@@ -1,0 +1,38 @@
+{
+  "name": "wrath-shield-v3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/node": "^24.9.1",
+    "@types/react": "^19.2.2",
+    "better-sqlite3": "^12.4.1",
+    "mem0ai": "^2.1.38",
+    "next": "^14.2.15",
+    "qdrant-client": "^0.0.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "typescript": "^5.9.3"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.0",
+    "@types/jest": "^30.0.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^30.2.0",
+    "ts-jest": "^29.4.5"
+  }
+}
