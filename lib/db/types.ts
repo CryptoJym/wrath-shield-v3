@@ -104,6 +104,37 @@ export interface Setting {
 }
 
 /**
+ * Flags Table (Burst Forge)
+ * Manipulation flags detected in conversation text
+ */
+export interface Flag {
+  id: string; // PRIMARY KEY
+  status: 'pending' | 'resolved' | 'dismissed';
+  original_text: string;
+  detected_at: number; // Unix timestamp
+  severity: number; // 1-5 scale
+  manipulation_type: string | null;
+  created_at?: number;
+  updated_at?: number;
+}
+
+/**
+ * Tweaks Table (Burst Forge)
+ * Confidence rewrites and flag resolutions
+ */
+export interface Tweak {
+  id: string; // PRIMARY KEY
+  flag_id: string; // Foreign key to flags table
+  assured_text: string;
+  action_type: 'rewrite' | 'dismiss' | 'escalate';
+  context: string | null;
+  delta_uix: number; // Change in UIX score
+  user_notes: string | null;
+  created_at?: number;
+  updated_at?: number;
+}
+
+/**
  * Input types for batch upserts (without auto-generated fields)
  */
 export type CycleInput = Omit<Cycle, 'created_at' | 'updated_at'>;
@@ -113,6 +144,8 @@ export type LifelogInput = Omit<Lifelog, 'created_at' | 'updated_at'>;
 export type TokenInput = Omit<Token, 'created_at' | 'updated_at'>;
 export type ScoreInput = Omit<Score, 'created_at' | 'updated_at'>;
 export type SettingInput = Omit<Setting, 'created_at' | 'updated_at'>;
+export type FlagInput = Omit<Flag, 'created_at' | 'updated_at'>;
+export type TweakInput = Omit<Tweak, 'created_at' | 'updated_at'>;
 
 /**
  * Metrics aggregation for dashboard queries

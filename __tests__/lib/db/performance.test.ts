@@ -266,8 +266,9 @@ describe('Database Performance & Integration Tests', () => {
         .prepare('SELECT name FROM migrations ORDER BY name')
         .all();
 
-      expect(migrations).toHaveLength(1);
+      expect(migrations).toHaveLength(2);
       expect(migrations[0]).toHaveProperty('name', '001_initial_schema');
+      expect(migrations[1]).toHaveProperty('name', '002_burst_forge_tables');
 
       // Verify all 7 tables were created
       const tables = db
@@ -279,12 +280,14 @@ describe('Database Performance & Integration Tests', () => {
       const tableNames = tables.map((t) => t.name).sort();
       expect(tableNames).toEqual([
         'cycles',
+        'flags',
         'lifelogs',
         'recoveries',
         'scores',
         'settings',
         'sleeps',
         'tokens',
+        'tweaks',
       ]);
     });
 

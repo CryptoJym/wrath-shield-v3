@@ -437,17 +437,22 @@ export class WhoopClient {
    * @returns Parsed and classified recovery data
    */
   parseRecovery(rawRecovery: any): ParsedRecovery {
-    const score = rawRecovery.score?.recovery_score ?? 0;
+    const scoreRaw = rawRecovery.score?.recovery_score;
+    const score = typeof scoreRaw === 'string' ? Number(scoreRaw) : (scoreRaw ?? 0);
+    const hrvRaw = rawRecovery.score?.hrv_rmssd_milli;
+    const rhrRaw = rawRecovery.score?.resting_heart_rate;
+    const spo2Raw = rawRecovery.score?.spo2_percentage;
+    const skinRaw = rawRecovery.score?.skin_temp_celsius;
     return {
       id: rawRecovery.id,
       cycle_id: rawRecovery.cycle_id,
       created_at: rawRecovery.created_at,
       score_percentage: score,
       recovery_level: this.classifyRecoveryScore(score),
-      hrv_rmssd_ms: rawRecovery.score?.hrv_rmssd_milli ?? 0,
-      resting_heart_rate: rawRecovery.score?.resting_heart_rate ?? 0,
-      spo2_percentage: rawRecovery.score?.spo2_percentage ?? 0,
-      skin_temp_celsius: rawRecovery.score?.skin_temp_celsius ?? 0,
+      hrv_rmssd_ms: typeof hrvRaw === 'string' ? Number(hrvRaw) : (hrvRaw ?? 0),
+      resting_heart_rate: typeof rhrRaw === 'string' ? Number(rhrRaw) : (rhrRaw ?? 0),
+      spo2_percentage: typeof spo2Raw === 'string' ? Number(spo2Raw) : (spo2Raw ?? 0),
+      skin_temp_celsius: typeof skinRaw === 'string' ? Number(skinRaw) : (skinRaw ?? 0),
     };
   }
 
@@ -483,6 +488,15 @@ export class WhoopClient {
   }
 
   /**
+   * Extract YYYY-MM-DD from an ISO-like timestamp. Returns '' if invalid.
+   */
+  private extractDate(input: string | null | undefined): string {
+    if (!input || typeof input !== 'string') return '';
+    const candidate = input.length >= 10 ? input.slice(0, 10) : '';
+    return /^\d{4}-\d{2}-\d{2}$/.test(candidate) ? candidate : '';
+  }
+
+  /**
    * Normalize parsed cycle data to database format
    * @param parsed - Parsed cycle data
    * @returns Database-ready cycle record
@@ -490,7 +504,7 @@ export class WhoopClient {
   normalizeCycleForDb(parsed: ParsedCycle): CycleInput {
     return {
       id: parsed.id.toString(),
-      date: parsed.start.split('T')[0], // Extract YYYY-MM-DD from ISO timestamp
+      date: this.extractDate(parsed.start),
       strain: parsed.strain,
       kilojoules: parsed.kilojoules,
       avg_hr: parsed.avg_heart_rate,
@@ -506,7 +520,7 @@ export class WhoopClient {
   normalizeRecoveryForDb(parsed: ParsedRecovery): RecoveryInput {
     return {
       id: parsed.id.toString(),
-      date: parsed.created_at.split('T')[0], // Extract YYYY-MM-DD from ISO timestamp
+      date: this.extractDate(parsed.created_at),
       score: parsed.score_percentage,
       hrv: parsed.hrv_rmssd_ms,
       rhr: parsed.resting_heart_rate,
@@ -523,7 +537,7 @@ export class WhoopClient {
   normalizeSleepForDb(parsed: ParsedSleep): SleepInput {
     return {
       id: parsed.id.toString(),
-      date: parsed.start.split('T')[0], // Extract YYYY-MM-DD from ISO timestamp
+      date: this.extractDate(parsed.start),
       performance: parsed.performance_percentage,
       rem_min: parsed.rem_minutes,
       sws_min: parsed.slow_wave_sleep_minutes,

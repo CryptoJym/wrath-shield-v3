@@ -786,5 +786,63 @@ describe('WhoopClient Data Collectors', () => {
       expect(parsed.performance_percentage).toBe(0);
       expect(parsed.sleep_debt_minutes).toBe(0);
     });
+
+    it('should tolerate numeric strings in recovery score and classify correctly', async () => {
+      const rawRecovery = {
+        id: 42,
+        cycle_id: 1001,
+        created_at: '2024-01-15T07:30:00Z',
+        score: {
+          recovery_score: '72', // as string instead of number
+          hrv_rmssd_milli: '35',
+          resting_heart_rate: '58',
+          spo2_percentage: '98',
+          skin_temp_celsius: '36.5',
+        },
+      } as any;
+
+      const client = new WhoopClient();
+      const parsed = (client as any).parseRecovery(rawRecovery) as ParsedRecovery;
+      expect(parsed.score_percentage).toBe(72);
+      expect(parsed.recovery_level).toBe('high'); // >= 70 -> high
+      // ensure numeric coercion occurred for other fields
+      expect(parsed.hrv_rmssd_ms).toBe(35);
+      expect(parsed.resting_heart_rate).toBe(58);
+      expect(parsed.spo2_percentage).toBe(98);
+    });
+
+    it('normalizes date from ISO with timezone offset and space separator', () => {
+      const client = new WhoopClient();
+      const parsedCycle: ParsedCycle = {
+        id: 2,
+        start: '2024-01-15 10:00:00-05:00',
+        end: '2024-01-15 18:00:00-05:00',
+        strain: 12,
+        strain_level: 'moderate',
+        kilojoules: 0,
+        avg_heart_rate: 0,
+        max_heart_rate: 0,
+      };
+      const norm = (client as any).normalizeCycleForDb(parsedCycle);
+      expect(norm.date).toBe('2024-01-15');
+    });
+
+    it('falls back to empty date for invalid timestamps', () => {
+      const client = new WhoopClient();
+      const parsedSleep: ParsedSleep = {
+        id: 3,
+        start: 'not-a-date',
+        end: 'also-bad',
+        rem_minutes: 0,
+        slow_wave_sleep_minutes: 0,
+        light_sleep_minutes: 0,
+        awake_minutes: 0,
+        performance_percentage: 0,
+        respiratory_rate: 0,
+        sleep_debt_minutes: 0,
+      };
+      const norm = (client as any).normalizeSleepForDb(parsedSleep);
+      expect(norm.date).toBe('');
+    });
   });
 });
