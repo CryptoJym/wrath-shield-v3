@@ -15,6 +15,7 @@
 import { useEffect, useState } from 'react';
 import TodayMetrics from './TodayMetrics';
 import TrendsMetrics from './TrendsMetrics';
+import AssuredHUD from './AssuredHUD';
 import styles from './Dashboard.module.css';
 
 interface MetricsResponse {
@@ -100,6 +101,8 @@ export default function Dashboard() {
   return (
     <div className={styles.dashboard}>
       <TodayMetrics today={metrics.today} />
+
+      <AssuredHUD />
 
       <div className={styles.trendsGrid}>
         <TrendsMetrics

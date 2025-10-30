@@ -1,0 +1,354 @@
+/**
+ * Wrath Shield v3 - AssuredHUD Component Styles
+ *
+ * Styling for the comprehensive UIX metrics dashboard component
+ */
+
+.container {
+  padding: var(--spacing-lg);
+  background-color: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  border: 2px solid var(--color-border);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  text-align: center;
+  margin-bottom: var(--spacing-lg);
+  letter-spacing: -0.02em;
+}
+
+/* Loading and Error States */
+
+.loading,
+.error {
+  text-align: center;
+  padding: var(--spacing-xl);
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+}
+
+.error {
+  color: var(--color-danger);
+  background-color: rgba(239, 68, 68, 0.1);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md);
+}
+
+/* Score Section - Main Dial */
+
+.scoreSection {
+  margin-bottom: var(--spacing-xl);
+}
+
+.dialContainer {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  margin: 0 auto;
+}
+
+.dial {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+}
+
+.scoreText {
+  font-size: 3rem;
+  font-weight: 700;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* Delta Indicator */
+
+.deltaIndicator {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.deltaUp {
+  color: var(--color-success);
+  font-size: 1.25rem;
+}
+
+.deltaDown {
+  color: var(--color-danger);
+  font-size: 1.25rem;
+}
+
+.deltaZero {
+  color: var(--color-text-muted);
+  font-size: 1.25rem;
+}
+
+.deltaValue {
+  color: var(--color-text-primary);
+  font-size: 0.875rem;
+}
+
+/* Pillars Section */
+
+.pillarsSection {
+  margin-bottom: var(--spacing-lg);
+}
+
+.pillarsTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-md);
+  text-align: center;
+}
+
+.pillarRow {
+  display: grid;
+  grid-template-columns: 120px 1fr 50px;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+}
+
+.pillarLabel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.pillarName {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.pillarWeight {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.pillarBarContainer {
+  height: 24px;
+  background-color: var(--color-bg-secondary);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+}
+
+.pillarBar {
+  height: 100%;
+  border-radius: var(--radius-md);
+  transition: width 0.5s ease, background-color 0.3s ease;
+  min-width: 2px;
+}
+
+.pillarValue {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  text-align: right;
+}
+
+/* Open Flags Section */
+
+.flagsSection {
+  margin-bottom: var(--spacing-lg);
+}
+
+.flagsWarning {
+  padding: var(--spacing-sm) var(--spacing-md);
+  background-color: rgba(245, 158, 11, 0.15);
+  border: 2px solid var(--color-warning);
+  border-radius: var(--radius-md);
+  color: var(--color-warning);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Top Fixes Section */
+
+.fixesSection {
+  margin-bottom: var(--spacing-lg);
+}
+
+.fixesTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.fixesList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.fixItem {
+  padding: var(--spacing-md);
+  background-color: var(--color-bg-secondary);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.fixItem:hover {
+  border-color: var(--color-info);
+  transform: translateX(4px);
+  cursor: pointer;
+}
+
+.fixHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-xs);
+}
+
+.fixNumber {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.fixLift {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--color-success);
+  background-color: rgba(16, 185, 129, 0.1);
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-sm);
+}
+
+.fixText {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
+/* Meta Info Section */
+
+.metaInfo {
+  padding-top: var(--spacing-md);
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  justify-content: space-between;
+  gap: var(--spacing-md);
+}
+
+.metaItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex: 1;
+}
+
+.metaLabel {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.metaValue {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+/* Responsive Design */
+
+@media (max-width: 640px) {
+  .container {
+    padding: var(--spacing-md);
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .dialContainer {
+    width: 180px;
+    height: 180px;
+  }
+
+  .scoreText {
+    font-size: 2.5rem;
+  }
+
+  .pillarRow {
+    grid-template-columns: 100px 1fr 40px;
+    gap: var(--spacing-xs);
+  }
+
+  .pillarName {
+    font-size: 0.8125rem;
+  }
+
+  .pillarBarContainer {
+    height: 20px;
+  }
+
+  .metaInfo {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+}
+
+/* Animations */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.container {
+  animation: fadeIn 0.4s ease-out;
+}
+
+.pillarRow {
+  animation: fadeIn 0.5s ease-out backwards;
+}
+
+.pillarRow:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.pillarRow:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.pillarRow:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.fixItem {
+  animation: fadeIn 0.4s ease-out backwards;
+}
+
+.fixItem:nth-child(1) {
+  animation-delay: 0.4s;
+}
+
+.fixItem:nth-child(2) {
+  animation-delay: 0.5s;
+}

@@ -22,6 +22,10 @@ import type {
   ScoreInput,
   Setting,
   SettingInput,
+  Flag,
+  FlagInput,
+  Tweak,
+  TweakInput,
   DailyMetrics,
 } from './types';
 
@@ -248,6 +252,76 @@ export function insertSettings(settings: SettingInput[]): void {
 }
 
 /**
+ * Flags (Burst Forge) - Batch Upsert
+ */
+export function insertFlags(flags: FlagInput[]): void {
+  if (flags.length === 0) return;
+
+  const db = getDatabase();
+
+  const upsert = db.prepare(`
+    INSERT INTO flags (id, status, original_text, detected_at, severity, manipulation_type)
+    VALUES (?, ?, ?, ?, ?, ?)
+    ON CONFLICT(id) DO UPDATE SET
+      status = excluded.status,
+      original_text = excluded.original_text,
+      detected_at = excluded.detected_at,
+      severity = excluded.severity,
+      manipulation_type = excluded.manipulation_type,
+      updated_at = strftime('%s', 'now')
+  `);
+
+  db.transaction(() => {
+    for (const flag of flags) {
+      upsert.run(
+        flag.id,
+        flag.status,
+        flag.original_text,
+        flag.detected_at,
+        flag.severity,
+        flag.manipulation_type
+      );
+    }
+  });
+}
+
+/**
+ * Tweaks (Burst Forge) - Batch Upsert
+ */
+export function insertTweaks(tweaks: TweakInput[]): void {
+  if (tweaks.length === 0) return;
+
+  const db = getDatabase();
+
+  const upsert = db.prepare(`
+    INSERT INTO tweaks (id, flag_id, assured_text, action_type, context, delta_uix, user_notes)
+    VALUES (?, ?, ?, ?, ?, ?, ?)
+    ON CONFLICT(id) DO UPDATE SET
+      flag_id = excluded.flag_id,
+      assured_text = excluded.assured_text,
+      action_type = excluded.action_type,
+      context = excluded.context,
+      delta_uix = excluded.delta_uix,
+      user_notes = excluded.user_notes,
+      updated_at = strftime('%s', 'now')
+  `);
+
+  db.transaction(() => {
+    for (const tweak of tweaks) {
+      upsert.run(
+        tweak.id,
+        tweak.flag_id,
+        tweak.assured_text,
+        tweak.action_type,
+        tweak.context,
+        tweak.delta_uix,
+        tweak.user_notes
+      );
+    }
+  });
+}
+
+/**
  * Get metrics for last N days (defaults to 7)
  */
 export function getMetricsLastNDays(days: number = 7): DailyMetrics[] {
@@ -391,4 +465,99 @@ export function calculateUnbendingScore(date: string): void {
   const unbendingScore = (stats.wrath_deployed / stats.manipulation_count) * 100;
 
   insertScores([{ date, unbending_score: unbendingScore, recovery_compliance: null }]);
+}
+
+/**
+ * Get flag by ID (Burst Forge)
+ */
+export function getFlag(id: string): Flag | null {
+  const db = getDatabase();
+  const query = db.prepare<Flag>(`
+    SELECT * FROM flags WHERE id = ?
+  `);
+  return query.get(id) || null;
+}
+
+/**
+ * Get all tweaks for a specific flag (Burst Forge)
+ */
+export function getTweaksByFlagId(flagId: string): Tweak[] {
+  const db = getDatabase();
+  const query = db.prepare<Tweak>(`
+    SELECT * FROM tweaks WHERE flag_id = ? ORDER BY created_at DESC
+  `);
+  return query.all(flagId);
+}
+
+/**
+ * Update flag status (Burst Forge)
+ */
+export function updateFlagStatus(id: string, status: 'pending' | 'resolved' | 'dismissed'): void {
+  const db = getDatabase();
+  const update = db.prepare(`
+    UPDATE flags
+    SET status = ?, updated_at = strftime('%s', 'now')
+    WHERE id = ?
+  `);
+  update.run(status, id);
+}
+
+/**
+ * Get all pending flags (Burst Forge)
+ */
+export function getPendingFlags(): Flag[] {
+  const db = getDatabase();
+  const query = db.prepare<Flag>(`
+    SELECT * FROM flags WHERE status = 'pending' ORDER BY detected_at DESC
+  `);
+  return query.all();
+}
+
+/**
+ * Get resolved flags (for FlagRadar visualization)
+ */
+export function getResolvedFlags(): Flag[] {
+  const db = getDatabase();
+  const query = db.prepare<Flag>(`
+    SELECT * FROM flags WHERE status = 'resolved' ORDER BY detected_at DESC
+  `);
+  return query.all();
+}
+
+/**
+ * Get total UIX score (sum of all delta_uix values from tweaks)
+ */
+export function getTotalUIXScore(): number {
+  const db = getDatabase();
+  const query = db.prepare<{ total: number | null }>(`
+    SELECT SUM(delta_uix) as total FROM tweaks
+  `);
+  const result = query.get();
+  return result?.total ?? 0;
+}
+
+/**
+ * Get all tweaks from the last N hours (for metrics calculation)
+ */
+export function getTweaksLastNHours(hours: number = 72): Tweak[] {
+  const db = getDatabase();
+  const cutoff = Math.floor(Date.now() / 1000) - hours * 3600;
+
+  const query = db.prepare<Tweak>(`
+    SELECT * FROM tweaks
+    WHERE created_at >= ?
+    ORDER BY created_at DESC
+  `);
+  return query.all(cutoff);
+}
+
+/**
+ * Get all flags (not just pending)
+ */
+export function getAllFlags(): Flag[] {
+  const db = getDatabase();
+  const query = db.prepare<Flag>(`
+    SELECT * FROM flags ORDER BY detected_at DESC
+  `);
+  return query.all();
 }

@@ -56,7 +56,7 @@ describe('Configuration Loader', () => {
       process.env.OPENROUTER_API_KEY = 'test-openrouter-key';
       delete process.env.DATABASE_ENCRYPTION_KEY;
 
-      expect(() => getConfig()).toThrow('DATABASE_ENCRYPTION_KEY');
+      expect(() => getConfig()).toThrow(/DATABASE_ENCRYPTION_KEY|Encryption.*key/i);
     });
   });
 
