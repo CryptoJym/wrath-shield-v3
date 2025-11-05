@@ -17,7 +17,7 @@ jest.mock('@/lib/crypto', () => ({
 
 jest.mock('@/lib/db/queries', () => ({
   insertSettings: jest.fn(),
-  getSettings: jest.fn(),
+  getSetting: jest.fn(),
 }));
 
 describe('POST /api/settings - Limitless API Key', () => {
@@ -297,7 +297,7 @@ describe('POST /api/settings - Limitless API Key', () => {
 });
 
 describe('GET /api/settings - Check Configuration', () => {
-  const mockGetSettings = db.getSettings as jest.MockedFunction<typeof db.getSettings>;
+  const mockGetSetting = db.getSetting as jest.MockedFunction<typeof db.getSetting>;
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -305,7 +305,7 @@ describe('GET /api/settings - Check Configuration', () => {
 
   it('should return configured=true when API key exists', () => {
     // Mock existing setting
-    mockGetSettings.mockReturnValueOnce({
+    mockGetSetting.mockReturnValueOnce({
       key: 'limitless_api_key',
       value_enc: 'encrypted_data',
     });
@@ -327,7 +327,7 @@ describe('GET /api/settings - Check Configuration', () => {
       expect(data.provider).toBe('limitless');
 
       // Verify database query was called
-      expect(mockGetSettings).toHaveBeenCalledWith('limitless_api_key');
+      expect(mockGetSetting).toHaveBeenCalledWith('limitless_api_key');
 
       // Verify encrypted value is NOT exposed
       expect(data).not.toHaveProperty('value_enc');
@@ -337,7 +337,7 @@ describe('GET /api/settings - Check Configuration', () => {
 
   it('should return configured=false when API key does not exist', () => {
     // Mock no existing setting
-    mockGetSettings.mockReturnValueOnce(undefined);
+    mockGetSetting.mockReturnValueOnce(undefined);
 
     const request = new Request(
       'http://localhost:3000/api/settings?provider=limitless',
@@ -355,7 +355,7 @@ describe('GET /api/settings - Check Configuration', () => {
       expect(data.configured).toBe(false);
       expect(data.provider).toBe('limitless');
 
-      expect(mockGetSettings).toHaveBeenCalledWith('limitless_api_key');
+      expect(mockGetSetting).toHaveBeenCalledWith('limitless_api_key');
     });
   });
 
@@ -376,7 +376,7 @@ describe('GET /api/settings - Check Configuration', () => {
 
   it('should handle database errors and return 500', () => {
     // Mock database error
-    mockGetSettings.mockImplementationOnce(() => {
+    mockGetSetting.mockImplementationOnce(() => {
       throw new Error('Database error');
     });
 

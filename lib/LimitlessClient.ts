@@ -12,7 +12,7 @@
 
 import { ensureServerOnly } from './server-only-guard';
 import { decryptData } from './crypto';
-import { getSettings } from './db/queries';
+import { getSetting } from './db/queries';
 import type { LifelogInput } from './db/types';
 
 // Prevent client-side imports
@@ -116,7 +116,7 @@ class LimitlessClient {
    * Get decrypted Limitless API key from settings
    */
   private getApiKey(): string {
-    const setting = getSettings('limitless_api_key');
+    const setting = getSetting('limitless_api_key');
 
     if (!setting) {
       throw new Error('No Limitless API key found. Configure via POST /api/settings first.');
@@ -262,11 +262,11 @@ class LimitlessClient {
    * @returns Number of new lifelogs fetched and stored
    */
   async syncNewLifelogs(): Promise<number> {
-    const { getSettings, insertSettings } = await import('./db/queries');
+    const { getSetting, insertSettings } = await import('./db/queries');
     const { insertLifelogs } = await import('./db/queries');
 
     // Get last successful pull timestamp (ISO 8601 date string YYYY-MM-DD)
-    const lastPullSetting = getSettings('limitless_last_pull');
+    const lastPullSetting = getSetting('limitless_last_pull');
     const startDate = lastPullSetting
       ? decryptData(lastPullSetting.value_enc)
       : undefined;

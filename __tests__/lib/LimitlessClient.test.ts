@@ -21,7 +21,7 @@ jest.mock('@/lib/crypto', () => ({
 let mockSettings: Record<string, any> = {};
 
 jest.mock('@/lib/db/queries', () => ({
-  getSettings: jest.fn((key: string) => mockSettings[key] || null),
+  getSetting: jest.fn((key: string) => mockSettings[key] || null),
   insertSettings: jest.fn((settings: any[]) => {
     settings.forEach((setting) => {
       mockSettings[setting.key] = setting;

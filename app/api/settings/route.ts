@@ -9,7 +9,7 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { encryptData } from '@/lib/crypto';
-import { insertSettings, getSettings } from '@/lib/db/queries';
+import { insertSettings, getSetting } from '@/lib/db/queries';
 
 interface SettingsRequest {
   provider: 'limitless';
@@ -113,7 +113,7 @@ export async function GET(request: NextRequest) {
     }
 
     const settingKey = `${provider}_api_key`;
-    const setting = getSettings(settingKey);
+    const setting = getSetting(settingKey);
 
     if (!setting) {
       return NextResponse.json(
