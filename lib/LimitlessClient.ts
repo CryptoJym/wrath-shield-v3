@@ -14,10 +14,21 @@ import { ensureServerOnly } from './server-only-guard';
 import { decryptData } from './crypto';
 import { getSetting } from './db/queries';
 import type { LifelogInput } from './db/types';
-import { ProxyAgent } from 'undici';
 
 // Prevent client-side imports
 ensureServerOnly('lib/LimitlessClient');
+
+// Configure proxy for fetch if HTTPS_PROXY is set
+if (typeof global !== 'undefined' && process.env.HTTPS_PROXY) {
+  try {
+    const { ProxyAgent, setGlobalDispatcher } = require('undici');
+    const proxyAgent = new ProxyAgent(process.env.HTTPS_PROXY);
+    setGlobalDispatcher(proxyAgent);
+    console.log('[LimitlessClient] Configured global proxy dispatcher');
+  } catch (e) {
+    console.warn('[LimitlessClient] Could not configure proxy:', e);
+  }
+}
 
 const LIMITLESS_API_BASE = 'https://api.limitless.ai';
 
@@ -142,38 +153,11 @@ class LimitlessClient {
       });
     }
 
-    console.log('[LimitlessClient] Request:', {
-      url: url.toString(),
-      apiKeyLength: apiKey.length,
-      apiKeyPrefix: apiKey.substring(0, 10) + '...',
-      fullApiKey: apiKey, // TEMP DEBUG
-    });
-
-    // Configure proxy agent if proxy is set in environment
-    const proxyUrl = process.env.HTTPS_PROXY || process.env.https_proxy || process.env.HTTP_PROXY || process.env.http_proxy;
-    const fetchOptions: RequestInit = {
+    const response = await fetch(url.toString(), {
       headers: {
-        Authorization: `Bearer ${apiKey}`,
+        'X-API-Key': apiKey, // Limitless uses X-API-Key, NOT Authorization Bearer!
       },
-    };
-
-    if (proxyUrl) {
-      console.log('[LimitlessClient] Using proxy:', proxyUrl.split('@')[0] + '@...');
-      // @ts-ignore - dispatcher is valid for Node.js fetch with undici
-      fetchOptions.dispatcher = new ProxyAgent(proxyUrl);
-    }
-
-    let response;
-    try {
-      response = await fetch(url.toString(), fetchOptions);
-      console.log('[LimitlessClient] Response:', {
-        status: response.status,
-        ok: response.ok,
-      });
-    } catch (fetchError) {
-      console.error('[LimitlessClient] Fetch error:', fetchError);
-      throw fetchError;
-    }
+    });
 
     if (!response.ok) {
       const errorText = await response.text();

@@ -23,7 +23,7 @@ async function validateLimitlessKey(apiKey: string): Promise<boolean> {
   try {
     const response = await fetch('https://api.limitless.ai/v1/lifelogs?limit=1', {
       headers: {
-        Authorization: `Bearer ${apiKey}`,
+        'X-API-Key': apiKey, // Limitless uses X-API-Key, NOT Authorization Bearer!
       },
     });
 
