@@ -18,15 +18,14 @@ import type { LifelogInput } from './db/types';
 // Prevent client-side imports
 ensureServerOnly('lib/LimitlessClient');
 
-// Configure proxy for fetch if HTTPS_PROXY is set
+// Configure global proxy for Node.js fetch
 if (typeof global !== 'undefined' && process.env.HTTPS_PROXY) {
   try {
-    const { ProxyAgent, setGlobalDispatcher } = require('undici');
-    const proxyAgent = new ProxyAgent(process.env.HTTPS_PROXY);
-    setGlobalDispatcher(proxyAgent);
-    console.log('[LimitlessClient] Configured global proxy dispatcher');
+    const globalAgent = require('global-agent');
+    globalAgent.bootstrap();
+    console.log('[LimitlessClient] Configured global-agent proxy support');
   } catch (e) {
-    console.warn('[LimitlessClient] Could not configure proxy:', e);
+    console.warn('[LimitlessClient] Could not configure global-agent:', e);
   }
 }
 
