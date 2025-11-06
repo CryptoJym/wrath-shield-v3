@@ -39,8 +39,10 @@ jest.mock('@/lib/db/queries', () => ({
   insertTokens: jest.fn(),
 }));
 
-// Mock fetch globally
-global.fetch = jest.fn();
+// Mock httpsRequest
+jest.mock('@/lib/https-proxy-request', () => ({
+  httpsRequest: jest.fn(),
+}));
 
 describe('WHOOP OAuth Callback Route', () => {
   const mockRequest = (url: string, cookies: Record<string, string> = {}) => {
@@ -62,8 +64,9 @@ describe('WHOOP OAuth Callback Route', () => {
 
   beforeEach(() => {
     jest.clearAllMocks();
-    // Reset fetch mock
-    (global.fetch as jest.Mock).mockReset();
+    // Reset httpsRequest mock
+    const { httpsRequest } = require('@/lib/https-proxy-request');
+    (httpsRequest as jest.Mock).mockReset();
   });
 
   describe('State Validation (CSRF Protection)', () => {
@@ -166,10 +169,11 @@ describe('WHOOP OAuth Callback Route', () => {
       const state = 'valid-state';
       const code = 'auth-code-123';
 
-      // Mock successful token response
-      (global.fetch as jest.Mock).mockResolvedValueOnce({
-        ok: true,
-        json: async () => ({
+      // Mock successful token response from httpsRequest
+      const { httpsRequest } = require('@/lib/https-proxy-request');
+      (httpsRequest as jest.Mock).mockResolvedValueOnce({
+        status: 200,
+        data: JSON.stringify({
           access_token: 'whoop_access_token_xyz',
           token_type: 'Bearer',
           expires_in: 3600,
@@ -191,13 +195,14 @@ describe('WHOOP OAuth Callback Route', () => {
       expect(location).toContain('/?oauth_success=true');
 
       // Verify token exchange was called with correct parameters
-      expect(global.fetch).toHaveBeenCalledWith(
+      expect(httpsRequest).toHaveBeenCalledWith(
         'https://api.prod.whoop.com/oauth/oauth2/token',
         expect.objectContaining({
           method: 'POST',
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
           },
+          body: expect.any(String),
         })
       );
 
@@ -222,11 +227,11 @@ describe('WHOOP OAuth Callback Route', () => {
       const state = 'valid-state';
       const code = 'auth-code-456';
 
-      // Mock failed token response
-      (global.fetch as jest.Mock).mockResolvedValueOnce({
-        ok: false,
+      // Mock failed token response from httpsRequest
+      const { httpsRequest } = require('@/lib/https-proxy-request');
+      (httpsRequest as jest.Mock).mockResolvedValueOnce({
         status: 400,
-        text: async () => 'invalid_grant',
+        data: 'invalid_grant',
       });
 
       const req = mockRequest(
@@ -248,10 +253,11 @@ describe('WHOOP OAuth Callback Route', () => {
 
       const beforeTimestamp = Math.floor(Date.now() / 1000);
 
-      // Mock successful token response
-      (global.fetch as jest.Mock).mockResolvedValueOnce({
-        ok: true,
-        json: async () => ({
+      // Mock successful token response from httpsRequest
+      const { httpsRequest } = require('@/lib/https-proxy-request');
+      (httpsRequest as jest.Mock).mockResolvedValueOnce({
+        status: 200,
+        data: JSON.stringify({
           access_token: 'access',
           token_type: 'Bearer',
           expires_in: expiresIn,
@@ -282,9 +288,10 @@ describe('WHOOP OAuth Callback Route', () => {
       const state = 'valid-state';
       const code = 'auth-code-redirect';
 
-      (global.fetch as jest.Mock).mockResolvedValueOnce({
-        ok: true,
-        json: async () => ({
+      const { httpsRequest } = require('@/lib/https-proxy-request');
+      (httpsRequest as jest.Mock).mockResolvedValueOnce({
+        status: 200,
+        data: JSON.stringify({
           access_token: 'access',
           token_type: 'Bearer',
           expires_in: 3600,
@@ -300,8 +307,8 @@ describe('WHOOP OAuth Callback Route', () => {
 
       await GET(req);
 
-      const fetchCall = (global.fetch as jest.Mock).mock.calls[0];
-      const bodyParams = new URLSearchParams(fetchCall[1].body);
+      const httpsRequestCall = (httpsRequest as jest.Mock).mock.calls[0];
+      const bodyParams = new URLSearchParams(httpsRequestCall[1].body);
 
       expect(bodyParams.get('grant_type')).toBe('authorization_code');
       expect(bodyParams.get('code')).toBe(code);

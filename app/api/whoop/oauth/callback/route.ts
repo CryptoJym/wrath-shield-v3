@@ -9,6 +9,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { cfg } from '@/lib/config';
 import { encryptData } from '@/lib/crypto';
 import { insertTokens } from '@/lib/db/queries';
+import { httpsRequest } from '@/lib/https-proxy-request';
 
 const WHOOP_TOKEN_URL = 'https://api.prod.whoop.com/oauth/oauth2/token';
 
@@ -97,8 +98,8 @@ export async function GET(request: NextRequest) {
       client_secret: config.whoop.clientSecret,
     });
 
-    // POST to WHOOP token endpoint
-    const tokenResponse = await fetch(WHOOP_TOKEN_URL, {
+    // POST to WHOOP token endpoint using httpsRequest (supports proxy)
+    const tokenResponse = await httpsRequest(WHOOP_TOKEN_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -106,16 +107,15 @@ export async function GET(request: NextRequest) {
       body: tokenParams.toString(),
     });
 
-    if (!tokenResponse.ok) {
-      const errorText = await tokenResponse.text();
-      console.error('[WHOOP OAuth Callback] Token exchange failed:', tokenResponse.status, errorText);
+    if (tokenResponse.status !== 200) {
+      console.error('[WHOOP OAuth Callback] Token exchange failed:', tokenResponse.status, tokenResponse.data);
       return NextResponse.json(
         { error: 'Failed to exchange authorization code for tokens' },
         { status: 500 }
       );
     }
 
-    const tokenData = (await tokenResponse.json()) as WhoopTokenResponse;
+    const tokenData = JSON.parse(tokenResponse.data) as WhoopTokenResponse;
 
     // Encrypt tokens using AES-256-GCM
     const accessTokenEnc = encryptData(tokenData.access_token);
