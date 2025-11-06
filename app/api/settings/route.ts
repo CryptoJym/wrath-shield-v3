@@ -10,6 +10,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { encryptData } from '@/lib/crypto';
 import { insertSettings, getSetting } from '@/lib/db/queries';
+import { httpsRequest } from '@/lib/https-proxy-request';
 
 interface SettingsRequest {
   provider: 'limitless';
@@ -21,7 +22,8 @@ interface SettingsRequest {
  */
 async function validateLimitlessKey(apiKey: string): Promise<boolean> {
   try {
-    const response = await fetch('https://api.limitless.ai/v1/lifelogs?limit=1', {
+    const response = await httpsRequest('https://api.limitless.ai/v1/lifelogs?limit=1', {
+      method: 'GET',
       headers: {
         'X-API-Key': apiKey, // Limitless uses X-API-Key, NOT Authorization Bearer!
       },
@@ -29,7 +31,7 @@ async function validateLimitlessKey(apiKey: string): Promise<boolean> {
 
     // 200 or 204 = valid key
     // 401/403 = invalid key
-    return response.ok || response.status === 204;
+    return response.status === 200 || response.status === 204;
   } catch (error) {
     console.error('[Settings API] Limitless validation error:', error);
     return false;

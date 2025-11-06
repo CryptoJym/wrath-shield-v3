@@ -14,20 +14,10 @@ import { ensureServerOnly } from './server-only-guard';
 import { decryptData } from './crypto';
 import { getSetting } from './db/queries';
 import type { LifelogInput } from './db/types';
+import { httpsRequest } from './https-proxy-request';
 
 // Prevent client-side imports
 ensureServerOnly('lib/LimitlessClient');
-
-// Configure global proxy for Node.js fetch
-if (typeof global !== 'undefined' && process.env.HTTPS_PROXY) {
-  try {
-    const globalAgent = require('global-agent');
-    globalAgent.bootstrap();
-    console.log('[LimitlessClient] Configured global-agent proxy support');
-  } catch (e) {
-    console.warn('[LimitlessClient] Could not configure global-agent:', e);
-  }
-}
 
 const LIMITLESS_API_BASE = 'https://api.limitless.ai';
 
@@ -152,19 +142,27 @@ class LimitlessClient {
       });
     }
 
-    const response = await fetch(url.toString(), {
-      headers: {
-        'X-API-Key': apiKey, // Limitless uses X-API-Key, NOT Authorization Bearer!
-      },
-    });
+    console.log('[LimitlessClient] Requesting:', url.toString());
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error('[LimitlessClient] Error response:', errorText);
-      throw new Error(`Limitless API error: ${response.status} ${errorText}`);
+    let response;
+    try {
+      response = await httpsRequest(url.toString(), {
+        method: 'GET',
+        headers: {
+          'X-API-Key': apiKey, // Limitless uses X-API-Key, NOT Authorization Bearer!
+        },
+      });
+    } catch (error) {
+      console.error('[LimitlessClient] Request error:', error);
+      throw new Error(`Network error: ${error instanceof Error ? error.message : String(error)}`);
     }
 
-    return response.json();
+    if (response.status !== 200 && response.status !== 204) {
+      console.error('[LimitlessClient] Error response:', response.data);
+      throw new Error(`Limitless API error: ${response.status} ${response.data}`);
+    }
+
+    return JSON.parse(response.data);
   }
 
   /**
