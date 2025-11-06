@@ -181,3 +181,19 @@ export function constantTimeEquals(a: Buffer, b: Buffer): boolean {
   }
   return timingSafeEqual(a, b);
 }
+
+/**
+ * Alias for encrypt() - encrypts and returns JSON string
+ * (for backward compatibility with existing code)
+ */
+export function encryptData(plaintext: string): string {
+  return encryptToJSON(plaintext);
+}
+
+/**
+ * Alias for decrypt() - decrypts from JSON string
+ * (for backward compatibility with existing code)
+ */
+export function decryptData(json: string): string {
+  return decryptFromJSON(json);
+}

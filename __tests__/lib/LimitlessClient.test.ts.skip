@@ -21,7 +21,7 @@ jest.mock('@/lib/crypto', () => ({
 let mockSettings: Record<string, any> = {};
 
 jest.mock('@/lib/db/queries', () => ({
-  getSettings: jest.fn((key: string) => mockSettings[key] || null),
+  getSetting: jest.fn((key: string) => mockSettings[key] || null),
   insertSettings: jest.fn((settings: any[]) => {
     settings.forEach((setting) => {
       mockSettings[setting.key] = setting;
@@ -29,14 +29,18 @@ jest.mock('@/lib/db/queries', () => ({
   }),
 }));
 
-// Mock fetch globally
-global.fetch = jest.fn();
+// Mock httpsRequest instead of fetch
+jest.mock('@/lib/https-proxy-request', () => ({
+  httpsRequest: jest.fn(),
+}));
+
+import { httpsRequest } from '@/lib/https-proxy-request';
 
 describe('LimitlessClient', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     mockSettings = {};
-    (global.fetch as jest.Mock).mockReset();
+    (httpsRequest as jest.Mock).mockReset();
 
     // Set up valid API key by default
     mockSettings.limitless_api_key = {
@@ -47,61 +51,67 @@ describe('LimitlessClient', () => {
 
   describe('Pagination', () => {
     it('should fetch all lifelogs across multiple pages', async () => {
-      // Mock first page with cursor
-      (global.fetch as jest.Mock).mockResolvedValueOnce({
-        ok: true,
-        json: async () => ({
-          lifelogs: [
-            {
-              id: 'lifelog_1',
-              start_time: '2024-01-15T10:00:00Z',
-              end_time: '2024-01-15T11:00:00Z',
-              transcript: 'First page lifelog 1',
-              summary: 'Summary 1',
-            },
-            {
-              id: 'lifelog_2',
-              start_time: '2024-01-15T11:00:00Z',
-              end_time: '2024-01-15T12:00:00Z',
-              transcript: 'First page lifelog 2',
-              summary: 'Summary 2',
-            },
-          ],
-          cursor: 'page2_cursor',
+      // Mock first page with cursor (NEW API STRUCTURE)
+      (httpsRequest as jest.Mock).mockResolvedValueOnce({
+        status: 200,
+        data: JSON.stringify({
+          data: {
+            lifelogs: [
+              {
+                id: 'lifelog_1',
+                startTime: '2024-01-15T10:00:00Z',
+                endTime: '2024-01-15T11:00:00Z',
+                markdown: 'First page lifelog 1',
+                title: 'Summary 1',
+              },
+              {
+                id: 'lifelog_2',
+                startTime: '2024-01-15T11:00:00Z',
+                endTime: '2024-01-15T12:00:00Z',
+                markdown: 'First page lifelog 2',
+                title: 'Summary 2',
+              },
+            ],
+          },
+          meta: { cursor: 'page2_cursor' },
         }),
       });
 
       // Mock second page with cursor
-      (global.fetch as jest.Mock).mockResolvedValueOnce({
-        ok: true,
-        json: async () => ({
-          lifelogs: [
-            {
-              id: 'lifelog_3',
-              start_time: '2024-01-15T12:00:00Z',
-              end_time: '2024-01-15T13:00:00Z',
-              transcript: 'Second page lifelog',
-              summary: 'Summary 3',
-            },
-          ],
-          cursor: 'page3_cursor',
+      (httpsRequest as jest.Mock).mockResolvedValueOnce({
+        status: 200,
+        data: JSON.stringify({
+          data: {
+            lifelogs: [
+              {
+                id: 'lifelog_3',
+                startTime: '2024-01-15T12:00:00Z',
+                endTime: '2024-01-15T13:00:00Z',
+                markdown: 'Second page lifelog',
+                title: 'Summary 3',
+              },
+            ],
+          },
+          meta: { cursor: 'page3_cursor' },
         }),
       });
 
       // Mock final page without cursor
-      (global.fetch as jest.Mock).mockResolvedValueOnce({
-        ok: true,
-        json: async () => ({
-          lifelogs: [
-            {
-              id: 'lifelog_4',
-              start_time: '2024-01-15T13:00:00Z',
-              end_time: '2024-01-15T14:00:00Z',
-              transcript: 'Final page lifelog',
-              summary: 'Summary 4',
-            },
-          ],
-          cursor: null,
+      (httpsRequest as jest.Mock).mockResolvedValueOnce({
+        status: 200,
+        data: JSON.stringify({
+          data: {
+            lifelogs: [
+              {
+                id: 'lifelog_4',
+                startTime: '2024-01-15T13:00:00Z',
+                endTime: '2024-01-15T14:00:00Z',
+                markdown: 'Final page lifelog',
+                title: 'Summary 4',
+              },
+            ],
+          },
+          meta: { cursor: null },
         }),
       });
 
@@ -111,10 +121,10 @@ describe('LimitlessClient', () => {
       expect(lifelogs).toHaveLength(4);
       expect(lifelogs[0].id).toBe('lifelog_1');
       expect(lifelogs[3].id).toBe('lifelog_4');
-      expect(global.fetch).toHaveBeenCalledTimes(3);
+      expect(httpsRequest).toHaveBeenCalledTimes(3);
 
       // Verify cursor was used in subsequent requests
-      const calls = (global.fetch as jest.Mock).mock.calls;
+      const calls = (httpsRequest as jest.Mock).mock.calls;
       expect(calls[1][0]).toContain('cursor=page2_cursor');
       expect(calls[2][0]).toContain('cursor=page3_cursor');
     });

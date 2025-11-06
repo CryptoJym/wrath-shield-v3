@@ -39,14 +39,20 @@ jest.mock('@/lib/db/queries', () => ({
   }),
 }));
 
-// Mock fetch globally
-global.fetch = jest.fn();
+// Mock httpsRequest for proxy support
+jest.mock('@/lib/https-proxy-request', () => ({
+  httpsRequest: jest.fn(),
+}));
+
+import { httpsRequest } from '@/lib/https-proxy-request';
 
 describe('WhoopClient', () => {
+  const mockHttpsRequest = httpsRequest as jest.MockedFunction<typeof httpsRequest>;
+
   beforeEach(() => {
     jest.clearAllMocks();
     mockTokens = {};
-    (global.fetch as jest.Mock).mockReset();
+    mockHttpsRequest.mockReset();
   });
 
   describe('Token Refresh on Expiry', () => {
@@ -63,9 +69,9 @@ describe('WhoopClient', () => {
       };
 
       // Mock token refresh response
-      (global.fetch as jest.Mock).mockResolvedValueOnce({
-        ok: true,
-        json: async () => ({
+      mockHttpsRequest.mockResolvedValueOnce({
+        status: 200,
+        data: JSON.stringify({
           access_token: 'new_access_token',
           token_type: 'Bearer',
           expires_in: 3600,
@@ -75,16 +81,16 @@ describe('WhoopClient', () => {
       });
 
       // Mock WHOOP API response
-      (global.fetch as jest.Mock).mockResolvedValueOnce({
-        ok: true,
-        json: async () => ({ user_id: 12345, email: 'test@example.com' }),
+      mockHttpsRequest.mockResolvedValueOnce({
+        status: 200,
+        data: JSON.stringify({ user_id: 12345, email: 'test@example.com' }),
       });
 
       const client = new WhoopClient();
       const profile = await client.getUserProfile();
 
       // Verify token refresh was called
-      expect(global.fetch).toHaveBeenCalledWith(
+      expect(mockHttpsRequest).toHaveBeenCalledWith(
         'https://api.prod.whoop.com/oauth/oauth2/token',
         expect.objectContaining({
           method: 'POST',
@@ -125,17 +131,17 @@ describe('WhoopClient', () => {
       };
 
       // Mock WHOOP API response only (no token refresh)
-      (global.fetch as jest.Mock).mockResolvedValueOnce({
-        ok: true,
-        json: async () => ({ user_id: 12345 }),
+      mockHttpsRequest.mockResolvedValueOnce({
+        status: 200,
+        data: JSON.stringify({ user_id: 12345 }),
       });
 
       const client = new WhoopClient();
       await client.getUserProfile();
 
       // Verify token refresh was NOT called (only 1 fetch for API request)
-      expect(global.fetch).toHaveBeenCalledTimes(1);
-      expect(global.fetch).toHaveBeenCalledWith(
+      expect(mockHttpsRequest).toHaveBeenCalledTimes(1);
+      expect(mockHttpsRequest).toHaveBeenCalledWith(
         'https://api.prod.whoop.com/developer/v1/user/profile/basic',
         expect.objectContaining({
           headers: expect.objectContaining({
@@ -159,16 +165,16 @@ describe('WhoopClient', () => {
       };
 
       // First API call returns 401
-      (global.fetch as jest.Mock).mockResolvedValueOnce({
+      mockHttpsRequest.mockResolvedValueOnce({
         ok: false,
         status: 401,
         text: async () => 'Unauthorized',
       });
 
       // Token refresh succeeds
-      (global.fetch as jest.Mock).mockResolvedValueOnce({
-        ok: true,
-        json: async () => ({
+      mockHttpsRequest.mockResolvedValueOnce({
+        status: 200,
+        data: JSON.stringify({
           access_token: 'refreshed_access_token',
           token_type: 'Bearer',
           expires_in: 3600,
@@ -178,19 +184,19 @@ describe('WhoopClient', () => {
       });
 
       // Retry API call succeeds
-      (global.fetch as jest.Mock).mockResolvedValueOnce({
-        ok: true,
-        json: async () => ({ user_id: 12345 }),
+      mockHttpsRequest.mockResolvedValueOnce({
+        status: 200,
+        data: JSON.stringify({ user_id: 12345 }),
       });
 
       const client = new WhoopClient();
       const profile = await client.getUserProfile();
 
       // Verify sequence: API call (401) -> token refresh -> retry API call
-      expect(global.fetch).toHaveBeenCalledTimes(3);
+      expect(mockHttpsRequest).toHaveBeenCalledTimes(3);
 
       // Verify new token was used in retry
-      const calls = (global.fetch as jest.Mock).mock.calls;
+      const calls = mockHttpsRequest.mock.calls;
       const retryCall = calls[2];
       expect(retryCall[1].headers.Authorization).toBe('Bearer refreshed_access_token');
 
@@ -207,16 +213,16 @@ describe('WhoopClient', () => {
       };
 
       // First API call returns 401
-      (global.fetch as jest.Mock).mockResolvedValueOnce({
+      mockHttpsRequest.mockResolvedValueOnce({
         ok: false,
         status: 401,
         text: async () => 'Unauthorized',
       });
 
       // Token refresh succeeds
-      (global.fetch as jest.Mock).mockResolvedValueOnce({
-        ok: true,
-        json: async () => ({
+      mockHttpsRequest.mockResolvedValueOnce({
+        status: 200,
+        data: JSON.stringify({
           access_token: 'new_token',
           token_type: 'Bearer',
           expires_in: 3600,
@@ -226,7 +232,7 @@ describe('WhoopClient', () => {
       });
 
       // Retry still returns 401
-      (global.fetch as jest.Mock).mockResolvedValueOnce({
+      mockHttpsRequest.mockResolvedValueOnce({
         ok: false,
         status: 401,
         text: async () => 'Still unauthorized',
@@ -239,7 +245,7 @@ describe('WhoopClient', () => {
       );
 
       // Should have made 3 calls total: initial (401), refresh, retry (401)
-      expect(global.fetch).toHaveBeenCalledTimes(3);
+      expect(mockHttpsRequest).toHaveBeenCalledTimes(3);
     });
   });
 
@@ -256,9 +262,9 @@ describe('WhoopClient', () => {
       };
 
       // Mock token refresh (will be called once)
-      (global.fetch as jest.Mock).mockResolvedValueOnce({
-        ok: true,
-        json: async () => ({
+      mockHttpsRequest.mockResolvedValueOnce({
+        status: 200,
+        data: JSON.stringify({
           access_token: 'new_token',
           token_type: 'Bearer',
           expires_in: 3600,
@@ -268,13 +274,13 @@ describe('WhoopClient', () => {
       });
 
       // Mock two API responses
-      (global.fetch as jest.Mock).mockResolvedValueOnce({
-        ok: true,
-        json: async () => ({ data: 'response1' }),
+      mockHttpsRequest.mockResolvedValueOnce({
+        status: 200,
+        data: JSON.stringify({ data: 'response1' }),
       });
-      (global.fetch as jest.Mock).mockResolvedValueOnce({
-        ok: true,
-        json: async () => ({ data: 'response2' }),
+      mockHttpsRequest.mockResolvedValueOnce({
+        status: 200,
+        data: JSON.stringify({ data: 'response2' }),
       });
 
       const client = new WhoopClient();
@@ -286,7 +292,7 @@ describe('WhoopClient', () => {
       ]);
 
       // Token refresh should have been called only once
-      const refreshCalls = (global.fetch as jest.Mock).mock.calls.filter((call) =>
+      const refreshCalls = mockHttpsRequest.mock.calls.filter((call) =>
         call[0].includes('oauth2/token')
       );
       expect(refreshCalls).toHaveLength(1);
@@ -317,7 +323,7 @@ describe('WhoopClient', () => {
       };
 
       // Mock failed token refresh
-      (global.fetch as jest.Mock).mockResolvedValueOnce({
+      mockHttpsRequest.mockResolvedValueOnce({
         ok: false,
         status: 400,
         text: async () => 'invalid_grant',
@@ -359,15 +365,15 @@ describe('WhoopClient', () => {
     });
 
     it('should make GET request to recovery endpoint', async () => {
-      (global.fetch as jest.Mock).mockResolvedValueOnce({
-        ok: true,
-        json: async () => ({ records: [{ recovery_score: 85 }] }),
+      mockHttpsRequest.mockResolvedValueOnce({
+        status: 200,
+        data: JSON.stringify({ records: [{ recovery_score: 85 }] }),
       });
 
       const client = new WhoopClient();
       const recovery = await client.getRecovery({ start: '2024-01-01', end: '2024-01-31' });
 
-      expect(global.fetch).toHaveBeenCalledWith(
+      expect(mockHttpsRequest).toHaveBeenCalledWith(
         'https://api.prod.whoop.com/developer/v1/recovery?start=2024-01-01&end=2024-01-31',
         expect.objectContaining({
           method: 'GET',
@@ -381,15 +387,15 @@ describe('WhoopClient', () => {
     });
 
     it('should make GET request to cycles endpoint', async () => {
-      (global.fetch as jest.Mock).mockResolvedValueOnce({
-        ok: true,
-        json: async () => ({ records: [{ strain: 12.5 }] }),
+      mockHttpsRequest.mockResolvedValueOnce({
+        status: 200,
+        data: JSON.stringify({ records: [{ strain: 12.5 }] }),
       });
 
       const client = new WhoopClient();
       const cycles = await client.getCycles({ start: '2024-01-01' });
 
-      expect(global.fetch).toHaveBeenCalledWith(
+      expect(mockHttpsRequest).toHaveBeenCalledWith(
         'https://api.prod.whoop.com/developer/v1/cycle?start=2024-01-01',
         expect.any(Object)
       );
@@ -398,15 +404,15 @@ describe('WhoopClient', () => {
     });
 
     it('should make GET request to sleep endpoint', async () => {
-      (global.fetch as jest.Mock).mockResolvedValueOnce({
-        ok: true,
-        json: async () => ({ records: [{ total_sleep_time: 28000 }] }),
+      mockHttpsRequest.mockResolvedValueOnce({
+        status: 200,
+        data: JSON.stringify({ records: [{ total_sleep_time: 28000 }] }),
       });
 
       const client = new WhoopClient();
       const sleep = await client.getSleep();
 
-      expect(global.fetch).toHaveBeenCalledWith(
+      expect(mockHttpsRequest).toHaveBeenCalledWith(
         'https://api.prod.whoop.com/developer/v1/activity/sleep',
         expect.any(Object)
       );
@@ -415,7 +421,7 @@ describe('WhoopClient', () => {
     });
 
     it('should handle API errors', async () => {
-      (global.fetch as jest.Mock).mockResolvedValueOnce({
+      mockHttpsRequest.mockResolvedValueOnce({
         ok: false,
         status: 500,
         text: async () => 'Internal Server Error',

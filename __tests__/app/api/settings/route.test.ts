@@ -17,16 +17,24 @@ jest.mock('@/lib/crypto', () => ({
 
 jest.mock('@/lib/db/queries', () => ({
   insertSettings: jest.fn(),
-  getSettings: jest.fn(),
+  getSetting: jest.fn(),
 }));
+
+// Mock httpsRequest for proxy support
+jest.mock('@/lib/https-proxy-request', () => ({
+  httpsRequest: jest.fn(),
+}));
+
+import { httpsRequest } from '@/lib/https-proxy-request';
 
 describe('POST /api/settings - Limitless API Key', () => {
   const mockEncryptData = crypto.encryptData as jest.MockedFunction<typeof crypto.encryptData>;
   const mockInsertSettings = db.insertSettings as jest.MockedFunction<typeof db.insertSettings>;
+  const mockHttpsRequest = httpsRequest as jest.MockedFunction<typeof httpsRequest>;
 
   beforeEach(() => {
     jest.clearAllMocks();
-    global.fetch = jest.fn();
+    mockHttpsRequest.mockReset();
   });
 
   afterEach(() => {
@@ -34,10 +42,10 @@ describe('POST /api/settings - Limitless API Key', () => {
   });
 
   it('should accept valid Limitless API key and store encrypted', async () => {
-    // Mock successful API key validation (200)
-    (global.fetch as jest.Mock).mockResolvedValueOnce({
-      ok: true,
+    // Mock successful API key validation (200) with new httpsRequest
+    mockHttpsRequest.mockResolvedValueOnce({
       status: 200,
+      data: JSON.stringify({ data: { lifelogs: [] }, meta: {} }),
     });
 
     // Mock encryption
@@ -59,13 +67,13 @@ describe('POST /api/settings - Limitless API Key', () => {
     expect(data.success).toBe(true);
     expect(data.message).toContain('limitless API key validated and stored successfully');
 
-    // Verify API key was validated
-    expect(global.fetch).toHaveBeenCalledWith(
+    // Verify API key was validated with correct header (X-API-Key, not Authorization Bearer)
+    expect(mockHttpsRequest).toHaveBeenCalledWith(
       'https://api.limitless.ai/v1/lifelogs?limit=1',
       expect.objectContaining({
-        headers: {
-          Authorization: 'Bearer test_valid_key',
-        },
+        headers: expect.objectContaining({
+          'X-API-Key': 'test_valid_key',
+        }),
       })
     );
 
@@ -83,7 +91,7 @@ describe('POST /api/settings - Limitless API Key', () => {
 
   it('should accept valid Limitless API key with 204 response', async () => {
     // Mock successful API key validation (204 No Content)
-    (global.fetch as jest.Mock).mockResolvedValueOnce({
+    mockHttpsRequest.mockResolvedValueOnce({
       ok: false,
       status: 204,
     });
@@ -108,7 +116,7 @@ describe('POST /api/settings - Limitless API Key', () => {
 
   it('should reject invalid Limitless API key (401)', async () => {
     // Mock failed API key validation (401 Unauthorized)
-    (global.fetch as jest.Mock).mockResolvedValueOnce({
+    mockHttpsRequest.mockResolvedValueOnce({
       ok: false,
       status: 401,
     });
@@ -135,7 +143,7 @@ describe('POST /api/settings - Limitless API Key', () => {
 
   it('should reject invalid Limitless API key (403)', async () => {
     // Mock failed API key validation (403 Forbidden)
-    (global.fetch as jest.Mock).mockResolvedValueOnce({
+    mockHttpsRequest.mockResolvedValueOnce({
       ok: false,
       status: 403,
     });
@@ -212,7 +220,7 @@ describe('POST /api/settings - Limitless API Key', () => {
 
   it('should handle network errors during validation gracefully', async () => {
     // Mock network error
-    (global.fetch as jest.Mock).mockRejectedValueOnce(new Error('Network error'));
+    mockHttpsRequest.mockRejectedValueOnce(new Error('Network error'));
 
     const request = new Request('http://localhost:3000/api/settings', {
       method: 'POST',
@@ -236,9 +244,9 @@ describe('POST /api/settings - Limitless API Key', () => {
 
   it('should handle database errors and return 500', async () => {
     // Mock successful validation
-    (global.fetch as jest.Mock).mockResolvedValueOnce({
-      ok: true,
+    mockHttpsRequest.mockResolvedValueOnce({
       status: 200,
+      data: JSON.stringify({ data: { lifelogs: [] }, meta: {} }),
     });
 
     mockEncryptData.mockReturnValue('encrypted_key_data');
@@ -268,9 +276,9 @@ describe('POST /api/settings - Limitless API Key', () => {
     const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation();
 
     // Mock failed validation
-    (global.fetch as jest.Mock).mockResolvedValueOnce({
-      ok: false,
+    mockHttpsRequest.mockResolvedValueOnce({
       status: 401,
+      data: 'Unauthorized',
     });
 
     const request = new Request('http://localhost:3000/api/settings', {
@@ -297,7 +305,7 @@ describe('POST /api/settings - Limitless API Key', () => {
 });
 
 describe('GET /api/settings - Check Configuration', () => {
-  const mockGetSettings = db.getSettings as jest.MockedFunction<typeof db.getSettings>;
+  const mockGetSetting = db.getSetting as jest.MockedFunction<typeof db.getSetting>;
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -305,7 +313,7 @@ describe('GET /api/settings - Check Configuration', () => {
 
   it('should return configured=true when API key exists', () => {
     // Mock existing setting
-    mockGetSettings.mockReturnValueOnce({
+    mockGetSetting.mockReturnValueOnce({
       key: 'limitless_api_key',
       value_enc: 'encrypted_data',
     });
@@ -327,7 +335,7 @@ describe('GET /api/settings - Check Configuration', () => {
       expect(data.provider).toBe('limitless');
 
       // Verify database query was called
-      expect(mockGetSettings).toHaveBeenCalledWith('limitless_api_key');
+      expect(mockGetSetting).toHaveBeenCalledWith('limitless_api_key');
 
       // Verify encrypted value is NOT exposed
       expect(data).not.toHaveProperty('value_enc');
@@ -337,7 +345,7 @@ describe('GET /api/settings - Check Configuration', () => {
 
   it('should return configured=false when API key does not exist', () => {
     // Mock no existing setting
-    mockGetSettings.mockReturnValueOnce(undefined);
+    mockGetSetting.mockReturnValueOnce(undefined);
 
     const request = new Request(
       'http://localhost:3000/api/settings?provider=limitless',
@@ -355,7 +363,7 @@ describe('GET /api/settings - Check Configuration', () => {
       expect(data.configured).toBe(false);
       expect(data.provider).toBe('limitless');
 
-      expect(mockGetSettings).toHaveBeenCalledWith('limitless_api_key');
+      expect(mockGetSetting).toHaveBeenCalledWith('limitless_api_key');
     });
   });
 
@@ -376,7 +384,7 @@ describe('GET /api/settings - Check Configuration', () => {
 
   it('should handle database errors and return 500', () => {
     // Mock database error
-    mockGetSettings.mockImplementationOnce(() => {
+    mockGetSetting.mockImplementationOnce(() => {
       throw new Error('Database error');
     });
 

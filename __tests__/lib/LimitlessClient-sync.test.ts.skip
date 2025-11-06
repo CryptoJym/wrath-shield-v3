@@ -30,7 +30,7 @@ let insertedLifelogs: any[] = [];
 let insertedSettings: any[] = [];
 
 jest.mock('@/lib/db/queries', () => ({
-  getSettings: jest.fn((key: string) => mockSettings[key] || null),
+  getSetting: jest.fn((key: string) => mockSettings[key] || null),
   insertSettings: jest.fn((settings: any[]) => {
     settings.forEach((setting) => {
       mockSettings[setting.key] = setting;
@@ -48,7 +48,7 @@ global.fetch = jest.fn();
 describe('LimitlessClient - Incremental Sync', () => {
   const mockEncryptData = crypto.encryptData as jest.MockedFunction<typeof crypto.encryptData>;
   const mockDecryptData = crypto.decryptData as jest.MockedFunction<typeof crypto.decryptData>;
-  const mockGetSettings = db.getSettings as jest.MockedFunction<typeof db.getSettings>;
+  const mockGetSetting = db.getSetting as jest.MockedFunction<typeof db.getSetting>;
   const mockInsertSettings = db.insertSettings as jest.MockedFunction<typeof db.insertSettings>;
   const mockInsertLifelogs = db.insertLifelogs as jest.MockedFunction<typeof db.insertLifelogs>;
 
@@ -76,7 +76,7 @@ describe('LimitlessClient - Incremental Sync', () => {
   describe('First Sync (No Previous Timestamp)', () => {
     it('should fetch all lifelogs when no last_successful_pull exists', async () => {
       // No last_successful_pull setting exists
-      mockGetSettings.mockReturnValueOnce(null);
+      mockGetSetting.mockReturnValueOnce(null);
 
       // Mock API response with 2 lifelogs
       (global.fetch as jest.Mock).mockResolvedValueOnce({
@@ -135,7 +135,7 @@ describe('LimitlessClient - Incremental Sync', () => {
     });
 
     it('should update last_successful_pull to today after first sync', async () => {
-      mockGetSettings.mockReturnValueOnce(null);
+      mockGetSetting.mockReturnValueOnce(null);
 
       (global.fetch as jest.Mock).mockResolvedValueOnce({
         ok: true,
@@ -171,7 +171,7 @@ describe('LimitlessClient - Incremental Sync', () => {
   describe('Incremental Sync', () => {
     it('should fetch only lifelogs since last_successful_pull', async () => {
       // Mock existing last_successful_pull timestamp
-      mockGetSettings.mockReturnValueOnce({
+      mockGetSetting.mockReturnValueOnce({
         key: 'limitless_last_pull',
         value_enc: 'encrypted_2024-01-25',
       });
@@ -227,7 +227,7 @@ describe('LimitlessClient - Incremental Sync', () => {
     });
 
     it('should handle multiple pages in incremental sync', async () => {
-      mockGetSettings.mockReturnValueOnce({
+      mockGetSetting.mockReturnValueOnce({
         key: 'limitless_last_pull',
         value_enc: 'encrypted_2024-01-20',
       });
@@ -283,7 +283,7 @@ describe('LimitlessClient - Incremental Sync', () => {
 
   describe('Empty Result Handling', () => {
     it('should return 0 when no new lifelogs are available', async () => {
-      mockGetSettings.mockReturnValueOnce({
+      mockGetSetting.mockReturnValueOnce({
         key: 'limitless_last_pull',
         value_enc: 'encrypted_2024-01-30',
       });
@@ -312,7 +312,7 @@ describe('LimitlessClient - Incremental Sync', () => {
     });
 
     it('should not update timestamp when fetch returns empty array', async () => {
-      mockGetSettings.mockReturnValueOnce(null); // First sync
+      mockGetSetting.mockReturnValueOnce(null); // First sync
 
       (global.fetch as jest.Mock).mockResolvedValueOnce({
         ok: true,
@@ -332,7 +332,7 @@ describe('LimitlessClient - Incremental Sync', () => {
 
   describe('Timestamp Storage', () => {
     it('should encrypt timestamp before storing in database', async () => {
-      mockGetSettings.mockReturnValueOnce(null);
+      mockGetSetting.mockReturnValueOnce(null);
 
       (global.fetch as jest.Mock).mockResolvedValueOnce({
         ok: true,
@@ -365,7 +365,7 @@ describe('LimitlessClient - Incremental Sync', () => {
     });
 
     it('should use YYYY-MM-DD format for timestamp', async () => {
-      mockGetSettings.mockReturnValueOnce(null);
+      mockGetSetting.mockReturnValueOnce(null);
 
       // Mock specific date
       jest.spyOn(Date.prototype, 'toISOString').mockReturnValue('2024-12-25T23:59:59.999Z');
@@ -393,7 +393,7 @@ describe('LimitlessClient - Incremental Sync', () => {
     });
 
     it('should decrypt stored timestamp when reading last_successful_pull', async () => {
-      mockGetSettings.mockReturnValueOnce({
+      mockGetSetting.mockReturnValueOnce({
         key: 'limitless_last_pull',
         value_enc: 'encrypted_2024-01-15',
       });
@@ -424,7 +424,7 @@ describe('LimitlessClient - Incremental Sync', () => {
 
   describe('Database Deduplication', () => {
     it('should rely on insertLifelogs upsert behavior for deduplication', async () => {
-      mockGetSettings.mockReturnValueOnce(null);
+      mockGetSetting.mockReturnValueOnce(null);
 
       // Mock response with duplicate IDs (simulating multiple syncs)
       (global.fetch as jest.Mock).mockResolvedValueOnce({
@@ -457,7 +457,7 @@ describe('LimitlessClient - Incremental Sync', () => {
     });
 
     it('should pass all normalized lifelogs to insertLifelogs', async () => {
-      mockGetSettings.mockReturnValueOnce({
+      mockGetSetting.mockReturnValueOnce({
         key: 'limitless_last_pull',
         value_enc: 'encrypted_2024-01-20',
       });
@@ -528,7 +528,7 @@ describe('LimitlessClient - Incremental Sync', () => {
     });
 
     it('should propagate API errors', async () => {
-      mockGetSettings.mockReturnValueOnce(null);
+      mockGetSetting.mockReturnValueOnce(null);
 
       (global.fetch as jest.Mock).mockResolvedValueOnce({
         ok: false,
@@ -547,7 +547,7 @@ describe('LimitlessClient - Incremental Sync', () => {
     });
 
     it('should propagate network errors', async () => {
-      mockGetSettings.mockReturnValueOnce(null);
+      mockGetSetting.mockReturnValueOnce(null);
 
       (global.fetch as jest.Mock).mockRejectedValueOnce(new Error('Network failure'));
 
@@ -562,7 +562,7 @@ describe('LimitlessClient - Incremental Sync', () => {
 
   describe('Integration with Pagination', () => {
     it('should use existing pagination logic during sync', async () => {
-      mockGetSettings.mockReturnValueOnce({
+      mockGetSetting.mockReturnValueOnce({
         key: 'limitless_last_pull',
         value_enc: 'encrypted_2024-01-01',
       });
@@ -614,7 +614,7 @@ describe('LimitlessClient - Incremental Sync', () => {
 
   describe('Observability', () => {
     it('should return count of new lifelogs for monitoring', async () => {
-      mockGetSettings.mockReturnValueOnce(null);
+      mockGetSetting.mockReturnValueOnce(null);
 
       (global.fetch as jest.Mock).mockResolvedValueOnce({
         ok: true,
@@ -636,7 +636,7 @@ describe('LimitlessClient - Incremental Sync', () => {
     });
 
     it('should return 0 for empty syncs', async () => {
-      mockGetSettings.mockReturnValueOnce({
+      mockGetSetting.mockReturnValueOnce({
         key: 'limitless_last_pull',
         value_enc: 'encrypted_2024-01-30',
       });
