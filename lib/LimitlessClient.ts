@@ -78,16 +78,24 @@ class RateLimiter {
 /**
  * Limitless Lifelog Response
  */
+interface LifelogItem {
+  id: string;
+  startTime: string; // ISO 8601
+  endTime: string; // ISO 8601
+  markdown: string; // Transcript
+  title: string; // Summary
+  contents?: any[];
+  isStarred?: boolean;
+  updatedAt?: string;
+}
+
 interface LifelogResponse {
-  lifelogs: Array<{
-    id: string;
-    start_time: string; // ISO 8601
-    end_time: string; // ISO 8601
-    transcript: string;
-    summary?: string;
-    metadata?: Record<string, unknown>;
-  }>;
-  cursor?: string | null;
+  data: {
+    lifelogs: LifelogItem[];
+  };
+  meta?: {
+    cursor?: string | null;
+  };
 }
 
 /**
@@ -162,7 +170,13 @@ class LimitlessClient {
       throw new Error(`Limitless API error: ${response.status} ${response.data}`);
     }
 
-    return JSON.parse(response.data);
+    const parsed = JSON.parse(response.data);
+    console.log('[LimitlessClient] Response received:', {
+      status: response.status,
+      keys: Object.keys(parsed),
+      dataKeys: parsed.data ? Object.keys(parsed.data) : null,
+    });
+    return parsed;
   }
 
   /**
@@ -174,8 +188,8 @@ class LimitlessClient {
   async fetchLifelogs(opts?: {
     start_date?: string; // YYYY-MM-DD
     end_date?: string; // YYYY-MM-DD
-  }): Promise<LifelogResponse['lifelogs']> {
-    const allLifelogs: LifelogResponse['lifelogs'] = [];
+  }): Promise<LifelogItem[]> {
+    const allLifelogs: LifelogItem[] = [];
     let cursor: string | null | undefined = undefined;
 
     do {
@@ -197,8 +211,14 @@ class LimitlessClient {
 
       const response: LifelogResponse = await this.request('/v1/lifelogs', params);
 
-      allLifelogs.push(...response.lifelogs);
-      cursor = response.cursor;
+      console.log('[LimitlessClient] Fetched', response.data.lifelogs.length, 'lifelogs');
+      if (response.data.lifelogs.length > 0) {
+        console.log('[LimitlessClient] First lifelog keys:', Object.keys(response.data.lifelogs[0]));
+        console.log('[LimitlessClient] First lifelog full:', JSON.stringify(response.data.lifelogs[0], null, 2));
+      }
+
+      allLifelogs.push(...response.data.lifelogs);
+      cursor = response.meta?.cursor;
     } while (cursor);
 
     return allLifelogs;
@@ -207,14 +227,14 @@ class LimitlessClient {
   /**
    * Parse raw lifelog into database-ready format
    */
-  parseLifelog(raw: LifelogResponse['lifelogs'][0]): ParsedLifelog {
+  parseLifelog(raw: LifelogItem): ParsedLifelog {
     return {
       id: raw.id,
-      date: raw.start_time.split('T')[0], // Extract YYYY-MM-DD from ISO timestamp
-      start_time: raw.start_time,
-      end_time: raw.end_time,
-      transcript: raw.transcript,
-      summary: raw.summary ?? null,
+      date: raw.startTime.split('T')[0], // Extract YYYY-MM-DD from ISO timestamp
+      start_time: raw.startTime,
+      end_time: raw.endTime,
+      transcript: raw.markdown,
+      summary: raw.title ?? null,
       raw_json: JSON.stringify(raw),
     };
   }
