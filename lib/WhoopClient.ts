@@ -9,6 +9,7 @@ import { decryptData, encryptData } from '@/lib/crypto';
 import { getToken, insertTokens } from '@/lib/db/queries';
 import { ensureServerOnly } from '@/lib/server-only-guard';
 import type { CycleInput, RecoveryInput, SleepInput } from '@/lib/db/types';
+import { httpsRequest } from '@/lib/https-proxy-request';
 
 ensureServerOnly();
 
@@ -168,7 +169,7 @@ export class WhoopClient {
 
     console.log('[WhoopClient] Refreshing access token');
 
-    const response = await fetch(WHOOP_TOKEN_URL, {
+    const response = await httpsRequest(WHOOP_TOKEN_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -176,13 +177,12 @@ export class WhoopClient {
       body: tokenParams.toString(),
     });
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error('[WhoopClient] Token refresh failed:', response.status, errorText);
-      throw new Error(`Token refresh failed: ${response.status} ${errorText}`);
+    if (response.status !== 200) {
+      console.error('[WhoopClient] Token refresh failed:', response.status, response.data);
+      throw new Error(`Token refresh failed: ${response.status} ${response.data}`);
     }
 
-    const tokenData = (await response.json()) as TokenRefreshResponse;
+    const tokenData = JSON.parse(response.data) as TokenRefreshResponse;
 
     // Encrypt new tokens
     const accessTokenEnc = encryptData(tokenData.access_token);
@@ -230,7 +230,7 @@ export class WhoopClient {
     const accessToken = await this.getAccessToken();
     const url = `${WHOOP_API_BASE}${path}`;
 
-    const options: RequestInit = {
+    const requestOptions: any = {
       method,
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -239,10 +239,10 @@ export class WhoopClient {
     };
 
     if (body && (method === 'POST' || method === 'PUT' || method === 'PATCH')) {
-      options.body = JSON.stringify(body);
+      requestOptions.body = JSON.stringify(body);
     }
 
-    const response = await fetch(url, options);
+    const response = await httpsRequest(url, requestOptions);
 
     // Handle 401 Unauthorized - token might be expired despite our refresh logic
     if (response.status === 401 && retryCount === 0) {
@@ -252,12 +252,11 @@ export class WhoopClient {
       return this.request<T>(method, path, body, retryCount + 1);
     }
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      throw new Error(`WHOOP API error: ${response.status} ${errorText}`);
+    if (response.status !== 200 && response.status !== 204) {
+      throw new Error(`WHOOP API error: ${response.status} ${response.data}`);
     }
 
-    return response.json() as Promise<T>;
+    return JSON.parse(response.data) as T;
   }
 
   /**

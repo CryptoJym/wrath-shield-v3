@@ -17,6 +17,7 @@ ensureServerOnly('lib/https-proxy-request');
 export interface HttpsRequestOptions {
   method?: string;
   headers?: Record<string, string>;
+  body?: string;
 }
 
 export interface HttpsResponse {
@@ -68,22 +69,32 @@ export function httpsRequest(
       // Create tunneling agent
       agent = tunnel.httpsOverHttp(proxyOptions);
 
+      const headers = { ...options.headers };
+      if (options.body) {
+        headers['Content-Length'] = Buffer.byteLength(options.body).toString();
+      }
+
       requestOptions = {
         method: options.method || 'GET',
         hostname: urlObj.hostname,
         port: urlObj.port || 443,
         path: urlObj.pathname + urlObj.search,
-        headers: options.headers,
+        headers,
         agent: agent,
       };
     } else {
       // Direct connection (no proxy)
+      const headers = { ...options.headers };
+      if (options.body) {
+        headers['Content-Length'] = Buffer.byteLength(options.body).toString();
+      }
+
       requestOptions = {
         method: options.method || 'GET',
         hostname: urlObj.hostname,
         port: urlObj.port || 443,
         path: urlObj.pathname + urlObj.search,
-        headers: options.headers,
+        headers,
       };
     }
 
@@ -116,6 +127,11 @@ export function httpsRequest(
       console.error('[https-proxy-request] Request error:', error);
       reject(error);
     });
+
+    // Write request body if provided
+    if (options.body) {
+      req.write(options.body);
+    }
 
     req.end();
   });
