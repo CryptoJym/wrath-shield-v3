@@ -42,3 +42,4 @@ psycopg2-binary==2.9.11  # PostgreSQL adapter for Python
 
 # AI Integration
 openai==1.54.0  # For xAI Grok API (OpenAI-compatible)
+altair==5.3.0

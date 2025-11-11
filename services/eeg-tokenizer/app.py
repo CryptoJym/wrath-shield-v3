@@ -14,6 +14,7 @@ import matplotlib.pyplot as plt
 import json
 import torch
 import os
+import sys
 from datetime import datetime, timedelta
 from pathlib import Path
 
@@ -343,9 +344,11 @@ elif mode == "Live Streaming":
 
         if start and not st.session_state.ws_pid:
             import subprocess
+            base_dir = Path(__file__).resolve().parent
+            script_path = str(base_dir / 'neurable_ws_client.py')
             cmd = [
                 sys.executable,
-                'neurable_ws_client.py',
+                script_path,
                 '--url', ws_url,
                 '--session-id', 'LIVE',
                 '--verbose'
