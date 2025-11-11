@@ -9,9 +9,9 @@ scipy>=1.13.0
 # torchvision
 # torchaudio
 
-# EEG processing
-mne==1.5.1
-mne-connectivity==0.5.0
+# (Optional) EEG processing
+# mne
+# mne-connectivity
 
 # API and async
 fastapi==0.104.1
@@ -28,8 +28,8 @@ pydantic==2.5.0
 pytest==7.4.3
 pytest-asyncio==0.21.1
 
-# OpenNeuro dataset access
-openneuro-py==2023.2.0
+# (Optional) OpenNeuro dataset access
+# openneuro-py
 
 # Visualization
 matplotlib==3.8.0

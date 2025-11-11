@@ -23,7 +23,6 @@ if str(_BASE_DIR) not in sys.path:
     sys.path.insert(0, str(_BASE_DIR))
 
 # Import tokenization pipeline
-from tokenization_pipeline import EEGTokenizer
 from db_client import DatabaseClient
 from grok_chat import GrokChatClient
 import httpx
