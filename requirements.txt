@@ -1,0 +1,5 @@
+# Root requirements file to guide Streamlit Cloud.
+# Delegates to the app's minimal dependency set.
+
+-r services/eeg-tokenizer/requirements.txt
+
