@@ -21,7 +21,9 @@ _BASE_DIR = Path(__file__).resolve().parent
 if str(_BASE_DIR) not in sys.path:
     sys.path.insert(0, str(_BASE_DIR))
 
-# Import tokenization pipeline
+# Cloud mode toggle (hide DB/Agentic sections on Streamlit Cloud)
+CLOUD_MODE = os.getenv('CLOUD_MODE', '').strip().lower() in ('1', 'true', 'yes')
+
 from db_client import DatabaseClient
 from grok_chat import GrokChatClient
 import httpx
@@ -88,7 +90,7 @@ def get_data_status():
         # Be quiet on Cloud or when DB is unreachable
         return None
 
-data_status = get_data_status()
+data_status = None if CLOUD_MODE else get_data_status()
 
 # Sidebar
 st.sidebar.title("🧠 EEG Tokenizer")
@@ -411,7 +413,7 @@ elif mode == "Live Streaming":
     st.markdown("---")
 
     # Brain state display (if database connected)
-    if db_connected and db_client and hasattr(db_client, 'get_brain_state'):
+    if (not os.getenv('CLOUD_MODE')) and db_connected and db_client and hasattr(db_client, 'get_brain_state'):
         st.subheader("🧠 Current Brain State (Last 10 seconds)")
 
         try:
@@ -553,3 +555,5 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+# Cloud mode toggle (hide DB/Agentic sections on Streamlit Cloud)
+CLOUD_MODE = os.getenv('CLOUD_MODE', '').strip() == '1'
