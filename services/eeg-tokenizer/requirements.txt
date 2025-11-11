@@ -1,46 +1,15 @@
-# EEG Tokenization Service Dependencies
-# Core scientific computing (Cloud-safe wheels)
-numpy>=1.26.4
-scipy>=1.13.0
+# Streamlit Cloud friendly requirements (minimal runtime deps)
 
-# Deep learning (optional locally; excluded on Streamlit Cloud to avoid wheel issues)
-# Install these locally if you need live tokenization in-process.
-# torch
-# torchvision
-# torchaudio
+# UI
+streamlit==1.28.1
+altair>=5.3.0
+pandas>=2.2.3
 
-# (Optional) EEG processing
-# mne
-# mne-connectivity
-
-# API and async
-fastapi==0.104.1
-uvicorn[standard]==0.24.0
-websockets==12.0
+# HTTP client
 httpx==0.25.1
 
-# Database
-aiosqlite==0.19.0
+# Database driver (optional at runtime; used when DB is reachable)
+psycopg2-binary==2.9.11
 
-# Utilities
-python-dotenv==1.0.0
-pydantic==2.5.0
-pytest==7.4.3
-pytest-asyncio==0.21.1
-
-# (Optional) OpenNeuro dataset access
-# openneuro-py
-
-# Visualization
-matplotlib==3.8.0
-streamlit==1.28.1
-pandas==2.2.2
-
-# Database (required for real-time streaming and historical data)
-# Note: psycopg2-binary 2.9.11+ supports Python 3.13
-psycopg2-binary==2.9.11  # PostgreSQL adapter for Python
-# asyncpg==0.29.0  # Async PostgreSQL driver (optional, for async operations)
-
-# AI Integration
-openai==1.54.0  # For xAI Grok API (OpenAI-compatible)
-altair==5.3.0
+# xAI (OpenAI-compatible client)
+openai==1.54.0
