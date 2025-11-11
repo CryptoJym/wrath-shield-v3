@@ -124,7 +124,7 @@ export async function GET(request: NextRequest) {
     // Calculate expiration timestamp (current time + expires_in seconds)
     const expiresAt = Math.floor(Date.now() / 1000) + tokenData.expires_in;
 
-    // Store encrypted tokens in database
+    // Store encrypted tokens in database (per-user scoping handled by DB defaults)
     insertTokens([
       {
         provider: 'whoop',

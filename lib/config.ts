@@ -125,22 +125,27 @@ export function getConfig(): AppConfig {
   // Priority: 1. macOS Keychain, 2. Environment variable (backwards compatibility)
   let cryptoConfig;
   try {
-    let keyBase64: string;
+    let keyBase64: string | undefined;
 
-    if (hasKeyInKeychain()) {
-      // Preferred: Use macOS Keychain for secure key storage
+    const inTest = (process.env.NODE_ENV === 'test');
+
+    if (!inTest && hasKeyInKeychain()) {
+      // Preferred (outside tests): Use macOS Keychain for secure key storage
       keyBase64 = getKeyFromKeychain();
     } else if (process.env.DATABASE_ENCRYPTION_KEY) {
-      // Fallback: Environment variable (backwards compatibility during migration)
+      // Fallback: Environment variable
       keyBase64 = process.env.DATABASE_ENCRYPTION_KEY;
-      console.warn(
-        'WARNING: Using DATABASE_ENCRYPTION_KEY from environment variable. ' +
-        'For better security, migrate to macOS Keychain: npm run setup:keychain'
-      );
-    } else {
+      if (!inTest) {
+        console.warn(
+          'WARNING: Using DATABASE_ENCRYPTION_KEY from environment variable. ' +
+          'For better security, migrate to macOS Keychain: npm run setup:keychain'
+        );
+      }
+    }
+
+    if (!keyBase64) {
       throw new Error(
-        'Database encryption key not found. ' +
-        'Run setup script to initialize: npm run setup:keychain'
+        'DATABASE_ENCRYPTION_KEY is required; not found in env or Keychain'
       );
     }
 
@@ -148,7 +153,7 @@ export function getConfig(): AppConfig {
     const decoded = Buffer.from(keyBase64, 'base64');
     if (decoded.length !== 32) {
       throw new Error(
-        `Database encryption key must be exactly 32 bytes when base64-decoded (got ${decoded.length} bytes)`
+        `DATABASE_ENCRYPTION_KEY must be exactly 32 bytes when base64-decoded (got ${decoded.length} bytes)`
       );
     }
 

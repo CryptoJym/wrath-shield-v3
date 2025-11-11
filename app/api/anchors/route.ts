@@ -7,7 +7,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getAnchors, addAnchor } from '@/lib/MemoryWrapper';
 
-const USER_ID = 'default-user'; // Single-user app for now
+const DEFAULT_USER_ID = 'default'; // Multi-user support: default if none provided
 
 /**
  * GET /api/anchors
@@ -22,8 +22,9 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     const { searchParams } = new URL(request.url);
     const since = searchParams.get('since') || undefined;
     const category = searchParams.get('category') || undefined;
+    const userId = searchParams.get('userId') || DEFAULT_USER_ID;
 
-    const anchors = await getAnchors(USER_ID, {
+    const anchors = await getAnchors(userId, {
       since,
       category,
     });
@@ -88,8 +89,13 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       );
     }
 
-    // Add anchor to Mem0
-    await addAnchor(body.text, body.category, body.date, USER_ID);
+    // Optional user selection
+    const userId = typeof body.userId === 'string' && body.userId.trim() !== ''
+      ? body.userId.trim()
+      : DEFAULT_USER_ID;
+
+    // Add anchor to Mem0 for the chosen user
+    await addAnchor(body.text, body.category, body.date, userId);
 
     return NextResponse.json(
       {

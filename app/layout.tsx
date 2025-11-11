@@ -5,23 +5,8 @@
  */
 
 import type { Metadata } from 'next';
-import { Inter, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import '../styles/power.css';
-
-// Configure Inter font for body text
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-  display: 'swap',
-});
-
-// Configure JetBrains Mono for code/monospace text
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ['latin'],
-  variable: '--font-jetbrains-mono',
-  display: 'swap',
-});
 
 export const metadata: Metadata = {
   title: 'Wrath Shield v3',
@@ -34,8 +19,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`}>
-      <body className={inter.className}>
+    <html lang="en">
+      <body>
         <header style={{
           position: 'sticky', top: 0, zIndex: 50,
           background: 'var(--color-bg)', borderBottom: '1px solid var(--color-border)',
@@ -45,6 +30,8 @@ export default function RootLayout({
             <a href="/" style={{ fontWeight: 600 }}>Wrath Shield v3</a>
             <a href="/chat" style={{ color: 'var(--color-text-secondary)' }}>Agentic Grok Chat</a>
             <a href="/eeg" style={{ color: 'var(--color-text-secondary)' }}>EEG Dashboard</a>
+            <a href="/feed" style={{ color: 'var(--color-text-secondary)' }}>Feed</a>
+            <a href="/users/default" style={{ color: 'var(--color-text-secondary)' }}>Default User</a>
           </nav>
         </header>
         <main style={{ padding: '1rem' }}>{children}</main>

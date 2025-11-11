@@ -1,18 +1,19 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
-export async function POST(req: Request) {
-  const base = process.env.AGENTIC_GROK_URL || 'http://localhost:8001';
-  const payload = await req.json();
+export async function POST(request: NextRequest) {
   try {
-    const r = await fetch(`${base}/api/agentic/chat`, {
+    const body = await request.json();
+    const base = process.env.AGENTIC_GROK_URL || 'http://localhost:8001';
+    const resp = await fetch(`${base}/api/agentic/chat`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
+      body: JSON.stringify(body),
     });
-    const data = await r.json();
-    return NextResponse.json(data);
+    const data = await resp.json().catch(() => ({}));
+    return NextResponse.json(data, { status: resp.status });
   } catch (e: any) {
-    return NextResponse.json({ error: String(e) }, { status: 500 });
+    console.error('[Next Agentic Chat] Error:', e);
+    return NextResponse.json({ error: 'Agentic chat failed' }, { status: 500 });
   }
 }
 

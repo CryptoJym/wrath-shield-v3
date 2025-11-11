@@ -9,12 +9,13 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { encryptData } from '@/lib/crypto';
-import { insertSettings, getSetting } from '@/lib/db/queries';
+import { insertSettings, insertSettingsForUser, getSetting } from '@/lib/db/queries';
 import { httpsRequest } from '@/lib/https-proxy-request';
 
 interface SettingsRequest {
   provider: 'limitless';
   key: string;
+  userId?: string;
 }
 
 /**
@@ -77,13 +78,16 @@ export async function POST(request: NextRequest) {
     // Encrypt the API key
     const encryptedKey = encryptData(body.key);
 
-    // Store in settings table
-    insertSettings([
-      {
-        key: `${body.provider}_api_key`,
-        value_enc: encryptedKey,
-      },
-    ]);
+    const setting = {
+      key: `${body.provider}_api_key`,
+      value_enc: encryptedKey,
+    } as const;
+
+    if (body.userId && body.userId.trim() !== '') {
+      insertSettingsForUser([setting], body.userId);
+    } else {
+      insertSettings([setting]);
+    }
 
     return NextResponse.json(
       {
@@ -109,13 +113,14 @@ export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
     const provider = searchParams.get('provider');
+    const userId = searchParams.get('userId') || undefined;
 
     if (!provider) {
       return NextResponse.json({ error: 'Missing provider parameter' }, { status: 400 });
     }
 
     const settingKey = `${provider}_api_key`;
-    const setting = getSetting(settingKey);
+    const setting = userId ? getSetting(settingKey, userId) : getSetting(settingKey);
 
     if (!setting) {
       return NextResponse.json(

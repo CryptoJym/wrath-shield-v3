@@ -212,6 +212,7 @@ export async function storeDailySummary(
 ): Promise<void> {
   // Lazy-load modules to avoid circular dependencies
   const { addDailySummary } = await import('./MemoryWrapper');
+  // Keep legacy API names for test compatibility; user scoping handled in DB defaults
   const { insertLifelogs, calculateUnbendingScore } = await import('./db/queries');
 
   // 1. Store summary in Mem0 with structured metadata

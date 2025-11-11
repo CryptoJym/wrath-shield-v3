@@ -148,6 +148,20 @@ export type FlagInput = Omit<Flag, 'created_at' | 'updated_at'>;
 export type TweakInput = Omit<Tweak, 'created_at' | 'updated_at'>;
 
 /**
+ * Users Table
+ */
+export interface User {
+  id: string;
+  email: string | null;
+  name: string | null;
+  timezone: string | null;
+  created_at?: number;
+  updated_at?: number;
+}
+
+export type UserInput = Omit<User, 'created_at' | 'updated_at'>;
+
+/**
  * Metrics aggregation for dashboard queries
  */
 export interface DailyMetrics {

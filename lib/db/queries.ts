@@ -27,10 +27,37 @@ import type {
   Tweak,
   TweakInput,
   DailyMetrics,
+  User,
+  UserInput,
 } from './types';
 
 // Ensure this module is only used server-side
 ensureServerOnly('lib/db/queries');
+
+function hasUserIdColumn(table: string): boolean {
+  try {
+    const db = getDatabase().getRawDb() as any;
+    const rows = db.prepare(`PRAGMA table_info(${table})`).all();
+    return Array.isArray(rows) && rows.some((r: any) => r.name === 'user_id');
+  } catch {
+    return false;
+  }
+}
+
+// Resolve effective user id from parameter, settings.default_user_id, or 'default'
+function resolveUserId(userId?: string): string {
+  if (userId && userId.trim() !== '') return userId.trim();
+  try {
+    const db = getDatabase();
+    // Read default_user_id setting without calling getSetting to avoid recursion
+    const row = db
+      .prepare<{ value_enc: string }>(`SELECT value_enc FROM settings WHERE key = 'default_user_id' LIMIT 1`)
+      .get();
+    const vid = row?.value_enc?.trim();
+    if (vid) return vid;
+  } catch {}
+  return 'default';
+}
 
 /**
  * WHOOP Cycles - Batch Upsert
@@ -40,17 +67,31 @@ export function insertCycles(cycles: CycleInput[]): void {
 
   const db = getDatabase();
 
-  const upsert = db.prepare(`
-    INSERT INTO cycles (id, date, strain, kilojoules, avg_hr, max_hr)
-    VALUES (?, ?, ?, ?, ?, ?)
-    ON CONFLICT(id) DO UPDATE SET
-      date = excluded.date,
-      strain = excluded.strain,
-      kilojoules = excluded.kilojoules,
-      avg_hr = excluded.avg_hr,
-      max_hr = excluded.max_hr,
-      updated_at = strftime('%s', 'now')
-  `);
+  const scoped = hasUserIdColumn('cycles');
+  const upsert = scoped
+    ? db.prepare(`
+      INSERT INTO cycles (id, date, strain, kilojoules, avg_hr, max_hr, user_id)
+      VALUES (?, ?, ?, ?, ?, ?, COALESCE(?, 'default'))
+      ON CONFLICT(id) DO UPDATE SET
+        date = excluded.date,
+        strain = excluded.strain,
+        kilojoules = excluded.kilojoules,
+        avg_hr = excluded.avg_hr,
+        max_hr = excluded.max_hr,
+        user_id = COALESCE(excluded.user_id, user_id),
+        updated_at = strftime('%s', 'now')
+    `)
+    : db.prepare(`
+      INSERT INTO cycles (id, date, strain, kilojoules, avg_hr, max_hr)
+      VALUES (?, ?, ?, ?, ?, ?)
+      ON CONFLICT(id) DO UPDATE SET
+        date = excluded.date,
+        strain = excluded.strain,
+        kilojoules = excluded.kilojoules,
+        avg_hr = excluded.avg_hr,
+        max_hr = excluded.max_hr,
+        updated_at = strftime('%s', 'now')
+    `);
 
   db.transaction(() => {
     for (const cycle of cycles) {
@@ -61,6 +102,7 @@ export function insertCycles(cycles: CycleInput[]): void {
         cycle.kilojoules,
         cycle.avg_hr,
         cycle.max_hr
+        , ...(scoped ? [null] : [])
       );
     }
   });
@@ -74,18 +116,33 @@ export function insertRecoveries(recoveries: RecoveryInput[]): void {
 
   const db = getDatabase();
 
-  const upsert = db.prepare(`
-    INSERT INTO recoveries (id, date, score, hrv, rhr, spo2, skin_temp)
-    VALUES (?, ?, ?, ?, ?, ?, ?)
-    ON CONFLICT(id) DO UPDATE SET
-      date = excluded.date,
-      score = excluded.score,
-      hrv = excluded.hrv,
-      rhr = excluded.rhr,
-      spo2 = excluded.spo2,
-      skin_temp = excluded.skin_temp,
-      updated_at = strftime('%s', 'now')
-  `);
+  const scoped = hasUserIdColumn('recoveries');
+  const upsert = scoped
+    ? db.prepare(`
+      INSERT INTO recoveries (id, date, score, hrv, rhr, spo2, skin_temp, user_id)
+      VALUES (?, ?, ?, ?, ?, ?, ?, COALESCE(?, 'default'))
+      ON CONFLICT(id) DO UPDATE SET
+        date = excluded.date,
+        score = excluded.score,
+        hrv = excluded.hrv,
+        rhr = excluded.rhr,
+        spo2 = excluded.spo2,
+        skin_temp = excluded.skin_temp,
+        user_id = COALESCE(excluded.user_id, user_id),
+        updated_at = strftime('%s', 'now')
+    `)
+    : db.prepare(`
+      INSERT INTO recoveries (id, date, score, hrv, rhr, spo2, skin_temp)
+      VALUES (?, ?, ?, ?, ?, ?, ?)
+      ON CONFLICT(id) DO UPDATE SET
+        date = excluded.date,
+        score = excluded.score,
+        hrv = excluded.hrv,
+        rhr = excluded.rhr,
+        spo2 = excluded.spo2,
+        skin_temp = excluded.skin_temp,
+        updated_at = strftime('%s', 'now')
+    `);
 
   db.transaction(() => {
     for (const recovery of recoveries) {
@@ -97,6 +154,7 @@ export function insertRecoveries(recoveries: RecoveryInput[]): void {
         recovery.rhr,
         recovery.spo2,
         recovery.skin_temp
+        , ...(scoped ? [null] : [])
       );
     }
   });
@@ -110,19 +168,35 @@ export function insertSleeps(sleeps: SleepInput[]): void {
 
   const db = getDatabase();
 
-  const upsert = db.prepare(`
-    INSERT INTO sleeps (id, date, performance, rem_min, sws_min, light_min, respiration, sleep_debt_min)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-    ON CONFLICT(id) DO UPDATE SET
-      date = excluded.date,
-      performance = excluded.performance,
-      rem_min = excluded.rem_min,
-      sws_min = excluded.sws_min,
-      light_min = excluded.light_min,
-      respiration = excluded.respiration,
-      sleep_debt_min = excluded.sleep_debt_min,
-      updated_at = strftime('%s', 'now')
-  `);
+  const scoped = hasUserIdColumn('sleeps');
+  const upsert = scoped
+    ? db.prepare(`
+      INSERT INTO sleeps (id, date, performance, rem_min, sws_min, light_min, respiration, sleep_debt_min, user_id)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, COALESCE(?, 'default'))
+      ON CONFLICT(id) DO UPDATE SET
+        date = excluded.date,
+        performance = excluded.performance,
+        rem_min = excluded.rem_min,
+        sws_min = excluded.sws_min,
+        light_min = excluded.light_min,
+        respiration = excluded.respiration,
+        sleep_debt_min = excluded.sleep_debt_min,
+        user_id = COALESCE(excluded.user_id, user_id),
+        updated_at = strftime('%s', 'now')
+    `)
+    : db.prepare(`
+      INSERT INTO sleeps (id, date, performance, rem_min, sws_min, light_min, respiration, sleep_debt_min)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+      ON CONFLICT(id) DO UPDATE SET
+        date = excluded.date,
+        performance = excluded.performance,
+        rem_min = excluded.rem_min,
+        sws_min = excluded.sws_min,
+        light_min = excluded.light_min,
+        respiration = excluded.respiration,
+        sleep_debt_min = excluded.sleep_debt_min,
+        updated_at = strftime('%s', 'now')
+    `);
 
   db.transaction(() => {
     for (const sleep of sleeps) {
@@ -135,6 +209,7 @@ export function insertSleeps(sleeps: SleepInput[]): void {
         sleep.light_min,
         sleep.respiration,
         sleep.sleep_debt_min
+        , ...(scoped ? [null] : [])
       );
     }
   });
@@ -147,8 +222,19 @@ export function insertLifelogs(lifelogs: LifelogInput[]): void {
   if (lifelogs.length === 0) return;
 
   const db = getDatabase();
-
-  const upsert = db.prepare(`
+  const scoped = hasUserIdColumn('lifelogs');
+  const upsert = scoped ? db.prepare(`
+    INSERT INTO lifelogs (id, date, title, manipulation_count, wrath_deployed, raw_json, user_id)
+    VALUES (?, ?, ?, ?, ?, ?, COALESCE(?, 'default'))
+    ON CONFLICT(id) DO UPDATE SET
+      date = excluded.date,
+      title = excluded.title,
+      manipulation_count = excluded.manipulation_count,
+      wrath_deployed = excluded.wrath_deployed,
+      raw_json = excluded.raw_json,
+      user_id = COALESCE(excluded.user_id, user_id),
+      updated_at = strftime('%s', 'now')
+  `) : db.prepare(`
     INSERT INTO lifelogs (id, date, title, manipulation_count, wrath_deployed, raw_json)
     VALUES (?, ?, ?, ?, ?, ?)
     ON CONFLICT(id) DO UPDATE SET
@@ -169,6 +255,39 @@ export function insertLifelogs(lifelogs: LifelogInput[]): void {
         lifelog.manipulation_count,
         lifelog.wrath_deployed,
         lifelog.raw_json
+        , ...(scoped ? [null] : [])
+      );
+    }
+  });
+}
+
+/** Explicit user-scoped lifelog insert */
+export function insertLifelogsForUser(lifelogs: LifelogInput[], userId?: string): void {
+  if (lifelogs.length === 0) return;
+  const uid = resolveUserId(userId);
+  const db = getDatabase();
+  const upsert = db.prepare(`
+    INSERT INTO lifelogs (id, date, title, manipulation_count, wrath_deployed, raw_json, user_id)
+    VALUES (?, ?, ?, ?, ?, ?, ?)
+    ON CONFLICT(id) DO UPDATE SET
+      date = excluded.date,
+      title = excluded.title,
+      manipulation_count = excluded.manipulation_count,
+      wrath_deployed = excluded.wrath_deployed,
+      raw_json = excluded.raw_json,
+      user_id = excluded.user_id,
+      updated_at = strftime('%s', 'now')
+  `);
+  db.transaction(() => {
+    for (const lifelog of lifelogs) {
+      upsert.run(
+        lifelog.id,
+        lifelog.date,
+        lifelog.title,
+        lifelog.manipulation_count,
+        lifelog.wrath_deployed,
+        lifelog.raw_json,
+        uid
       );
     }
   });
@@ -181,16 +300,27 @@ export function insertTokens(tokens: TokenInput[]): void {
   if (tokens.length === 0) return;
 
   const db = getDatabase();
-
-  const upsert = db.prepare(`
-    INSERT INTO tokens (provider, access_token_enc, refresh_token_enc, expires_at)
-    VALUES (?, ?, ?, ?)
-    ON CONFLICT(provider) DO UPDATE SET
-      access_token_enc = excluded.access_token_enc,
-      refresh_token_enc = excluded.refresh_token_enc,
-      expires_at = excluded.expires_at,
-      updated_at = strftime('%s', 'now')
-  `);
+  const uidDefault = resolveUserId();
+  const scoped = hasUserIdColumn('tokens');
+  const upsert = scoped
+    ? db.prepare(`
+      INSERT INTO tokens (provider, access_token_enc, refresh_token_enc, expires_at, user_id)
+      VALUES (?, ?, ?, ?, COALESCE(?, 'default'))
+      ON CONFLICT(provider, user_id) DO UPDATE SET
+        access_token_enc = excluded.access_token_enc,
+        refresh_token_enc = excluded.refresh_token_enc,
+        expires_at = excluded.expires_at,
+        updated_at = strftime('%s', 'now')
+    `)
+    : db.prepare(`
+      INSERT INTO tokens (provider, access_token_enc, refresh_token_enc, expires_at)
+      VALUES (?, ?, ?, ?)
+      ON CONFLICT(provider) DO UPDATE SET
+        access_token_enc = excluded.access_token_enc,
+        refresh_token_enc = excluded.refresh_token_enc,
+        expires_at = excluded.expires_at,
+        updated_at = strftime('%s', 'now')
+    `);
 
   db.transaction(() => {
     for (const token of tokens) {
@@ -198,7 +328,34 @@ export function insertTokens(tokens: TokenInput[]): void {
         token.provider,
         token.access_token_enc,
         token.refresh_token_enc,
-        token.expires_at
+        token.expires_at,
+        ...(scoped ? [uidDefault] : [])
+      );
+    }
+  });
+}
+
+export function insertTokensForUser(tokens: TokenInput[], userId?: string): void {
+  if (tokens.length === 0) return;
+  const uid = resolveUserId(userId);
+  const db = getDatabase();
+  const upsert = db.prepare(`
+    INSERT INTO tokens (provider, access_token_enc, refresh_token_enc, expires_at, user_id)
+    VALUES (?, ?, ?, ?, ?)
+    ON CONFLICT(provider, user_id) DO UPDATE SET
+      access_token_enc = excluded.access_token_enc,
+      refresh_token_enc = excluded.refresh_token_enc,
+      expires_at = excluded.expires_at,
+      updated_at = strftime('%s', 'now')
+  `);
+  db.transaction(() => {
+    for (const token of tokens) {
+      upsert.run(
+        token.provider,
+        token.access_token_enc,
+        token.refresh_token_enc,
+        token.expires_at,
+        uid
       );
     }
   });
@@ -211,19 +368,49 @@ export function insertScores(scores: ScoreInput[]): void {
   if (scores.length === 0) return;
 
   const db = getDatabase();
-
-  const upsert = db.prepare(`
-    INSERT INTO scores (date, unbending_score, recovery_compliance)
-    VALUES (?, ?, ?)
-    ON CONFLICT(date) DO UPDATE SET
-      unbending_score = excluded.unbending_score,
-      recovery_compliance = excluded.recovery_compliance,
-      updated_at = strftime('%s', 'now')
-  `);
+  const scoped = hasUserIdColumn('scores');
+  const upsert = scoped
+    ? db.prepare(`
+      INSERT INTO scores (date, unbending_score, recovery_compliance, user_id)
+      VALUES (?, ?, ?, COALESCE(?, 'default'))
+      ON CONFLICT(date) DO UPDATE SET
+        unbending_score = excluded.unbending_score,
+        recovery_compliance = excluded.recovery_compliance,
+        user_id = COALESCE(excluded.user_id, user_id),
+        updated_at = strftime('%s', 'now')
+    `)
+    : db.prepare(`
+      INSERT INTO scores (date, unbending_score, recovery_compliance)
+      VALUES (?, ?, ?)
+      ON CONFLICT(date) DO UPDATE SET
+        unbending_score = excluded.unbending_score,
+        recovery_compliance = excluded.recovery_compliance,
+        updated_at = strftime('%s', 'now')
+    `);
 
   db.transaction(() => {
     for (const score of scores) {
-      upsert.run(score.date, score.unbending_score, score.recovery_compliance);
+      upsert.run(score.date, score.unbending_score, score.recovery_compliance, ...(scoped ? [null] : []));
+    }
+  });
+}
+
+export function insertScoresForUser(scores: ScoreInput[], userId?: string): void {
+  if (scores.length === 0) return;
+  const uid = resolveUserId(userId);
+  const db = getDatabase();
+  const upsert = db.prepare(`
+    INSERT INTO scores (date, unbending_score, recovery_compliance, user_id)
+    VALUES (?, ?, ?, ?)
+    ON CONFLICT(date) DO UPDATE SET
+      unbending_score = excluded.unbending_score,
+      recovery_compliance = excluded.recovery_compliance,
+      user_id = excluded.user_id,
+      updated_at = strftime('%s', 'now')
+  `);
+  db.transaction(() => {
+    for (const score of scores) {
+      upsert.run(score.date, score.unbending_score, score.recovery_compliance, uid);
     }
   });
 }
@@ -235,18 +422,45 @@ export function insertSettings(settings: SettingInput[]): void {
   if (settings.length === 0) return;
 
   const db = getDatabase();
-
-  const upsert = db.prepare(`
-    INSERT INTO settings (key, value_enc)
-    VALUES (?, ?)
-    ON CONFLICT(key) DO UPDATE SET
-      value_enc = excluded.value_enc,
-      updated_at = strftime('%s', 'now')
-  `);
+  const uidDefault = resolveUserId();
+  const scoped = hasUserIdColumn('settings');
+  const upsert = scoped
+    ? db.prepare(`
+      INSERT INTO settings (key, value_enc, user_id)
+      VALUES (?, ?, COALESCE(?, 'default'))
+      ON CONFLICT(key, user_id) DO UPDATE SET
+        value_enc = excluded.value_enc,
+        updated_at = strftime('%s', 'now')
+    `)
+    : db.prepare(`
+      INSERT INTO settings (key, value_enc)
+      VALUES (?, ?)
+      ON CONFLICT(key) DO UPDATE SET
+        value_enc = excluded.value_enc,
+        updated_at = strftime('%s', 'now')
+    `);
 
   db.transaction(() => {
     for (const setting of settings) {
-      upsert.run(setting.key, setting.value_enc);
+      upsert.run(setting.key, setting.value_enc, ...(scoped ? [uidDefault] : []));
+    }
+  });
+}
+
+export function insertSettingsForUser(settings: SettingInput[], userId?: string): void {
+  if (settings.length === 0) return;
+  const uid = resolveUserId(userId);
+  const db = getDatabase();
+  const upsert = db.prepare(`
+    INSERT INTO settings (key, value_enc, user_id)
+    VALUES (?, ?, ?)
+    ON CONFLICT(key, user_id) DO UPDATE SET
+      value_enc = excluded.value_enc,
+      updated_at = strftime('%s', 'now')
+  `);
+  db.transaction(() => {
+    for (const setting of settings) {
+      upsert.run(setting.key, setting.value_enc, uid);
     }
   });
 }
@@ -324,9 +538,11 @@ export function insertTweaks(tweaks: TweakInput[]): void {
 /**
  * Get metrics for last N days (defaults to 7)
  */
-export function getMetricsLastNDays(days: number = 7): DailyMetrics[] {
+export function getMetricsLastNDays(days: number = 7, userId?: string): DailyMetrics[] {
   const db = getDatabase();
+  const uid = resolveUserId(userId);
 
+  const scoped = hasUserIdColumn('cycles');
   const query = db.prepare<DailyMetrics>(`
     SELECT
       COALESCE(c.date, r.date, s.date, l.date, sc.date) as date,
@@ -345,126 +561,137 @@ export function getMetricsLastNDays(days: number = 7): DailyMetrics[] {
         UNION SELECT date FROM scores
       ) ORDER BY date DESC LIMIT ?
     ) dates
-    LEFT JOIN cycles c ON dates.date = c.date
-    LEFT JOIN recoveries r ON dates.date = r.date
-    LEFT JOIN sleeps s ON dates.date = s.date
-    LEFT JOIN lifelogs l ON dates.date = l.date
-    LEFT JOIN scores sc ON dates.date = sc.date
+    LEFT JOIN cycles c ON dates.date = c.date ${scoped ? 'AND c.user_id = ?' : ''}
+    LEFT JOIN recoveries r ON dates.date = r.date ${scoped ? 'AND r.user_id = ?' : ''}
+    LEFT JOIN sleeps s ON dates.date = s.date ${scoped ? 'AND s.user_id = ?' : ''}
+    LEFT JOIN lifelogs l ON dates.date = l.date ${scoped ? 'AND l.user_id = ?' : ''}
+    LEFT JOIN scores sc ON dates.date = sc.date ${scoped ? 'AND sc.user_id = ?' : ''}
     ORDER BY date DESC
   `);
 
-  return query.all(days);
+  return scoped ? query.all(days, uid, uid, uid, uid, uid) : query.all(days);
 }
 
 /**
  * Get latest recovery data
  */
-export function getLatestRecovery(): Recovery | null {
+export function getLatestRecovery(userId?: string): Recovery | null {
   const db = getDatabase();
-  const query = db.prepare<Recovery>(`
-    SELECT * FROM recoveries ORDER BY date DESC LIMIT 1
-  `);
-  return query.get() || null;
+  const uid = resolveUserId(userId);
+  const scoped = hasUserIdColumn('recoveries');
+  const query = scoped
+    ? db.prepare<Recovery>(`SELECT * FROM recoveries WHERE user_id = ? ORDER BY date DESC LIMIT 1`)
+    : db.prepare<Recovery>(`SELECT * FROM recoveries ORDER BY date DESC LIMIT 1`);
+  return scoped ? (query.get(uid) || null) : (query.get() || null);
 }
 
 /**
  * Get latest cycle data
  */
-export function getLatestCycle(): Cycle | null {
+export function getLatestCycle(userId?: string): Cycle | null {
   const db = getDatabase();
-  const query = db.prepare<Cycle>(`
-    SELECT * FROM cycles ORDER BY date DESC LIMIT 1
-  `);
-  return query.get() || null;
+  const uid = resolveUserId(userId);
+  const scoped = hasUserIdColumn('cycles');
+  const query = scoped
+    ? db.prepare<Cycle>(`SELECT * FROM cycles WHERE user_id = ? ORDER BY date DESC LIMIT 1`)
+    : db.prepare<Cycle>(`SELECT * FROM cycles ORDER BY date DESC LIMIT 1`);
+  return scoped ? (query.get(uid) || null) : (query.get() || null);
 }
 
 /**
  * Get latest sleep data
  */
-export function getLatestSleep(): Sleep | null {
+export function getLatestSleep(userId?: string): Sleep | null {
   const db = getDatabase();
-  const query = db.prepare<Sleep>(`
-    SELECT * FROM sleeps ORDER BY date DESC LIMIT 1
-  `);
-  return query.get() || null;
+  const uid = resolveUserId(userId);
+  const scoped = hasUserIdColumn('sleeps');
+  const query = scoped
+    ? db.prepare<Sleep>(`SELECT * FROM sleeps WHERE user_id = ? ORDER BY date DESC LIMIT 1`)
+    : db.prepare<Sleep>(`SELECT * FROM sleeps ORDER BY date DESC LIMIT 1`);
+  return scoped ? (query.get(uid) || null) : (query.get() || null);
 }
 
 /**
  * Get OAuth token for a provider
  */
-export function getToken(provider: 'whoop' | 'limitless'): Token | null {
+export function getToken(provider: 'whoop' | 'limitless', userId?: string): Token | null {
   const db = getDatabase();
-  const query = db.prepare<Token>(`
-    SELECT * FROM tokens WHERE provider = ?
-  `);
-  return query.get(provider) || null;
+  const uid = resolveUserId(userId);
+  const scoped = hasUserIdColumn('tokens');
+  const query = scoped
+    ? db.prepare<Token>(`SELECT * FROM tokens WHERE provider = ? AND user_id = ?`)
+    : db.prepare<Token>(`SELECT * FROM tokens WHERE provider = ?`);
+  return scoped ? (query.get(provider, uid) || null) : (query.get(provider) || null);
 }
 
 /**
  * Get setting by key
  */
-export function getSetting(key: string): Setting | null {
+export function getSetting(key: string, userId?: string): Setting | null {
   const db = getDatabase();
-  const query = db.prepare<Setting>(`
-    SELECT * FROM settings WHERE key = ?
-  `);
-  return query.get(key) || null;
+  const uid = resolveUserId(userId);
+  const scoped = hasUserIdColumn('settings');
+  const query = scoped
+    ? db.prepare<Setting>(`SELECT * FROM settings WHERE key = ? AND user_id = ?`)
+    : db.prepare<Setting>(`SELECT * FROM settings WHERE key = ?`);
+  return scoped ? (query.get(key, uid) || null) : (query.get(key) || null);
 }
 
 /**
  * Get all lifelogs for a specific date
  */
-export function getLifelogsForDate(date: string): Lifelog[] {
+export function getLifelogsForDate(date: string, userId?: string): Lifelog[] {
   const db = getDatabase();
-  const query = db.prepare<Lifelog>(`
-    SELECT * FROM lifelogs WHERE date = ? ORDER BY created_at DESC
-  `);
-  return query.all(date);
+  const uid = resolveUserId(userId);
+  const scoped = hasUserIdColumn('lifelogs');
+  const query = scoped
+    ? db.prepare<Lifelog>(`SELECT * FROM lifelogs WHERE date = ? AND user_id = ? ORDER BY created_at DESC`)
+    : db.prepare<Lifelog>(`SELECT * FROM lifelogs WHERE date = ? ORDER BY created_at DESC`);
+  return scoped ? query.all(date, uid) : query.all(date);
 }
 
 /**
  * Get unbending score for a date range
  */
-export function getUnbendingScores(startDate: string, endDate: string): Score[] {
+export function getUnbendingScores(startDate: string, endDate: string, userId?: string): Score[] {
   const db = getDatabase();
-  const query = db.prepare<Score>(`
-    SELECT * FROM scores
-    WHERE date >= ? AND date <= ?
-    ORDER BY date DESC
-  `);
-  return query.all(startDate, endDate);
+  const uid = resolveUserId(userId);
+  const scoped = hasUserIdColumn('scores');
+  const query = scoped
+    ? db.prepare<Score>(`SELECT * FROM scores WHERE date >= ? AND date <= ? AND user_id = ? ORDER BY date DESC`)
+    : db.prepare<Score>(`SELECT * FROM scores WHERE date >= ? AND date <= ? ORDER BY date DESC`);
+  return scoped ? query.all(startDate, endDate, uid) : query.all(startDate, endDate);
 }
 
 /**
  * Calculate and insert unbending score for a specific date
  */
-export function calculateUnbendingScore(date: string): void {
+export function calculateUnbendingScore(date: string, userId?: string): void {
   const db = getDatabase();
+  const uid = resolveUserId(userId);
+  const scoped = hasUserIdColumn('lifelogs');
 
-  // Get manipulation stats for the date
   const stats = db
-    .prepare<{
-      manipulation_count: number;
-      wrath_deployed: number;
-    }>(`
-      SELECT
-        SUM(manipulation_count) as manipulation_count,
-        SUM(wrath_deployed) as wrath_deployed
-      FROM lifelogs
-      WHERE date = ?
-    `)
-    .get(date);
+    .prepare<{ manipulation_count: number; wrath_deployed: number }>(
+      `SELECT SUM(manipulation_count) as manipulation_count, SUM(wrath_deployed) as wrath_deployed FROM lifelogs WHERE date = ? ${scoped ? 'AND user_id = ?' : ''}`
+    )
+    .get(...(scoped ? [date, uid] : [date]));
 
   if (!stats || stats.manipulation_count === 0) {
-    // No data for this date, insert null score
-    insertScores([{ date, unbending_score: null, recovery_compliance: null }]);
+    if (hasUserIdColumn('scores')) {
+      insertScoresForUser([{ date, unbending_score: null, recovery_compliance: null }], uid);
+    } else {
+      insertScores([{ date, unbending_score: null, recovery_compliance: null }]);
+    }
     return;
   }
 
-  // Calculate unbending score: % of manipulations that resulted in wrath
   const unbendingScore = (stats.wrath_deployed / stats.manipulation_count) * 100;
-
-  insertScores([{ date, unbending_score: unbendingScore, recovery_compliance: null }]);
+  if (hasUserIdColumn('scores')) {
+    insertScoresForUser([{ date, unbending_score: unbendingScore, recovery_compliance: null }], uid);
+  } else {
+    insertScores([{ date, unbending_score: unbendingScore, recovery_compliance: null }]);
+  }
 }
 
 /**
@@ -522,6 +749,52 @@ export function getResolvedFlags(): Flag[] {
     SELECT * FROM flags WHERE status = 'resolved' ORDER BY detected_at DESC
   `);
   return query.all();
+}
+
+/**
+ * Users - Create new user profile
+ */
+export function createUser(input: Omit<UserInput, 'id'> & { id: string }): void {
+  const db = getDatabase();
+  const insert = db.prepare(`
+    INSERT INTO users (id, email, name, timezone)
+    VALUES (?, ?, ?, ?)
+  `);
+  insert.run(input.id, input.email ?? null, input.name ?? null, input.timezone ?? null);
+}
+
+/**
+ * Users - Update existing user profile
+ */
+export function updateUser(id: string, updates: Partial<Omit<UserInput, 'id'>>): void {
+  const db = getDatabase();
+  const fields: string[] = [];
+  const values: any[] = [];
+  if (updates.email !== undefined) { fields.push('email = ?'); values.push(updates.email); }
+  if (updates.name !== undefined) { fields.push('name = ?'); values.push(updates.name); }
+  if (updates.timezone !== undefined) { fields.push('timezone = ?'); values.push(updates.timezone); }
+  if (fields.length === 0) return;
+  const sql = `UPDATE users SET ${fields.join(', ')}, updated_at = strftime('%s', 'now') WHERE id = ?`;
+  const stmt = db.prepare(sql);
+  stmt.run(...values, id);
+}
+
+/**
+ * Users - Get a user by id
+ */
+export function getUser(id: string): User | null {
+  const db = getDatabase();
+  const query = db.prepare<User>(`SELECT * FROM users WHERE id = ?`);
+  return query.get(id) || null;
+}
+
+/**
+ * Users - List users
+ */
+export function listUsers(limit: number = 50, offset: number = 0): User[] {
+  const db = getDatabase();
+  const query = db.prepare<User>(`SELECT * FROM users ORDER BY created_at DESC LIMIT ? OFFSET ?`);
+  return query.all(limit, offset);
 }
 
 /**

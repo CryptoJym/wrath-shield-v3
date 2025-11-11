@@ -77,6 +77,20 @@ export default async function Home() {
             <a className="btn" href="/eeg">Open EEG Dashboard</a>
           </div>
         </div>
+
+        <div className="card">
+          <div className="text-secondary">Feed</div>
+          <div style={{ marginTop: 8 }}>
+            <a className="btn" href="/feed">Open Feed</a>
+          </div>
+        </div>
+
+        <div className="card">
+          <div className="text-secondary">Default User</div>
+          <div style={{ marginTop: 8 }}>
+            <a className="btn" href="/users/default">Manage Default User</a>
+          </div>
+        </div>
       </section>
 
       <Dashboard />

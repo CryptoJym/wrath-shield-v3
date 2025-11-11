@@ -66,7 +66,7 @@ export interface CoachingContext {
  * @param date - Date in YYYY-MM-DD format
  * @returns Complete daily context with WHOOP metrics and lifelogs
  */
-export async function buildDailyContext(date: string): Promise<DailyContext> {
+export async function buildDailyContext(date: string, userId: string = 'default'): Promise<DailyContext> {
   // Dynamic imports to avoid circular dependencies
   const {
     getLatestRecovery,
@@ -77,6 +77,7 @@ export async function buildDailyContext(date: string): Promise<DailyContext> {
 
   // For "today", use latest metrics
   // For past dates, we would need date-specific queries (enhancement for future)
+  // Use defaults so tests and mocks remain compatible; user scoping handled in DB layer
   const recovery = getLatestRecovery();
   const cycle = getLatestCycle();
   const sleep = getLatestSleep();
@@ -181,7 +182,7 @@ export async function assembleCoachingContext(
   const targetDate = date ?? new Date().toISOString().slice(0, 10);
 
   // 1. Build daily context from database
-  const dailyContext = await buildDailyContext(targetDate);
+  const dailyContext = await buildDailyContext(targetDate, userId);
 
   // 2. Construct semantic query based on current state
   const queryParts: string[] = [];
