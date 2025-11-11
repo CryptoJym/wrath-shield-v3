@@ -18,6 +18,11 @@ import sys
 from datetime import datetime, timedelta
 from pathlib import Path
 
+# Ensure local modules (tokenization_pipeline, db_client, grok_chat) are importable
+_BASE_DIR = Path(__file__).resolve().parent
+if str(_BASE_DIR) not in sys.path:
+    sys.path.insert(0, str(_BASE_DIR))
+
 # Import tokenization pipeline
 from tokenization_pipeline import EEGTokenizer
 from db_client import DatabaseClient
