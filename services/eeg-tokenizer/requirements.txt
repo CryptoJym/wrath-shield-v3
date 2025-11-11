@@ -1,12 +1,13 @@
 # EEG Tokenization Service Dependencies
-# Core scientific computing
-numpy==1.24.3
-scipy==1.11.3
+# Core scientific computing (Cloud-safe wheels)
+numpy>=1.26.4
+scipy>=1.13.0
 
-# Deep learning
-torch==2.1.0
-torchvision==0.16.0
-torchaudio==2.1.0
+# Deep learning (optional locally; excluded on Streamlit Cloud to avoid wheel issues)
+# Install these locally if you need live tokenization in-process.
+# torch
+# torchvision
+# torchaudio
 
 # EEG processing
 mne==1.5.1
