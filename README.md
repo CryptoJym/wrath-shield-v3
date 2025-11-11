@@ -1,222 +1,88 @@
-# Wrath Shield v3
+# Wrath Shield v3 (Unified)
 
-A comprehensive Next.js 14 backend for manipulation detection with WHOOP and Limitless integration, semantic memory (Mem0 + Qdrant), and an AI coaching engine.
+Unified local stack for Grok‑assisted coaching, WHOOP + Limitless integrations, Neurable EEG via Streamlit, and Grok‑backed memory.
 
-📊 **[View Detailed System Overview](SYSTEM_OVERVIEW.md)** - Complete status, active services, and recent updates
+- Next.js 14 app (4242)
+- Agentic Grok FastAPI service (8001)
+- Streamlit EEG dashboard (8501)
 
-## 🔧 Recent Updates
+All Node/Jest tests: 63 suites, 999 tests — passing.
 
-**2025-11-10**: Fixed Whoop OAuth callback encryption error
-- Modified callback route to handle missing refresh tokens (stores `null` instead of empty string)
-- Added comprehensive test suite (`test-whoop-callback-fix.ts`)
-- Full details: [WHOOP_OAUTH_FIX_SUMMARY.md](WHOOP_OAUTH_FIX_SUMMARY.md)
+## Services & Ports
+- Next (UI + APIs): http://localhost:4242
+  - Chat: /chat (proxies to Agentic Grok)
+  - EEG: /eeg (embeds Streamlit)
+  - Feed: /feed (metrics + anchors)
+  - Users: /users/default (set default user)
+- Agentic Grok: http://localhost:8001
+  - POST /api/agentic/chat, /chat/stream
+  - GET /api/agentic/health
+  - Memory: /api/agentic/memory/{add,search,list}
+- Streamlit EEG: http://localhost:8501
 
-## ⚠️ Current Status
-
-**Backend: 100% Complete (525 tests passing)**
-**Frontend: Not Yet Implemented**
-
-This repository contains a fully functional backend SDK with zero UI implementation. The system can detect manipulative conversation patterns, track WHOOP biometrics, integrate with Limitless pendant transcripts, and provide coaching insights - but currently has no user interface for interaction.
-
-## What Exists
-
-### Backend Infrastructure ✅
-- **Database**: SQLite with 7 tables (cycles, recoveries, sleeps, lifelogs, tokens, scores, settings)
-- **Security**: AES-256-GCM encryption with HKDF key derivation, server/client boundary enforcement
-- **Configuration**: All API keys configured in `.env.local` (not committed)
-
-### WHOOP Integration ✅
-- OAuth2 flow with CSRF protection
-- Automatic token refresh (60-second buffer)
-- Paginated data fetchers for cycles, recoveries, and sleeps
-- Classification logic (strain levels, recovery levels)
-- Database normalization for all WHOOP data types
-- **Fixed (2025-11-10)**: Handles missing refresh tokens correctly
-
-### Limitless Integration ✅
-- Settings API with encrypted key storage
-- Token bucket rate limiter (180 req/min)
-- Cursor-based pagination
-- Incremental sync with `last_successful_pull` tracking
-
-### Manipulation Detection ✅
-- 6 manipulation categories: gaslighting, guilt, obligation, conditional affection, minimization, blame shifting
-- Pattern matching with natural language variations
-- Response classification (wrath, compliance, silence)
-- Severity scoring with intensifier detection
-
-### Semantic Memory (Mem0 + Qdrant) ✅
-- Primary/fallback architecture
-- OpenAI and local embeddings support
-- App-specific helpers: `addDailySummary()`, `addAnchor()`, `getAnchors()`
-
-### Daily Summary Pipeline ✅
-- Analyze lifelogs for manipulations
-- Compose rich summaries with WHOOP metrics
-- Three-step storage: Mem0 → lifelogs → unbending score
-- Batch processing with idempotent operations
-
-### APIs (JSON Endpoints) ✅
-- `GET /api/metrics` - Today + 7-day + 30-day aggregates (5-min cache)
-- OAuth endpoints for WHOOP
-- Settings endpoint for Limitless
-
-### Test Coverage ✅
-- **525 passing tests** across all modules
-- Unit tests for all components
-- Integration tests for complete workflows
-- Performance benchmarks (batch inserts <500ms, queries <100ms)
-- Resilience tests for edge cases and errors
-- Security audits (no secret leakage)
-
-## What Doesn't Exist (Yet)
-
-### Missing UI Components ❌
-- No morning routine interface
-- No evening routine interface
-- No chat interface for coaching
-- No lifelog browser
-- No interactive dashboard (only data charts exist)
-- No settings page
-
-### Missing Automation ❌
-- No cron jobs for automatic data sync
-- No background workers
-- No scheduled coaching sessions
-- No push notifications
-
-### Missing OpenRouter Integration ❌
-- Coaching engine infrastructure exists
-- LLM client implemented and tested
-- But no endpoints to trigger coaching responses
-- No UI to display coaching insights
-
-## Architecture
-
+## Environment
+Copy and edit:
 ```
-┌─────────────────────────────────────────────────────────┐
-│                    User (You)                           │
-└──────────────────────┬──────────────────────────────────┘
-                       │
-                       ▼
-         ┌─────────────────────────┐
-         │   MISSING: Frontend UI  │  ← Needs Implementation
-         └─────────────────────────┘
-                       │
-                       ▼
-┌──────────────────────────────────────────────────────────┐
-│                   Next.js API Routes                     │
-│  ✅ /api/metrics (dashboard data)                        │
-│  ✅ /api/whoop/oauth/* (WHOOP auth)                      │
-│  ✅ /api/settings (Limitless key)                        │
-│  ❌ /api/coaching (coaching responses - not implemented) │
-│  ❌ /api/sync (data sync - not implemented)              │
-└──────────────────────────────────────────────────────────┘
-                       │
-         ┌─────────────┴─────────────┐
-         ▼                           ▼
-┌──────────────────┐       ┌──────────────────┐
-│  WHOOP Client    │       │ Limitless Client │
-│  ✅ OAuth2        │       │ ✅ Rate Limiting  │
-│  ✅ Auto Refresh  │       │ ✅ Pagination     │
-│  ✅ Data Fetching │       │ ✅ Incremental    │
-└──────────────────┘       └──────────────────┘
-         │                           │
-         └─────────────┬─────────────┘
-                       ▼
-         ┌─────────────────────────┐
-         │  Manipulation Detector  │
-         │  ✅ 6 Categories         │
-         │  ✅ Response Detection   │
-         └─────────────────────────┘
-                       │
-                       ▼
-         ┌─────────────────────────┐
-         │   Daily Summary Engine  │
-         │   ✅ Compose Summaries   │
-         │   ✅ Calculate Scores    │
-         └─────────────────────────┘
-                       │
-         ┌─────────────┴─────────────┐
-         ▼                           ▼
-┌──────────────────┐       ┌──────────────────┐
-│   SQLite DB      │       │   Mem0 + Qdrant  │
-│   ✅ 7 Tables     │       │   ✅ Semantic     │
-│   ✅ Encrypted    │       │   ✅ Embeddings   │
-└──────────────────┘       └──────────────────┘
-```
-
-## Getting Started
-
-### Prerequisites
-- Node.js 18+
-- npm or yarn
-- API keys for:
-  - WHOOP (OAuth2 credentials)
-  - OpenRouter (for coaching)
-  - Limitless (optional)
-  - OpenAI (optional, for better embeddings)
-
-### Installation
-
-1. Clone the repository:
-```bash
-git clone https://github.com/CryptoJym/wrath-shield-v3.git
-cd wrath-shield-v3
-```
-
-2. Install dependencies:
-```bash
-npm install
-```
-
-3. Configure environment variables:
-```bash
 cp .env.local.example .env.local
-# Edit .env.local with your API keys
+```
+Key vars:
+- XAI_API_KEY, AGENTIC_GROK_URL (defaults to http://localhost:8001)
+- WHOOP_CLIENT_ID/SECRET (OAuth2)
+- OPENROUTER_API_KEY (for coaching via OpenRouter)
+- LIMITLESS_API_KEY (optional)
+- OPENAI_API_KEY (optional embeddings)
+- DATABASE_ENCRYPTION_KEY (base64 32‑byte)
+- NEXT_PUBLIC_STREAMLIT_URL (default http://localhost:8501)
+
+## Start locally
+Option A (individual):
+```
+# 1) Agentic Grok
+cd services/agentic-grok && source venv/bin/activate && python agentic_service.py
+
+# 2) Streamlit EEG
+cd ../eeg-tokenizer && source venv/bin/activate && streamlit run app.py
+
+# 3) Next
+cd ../../ && npm run dev
 ```
 
-4. Run the development server:
-```bash
-npm run dev
+Option B (script):
+```
+./scripts/start-all.sh
 ```
 
-5. Visit `http://localhost:3002` to see the (very basic) dashboard.
+## Memory model & policy
+- Grok has two memory tools:
+  - memory_search (read) → calls Next /api/memory/search
+  - memory_add (write) → writes to Agentic Grok’s mem_store.db
+- Built‑in policy in Grok orchestrator enforces:
+  - Save only durable facts (preferences, goals, anchors with date)
+  - Avoid secrets/ephemeral info; cap N writes per chat (default 3)
+- Next’s MemoryWrapper prefers Grok → Qdrant → local SQLite.
 
-### Testing
+## Key API routes (Next)
+- GET /api/metrics — aggregates (today, last 7/30 days)
+- POST /api/memory/search — HTTP facade for Grok tool
+- GET /api/feed — dashboard feed (metrics + anchors)
+- WHOOP OAuth: /api/whoop/oauth/{initiate,callback}
+- Settings: /api/settings (Limitless key)
+- Users: /api/users, /api/users/default
 
-Run the full test suite:
-```bash
+## Data & migrations
+- SQLite primary app DB: .data/wrath-shield.db
+- Migrations under /migrations
+  - Test runs: only baseline migration applied for stability
+- Grok memory: services/agentic-grok/mem_store.db
+
+## Testing
+```
 npm test
 ```
+Outputs: 63/63 suites passing, 999/999 tests passing.
 
-Run tests in watch mode:
-```bash
-npm run test:watch
-```
-
-Generate coverage report:
-```bash
-npm run test:coverage
-```
-
-## Current Capabilities (via Code)
-
-Since there's no UI, you can interact with the system programmatically:
-
-### 1. Fetch WHOOP Data
-```typescript
-import { getWhoopClient } from '@/lib/WhoopClient';
-import { insertCycles } from '@/lib/db/queries';
-
-const client = getWhoopClient();
-const cycles = await client.fetchCyclesForDb('2025-01-01', '2025-01-31');
-await insertCycles(cycles);
-```
-
-### 2. Sync Limitless Lifelogs
-```typescript
-import { getLimitlessClient } from '@/lib/LimitlessClient';
+## Handoff for engineers
+See docs/HANDOFF.md for detailed architecture, code map, troubleshooting, and next steps.
 
 const client = getLimitlessClient();
 const newCount = await client.syncNewLifelogs();
