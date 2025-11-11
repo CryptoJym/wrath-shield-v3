@@ -47,18 +47,11 @@ def get_db_client():
 
 db_client, db_connected = get_db_client()
 
-# Initialize Grok chat client
 @st.cache_resource
 def get_grok_client():
-    """Get cached Grok chat client."""
+    """Get cached Grok chat client (prefer local Agentic service to avoid proxy issues)."""
     try:
-        # Prefer direct xAI API if XAI_API_KEY is set
-        api_key = os.getenv('XAI_API_KEY')
-        if api_key:
-            grok = GrokChatClient(api_key=api_key, db_client=db_client)
-            return grok, True, None
-
-        # Fallback to local Agentic Grok service if available
+        # Prefer local Agentic Grok if reachable
         agent_url = os.getenv('AGENTIC_GROK_URL', 'http://localhost:8001')
         try:
             r = httpx.get(f"{agent_url}/api/agentic/health", timeout=2.0)
@@ -68,7 +61,13 @@ def get_grok_client():
         except Exception:
             pass
 
-        return None, False, "No XAI_API_KEY and Agentic Grok service unavailable"
+        # Fallback to direct xAI API
+        api_key = os.getenv('XAI_API_KEY')
+        if api_key:
+            grok = GrokChatClient(api_key=api_key, db_client=db_client)
+            return grok, True, None
+
+        return None, False, "Agentic Grok unreachable and XAI_API_KEY not set"
     except Exception as e:
         return None, False, str(e)
 
@@ -78,13 +77,16 @@ grok_client, grok_connected, grok_error = get_grok_client()
 @st.cache_data(ttl=10)
 def get_data_status():
     """Get cached data status from database (refreshes every 10 seconds)."""
-    if db_connected and db_client:
-        try:
+    if not (db_connected and db_client):
+        return None
+    try:
+        if hasattr(db_client, 'get_data_status'):
             return db_client.get_data_status()
-        except Exception as e:
-            st.warning(f"Failed to get data status: {e}")
+        else:
             return None
-    return None
+    except Exception as e:
+        # Be quiet on Cloud or when DB is unreachable
+        return None
 
 data_status = get_data_status()
 
@@ -409,7 +411,7 @@ elif mode == "Live Streaming":
     st.markdown("---")
 
     # Brain state display (if database connected)
-    if db_connected and db_client:
+    if db_connected and db_client and hasattr(db_client, 'get_brain_state'):
         st.subheader("🧠 Current Brain State (Last 10 seconds)")
 
         try:
@@ -462,8 +464,8 @@ elif mode == "Live Streaming":
             else:
                 st.info("No recent alerts")
 
-        except Exception as e:
-            st.error(f"Failed to fetch brain state: {e}")
+        except Exception:
+            st.info("Brain state unavailable (database not reachable)")
 
     st.markdown("---")
 
