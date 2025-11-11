@@ -36,7 +36,18 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`}>
       <body className={inter.className}>
-        <main>{children}</main>
+        <header style={{
+          position: 'sticky', top: 0, zIndex: 50,
+          background: 'var(--color-bg)', borderBottom: '1px solid var(--color-border)',
+          padding: '0.75rem 1rem'
+        }}>
+          <nav style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+            <a href="/" style={{ fontWeight: 600 }}>Wrath Shield v3</a>
+            <a href="/chat" style={{ color: 'var(--color-text-secondary)' }}>Agentic Grok Chat</a>
+            <a href="/eeg" style={{ color: 'var(--color-text-secondary)' }}>EEG Dashboard</a>
+          </nav>
+        </header>
+        <main style={{ padding: '1rem' }}>{children}</main>
       </body>
     </html>
   );
