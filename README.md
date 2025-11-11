@@ -2,6 +2,15 @@
 
 A comprehensive Next.js 14 backend for manipulation detection with WHOOP and Limitless integration, semantic memory (Mem0 + Qdrant), and an AI coaching engine.
 
+📊 **[View Detailed System Overview](SYSTEM_OVERVIEW.md)** - Complete status, active services, and recent updates
+
+## 🔧 Recent Updates
+
+**2025-11-10**: Fixed Whoop OAuth callback encryption error
+- Modified callback route to handle missing refresh tokens (stores `null` instead of empty string)
+- Added comprehensive test suite (`test-whoop-callback-fix.ts`)
+- Full details: [WHOOP_OAUTH_FIX_SUMMARY.md](WHOOP_OAUTH_FIX_SUMMARY.md)
+
 ## ⚠️ Current Status
 
 **Backend: 100% Complete (525 tests passing)**
@@ -22,6 +31,7 @@ This repository contains a fully functional backend SDK with zero UI implementat
 - Paginated data fetchers for cycles, recoveries, and sleeps
 - Classification logic (strain levels, recovery levels)
 - Database normalization for all WHOOP data types
+- **Fixed (2025-11-10)**: Handles missing refresh tokens correctly
 
 ### Limitless Integration ✅
 - Settings API with encrypted key storage
@@ -324,3 +334,9 @@ For questions or issues, open a GitHub issue or contact the maintainer.
 ---
 
 **Remember**: This is a backend SDK. The system is fully functional from a code perspective, but needs UI work to become user-friendly. All infrastructure, data pipelines, and intelligence features are production-ready.
+### 2025-11-10: Live EEG + Unified Dashboard
+
+- Added Neurable WebSocket live stream client (`services/eeg-tokenizer/neurable_ws_client.py`).
+- Streamlit EEG dashboard now includes controls to start/stop the WS client and shows accurate DB/brain-state panels.
+- Next.js unified nav (Home, Agentic Grok Chat, EEG Dashboard). EEG page embeds Streamlit (`/eeg`).
+- Agentic Grok chat UI (`/chat`) proxies to the local Agentic Grok FastAPI service so server-side tools are enabled, using your `XAI_API_KEY`.
