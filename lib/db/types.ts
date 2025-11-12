@@ -173,3 +173,35 @@ export interface DailyMetrics {
   wrath_deployed: number;
   unbending_score: number | null;
 }
+
+export type BaselineSummary = {
+  window_days: number;
+  avg_hrv: number | null;
+  avg_rhr: number | null;
+  avg_recovery: number | null;
+  avg_sleep_performance: number | null;
+  n_recoveries: number;
+  n_sleeps: number;
+  recovery_distribution: { high: number; medium: number; low: number };
+};
+
+/**
+ * Psych Signals (analysis summaries)
+ */
+export interface PsychSignal {
+  id: string;
+  date: string; // YYYY-MM-DD
+  user_id: string;
+  records: number;
+  words: number;
+  vocab: number;
+  ttr: number;
+  sentiment_score: number;
+  pos_terms: number;
+  neg_terms: number;
+  emotions_json: string | null; // JSON object
+  top_terms_json: string | null; // JSON array
+  sources_json: string | null; // JSON object
+  created_at?: number;
+  updated_at?: number;
+}

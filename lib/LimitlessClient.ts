@@ -281,6 +281,16 @@ class LimitlessClient {
   }
 
   /**
+   * Backfill a date range directly into the database (does not change last_pull)
+   */
+  async backfillRangeForDb(start_date: string, end_date?: string): Promise<number> {
+    const { insertLifelogs } = await import('./db/queries');
+    const lifelogs = await this.fetchLifelogsForDb({ start_date, end_date });
+    if (lifelogs.length) insertLifelogs(lifelogs);
+    return lifelogs.length;
+  }
+
+  /**
    * Fetch new lifelogs since last successful pull
    *
    * Implements incremental sync by:

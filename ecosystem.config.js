@@ -65,6 +65,24 @@ module.exports = {
         path: '/', // Next.js home route
       },
     },
+    {
+      name: 'wrath-scheduler',
+      script: 'bash',
+      args: "-lc 'npx -y tsx scripts/nightly-tasks.ts'",
+      cwd: __dirname,
+      instances: 1,
+      exec_mode: 'fork',
+      autorestart: false,
+      watch: false,
+      cron_restart: '0 3 * * *', // run daily at 03:00
+      env: {
+        NODE_ENV: 'production',
+      },
+      error_file: './logs/scheduler-error.log',
+      out_file: './logs/scheduler-out.log',
+      log_date_format: 'YYYY-MM-DD HH:mm:ss Z',
+      merge_logs: true,
+    },
   ],
 
   // Deployment configuration (optional)

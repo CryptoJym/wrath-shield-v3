@@ -78,16 +78,15 @@ export async function GET(request: NextRequest) {
     }
 
     // State is valid - clear the cookie
-    const cookieResponse = NextResponse.json({ success: true });
-    cookieResponse.cookies.delete('oauth_state');
+    // Prepare a base response to manage cookie deletion later on redirect
+    const baseResponse = NextResponse.next();
+    baseResponse.cookies.delete('oauth_state', { path: '/api/whoop/oauth' });
 
     console.log('[WHOOP OAuth Callback] State validated, exchanging code for tokens');
 
     // Exchange authorization code for tokens
     const config = cfg();
-    const protocol = request.headers.get('x-forwarded-proto') ?? 'http';
-    const host = request.headers.get('host') ?? 'localhost:3000';
-    const redirectUri = `${protocol}://${host}/api/whoop/oauth/callback`;
+    const redirectUri = config.whoop.redirectUri;
 
     const tokenParams = new URLSearchParams({
       grant_type: 'authorization_code',
@@ -139,12 +138,13 @@ export async function GET(request: NextRequest) {
     // Redirect to success page
     const successUrl = new URL('/', request.url);
     successUrl.searchParams.set('oauth_success', 'true');
-    return NextResponse.redirect(successUrl, { status: 302 });
+    const res = NextResponse.redirect(successUrl, { status: 302 });
+    res.cookies.delete('oauth_state', { path: '/api/whoop/oauth' });
+    return res;
   } catch (error) {
     console.error('[WHOOP OAuth Callback] Error:', error);
-    return NextResponse.json(
-      { error: 'Failed to process OAuth callback' },
-      { status: 500 }
-    );
+    const errUrl = new URL('/', request.url);
+    errUrl.searchParams.set('oauth_error', 'Failed to process WHOOP OAuth callback');
+    return NextResponse.redirect(errUrl, { status: 302 });
   }
 }

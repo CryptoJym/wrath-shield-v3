@@ -29,6 +29,7 @@ import type {
   DailyMetrics,
   User,
   UserInput,
+  PsychSignal,
 } from './types';
 
 // Ensure this module is only used server-side
@@ -49,12 +50,12 @@ function resolveUserId(userId?: string): string {
   if (userId && userId.trim() !== '') return userId.trim();
   try {
     const db = getDatabase();
-    // Read default_user_id setting without calling getSetting to avoid recursion
+    // Direct read; value may be plain UUID (not encrypted)
     const row = db
       .prepare<{ value_enc: string }>(`SELECT value_enc FROM settings WHERE key = 'default_user_id' LIMIT 1`)
       .get();
     const vid = row?.value_enc?.trim();
-    if (vid) return vid;
+    if (vid && /^[0-9a-fA-F-]{36}$/.test(vid)) return vid; // UUID pattern
   } catch {}
   return 'default';
 }
@@ -612,16 +613,111 @@ export function getLatestSleep(userId?: string): Sleep | null {
 }
 
 /**
+ * Get recovery scores for last N days (descending)
+ */
+export function getRecoveriesLastNDays(days: number = 14, userId?: string): Recovery[] {
+  const db = getDatabase();
+  const uid = resolveUserId(userId);
+  const scoped = hasUserIdColumn('recoveries');
+  const query = scoped
+    ? db.prepare<Recovery>(`SELECT * FROM recoveries WHERE user_id = ? ORDER BY date DESC LIMIT ?`)
+    : db.prepare<Recovery>(`SELECT * FROM recoveries ORDER BY date DESC LIMIT ?`);
+  return scoped ? query.all(uid, days) : query.all(days);
+}
+
+function dateNDaysAgo(n: number): string {
+  const d = new Date(Date.now() - n * 86400000);
+  return d.toISOString().slice(0,10);
+}
+
+export function getBaselines(days: number = 30, userId?: string) {
+  const db = getDatabase();
+  const uid = resolveUserId(userId);
+  const start = dateNDaysAgo(days);
+  const end = new Date().toISOString().slice(0,10);
+  const scopedRec = hasUserIdColumn('recoveries');
+  const scopedSleep = hasUserIdColumn('sleeps');
+
+  const recRow = scopedRec
+    ? db.prepare<{ avg_hrv: number|null; avg_rhr: number|null; avg_score: number|null; n: number }>(
+        `SELECT AVG(hrv) as avg_hrv, AVG(rhr) as avg_rhr, AVG(score) as avg_score, COUNT(*) as n FROM recoveries WHERE date >= ? AND date <= ? AND user_id = ?`
+      ).get(start, end, uid)
+    : db.prepare<{ avg_hrv: number|null; avg_rhr: number|null; avg_score: number|null; n: number }>(
+        `SELECT AVG(hrv) as avg_hrv, AVG(rhr) as avg_rhr, AVG(score) as avg_score, COUNT(*) as n FROM recoveries WHERE date >= ? AND date <= ?`
+      ).get(start, end);
+
+  const slpRow = scopedSleep
+    ? db.prepare<{ avg_perf: number|null; n: number }>(
+        `SELECT AVG(performance) as avg_perf, COUNT(*) as n FROM sleeps WHERE date >= ? AND date <= ? AND user_id = ?`
+      ).get(start, end, uid)
+    : db.prepare<{ avg_perf: number|null; n: number }>(
+        `SELECT AVG(performance) as avg_perf, COUNT(*) as n FROM sleeps WHERE date >= ? AND date <= ?`
+      ).get(start, end);
+
+  const distRow = scopedRec
+    ? db.prepare<{ high: number; med: number; low: number }>(
+        `SELECT 
+            SUM(CASE WHEN score >= 70 THEN 1 ELSE 0 END) as high,
+            SUM(CASE WHEN score >= 40 AND score < 70 THEN 1 ELSE 0 END) as med,
+            SUM(CASE WHEN score < 40 THEN 1 ELSE 0 END) as low
+         FROM recoveries WHERE date >= ? AND date <= ? AND user_id = ?`
+      ).get(start, end, uid)
+    : db.prepare<{ high: number; med: number; low: number }>(
+        `SELECT 
+            SUM(CASE WHEN score >= 70 THEN 1 ELSE 0 END) as high,
+            SUM(CASE WHEN score >= 40 AND score < 70 THEN 1 ELSE 0 END) as med,
+            SUM(CASE WHEN score < 40 THEN 1 ELSE 0 END) as low
+         FROM recoveries WHERE date >= ? AND date <= ?`
+      ).get(start, end);
+
+  return {
+    window_days: days,
+    avg_hrv: recRow?.avg_hrv ?? null,
+    avg_rhr: recRow?.avg_rhr ?? null,
+    avg_recovery: recRow?.avg_score ?? null,
+    avg_sleep_performance: slpRow?.avg_perf ?? null,
+    n_recoveries: recRow?.n ?? 0,
+    n_sleeps: slpRow?.n ?? 0,
+    recovery_distribution: { high: distRow?.high ?? 0, medium: distRow?.med ?? 0, low: distRow?.low ?? 0 },
+  };
+}
+
+export function getTodaySnapshot(userId?: string) {
+  const db = getDatabase();
+  const uid = resolveUserId(userId);
+  const today = new Date().toISOString().slice(0,10);
+  const scopedRec = hasUserIdColumn('recoveries');
+  const scopedSleep = hasUserIdColumn('sleeps');
+  const rec = scopedRec
+    ? db.prepare(`SELECT * FROM recoveries WHERE date = ? AND user_id = ? LIMIT 1`).get(today, uid)
+    : db.prepare(`SELECT * FROM recoveries WHERE date = ? LIMIT 1`).get(today);
+  const slp = scopedSleep
+    ? db.prepare(`SELECT * FROM sleeps WHERE date = ? AND user_id = ? LIMIT 1`).get(today, uid)
+    : db.prepare(`SELECT * FROM sleeps WHERE date = ? LIMIT 1`).get(today);
+  return { today, recovery: rec || null, sleep: slp || null };
+}
+
+/**
  * Get OAuth token for a provider
  */
 export function getToken(provider: 'whoop' | 'limitless', userId?: string): Token | null {
   const db = getDatabase();
   const uid = resolveUserId(userId);
   const scoped = hasUserIdColumn('tokens');
-  const query = scoped
-    ? db.prepare<Token>(`SELECT * FROM tokens WHERE provider = ? AND user_id = ?`)
-    : db.prepare<Token>(`SELECT * FROM tokens WHERE provider = ?`);
-  return scoped ? (query.get(provider, uid) || null) : (query.get(provider) || null);
+  if (scoped) {
+    const q = db.prepare<Token>(`SELECT * FROM tokens WHERE provider = ? AND user_id = ?`);
+    const row = q.get(provider, uid) as Token | undefined;
+    if (row) return row;
+    // Fallback to 'default' user scope if specific not found
+    if (uid !== 'default') {
+      const r2 = q.get(provider, 'default') as Token | undefined;
+      if (r2) return r2;
+    }
+    return null;
+  } else {
+    const q = db.prepare<Token>(`SELECT * FROM tokens WHERE provider = ?`);
+    return (q.get(provider) as Token | undefined) || null;
+  }
 }
 
 /**
@@ -833,4 +929,44 @@ export function getAllFlags(): Flag[] {
     SELECT * FROM flags ORDER BY detected_at DESC
   `);
   return query.all();
+}
+
+/** Psych Signals - Get latest summary */
+export function getLatestPsychSignal(userId?: string): PsychSignal | null {
+  const db = getDatabase();
+  const uid = resolveUserId(userId);
+  // Check if table exists
+  try {
+    const chk = db.prepare(`SELECT name FROM sqlite_master WHERE type='table' AND name='psych_signals'`).get();
+    if (!chk) return null;
+  } catch {
+    return null;
+  }
+  const scoped = hasUserIdColumn('psych_signals');
+  const query = scoped
+    ? db.prepare<PsychSignal>(`SELECT * FROM psych_signals WHERE user_id = ? ORDER BY date DESC, created_at DESC LIMIT 1`)
+    : db.prepare<PsychSignal>(`SELECT * FROM psych_signals ORDER BY date DESC, created_at DESC LIMIT 1`);
+  return scoped ? (query.get(uid) || null) : (query.get() || null);
+}
+
+/** Psych Signals - Last N days (descending) */
+export function getPsychSignalsLastNDays(days: number = 14, userId?: string): PsychSignal[] {
+  const db = getDatabase();
+  // Table existence check
+  try {
+    const chk = db.prepare(`SELECT name FROM sqlite_master WHERE type='table' AND name='psych_signals'`).get();
+    if (!chk) return [];
+  } catch {
+    return [];
+  }
+  const uid = resolveUserId(userId);
+  const scoped = hasUserIdColumn('psych_signals');
+  const query = scoped
+    ? db.prepare<PsychSignal>(
+        `SELECT * FROM psych_signals WHERE user_id = ? ORDER BY date DESC LIMIT ?`
+      )
+    : db.prepare<PsychSignal>(
+        `SELECT * FROM psych_signals ORDER BY date DESC LIMIT ?`
+      );
+  return scoped ? query.all(uid, days) : query.all(days);
 }

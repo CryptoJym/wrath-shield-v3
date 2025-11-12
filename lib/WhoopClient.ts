@@ -346,12 +346,11 @@ export class WhoopClient {
    * @param end - End date in ISO 8601 format (e.g., '2024-01-31T23:59:59Z')
    * @returns Array of all cycle records across all pages
    */
-  async fetchCycles(start: string, end: string): Promise<any[]> {
-    return this.fetchPaginated('/developer/v2/cycle', {
-      limit: '25',
-      start,
-      end,
-    });
+  async fetchCycles(start?: string, end?: string): Promise<any[]> {
+    const params: Record<string, string> = { limit: '25' };
+    if (start) params.start = start;
+    if (end) params.end = end;
+    return this.fetchPaginated('/developer/v2/cycle', params);
   }
 
   /**
@@ -517,8 +516,9 @@ export class WhoopClient {
    * @returns Database-ready recovery record
    */
   normalizeRecoveryForDb(parsed: ParsedRecovery): RecoveryInput {
+    const rid = (parsed.id ?? parsed.cycle_id ?? `${parsed.created_at || ''}-${Math.random().toString(36).slice(2,8)}`);
     return {
-      id: parsed.id.toString(),
+      id: rid.toString(),
       date: this.extractDate(parsed.created_at),
       score: parsed.score_percentage,
       hrv: parsed.hrv_rmssd_ms,
@@ -557,6 +557,12 @@ export class WhoopClient {
     return rawCycles.map((cycle) => this.parseCycle(cycle));
   }
 
+  /** Fetch and parse all cycles across full history */
+  async fetchAndParseCyclesAll(): Promise<ParsedCycle[]> {
+    const raw = await this.fetchCycles();
+    return raw.map((c) => this.parseCycle(c));
+  }
+
   /**
    * Fetch and parse all recoveries for a date range
    * @param start - Optional start date in ISO 8601 format
@@ -588,6 +594,12 @@ export class WhoopClient {
   async fetchCyclesForDb(start: string, end: string): Promise<CycleInput[]> {
     const parsed = await this.fetchAndParseCycles(start, end);
     return parsed.map((cycle) => this.normalizeCycleForDb(cycle));
+  }
+
+  /** Fetch, parse, and normalize all cycles for DB upsert */
+  async fetchCyclesForDbAll(): Promise<CycleInput[]> {
+    const parsed = await this.fetchAndParseCyclesAll();
+    return parsed.map((c) => this.normalizeCycleForDb(c));
   }
 
   /**
