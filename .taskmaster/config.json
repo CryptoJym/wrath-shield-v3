@@ -1,0 +1,31 @@
+{
+  "project_name": "Legal Advocate AI - Strategic Case Guardian",
+  "project_root": "/Users/jamesbrady/legal-advocate-ai",
+  "version": "1.0.0",
+  "response_language": "English",
+  "models": {
+    "main": {
+      "provider": "openrouter",
+      "model_id": "openai/gpt-5",
+      "api_key_env": "OPENROUTER_API_KEY",
+      "parameters": {
+        "reasoning_effort": "high",
+        "temperature": 0.7
+      }
+    },
+    "research": {
+      "provider": "openrouter",
+      "model_id": "perplexity/sonar-deep-research",
+      "api_key_env": "OPENROUTER_API_KEY"
+    },
+    "fallback": {
+      "provider": "openrouter",
+      "model_id": "x-ai/grok-2-vision-1212",
+      "api_key_env": "OPENROUTER_API_KEY"
+    }
+  },
+  "tags": {
+    "current": "main",
+    "list": ["main"]
+  }
+}

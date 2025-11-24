@@ -1,0 +1,43 @@
+# ========================================
+# RAILWAY ENVIRONMENT VARIABLES
+# Copy and paste these into Railway Dashboard
+# ========================================
+
+# === GENERATED SECURE KEYS (DO NOT CHANGE) ===
+SECRET_KEY=6835303fc3c2eb0c7683aa881bda31d6098cac6d037003db35ba0d19ab548b37
+API_KEY=ebdb0fc6e40188608c90028afe63fa7ace6d186823bceb5b8a844ce155bb556c
+
+# === ENVIRONMENT ===
+ENVIRONMENT=production
+
+# === MYCASE CREDENTIALS ===
+MYCASE_USERNAME=James@jamesbrady.org
+MYCASE_PASSWORD=3$!cD%VX
+MYCASE_PORTAL_URL=https://mycase.utcourts.gov/MyCaseWEB/LoginServlet
+
+# === ADMIN EMAIL ===
+ADMIN_EMAIL=James@jamesbrady.org
+
+# === CORS (OPTIONAL - Only if you have custom domain) ===
+# CORS_ORIGINS=https://yourdomain.com
+
+# ========================================
+# DATABASE_URL is automatically created by Railway
+# You don't need to add it manually
+# ========================================
+
+
+# ========================================
+# HOW TO USE THIS FILE:
+# ========================================
+# 1. Open this file
+# 2. Replace YOUR_MYCASE_USERNAME_HERE with your actual MyCase username
+# 3. Replace YOUR_MYCASE_PASSWORD_HERE with your actual MyCase password
+# 4. Replace YOUR_FIRM_MYCASE_URL_HERE with your firm's MyCase URL
+# 5. Replace YOUR_EMAIL_HERE with your email address
+# 6. Copy each line (without the # comments) into Railway's Variables tab
+#
+# Example:
+# SECRET_KEY=6835303fc3c2eb0c7683aa881bda31d6098cac6d037003db35ba0d19ab548b37
+#
+# ========================================
