@@ -1,0 +1,88 @@
+# Environment and API Keys
+.env
+.env.local
+.env.*.local
+
+# API Keys and Secrets
+**/secrets.json
+**/credentials.json
+*.key
+*.pem
+
+# Database Files
+*.db
+*.sqlite
+*.sqlite3
+*.db-shm
+*.db-wal
+
+# Python
+__pycache__/
+*.py[cod]
+*.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+.venv/
+venv/
+ENV/
+env/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Case Data (NEVER commit case files)
+~/LegalAdvocateAI/
+**/case_data/
+**/documents/
+**/messages/
+**/emails/
+
+# Logs and temporary files
+*.log
+logs/
+*.tmp
+*.temp
+.cache/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Task Master temporary files
+.taskmaster/queues/*.processing
+.taskmaster/reports/*.tmp
+
+# Local LLM model files (not Python code)
+*.gguf
+*.bin
+ollama_models/
+llm_models/
+
+# Presidio cache
+.presidio/
+
+# Vector store indexes
+faiss_index/
+chroma_db/

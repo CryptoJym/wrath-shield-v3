@@ -1,0 +1,383 @@
+{
+  "metadata": {
+    "project_name": "Legal Advocate AI - Strategic Case Guardian",
+    "version": "1.0.0",
+    "last_updated": "2025-10-04",
+    "total_tasks": 29,
+    "tags": {
+      "current": "main",
+      "list": ["main"]
+    }
+  },
+  "tasks": [
+    {
+      "id": "1",
+      "title": "M0: Secure Skeleton & Local LLM Setup",
+      "description": "Create foundational infrastructure: project directory, SQLCipher DB, local LLM setup, Presidio redaction",
+      "status": "pending",
+      "priority": "ASAP",
+      "dependencies": [],
+      "labels": ["m0", "infrastructure", "security"],
+      "subtasks": [
+        {
+          "id": "1.1",
+          "title": "Create ~/LegalAdvocateAI directory with secure permissions",
+          "description": "Create main project directory with 700 permissions for privacy",
+          "status": "pending",
+          "dependencies": []
+        },
+        {
+          "id": "1.2",
+          "title": "Initialize SQLCipher database",
+          "description": "Set up encrypted SQLite database for case data storage",
+          "status": "pending",
+          "dependencies": ["1.1"]
+        },
+        {
+          "id": "1.3",
+          "title": "Install and configure Ollama/LM Studio",
+          "description": "Set up local LLM (Llama 3.1 8B/70B quantized) on Apple Silicon",
+          "status": "pending",
+          "dependencies": ["1.1"]
+        },
+        {
+          "id": "1.4",
+          "title": "Wire configuration for optional Sonnet remote",
+          "description": "Add configuration option for cloud LLM fallback with explicit consent",
+          "status": "pending",
+          "dependencies": ["1.3"]
+        },
+        {
+          "id": "1.5",
+          "title": "Integrate Presidio for PII redaction in logs",
+          "description": "Set up Presidio pipelines to mask PII in crash logs and exports",
+          "status": "pending",
+          "dependencies": ["1.2"]
+        },
+        {
+          "id": "1.6",
+          "title": "Build CLI 'hello brief' with placeholder data",
+          "description": "Create basic CLI that generates a test brief from placeholder data",
+          "status": "pending",
+          "dependencies": ["1.2", "1.3", "1.5"]
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "title": "M1: Document Ingestion → Timeline",
+      "description": "Integrate document parsing (unstructured, pdfminer.six), create Event Builder, set up Memgraph schema",
+      "status": "pending",
+      "priority": "HIGH",
+      "dependencies": ["1"],
+      "labels": ["m1", "ingestion", "timeline"],
+      "subtasks": [
+        {
+          "id": "2.1",
+          "title": "Install Memgraph and define nodes/edges schema",
+          "description": "Set up Memgraph with Cypher-compatible schema for People, Orders, Events, Statutes",
+          "status": "pending",
+          "dependencies": []
+        },
+        {
+          "id": "2.2",
+          "title": "Create SQLCipher tables for documents/snippets/messages/events",
+          "description": "Define and create all required database tables with proper indexes",
+          "status": "pending",
+          "dependencies": []
+        },
+        {
+          "id": "2.3",
+          "title": "Integrate unstructured + pdfminer.six for PDF parsing",
+          "description": "Build document parser that extracts text blocks, metadata; add OCR fallback via pytesseract",
+          "status": "pending",
+          "dependencies": ["2.2"]
+        },
+        {
+          "id": "2.4",
+          "title": "Build NER (spaCy) + rule extractors",
+          "description": "Extract case numbers, judges, parties, dates; detect order/modification types",
+          "status": "pending",
+          "dependencies": ["2.3"]
+        },
+        {
+          "id": "2.5",
+          "title": "Create Event Builder service (idempotent)",
+          "description": "Build service that normalizes documents into Events with SHA-based de-duplication",
+          "status": "pending",
+          "dependencies": ["2.1", "2.4"]
+        },
+        {
+          "id": "2.6",
+          "title": "Test: 10 PDFs → ≥10 events, navigable timeline",
+          "description": "Acceptance test: Process 10 mixed PDFs and verify event creation with ≥90% classification accuracy",
+          "status": "pending",
+          "dependencies": ["2.5"]
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "title": "M2: iMessage + Email Monitors",
+      "description": "Build communication monitoring for iMessage and Email (Gmail/Outlook) with delta scanning",
+      "status": "pending",
+      "priority": "HIGH",
+      "dependencies": ["2"],
+      "labels": ["m2", "monitoring", "communications"],
+      "subtasks": [
+        {
+          "id": "3.1",
+          "title": "Build iMessage reader with Full Disk Access UI instructions",
+          "description": "Create iMessage DB reader (copy-then-query ~/Library/Messages/chat.db) with whitelist support",
+          "status": "pending",
+          "dependencies": []
+        },
+        {
+          "id": "3.2",
+          "title": "Implement Gmail watcher/poller with label config",
+          "description": "Set up Gmail API watch or polling for case-labeled threads; build label filter UI",
+          "status": "pending",
+          "dependencies": []
+        },
+        {
+          "id": "3.3",
+          "title": "Implement Outlook Graph change notifications or poller",
+          "description": "Set up Microsoft Graph webhooks or polling for case emails",
+          "status": "pending",
+          "dependencies": []
+        },
+        {
+          "id": "3.4",
+          "title": "Extract events from messages (dates/promises/violations)",
+          "description": "Build keyword extraction to create Events from communication content",
+          "status": "pending",
+          "dependencies": ["3.1", "3.2", "3.3"]
+        },
+        {
+          "id": "3.5",
+          "title": "Test: Detect new email/iMessage within SLA",
+          "description": "Acceptance test: Email ≤2min, iMessage every 10min without blocking Messages app",
+          "status": "pending",
+          "dependencies": ["3.4"]
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "title": "M3: Daily Brief + .ics Export",
+      "description": "Build briefing generator with Urgent/Opportunities/Warnings categories and calendar export",
+      "status": "pending",
+      "priority": "HIGH",
+      "dependencies": ["2"],
+      "labels": ["m3", "briefing", "calendar"],
+      "subtasks": [
+        {
+          "id": "4.1",
+          "title": "Build ranker for Urgent/Opportunities/Warnings",
+          "description": "Create severity-based ranking algorithm for events (deadlines, violations, new orders)",
+          "status": "pending",
+          "dependencies": []
+        },
+        {
+          "id": "4.2",
+          "title": "Create brief generator with evidence back-links",
+          "description": "Build Markdown/HTML generator that links each item to source snippets and documents",
+          "status": "pending",
+          "dependencies": ["4.1"]
+        },
+        {
+          "id": "4.3",
+          "title": "Add Title 81 citation attachments",
+          "description": "Surface relevant Utah Title 81 sections when custody/parent-time topics detected",
+          "status": "pending",
+          "dependencies": ["4.2"]
+        },
+        {
+          "id": "4.4",
+          "title": "Build .ics export module",
+          "description": "Generate iCalendar files for deadlines/hearings (user imports to Calendar/Google)",
+          "status": "pending",
+          "dependencies": ["4.1"]
+        },
+        {
+          "id": "4.5",
+          "title": "Test: Generate brief from test set with all 3 categories",
+          "description": "Acceptance: From 3 messages + 2 emails + 2 PDFs → brief with ≥1 Urgent/Opportunity/Warning each",
+          "status": "pending",
+          "dependencies": ["4.2", "4.3", "4.4"]
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "title": "M4: Pre-send Risk Check (User-Invoked)",
+      "description": "Build MailKit extension and Quick Action for pre-send message analysis with tone/risk checking",
+      "status": "pending",
+      "priority": "MEDIUM",
+      "dependencies": ["2"],
+      "labels": ["m4", "pre-send", "risk-analysis"],
+      "subtasks": [
+        {
+          "id": "5.1",
+          "title": "Build Detoxify-based tone/hostility checker",
+          "description": "Integrate Detoxify model for local toxicity detection with threshold configuration",
+          "status": "pending",
+          "dependencies": []
+        },
+        {
+          "id": "5.2",
+          "title": "Create absolute language and admissions detector",
+          "description": "Build regex patterns for 'never/always' absolutes and legal admission keywords",
+          "status": "pending",
+          "dependencies": []
+        },
+        {
+          "id": "5.3",
+          "title": "Implement order compliance checker",
+          "description": "Match draft text against active court order constraints from graph",
+          "status": "pending",
+          "dependencies": []
+        },
+        {
+          "id": "5.4",
+          "title": "Build MailKit compose extension for Apple Mail",
+          "description": "Create macOS Mail extension that analyzes draft before sending",
+          "status": "pending",
+          "dependencies": ["5.1", "5.2", "5.3"]
+        },
+        {
+          "id": "5.5",
+          "title": "Create system-wide Quick Action for any app",
+          "description": "Build macOS Quick Action to analyze selected text in any application",
+          "status": "pending",
+          "dependencies": ["5.1", "5.2", "5.3"]
+        },
+        {
+          "id": "5.6",
+          "title": "Build risk panel UI with neutral rewrite suggestions",
+          "description": "Create UI showing color-coded risks with LLM-generated neutral alternatives",
+          "status": "pending",
+          "dependencies": ["5.4", "5.5"]
+        },
+        {
+          "id": "5.7",
+          "title": "Test: Flag ≥3 risks in seeded 'hot' draft",
+          "description": "Acceptance: System flags absolute language, tone, missing citation and produces compliant rewrite",
+          "status": "pending",
+          "dependencies": ["5.6"]
+        }
+      ]
+    },
+    {
+      "id": "6",
+      "title": "M5: Utah Domain Pack",
+      "description": "Bundle Utah Title 81 sections and seed case library with In re K.M. 2025 UT App 17",
+      "status": "pending",
+      "priority": "MEDIUM",
+      "dependencies": ["4"],
+      "labels": ["m5", "utah-law", "domain-knowledge"],
+      "subtasks": [
+        {
+          "id": "6.1",
+          "title": "Bundle Title 81 sections (§81-9-202/206/302/304) as local HTML",
+          "description": "Download and cache HTML/PDF for key Utah custody/parent-time statutes",
+          "status": "pending",
+          "dependencies": []
+        },
+        {
+          "id": "6.2",
+          "title": "Create Utah-aware prompts and triggers",
+          "description": "Build keyword triggers (schedule, parent-time, modification, best interest) to surface statutes",
+          "status": "pending",
+          "dependencies": ["6.1"]
+        },
+        {
+          "id": "6.3",
+          "title": "Seed case library with In re K.M. summary",
+          "description": "Add holdings summaries for In re K.M., 2025 UT App 17 (safety/guardianship context)",
+          "status": "pending",
+          "dependencies": []
+        },
+        {
+          "id": "6.4",
+          "title": "Test: Brief includes correct Title 81 sections and links",
+          "description": "Acceptance: Custody/parent-time items display specific sections with quotations and URLs",
+          "status": "pending",
+          "dependencies": ["6.2", "6.3"]
+        }
+      ]
+    },
+    {
+      "id": "7",
+      "title": "M6: Hardening & Usability",
+      "description": "Add privacy toggles, audit log, performance tests, MyCase import helper; prepare for beta",
+      "status": "pending",
+      "priority": "HIGH",
+      "dependencies": ["3", "4", "5", "6"],
+      "labels": ["m6", "security", "performance", "ux"],
+      "subtasks": [
+        {
+          "id": "7.1",
+          "title": "Implement SQLCipher key management via macOS Keychain",
+          "description": "Secure database encryption keys in Keychain with rotation support",
+          "status": "pending",
+          "dependencies": []
+        },
+        {
+          "id": "7.2",
+          "title": "Build Presidio log redaction pipelines",
+          "description": "Ensure all logs mask PII before writing to disk or exports",
+          "status": "pending",
+          "dependencies": []
+        },
+        {
+          "id": "7.3",
+          "title": "Create audit log UI with evidence links",
+          "description": "Build UI showing all recommendations with 'because' explanations and snippet links",
+          "status": "pending",
+          "dependencies": []
+        },
+        {
+          "id": "7.4",
+          "title": "Add privacy toggles for monitors (on/off)",
+          "description": "Build settings UI to enable/disable iMessage/email monitoring individually",
+          "status": "pending",
+          "dependencies": []
+        },
+        {
+          "id": "7.5",
+          "title": "Run performance tests on 5k messages + 500 docs",
+          "description": "Benchmark ingestion throughput (<30min) and pre-send latency (<1.5s)",
+          "status": "pending",
+          "dependencies": []
+        },
+        {
+          "id": "7.6",
+          "title": "Build MyCase downloads import helper",
+          "description": "Create UI to import manually downloaded MyCase PDFs into timeline",
+          "status": "pending",
+          "dependencies": []
+        },
+        {
+          "id": "7.7",
+          "title": "Add UPL disclaimer banner and About dialog",
+          "description": "Implement persistent 'not legal advice' banner with Utah UPL references",
+          "status": "pending",
+          "dependencies": []
+        },
+        {
+          "id": "7.8",
+          "title": "Final integration testing and beta prep",
+          "description": "Run full end-to-end tests; prepare deployment package for beta users",
+          "status": "pending",
+          "dependencies": ["7.1", "7.2", "7.3", "7.4", "7.5", "7.6", "7.7"]
+        }
+      ]
+    }
+  ],
+  "_migration_metadata": {
+    "src": "PRD-Legal-Advocate-AI-v1.0",
+    "migration_date": "2025-10-04",
+    "notes": "Initial task structure generated from comprehensive PRD with M0-M6 milestones"
+  }
+}
