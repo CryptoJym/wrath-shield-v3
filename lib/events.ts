@@ -39,11 +39,17 @@ function migrate(db: BetterSqlite3.Database) {
   const alters: string[] = [];
   if (!have('routed_target')) alters.push("ALTER TABLE events ADD COLUMN routed_target TEXT;");
   if (!have('junk')) alters.push("ALTER TABLE events ADD COLUMN junk INTEGER DEFAULT 0;");
+  // Classification columns for confidence scoring and review flagging
+  if (!have('confidence')) alters.push("ALTER TABLE events ADD COLUMN confidence REAL;");
+  if (!have('classification')) alters.push("ALTER TABLE events ADD COLUMN classification TEXT;");
+  if (!have('needs_review')) alters.push("ALTER TABLE events ADD COLUMN needs_review INTEGER DEFAULT 0;");
   if (alters.length) {
     const tx = db.transaction(() => alters.forEach((sql) => db.exec(sql)));
     tx();
     db.exec("CREATE INDEX IF NOT EXISTS idx_events_routed ON events(routed_target);");
     db.exec("CREATE INDEX IF NOT EXISTS idx_events_junk ON events(junk);");
+    db.exec("CREATE INDEX IF NOT EXISTS idx_events_needs_review ON events(needs_review);");
+    db.exec("CREATE INDEX IF NOT EXISTS idx_events_confidence ON events(confidence);");
   }
 }
 
@@ -60,6 +66,10 @@ export type EventRow = {
   metadata?: any;
   routed_target?: string | null;
   junk?: number;
+  // Classification fields
+  confidence?: number | null;
+  classification?: string | null;
+  needs_review?: number;
 };
 
 export function upsertEvents(rows: EventRow[], user_id?: string) {
@@ -114,7 +124,57 @@ export function listRecentEvents(limit = 200, user_id?: string): EventRow[] {
     metadata: r.metadata ? safeParse(r.metadata) : null,
     routed_target: (r as any).routed_target || null,
     junk: (r as any).junk ?? 0,
+    confidence: (r as any).confidence ?? null,
+    classification: (r as any).classification ?? null,
+    needs_review: (r as any).needs_review ?? 0,
   }));
+}
+
+export function listEventsNeedingReview(limit = 50, user_id?: string): EventRow[] {
+  const db = getDb();
+  const where: string[] = ['needs_review = 1'];
+  const params: any[] = [];
+  if (user_id) {
+    where.push('(user_id = ? OR user_id IS NULL OR user_id = \'default\')');
+    params.push(user_id);
+  }
+  params.push(limit);
+  const sql = `SELECT * FROM events WHERE ${where.join(' AND ')} ORDER BY ts DESC LIMIT ?`;
+  const rows = db.prepare<EventRow>(sql).all(...params) as any[];
+  db.close();
+  return rows.map((r) => ({
+    ...r,
+    metadata: r.metadata ? safeParse(r.metadata) : null,
+    routed_target: (r as any).routed_target || null,
+    junk: (r as any).junk ?? 0,
+    confidence: (r as any).confidence ?? null,
+    classification: (r as any).classification ?? null,
+    needs_review: (r as any).needs_review ?? 0,
+  }));
+}
+
+export function updateEventClassification(
+  id: string,
+  classification: string,
+  confidence: number,
+  user_id?: string
+) {
+  const db = getDb();
+  const needs_review = confidence < 0.7 ? 1 : 0;
+  const stmt = db.prepare(
+    `UPDATE events SET classification = ?, confidence = ?, needs_review = ? WHERE id = ? ${user_id ? "AND (user_id = ? OR user_id IS NULL OR user_id = 'default')" : ""}`
+  );
+  stmt.run(user_id ? [classification, confidence, needs_review, id, user_id] : [classification, confidence, needs_review, id]);
+  db.close();
+}
+
+export function markEventReviewed(id: string, user_id?: string) {
+  const db = getDb();
+  const stmt = db.prepare(
+    `UPDATE events SET needs_review = 0 WHERE id = ? ${user_id ? "AND (user_id = ? OR user_id IS NULL OR user_id = 'default')" : ""}`
+  );
+  stmt.run(user_id ? [id, user_id] : [id]);
+  db.close();
 }
 
 function safeParse(s: string) {

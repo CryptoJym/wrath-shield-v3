@@ -36,6 +36,7 @@ export default function InboxPage() {
   const { data: eventsData } = useSWR("/api/events?limit=400", fetcher, { refreshInterval: 8000 });
   const { data: financeData } = useSWR("/api/finance/summary", fetcher, { refreshInterval: 60000 });
   const { data: ctxData, mutate: mutateCtx } = useSWR("/api/finance/context-requests", fetcher, { refreshInterval: 15000 });
+  const { data: healthData } = useSWR("/api/comms/health", fetcher, { refreshInterval: 30000 });
 
   const [query, setQuery] = useState("");
   const [eventFilter, setEventFilter] = useState("");
@@ -91,6 +92,8 @@ export default function InboxPage() {
           <h1 className="text-3xl font-semibold">Actions + Timeline + Chat</h1>
           <p className="text-slate-300">Review actions, scan recent signals (email/calendar/iMessage/lifelogs), and chat with Grok.</p>
         </header>
+
+        <IngestHealthPanel data={healthData} />
 
         <div className="grid md:grid-cols-3 gap-6">
           <ActionColumn title="Proposed" tone="blue" items={proposed} mutate={mutate} />
@@ -438,3 +441,83 @@ const ROUTE_OPTIONS = [
   { key: "orchestrator", label: "→ Orchestrator" },
   { key: "legal", label: "→ Legal" },
 ];
+
+function IngestHealthPanel({ data }: { data: any }) {
+  if (!data) return null;
+
+  const statusColor: Record<string, string> = {
+    ok: "text-emerald-400 bg-emerald-900/30",
+    warning: "text-amber-400 bg-amber-900/30",
+    error: "text-rose-400 bg-rose-900/30",
+    not_configured: "text-slate-400 bg-slate-800/50",
+  };
+
+  const statusIcon: Record<string, string> = {
+    ok: "●",
+    warning: "◐",
+    error: "○",
+    not_configured: "○",
+  };
+
+  const sources = data.sources || [];
+  const summary = data.summary || {};
+  const events = data.events || {};
+
+  const overallStatus = !data.ok ? (summary.errors > 0 ? "error" : "warning") : "ok";
+
+  return (
+    <section className="rounded-2xl border border-slate-800 bg-slate-900/70 p-4 space-y-3">
+      <div className="flex items-center justify-between gap-3 flex-wrap">
+        <div className="flex items-center gap-3">
+          <span className={`text-xl ${statusColor[overallStatus]?.split(" ")[0]}`}>
+            {statusIcon[overallStatus]}
+          </span>
+          <div>
+            <div className="text-lg font-semibold">Ingest Health</div>
+            <p className="text-sm text-slate-400">
+              {summary.healthy}/{summary.total} sources healthy · {events.total || 0} events in timeline
+            </p>
+          </div>
+        </div>
+        {events.needs_review > 0 && (
+          <span className="px-3 py-1 rounded-full text-xs bg-amber-900/40 text-amber-300">
+            {events.needs_review} needs review
+          </span>
+        )}
+      </div>
+
+      <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-2">
+        {sources.map((src: any) => (
+          <div
+            key={src.name}
+            className={`flex items-center gap-2 px-3 py-2 rounded-lg ${statusColor[src.status]}`}
+          >
+            <span className="text-sm">{statusIcon[src.status]}</span>
+            <div className="flex-1 min-w-0">
+              <div className="text-sm font-medium truncate">{src.name}</div>
+              {src.status === "ok" || src.status === "warning" ? (
+                <div className="text-xs opacity-70">
+                  {src.recordCount ?? 0} records · {src.lastSync || "unknown"}
+                </div>
+              ) : src.status === "not_configured" ? (
+                <div className="text-xs opacity-70">Not configured</div>
+              ) : (
+                <div className="text-xs opacity-70">{src.error || "Error"}</div>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {events.by_channel && Object.keys(events.by_channel).length > 0 && (
+        <div className="flex flex-wrap gap-2 text-xs text-slate-400 pt-1">
+          {Object.entries(events.by_channel).map(([ch, cnt]) => (
+            <span key={ch} className="px-2 py-1 rounded bg-slate-800">
+              {ch}: {cnt as number}
+            </span>
+          ))}
+        </div>
+      )}
+    </section>
+  );
+}
