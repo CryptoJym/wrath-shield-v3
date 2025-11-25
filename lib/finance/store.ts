@@ -115,6 +115,65 @@ export type TxnRow = {
   confidence?: number;
 };
 
+type TxnUpdate = {
+  bucket?: string;
+  project?: string;
+  reimbursable?: boolean;
+  status?: 'pending_review' | 'classified' | 'confirmed';
+  note?: string;
+  rationale?: string;
+};
+
+export type AuditRow = {
+  id?: number;
+  txn_id: string;
+  user_id?: string;
+  ts?: string;
+  source?: string;
+  prev_bucket?: string | null;
+  new_bucket?: string | null;
+  prev_project?: string | null;
+  new_project?: string | null;
+  prev_reimbursable?: number | null;
+  new_reimbursable?: number | null;
+  note?: string | null;
+};
+
+export function auditTxn(id: string, user_id: string | undefined, source: string, prev: any, next: any) {
+  const db = getDb();
+  db.prepare(
+    `INSERT INTO finance_audit (txn_id, user_id, source, prev_bucket, new_bucket, prev_project, new_project, prev_reimbursable, new_reimbursable, note)
+     VALUES (@txn_id, @user_id, @source, @prev_bucket, @new_bucket, @prev_project, @new_project, @prev_reimbursable, @new_reimbursable, @note)`
+  ).run({
+    txn_id: id,
+    user_id: user_id || 'default',
+    source,
+    prev_bucket: prev.bucket ?? null,
+    new_bucket: next.bucket ?? null,
+    prev_project: prev.project ?? null,
+    new_project: next.project ?? null,
+    prev_reimbursable: prev.reimbursable === undefined ? null : prev.reimbursable ? 1 : 0,
+    new_reimbursable: next.reimbursable === undefined ? null : next.reimbursable ? 1 : 0,
+    note: next.note || null,
+  });
+  db.close();
+}
+
+export function listAudit(txn_id: string, user_id?: string): AuditRow[] {
+  const db = getDb();
+  const where: string[] = ['txn_id = ?'];
+  const params: any[] = [txn_id];
+  if (user_id) {
+    where.push("(user_id = ? OR user_id IS NULL OR user_id = 'default')");
+    params.push(user_id);
+  }
+  const rows = db
+    .prepare(`SELECT * FROM finance_audit WHERE ${where.join(' AND ')} ORDER BY ts DESC, id DESC`)
+    .all(...params) as any[];
+  db.close();
+  return rows;
+}
+
 export async function upsertTransactionsFromRows(rows: TxnRow[], user_id?: string) {
   if (!rows.length) return;
   const db = getDb();
@@ -184,6 +243,58 @@ export function listByDateRange(start: string, end: string, user_id?: string): T
   }));
 }
 
+export function listDistinctValues(column: 'bucket' | 'project', user_id?: string): string[] {
+  const db = getDb();
+  const where: string[] = [`${column} IS NOT NULL`, `${column} != ''`];
+  const params: any[] = [];
+  if (user_id) {
+    where.push("(user_id = ? OR user_id IS NULL OR user_id = 'default')");
+    params.push(user_id);
+  }
+  const sql = `SELECT DISTINCT ${column} as val FROM finance_transactions WHERE ${where.join(' AND ')} ORDER BY val COLLATE NOCASE`;
+  const rows = db.prepare(sql).all(...params) as any[];
+  db.close();
+  return rows.map((r) => r.val).filter(Boolean);
+}
+
+type BulkFields = {
+  bucket?: string | null;
+  project?: string | null;
+  reimbursable?: boolean | null;
+  status?: 'pending_review' | 'classified' | 'confirmed';
+};
+
+export function bulkUpdateVendor(
+  vendor: string,
+  start: string,
+  end: string,
+  fields: BulkFields,
+  user_id?: string
+) {
+  const db = getDb();
+  const params: any[] = [];
+  const setParts: string[] = [];
+  if (fields.bucket !== undefined) setParts.push('bucket = ?'), params.push(fields.bucket);
+  if (fields.project !== undefined) setParts.push('project = ?'), params.push(fields.project);
+  if (fields.reimbursable !== undefined)
+    setParts.push('reimbursable = ?'), params.push(fields.reimbursable === null ? null : fields.reimbursable ? 1 : 0);
+  if (fields.status !== undefined) setParts.push('status = ?'), params.push(fields.status);
+  if (!setParts.length) {
+    db.close();
+    return 0;
+  }
+  params.push(start, end, vendor);
+  let sql = `UPDATE finance_transactions SET ${setParts.join(', ')} WHERE date >= ? AND date < ? AND vendor = ?`;
+  if (user_id) {
+    sql += " AND (user_id = ? OR user_id IS NULL OR user_id = 'default')";
+    params.push(user_id);
+  }
+  const stmt = db.prepare(sql);
+  const info = stmt.run(...params);
+  db.close();
+  return info.changes ?? 0;
+}
+
 export function getTransaction(id: string): TxnRow | null {
   const db = getDb();
   const row = db.prepare<TxnRow>('SELECT * FROM finance_transactions WHERE id = ?').get(id) as any;
@@ -197,6 +308,60 @@ export function getTransaction(id: string): TxnRow | null {
     status: (row as any).status || 'pending_review',
     confidence: (row as any).confidence ?? 0,
   };
+}
+
+export function updateTransaction(id: string, fields: TxnUpdate, user_id?: string, source = 'user') {
+  const db = getDb();
+  const existing = db
+    .prepare(
+      `SELECT * FROM finance_transactions WHERE id = ? ${user_id ? "AND (user_id = ? OR user_id IS NULL OR user_id = 'default')" : ''}`
+    )
+    .get(user_id ? [id, user_id] : [id]) as any;
+  if (!existing) {
+    db.close();
+    return;
+  }
+  const metaObj = existing.meta ? safeParse(existing.meta) : {};
+  if (fields.note !== undefined) metaObj.note = fields.note;
+  if (fields.rationale !== undefined) metaObj.rationale = fields.rationale;
+
+  // enforce buckets: collapse work_nonreimbursable -> work_reimbursable; allowed set
+  const allowedBuckets = new Set(['work_reimbursable','personal_ai','family','entertainment','other','unknown',null]);
+  const nextBucket = fields.bucket === 'work_nonreimbursable' ? 'work_reimbursable' : fields.bucket;
+  const bucketFinal = allowedBuckets.has(nextBucket ?? null) ? nextBucket : 'other';
+  const reimbFinal = bucketFinal === 'work_reimbursable' ? true : fields.reimbursable;
+
+  const nextState = {
+    bucket: bucketFinal,
+    project: fields.project ?? null,
+    reimbursable: reimbFinal === undefined ? null : reimbFinal,
+  };
+
+  const prevState = {
+    bucket: existing.bucket,
+    project: existing.project,
+    reimbursable: existing.reimbursable,
+  };
+
+  db.prepare(
+    `UPDATE finance_transactions
+     SET bucket = COALESCE(@bucket, bucket),
+         project = COALESCE(@project, project),
+         reimbursable = CASE WHEN @reimbursable IS NULL THEN reimbursable ELSE @reimbursable END,
+         status = COALESCE(@status, status),
+         meta = @meta
+     WHERE id = @id ${user_id ? "AND (user_id = @user_id OR user_id IS NULL OR user_id = 'default')" : ''}`
+  ).run({
+    id,
+    user_id,
+    bucket: bucketFinal ?? null,
+    project: fields.project ?? null,
+    reimbursable: reimbFinal === undefined ? null : reimbFinal ? 1 : 0,
+    status: fields.status ?? null,
+    meta: Object.keys(metaObj).length ? JSON.stringify(metaObj) : null,
+  });
+  auditTxn(id, user_id, source, prevState, nextState);
+  db.close();
 }
 
 function safeParse(s: string) {
@@ -325,44 +490,6 @@ export function updateContextRequest(id: string, updates: Partial<ContextRequest
         : 0,
   });
   const out = db.prepare<ContextRequest>('SELECT * FROM finance_context_requests WHERE id = ?').get(id) as any;
-  db.close();
-  return out;
-}
-
-export function updateTransaction(id: string, updates: Partial<TxnRow>) {
-  const db = getDb();
-  const existing = db.prepare<TxnRow>('SELECT * FROM finance_transactions WHERE id = ?').get(id) as any;
-  if (!existing) {
-    db.close();
-    return null;
-  }
-  const merged = {
-    ...existing,
-    ...updates,
-    recurring: updates.recurring === undefined ? existing.recurring : updates.recurring ? 1 : 0,
-    reimbursable:
-      updates.reimbursable === undefined ? existing.reimbursable : updates.reimbursable ? 1 : 0,
-    meta: updates.meta ? JSON.stringify(updates.meta) : existing.meta,
-  };
-  db.prepare(
-    `UPDATE finance_transactions SET
-      account=@account,
-      amount=@amount,
-      iso_currency_code=@iso_currency_code,
-      date=@date,
-      vendor=@vendor,
-      raw_desc=@raw_desc,
-      bucket=@bucket,
-      project=@project,
-      recurring=@recurring,
-      reimbursable=@reimbursable,
-      source=@source,
-      meta=@meta,
-      status=@status,
-      confidence=@confidence
-     WHERE id=@id`
-  ).run(merged);
-  const out = db.prepare<TxnRow>('SELECT * FROM finance_transactions WHERE id = ?').get(id) as any;
   db.close();
   return out;
 }

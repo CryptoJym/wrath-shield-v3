@@ -45,10 +45,29 @@ export default function FinancePage() {
   const cycles = useMemo(() => buildCycleOptions(), []);
   const effectiveRange = range ?? { start: cycles[0].start, end: cycles[0].end };
   const summaryUrl = `/api/finance/summary?start=${effectiveRange.start}&end=${effectiveRange.end}`;
+  const txnsUrl = `/api/finance/txns?start=${effectiveRange.start}&end=${effectiveRange.end}`;
+
+  // Previous cycle window (UI only, reuse summary API)
+  const prevRange = useMemo(() => {
+    const ref = new Date(effectiveRange.start);
+    ref.setDate(ref.getDate() - 1);
+    const { start, end } = cycleWindow(ref);
+    return { start: iso(start), end: iso(end) };
+  }, [effectiveRange.start]);
+  const prevSummaryUrl = `/api/finance/summary?start=${prevRange.start}&end=${prevRange.end}`;
 
   const { data: summary } = useSWR(summaryUrl, fetcher, { refreshInterval: 30000 });
+  const { data: prev } = useSWR(prevSummaryUrl, fetcher, { refreshInterval: 60000 });
   const { data: ctx, mutate: mutateCtx } = useSWR("/api/finance/context-requests", fetcher, { refreshInterval: 15000 });
-  const [vendorWindow, setVendorWindow] = useState<"cycle" | "90d" | "all">("90d");
+  const { data: txns, mutate: mutateTxns } = useSWR(txnsUrl, fetcher, { refreshInterval: 45000 });
+  const { data: opts } = useSWR("/api/finance/options", fetcher, { refreshInterval: 120000 });
+  const [bulkVendor, setBulkVendor] = useState("");
+  const [bulkBucket, setBulkBucket] = useState("");
+  const [bulkProject, setBulkProject] = useState("");
+  const [bulkReimb, setBulkReimb] = useState(false);
+  const [bulkSaving, setBulkSaving] = useState(false);
+  const [classifying, setClassifying] = useState(false);
+  const [vendorWindow, setVendorWindow] = useState<"cycle" | "90d" | "all">("cycle");
   const vendorUrl = useMemo(() => {
     if (vendorWindow === "cycle" && summary?.window?.start && summary?.window?.end) {
       return `/api/finance/vendors?start=${summary.window.start}&end=${summary.window.end}`;
@@ -59,6 +78,55 @@ export default function FinancePage() {
     return "/api/finance/vendors";
   }, [vendorWindow, summary]);
   const { data: vendors } = useSWR(vendorUrl, fetcher, { refreshInterval: 60000 });
+
+  const currentTotal = sumBuckets(summary?.buckets);
+  const prevTotal = sumBuckets(prev?.buckets);
+  const deltaTotal = currentTotal - prevTotal;
+
+  const bucketDelta = useMemo(() => {
+    const deltas: Record<string, number> = {};
+    const cur = summary?.buckets || {};
+    const prv = prev?.buckets || {};
+    const keys = new Set([...Object.keys(cur), ...Object.keys(prv)]);
+    keys.forEach((k) => {
+      deltas[k] = (cur[k] || 0) - (prv[k] || 0);
+    });
+    return deltas;
+  }, [summary, prev]);
+
+  const applyBulk = async () => {
+    if (!bulkVendor) return;
+    setBulkSaving(true);
+    await fetch("/api/finance/txns/bulk", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        vendor: bulkVendor,
+        start: effectiveRange.start,
+        end: effectiveRange.end,
+        bucket: bulkBucket || null,
+        project: bulkProject || null,
+        reimbursable: bulkReimb,
+      }),
+    });
+    setBulkSaving(false);
+    mutateTxns?.();
+  };
+
+  const classifyWindow = async (rows: Txn[]) => {
+    const targets = rows
+      .filter((r) => !r.bucket || r.bucket === 'unknown' || r.reimbursable === undefined || r.reimbursable === null || r.status !== 'classified')
+      .map((r) => r.id);
+    if (!targets.length) return;
+    setClassifying(true);
+    await fetch('/api/finance/classify', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ ids: targets.slice(0, 50) }),
+    });
+    setClassifying(false);
+    mutateTxns?.();
+  };
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-50">
@@ -86,21 +154,74 @@ export default function FinancePage() {
             ))}
           </select>
           <span className="text-xs text-slate-500">Start day anchored to the 8th.</span>
+          <a
+            className="text-xs px-3 py-1 rounded-full bg-slate-800 border border-slate-700 text-slate-200"
+            href={`/finance/print?start=${effectiveRange.start}&end=${effectiveRange.end}`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Printable report
+          </a>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6">
-          <Card title="Current Cycle" subtitle={`${summary?.window?.start ?? "?"} → ${summary?.window?.end ?? "?"}`}>
+        <div className="grid md:grid-cols-3 gap-6">
+          <Card
+            title="Selected window"
+            subtitle={`${summary?.window?.start ?? "?"} → ${summary?.window?.end ?? "?"}`}
+          >
             <BucketGrid buckets={summary?.buckets} />
-            <p className="text-xs text-slate-500 mt-2">{summary?.count ?? 0} transactions</p>
+            <TotalsFooter label="Total" amount={sumBuckets(summary?.buckets)} count={summary?.count ?? 0} />
           </Card>
+
+          <Card
+            title="Previous cycle"
+            subtitle={`${prev?.window?.start ?? prevRange.start} → ${prev?.window?.end ?? prevRange.end}`}
+          >
+            <BucketGrid buckets={prev?.buckets} />
+            <TotalsFooter label="Total" amount={sumBuckets(prev?.buckets)} count={prev?.count ?? 0} />
+          </Card>
+
           <Card
             title="Last 90 Days"
             subtitle={`${summary?.back90?.start ?? "?"} → ${summary?.back90?.end ?? "?"}`}
           >
             <BucketGrid buckets={summary?.back90?.buckets} />
-            <p className="text-xs text-slate-500 mt-2">{summary?.back90?.count ?? 0} transactions</p>
+            <TotalsFooter
+              label="Total"
+              amount={sumBuckets(summary?.back90?.buckets)}
+              count={summary?.back90?.count ?? 0}
+            />
           </Card>
         </div>
+
+        <Card title="Delta vs previous cycle" subtitle="Positive = increase vs prior 8→8 cycle">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-3">
+            <div className="border border-slate-800 rounded-xl p-3 bg-slate-900/60">
+              <div className="text-sm text-slate-400">Total delta</div>
+              <div className={`text-lg font-semibold ${deltaTotal >= 0 ? 'text-amber-200' : 'text-emerald-200'}`}>
+                {deltaTotal >= 0 ? '+' : ''}${deltaTotal.toFixed(2)}
+              </div>
+            </div>
+            {Object.entries(bucketDelta).map(([b, v]) => (
+              <div key={b} className="border border-slate-800 rounded-xl p-3 bg-slate-900/60">
+                <div className="text-sm text-slate-400">{b}</div>
+                <div className={`text-lg font-semibold ${v >= 0 ? 'text-amber-200' : 'text-emerald-200'}`}>
+                  {v >= 0 ? '+' : ''}${v.toFixed(2)}
+                </div>
+              </div>
+            ))}
+          </div>
+        </Card>
+
+      <Card title="Transactions (selected window)" subtitle="Edit bucket/project/reimbursable inline; saves immediately">
+        <TransactionTable
+          rows={txns?.txns || []}
+          mutate={mutateTxns}
+          bucketOptions={opts?.buckets || []}
+          projectOptions={opts?.projects || []}
+          classify={() => classifyWindow(txns?.txns || [])}
+        />
+      </Card>
 
       <Card
         title="Pending Context Requests"
@@ -109,21 +230,62 @@ export default function FinancePage() {
         <ContextList requests={ctx?.requests || []} mutate={mutateCtx} />
       </Card>
 
-      <Card title="Top Vendors" subtitle="Helps validate classification and reimbursement decisions.">
-        <div className="flex gap-3 items-center text-xs text-slate-300 mb-2">
-          <span className="text-slate-400">Window:</span>
-          <select
-            className="bg-slate-900 border border-slate-700 rounded px-2 py-1"
-            value={vendorWindow}
-            onChange={(e) => setVendorWindow(e.target.value as any)}
-          >
-            <option value="cycle">Current cycle</option>
-            <option value="90d">Last 90 days</option>
-            <option value="all">All time</option>
-          </select>
-        </div>
-        <VendorList vendors={vendors?.vendors || []} />
-      </Card>
+          <Card title="Top Vendors" subtitle="Helps validate classification and reimbursement decisions.">
+            <div className="flex flex-wrap gap-3 items-center text-xs text-slate-300 mb-2">
+              <span className="text-slate-400">Window:</span>
+              <select
+                className="bg-slate-900 border border-slate-700 rounded px-2 py-1"
+                value={vendorWindow}
+                onChange={(e) => setVendorWindow(e.target.value as any)}
+              >
+                <option value="cycle">Current cycle</option>
+                <option value="90d">Last 90 days</option>
+                <option value="all">All time</option>
+              </select>
+
+              <span className="text-slate-400">Bulk apply to vendor (current window)</span>
+              <select
+                className="bg-slate-900 border border-slate-700 rounded px-2 py-1"
+                value={bulkVendor}
+                onChange={(e) => setBulkVendor(e.target.value)}
+              >
+                <option value="">Select vendor…</option>
+                {(vendors?.vendors || []).map((v) => (
+                  <option key={v.vendor || '(unknown)'} value={v.vendor || ''}>
+                    {v.vendor || '(unknown)'}
+                  </option>
+                ))}
+              </select>
+              <input
+                list="bulk-bucket"
+                className="bg-slate-900 border border-slate-700 rounded px-2 py-1"
+                placeholder="bucket"
+                value={bulkBucket}
+                onChange={(e) => setBulkBucket(e.target.value)}
+              />
+              <input
+                list="bulk-project"
+                className="bg-slate-900 border border-slate-700 rounded px-2 py-1"
+                placeholder="project"
+                value={bulkProject}
+                onChange={(e) => setBulkProject(e.target.value)}
+              />
+              <label className="flex items-center gap-1">
+                <input type="checkbox" checked={bulkReimb} onChange={() => setBulkReimb(!bulkReimb)} />
+                Reimbursable
+              </label>
+              <button
+                onClick={applyBulk}
+                disabled={!bulkVendor || bulkSaving}
+                className="px-3 py-1 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white disabled:opacity-50"
+              >
+                {bulkSaving ? 'Applying…' : 'Apply to vendor'}
+              </button>
+              <datalist id="bulk-bucket">{(opts?.buckets || []).map((b) => <option key={b} value={b} />)}</datalist>
+              <datalist id="bulk-project">{(opts?.projects || []).map((p) => <option key={p} value={p} />)}</datalist>
+            </div>
+            <VendorList vendors={vendors?.vendors || []} />
+          </Card>
     </div>
   </div>
   );
@@ -155,6 +317,22 @@ function BucketGrid({ buckets }: { buckets?: Record<string, number> }) {
       ))}
     </div>
   );
+}
+
+function TotalsFooter({ label, amount, count }: { label: string; amount: number; count: number }) {
+  return (
+    <div className="flex items-center justify-between text-xs text-slate-400 mt-2">
+      <span>
+        {label}: <span className="text-slate-100 font-semibold">${amount.toFixed(2)}</span>
+      </span>
+      <span>{count ?? 0} transactions</span>
+    </div>
+  );
+}
+
+function sumBuckets(buckets?: Record<string, number>) {
+  if (!buckets) return 0;
+  return Object.values(buckets).reduce((acc, v) => acc + (v || 0), 0);
 }
 
 function ContextList({ requests, mutate }: { requests: any[]; mutate?: any }) {
@@ -299,5 +477,217 @@ function VendorList({ vendors }: { vendors: { vendor: string; total: number; cou
         </div>
       ))}
     </div>
+  );
+}
+
+type Txn = {
+  id: string;
+  vendor?: string;
+  raw_desc?: string;
+  date: string;
+  amount: number;
+  bucket?: string;
+  project?: string;
+  reimbursable?: boolean;
+  status?: string;
+  meta?: any;
+};
+
+type TxnTableProps = {
+  rows: Txn[];
+  mutate?: () => void;
+  bucketOptions?: string[];
+  projectOptions?: string[];
+  classify?: () => void;
+};
+
+function TransactionTable({ rows, mutate, bucketOptions, projectOptions, classify }: TxnTableProps) {
+  const [showAll, setShowAll] = useState(false);
+  const filtered = showAll
+    ? rows
+    : rows.filter((r) => !r.bucket || r.bucket === 'unknown' || r.reimbursable === undefined || r.reimbursable === null || r.status !== 'classified');
+  if (!filtered.length) return <p className="text-sm text-slate-500">No transactions in this window.</p>;
+  return (
+    <div className="space-y-2">
+      <div className="flex items-center gap-2 text-xs text-slate-400">
+        <label className="flex items-center gap-1">
+          <input type="checkbox" checked={showAll} onChange={() => setShowAll(!showAll)} /> Show all (including classified)
+        </label>
+        <span className="text-slate-500">Default shows only items needing review.</span>
+        {classify && (
+          <button
+            onClick={classify}
+            className="px-3 py-1 rounded-full bg-indigo-700 hover:bg-indigo-600 text-white"
+          >
+            Classify unreviewed with Grok
+          </button>
+        )}
+      </div>
+      <div className="overflow-auto max-h-[520px] text-sm">
+        <table className="min-w-full border border-slate-800">
+          <thead className="bg-slate-900 text-slate-300 text-xs uppercase">
+            <tr>
+              <th className="p-2 border-r border-slate-800">Date</th>
+            <th className="p-2 border-r border-slate-800">Vendor</th>
+            <th className="p-2 border-r border-slate-800">Amount</th>
+            <th className="p-2 border-r border-slate-800">Bucket</th>
+            <th className="p-2 border-r border-slate-800">Project</th>
+            <th className="p-2 border-r border-slate-800">Reimb?</th>
+            <th className="p-2 border-r border-slate-800">Note / Rationale</th>
+            <th className="p-2 border-r border-slate-800">Lookup</th>
+            <th className="p-2">Save / History</th>
+          </tr>
+        </thead>
+          <tbody>
+          {filtered.map((r) => (
+            <TxnRow key={r.id} r={r} mutate={mutate} bucketOptions={bucketOptions} projectOptions={projectOptions} />
+          ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+function TxnRow({ r, mutate, bucketOptions, projectOptions }: { r: Txn; mutate?: () => void; bucketOptions?: string[]; projectOptions?: string[] }) {
+  const [bucket, setBucket] = useState(r.bucket || "");
+  const [project, setProject] = useState(r.project || "");
+  const [reimb, setReimb] = useState(!!r.reimbursable);
+  const [note, setNote] = useState(r.meta?.note || "");
+  const [rationale, setRationale] = useState(r.meta?.rationale || "");
+  const [saving, setSaving] = useState(false);
+  const [history, setHistory] = useState<any[] | null>(null);
+  const [lookup, setLookup] = useState<string | null>(null);
+  const [loadingHistory, setLoadingHistory] = useState(false);
+  const [loadingLookup, setLoadingLookup] = useState(false);
+
+  const save = async () => {
+    setSaving(true);
+    await fetch("/api/finance/txns", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        id: r.id,
+        bucket: bucket || null,
+        project: project || null,
+        reimbursable: reimb,
+        note: note || null,
+        rationale: rationale || null,
+        status: 'classified',
+      }),
+    });
+    setSaving(false);
+    mutate?.();
+  };
+
+  const fetchHistory = async () => {
+    setLoadingHistory(true);
+    const res = await fetch(`/api/finance/audit?txn=${encodeURIComponent(r.id)}`);
+    const data = await res.json();
+    setHistory(data.audit || []);
+    setLoadingHistory(false);
+  };
+
+  const fetchLookup = async () => {
+    setLoadingLookup(true);
+    const res = await fetch(`/api/finance/vendor-lookup?q=${encodeURIComponent(r.vendor || '')}`);
+    const data = await res.json();
+    setLookup(data.heading || data.abstract || JSON.stringify(data));
+    setLoadingLookup(false);
+  };
+
+  return (
+    <tr className="border-t border-slate-800">
+      <td className="p-2 align-top text-slate-300 whitespace-nowrap">{r.date}</td>
+      <td className="p-2 align-top text-slate-100 min-w-[220px] max-w-[260px]">
+        <div className="font-semibold line-clamp-2">{r.vendor || "(unknown)"}</div>
+        <div className="text-xs text-slate-500 line-clamp-2">{r.raw_desc}</div>
+      </td>
+      <td className="p-2 align-top text-emerald-200 whitespace-nowrap">${r.amount.toFixed(2)}</td>
+      <td className="p-2 align-top">
+        <input
+          list={`bucket-${r.id}`}
+          className="w-40 bg-slate-900 border border-slate-700 rounded px-2 py-1 text-slate-100"
+          value={bucket}
+          onChange={(e) => setBucket(e.target.value)}
+          placeholder="bucket"
+        />
+        <datalist id={`bucket-${r.id}`}>
+          {(bucketOptions || []).map((b) => (
+            <option key={b} value={b} />
+          ))}
+        </datalist>
+      </td>
+      <td className="p-2 align-top">
+        <input
+          list={`project-${r.id}`}
+          className="w-36 bg-slate-900 border border-slate-700 rounded px-2 py-1 text-slate-100"
+          value={project}
+          onChange={(e) => setProject(e.target.value)}
+          placeholder="project"
+        />
+        <datalist id={`project-${r.id}`}>
+          {(projectOptions || []).map((p) => (
+            <option key={p} value={p} />
+          ))}
+        </datalist>
+      </td>
+      <td className="p-2 align-top text-center">
+        <input type="checkbox" checked={reimb} onChange={() => setReimb(!reimb)} />
+      </td>
+      <td className="p-2 align-top">
+        <textarea
+          className="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-slate-100 text-xs"
+          rows={3}
+          value={note}
+          onChange={(e) => setNote(e.target.value)}
+          placeholder="Note"
+        />
+        <textarea
+          className="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-slate-100 text-xs mt-1"
+          rows={3}
+          value={rationale}
+          onChange={(e) => setRationale(e.target.value)}
+          placeholder="Why reimbursable/not?"
+        />
+      </td>
+      <td className="p-2 align-top text-xs text-slate-400">
+        <button
+          onClick={fetchLookup}
+          className="text-indigo-400 hover:text-indigo-200"
+        >
+          {loadingLookup ? '...' : 'Lookup'}
+        </button>
+        {lookup && <div className="mt-1 text-[11px] text-slate-500 line-clamp-3">{lookup}</div>}
+      </td>
+      <td className="p-2 align-top">
+        <button
+          onClick={save}
+          disabled={saving}
+          className="text-xs px-3 py-1 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white disabled:opacity-60"
+        >
+          {saving ? "Saving..." : "Save"}
+        </button>
+        <button
+          onClick={fetchHistory}
+          className="text-[11px] mt-1 px-2 py-1 rounded-full bg-slate-800 text-slate-200 border border-slate-700"
+        >
+          {loadingHistory ? 'History...' : 'History'}
+        </button>
+        {history && history.length > 0 && (
+          <div className="mt-1 max-h-32 overflow-auto text-[10px] text-slate-400 space-y-1">
+            {history.map((h:any)=> (
+              <div key={h.id} className="border-b border-slate-800 pb-1">
+                <div>{h.ts} — {h.source}</div>
+                <div>bucket: {h.prev_bucket || '∅'} → {h.new_bucket || '∅'}</div>
+                <div>project: {h.prev_project || '∅'} → {h.new_project || '∅'}</div>
+                <div>reimb: {h.prev_reimbursable===null? '∅': h.prev_reimbursable? 'Y':'N'} → {h.new_reimbursable===null? '∅': h.new_reimbursable? 'Y':'N'}</div>
+                {h.note && <div>note: {h.note}</div>}
+              </div>
+            ))}
+          </div>
+        )}
+      </td>
+    </tr>
   );
 }
