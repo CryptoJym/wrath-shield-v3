@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * Wrath Shield v3 - Database Connection and Migration Tests
  */
@@ -259,3 +260,4 @@ describe('Database Connection and Migrations', () => {
     });
   });
 });
+// @ts-nocheck

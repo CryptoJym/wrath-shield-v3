@@ -19,6 +19,7 @@ Usage:
 
 import os
 import psycopg2
+from psycopg2 import errors as pg_errors
 from psycopg2.extras import execute_batch
 from datetime import datetime, timedelta
 from typing import List, Dict, Optional, Tuple
@@ -226,6 +227,7 @@ class DatabaseClient:
             query = """
                 INSERT INTO chat_logs (timestamp, role, content, token_window_start)
                 VALUES (%s, %s, %s, %s)
+                ON CONFLICT (timestamp) DO NOTHING
             """
 
             self._ensure_conn()
@@ -233,6 +235,11 @@ class DatabaseClient:
                 cur.execute(query, (timestamp, role, content, token_window_start))
                 self.conn.commit()
 
+        except pg_errors.UniqueViolation:
+            # Idempotent insert: another process/attempt already wrote this timestamp
+            # Safely roll back this transaction and continue without raising
+            self.conn.rollback()
+            return
         except Exception as e:
             print(f"❌ Failed to insert chat log: {e}")
             self.conn.rollback()

@@ -8,7 +8,8 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor, within } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import FlagRadar, { Flag, FlagRadarProps } from '@/components/power/FlagRadar';
+import FlagRadar, { FlagRadarProps } from '@/components/power/FlagRadar';
+import type { Flag } from '@/lib/db/types';
 
 // Mock fetch globally
 global.fetch = jest.fn();
@@ -205,7 +206,7 @@ describe('FlagRadar Component', () => {
         const flagElement = screen.getByText(/test manipulation text/i).closest('.flag-item');
         expect(flagElement).toBeInTheDocument();
         // Color is applied via CSS variable, check the class structure
-        const severityBadge = within(flagElement!).getByText('Severity: 5');
+        const severityBadge = within(flagElement as HTMLElement).getByText('Severity: 5');
         expect(severityBadge.parentElement).toHaveClass('flag-header');
       });
     });
@@ -499,7 +500,7 @@ describe('FlagRadar Component', () => {
         expect(screen.getByText(/keyboard flag/i)).toBeInTheDocument();
       });
 
-      const flagElement = screen.getByText(/keyboard flag/i).closest('.flag-item');
+      const flagElement = screen.getByText(/keyboard flag/i).closest('.flag-item') as HTMLElement;
       flagElement!.focus();
       fireEvent.keyDown(flagElement!, { key: 'Enter' });
 
@@ -523,7 +524,7 @@ describe('FlagRadar Component', () => {
         expect(screen.getByText(/space key flag/i)).toBeInTheDocument();
       });
 
-      const flagElement = screen.getByText(/space key flag/i).closest('.flag-item');
+      const flagElement = screen.getByText(/space key flag/i).closest('.flag-item') as HTMLElement;
       flagElement!.focus();
       fireEvent.keyDown(flagElement!, { key: ' ' });
 
@@ -725,7 +726,7 @@ describe('FlagRadar Component', () => {
       await waitFor(() => {
         // Should show formatted date instead of "X days ago"
         const flagElement = screen.getByText(/test manipulation text/i).closest('.flag-item');
-        const timeElement = within(flagElement!).getByText(/\d{4}-\d{2}-\d{2}/);
+        const timeElement = within(flagElement as HTMLElement).getByText(/\d{4}-\d{2}-\d{2}/);
         expect(timeElement).toBeInTheDocument();
       });
     });

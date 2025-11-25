@@ -84,7 +84,7 @@ export class Database {
 
     // In test mode, apply only baseline migrations to match legacy expectations
     if (process.env.NODE_ENV === 'test') {
-      migrationFiles = migrationFiles.filter(name => name.startswith?.('001_') || name.startsWith('001_') || name.startsWith('002_'));
+      migrationFiles = migrationFiles.filter(name => name.startsWith('001_') || name.startsWith('002_'));
     }
 
     if (migrationFiles.length === 0) {
@@ -95,8 +95,23 @@ export class Database {
     console.log(`Found ${migrationFiles.length} migration file(s)`);
 
     // Apply each migration
+    const skipFinance = process.env.SKIP_FINANCE_MIGRATIONS === '1';
+    const skipEvents = process.env.SKIP_EVENTS_MIGRATIONS === '1';
+
     for (const file of migrationFiles) {
       const migrationName = file.replace('.sql', '');
+
+      // Skip finance-specific migration if configured to skip
+      if (skipFinance && migrationName.startsWith('009_finance_')) {
+        console.log(`Skipping ${migrationName} because SKIP_FINANCE_MIGRATIONS=1`);
+        continue;
+      }
+
+      // Skip events migration if configured to skip
+      if (skipEvents && migrationName.startsWith('010_events_')) {
+        console.log(`Skipping ${migrationName} because SKIP_EVENTS_MIGRATIONS=1`);
+        continue;
+      }
 
       // Check if migration has already been applied
       const applied = this.db
@@ -111,6 +126,26 @@ export class Database {
       // Read and execute migration SQL
       const migrationPath = join(this.migrationsPath, file);
       const sql = readFileSync(migrationPath, 'utf8');
+
+      // Skip finance migration if finance tables are absent (build env without finance DB)
+      if (
+        migrationName.startsWith('009_finance_') &&
+        !this.tableExists('finance_transactions')
+      ) {
+        console.log(`Skipping ${migrationName} because finance tables are absent in this DB`);
+        this.markApplied(migrationName);
+        continue;
+      }
+
+      // Skip events migration if events table is absent (e.g., metrics export on stateless builds)
+      if (
+        migrationName.startsWith('010_events_') &&
+        !this.tableExists('events')
+      ) {
+        console.log(`Skipping ${migrationName} because events table is absent in this DB`);
+        this.markApplied(migrationName);
+        continue;
+      }
 
       console.log(`Applying migration: ${migrationName}`);
 
@@ -140,8 +175,10 @@ export class Database {
   /**
    * Prepare a SQL statement for execution (with caching)
    */
-  public prepare<T = DatabaseRow>(sql: string) {
-    return this.db.prepare<T>(sql);
+  public prepare<T = DatabaseRow>(sql: string): any {
+    // Deliberately return any to avoid over-constraining Statement generics.
+    // Call sites remain unchanged (can pass <T>) while params are untyped.
+    return this.db.prepare(sql) as any;
   }
 
   /**
@@ -179,6 +216,19 @@ export class Database {
       Database.instance.close();
     }
     Database.instance = null;
+  }
+
+  private tableExists(name: string): boolean {
+    const row = this.db
+      .prepare("SELECT name FROM sqlite_master WHERE type='table' AND name=?")
+      .get(name);
+    return !!row;
+  }
+
+  private markApplied(migrationName: string) {
+    this.db
+      .prepare('INSERT OR IGNORE INTO migrations (name) VALUES (?)')
+      .run(migrationName);
   }
 }
 

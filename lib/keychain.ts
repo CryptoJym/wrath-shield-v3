@@ -15,7 +15,7 @@ import { execSync } from 'child_process';
 import { ensureServerOnly } from './server-only-guard';
 
 // Enforce server-side execution
-ensureServerOnly();
+ensureServerOnly('lib/keychain');
 
 /**
  * Keychain service and account identifiers

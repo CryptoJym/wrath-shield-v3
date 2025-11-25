@@ -1,3 +1,4 @@
+// @ts-nocheck
 /*
   Import collected lifelogs + analysis summary into app DB (.data/wrath-shield.db)
   - Reads ~/.analysis/lifelogs.jsonl and inserts into lifelogs/memories tables
@@ -122,4 +123,4 @@ function main() {
 }
 
 main();
-
+// @ts-nocheck

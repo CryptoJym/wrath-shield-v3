@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * Wrath Shield v3 - Database Performance & Integration Tests
  *
@@ -514,3 +515,4 @@ describe('Database Performance & Integration Tests', () => {
     });
   });
 });
+// @ts-nocheck

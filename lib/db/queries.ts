@@ -30,6 +30,8 @@ import type {
   User,
   UserInput,
   PsychSignal,
+  AgenticAction,
+  AgenticActionInput,
 } from './types';
 
 // Ensure this module is only used server-side
@@ -96,15 +98,26 @@ export function insertCycles(cycles: CycleInput[]): void {
 
   db.transaction(() => {
     for (const cycle of cycles) {
-      upsert.run(
-        cycle.id,
-        cycle.date,
-        cycle.strain,
-        cycle.kilojoules,
-        cycle.avg_hr,
-        cycle.max_hr
-        , ...(scoped ? [null] : [])
-      );
+      if (scoped) {
+        upsert.run(
+          cycle.id,
+          cycle.date,
+          cycle.strain,
+          cycle.kilojoules,
+          cycle.avg_hr,
+          cycle.max_hr,
+          null
+        );
+      } else {
+        upsert.run(
+          cycle.id,
+          cycle.date,
+          cycle.strain,
+          cycle.kilojoules,
+          cycle.avg_hr,
+          cycle.max_hr
+        );
+      }
     }
   });
 }
@@ -147,16 +160,28 @@ export function insertRecoveries(recoveries: RecoveryInput[]): void {
 
   db.transaction(() => {
     for (const recovery of recoveries) {
-      upsert.run(
-        recovery.id,
-        recovery.date,
-        recovery.score,
-        recovery.hrv,
-        recovery.rhr,
-        recovery.spo2,
-        recovery.skin_temp
-        , ...(scoped ? [null] : [])
-      );
+      if (scoped) {
+        upsert.run(
+          recovery.id,
+          recovery.date,
+          recovery.score,
+          recovery.hrv,
+          recovery.rhr,
+          recovery.spo2,
+          recovery.skin_temp,
+          null
+        );
+      } else {
+        upsert.run(
+          recovery.id,
+          recovery.date,
+          recovery.score,
+          recovery.hrv,
+          recovery.rhr,
+          recovery.spo2,
+          recovery.skin_temp
+        );
+      }
     }
   });
 }
@@ -201,17 +226,30 @@ export function insertSleeps(sleeps: SleepInput[]): void {
 
   db.transaction(() => {
     for (const sleep of sleeps) {
-      upsert.run(
-        sleep.id,
-        sleep.date,
-        sleep.performance,
-        sleep.rem_min,
-        sleep.sws_min,
-        sleep.light_min,
-        sleep.respiration,
-        sleep.sleep_debt_min
-        , ...(scoped ? [null] : [])
-      );
+      if (scoped) {
+        upsert.run(
+          sleep.id,
+          sleep.date,
+          sleep.performance,
+          sleep.rem_min,
+          sleep.sws_min,
+          sleep.light_min,
+          sleep.respiration,
+          sleep.sleep_debt_min,
+          null
+        );
+      } else {
+        upsert.run(
+          sleep.id,
+          sleep.date,
+          sleep.performance,
+          sleep.rem_min,
+          sleep.sws_min,
+          sleep.light_min,
+          sleep.respiration,
+          sleep.sleep_debt_min
+        );
+      }
     }
   });
 }
@@ -249,15 +287,26 @@ export function insertLifelogs(lifelogs: LifelogInput[]): void {
 
   db.transaction(() => {
     for (const lifelog of lifelogs) {
-      upsert.run(
-        lifelog.id,
-        lifelog.date,
-        lifelog.title,
-        lifelog.manipulation_count,
-        lifelog.wrath_deployed,
-        lifelog.raw_json
-        , ...(scoped ? [null] : [])
-      );
+      if (scoped) {
+        upsert.run(
+          lifelog.id,
+          lifelog.date,
+          lifelog.title,
+          lifelog.manipulation_count,
+          lifelog.wrath_deployed,
+          lifelog.raw_json,
+          null
+        );
+      } else {
+        upsert.run(
+          lifelog.id,
+          lifelog.date,
+          lifelog.title,
+          lifelog.manipulation_count,
+          lifelog.wrath_deployed,
+          lifelog.raw_json
+        );
+      }
     }
   });
 }
@@ -325,13 +374,22 @@ export function insertTokens(tokens: TokenInput[]): void {
 
   db.transaction(() => {
     for (const token of tokens) {
-      upsert.run(
-        token.provider,
-        token.access_token_enc,
-        token.refresh_token_enc,
-        token.expires_at,
-        ...(scoped ? [uidDefault] : [])
-      );
+      if (scoped) {
+        upsert.run(
+          token.provider,
+          token.access_token_enc,
+          token.refresh_token_enc,
+          token.expires_at,
+          uidDefault
+        );
+      } else {
+        upsert.run(
+          token.provider,
+          token.access_token_enc,
+          token.refresh_token_enc,
+          token.expires_at
+        );
+      }
     }
   });
 }
@@ -391,7 +449,11 @@ export function insertScores(scores: ScoreInput[]): void {
 
   db.transaction(() => {
     for (const score of scores) {
-      upsert.run(score.date, score.unbending_score, score.recovery_compliance, ...(scoped ? [null] : []));
+      if (scoped) {
+        upsert.run(score.date, score.unbending_score, score.recovery_compliance, null);
+      } else {
+        upsert.run(score.date, score.unbending_score, score.recovery_compliance);
+      }
     }
   });
 }
@@ -443,7 +505,11 @@ export function insertSettings(settings: SettingInput[]): void {
 
   db.transaction(() => {
     for (const setting of settings) {
-      upsert.run(setting.key, setting.value_enc, ...(scoped ? [uidDefault] : []));
+      if (scoped) {
+        upsert.run(setting.key, setting.value_enc, uidDefault);
+      } else {
+        upsert.run(setting.key, setting.value_enc);
+      }
     }
   });
 }
@@ -762,16 +828,17 @@ export function getUnbendingScores(startDate: string, endDate: string, userId?: 
 /**
  * Calculate and insert unbending score for a specific date
  */
-export function calculateUnbendingScore(date: string, userId?: string): void {
+export function calculateUnbendingScore(date: string, userId?: string): number | null {
   const db = getDatabase();
   const uid = resolveUserId(userId);
   const scoped = hasUserIdColumn('lifelogs');
 
-  const stats = db
-    .prepare<{ manipulation_count: number; wrath_deployed: number }>(
-      `SELECT SUM(manipulation_count) as manipulation_count, SUM(wrath_deployed) as wrath_deployed FROM lifelogs WHERE date = ? ${scoped ? 'AND user_id = ?' : ''}`
-    )
-    .get(...(scoped ? [date, uid] : [date]));
+  const stmt = db.prepare(
+    `SELECT SUM(manipulation_count) as manipulation_count, SUM(wrath_deployed) as wrath_deployed FROM lifelogs WHERE date = ? ${scoped ? 'AND user_id = ?' : ''}`
+  );
+  const stats = scoped
+    ? stmt.get(date, uid) as { manipulation_count: number; wrath_deployed: number }
+    : stmt.get(date) as { manipulation_count: number; wrath_deployed: number };
 
   if (!stats || stats.manipulation_count === 0) {
     if (hasUserIdColumn('scores')) {
@@ -779,7 +846,7 @@ export function calculateUnbendingScore(date: string, userId?: string): void {
     } else {
       insertScores([{ date, unbending_score: null, recovery_compliance: null }]);
     }
-    return;
+    return null;
   }
 
   const unbendingScore = (stats.wrath_deployed / stats.manipulation_count) * 100;
@@ -788,6 +855,7 @@ export function calculateUnbendingScore(date: string, userId?: string): void {
   } else {
     insertScores([{ date, unbending_score: unbendingScore, recovery_compliance: null }]);
   }
+  return unbendingScore;
 }
 
 /**
@@ -969,4 +1037,94 @@ export function getPsychSignalsLastNDays(days: number = 14, userId?: string): Ps
         `SELECT * FROM psych_signals ORDER BY date DESC LIMIT ?`
       );
   return scoped ? query.all(uid, days) : query.all(days);
+}
+
+// ---------------------------------------------------------------------------
+// Agentic Actions (EA automation outputs)
+// ---------------------------------------------------------------------------
+
+function hasAgenticTable(): boolean {
+  try {
+    const db = getDatabase();
+    const row = db.prepare(`SELECT name FROM sqlite_master WHERE type='table' AND name='agentic_actions'`).get();
+    return !!row;
+  } catch {
+    return false;
+  }
+}
+
+export function insertAgenticActions(actions: AgenticActionInput[]): void {
+  if (actions.length === 0 || !hasAgenticTable()) return;
+  const db = getDatabase();
+  const uidDefault = resolveUserId();
+  const stmt = db.prepare(`
+    INSERT INTO agentic_actions (id, user_id, type, target, title, content, confidence, status, source, metadata)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    ON CONFLICT(id) DO UPDATE SET
+      user_id = excluded.user_id,
+      type = excluded.type,
+      target = excluded.target,
+      title = excluded.title,
+      content = excluded.content,
+      confidence = excluded.confidence,
+      status = excluded.status,
+      source = excluded.source,
+      metadata = excluded.metadata,
+      updated_at = strftime('%s','now')
+  `);
+  db.transaction(() => {
+    for (const a of actions) {
+      stmt.run(
+        a.id,
+        a.user_id || uidDefault,
+        a.type,
+        a.target ?? null,
+        a.title ?? null,
+        a.content,
+        a.confidence ?? null,
+        a.status || 'proposed',
+        a.source ?? null,
+        a.metadata ?? null
+      );
+    }
+  });
+}
+
+export function listAgenticActions(opts: { status?: AgenticAction['status']; limit?: number; userId?: string } = {}): AgenticAction[] {
+  if (!hasAgenticTable()) return [];
+  const db = getDatabase();
+  const { status, limit = 50 } = opts;
+  const uid = resolveUserId(opts.userId);
+  const scoped = hasUserIdColumn('agentic_actions');
+  if (status) {
+    const query = scoped
+      ? db.prepare<AgenticAction>(`SELECT * FROM agentic_actions WHERE status = ? AND user_id = ? ORDER BY created_at DESC LIMIT ?`)
+      : db.prepare<AgenticAction>(`SELECT * FROM agentic_actions WHERE status = ? ORDER BY created_at DESC LIMIT ?`);
+    return scoped ? query.all(status, uid, limit) : query.all(status, limit);
+  }
+  const query = scoped
+    ? db.prepare<AgenticAction>(`SELECT * FROM agentic_actions WHERE user_id = ? ORDER BY created_at DESC LIMIT ?`)
+    : db.prepare<AgenticAction>(`SELECT * FROM agentic_actions ORDER BY created_at DESC LIMIT ?`);
+  return scoped ? query.all(uid, limit) : query.all(limit);
+}
+
+export function updateAgenticActionStatus(id: string, status: AgenticAction['status']): void {
+  if (!hasAgenticTable()) return;
+  const db = getDatabase();
+  const stmt = db.prepare(`UPDATE agentic_actions SET status = ?, updated_at = strftime('%s','now') WHERE id = ?`);
+  stmt.run(status, id);
+}
+
+export function updateAgenticActionStatusWithMeta(
+  id: string,
+  status: AgenticAction['status'],
+  metadata?: Record<string, any>
+): void {
+  if (!hasAgenticTable()) return;
+  const db = getDatabase();
+  const metaJson = metadata ? JSON.stringify(metadata) : null;
+  const stmt = db.prepare(
+    `UPDATE agentic_actions SET status = ?, metadata = COALESCE(?, metadata), updated_at = strftime('%s','now') WHERE id = ?`
+  );
+  stmt.run(status, metaJson, id);
 }

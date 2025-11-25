@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { NextRequest, NextResponse } from 'next/server';
 import { getMetricsLastNDays } from '@/lib/db/queries';
 import { getAnchors } from '@/lib/MemoryWrapper';
@@ -17,4 +19,3 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: 'Failed to compute feed' }, { status: 500 });
   }
 }
-

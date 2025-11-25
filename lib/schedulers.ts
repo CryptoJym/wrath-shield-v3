@@ -12,22 +12,22 @@ export function getSchedulerSpecs(opts: BuildSchedulersOptions = {}): RunnerSpec
       name: 'hourly-scan',
       kind: 'hourly',
       minuteOffset,
-      callback: () => hourlyScan(),
+      callback: async () => { await hourlyScan(); },
     },
     {
       name: 'midday-ping',
       kind: 'midday',
-      callback: () => middayPing([]), // Call-site can pass real flags source
+      callback: async () => { await middayPing([]); }, // Call-site can pass real flags source
     },
     {
       name: 'nightly-rollup',
       kind: 'nightly',
-      callback: () => nightlyRollup(),
+      callback: async () => { await nightlyRollup(); },
     },
     {
       name: 'sanity-gpt5',
       kind: 'nightly',
-      callback: () => sanityGpt5(),
+      callback: async () => { await sanityGpt5(); },
     },
   ];
 }

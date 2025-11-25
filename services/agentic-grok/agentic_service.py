@@ -44,6 +44,7 @@ from xai_sdk.chat import user, assistant, system
 from xai_sdk.tools import web_search, x_search, code_execution, chat_pb2
 
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from sse_starlette.sse import EventSourceResponse
 import httpx
@@ -187,7 +188,54 @@ Otherwise use discretion and store at most a few high-value items per session.""
         )
     )
 
-    return [whoop_tool, limitless_tool, mem0_tool, memory_add_tool]
+    # Legal context fetch
+    legal_context_fetch_tool = chat_pb2.Tool(
+        function=chat_pb2.Function(
+            name="legal_context_fetch",
+            description="""Fetch pending legal context requests that need clarification.
+Returns a list of items with id, contact, topic, summary, due_date, and confidence. Use before drafting or asking the user for legal follow-ups.""",
+            parameters=json.dumps({
+                "type": "object",
+                "properties": {
+                    "limit": {"type": "integer", "default": 10, "description": "Max items to fetch"},
+                    "user_id": {"type": "string", "description": "User identifier"}
+                },
+                "required": []
+            })
+        )
+    )
+
+    # Legal context resolve
+    legal_context_resolve_tool = chat_pb2.Tool(
+        function=chat_pb2.Function(
+            name="legal_context_resolve",
+            description="""Resolve a legal context request with a concise summary and optional action/due date.
+This updates the legal queue so the UI and other agents see it as resolved.""",
+            parameters=json.dumps({
+                "type": "object",
+                "properties": {
+                    "id": {"type": "string", "description": "Context request id"},
+                    "summary": {"type": "string", "description": "Short resolution text"},
+                    "confidence": {"type": "number", "description": "0-1 confidence"},
+                    "action": {"type": "string", "description": "Next action"},
+                    "due_date": {"type": "string", "description": "ISO date if relevant"},
+                    "rationale": {"type": "string", "description": "Reasoning"},
+                    "attachments": {"type": "array", "items": {"type": "string"}, "description": "Attachment names/links"},
+                    "user_id": {"type": "string", "description": "User identifier"}
+                },
+                "required": ["id", "summary"]
+            })
+        )
+    )
+
+    return [
+        whoop_tool,
+        limitless_tool,
+        mem0_tool,
+        memory_add_tool,
+        legal_context_fetch_tool,
+        legal_context_resolve_tool,
+    ]
 
 
 # ============================================================================
@@ -262,6 +310,43 @@ async def execute_custom_tool(tool_name: str, arguments: Dict[str, Any]) -> Dict
             "limit": limit,
         }
 
+    elif tool_name == "legal_context_fetch":
+        limit = int(arguments.get("limit", 10))
+        user_id = arguments.get("user_id") or "default"
+        base_url = os.getenv("NEXT_API_BASE_URL", "http://localhost:3000")
+        url = f"{base_url}/api/legal/context-requests/next?limit={limit}"
+        try:
+            async with httpx.AsyncClient(timeout=10.0) as client:
+                resp = await client.get(url, headers={"x-user-id": user_id})
+                data = resp.json() if resp.status_code == 200 else {}
+                return {"requests": data.get("requests", [])}
+        except Exception as e:
+            return {"error": str(e)}
+
+    elif tool_name == "legal_context_resolve":
+        base_url = os.getenv("NEXT_API_BASE_URL", "http://localhost:3000")
+        user_id = arguments.get("user_id") or "default"
+        payload = {
+            "legal": True,
+            "id": arguments.get("id"),
+            "summary": arguments.get("summary"),
+            "confidence": arguments.get("confidence"),
+            "action": arguments.get("action"),
+            "due_date": arguments.get("due_date"),
+            "rationale": arguments.get("rationale"),
+            "attachments": arguments.get("attachments"),
+            "user_id": user_id,
+        }
+        if not payload["id"] or not payload["summary"]:
+            return {"error": "id and summary are required"}
+        try:
+            async with httpx.AsyncClient(timeout=10.0) as client:
+                resp = await client.post(f"{base_url}/api/legal/context-requests", json=payload)
+                data = resp.json() if resp.status_code == 200 else {}
+                return {"request": data.get("request"), "status": resp.status_code}
+        except Exception as e:
+            return {"error": str(e)}
+
     elif tool_name == "memory_add":
         text = str(arguments.get("text") or "").strip()
         if not text:
@@ -315,7 +400,7 @@ class AgenticOrchestrator:
             raise ValueError("XAI_API_KEY environment variable not set")
 
         self.client = Client(api_key=api_key)
-        self.model = "grok-4-fast"
+        self.model = os.getenv("AGENTIC_MODEL", "grok-4-1-fast-reasoning-latest")
 
         # Combine built-in and custom tools
         self.tools = [
@@ -496,6 +581,18 @@ app = FastAPI(
     version="1.0.0"
 )
 
+# CORS for local Next.js UI
+allowed_origins = [
+    os.getenv("CORS_ORIGIN", "http://localhost:4242"),
+]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=allowed_origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 # Initialize orchestrator
 orchestrator = AgenticOrchestrator()
 
@@ -556,17 +653,32 @@ class MemorySearchRequest(BaseModel):
 
 @app.post("/api/agentic/memory/add")
 async def memory_add(req: MemoryAddRequest):
-    conn = sqlite3.connect(MEM_DB_PATH)
-    try:
-        mem_id = __import__('uuid').uuid4().hex
-        conn.execute(
-            "INSERT INTO memories (id, user_id, text, metadata) VALUES (?, ?, ?, ?)",
-            (mem_id, req.user_id, req.text, None if req.metadata is None else json.dumps(req.metadata))
-        )
-        conn.commit()
-        return {"success": True, "id": mem_id}
-    finally:
-        conn.close()
+    # Basic validation
+    text = (req.text or "").strip()
+    if not text:
+        return {"success": False, "error": "empty_text"}
+
+    # Retry on transient SQLite errors (e.g., database is locked)
+    attempts = 0
+    while attempts < 3:
+        attempts += 1
+        conn = sqlite3.connect(MEM_DB_PATH)
+        try:
+            mem_id = __import__('uuid').uuid4().hex
+            conn.execute(
+                "INSERT INTO memories (id, user_id, text, metadata) VALUES (?, ?, ?, ?)",
+                (mem_id, req.user_id, text, None if req.metadata is None else json.dumps(req.metadata))
+            )
+            conn.commit()
+            return {"success": True, "id": mem_id}
+        except sqlite3.OperationalError as e:
+            if 'locked' in str(e).lower() and attempts < 3:
+                await asyncio.sleep(0.1 * attempts)
+                continue
+            return {"success": False, "error": str(e)}
+        finally:
+            conn.close()
+    return {"success": False, "error": "write_failed"}
 
 @app.post("/api/agentic/memory/search")
 async def memory_search(req: MemorySearchRequest):
@@ -686,10 +798,55 @@ async def health_check():
 @app.get("/api/db/status")
 async def db_status():
     if _DatabaseClient is None:
-        raise HTTPException(status_code=500, detail="Database client unavailable")
+        # Return a soft failure so upstream dashboards can still render
+        return {"eeg_tokens": {"row_count": 0, "has_data": False}}
     try:
         with _DatabaseClient() as db:
             return db.get_data_status()
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/eeg/summary")
+async def eeg_summary(minutes: int = 60):
+    """Return EEG aggregates for the last N minutes.
+
+    Response shape:
+      { ok, minutes, series: [{ bucket: ISO8601, tokens: int }], last_token: ISO8601|null }
+    """
+    if minutes <= 0:
+        minutes = 60
+    if minutes > 24 * 60:
+        minutes = 24 * 60
+
+    if _DatabaseClient is None:
+        return {"ok": False, "minutes": minutes, "series": [], "last_token": None}
+
+    try:
+        with _DatabaseClient() as db:
+            # Prefer an aggregate endpoint if available
+            try:
+                agg = db.get_eeg_aggregates(minutes)
+                # Expect items with keys including 'bucket' and possibly counts per channel
+                # Collapse to total tokens per bucket (count rows per bucket if not provided)
+                by_bucket: dict[str, int] = {}
+                for row in (agg or []):
+                    bucket = str(row.get("bucket") or row.get("time") or row.get("ts") or "")
+                    if not bucket:
+                        continue
+                    # Prefer explicit token count else fallback to 1 per row
+                    tokens = int(row.get("tokens") or row.get("count") or 1)
+                    by_bucket[bucket] = by_bucket.get(bucket, 0) + tokens
+
+                series = [
+                    {"bucket": k, "tokens": by_bucket[k]}
+                    for k in sorted(by_bucket.keys())
+                ]
+                last_token = series[-1]["bucket"] if series else None
+                return {"ok": True, "minutes": minutes, "series": series, "last_token": last_token}
+            except Exception:
+                # Fallback: return empty but ok=false
+                return {"ok": False, "minutes": minutes, "series": [], "last_token": None}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 

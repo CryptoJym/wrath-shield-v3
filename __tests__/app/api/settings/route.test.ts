@@ -43,10 +43,7 @@ describe('POST /api/settings - Limitless API Key', () => {
 
   it('should accept valid Limitless API key and store encrypted', async () => {
     // Mock successful API key validation (200) with new httpsRequest
-    mockHttpsRequest.mockResolvedValueOnce({
-      status: 200,
-      data: JSON.stringify({ data: { lifelogs: [] }, meta: {} }),
-    });
+    mockHttpsRequest.mockResolvedValueOnce({ status: 200, data: JSON.stringify({ data: { lifelogs: [] }, meta: {} }) });
 
     // Mock encryption
     mockEncryptData.mockReturnValue('encrypted_key_data');
@@ -91,10 +88,7 @@ describe('POST /api/settings - Limitless API Key', () => {
 
   it('should accept valid Limitless API key with 204 response', async () => {
     // Mock successful API key validation (204 No Content)
-    mockHttpsRequest.mockResolvedValueOnce({
-      ok: false,
-      status: 204,
-    });
+    mockHttpsRequest.mockResolvedValueOnce({ status: 204, data: '' });
 
     mockEncryptData.mockReturnValue('encrypted_key_data');
 
@@ -116,10 +110,7 @@ describe('POST /api/settings - Limitless API Key', () => {
 
   it('should reject invalid Limitless API key (401)', async () => {
     // Mock failed API key validation (401 Unauthorized)
-    mockHttpsRequest.mockResolvedValueOnce({
-      ok: false,
-      status: 401,
-    });
+    mockHttpsRequest.mockResolvedValueOnce({ status: 401, data: '' });
 
     const request = new Request('http://localhost:3000/api/settings', {
       method: 'POST',
@@ -143,10 +134,7 @@ describe('POST /api/settings - Limitless API Key', () => {
 
   it('should reject invalid Limitless API key (403)', async () => {
     // Mock failed API key validation (403 Forbidden)
-    mockHttpsRequest.mockResolvedValueOnce({
-      ok: false,
-      status: 403,
-    });
+    mockHttpsRequest.mockResolvedValueOnce({ status: 403, data: '' });
 
     const request = new Request('http://localhost:3000/api/settings', {
       method: 'POST',
@@ -345,7 +333,7 @@ describe('GET /api/settings - Check Configuration', () => {
 
   it('should return configured=false when API key does not exist', () => {
     // Mock no existing setting
-    mockGetSetting.mockReturnValueOnce(undefined);
+    mockGetSetting.mockReturnValueOnce(null as any);
 
     const request = new Request(
       'http://localhost:3000/api/settings?provider=limitless',

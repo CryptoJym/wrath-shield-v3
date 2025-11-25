@@ -102,19 +102,19 @@ describe('WHOOP OAuth Initiate Route', () => {
       const response = await GET(req);
 
       const setCookieHeader = response.headers.get('set-cookie');
-      expect(setCookieHeader).toBeTruthy();
+      expect(setCookieHeader!).toBeTruthy();
 
       // Verify cookie attributes
       expect(setCookieHeader).toContain('oauth_state=');
       expect(setCookieHeader).toContain('HttpOnly');
-      expect(setCookieHeader.toLowerCase()).toContain('samesite=lax');
+      expect((setCookieHeader ?? '').toLowerCase()).toContain('samesite=lax');
       expect(setCookieHeader).toContain('Path=/api/whoop/oauth');
       expect(setCookieHeader).toContain('Max-Age=600'); // 10 minutes
     });
 
     it('should set Secure flag in production', async () => {
       const originalEnv = process.env.NODE_ENV;
-      process.env.NODE_ENV = 'production';
+      (process as any).env.NODE_ENV = 'production';
 
       const req = mockRequest('https://app.example.com/api/whoop/oauth/initiate', {
         'x-forwarded-proto': 'https',
@@ -123,10 +123,9 @@ describe('WHOOP OAuth Initiate Route', () => {
 
       const response = await GET(req);
       const setCookieHeader = response.headers.get('set-cookie');
+      expect(setCookieHeader!).toContain('Secure');
 
-      expect(setCookieHeader).toContain('Secure');
-
-      process.env.NODE_ENV = originalEnv;
+      (process as any).env.NODE_ENV = originalEnv;
     });
 
     it('should match state in cookie and URL', async () => {

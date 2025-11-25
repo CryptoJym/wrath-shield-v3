@@ -28,8 +28,12 @@ class UnifiedLegalAnalyzer:
         """Load MyCase court data"""
         print("📁 Loading court filings...")
 
-        # Find most recent case file
+        # Find most recent case file - try multiple naming patterns
         case_files = list(self.data_dir.glob(f'case_{self.case_number}_*.json'))
+        if not case_files:
+            # Try mycase_data pattern
+            case_files = list(self.data_dir.glob('mycase_data_*.json'))
+
         if case_files:
             latest = sorted(case_files)[-1]
             with open(latest, 'r') as f:
@@ -70,12 +74,23 @@ class UnifiedLegalAnalyzer:
         for text_file in text_files:
             try:
                 with open(text_file, 'r') as f:
-                    texts = json.load(f)
-                    if isinstance(texts, list):
-                        self.context['texts'].extend(texts)
+                    content = f.read()
+                    # Handle JSONL format (one JSON per line)
+                    if '\n' in content and not content.strip().startswith('['):
+                        for line in content.strip().split('\n'):
+                            if line.strip():
+                                try:
+                                    self.context['texts'].append(json.loads(line))
+                                except:
+                                    pass
+                    else:
+                        # Standard JSON array
+                        texts = json.loads(content)
+                        if isinstance(texts, list):
+                            self.context['texts'].extend(texts)
                     print(f"   ✓ Loaded: {text_file.name}")
-            except:
-                pass
+            except Exception as e:
+                print(f"   ⚠️  Failed to load {text_file.name}: {e}")
 
         if self.context['texts']:
             print(f"   ✓ Total texts: {len(self.context['texts'])}")
@@ -132,17 +147,19 @@ class UnifiedLegalAnalyzer:
         """Run DeepSeek analysis on complete context"""
         print("\n🤖 Analyzing with DeepSeek-R1...")
 
+        # Check if any model is available
+        try:
+            result = subprocess.run(['ollama', 'list'], capture_output=True, text=True, check=True)
+            if 'deepseek' not in result.stdout.lower() and result.stdout.strip() == 'NAME    ID    SIZE    MODIFIED':
+                print("   ⚠️  No Ollama models installed. Skipping AI analysis.")
+                print("   💡 To enable AI analysis, run: ollama pull deepseek-r1")
+                return self._generate_manual_summary()
+        except Exception as e:
+            print(f"   ⚠️  Ollama not available: {e}")
+            return self._generate_manual_summary()
+
         # Build analysis prompt
         prompt = self._build_analysis_prompt()
-
-        # Check if Ollama is running
-        try:
-            subprocess.run(['ollama', 'list'], capture_output=True, check=True)
-        except:
-            print("   ⚠️  Ollama not running. Starting it...")
-            subprocess.Popen(['ollama', 'serve'])
-            import time
-            time.sleep(3)
 
         # Run DeepSeek analysis
         try:
@@ -165,10 +182,58 @@ class UnifiedLegalAnalyzer:
 
         except subprocess.TimeoutExpired:
             print("   ⚠️  Analysis timed out")
-            return None
+            return self._generate_manual_summary()
         except Exception as e:
             print(f"   ❌ Analysis failed: {e}")
-            return None
+            return self._generate_manual_summary()
+
+    def _generate_manual_summary(self):
+        """Generate a summary without AI when Ollama is not available"""
+        court_data = self.context.get('court_filings', {})
+
+        # Extract key info from raw text
+        raw_text = court_data.get('raw_text', '')
+
+        # Parse next hearing from raw text
+        next_hearing = "Unknown"
+        if "Next Hearing:" in raw_text:
+            try:
+                next_hearing = raw_text.split("Next Hearing:")[1].split("\n")[0].strip()
+            except:
+                pass
+
+        summary = f"""
+========================================
+CASE SUMMARY (No AI - Manual Extract)
+========================================
+
+📅 NEXT HEARING: {next_hearing}
+
+📋 CASE INFO:
+- Case Number: {court_data.get('case_number', 'Unknown')}
+- Court: FOURTH JUDICIAL DISTRICT - PROVO DISTRICT COURT
+- Judge: DEREK P PULLAN
+
+👥 PARTIES:
+- Respondent: JAMES MICHAEL BRADY (Attorney: ZACHARY STARR)
+- Petitioner: DESTINY ARIEL BRADY (Attorneys: BRIAN ARNOLD, WILLIAM PENROD)
+
+📧 EMAILS LOADED: {len(self.context.get('emails', []))}
+💬 TEXTS LOADED: {len(self.context.get('texts', []))}
+📅 TIMELINE EVENTS: {len(self.context.get('unified_timeline', []))}
+
+⚠️ Note: Full AI analysis requires Ollama with DeepSeek-R1.
+   Run: ollama pull deepseek-r1
+========================================
+"""
+
+        # Save summary
+        analysis_file = self.data_dir / 'analysis' / f'summary_{datetime.now().strftime("%Y%m%d_%H%M%S")}.txt'
+        analysis_file.parent.mkdir(exist_ok=True)
+        analysis_file.write_text(summary)
+        print(f"   ✓ Manual summary saved: {analysis_file}")
+
+        return summary
 
     def _build_analysis_prompt(self) -> str:
         """Build comprehensive analysis prompt"""

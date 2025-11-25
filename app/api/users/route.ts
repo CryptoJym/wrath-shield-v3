@@ -17,9 +17,9 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     const id: string = body?.id || uuidv4();
-    const email: string | undefined = body?.email;
-    const name: string | undefined = body?.name;
-    const timezone: string | undefined = body?.timezone;
+    const email: string | null = (body?.email as string | undefined) ?? null;
+    const name: string | null = (body?.name as string | undefined) ?? null;
+    const timezone: string | null = (body?.timezone as string | undefined) ?? null;
 
     const { createUser, getUser } = await import('@/lib/db/queries');
     createUser({ id, email, name, timezone });
@@ -30,4 +30,3 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ success: false, error: 'Failed to create user' }, { status: 500 });
   }
 }
-

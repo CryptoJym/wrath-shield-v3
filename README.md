@@ -75,11 +75,30 @@ Option B (script):
   - Test runs: only baseline migration applied for stability
 - Grok memory: services/agentic-grok/mem_store.db
 
+## Vercel deploy notes
+- Env set via CLI (prod + preview):
+  - SKIP_FINANCE_MIGRATIONS=1
+  - SKIP_EVENTS_MIGRATIONS=1
+  - OPENROUTER_API_KEY
+  - DATABASE_ENCRYPTION_KEY (random 32-byte hex per env)
+- Optional: WHOOP_CLIENT_ID / WHOOP_CLIENT_SECRET, Motion, Twilio, etc.
+- Clerk is enabled; if Clerk keys are unset middleware bypasses auth.
+- Deploy: `vercel --prod` (or `vercel` for preview) using the stored Vercel token.
+
 ## Testing
 ```
 npm test
 ```
 Outputs: 63/63 suites passing, 999/999 tests passing.
+
+## Secrets / 1Password pattern (required)
+- Keep real secrets out of git. `.env.example` lists required vars; put actual values in `~/.secrets/legal.env` (git-ignored).
+- Run commands with injected secrets via 1Password CLI: `./scripts/run-with-op.sh <command>` (wraps `op run --env-file ~/.secrets/legal.env`).
+- For scheduled jobs (cron/pm2), wrap the job with `run-with-op.sh` so secrets are injected per run and never stored in code.
+- Never embed credentials in code, scrapers, or repo; keep session cookies (if needed) in a local, git-ignored cache.
+
+## PM Agent (GitHub + Motion) design
+- See `docs/architecture/pm-agent.md` for the full blueprint: sources, mapping, env vars, scheduler cadence, file layout, and Zep anchoring.
 
 ## Handoff for engineers
 See docs/HANDOFF.md for detailed architecture, code map, troubleshooting, and next steps.

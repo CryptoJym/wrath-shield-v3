@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 /**
  * Wrath Shield v3 - Metrics API Endpoint
  *

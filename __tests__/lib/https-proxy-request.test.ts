@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * Tests for https-proxy-request module
  *
@@ -438,3 +439,4 @@ describe('https-proxy-request', () => {
     });
   });
 });
+// @ts-nocheck

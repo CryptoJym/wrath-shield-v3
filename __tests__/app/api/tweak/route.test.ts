@@ -24,12 +24,11 @@ jest.mock('uuid', () => ({
 describe('Tweak API Route', () => {
   const mockFlag: Flag = {
     id: 'flag-1',
-    lifelog_id: 'lifelog-1',
     original_text: 'You always overreact',
     manipulation_type: 'gaslighting',
     severity: 3,
     status: 'pending',
-    timestamp: Math.floor(Date.now() / 1000),
+    detected_at: Math.floor(Date.now() / 1000),
   };
 
   beforeEach(() => {

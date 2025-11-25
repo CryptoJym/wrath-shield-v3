@@ -11,7 +11,7 @@ import { ensureServerOnly } from '@/lib/server-only-guard';
 import type { CycleInput, RecoveryInput, SleepInput } from '@/lib/db/types';
 import { httpsRequest } from '@/lib/https-proxy-request';
 
-ensureServerOnly();
+ensureServerOnly('lib/WhoopClient');
 
 const WHOOP_API_BASE = 'https://api.prod.whoop.com';
 const WHOOP_TOKEN_URL = 'https://api.prod.whoop.com/oauth/oauth2/token';

@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+. "/Users/jamesbrady/wrath-shield-v3/.husky/_/husky.sh"
+
+npm run lint-staged

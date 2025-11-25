@@ -122,16 +122,20 @@ class LimitlessClient {
   }
 
   /**
-   * Get decrypted Limitless API key from settings
+   * Get decrypted Limitless API key from settings or env
    */
   private getApiKey(): string {
     const setting = getSetting('limitless_api_key');
 
-    if (!setting) {
-      throw new Error('No Limitless API key found. Configure via POST /api/settings first.');
+    if (setting && typeof setting.value_enc === 'string') {
+      return decryptData(setting.value_enc);
     }
 
-    return decryptData(setting.value_enc);
+    if (process.env.LIMITLESS_API_KEY) {
+      return process.env.LIMITLESS_API_KEY;
+    }
+
+    throw new Error('No Limitless API key found. Configure via POST /api/settings or set LIMITLESS_API_KEY env var.');
   }
 
   /**
@@ -307,9 +311,7 @@ class LimitlessClient {
 
     // Get last successful pull timestamp (ISO 8601 date string YYYY-MM-DD)
     const lastPullSetting = getSetting('limitless_last_pull');
-    const startDate = lastPullSetting
-      ? decryptData(lastPullSetting.value_enc)
-      : undefined;
+    const startDate = lastPullSetting?.value_enc ? decryptData(lastPullSetting.value_enc) : undefined;
 
     // Fetch lifelogs since last pull (or all if never pulled before)
     const lifelogs = await this.fetchLifelogsForDb({

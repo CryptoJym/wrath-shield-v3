@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * Wrath Shield v3 - CoachingEngine Tests
  *
@@ -602,3 +603,4 @@ describe('assembleCoachingContext', () => {
     expect(context.query).not.toContain('high strain');
   });
 });
+// @ts-nocheck

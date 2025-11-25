@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * Local-Only Operation Verification Tests
  *

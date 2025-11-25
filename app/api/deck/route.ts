@@ -168,7 +168,8 @@ async function getDailyTasks(date: string): Promise<DailyTask[]> {
   }
 
   try {
-    const savedTasks = JSON.parse(taskState.value_enc);
+    const raw = taskState.value_enc ?? '[]';
+    const savedTasks = JSON.parse(raw);
     return defaultTasks.map((task, idx) => ({
       ...task,
       completed: savedTasks[idx]?.completed || false,
@@ -192,8 +193,8 @@ async function calculateGatingState(): Promise<GatingState> {
   const oneDayAgo = now - 24 * 3600;
   const twoDaysAgo = now - 48 * 3600;
 
-  const yesterday = recentTweaks.filter(t => t.created_at >= oneDayAgo && t.created_at < now);
-  const dayBeforeYesterday = recentTweaks.filter(t => t.created_at >= twoDaysAgo && t.created_at < oneDayAgo);
+  const yesterday = recentTweaks.filter(t => (t.created_at ?? 0) >= oneDayAgo && (t.created_at ?? 0) < now);
+  const dayBeforeYesterday = recentTweaks.filter(t => (t.created_at ?? 0) >= twoDaysAgo && (t.created_at ?? 0) < oneDayAgo);
 
   const yesterdayUIX = yesterday.reduce((sum, t) => sum + t.delta_uix, 0);
   const dayBeforeUIX = dayBeforeYesterday.reduce((sum, t) => sum + t.delta_uix, 0);
@@ -212,7 +213,7 @@ async function calculateGatingState(): Promise<GatingState> {
     const stompedSetting = getSetting('deck_flags_stomped');
     if (stompedSetting) {
       try {
-        flagsStomped = parseInt(stompedSetting.value_enc, 10) || 0;
+        flagsStomped = parseInt(stompedSetting.value_enc ?? '0', 10) || 0;
       } catch {
         flagsStomped = 0;
       }
@@ -259,7 +260,8 @@ function handleCompleteTask(body: DeckRequest, date: string): NextResponse {
 
   if (taskState) {
     try {
-      tasks = JSON.parse(taskState.value_enc);
+      const raw = taskState.value_enc ?? '[]';
+      tasks = JSON.parse(raw);
     } catch {
       // Use defaults
     }
@@ -326,11 +328,11 @@ async function handleStompFlag(body: DeckRequest, date: string): Promise<NextRes
     id: randomUUID(),
     flag_id: flag.id,
     assured_text: `[Deck Unlock] Flag stomped: ${flag.original_text}`,
-    action_type: 'stomp',
+    // Normalize to supported type union; stomp acts as a resolve/dismiss operation
+    action_type: 'dismiss',
     context: null,
     delta_uix: flag.severity * 15, // 15 UIX per severity point
     user_notes: null,
-    created_at: now,
   }]);
 
   // Mark flag as resolved
@@ -341,7 +343,7 @@ async function handleStompFlag(body: DeckRequest, date: string): Promise<NextRes
   let stompedCount = 0;
   if (stompedSetting) {
     try {
-      stompedCount = parseInt(stompedSetting.value_enc, 10) || 0;
+      stompedCount = parseInt(stompedSetting.value_enc ?? '0', 10) || 0;
     } catch {
       stompedCount = 0;
     }

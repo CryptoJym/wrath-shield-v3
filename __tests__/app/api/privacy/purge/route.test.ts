@@ -56,7 +56,7 @@ describe('Privacy Purge API', () => {
 
       // Mock transaction to execute immediately
       mockDatabase.transaction.mockImplementation((fn: () => void) => {
-        return () => fn();
+        fn();
       });
 
       const response = await POST(req);
@@ -94,7 +94,7 @@ describe('Privacy Purge API', () => {
         .mockReturnValueOnce(deletePullTimestamp); // last pull timestamp
 
       mockDatabase.transaction.mockImplementation((fn: () => void) => {
-        return () => fn();
+        fn();
       });
 
       const response = await POST(req);
@@ -177,7 +177,7 @@ describe('Privacy Purge API', () => {
       let transactionFn: (() => void) | null = null;
       mockDatabase.transaction.mockImplementation((fn: () => void) => {
         transactionFn = fn;
-        return () => fn();
+        fn();
       });
 
       await POST(req);
@@ -311,7 +311,7 @@ describe('Privacy Purge API', () => {
         .mockReturnValueOnce(deleteTokens);
 
       mockDatabase.transaction.mockImplementation((fn: () => void) => {
-        return () => fn();
+        fn();
       });
 
       const purgeResponse = await POST(postReq);
@@ -356,7 +356,7 @@ describe('Privacy Purge API', () => {
         .mockReturnValueOnce(deleteTokens);
 
       mockDatabase.transaction.mockImplementation((fn: () => void) => {
-        return () => fn();
+        fn();
       });
 
       const response = await POST(req);
@@ -386,7 +386,7 @@ describe('Privacy Purge API', () => {
         .mockReturnValueOnce(deletePullTimestamp);
 
       mockDatabase.transaction.mockImplementation((fn: () => void) => {
-        return () => fn();
+        fn();
       });
 
       const response = await POST(req);

@@ -49,7 +49,7 @@ describe('POST /api/pull-data - Successful Pulls', () => {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ targetDate: '2025-01-15' }),
-    }) as NextRequest;
+    }) as unknown as NextRequest;
 
     const response = await POST(request);
     const data = await response.json();
@@ -85,7 +85,7 @@ describe('POST /api/pull-data - Successful Pulls', () => {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({}),
-    }) as NextRequest;
+    }) as unknown as NextRequest;
 
     const response = await POST(request);
     const data = await response.json();
@@ -111,7 +111,7 @@ describe('POST /api/pull-data - Successful Pulls', () => {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ targetDate: '2025-01-15' }),
-    }) as NextRequest;
+    }) as unknown as NextRequest;
 
     const response = await POST(request);
     const data = await response.json();
@@ -141,7 +141,7 @@ describe('POST /api/pull-data - Successful Pulls', () => {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: 'invalid json',
-    }) as NextRequest;
+    }) as unknown as NextRequest;
 
     const response = await POST(request);
 
@@ -184,7 +184,7 @@ describe('POST /api/pull-data - Partial Failures', () => {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ targetDate: '2025-01-15' }),
-    }) as NextRequest;
+    }) as unknown as NextRequest;
 
     const response = await POST(request);
     const data = await response.json();
@@ -209,7 +209,7 @@ describe('POST /api/pull-data - Partial Failures', () => {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ targetDate: '2025-01-15' }),
-    }) as NextRequest;
+    }) as unknown as NextRequest;
 
     const response = await POST(request);
     const data = await response.json();
@@ -240,7 +240,7 @@ describe('POST /api/pull-data - Partial Failures', () => {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ targetDate: '2025-01-15' }),
-    }) as NextRequest;
+    }) as unknown as NextRequest;
 
     const response = await POST(request);
     const data = await response.json();
@@ -268,7 +268,7 @@ describe('POST /api/pull-data - Partial Failures', () => {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ targetDate: '2025-01-15' }),
-    }) as NextRequest;
+    }) as unknown as NextRequest;
 
     const response = await POST(request);
     const data = await response.json();
@@ -305,7 +305,7 @@ describe('POST /api/pull-data - Validation', () => {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ targetDate: '20250115' }),
-    }) as NextRequest;
+    }) as unknown as NextRequest;
 
     const response = await POST(request);
     const data = await response.json();
@@ -324,7 +324,7 @@ describe('POST /api/pull-data - Validation', () => {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ targetDate: '2025/01/15' }),
-    }) as NextRequest;
+    }) as unknown as NextRequest;
 
     const response = await POST(request);
     const data = await response.json();
@@ -338,7 +338,7 @@ describe('POST /api/pull-data - Validation', () => {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ targetDate: 'January 15, 2025' }),
-    }) as NextRequest;
+    }) as unknown as NextRequest;
 
     const response = await POST(request);
     const data = await response.json();
@@ -376,7 +376,7 @@ describe('POST /api/pull-data - Error Handling', () => {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ targetDate: '2025-01-15' }),
-    }) as NextRequest;
+    }) as unknown as NextRequest;
 
     const response = await POST(request);
     const data = await response.json();

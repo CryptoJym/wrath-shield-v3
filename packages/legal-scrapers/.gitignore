@@ -86,3 +86,12 @@ llm_models/
 # Vector store indexes
 faiss_index/
 chroma_db/
+
+# Scraped data (contains personal case info)
+scraped_data/
+*_imessages*.json
+*_emails*.json
+*.jsonl
+
+# Browser profile data
+browser_profile/

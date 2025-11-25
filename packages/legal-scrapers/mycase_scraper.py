@@ -34,11 +34,17 @@ class MyCaseScraper:
         print(f"🌐 URL: {self.url}")
 
         with sync_playwright() as p:
-            # Launch browser
-            browser = p.chromium.launch(headless=self.headless)
-            context = browser.new_context(
+            # Use persistent context with user's Chrome profile for better compatibility
+            user_data_dir = str(Path.home() / '.legal_advocate_ai' / 'browser_profile')
+            Path(user_data_dir).mkdir(parents=True, exist_ok=True)
+
+            context = p.chromium.launch_persistent_context(
+                user_data_dir,
+                headless=self.headless,
+                channel='chrome',  # Use real Chrome instead of Playwright chromium
                 viewport={'width': 1920, 'height': 1080},
-                user_agent='Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36'
+                user_agent='Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+                args=['--disable-blink-features=AutomationControlled']  # Avoid detection
             )
             page = context.new_page()
 
@@ -64,7 +70,7 @@ class MyCaseScraper:
                 print(f"📸 Error screenshot saved: {screenshot_path}")
                 raise
             finally:
-                browser.close()
+                context.close()
 
     def _login_and_extract(self, page):
         """Login and extract case information"""
@@ -88,15 +94,17 @@ class MyCaseScraper:
         # Look for login form fields
         print("   → Looking for login form...")
 
-        # Try common login field selectors
+        # Try common login field selectors - use specific ID first for Utah Courts
         email_selectors = [
+            '#username',  # Utah Courts specific ID
+            'input#username',
+            'input[id="username"]',
+            'input[type="email"]:visible',
             'input[type="email"]',
             'input[name*="email" i]',
             'input[name*="username" i]',
             'input[name*="user" i]',
             'input[id*="email" i]',
-            'input[id*="username" i]',
-            '#username',
             '#email',
             'input[type="text"]'
         ]
@@ -153,13 +161,28 @@ class MyCaseScraper:
         if email_field and password_field:
             print("   → Filling login credentials...")
             try:
+                # Wait for element to be visible first
+                page.wait_for_selector(email_field, state='visible', timeout=30000)
                 page.fill(email_field, self.email, timeout=60000)
                 page.fill(password_field, self.password, timeout=60000)
             except Exception as e:
-                print(f"   ⚠️  Error filling fields: {e}")
-                # Try typing instead
-                page.locator(email_field).type(self.email)
-                page.locator(password_field).type(self.password)
+                print(f"   ⚠️  Error filling fields with fill(): {e}")
+                # Try using .first to avoid strict mode violations
+                try:
+                    email_loc = page.locator(email_field).first
+                    pwd_loc = page.locator(password_field).first
+                    email_loc.wait_for(state='visible', timeout=15000)
+                    email_loc.fill(self.email)
+                    pwd_loc.fill(self.password)
+                except Exception as e2:
+                    print(f"   ⚠️  Error with .first locator: {e2}")
+                    # Final fallback: try clicking and typing
+                    email_loc = page.locator(email_field).first
+                    email_loc.click()
+                    page.keyboard.type(self.email)
+                    pwd_loc = page.locator(password_field).first
+                    pwd_loc.click()
+                    page.keyboard.type(self.password)
 
             try:
                 page.screenshot(path=str(self.data_dir / '02_credentials_filled.png'))

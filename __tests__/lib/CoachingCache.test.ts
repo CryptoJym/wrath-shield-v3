@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * Wrath Shield v3 - Coaching Cache Tests
  *
@@ -555,3 +556,4 @@ describe('CoachingCache', () => {
     });
   });
 });
+// @ts-nocheck

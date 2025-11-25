@@ -9,8 +9,9 @@
 
 import { ensureServerOnly } from './server-only-guard';
 import { cfg } from './config';
-// Support multiple mem0ai export shapes across versions
-import * as mem0 from 'mem0ai';
+// Support multiple mem0ai export shapes across versions (require to avoid static import errors)
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const mem0 = require('mem0ai');
 
 // Prevent client-side imports
 ensureServerOnly('lib/MemoryWrapper');
@@ -40,6 +41,11 @@ class MemoryWrapper {
   async initialize(): Promise<void> {
     if (this.memory) {
       return; // Already initialized
+    }
+
+    // Hard-disable cloud if requested
+    if (process.env.MEM0_DISABLE_CLOUD === '1') {
+      process.env.MEM0_API_KEY = '';
     }
 
     const appConfig = cfg();
@@ -121,7 +127,7 @@ class MemoryWrapper {
    */
   private async tryQdrant(url: string): Promise<void> {
     if (process.env.NODE_ENV === 'test') {
-      const { QdrantClient } = await import('qdrant-client');
+      const { QdrantClient }: any = await import('qdrant-client');
       const client = new QdrantClient({ url });
       await client.getCollections();
       // Minimal stub memory for test environment (behaves like Mem0 interface)
@@ -153,7 +159,8 @@ class MemoryWrapper {
     if (process.env.NODE_ENV !== 'test') {
       const MemoryClass: Mem0Ctor = (mem0 as any).Memory || (mem0 as any).MemoryClient || (mem0 as any).default;
       this.memory = new MemoryClass({
-        api_key: process.env.MEM0_API_KEY || undefined,
+        // mem0 JS client expects camelCase apiKey
+        apiKey: process.env.MEM0_API_KEY || undefined,
         vector_store: {
           provider: 'qdrant',
           config: {

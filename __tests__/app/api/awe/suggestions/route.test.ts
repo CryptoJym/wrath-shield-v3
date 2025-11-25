@@ -22,9 +22,9 @@ describe('POST /api/awe/suggestions', () => {
 
   // Helper function to create mock requests
   const createRequest = (body: any): NextRequest => {
-    return {
+    return ({
       json: async () => body,
-    } as NextRequest;
+    } as unknown) as NextRequest;
   };
 
   describe('Valid Requests', () => {
@@ -201,11 +201,11 @@ describe('POST /api/awe/suggestions', () => {
 
   describe('Malformed Requests', () => {
     it('should return 400 for invalid JSON', async () => {
-      const request = {
+      const request = ({
         json: async () => {
           throw new SyntaxError('Unexpected token');
         },
-      } as NextRequest;
+      } as unknown) as NextRequest;
 
       const response = await POST(request);
       const data = await response.json();
@@ -216,11 +216,11 @@ describe('POST /api/awe/suggestions', () => {
     });
 
     it('should handle JSON parsing errors gracefully', async () => {
-      const request = {
+      const request = ({
         json: async () => {
           throw new SyntaxError('Unexpected end of JSON input');
         },
-      } as NextRequest;
+      } as unknown) as NextRequest;
 
       const response = await POST(request);
       const data = await response.json();

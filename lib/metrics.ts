@@ -105,7 +105,7 @@ function calculatePillarScore(
   );
 
   const weightedSum = relevantTweaks.reduce((sum, tweak) => {
-    const decayFactor = calculateDecayFactor(tweak.created_at);
+    const decayFactor = calculateDecayFactor((tweak.created_at ?? Math.floor(Date.now()/1000)) as number);
     return sum + tweak.delta_uix * decayFactor;
   }, 0);
 
@@ -143,7 +143,7 @@ export function calculateUIXMetrics(
   // Filter tweaks to last 72 hours
   const now = Math.floor(Date.now() / 1000);
   const cutoff = now - UIX_CONFIG.DECAY_HOURS * 3600;
-  const recentTweaks = tweaks.filter((t) => t.created_at >= cutoff);
+  const recentTweaks = tweaks.filter((t) => (t.created_at ?? 0) >= cutoff);
 
   // Calculate pillar scores
   const wordScore = calculatePillarScore(recentTweaks, 'word');
@@ -181,7 +181,7 @@ export function calculateUIXMetrics(
   const avgRecency =
     recentTweaks.length > 0
       ? recentTweaks.reduce(
-          (sum, t) => sum + calculateDecayFactor(t.created_at),
+          (sum, t) => sum + calculateDecayFactor((t.created_at ?? cutoff) as number),
           0
         ) / recentTweaks.length
       : 0;
@@ -228,7 +228,7 @@ export async function getPreviousUIXScore(
 
   // Filter tweaks to 24-96h window (as of 24h ago)
   const historicalTweaks = tweaks.filter(
-    (t) => t.created_at >= threeDaysAgo && t.created_at < oneDayAgo
+    (t) => (t.created_at ?? 0) >= threeDaysAgo && (t.created_at ?? 0) < oneDayAgo
   );
 
   // Calculate metrics as they would have been 24h ago

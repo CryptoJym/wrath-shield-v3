@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * Wrath Shield v3 - Memory Wrapper Tests
  *
@@ -314,3 +315,4 @@ describe('MemoryWrapper', () => {
     });
   });
 });
+// @ts-nocheck

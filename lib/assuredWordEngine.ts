@@ -14,7 +14,7 @@
 import { ensureServerOnly } from './server-only-guard';
 
 // Enforce server-side execution
-ensureServerOnly();
+ensureServerOnly('lib/assuredWordEngine');
 
 /**
  * Category types matching SpeechMiner confidence flags

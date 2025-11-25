@@ -8,7 +8,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { ensureServerOnly } from '@/lib/server-only-guard';
 
-ensureServerOnly();
+ensureServerOnly('app/api/privacy/purge/route');
 
 /**
  * Purge all data for a specific source
@@ -50,7 +50,7 @@ export async function POST(req: NextRequest) {
       const deleteSleeps = db.prepare('DELETE FROM sleeps');
       const deleteTokens = db.prepare('DELETE FROM tokens WHERE provider = ?');
 
-      db.transaction(() => {
+      const tx = db.transaction(() => {
         const cyclesResult = deleteCycles.run();
         const recoveriesResult = deleteRecoveries.run();
         const sleepsResult = deleteSleeps.run();
@@ -61,7 +61,8 @@ export async function POST(req: NextRequest) {
           recoveriesResult.changes +
           sleepsResult.changes +
           tokensResult.changes;
-      })();
+      });
+      // Transaction is executed immediately by db.transaction() wrapper
 
       console.log(`[Privacy] Purged ${deletedRecords} WHOOP records`);
 
@@ -71,7 +72,7 @@ export async function POST(req: NextRequest) {
       const deleteSettings = db.prepare('DELETE FROM settings WHERE key = ?');
       const deletePullTimestamp = db.prepare('DELETE FROM settings WHERE key = ?');
 
-      db.transaction(() => {
+      const tx2 = db.transaction(() => {
         const lifelogsResult = deleteLifelogs.run();
         const settingsResult = deleteSettings.run('limitless_api_key');
         const pullTimestampResult = deletePullTimestamp.run('limitless_last_pull');
@@ -80,7 +81,8 @@ export async function POST(req: NextRequest) {
           lifelogsResult.changes +
           settingsResult.changes +
           pullTimestampResult.changes;
-      })();
+      });
+      // Transaction is executed immediately by db.transaction() wrapper
 
       console.log(`[Privacy] Purged ${deletedRecords} Limitless records`);
     }

@@ -29,3 +29,12 @@ global.console = {
 // // @ts-ignore
 // if (!global.Headers) global.Headers = Headers;
 
+// Provide sane defaults for required env vars in tests; individual tests can override/delete.
+process.env.WHOOP_CLIENT_ID = process.env.WHOOP_CLIENT_ID ?? 'test-whoop-id';
+process.env.WHOOP_CLIENT_SECRET = process.env.WHOOP_CLIENT_SECRET ?? 'test-whoop-secret';
+process.env.WHOOP_REDIRECT_URI = process.env.WHOOP_REDIRECT_URI ?? 'http://localhost:4242/callback';
+process.env.OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY ?? 'test-openrouter-key';
+process.env.DATABASE_ENCRYPTION_KEY =
+  process.env.DATABASE_ENCRYPTION_KEY ?? Buffer.from('a'.repeat(32)).toString('base64');
+process.env.QDRANT_HOST = process.env.QDRANT_HOST ?? 'localhost';
+process.env.QDRANT_PORT = process.env.QDRANT_PORT ?? '6333';

@@ -548,7 +548,7 @@ describe('AnchorArsenal Component', () => {
       });
 
       const anchorElement = screen.getByText(/keyboard anchor/i).closest('.anchor-item');
-      anchorElement!.focus();
+      (anchorElement as HTMLElement)!.focus();
       fireEvent.keyDown(anchorElement!, { key: 'Enter' });
 
       expect(onAnchorSelect).toHaveBeenCalledTimes(1);
@@ -572,7 +572,7 @@ describe('AnchorArsenal Component', () => {
       });
 
       const anchorElement = screen.getByText(/keyboard anchor/i).closest('.anchor-item');
-      anchorElement!.focus();
+      (anchorElement as HTMLElement)!.focus();
       fireEvent.keyDown(anchorElement!, { key: ' ' });
 
       expect(onAnchorSelect).toHaveBeenCalledTimes(1);
@@ -599,7 +599,7 @@ describe('AnchorArsenal Component', () => {
       const event = new KeyboardEvent('keydown', { key: ' ', bubbles: true, cancelable: true });
       const preventDefaultSpy = jest.spyOn(event, 'preventDefault');
 
-      anchorElement!.focus();
+      (anchorElement as HTMLElement)!.focus();
       anchorElement!.dispatchEvent(event);
 
       expect(preventDefaultSpy).toHaveBeenCalled();
@@ -637,7 +637,7 @@ describe('AnchorArsenal Component', () => {
 
       await waitFor(() => {
         const truthButton = screen.getByRole('button', { name: /show truth anchors/i });
-        truthButton.focus();
+        (truthButton as HTMLElement).focus();
         fireEvent.click(truthButton);
 
         expect(truthButton).toHaveClass('active');

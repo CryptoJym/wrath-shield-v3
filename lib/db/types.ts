@@ -146,6 +146,24 @@ export type ScoreInput = Omit<Score, 'created_at' | 'updated_at'>;
 export type SettingInput = Omit<Setting, 'created_at' | 'updated_at'>;
 export type FlagInput = Omit<Flag, 'created_at' | 'updated_at'>;
 export type TweakInput = Omit<Tweak, 'created_at' | 'updated_at'>;
+ 
+/** Agentic Actions Table (EA automation outputs) */
+export interface AgenticAction {
+  id: string;
+  user_id: string;
+  type: 'task' | 'email_draft' | 'text_message' | 'reminder' | 'calendar_event' | 'note';
+  target: string | null;
+  title: string | null;
+  content: string;
+  confidence: number | null;
+  status: 'proposed' | 'queued' | 'executed' | 'failed' | 'dismissed';
+  source: string | null;
+  metadata: string | null;
+  created_at?: number;
+  updated_at?: number;
+}
+
+export type AgenticActionInput = Omit<AgenticAction, 'created_at' | 'updated_at'>;
 
 /**
  * Users Table
