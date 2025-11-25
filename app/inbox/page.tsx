@@ -2,6 +2,7 @@
 
 import useSWR from "swr";
 import { useMemo, useState } from "react";
+import { RoutingLog, RoutingStatsBar } from "@/components/pm/RoutingLog";
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
@@ -164,6 +165,9 @@ export default function InboxPage() {
 
         <FinancePanel data={financeData} />
         <ContextRequestsPanel data={ctxData} mutate={mutateCtx} />
+
+        {/* Routing Log - shows routed items and their status */}
+        <RoutingLog limit={30} showStats={true} />
 
         <ChatBox
           query={query}
@@ -352,6 +356,8 @@ function ActionBtn({ label, onClick, tone }: { label: string; onClick: () => voi
 }
 
 function EventRow({ ev }: { ev: any }) {
+  const [routing, setRouting] = useState<string | null>(null);
+  const [routeResult, setRouteResult] = useState<{ target: string; dispatched?: string[] } | null>(null);
   const ts = ev.ts ? new Date(ev.ts * 1000) : null;
   const when = ts ? ts.toLocaleString(undefined, { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" }) : "";
   const channelColor: Record<string, string> = {
@@ -361,15 +367,25 @@ function EventRow({ ev }: { ev: any }) {
     lifelog: "text-amber-300 bg-amber-900/30",
   };
   const badge = channelColor[ev.channel] || "text-slate-300 bg-slate-800";
-  const routed = ev.routed_target;
+  const routed = routeResult?.target || ev.routed_target;
   const isJunk = ev.junk === 1;
 
   const route = async (target: string) => {
-    await fetch("/api/events/route", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ id: ev.id, target }),
-    });
+    setRouting(target);
+    setRouteResult(null);
+    try {
+      const res = await fetch("/api/events/route", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ id: ev.id, target }),
+      });
+      const data = await res.json();
+      if (data.ok) {
+        setRouteResult({ target, dispatched: data.dispatched_to });
+      }
+    } finally {
+      setRouting(null);
+    }
   };
   const markJunk = async (junk: boolean) => {
     await fetch("/api/events/junk", {
@@ -391,6 +407,11 @@ function EventRow({ ev }: { ev: any }) {
         {ev.contact && <span>from/to: {ev.contact}</span>}
         {ev.source && <span>source: {ev.source}</span>}
         {routed && <span className="text-emerald-300">routed: {routed}</span>}
+        {routeResult?.dispatched && routeResult.dispatched.length > 0 && (
+          <span className="text-cyan-300">
+            dispatched: {routeResult.dispatched.map(a => a.replace('-agent', '')).join(', ')}
+          </span>
+        )}
         {isJunk && <span className="text-amber-300">junk</span>}
       </div>
       <div className="flex flex-wrap gap-2 pt-1 text-[11px]">
@@ -398,9 +419,16 @@ function EventRow({ ev }: { ev: any }) {
           <button
             key={opt.key}
             onClick={() => route(opt.key)}
-            className="px-2 py-1 rounded border border-slate-700 bg-slate-800 hover:bg-slate-700 text-slate-100"
+            disabled={!!routing}
+            className={`px-2 py-1 rounded border text-slate-100 transition ${
+              routing === opt.key
+                ? "border-emerald-500 bg-emerald-900/50"
+                : routed === opt.key
+                ? "border-emerald-600 bg-emerald-900/30"
+                : "border-slate-700 bg-slate-800 hover:bg-slate-700"
+            } ${routing ? "opacity-70" : ""}`}
           >
-            {opt.label}
+            {routing === opt.key ? "..." : opt.label}
           </button>
         ))}
         <button
@@ -518,6 +546,11 @@ function IngestHealthPanel({ data }: { data: any }) {
           ))}
         </div>
       )}
+
+      {/* Routing stats bar */}
+      <div className="pt-2 border-t border-slate-800">
+        <RoutingStatsBar />
+      </div>
     </section>
   );
 }
