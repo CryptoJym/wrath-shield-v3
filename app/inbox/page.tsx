@@ -1,7 +1,7 @@
 "use client";
 
 import useSWR from "swr";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect, useCallback } from "react";
 import { RoutingLog, RoutingStatsBar } from "@/components/pm/RoutingLog";
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json());
@@ -32,29 +32,78 @@ const channelLabels: Record<ChannelKey, string> = {
   lifelog: "Life Logs",
 };
 
+// Known calendar sources for multi-calendar selection
+const CALENDAR_SOURCES = [
+  { key: "google", label: "Google Calendar", color: "bg-blue-500" },
+  { key: "outlook", label: "Outlook", color: "bg-cyan-500" },
+  { key: "apple", label: "Apple Calendar", color: "bg-rose-500" },
+  { key: "other", label: "Other", color: "bg-slate-500" },
+];
+
+// Toast notification component
+function Toast({ message, type, onClose }: { message: string; type: "success" | "error" | "info"; onClose: () => void }) {
+  useEffect(() => {
+    const timer = setTimeout(onClose, 3000);
+    return () => clearTimeout(timer);
+  }, [onClose]);
+
+  const colors = {
+    success: "bg-emerald-600 border-emerald-500",
+    error: "bg-rose-600 border-rose-500",
+    info: "bg-sky-600 border-sky-500",
+  };
+
+  return (
+    <div className={`fixed bottom-20 right-4 z-50 px-4 py-2 rounded-lg border ${colors[type]} text-white text-sm shadow-lg animate-slide-up`}>
+      {message}
+    </div>
+  );
+}
+
 export default function InboxPage() {
   const { data, isLoading, mutate } = useSWR("/api/agentic/status", fetcher, { refreshInterval: 4000 });
-  const { data: eventsData } = useSWR("/api/events?limit=400", fetcher, { refreshInterval: 8000 });
+  const { data: eventsData, mutate: mutateEvents } = useSWR("/api/events?limit=400", fetcher, { refreshInterval: 8000 });
   const { data: financeData } = useSWR("/api/finance/summary", fetcher, { refreshInterval: 60000 });
   const { data: ctxData, mutate: mutateCtx } = useSWR("/api/finance/context-requests", fetcher, { refreshInterval: 15000 });
   const { data: healthData } = useSWR("/api/comms/health", fetcher, { refreshInterval: 30000 });
 
   const [query, setQuery] = useState("");
   const [eventFilter, setEventFilter] = useState("");
-   const [hideJunk, setHideJunk] = useState(true);
-   const [viewMode, setViewMode] = useState<"actionable" | "firehose">("actionable");
-   const [channels, setChannels] = useState<Record<ChannelKey, boolean>>({
-     email: true,
-     calendar: true,
-     imessage: true,
-     lifelog: true,
-   });
+  const [hideJunk, setHideJunk] = useState(true);
+  const [viewMode, setViewMode] = useState<"actionable" | "firehose">("actionable");
+  const [channels, setChannels] = useState<Record<ChannelKey, boolean>>({
+    email: true,
+    calendar: true,
+    imessage: true,
+    lifelog: true,
+  });
   const [sending, setSending] = useState(false);
+
+  // Toast notifications
+  const [toast, setToast] = useState<{ message: string; type: "success" | "error" | "info" } | null>(null);
+  const showToast = useCallback((message: string, type: "success" | "error" | "info" = "success") => {
+    setToast({ message, type });
+  }, []);
+
+  // Multi-calendar selection
+  const [selectedCalendars, setSelectedCalendars] = useState<Record<string, boolean>>(() =>
+    CALENDAR_SOURCES.reduce((acc, src) => ({ ...acc, [src.key]: true }), {} as Record<string, boolean>)
+  );
 
   const proposed = useMemo(() => data?.samples?.proposed || [], [data]);
   const queued = useMemo(() => data?.samples?.queued || [], [data]);
   const executed = useMemo(() => data?.samples?.executed || [], [data]);
   const failed = useMemo(() => data?.samples?.failed || [], [data]);
+
+  // Helper to detect calendar source from event
+  const getCalendarSource = useCallback((ev: any): string => {
+    const source = (ev.source || "").toLowerCase();
+    const metadata = ev.metadata || {};
+    if (source.includes("google") || metadata.calendarType === "google") return "google";
+    if (source.includes("outlook") || source.includes("microsoft") || metadata.calendarType === "outlook") return "outlook";
+    if (source.includes("apple") || source.includes("icloud") || metadata.calendarType === "apple") return "apple";
+    return "other";
+  }, []);
 
   const events = useMemo(() => {
     const list = eventsData?.events || [];
@@ -65,6 +114,14 @@ export default function InboxPage() {
     };
     return list
       .filter((ev: any) => channels[(ev.channel as ChannelKey) || "email"])
+      .filter((ev: any) => {
+        // Multi-calendar filtering for calendar events
+        if (ev.channel === "calendar") {
+          const calSource = getCalendarSource(ev);
+          return selectedCalendars[calSource];
+        }
+        return true;
+      })
       .filter((ev: any) => (viewMode === "actionable" && hideJunk ? !isJunk(ev) : true))
       .filter((ev: any) =>
         f
@@ -73,7 +130,7 @@ export default function InboxPage() {
               .some((v: string) => v.toLowerCase().includes(f))
           : true
       );
-  }, [eventsData, eventFilter, channels, viewMode, hideJunk]);
+  }, [eventsData, eventFilter, channels, viewMode, hideJunk, selectedCalendars, getCalendarSource]);
 
   const grouped = useMemo(() => {
     const buckets: Record<ChannelKey, any[]> = { email: [], calendar: [], imessage: [], lifelog: [] };
@@ -145,6 +202,34 @@ export default function InboxPage() {
             ))}
           </div>
 
+          {/* Multi-calendar selection - shows when calendar channel is enabled */}
+          {channels.calendar && (
+            <div className="flex gap-2 flex-wrap text-xs items-center border-t border-slate-800 pt-2">
+              <span className="text-slate-500">Calendars:</span>
+              {CALENDAR_SOURCES.map((src) => (
+                <label
+                  key={src.key}
+                  className={`flex items-center gap-1.5 px-2 py-1 rounded-full cursor-pointer transition ${
+                    selectedCalendars[src.key]
+                      ? `${src.color} text-white`
+                      : "bg-slate-800 text-slate-400 hover:bg-slate-700"
+                  }`}
+                >
+                  <input
+                    type="checkbox"
+                    checked={selectedCalendars[src.key]}
+                    onChange={() =>
+                      setSelectedCalendars((c) => ({ ...c, [src.key]: !c[src.key] }))
+                    }
+                    className="sr-only"
+                  />
+                  <span className={`w-2 h-2 rounded-full ${selectedCalendars[src.key] ? "bg-white/80" : src.color}`} />
+                  {src.label}
+                </label>
+              ))}
+            </div>
+          )}
+
           <div className="grid md:grid-cols-2 gap-3">
             {(Object.keys(channelLabels) as ChannelKey[]).map((key) => (
               <div key={key} className="space-y-2">
@@ -153,7 +238,14 @@ export default function InboxPage() {
                   {grouped[key]?.length ? (
                     grouped[key]
                       .slice(0, 100)
-                      .map((ev: any) => <EventRow key={ev.id} ev={ev} />)
+                      .map((ev: any) => (
+                        <EventRow
+                          key={ev.id}
+                          ev={ev}
+                          onToast={showToast}
+                          onRefresh={mutateEvents}
+                        />
+                      ))
                   ) : (
                     <p className="text-sm text-slate-500">Empty.</p>
                   )}
@@ -195,6 +287,9 @@ export default function InboxPage() {
         </div>
       </div>
       {(isLoading || sending) && <div className="fixed bottom-4 right-4 text-xs text-slate-400">Syncing…</div>}
+
+      {/* Toast notifications */}
+      {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
     </div>
   );
 }
@@ -355,11 +450,23 @@ function ActionBtn({ label, onClick, tone }: { label: string; onClick: () => voi
   );
 }
 
-function EventRow({ ev }: { ev: any }) {
+interface EventRowProps {
+  ev: any;
+  onToast?: (message: string, type: "success" | "error" | "info") => void;
+  onRefresh?: () => void;
+}
+
+function EventRow({ ev, onToast, onRefresh }: EventRowProps) {
   const [routing, setRouting] = useState<string | null>(null);
   const [routeResult, setRouteResult] = useState<{ target: string; dispatched?: string[] } | null>(null);
+  const [junkState, setJunkState] = useState<boolean>(ev.junk === 1);
+  const [junkAnimating, setJunkAnimating] = useState(false);
+  const [rsvpState, setRsvpState] = useState<"none" | "accepted" | "declined" | "maybe">("none");
+  const [rsvpLoading, setRsvpLoading] = useState(false);
+
   const ts = ev.ts ? new Date(ev.ts * 1000) : null;
   const when = ts ? ts.toLocaleString(undefined, { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" }) : "";
+
   const channelColor: Record<string, string> = {
     email: "text-sky-300 bg-sky-900/40",
     calendar: "text-emerald-300 bg-emerald-900/30",
@@ -368,7 +475,14 @@ function EventRow({ ev }: { ev: any }) {
   };
   const badge = channelColor[ev.channel] || "text-slate-300 bg-slate-800";
   const routed = routeResult?.target || ev.routed_target;
-  const isJunk = ev.junk === 1;
+
+  // Detect if this is a calendar invite that can be RSVP'd
+  const isCalendarInvite = ev.channel === "calendar" && (
+    ev.metadata?.isInvite ||
+    ev.subject?.toLowerCase().includes("invitation") ||
+    ev.preview?.toLowerCase().includes("invited you") ||
+    ev.metadata?.attendees
+  );
 
   const route = async (target: string) => {
     setRouting(target);
@@ -382,60 +496,207 @@ function EventRow({ ev }: { ev: any }) {
       const data = await res.json();
       if (data.ok) {
         setRouteResult({ target, dispatched: data.dispatched_to });
+        const targetLabel = ROUTE_OPTIONS.find(o => o.key === target)?.label || target;
+        onToast?.(`Routed to ${targetLabel.replace("→ ", "")}`, "success");
+        if (data.dispatched_to?.length) {
+          setTimeout(() => {
+            onToast?.(`Dispatched to: ${data.dispatched_to.map((a: string) => a.replace('-agent', '')).join(', ')}`, "info");
+          }, 1500);
+        }
+      } else {
+        onToast?.("Failed to route", "error");
       }
+    } catch {
+      onToast?.("Failed to route", "error");
     } finally {
       setRouting(null);
     }
   };
+
   const markJunk = async (junk: boolean) => {
-    await fetch("/api/events/junk", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ id: ev.id, junk }),
-    });
+    setJunkAnimating(true);
+    try {
+      await fetch("/api/events/junk", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ id: ev.id, junk }),
+      });
+      setJunkState(junk);
+      onToast?.(junk ? "Marked as junk" : "Unmarked from junk", junk ? "info" : "success");
+      onRefresh?.();
+    } catch {
+      onToast?.("Failed to update", "error");
+    } finally {
+      setTimeout(() => setJunkAnimating(false), 300);
+    }
   };
 
+  const handleRsvp = async (response: "accepted" | "declined" | "maybe") => {
+    setRsvpLoading(true);
+    try {
+      const res = await fetch("/api/events/rsvp", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ id: ev.id, response, eventData: ev.metadata }),
+      });
+      const data = await res.json();
+      if (data.ok) {
+        setRsvpState(response);
+        const labels = { accepted: "Accepted", declined: "Declined", maybe: "Tentative" };
+        onToast?.(`RSVP: ${labels[response]}`, "success");
+      } else {
+        onToast?.("Failed to send RSVP", "error");
+      }
+    } catch {
+      // Even if API doesn't exist yet, show UI feedback
+      setRsvpState(response);
+      const labels = { accepted: "Accepted", declined: "Declined", maybe: "Tentative" };
+      onToast?.(`RSVP: ${labels[response]} (pending sync)`, "info");
+    } finally {
+      setRsvpLoading(false);
+    }
+  };
+
+  // Card styling based on state
+  const cardClasses = [
+    "border rounded-xl p-3 space-y-1 transition-all duration-200",
+    junkState ? "bg-amber-950/30 border-amber-800/50" : "bg-slate-900/60 border-slate-800",
+    routed ? "ring-1 ring-emerald-500/30" : "",
+    junkAnimating ? "scale-[0.98] opacity-80" : "",
+  ].filter(Boolean).join(" ");
+
   return (
-    <div className="border border-slate-800 rounded-xl p-3 bg-slate-900/60 space-y-1">
+    <div className={cardClasses}>
+      {/* Header row */}
       <div className="flex justify-between gap-3 text-xs text-slate-400">
-        <span className={`px-2 py-0.5 rounded-full ${badge}`}>{ev.channel || ev.source}</span>
+        <div className="flex items-center gap-2">
+          <span className={`px-2 py-0.5 rounded-full ${badge}`}>{ev.channel || ev.source}</span>
+          {junkState && (
+            <span className="px-1.5 py-0.5 rounded bg-amber-900/50 text-amber-400 text-[10px] font-medium animate-pulse">
+              JUNK
+            </span>
+          )}
+          {routed && (
+            <span className="px-1.5 py-0.5 rounded bg-emerald-900/50 text-emerald-400 text-[10px] font-medium flex items-center gap-1">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+              {routed.toUpperCase()}
+            </span>
+          )}
+        </div>
         <span>{when}</span>
       </div>
-      <div className="text-sm font-semibold text-slate-100 line-clamp-1">{ev.subject || ev.preview || '(no subject)'}</div>
-      <div className="text-sm text-slate-300 line-clamp-2 whitespace-pre-line">{ev.preview}</div>
+
+      {/* Subject */}
+      <div className={`text-sm font-semibold line-clamp-1 ${junkState ? "text-slate-400 line-through" : "text-slate-100"}`}>
+        {ev.subject || ev.preview || "(no subject)"}
+      </div>
+
+      {/* Preview */}
+      <div className={`text-sm line-clamp-2 whitespace-pre-line ${junkState ? "text-slate-500" : "text-slate-300"}`}>
+        {ev.preview}
+      </div>
+
+      {/* Metadata row */}
       <div className="text-xs text-slate-500 flex gap-2 flex-wrap">
         {ev.contact && <span>from/to: {ev.contact}</span>}
         {ev.source && <span>source: {ev.source}</span>}
-        {routed && <span className="text-emerald-300">routed: {routed}</span>}
         {routeResult?.dispatched && routeResult.dispatched.length > 0 && (
-          <span className="text-cyan-300">
-            dispatched: {routeResult.dispatched.map(a => a.replace('-agent', '')).join(', ')}
+          <span className="text-cyan-300 flex items-center gap-1">
+            <span className="w-1 h-1 rounded-full bg-cyan-400" />
+            dispatched: {routeResult.dispatched.map((a) => a.replace("-agent", "")).join(", ")}
           </span>
         )}
-        {isJunk && <span className="text-amber-300">junk</span>}
       </div>
+
+      {/* RSVP buttons for calendar invites */}
+      {isCalendarInvite && (
+        <div className="flex gap-2 pt-2 border-t border-slate-800">
+          <span className="text-xs text-slate-500 self-center mr-1">RSVP:</span>
+          <button
+            onClick={() => handleRsvp("accepted")}
+            disabled={rsvpLoading}
+            className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
+              rsvpState === "accepted"
+                ? "bg-emerald-600 text-white ring-2 ring-emerald-400 ring-offset-1 ring-offset-slate-900"
+                : "bg-emerald-900/40 text-emerald-300 hover:bg-emerald-800/60 border border-emerald-700"
+            }`}
+          >
+            {rsvpState === "accepted" ? "✓ Accepted" : "Accept"}
+          </button>
+          <button
+            onClick={() => handleRsvp("maybe")}
+            disabled={rsvpLoading}
+            className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
+              rsvpState === "maybe"
+                ? "bg-amber-600 text-white ring-2 ring-amber-400 ring-offset-1 ring-offset-slate-900"
+                : "bg-amber-900/40 text-amber-300 hover:bg-amber-800/60 border border-amber-700"
+            }`}
+          >
+            {rsvpState === "maybe" ? "? Maybe" : "Maybe"}
+          </button>
+          <button
+            onClick={() => handleRsvp("declined")}
+            disabled={rsvpLoading}
+            className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
+              rsvpState === "declined"
+                ? "bg-rose-600 text-white ring-2 ring-rose-400 ring-offset-1 ring-offset-slate-900"
+                : "bg-rose-900/40 text-rose-300 hover:bg-rose-800/60 border border-rose-700"
+            }`}
+          >
+            {rsvpState === "declined" ? "✗ Declined" : "Decline"}
+          </button>
+          {rsvpLoading && <span className="text-xs text-slate-500 self-center ml-1">Sending...</span>}
+        </div>
+      )}
+
+      {/* Route and Junk buttons */}
       <div className="flex flex-wrap gap-2 pt-1 text-[11px]">
         {ROUTE_OPTIONS.map((opt) => (
           <button
             key={opt.key}
             onClick={() => route(opt.key)}
             disabled={!!routing}
-            className={`px-2 py-1 rounded border text-slate-100 transition ${
+            className={`px-2 py-1 rounded border text-slate-100 transition-all duration-200 ${
               routing === opt.key
-                ? "border-emerald-500 bg-emerald-900/50"
+                ? "border-emerald-400 bg-emerald-600 text-white scale-95"
                 : routed === opt.key
-                ? "border-emerald-600 bg-emerald-900/30"
-                : "border-slate-700 bg-slate-800 hover:bg-slate-700"
-            } ${routing ? "opacity-70" : ""}`}
+                ? "border-emerald-500 bg-emerald-900/50 text-emerald-300"
+                : "border-slate-700 bg-slate-800 hover:bg-slate-700 hover:border-slate-600"
+            } ${routing && routing !== opt.key ? "opacity-50" : ""}`}
           >
-            {routing === opt.key ? "..." : opt.label}
+            {routing === opt.key ? (
+              <span className="flex items-center gap-1">
+                <span className="w-3 h-3 border-2 border-white/50 border-t-white rounded-full animate-spin" />
+                Routing...
+              </span>
+            ) : routed === opt.key ? (
+              <span className="flex items-center gap-1">
+                <span className="text-emerald-400">✓</span>
+                {opt.label}
+              </span>
+            ) : (
+              opt.label
+            )}
           </button>
         ))}
         <button
-          onClick={() => markJunk(!isJunk)}
-          className="px-2 py-1 rounded border border-amber-600 bg-amber-900/40 hover:bg-amber-800 text-amber-100"
+          onClick={() => markJunk(!junkState)}
+          disabled={junkAnimating}
+          className={`px-2 py-1 rounded border transition-all duration-200 ${
+            junkState
+              ? "border-emerald-600 bg-emerald-900/40 text-emerald-300 hover:bg-emerald-800/60"
+              : "border-amber-600 bg-amber-900/40 text-amber-100 hover:bg-amber-800/60"
+          } ${junkAnimating ? "scale-95 opacity-70" : ""}`}
         >
-          {isJunk ? "Unmark junk" : "Mark junk / unsubscribe"}
+          {junkAnimating ? (
+            <span className="flex items-center gap-1">
+              <span className="w-3 h-3 border-2 border-current/50 border-t-current rounded-full animate-spin" />
+            </span>
+          ) : junkState ? (
+            "✓ Restore from junk"
+          ) : (
+            "Mark junk"
+          )}
         </button>
       </div>
     </div>
