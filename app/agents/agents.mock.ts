@@ -61,5 +61,53 @@ export const AGENTS_MOCK: Agent[] = [
     open_items: 4,
     capabilities: ["Email/iMessage ingest", "Classification", "Lifelogs"],
     link: "/inbox"
+  },
+  {
+    id: "ea",
+    name: "Executive Assistant",
+    icon: "calendar",
+    status: "green",
+    hp: 95,
+    mp: 85,
+    last_sync: "2025-11-24T20:15:00Z",
+    open_items: 1,
+    capabilities: ["Calendar management", "Travel booking", "Gatekeeping"],
+    link: "/ea"
+  },
+  {
+    id: "relationships",
+    name: "Relationship Manager",
+    icon: "users",
+    status: "yellow",
+    hp: 75,
+    mp: 60,
+    last_sync: "2025-11-24T16:45:00Z",
+    open_items: 6,
+    capabilities: ["CRM sync", "Birthday reminders", "Outreach drafting"],
+    link: "/relationships"
+  },
+  {
+    id: "grok",
+    name: "Research Agent (Grok)",
+    icon: "brain",
+    status: "green",
+    hp: 100,
+    mp: 100,
+    last_sync: "2025-11-24T21:00:00Z",
+    open_items: 0,
+    capabilities: ["Deep research", "Fact checking", "Synthesis"],
+    link: "/chat"
+  },
+  {
+    id: "eeg",
+    name: "Bio-Data Analyst",
+    icon: "activity",
+    status: "red",
+    hp: 45,
+    mp: 30,
+    last_sync: "2025-11-23T09:00:00Z",
+    open_items: 8,
+    capabilities: ["Brainwave analysis", "Focus tracking", "Flow state optimization"],
+    link: "/eeg"
   }
 ];

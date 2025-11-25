@@ -13,7 +13,10 @@ import {
     ExternalLink,
     Zap,
     Shield,
-    Clock
+    Clock,
+    Calendar,
+    Users,
+    Brain
 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -22,7 +25,11 @@ const IconMap: Record<string, React.ElementType> = {
     "gavel": Gavel,
     "coins": Coins,
     "clipboard-list": ClipboardList,
-    "mail": Mail
+    "mail": Mail,
+    "calendar": Calendar,
+    "users": Users,
+    "brain": Brain,
+    "activity": Activity
 };
 
 // RPG Bar Component
@@ -112,8 +119,8 @@ export default function AgentsRosterPage() {
                                     key={f}
                                     onClick={() => setFilter(f)}
                                     className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors capitalize ${filter === f
-                                            ? 'bg-primary text-primary-foreground shadow-sm'
-                                            : 'text-muted-foreground hover:text-foreground hover:bg-secondary'
+                                        ? 'bg-primary text-primary-foreground shadow-sm'
+                                        : 'text-muted-foreground hover:text-foreground hover:bg-secondary'
                                         }`}
                                 >
                                     {f}
