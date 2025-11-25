@@ -17,6 +17,8 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
+    "@babel/plugin-transform-private-methods": "^7.27.1",
+    "@clerk/nextjs": "^6.35.5",
     "@types/better-sqlite3": "^7.6.13",
     "@types/node": "^24.9.1",
     "@types/react": "^19.2.2",
