@@ -38,3 +38,12 @@ export function getClientSafeConfig(): ClientSafeConfig {
     },
   };
 }
+
+// Utility function to safely read environment variables with defaults
+export function safeConfig<T = string>(key: string, defaultValue: T): T {
+  const value = process.env[key];
+  if (value === undefined || value === null || value === '') {
+    return defaultValue;
+  }
+  return value as unknown as T;
+}

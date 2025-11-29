@@ -78,12 +78,6 @@ export async function POST(req: Request) {
         reimbursable:
           body.reimbursable === undefined ? (updated.reimbursable as any) : body.reimbursable,
         status: 'confirmed',
-        confidence: body.confidence ?? updated?.confidence ?? 0.8,
-        meta: {
-          ...(body.summary ? { context_summary: body.summary } : {}),
-          ...(body.note ? { context_note: body.note } : {}),
-          ...(body.rationale ? { reimbursement_rationale: body.rationale } : {}),
-        },
       });
     }
     return NextResponse.json({ request: updated });

@@ -1,11 +1,16 @@
 /**
  * Personalization Detection and Neutral Stance Coach
+ * Now integrated with Life OS config for agent prompts and routing.
  * SECURITY: Server-only for LLM calls. Detection can be used anywhere.
  */
 import { ensureServerOnly } from './server-only-guard';
 import { analyzeText, AnalysisResult } from './speechMiner';
-import { getOpenRouterClient } from './OpenRouterClient';
+import { invokeAgent } from './agents/AgentInvoker';
+import { getAgent } from './life-os-config';
 import type { ConstructedPrompt, ChatMessage } from './PromptBuilder';
+
+// Agent ID for coaching (falls back to orchestrator)
+const COACHING_AGENT_ID = 'agent.coaching';
 
 export interface PersonalizationCue {
   phrase: string;
@@ -89,17 +94,50 @@ export function buildSecondAgreementPrompt(userText: string, cues: Personalizati
 
 export async function generateNeutralStanceLines(
   userText: string
-): Promise<{ lines: string[]; cues: PersonalizationCue[] }> {
+): Promise<{ lines: string[]; cues: PersonalizationCue[]; escalationLevel?: string }> {
   ensureServerOnly('lib/personalization generateNeutralStanceLines');
   const detection = detectPersonalization(userText);
-  const prompt = buildSecondAgreementPrompt(userText, detection.cues);
-  const client = getOpenRouterClient();
-  const response = await client.getCoachingResponse(prompt);
+
+  // Determine which agent to use
+  const agent = getAgent(COACHING_AGENT_ID);
+  const agentId = agent ? COACHING_AGENT_ID : 'agent.orchestrator';
+
+  // Build the user message with cues
+  const cuesSection = detection.cues.length
+    ? detection.cues.map((c, i) => `- ${i + 1}. "${c.phrase}" (sev ${c.severity}) → ${c.snippet}`).join('\n')
+    : '- None detected';
+
+  const userMessage = `# SECOND_AGREEMENT_CHECK
+
+**Original Text:**
+${userText.trim()}
+
+**Detected Personalization Cues:**
+${cuesSection}
+
+**Task:**
+Transform personalized phrasing into neutral, objective lines that maintain assertive boundaries.
+Rules: (1) Avoid I/me/my. (2) Remove emotional framing. (3) Return 3-5 short bullet lines (<20 words).
+(4) No platitudes; be specific. (5) Tone steady, direct, non-apologetic.
+Return only the bullet lines.`;
+
+  // Invoke via AgentInvoker (Life OS routing)
+  const response = await invokeAgent({
+    agentId,
+    userMessage,
+    forceExecute: true, // Coaching is always auto-execute
+  });
+
   const lines = response.content
     .split(/\r?\n+/)
     .map((l) => l.replace(/^[-•\d\.\)\s]+/, '').trim())
     .filter((l) => l.length > 0)
     .slice(0, 5);
-  return { lines, cues: detection.cues };
+
+  return {
+    lines,
+    cues: detection.cues,
+    escalationLevel: response.escalationLevel,
+  };
 }
 

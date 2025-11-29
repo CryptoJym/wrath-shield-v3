@@ -24,7 +24,7 @@ describe('Dashboard API Integration Tests', () => {
   beforeEach(() => {
     // Reset all mocks completely (clears implementations, not just call history)
     jest.resetAllMocks();
-    // Clear API cache to prevent cached data from interfering with tests
+    // Clear the in-memory cache to prevent test pollution
     clearMetricsCache();
   });
 
@@ -269,6 +269,9 @@ describe('Dashboard API Integration Tests', () => {
       (getLatestCycle as jest.Mock).mockResolvedValue(null);
       (getLatestSleep as jest.Mock).mockResolvedValue(null);
       (getLifelogsForDate as jest.Mock).mockResolvedValue([]);
+      // Must mock these too since they're called after the first Promise.all
+      (calculateUnbendingScore as jest.Mock).mockResolvedValue(null);
+      (getMetricsLastNDays as jest.Mock).mockResolvedValue([]);
 
       const request = new NextRequest('http://localhost:3000/api/metrics');
       const response = await GET(request);
@@ -286,6 +289,9 @@ describe('Dashboard API Integration Tests', () => {
       (getLatestCycle as jest.Mock).mockRejectedValue(new Error('Cycle data unavailable'));
       (getLatestSleep as jest.Mock).mockResolvedValue({ id: '1', date: today, performance: 85, rem_min: 95, sws_min: 62, light_min: 180, awake_min: 15, respiration: 14.2, sleep_debt_min: 10 });
       (getLifelogsForDate as jest.Mock).mockResolvedValue([]);
+      // Must mock these too since they're called after the first Promise.all
+      (calculateUnbendingScore as jest.Mock).mockResolvedValue(null);
+      (getMetricsLastNDays as jest.Mock).mockResolvedValue([]);
 
       const request = new NextRequest('http://localhost:3000/api/metrics');
       const response = await GET(request);

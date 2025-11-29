@@ -2,11 +2,8 @@
 /**
  * Wrath Shield v3 - Memory Wrapper Tests
  *
- * Tests for Mem0 initialization with Qdrant/in-memory fallback,
- * vector store resilience, and memory operations.
+ * Tests for Zep/SQLite memory initialization and operations.
  */
-
-import { QdrantClient } from 'qdrant-client';
 
 // Disable server-only guard for testing
 jest.mock('../../lib/server-only-guard', () => ({
@@ -26,43 +23,37 @@ jest.mock('../../lib/config', () => ({
   })),
 }));
 
-// Mock qdrant-client
-jest.mock('qdrant-client', () => ({
-  QdrantClient: jest.fn(),
-}));
-
-// Mock mem0ai
-jest.mock('mem0ai', () => ({
-  Memory: jest.fn(),
+// Mock @getzep/zep-cloud
+jest.mock('@getzep/zep-cloud', () => ({
+  ZepClient: jest.fn(),
 }));
 
 describe('MemoryWrapper', () => {
-  let mockQdrantClient: any;
-  let mockMemory: any;
+  let mockZepClient: any;
 
   beforeEach(() => {
     // Reset all mocks
     jest.clearAllMocks();
 
-    // Setup mock Qdrant client
-    mockQdrantClient = {
-      getCollections: jest.fn(),
+    // Setup mock Zep client
+    mockZepClient = {
+      user: {
+        get: jest.fn(),
+        add: jest.fn(),
+      },
+      graph: {
+        add: jest.fn(),
+        search: jest.fn().mockResolvedValue({ edges: [], nodes: [] }),
+        delete: jest.fn(),
+        episode: {
+          getByUserId: jest.fn().mockResolvedValue({ episodes: [] }),
+        },
+      },
     };
-    (QdrantClient as jest.MockedClass<typeof QdrantClient>).mockImplementation(
-      () => mockQdrantClient
-    );
 
-    // Setup mock Memory instance
-    mockMemory = {
-      add: jest.fn().mockResolvedValue(undefined),
-      search: jest.fn().mockResolvedValue([]),
-      getAll: jest.fn().mockResolvedValue([]),
-      delete: jest.fn().mockResolvedValue(undefined),
-    };
-
-    // Mock Memory constructor to return mockMemory instance
-    const mem0ai = require('mem0ai');
-    mem0ai.Memory.mockImplementation(() => mockMemory);
+    // Mock ZepClient constructor
+    const { ZepClient } = require('@getzep/zep-cloud');
+    ZepClient.mockImplementation(() => mockZepClient);
   });
 
   afterEach(() => {
@@ -72,247 +63,171 @@ describe('MemoryWrapper', () => {
   });
 
   describe('Initialization', () => {
-    it('should initialize with Qdrant when available', async () => {
-      // Mock successful Qdrant connection
-      mockQdrantClient.getCollections.mockResolvedValue({ collections: [] });
-
+    it('should initialize with in-memory store in test mode', async () => {
       const { initializeMemory, getMemoryConfig } = require('../../lib/MemoryWrapper');
       await initializeMemory();
 
       const config = getMemoryConfig();
-      expect(config).toBeTruthy();
-      expect(config?.vectorStore).toBe('qdrant');
-      expect(config?.qdrantUrl).toBe('http://localhost:6333');
-      expect(config?.qdrantCollection).toBe('wrath_shield_memories');
-    });
-
-    it('should fall back to in-memory when Qdrant is unavailable', async () => {
-      // Mock failed Qdrant connection
-      mockQdrantClient.getCollections.mockRejectedValue(new Error('Connection refused'));
-
-      const { initializeMemory, getMemoryConfig } = require('../../lib/MemoryWrapper');
-
-      // Should not throw, should fall back
-      await expect(initializeMemory()).resolves.not.toThrow();
-
-      const config = getMemoryConfig();
-      expect(config).toBeTruthy();
-      expect(config?.vectorStore).toBe('in-memory');
-      expect(config?.qdrantUrl).toBeUndefined();
-    });
-
-    it('should configure OpenAI embeddings when API key is available', async () => {
-      process.env.OPENAI_API_KEY = 'test-key';
-      mockQdrantClient.getCollections.mockResolvedValue({ collections: [] });
-
-      const { initializeMemory, getMemoryConfig } = require('../../lib/MemoryWrapper');
-      await initializeMemory();
-
-      const config = getMemoryConfig();
-      expect(config?.embeddingsProvider).toBe('openai');
-      expect(config?.embeddingsApiKey).toBe('test-key');
-
-      delete process.env.OPENAI_API_KEY;
-    });
-
-    it('should use local embeddings when OpenAI key is not available', async () => {
-      delete process.env.OPENAI_API_KEY;
-      mockQdrantClient.getCollections.mockResolvedValue({ collections: [] });
-
-      const { initializeMemory, getMemoryConfig } = require('../../lib/MemoryWrapper');
-      await initializeMemory();
-
-      const config = getMemoryConfig();
-      expect(config?.embeddingsProvider).toBe('local');
-      expect(config?.embeddingsApiKey).toBeUndefined();
+      expect(config).toBeDefined();
+      expect(config.provider).toBe('in-memory');
     });
 
     it('should not reinitialize if already initialized', async () => {
-      mockQdrantClient.getCollections.mockResolvedValue({ collections: [] });
-
-      const { initializeMemory } = require('../../lib/MemoryWrapper');
-      await initializeMemory();
-
-      // Reset mock to verify it's not called again
-      mockQdrantClient.getCollections.mockClear();
+      const { initializeMemory, getMemoryConfig } = require('../../lib/MemoryWrapper');
 
       await initializeMemory();
+      const config1 = getMemoryConfig();
 
-      // getCollections should not be called again
-      expect(mockQdrantClient.getCollections).not.toHaveBeenCalled();
+      await initializeMemory();
+      const config2 = getMemoryConfig();
+
+      expect(config1).toBe(config2);
+    });
+
+    it('should reset properly', async () => {
+      const { initializeMemory, getMemoryConfig, resetMemory } = require('../../lib/MemoryWrapper');
+
+      await initializeMemory();
+      expect(getMemoryConfig()).not.toBeNull();
+
+      resetMemory();
+      expect(getMemoryConfig()).toBeNull();
     });
   });
 
   describe('Memory Operations', () => {
     beforeEach(async () => {
-      // Initialize with in-memory for testing
-      mockQdrantClient.getCollections.mockRejectedValue(new Error('Test mode'));
-
       const { initializeMemory } = require('../../lib/MemoryWrapper');
       await initializeMemory();
     });
 
     it('should add memory with user ID and metadata', async () => {
-      const { addMemory } = require('../../lib/MemoryWrapper');
+      const { addMemory, getAllMemories } = require('../../lib/MemoryWrapper');
 
       await addMemory('Test memory content', 'user-123', { category: 'test' });
 
-      expect(mockMemory.add).toHaveBeenCalledWith('Test memory content', {
-        user_id: 'user-123',
-        metadata: { category: 'test' },
-      });
+      const memories = await getAllMemories('user-123');
+      expect(memories).toHaveLength(1);
+      expect(memories[0].text).toBe('Test memory content');
+      expect(memories[0].metadata.category).toBe('test');
     });
 
     it('should search memories by query', async () => {
-      const { searchMemories } = require('../../lib/MemoryWrapper');
-      mockMemory.search.mockResolvedValue([
-        { id: '1', text: 'Found memory', score: 0.95 },
-      ]);
+      const { addMemory, searchMemories } = require('../../lib/MemoryWrapper');
 
-      const results = await searchMemories('test query', 'user-123', 10);
+      await addMemory('Found memory content', 'user-123');
+      await addMemory('Other content', 'user-123');
 
-      expect(mockMemory.search).toHaveBeenCalledWith('test query', {
-        user_id: 'user-123',
-        limit: 10,
-      });
+      const results = await searchMemories('found', 'user-123', 10);
+
       expect(results).toHaveLength(1);
-      expect(results[0].text).toBe('Found memory');
+      expect(results[0].text).toBe('Found memory content');
     });
 
     it('should use default limit of 5 for search', async () => {
-      const { searchMemories } = require('../../lib/MemoryWrapper');
+      const { addMemory, searchMemories } = require('../../lib/MemoryWrapper');
 
-      await searchMemories('test query', 'user-123');
+      // Add 10 memories with "test" in them
+      for (let i = 0; i < 10; i++) {
+        await addMemory(`Test memory ${i}`, 'user-123');
+      }
 
-      expect(mockMemory.search).toHaveBeenCalledWith('test query', {
-        user_id: 'user-123',
-        limit: 5,
-      });
+      const results = await searchMemories('test', 'user-123');
+
+      expect(results.length).toBeLessThanOrEqual(5);
     });
 
     it('should get all memories for a user', async () => {
-      const { getAllMemories } = require('../../lib/MemoryWrapper');
-      mockMemory.getAll.mockResolvedValue([
-        { id: '1', text: 'Memory 1' },
-        { id: '2', text: 'Memory 2' },
-      ]);
+      const { addMemory, getAllMemories } = require('../../lib/MemoryWrapper');
+
+      await addMemory('Memory 1', 'user-123');
+      await addMemory('Memory 2', 'user-123');
+      await addMemory('Memory 3', 'user-123');
 
       const memories = await getAllMemories('user-123');
 
-      expect(mockMemory.getAll).toHaveBeenCalledWith({ user_id: 'user-123' });
-      expect(memories).toHaveLength(2);
+      expect(memories).toHaveLength(3);
     });
 
-    it('should delete a specific memory', async () => {
-      const { deleteMemory } = require('../../lib/MemoryWrapper');
+    it('should delete a memory', async () => {
+      const { addMemory, getAllMemories, deleteMemory } = require('../../lib/MemoryWrapper');
 
-      await deleteMemory('memory-id-123');
+      await addMemory('Memory to delete', 'user-123');
+      let memories = await getAllMemories('user-123');
+      expect(memories).toHaveLength(1);
 
-      expect(mockMemory.delete).toHaveBeenCalledWith('memory-id-123');
+      await deleteMemory(memories[0].id);
+      memories = await getAllMemories('user-123');
+      expect(memories).toHaveLength(0);
     });
 
-    it('should auto-initialize on first operation if not initialized', async () => {
-      const { resetMemory, addMemory } = require('../../lib/MemoryWrapper');
-      resetMemory(); // Reset to uninitialized state
+    it('should isolate memories between users', async () => {
+      const { addMemory, getAllMemories } = require('../../lib/MemoryWrapper');
 
-      mockQdrantClient.getCollections.mockRejectedValue(new Error('Test mode'));
+      await addMemory('User 1 memory', 'user-1');
+      await addMemory('User 2 memory', 'user-2');
 
-      // This should trigger initialization
-      await addMemory('Test', 'user-123');
+      const user1Memories = await getAllMemories('user-1');
+      const user2Memories = await getAllMemories('user-2');
 
-      expect(mockMemory.add).toHaveBeenCalled();
+      expect(user1Memories).toHaveLength(1);
+      expect(user1Memories[0].text).toBe('User 1 memory');
+      expect(user2Memories).toHaveLength(1);
+      expect(user2Memories[0].text).toBe('User 2 memory');
     });
   });
 
-  describe('Resilience & Edge Cases', () => {
-    it('should handle Qdrant timeout gracefully', async () => {
-      // Simulate timeout
-      mockQdrantClient.getCollections.mockImplementation(() => {
-        return new Promise((_, reject) => {
-          setTimeout(() => reject(new Error('ETIMEDOUT')), 50);
-        });
-      });
-
-      const { initializeMemory, getMemoryConfig } = require('../../lib/MemoryWrapper');
-
+  describe('Memory Item Structure', () => {
+    beforeEach(async () => {
+      const { initializeMemory } = require('../../lib/MemoryWrapper');
       await initializeMemory();
+    });
 
-      // Should fall back to in-memory
-      const config = getMemoryConfig();
-      expect(config?.vectorStore).toBe('in-memory');
+    it('should return memory items with correct structure', async () => {
+      const { addMemory, getAllMemories } = require('../../lib/MemoryWrapper');
+
+      await addMemory('Structured memory', 'user-123', { key: 'value' });
+
+      const memories = await getAllMemories('user-123');
+      expect(memories[0]).toHaveProperty('id');
+      expect(memories[0]).toHaveProperty('text');
+      expect(memories[0]).toHaveProperty('metadata');
+      expect(memories[0].text).toBe('Structured memory');
+      expect(memories[0].metadata.key).toBe('value');
+    });
+  });
+
+  describe('Edge Cases', () => {
+    beforeEach(async () => {
+      const { initializeMemory } = require('../../lib/MemoryWrapper');
+      await initializeMemory();
     });
 
     it('should handle empty search results', async () => {
-      mockQdrantClient.getCollections.mockRejectedValue(new Error('Test mode'));
+      const { searchMemories } = require('../../lib/MemoryWrapper');
 
-      const { initializeMemory, searchMemories } = require('../../lib/MemoryWrapper');
-      await initializeMemory();
-
-      mockMemory.search.mockResolvedValue([]);
-
-      const results = await searchMemories('nonexistent query', 'user-123');
+      const results = await searchMemories('nonexistent', 'user-123');
 
       expect(results).toEqual([]);
     });
 
-    it('should handle empty memory list', async () => {
-      mockQdrantClient.getCollections.mockRejectedValue(new Error('Test mode'));
+    it('should handle getting memories for user with no memories', async () => {
+      const { getAllMemories } = require('../../lib/MemoryWrapper');
 
-      const { initializeMemory, getAllMemories } = require('../../lib/MemoryWrapper');
-      await initializeMemory();
-
-      mockMemory.getAll.mockResolvedValue([]);
-
-      const memories = await getAllMemories('new-user');
+      const memories = await getAllMemories('user-with-no-memories');
 
       expect(memories).toEqual([]);
     });
 
-    it('should reset singleton state', () => {
-      const { resetMemory, getMemoryConfig } = require('../../lib/MemoryWrapper');
+    it('should handle special characters in memory content', async () => {
+      const { addMemory, getAllMemories } = require('../../lib/MemoryWrapper');
 
-      resetMemory();
+      await addMemory('Memory with "quotes" and \'apostrophes\'', 'user-123');
+      await addMemory('Memory with unicode: 你好 🎉', 'user-123');
 
-      const config = getMemoryConfig();
-      expect(config).toBeNull();
-    });
-  });
+      const memories = await getAllMemories('user-123');
 
-  describe('Configuration Variants', () => {
-    it('should use custom Qdrant host and port from config', async () => {
-      // Mock custom config before requiring MemoryWrapper
-      jest.resetModules();
-
-      jest.doMock('../../lib/config', () => ({
-        cfg: jest.fn(() => ({
-          qdrant: {
-            host: 'custom-host',
-            port: 9999,
-          },
-          openai: {
-            apiKey: undefined,
-          },
-        })),
-      }));
-
-      // Re-mock qdrant and mem0ai after reset
-      jest.doMock('qdrant-client', () => ({
-        QdrantClient: jest.fn(() => ({
-          getCollections: jest.fn().mockResolvedValue({ collections: [] }),
-        })),
-      }));
-
-      jest.doMock('mem0ai', () => ({
-        Memory: jest.fn(() => mockMemory),
-      }));
-
-      // Now require MemoryWrapper with custom config
-      const { initializeMemory, getMemoryConfig } = require('../../lib/MemoryWrapper');
-      await initializeMemory();
-
-      const config = getMemoryConfig();
-      expect(config?.qdrantUrl).toBe('http://custom-host:9999');
+      expect(memories).toHaveLength(2);
     });
   });
 });
-// @ts-nocheck

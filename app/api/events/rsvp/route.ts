@@ -6,6 +6,7 @@
 
 import { NextResponse } from 'next/server';
 import { currentUserOrThrow } from '@/lib/auth/user';
+import { updateEventRsvp } from '@/lib/events';
 
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
@@ -29,8 +30,8 @@ export async function POST(req: Request) {
       );
     }
 
-    // TODO: Integrate with actual calendar APIs (Google Calendar, Outlook, Apple Calendar)
-    // For now, we store the RSVP response locally and log it
+    // Store RSVP response in events DB and dismiss the event from inbox
+    updateEventRsvp(id, response, userId);
     console.log(`[RSVP] Event ${id}: User ${userId} responded with "${response}"`);
 
     // If we have event metadata with calendar info, we could send the response
@@ -42,8 +43,6 @@ export async function POST(req: Request) {
       // - Apple Calendar: CalDAV REPLY
     }
 
-    // Store RSVP in local state (could use events.db or a separate store)
-    // For now, just acknowledge the request
     return NextResponse.json({
       ok: true,
       eventId: id,

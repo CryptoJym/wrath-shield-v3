@@ -156,7 +156,7 @@ export interface AgenticAction {
   title: string | null;
   content: string;
   confidence: number | null;
-  status: 'proposed' | 'queued' | 'executed' | 'failed' | 'dismissed';
+  status: 'proposed' | 'queued' | 'executed' | 'failed' | 'dismissed' | 'pending_approval' | 'critical_alert';
   source: string | null;
   metadata: string | null;
   created_at?: number;

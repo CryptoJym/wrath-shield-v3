@@ -147,7 +147,7 @@ export function createLegalContextRequest(input: Partial<LegalContextRequest>): 
     created_at: now,
     updated_at: now,
   });
-  const out = db.prepare<LegalContextRequest>('SELECT * FROM legal_context_requests WHERE id = ?').get(id) as any;
+  const out = db.prepare('SELECT * FROM legal_context_requests WHERE id = ?').get(id) as any;
   db.close();
   return mapRow(out);
 }
@@ -188,7 +188,7 @@ export function listLegalContextRequests(
     params.push(status);
   }
   if (user_id) {
-    where.push('(user_id = ? OR user_id IS NULL OR user_id = "default")');
+    where.push("(user_id = ? OR user_id IS NULL OR user_id = 'default')");
     params.push(user_id);
   }
   const sql = `SELECT * FROM legal_context_requests ${where.length ? 'WHERE ' + where.join(' AND ') : ''} ORDER BY created_at DESC`;
@@ -301,7 +301,7 @@ export function listPendingActions(
     params.push(status);
   }
   if (user_id) {
-    where.push('(user_id = ? OR user_id IS NULL OR user_id = "default")');
+    where.push("(user_id = ? OR user_id IS NULL OR user_id = 'default')");
     params.push(user_id);
   }
   const sql = `SELECT * FROM legal_pending_actions ${where.length ? 'WHERE ' + where.join(' AND ') : ''} ORDER BY
@@ -410,7 +410,7 @@ export function listNotifications(
   const where: string[] = [];
   const params: any[] = [];
   if (user_id) {
-    where.push('(user_id = ? OR user_id IS NULL OR user_id = "default")');
+    where.push("(user_id = ? OR user_id IS NULL OR user_id = 'default')");
     params.push(user_id);
   }
   where.push('dismissed = 0');
@@ -445,7 +445,7 @@ export function markAllNotificationsRead(user_id?: string): number {
   let sql = 'UPDATE legal_notifications SET read = 1 WHERE read = 0';
   const params: any[] = [];
   if (user_id) {
-    sql += ' AND (user_id = ? OR user_id IS NULL OR user_id = "default")';
+    sql += " AND (user_id = ? OR user_id IS NULL OR user_id = 'default')";
     params.push(user_id);
   }
   const result = db.prepare(sql).run(...params);
@@ -472,7 +472,7 @@ export function getUnreadNotificationCount(user_id?: string): number {
   const where = ['dismissed = 0', 'read = 0'];
   const params: any[] = [];
   if (user_id) {
-    where.push('(user_id = ? OR user_id IS NULL OR user_id = "default")');
+    where.push("(user_id = ? OR user_id IS NULL OR user_id = 'default')");
     params.push(user_id);
   }
   const row = db.prepare(`SELECT COUNT(*) as count FROM legal_notifications WHERE ${where.join(' AND ')}`).get(...params) as any;
@@ -518,7 +518,7 @@ export function listChatMessages(user_id?: string, limit = 100): LegalChatMessag
   const where: string[] = [];
   const params: any[] = [];
   if (user_id) {
-    where.push('(user_id = ? OR user_id IS NULL OR user_id = "default")');
+    where.push("(user_id = ? OR user_id IS NULL OR user_id = 'default')");
     params.push(user_id);
   }
   const sql = `SELECT * FROM legal_chat_messages ${where.length ? 'WHERE ' + where.join(' AND ') : ''} ORDER BY created_at ASC LIMIT ?`;

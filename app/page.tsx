@@ -1,5 +1,5 @@
 /**
- * Wrath Shield v3 - Home/Dashboard Page
+ * Whoop Dashboard - Home Page
  *
  * Main dashboard displaying WHOOP metrics, manipulation detection results,
  * and coaching insights.
@@ -12,6 +12,8 @@
  */
 
 import Dashboard from '@/components/Dashboard';
+
+export const dynamic = 'force-dynamic';
 
 async function getSystemStatus() {
   try {
@@ -34,7 +36,7 @@ export default async function Home() {
   return (
     <div>
       <header style={{ marginBottom: '1rem' }}>
-        <h1>Wrath Shield v3</h1>
+        <h1>Whoop Dashboard</h1>
         <p style={{ color: 'var(--color-text-secondary)' }}>
           Personal development dashboard combining biometric tracking and assertiveness coaching
         </p>

@@ -1,5 +1,3 @@
-export const dynamic = 'force-dynamic';
-
 /**
  * Wrath Shield v3 - WHOOP OAuth2 Callback Route
  *
@@ -8,6 +6,8 @@ export const dynamic = 'force-dynamic';
  */
 
 import { NextRequest, NextResponse } from 'next/server';
+
+export const dynamic = 'force-dynamic';
 import { cfg } from '@/lib/config';
 import { encryptData } from '@/lib/crypto';
 import { insertTokens } from '@/lib/db/queries';
@@ -88,15 +88,7 @@ export async function GET(request: NextRequest) {
 
     // Exchange authorization code for tokens
     const config = cfg();
-    let origin: string;
-    try {
-      origin = new URL(request.url).origin;
-    } catch {
-      const host = request.headers.get('host') ?? 'localhost:3000';
-      const proto = request.headers.get('x-forwarded-proto') ?? 'http';
-      origin = `${proto}://${host}`;
-    }
-    const redirectUri = config.whoop.redirectUri || `${origin}/api/whoop/oauth/callback`;
+    const redirectUri = config.whoop.redirectUri;
 
     const tokenParams = new URLSearchParams({
       grant_type: 'authorization_code',
@@ -153,6 +145,8 @@ export async function GET(request: NextRequest) {
     return res;
   } catch (error) {
     console.error('[WHOOP OAuth Callback] Error:', error);
-    return NextResponse.json({ error: 'Failed to process OAuth callback' }, { status: 500 });
+    const errUrl = new URL('/', request.url);
+    errUrl.searchParams.set('oauth_error', 'Failed to process WHOOP OAuth callback');
+    return NextResponse.redirect(errUrl, { status: 302 });
   }
 }

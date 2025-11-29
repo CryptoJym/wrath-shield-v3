@@ -1,5 +1,3 @@
-export const dynamic = 'force-dynamic';
-
 /**
  * Wrath Shield v3 - WHOOP OAuth2 Initiate Route
  *
@@ -13,7 +11,7 @@ import { cfg } from '@/lib/config';
 
 const WHOOP_AUTH_BASE_URL = 'https://api.prod.whoop.com/oauth/oauth2/auth';
 // Include 'offline' to receive a refresh_token (per WHOOP docs)
-const WHOOP_SCOPES = ['read:recovery', 'read:cycles', 'read:sleep'];
+const WHOOP_SCOPES = ['read:recovery', 'read:cycles', 'read:sleep', 'offline'];
 
 /**
  * Generate a cryptographically secure random state parameter for CSRF protection
@@ -25,21 +23,9 @@ function generateState(): string {
 /**
  * Build the WHOOP authorization URL with all required parameters
  */
-function getOriginFromRequest(req: NextRequest): string {
-  try {
-    const u = new URL(req.url);
-    return u.origin;
-  } catch {
-    const host = req.headers.get('host') ?? 'localhost:3000';
-    const proto = req.headers.get('x-forwarded-proto') ?? 'http';
-    return `${proto}://${host}`;
-  }
-}
-
-function buildAuthorizationUrl(state: string, req: NextRequest): string {
+function buildAuthorizationUrl(state: string): string {
   const config = cfg();
-  const origin = getOriginFromRequest(req);
-  const redirectUri = config.whoop.redirectUri || `${origin}/api/whoop/oauth/callback`;
+  const redirectUri = config.whoop.redirectUri;
 
   const params = new URLSearchParams({
     client_id: config.whoop.clientId,
@@ -61,13 +47,13 @@ function buildAuthorizationUrl(state: string, req: NextRequest): string {
  * 3. Setting a cookie with the state for validation in callback
  * 4. Redirecting user to WHOOP authorization page (302)
  */
-export async function GET(request: NextRequest) {
+export async function GET(_request: NextRequest) {
   try {
     // Generate state for CSRF protection
     const state = generateState();
 
     // Build authorization URL
-    const authUrl = buildAuthorizationUrl(state, request);
+    const authUrl = buildAuthorizationUrl(state);
 
     // Create response with redirect
     const response = NextResponse.redirect(authUrl, { status: 302 });

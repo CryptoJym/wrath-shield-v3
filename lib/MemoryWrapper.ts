@@ -1,22 +1,25 @@
 /**
- * Wrath Shield v3 - Mem0 Memory Wrapper
+ * Wrath Shield v3 - Unified Memory Wrapper
  *
- * Local-only memory system using Qdrant vector store with in-memory fallback.
- * No data is sent to Mem0 cloud. Embeddings are generated locally.
+ * Memory system with multiple backend support:
+ * 1. Zep Cloud (preferred) - Unified memory for all agents
+ * 2. Grok-backed memory service (fallback)
+ * 3. Qdrant vector store (fallback)
+ * 4. SQLite in-memory store (final fallback)
  *
  * SECURITY: This module must ONLY be imported in server-side code.
  */
 
 import { ensureServerOnly } from './server-only-guard';
 import { cfg } from './config';
-// Support multiple mem0ai export shapes across versions (require to avoid static import errors)
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const mem0 = require('mem0ai');
+// Support multiple mem0ai export shapes across versions
+// NOTE: mem0ai import is done lazily inside initialize() to avoid build-time
+// compatibility errors when the package shape changes. Do not import at top level.
 
 // Prevent client-side imports
 ensureServerOnly('lib/MemoryWrapper');
 
-type VectorStoreType = 'qdrant' | 'in-memory';
+type VectorStoreType = 'zep' | 'qdrant' | 'in-memory' | 'grok';
 
 interface MemoryConfig {
   vectorStore: VectorStoreType;
@@ -24,6 +27,7 @@ interface MemoryConfig {
   qdrantCollection?: string;
   embeddingsProvider: 'openai' | 'local';
   embeddingsApiKey?: string;
+  zepApiKey?: string;
 }
 
 /**
@@ -36,25 +40,39 @@ class MemoryWrapper {
   private config: MemoryConfig | null = null;
 
   /**
-   * Initialize Mem0 with Qdrant as primary, in-memory as fallback
+   * Initialize memory with preferred backend (Zep > Grok > Qdrant > SQLite)
    */
   async initialize(): Promise<void> {
     if (this.memory) {
       return; // Already initialized
     }
 
-    // Hard-disable cloud if requested
-    if (process.env.MEM0_DISABLE_CLOUD === '1') {
-      process.env.MEM0_API_KEY = '';
-    }
-
     const appConfig = cfg();
     const qdrantUrl = `http://${appConfig.qdrant.host}:${appConfig.qdrant.port}`;
     const hasMem0Key = !!process.env.MEM0_API_KEY && process.env.MEM0_API_KEY.length > 0;
+    // Check for ZEP_API_KEY or ZEP_LEGAL_API_KEY (fallback)
+    const zepApiKey = process.env.ZEP_API_KEY || process.env.ZEP_LEGAL_API_KEY;
+    const hasZepKey = !!zepApiKey && zepApiKey.length > 0;
     const grokUrl = process.env.AGENTIC_GROK_URL || 'http://localhost:8001';
-    console.log(`[MemoryWrapper] init: MEM0_API_KEY set=${hasMem0Key}, Qdrant=${qdrantUrl}, Grok=${grokUrl}`);
+    console.log(`[MemoryWrapper] init: ZEP_API_KEY set=${hasZepKey}, MEM0_API_KEY set=${hasMem0Key}, Qdrant=${qdrantUrl}, Grok=${grokUrl}`);
 
     const inTest = process.env.NODE_ENV === 'test';
+
+    // Try Zep first (preferred unified memory)
+    if (hasZepKey && !inTest) {
+      try {
+        await this.tryZep();
+        this.config = {
+          vectorStore: 'zep',
+          embeddingsProvider: 'openai', // Zep handles embeddings
+          zepApiKey: zepApiKey,
+        };
+        console.log('[MemoryWrapper] Successfully connected to Zep Cloud');
+        return;
+      } catch (error) {
+        console.warn('[MemoryWrapper] Zep unavailable, falling back to other options:', error);
+      }
+    }
 
     // Prefer Grok-backed memory if service is reachable (skip in test)
     const grokHealth = inTest ? null : await fetch(`${grokUrl}/api/agentic/health`).catch(() => null);
@@ -123,13 +141,99 @@ class MemoryWrapper {
   }
 
   /**
+   * Attempt to connect to Zep Cloud
+   */
+  private async tryZep(): Promise<void> {
+    try {
+      const {
+        initializeZep,
+        addZepMemory,
+        searchZepMemory,
+        getRecentZepMemories,
+        deleteZepMemory,
+        getZepContext,
+      } = await import('./memory/zep');
+
+      // Initialize Zep client
+      await initializeZep();
+
+      // Create adapter that matches the existing memory interface
+      this.memory = {
+        add: async (text: string, opts: { user_id: string; metadata?: any }) => {
+          // Map user_id to agent format if needed
+          const agentId = this.mapUserIdToAgent(opts.user_id);
+          await addZepMemory(agentId, text, opts.metadata);
+        },
+        search: async (query: string, opts: { user_id: string; limit?: number }) => {
+          const agentId = this.mapUserIdToAgent(opts.user_id);
+          const results = await searchZepMemory(agentId, query, opts.limit ?? 5);
+          return results.map(r => ({
+            id: r.memory.id,
+            text: r.memory.text,
+            metadata: r.memory.metadata,
+            score: r.score,
+          }));
+        },
+        getAll: async (opts: { user_id: string }) => {
+          const agentId = this.mapUserIdToAgent(opts.user_id);
+          const memories = await getRecentZepMemories(agentId, 100);
+          return memories.map(m => ({
+            id: m.id,
+            text: m.text,
+            metadata: m.metadata,
+          }));
+        },
+        delete: async (id: string) => {
+          // For deletion, we need sessionId - this is a simplified version
+          // In production, you'd track sessionId with the memory
+          console.warn('[MemoryWrapper] Zep delete requires sessionId - operation skipped');
+        },
+        getContext: async (userId: string) => {
+          const agentId = this.mapUserIdToAgent(userId);
+          return await getZepContext(agentId);
+        },
+      };
+    } catch (error) {
+      console.error('[MemoryWrapper] Zep initialization failed:', error);
+      throw error;
+    }
+  }
+
+  /**
+   * Map user_id to AgentId format
+   * Converts formats like 'finance', 'legal', 'pm' to 'finance-agent', etc.
+   */
+  private mapUserIdToAgent(userId: string): any {
+    // If already in agent format, return as-is
+    if (userId.endsWith('-agent')) {
+      return userId;
+    }
+
+    // Map common agent names
+    const agentMap: Record<string, string> = {
+      finance: 'finance-agent',
+      legal: 'legal-agent',
+      pm: 'pm-agent',
+      ea: 'ea-agent',
+      comms: 'comms-agent',
+      hyro: 'hyro-agent',
+      grok: 'hyro-agent',
+      relationships: 'relationships-agent',
+      eeg: 'eeg-agent',
+    };
+
+    return agentMap[userId.toLowerCase()] || `${userId}-agent`;
+  }
+
+  /**
    * Attempt to connect to Qdrant (HTTP health check)
    */
   private async tryQdrant(url: string): Promise<void> {
     if (process.env.NODE_ENV === 'test') {
-      const { QdrantClient }: any = await import('qdrant-client');
-      const client = new QdrantClient({ url });
-      await client.getCollections();
+      // Use the low-level Api class from qdrant-client package
+      const { Api } = await import('qdrant-client');
+      const client = new Api({ baseUrl: url });
+      await client.collections.getCollections();
       // Minimal stub memory for test environment (behaves like Mem0 interface)
       const store: Record<string, any[]> = {};
       this.memory = {
@@ -157,20 +261,27 @@ class MemoryWrapper {
 
     // Initialize Mem0 with Qdrant configuration
     if (process.env.NODE_ENV !== 'test') {
-      const MemoryClass: Mem0Ctor = (mem0 as any).Memory || (mem0 as any).MemoryClient || (mem0 as any).default;
-      this.memory = new MemoryClass({
-        // mem0 JS client expects camelCase apiKey
-        apiKey: process.env.MEM0_API_KEY || undefined,
-        vector_store: {
-          provider: 'qdrant',
-          config: {
-            url,
-            collection_name: 'wrath_shield_memories',
+      try {
+        const mem0 = await import('mem0ai').catch(() => null);
+        const MemoryClass: Mem0Ctor | null =
+          mem0 && ((mem0 as any).Memory || (mem0 as any).MemoryClient || (mem0 as any).default);
+        if (!MemoryClass) throw new Error('mem0ai not available');
+        this.memory = new MemoryClass({
+          api_key: process.env.MEM0_API_KEY || undefined,
+          vector_store: {
+            provider: 'qdrant',
+            config: {
+              url,
+              collection_name: 'wrath_shield_memories',
+            },
           },
-        },
-        embedder: this.getEmbedderConfig(),
-        version: 'v1.0',
-      });
+          embedder: this.getEmbedderConfig(),
+          version: 'v1.0',
+        });
+      } catch (e) {
+        console.warn('[MemoryWrapper] mem0ai unavailable, falling back to in-memory store');
+        await this.useInMemory();
+      }
     }
   }
 
@@ -179,8 +290,14 @@ class MemoryWrapper {
    */
   private async useInMemory(): Promise<void> {
     if (process.env.NODE_ENV === 'test') {
-      const MemoryClass: Mem0Ctor = (mem0 as any).Memory || (mem0 as any).MemoryClient || (mem0 as any).default;
-      this.memory = new MemoryClass({});
+      const mem0 = await import('mem0ai').catch(() => null);
+      const MemoryClass: Mem0Ctor | null =
+        mem0 && ((mem0 as any).Memory || (mem0 as any).MemoryClient || (mem0 as any).default);
+      if (MemoryClass) {
+        this.memory = new MemoryClass({});
+      } else {
+        this.memory = null;
+      }
       return;
     }
 

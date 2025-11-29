@@ -1,0 +1,88 @@
+{
+  "owner": "James Brady",
+  "version": 1,
+  "lastUpdated": "2025-11-28",
+  "global_principles": [
+    "Decrease entropy: fewer scattered systems, fewer duplicate tasks, clearer ownership.",
+    "Increase coherence: every task should trace back to an org, project, and life priority.",
+    "Protect relationships: never optimise work at the expense of critical family obligations.",
+    "Default to private and compliant AI: sensitive data (FCRA, financials, personal PII) stays in private systems; external LLMs see only summaries/redacted views.",
+    "Agents propose structure; humans approve structural changes."
+  ],
+  "priority_stack": [
+    {
+      "id": "family",
+      "name": "Family & Home",
+      "description": "Lisa, Hiro, home stability, health, and core life logistics.",
+      "weight": 10
+    },
+    {
+      "id": "utlyze",
+      "name": "Utlyze / Managed AI Ventures",
+      "description": "Utlyze as the managed AI provider + portfolio ventures like Vuplicity and Reward.",
+      "weight": 9
+    },
+    {
+      "id": "solutionstream_kahoa",
+      "name": "SolutionStream & Kahoa",
+      "description": "Client work and strategic AI initiatives with Jason Thelin, Justin Rohatinsky, Ryan Kell, and Connor Larson.",
+      "weight": 8
+    },
+    {
+      "id": "personal_growth",
+      "name": "Personal Development",
+      "description": "James' own health, learning, and long-term skill-building.",
+      "weight": 7
+    }
+  ],
+  "coherence_rules": {
+    "avoid_fragmentation": [
+      "Maintain a single Life-OS task system as the source of truth.",
+      "External tools like Motion or GitHub are mirrors, not primary truth."
+    ],
+    "deadline_rules": [
+      "Family emergencies and hard health deadlines override all other domains.",
+      "FCRA / compliance deadlines in Vuplicity are treated as CRITICAL unless explicitly downgraded."
+    ],
+    "meeting_rules": [
+      "Do not book work meetings that consistently collide with fixed family anchors without explicit override by James."
+    ]
+  },
+  "escalation_levels": {
+    "CRITICAL": {
+      "description": "Immediate notification to James - requires human decision",
+      "triggers": [
+        "Legal threats or lawsuits",
+        "FCRA/compliance incidents",
+        "Security breaches",
+        "Financial anomalies > $1000",
+        "Family emergencies",
+        "Health-related urgencies"
+      ],
+      "response_time": "immediate"
+    },
+    "PROPOSE": {
+      "description": "Agent proposes action, awaits James approval",
+      "triggers": [
+        "New projects or repositories",
+        "Significant expenses ($100-$1000)",
+        "Structural changes to domains/agents",
+        "Bulk task operations (>5 items)",
+        "Meeting scheduling with external parties",
+        "Deadline changes on committed work"
+      ],
+      "response_time": "within_24h"
+    },
+    "AUTO_EXECUTE": {
+      "description": "Agent handles autonomously, logs for review",
+      "triggers": [
+        "Email classification and routing",
+        "Task status updates",
+        "Routine categorization",
+        "Data sync operations",
+        "Low-risk clean-up tasks"
+      ],
+      "response_time": "logged_only"
+    }
+  }
+}

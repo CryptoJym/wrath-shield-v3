@@ -1,4 +1,15 @@
-import BetterSqlite3 from 'better-sqlite3';
+// Lazy load better-sqlite3 so the app can run even if the native module
+// is missing or compiled for a different Node version (e.g., in dev after
+// switching Node runtimes). When unavailable, we return in-memory fallbacks
+// and the graph will simply show zero relationship items instead of crashing.
+let BetterSqlite3: any = null;
+try {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  BetterSqlite3 = require('better-sqlite3');
+} catch (e) {
+  console.warn('[relationships] better-sqlite3 not available, using noop DB', e instanceof Error ? e.message : e);
+}
+
 import { existsSync, mkdirSync } from 'fs';
 import { resolve, join } from 'path';
 
@@ -10,8 +21,15 @@ function ensureDir() {
 }
 
 export function getRelationshipDb() {
+  if (!BetterSqlite3) return null;
   ensureDir();
-  const db = new BetterSqlite3(dbPath);
+  let db: any;
+  try {
+    db = new BetterSqlite3(dbPath);
+  } catch (e) {
+    console.warn('[relationships] failed to open better-sqlite3 database; falling back to noop', e instanceof Error ? e.message : e);
+    return null;
+  }
   db.pragma('journal_mode = WAL');
   db.pragma('synchronous = NORMAL');
   db.exec(`
@@ -57,6 +75,7 @@ export type ContactRow = {
 
 export function upsertContact(row: ContactRow) {
   const db = getRelationshipDb();
+  if (!db) return;
   const stmt = db.prepare(`
     INSERT INTO contacts (id, display_name, handle, canonical_handle, confidence, last_ts, last_text, message_count, sent_count, recv_count)
     VALUES (@id, @display_name, @handle, @canonical_handle, @confidence, @last_ts, @last_text, @message_count, @sent_count, @recv_count)
@@ -77,13 +96,15 @@ export function upsertContact(row: ContactRow) {
 
 export function topContacts(limit = 50): ContactRow[] {
   const db = getRelationshipDb();
-  const stmt = db.prepare<ContactRow>(`SELECT * FROM contacts ORDER BY last_ts DESC LIMIT ?`);
-  return stmt.all(limit);
+  if (!db) return [];
+  const stmt = db.prepare(`SELECT * FROM contacts ORDER BY last_ts DESC LIMIT ?`);
+  return stmt.all(limit) as ContactRow[];
 }
 
 export function updateDisplayNameByHandle(handle: string, displayName: string) {
   if (!handle || !displayName) return;
   const db = getRelationshipDb();
+  if (!db) return;
   const stmt = db.prepare(`
     UPDATE contacts
     SET display_name = ?
@@ -101,6 +122,7 @@ export type RelationshipSummary = {
 
 export function upsertRelationshipSummary(s: RelationshipSummary) {
   const db = getRelationshipDb();
+  if (!db) return;
   const stmt = db.prepare(`
     INSERT INTO relationship_summaries (contact_id, summary, suggested_follow_up, last_updated)
     VALUES (@contact_id, @summary, @suggested_follow_up, @last_updated)
@@ -114,11 +136,12 @@ export function upsertRelationshipSummary(s: RelationshipSummary) {
 
 export function listRelationshipSummaries(): RelationshipSummary[] {
   const db = getRelationshipDb();
-  const stmt = db.prepare<RelationshipSummary>(`SELECT * FROM relationship_summaries ORDER BY last_updated DESC`);
-  return stmt.all();
+  if (!db) return [];
+  const stmt = db.prepare(`SELECT * FROM relationship_summaries ORDER BY last_updated DESC`);
+  return stmt.all() as RelationshipSummary[];
 }
 
-function ensureColumn(db: BetterSqlite3.Database, table: string, column: string, alterSql: string) {
+function ensureColumn(db: any, table: string, column: string, alterSql: string) {
   try {
     const rows = db.prepare(`PRAGMA table_info(${table})`).all();
     const has = rows.some((r: any) => r.name === column);
@@ -128,7 +151,7 @@ function ensureColumn(db: BetterSqlite3.Database, table: string, column: string,
   }
 }
 
-function ensureIndex(db: BetterSqlite3.Database, indexName: string, createSql: string) {
+function ensureIndex(db: any, indexName: string, createSql: string) {
   try {
     const row = db.prepare(`SELECT name FROM sqlite_master WHERE type='index' AND name=?`).get(indexName);
     if (!row) db.exec(createSql);

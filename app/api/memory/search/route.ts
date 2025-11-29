@@ -7,18 +7,17 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { searchMemories } from '@/lib/MemoryWrapper';
-
-const DEFAULT_USER_ID = 'default';
+import { currentUserOrThrow } from '@/lib/auth/user';
 
 /**
  * GET /api/memory/search?q=...&limit=...&userId=...
  */
 export async function GET(request: NextRequest): Promise<NextResponse> {
   try {
+    const { userId } = currentUserOrThrow();
     const { searchParams } = new URL(request.url);
     const query = searchParams.get('q') ?? '';
     const limit = Number(searchParams.get('limit') ?? '5');
-    const userId = searchParams.get('userId') ?? DEFAULT_USER_ID;
 
     if (!query || query.trim() === '') {
       return NextResponse.json(
@@ -44,10 +43,10 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
  */
 export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
+    const { userId } = currentUserOrThrow();
     const body = await request.json();
     const query = (body?.query as string) ?? '';
     const limit = Number(body?.limit ?? 5);
-    const userId = (body?.userId as string) ?? DEFAULT_USER_ID;
 
     if (!query || typeof query !== 'string') {
       return NextResponse.json(
@@ -66,4 +65,3 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     );
   }
 }
-

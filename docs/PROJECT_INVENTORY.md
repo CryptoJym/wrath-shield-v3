@@ -1,8 +1,9 @@
 # Complete Project Inventory
 
-> Generated: 2025-11-24
-> Total Repositories: 186 (CryptoJym: 86, h3ro-dev: 100)
+> Generated: 2025-11-24 (Updated with CryptoJym + vuplicity org scan)
+> Total Repositories: 194 (CryptoJym: 80, h3ro-dev: 100, vuplicity: 8, misc: 6)
 > Motion Workspaces: 9
+> GitHub Organizations: CryptoJym (user), h3ro-dev (org), vuplicity (org)
 
 ---
 
@@ -231,3 +232,200 @@ Financial tools and business operations.
 - **Client Work**: Kahoa, Utlyze, Vuplicity are active client/product projects
 - **R&D Pipeline**: Experiments feed into production projects
 - **Memory System**: Zep + PM Agent should track project statuses in real-time
+
+---
+
+## Appendix A: CryptoJym User Repositories (Full Scan 2025-11-24)
+
+### A.1 Core Products & Platforms
+
+| Repository | Description | Private | Language | Last Updated |
+|------------|-------------|---------|----------|--------------|
+| `wrath-shield-v3` | Complete Next.js backend for manipulation detection with WHOOP/Limitless | No | TypeScript | 2025-11-12 |
+| `businessofone` | Solo business consulting and optimization | No | TypeScript | 2025-11-24 |
+| `fcra-compliance-matrix` | Comprehensive FCRA compliance schema for all US jurisdictions | Yes | Python | 2025-11-14 |
+| `fcra-compliance-researcher` | Automated multi-agent FCRA research pipeline | No | Python | 2025-08-14 |
+
+### A.2 MCP Servers (CryptoJym)
+
+| Repository | Description | Private | Language |
+|------------|-------------|---------|----------|
+| `gohighlevel-mcp` | GoHighLevel MCP Server - 21 tools for CRM automation | No | JavaScript |
+| `gohighlevel-mcp-server` | GoHighLevel MCP integration | No | JavaScript |
+| `gamma-mcp-server` | Gamma API - presentations, documents, social content | No | TypeScript |
+| `freshbooks-mcp-server` | FreshBooks inventory management MCP | No | Python |
+| `marketing-mcp-servers` | Multi-platform social/email/SEO marketing automation | No | Python |
+| `oss-120b-pm-mcp` | OSS 120B Autonomous PM - GitHub/Notion/Motion sync | No | TypeScript |
+| `whoop-mcp-server` | WHOOP API health/fitness data access | Yes | TypeScript |
+| `cloze-crm-mcp` | Cloze CRM MCP with Six Sigma validation | Yes | TypeScript |
+| `cloze-mcp-server` | Cloze CRM comprehensive API coverage | Yes | TypeScript |
+| `informdata-mcp` | InformData background check MCP | Yes | TypeScript |
+
+### A.3 Client Work (CryptoJym)
+
+| Repository | Description | Private | Motion Workspace |
+|------------|-------------|---------|------------------|
+| `solutionstream-website` | SolutionStream website backup - AI software services | No | solutionstream |
+| `solutionstream-site` | SolutionStream site managed with Task Master | Yes | solutionstream |
+| `Solutionstream` | SolutionStream project root | Yes | solutionstream |
+| `kahoa-roadmap` | Kahoa roadmap documentation | No | kahoa |
+| `hdws-data-outreach` | High Desert Water Systems - FreshBooks analysis | Yes | - |
+| `luxstone-website` | Luxstone Group Strategic Analysis | No | - |
+| `2020-companies-executive-workstation` | 2020 Companies executive tools | No | - |
+| `pitch-2020-site` | 2020 master pitch site | No | - |
+
+### A.4 Vuplicity Ecosystem (CryptoJym mirrors)
+
+| Repository | Description | Private | Origin |
+|------------|-------------|---------|--------|
+| `vuplicity-status-site` | Vuplicity status page | No | - |
+| `vuplicity-employee-portal` | Migrated from Vuplicity org | Yes | vuplicity |
+| `vuplicity-hr-portal` | Migrated from Vuplicity org | Yes | vuplicity |
+| `vuplicity-api` | Migrated from Vuplicity org | Yes | vuplicity |
+| `Vuplicity-Website` | Migrated from Vuplicity org | Yes | vuplicity |
+
+### A.5 AI/ML & Research
+
+| Repository | Description | Private | Domain |
+|------------|-------------|---------|--------|
+| `eeg-burst-recorder` | Real-time EEG burst detection for MW75 Neuro | No | BCI |
+| `eeg-meditation-analysis` | Brainwave analysis for meditation tracking | No | BCI |
+| `brain-visualization-app` | Brain visualization application | No | BCI |
+| `bci-research` | Brain-Computer Interface - neural to LLM tokens | No | BCI |
+| `nanobanana-api` | Gemini 2.5 Flash image generation for brain viz | No | BCI |
+| `ai-agent-village-monitor` | AI agent village monitoring | No | Agents |
+| `ai-lead-gen-pro` | AI lead generation with 5-pass Horsemen analysis | No | Sales |
+| `ai-opportunity-analyzer` | AI opportunity analysis microservices | No | Analysis |
+| `ai-readiness-assessment` | Organization AI readiness assessment | No | Consulting |
+| `agent-foundry` | Interactive open-weight model selection tool | No | Infrastructure |
+| `legal-advocate-ai` | Legal workflow assistant for Utah family law | Yes | Legal |
+
+### A.6 Utlyze Products
+
+| Repository | Description | Private |
+|------------|-------------|---------|
+| `utlyze-futuristic` | Utlyze futuristic web application | No |
+| `utlyze-business-structure-site` | Utlyze business structure site | No |
+| `utlyze-taskmaster-mem0` | Taskmaster with Mem0 cloud memory | No |
+| `utlyze-financial-report` | Utlyze Q2 2025 financial report | Yes |
+| `utlyze-financial-dashboard` | 686% ROI dashboard on AI dev tools | Yes |
+
+### A.7 Automation & Tools
+
+| Repository | Description | Private |
+|------------|-------------|---------|
+| `audio-pipeline` | Multi-speaker audio cleanup/diarization/transcription | Yes |
+| `sidekick-testing-agent` | Sidekick UI testing with OpenAI CUA + Playwright | No |
+| `Overseer` | GitHub Action for roadmaps, memory graph, todoist | No |
+| `loom-automation` | Loom video automation | Yes |
+| `fleetops-orchestrator` | Fleet operations orchestrator | Yes |
+| `limitless-intake-pipeline` | Limitless pendant ingestion + Mem0 | Yes |
+
+### A.8 Other/Archived
+
+| Repository | Description | Private | Notes |
+|------------|-------------|---------|-------|
+| `informdata-sales-sheet` | InformData sales collateral automation | No | Sales |
+| `informdata-forensic-analysis` | InformData API forensic analysis | No | Debug |
+| `informdata-api-docs` | Interactive InformData API docs | No | Docs |
+| `streamlined-marketing` | Marketing streamlining | Yes | Marketing |
+| `ai-executive-outbound-taskmaster` | Executive outbound automation | Yes | Sales |
+| `mac-local-agent-starter` | Mac local agent starter kit | Yes | Template |
+| `ciso-shield-ai` | CISO Shield AI security | Yes | Security |
+| `elite-ai-leads` | Elite AI lead generation | Yes | Sales |
+| `one-llc-launchpad` | LLC of One - multi-venture launch | Yes | Of One |
+| `hr-of-one-launchpad` | HR of One launchpad | Yes | Of One |
+| `h3ro-dev` | H3RO dev utilities | Yes | Internal |
+| `taskmaster-due-process-20251030-152214` | Task Master scaffolded project | Yes | Template |
+
+### A.9 Blockchain/Crypto (Archived)
+
+| Repository | Description | Private |
+|------------|-------------|---------|
+| `blockchain-reward-hub` | Blockchain reward hub | Yes |
+| `voucher-hub` | Voucher hub | Yes |
+| `Verification` | Holdings verification | Yes |
+| `fishy-fortune-dashboard` | Fish project dashboard | Yes |
+| `fish-wallet-reward-dashboard` | Fish wallet rewards | Yes |
+| `Fishproject` | Fish project landing | Yes |
+| `chrysalis-loyalty-launch-24ac01c8` | Chrysalis loyalty launch | Yes |
+
+---
+
+## Appendix B: Vuplicity Organization Repositories (Full Scan 2025-11-24)
+
+**Organization**: `vuplicity` (8 repositories, all private)
+
+| Repository | Description | Language | Last Updated | Motion Workspace |
+|------------|-------------|----------|--------------|------------------|
+| `vuplicity-workers` | Cloudflare Workers for Vuplicity | JavaScript | 2025-11-11 | vuplicity |
+| `vuplicity-api` | Core backend API - business logic, DB, integrations | JavaScript | 2025-11-11 | vuplicity |
+| `vuplicity-hr-portal` | HR background check management interface | TypeScript | 2025-11-08 | vuplicity |
+| `informdata-api-documentation` | InformData API documentation | Python | 2025-11-05 | vuplicity |
+| `vuplicity-employee-portal` | Candidate consent/dispute/report portal | TypeScript | 2025-11-05 | vuplicity |
+| `Vuplicity-Website` | Main Vuplicity website | TypeScript | 2025-10-20 | vuplicity |
+| `stripe-test` | Stripe card-on-file billing test system | JavaScript | 2025-09-17 | vuplicity |
+| `informdata-mcp` | InformData MCP integration | Python | 2025-05-30 | vuplicity |
+
+### Vuplicity Architecture
+
+```
+vuplicity/
+├── vuplicity-api          # Backend API (Node.js/JavaScript)
+├── vuplicity-hr-portal    # HR-facing portal (React/TypeScript)
+├── vuplicity-employee-portal  # Candidate-facing portal (React/TypeScript)
+├── vuplicity-workers      # Edge workers (Cloudflare)
+├── Vuplicity-Website      # Marketing site (TypeScript)
+├── informdata-mcp         # InformData integration (Python)
+├── informdata-api-documentation  # API docs (Python)
+└── stripe-test            # Payment testing (JavaScript)
+```
+
+---
+
+## Appendix C: Proposed New Motion↔GitHub Mappings
+
+### HIGH Priority (Immediate)
+
+| Motion Workspace | Motion Project | GitHub Repo | Owner | Confidence |
+|-----------------|----------------|-------------|-------|------------|
+| `vuplicity` | Vuplicity Platform | `vuplicity-api` | vuplicity | High |
+| `vuplicity` | Vuplicity HR Portal | `vuplicity-hr-portal` | vuplicity | High |
+| `vuplicity` | Vuplicity Employee Portal | `vuplicity-employee-portal` | vuplicity | High |
+| `solutionstream` | SolutionStream | `solutionstream-site` | CryptoJym | High |
+| `kahoa` | Kahoa Roadmap | `kahoa-roadmap` | CryptoJym | High |
+| `my_team` | Wrath Shield | `wrath-shield-v3` | CryptoJym | High |
+
+### MEDIUM Priority (Of One Ecosystem)
+
+| Motion Workspace | Motion Project | GitHub Repo | Owner | Confidence |
+|-----------------|----------------|-------------|-------|------------|
+| `my_team` | CEO of One | `ceoofone` | h3ro-dev | High |
+| `my_team` | VC of One | `vcofone` | h3ro-dev | High |
+| `my_team` | Director of One | `directorofone` | h3ro-dev | High |
+| `my_team` | HR of One | `hrofone` | h3ro-dev | High |
+| `my_team` | Business of One | `businessofone` | CryptoJym | High |
+| `my_team` | LLC of One | `one-llc-launchpad` | CryptoJym | Medium |
+
+### MEDIUM Priority (MCP Servers)
+
+| Motion Workspace | Motion Project | GitHub Repo | Owner | Confidence |
+|-----------------|----------------|-------------|-------|------------|
+| `my_team` | GoHighLevel Integration | `gohighlevel-mcp` | CryptoJym | High |
+| `my_team` | WHOOP Integration | `whoop-mcp-server` | CryptoJym | High |
+| `my_team` | Cloze CRM Integration | `cloze-crm-mcp` | CryptoJym | High |
+| `vuplicity` | InformData Integration | `informdata-mcp` | vuplicity | High |
+
+### LOW Priority (R&D/BCI)
+
+| Motion Workspace | Motion Project | GitHub Repo | Owner | Notes |
+|-----------------|----------------|-------------|-------|-------|
+| `hyro_education_development` | EEG Research | `eeg-burst-recorder` | CryptoJym | BCI research |
+| `hyro_education_development` | Brain Viz | `brain-visualization-app` | CryptoJym | BCI research |
+| `hyro_education_development` | BCI Research | `bci-research` | CryptoJym | Neural-LLM |
+
+---
+
+## Appendix D: Skipped/Inaccessible Repositories
+
+None encountered during this scan. All repositories from CryptoJym and vuplicity orgs were accessible.

@@ -3,8 +3,9 @@
 import { useMemo, useState, useRef, useEffect, useCallback } from "react";
 import useSWR, { mutate as globalMutate } from "swr";
 import { motion, AnimatePresence } from "framer-motion";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
+const Markdown = ({ children }: { children: string }) => (
+  <div className="whitespace-pre-wrap leading-relaxed text-slate-200 text-sm">{children}</div>
+);
 import {
   Send,
   Loader,
@@ -439,7 +440,7 @@ function ChatMessageBubble({ message, isStreaming }: { message: ChatMessage; isS
           <p className="text-sm whitespace-pre-wrap">{message.content}</p>
         ) : (
           <div className="prose prose-sm prose-invert max-w-none">
-            <ReactMarkdown remarkPlugins={[remarkGfm]}>{message.content}</ReactMarkdown>
+            <Markdown>{message.content}</Markdown>
           </div>
         )}
         {message.metadata?.actionCreated && (

@@ -105,7 +105,7 @@ function calculatePillarScore(
   );
 
   const weightedSum = relevantTweaks.reduce((sum, tweak) => {
-    const decayFactor = calculateDecayFactor((tweak.created_at ?? Math.floor(Date.now()/1000)) as number);
+    const decayFactor = calculateDecayFactor(tweak.created_at ?? Date.now());
     return sum + tweak.delta_uix * decayFactor;
   }, 0);
 
@@ -181,7 +181,7 @@ export function calculateUIXMetrics(
   const avgRecency =
     recentTweaks.length > 0
       ? recentTweaks.reduce(
-          (sum, t) => sum + calculateDecayFactor((t.created_at ?? cutoff) as number),
+          (sum, t) => sum + calculateDecayFactor(t.created_at ?? Date.now()),
           0
         ) / recentTweaks.length
       : 0;

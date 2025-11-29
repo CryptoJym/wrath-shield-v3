@@ -42,7 +42,7 @@ export async function parseCsvFiles(dir: string): Promise<TxnRow[]> {
     const content = fs.readFileSync(full, 'utf8');
     const account = detectAccount(f);
     const def = ACCOUNT_DEFAULTS[account] || {};
-    const records = parse(content, { columns: true, skip_empty_lines: true, trim: true });
+    const records = parse(content, { columns: true, skip_empty_lines: true, trim: true }) as Record<string, string>[];
     for (const r of records) {
       const raw = JSON.stringify(r);
       const dateRaw = r['Date'] || r['Transaction Date'] || r['Posted Date'] || r['Trans Date'] || '';

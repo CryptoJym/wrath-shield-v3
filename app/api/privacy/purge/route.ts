@@ -8,7 +8,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { ensureServerOnly } from '@/lib/server-only-guard';
 
-ensureServerOnly('app/api/privacy/purge/route');
+ensureServerOnly('privacy/purge');
 
 /**
  * Purge all data for a specific source
@@ -39,50 +39,35 @@ export async function POST(req: NextRequest) {
 
     // Dynamic import to avoid circular dependencies
     const { Database } = await import('@/lib/db/Database');
-    const db = Database.getInstance();
+    const db = Database.getInstance().getRawDb();
 
     let deletedRecords = 0;
 
     if (source === 'whoop') {
       // Delete all WHOOP-related data
-      const deleteCycles = db.prepare('DELETE FROM cycles');
-      const deleteRecoveries = db.prepare('DELETE FROM recoveries');
-      const deleteSleeps = db.prepare('DELETE FROM sleeps');
-      const deleteTokens = db.prepare('DELETE FROM tokens WHERE provider = ?');
+      const cyclesResult = db.prepare('DELETE FROM cycles').run();
+      const recoveriesResult = db.prepare('DELETE FROM recoveries').run();
+      const sleepsResult = db.prepare('DELETE FROM sleeps').run();
+      const tokensResult = db.prepare('DELETE FROM tokens WHERE provider = ?').run('whoop');
 
-      const tx = db.transaction(() => {
-        const cyclesResult = deleteCycles.run();
-        const recoveriesResult = deleteRecoveries.run();
-        const sleepsResult = deleteSleeps.run();
-        const tokensResult = deleteTokens.run('whoop');
-
-        deletedRecords =
-          cyclesResult.changes +
-          recoveriesResult.changes +
-          sleepsResult.changes +
-          tokensResult.changes;
-      });
-      // Transaction is executed immediately by db.transaction() wrapper
+      deletedRecords =
+        (cyclesResult.changes || 0) +
+        (recoveriesResult.changes || 0) +
+        (sleepsResult.changes || 0) +
+        (tokensResult.changes || 0);
 
       console.log(`[Privacy] Purged ${deletedRecords} WHOOP records`);
 
     } else if (source === 'limitless') {
       // Delete all Limitless-related data
-      const deleteLifelogs = db.prepare('DELETE FROM lifelogs');
-      const deleteSettings = db.prepare('DELETE FROM settings WHERE key = ?');
-      const deletePullTimestamp = db.prepare('DELETE FROM settings WHERE key = ?');
+      const lifelogsResult = db.prepare('DELETE FROM lifelogs').run();
+      const settingsResult = db.prepare("DELETE FROM settings WHERE key = 'limitless_api_key'").run();
+      const pullTimestampResult = db.prepare("DELETE FROM settings WHERE key = 'limitless_last_pull'").run();
 
-      const tx2 = db.transaction(() => {
-        const lifelogsResult = deleteLifelogs.run();
-        const settingsResult = deleteSettings.run('limitless_api_key');
-        const pullTimestampResult = deletePullTimestamp.run('limitless_last_pull');
-
-        deletedRecords =
-          lifelogsResult.changes +
-          settingsResult.changes +
-          pullTimestampResult.changes;
-      });
-      // Transaction is executed immediately by db.transaction() wrapper
+      deletedRecords =
+        (lifelogsResult.changes || 0) +
+        (settingsResult.changes || 0) +
+        (pullTimestampResult.changes || 0);
 
       console.log(`[Privacy] Purged ${deletedRecords} Limitless records`);
     }
@@ -130,23 +115,23 @@ export async function GET(req: NextRequest) {
 
     // Dynamic import to avoid circular dependencies
     const { Database } = await import('@/lib/db/Database');
-    const db = Database.getInstance();
+    const db = Database.getInstance().getRawDb();
 
     let recordCount = 0;
 
     if (source === 'whoop') {
-      const cyclesCount = db.prepare('SELECT COUNT(*) as count FROM cycles').get() as { count: number };
-      const recoveriesCount = db.prepare('SELECT COUNT(*) as count FROM recoveries').get() as { count: number };
-      const sleepsCount = db.prepare('SELECT COUNT(*) as count FROM sleeps').get() as { count: number };
-      const tokensCount = db.prepare('SELECT COUNT(*) as count FROM tokens WHERE provider = ?').get('whoop') as { count: number };
+      const cyclesCount = db.prepare('SELECT COUNT(*) as count FROM cycles').get() as { count: number } | undefined;
+      const recoveriesCount = db.prepare('SELECT COUNT(*) as count FROM recoveries').get() as { count: number } | undefined;
+      const sleepsCount = db.prepare('SELECT COUNT(*) as count FROM sleeps').get() as { count: number } | undefined;
+      const tokensCount = db.prepare('SELECT COUNT(*) as count FROM tokens WHERE provider = ?').get('whoop') as { count: number } | undefined;
 
-      recordCount = cyclesCount.count + recoveriesCount.count + sleepsCount.count + tokensCount.count;
+      recordCount = (cyclesCount?.count || 0) + (recoveriesCount?.count || 0) + (sleepsCount?.count || 0) + (tokensCount?.count || 0);
 
     } else if (source === 'limitless') {
-      const lifelogsCount = db.prepare('SELECT COUNT(*) as count FROM lifelogs').get() as { count: number };
-      const settingsCount = db.prepare('SELECT COUNT(*) as count FROM settings WHERE key IN (?, ?)').get('limitless_api_key', 'limitless_last_pull') as { count: number };
+      const lifelogsCount = db.prepare('SELECT COUNT(*) as count FROM lifelogs').get() as { count: number } | undefined;
+      const settingsCount = db.prepare('SELECT COUNT(*) as count FROM settings WHERE key IN (?, ?)').get('limitless_api_key', 'limitless_last_pull') as { count: number } | undefined;
 
-      recordCount = lifelogsCount.count + settingsCount.count;
+      recordCount = (lifelogsCount?.count || 0) + (settingsCount?.count || 0);
     }
 
     return NextResponse.json({

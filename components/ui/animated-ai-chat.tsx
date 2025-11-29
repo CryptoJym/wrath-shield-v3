@@ -17,10 +17,12 @@ import {
     X as XIcon,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
 import { createPortal } from 'react-dom';
 import * as React from "react"
+
+const Markdown = ({ children }: { children: string }) => (
+  <div className="whitespace-pre-wrap leading-relaxed text-slate-200 text-sm">{children}</div>
+);
 
 interface UseAutoResizeTextareaProps {
     minHeight: number;
@@ -487,37 +489,7 @@ export function AnimatedAIChat() {
                                                             )}
                                                         </button>
                                                     </div>
-                                                    <ReactMarkdown
-                                                        remarkPlugins={[remarkGfm]}
-                                                        // Relax types for custom renderers to avoid noisy generics
-                                                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                                                        components={{
-                                                            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                                                            h1({ children }: any) { return <h3 style={{ fontSize: '1.125rem', fontWeight: 700 }}>{children}</h3> as any; },
-                                                            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                                                            h2({ children }: any) { return <h4 style={{ fontSize: '1rem', fontWeight: 700 }}>{children}</h4> as any; },
-                                                            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                                                            h3({ children }: any) { return <h5 style={{ fontSize: '0.95rem', fontWeight: 700 }}>{children}</h5> as any; },
-                                                            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                                                            code(props: any) {
-                                                                const { inline, children } = props;
-                                                                if (inline) return <code style={{ background: 'rgba(255,255,255,0.08)', padding: '0 4px', borderRadius: 4 }}>{children}</code> as any;
-                                                                return (
-                                                                    <pre style={{ background: 'rgba(255,255,255,0.06)', padding: 12, borderRadius: 8, overflow: 'auto', maxHeight: 320 }}>
-                                                                        <code>{children}</code>
-                                                                    </pre>
-                                                                ) as any;
-                                                            },
-                                                            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                                                            a({ href, children }: any) { return <a href={String(href)} target="_blank" rel="noopener noreferrer" className="underline">{children}</a> as any; },
-                                                            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                                                            li({ children }: any) { return <li style={{ marginLeft: '1.25rem' }}>{children}</li> as any; },
-                                                            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                                                            p({ children }: any) { return <p style={{ marginTop: 6, marginBottom: 6 }}>{children}</p> as any; },
-                                                        }}
-                                                    >
-                                                        {m.content}
-                                                    </ReactMarkdown>
+                                                    <Markdown>{m.content}</Markdown>
                                                 </>
                                             ) : (
                                                 <div>{m.content}</div>

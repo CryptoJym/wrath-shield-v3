@@ -1,0 +1,104 @@
+{
+  "version": 1,
+  "domains": [
+    {
+      "id": "family",
+      "name": "Family & Home",
+      "type": "personal",
+      "description": "Responsibilities related to Lisa, your marriage, shared home, and general life logistics.",
+      "owner": "James Brady",
+      "key_people": ["James Brady", "Lisa Brady"],
+      "default_agent": "agent.family",
+      "priority_weight": 10,
+      "motion_workspace": "ws_lisa",
+      "github_orgs": []
+    },
+    {
+      "id": "hiro_education",
+      "name": "Hiro Education & Development",
+      "type": "personal",
+      "description": "Project group tracking Hiro's education, development, and long-term growth.",
+      "owner": "James Brady",
+      "key_people": ["Hiro Brady", "James Brady", "Lisa Brady"],
+      "default_agent": "agent.hiro",
+      "priority_weight": 9,
+      "motion_workspace": "ws_hiro",
+      "github_orgs": []
+    },
+    {
+      "id": "utlyze_core",
+      "name": "Utlyze",
+      "type": "company",
+      "description": "Utlyze as an AI-first managed intelligence provider and venture studio building companies via private AI deployments.",
+      "owner": "James Brady",
+      "key_people": ["James Brady", "Jason Thelin"],
+      "default_agent": "agent.utlyze",
+      "priority_weight": 9,
+      "motion_workspace": "ws_utlyze",
+      "github_orgs": ["h3ro-dev", "CryptoJym"]
+    },
+    {
+      "id": "vuplicity",
+      "name": "Vuplicity",
+      "type": "venture",
+      "description": "AI-powered employment screening venture under Utlyze, focused on FCRA-compliant background checks completed in minutes, not days.",
+      "owner": "Utlyze",
+      "parent_domain": "utlyze_core",
+      "key_people": ["James Brady", "Jason Thelin"],
+      "default_agent": "agent.vuplicity",
+      "priority_weight": 9,
+      "sensitivity_level": "high_compliance",
+      "motion_workspace": "ws_vuplicity",
+      "github_orgs": ["vuplicity"]
+    },
+    {
+      "id": "reward",
+      "name": "New Reward",
+      "type": "venture",
+      "description": "Artificial-intelligence-first lead generation and marketing initiative.",
+      "owner": "Utlyze",
+      "parent_domain": "utlyze_core",
+      "key_people": ["James Brady", "Jason Thelin"],
+      "default_agent": "agent.reward",
+      "priority_weight": 7,
+      "motion_workspace": "ws_reward",
+      "github_orgs": []
+    },
+    {
+      "id": "solutionstream",
+      "name": "SolutionStream",
+      "type": "company",
+      "description": "Custom software and AI-driven development/staffing firm led by Jason Thelin, where James collaborates on client AI initiatives.",
+      "owner": "Jason Thelin",
+      "key_people": ["Jason Thelin", "James Brady", "Justin Rohatinsky"],
+      "default_agent": "agent.solutionstream",
+      "priority_weight": 8,
+      "motion_workspace": "ws_solutionstream",
+      "github_orgs": []
+    },
+    {
+      "id": "kahoa",
+      "name": "Kahoa",
+      "type": "company",
+      "description": "Strategic digital consultancy/AI training firm, closely connected with SolutionStream, involving leaders like Ryan Kell and Connor Larson.",
+      "owner": "Kahoa leadership",
+      "key_people": ["Ryan Kell", "Connor Larson", "James Brady", "Jason Thelin"],
+      "default_agent": "agent.kahoa",
+      "priority_weight": 8,
+      "motion_workspace": "ws_kahoa",
+      "github_orgs": []
+    },
+    {
+      "id": "personal_private",
+      "name": "James Private Workspace",
+      "type": "personal",
+      "description": "James' private projects, experiments, notebooks, and deep work that don't yet belong to an external org.",
+      "owner": "James Brady",
+      "key_people": ["James Brady"],
+      "default_agent": "agent.pm",
+      "priority_weight": 8,
+      "motion_workspace": "ws_private",
+      "github_orgs": ["CryptoJym"]
+    }
+  ]
+}

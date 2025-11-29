@@ -1,9 +1,8 @@
 import { shouldMiddayPing, type FlagEvent } from './schedulerLogic';
-import { runEntropyCoherencePass } from './entropyOrchestrator';
 
 export async function hourlyScan(): Promise<{ processed: number }> {
-  const res = await runEntropyCoherencePass();
-  return { processed: res.processed };
+  // Placeholder: In real impl, pull new transcripts and run SpeechMiner
+  return { processed: 0 };
 }
 
 export async function middayPing(flags: FlagEvent[]): Promise<{ shouldPing: boolean }> {

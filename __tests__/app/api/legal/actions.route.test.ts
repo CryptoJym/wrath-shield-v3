@@ -53,6 +53,7 @@ import { createPendingAction, listPendingActions, updatePendingAction } from '..
 describe('/api/legal/actions route', () => {
   beforeEach(() => {
     jest.clearAllMocks();
+    jest.resetModules();
     mockActions.clear();
   });
 

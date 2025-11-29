@@ -6,8 +6,8 @@ import { getDatabase } from '@/lib/db/Database';
 ensureServerOnly('app/api/users/default/route');
 
 export async function GET() {
-  const db = getDatabase();
-  const row = db.prepare<{ value_enc: string }>(`SELECT value_enc FROM settings WHERE key = 'default_user_id' LIMIT 1`).get();
+  const db = getDatabase().getRawDb();
+  const row = db.prepare(`SELECT value_enc FROM settings WHERE key = 'default_user_id' LIMIT 1`).get() as { value_enc: string } | undefined;
   return NextResponse.json({ defaultUserId: row?.value_enc ?? 'default' });
 }
 
@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
     if (!u) {
       return NextResponse.json({ success: false, error: 'user not found' }, { status: 404 });
     }
-    const db = getDatabase();
+    const db = getDatabase().getRawDb();
     const upsert = db.prepare(`
       INSERT INTO settings (key, value_enc, user_id)
       VALUES ('default_user_id', ?, 'default')

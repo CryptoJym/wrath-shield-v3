@@ -76,7 +76,6 @@ export async function POST(req: Request) {
         project: parsed.project ?? null,
         reimbursable: parsed.reimbursable ?? null,
         status: 'classified',
-        meta: { ...(txn.meta || {}), rationale: parsed.rationale ?? null },
       }, userId);
     } catch (e) {
       // ignore parse errors

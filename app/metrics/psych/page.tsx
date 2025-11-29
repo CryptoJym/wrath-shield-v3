@@ -2,7 +2,7 @@ import { getPsychSignalsLastNDays, getRecoveriesLastNDays } from '@/lib/db/queri
 import PsychSparkline from '@/components/PsychSparkline';
 import Link from 'next/link';
 
-function parseJson<T>(s: string | null | undefined, fallback: T): T {
+function parseJson<T>(fallback: T, s?: string | null): T {
   if (!s) return fallback;
   try { return JSON.parse(s) as T; } catch { return fallback; }
 }

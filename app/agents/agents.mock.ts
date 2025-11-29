@@ -11,6 +11,7 @@ export interface Agent {
   open_items: number;
   capabilities: string[];
   link: string;
+  avatar: string;
 }
 
 export const AGENTS_MOCK: Agent[] = [
@@ -24,7 +25,8 @@ export const AGENTS_MOCK: Agent[] = [
     last_sync: "2025-11-24T19:00:00Z",
     open_items: 3,
     capabilities: ["MyCase ingest", "Gmail Zack/Destiny", "iMessage Destiny", "Strategic brief", "Draft reply"],
-    link: "/legal/actions"
+    link: "/legal/actions",
+    avatar: "/assets/agents/legal.png"
   },
   {
     id: "finance",
@@ -36,7 +38,8 @@ export const AGENTS_MOCK: Agent[] = [
     last_sync: "2025-11-24T18:00:00Z",
     open_items: 5,
     capabilities: ["Transaction ingest", "Auto-enrich", "Cycle reports", "Disposition editor"],
-    link: "/finance"
+    link: "/finance",
+    avatar: "/assets/agents/finance.png"
   },
   {
     id: "pm",
@@ -48,7 +51,8 @@ export const AGENTS_MOCK: Agent[] = [
     last_sync: "2025-11-24T17:30:00Z",
     open_items: 2,
     capabilities: ["Motion↔GitHub sync", "Project inventory", "Cron scheduler"],
-    link: "/pm"
+    link: "/pm",
+    avatar: "/assets/agents/pm.png"
   },
   {
     id: "comms",
@@ -60,7 +64,8 @@ export const AGENTS_MOCK: Agent[] = [
     last_sync: "2025-11-24T10:00:00Z",
     open_items: 4,
     capabilities: ["Email/iMessage ingest", "Classification", "Lifelogs"],
-    link: "/inbox"
+    link: "/inbox",
+    avatar: "/assets/agents/comms.png"
   },
   {
     id: "ea",
@@ -72,7 +77,8 @@ export const AGENTS_MOCK: Agent[] = [
     last_sync: "2025-11-24T20:15:00Z",
     open_items: 1,
     capabilities: ["Calendar management", "Travel booking", "Gatekeeping"],
-    link: "/ea"
+    link: "/ea",
+    avatar: "/assets/agents/ea.png"
   },
   {
     id: "relationships",
@@ -84,7 +90,8 @@ export const AGENTS_MOCK: Agent[] = [
     last_sync: "2025-11-24T16:45:00Z",
     open_items: 6,
     capabilities: ["CRM sync", "Birthday reminders", "Outreach drafting"],
-    link: "/relationships"
+    link: "/relationships",
+    avatar: "/assets/agents/relationships.png"
   },
   {
     id: "grok",
@@ -96,7 +103,8 @@ export const AGENTS_MOCK: Agent[] = [
     last_sync: "2025-11-24T21:00:00Z",
     open_items: 0,
     capabilities: ["Deep research", "Fact checking", "Synthesis"],
-    link: "/chat"
+    link: "/chat",
+    avatar: "/assets/agents/grok.png"
   },
   {
     id: "eeg",
@@ -108,6 +116,7 @@ export const AGENTS_MOCK: Agent[] = [
     last_sync: "2025-11-23T09:00:00Z",
     open_items: 8,
     capabilities: ["Brainwave analysis", "Focus tracking", "Flow state optimization"],
-    link: "/eeg"
+    link: "/eeg",
+    avatar: "/assets/agents/eeg.png"
   }
 ];

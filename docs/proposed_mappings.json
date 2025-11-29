@@ -1,0 +1,344 @@
+{
+  "generated": "2025-11-24",
+  "status": "PROPOSED - Awaiting approval before applying",
+  "existing_mappings": [
+    {
+      "motion_project_id": "pr_zttJpHQ7XqmzmjDx9A8BtX",
+      "motion_project_name": "Guardian - Amalg - Cybersecurity of One Firm",
+      "motion_workspace": "my_team",
+      "github_owner": "CryptoJym",
+      "github_repo": "fcra-compliance-matrix",
+      "confidence": "high",
+      "status": "active"
+    },
+    {
+      "motion_project_id": "pr_1WwUd92HrosZqzXerGWN6f",
+      "motion_project_name": "CRO of One",
+      "motion_workspace": "my_team",
+      "github_owner": "h3ro-dev",
+      "github_repo": "cro-revenue-compass",
+      "confidence": "high",
+      "status": "active"
+    },
+    {
+      "motion_project_id": "pr_FFDKf79NPD7n898q7pV7mA",
+      "motion_project_name": "Creator of One",
+      "motion_workspace": "my_team",
+      "github_owner": "CryptoJym",
+      "github_repo": "marketing-mcp-servers",
+      "confidence": "medium",
+      "status": "active"
+    }
+  ],
+  "proposed_mappings": {
+    "high_priority": [
+      {
+        "motion_workspace": "vuplicity",
+        "motion_project_name": "Vuplicity Platform",
+        "github_owner": "vuplicity",
+        "github_repo": "vuplicity-api",
+        "confidence": "high",
+        "rationale": "Core Vuplicity backend API - maps directly to vuplicity workspace"
+      },
+      {
+        "motion_workspace": "vuplicity",
+        "motion_project_name": "Vuplicity HR Portal",
+        "github_owner": "vuplicity",
+        "github_repo": "vuplicity-hr-portal",
+        "confidence": "high",
+        "rationale": "HR-facing portal for background check management"
+      },
+      {
+        "motion_workspace": "vuplicity",
+        "motion_project_name": "Vuplicity Employee Portal",
+        "github_owner": "vuplicity",
+        "github_repo": "vuplicity-employee-portal",
+        "confidence": "high",
+        "rationale": "Candidate-facing consent/dispute portal"
+      },
+      {
+        "motion_workspace": "solutionstream",
+        "motion_project_name": "SolutionStream",
+        "github_owner": "CryptoJym",
+        "github_repo": "solutionstream-site",
+        "confidence": "high",
+        "rationale": "Main SolutionStream site managed with Task Master"
+      },
+      {
+        "motion_workspace": "kahoa",
+        "motion_project_name": "Kahoa Roadmap",
+        "github_owner": "CryptoJym",
+        "github_repo": "kahoa-roadmap",
+        "confidence": "high",
+        "rationale": "Kahoa roadmap documentation"
+      },
+      {
+        "motion_workspace": "my_team",
+        "motion_project_name": "Wrath Shield",
+        "github_owner": "CryptoJym",
+        "github_repo": "wrath-shield-v3",
+        "confidence": "high",
+        "rationale": "Main FCRA compliance platform - core product"
+      }
+    ],
+    "medium_priority_ofone": [
+      {
+        "motion_workspace": "my_team",
+        "motion_project_name": "CEO of One",
+        "github_owner": "h3ro-dev",
+        "github_repo": "ceoofone",
+        "confidence": "high",
+        "rationale": "Direct name match - Executive AI agent"
+      },
+      {
+        "motion_workspace": "my_team",
+        "motion_project_name": "VC of One",
+        "github_owner": "h3ro-dev",
+        "github_repo": "vcofone",
+        "confidence": "high",
+        "rationale": "Direct name match - Investment AI agent"
+      },
+      {
+        "motion_workspace": "my_team",
+        "motion_project_name": "Director of One",
+        "github_owner": "h3ro-dev",
+        "github_repo": "directorofone",
+        "confidence": "high",
+        "rationale": "Direct name match - Project management AI"
+      },
+      {
+        "motion_workspace": "my_team",
+        "motion_project_name": "HR of One",
+        "github_owner": "h3ro-dev",
+        "github_repo": "hrofone",
+        "confidence": "high",
+        "rationale": "Direct name match - HR automation AI"
+      },
+      {
+        "motion_workspace": "my_team",
+        "motion_project_name": "Business of One",
+        "github_owner": "CryptoJym",
+        "github_repo": "businessofone",
+        "confidence": "high",
+        "rationale": "Main Business of One platform"
+      },
+      {
+        "motion_workspace": "my_team",
+        "motion_project_name": "LLC of One",
+        "github_owner": "CryptoJym",
+        "github_repo": "one-llc-launchpad",
+        "confidence": "medium",
+        "rationale": "Multi-venture launch platform for solo founders"
+      }
+    ],
+    "medium_priority_mcp": [
+      {
+        "motion_workspace": "my_team",
+        "motion_project_name": "GoHighLevel Integration",
+        "github_owner": "CryptoJym",
+        "github_repo": "gohighlevel-mcp",
+        "confidence": "high",
+        "rationale": "GoHighLevel CRM MCP server - 21 tools"
+      },
+      {
+        "motion_workspace": "my_team",
+        "motion_project_name": "WHOOP Integration",
+        "github_owner": "CryptoJym",
+        "github_repo": "whoop-mcp-server",
+        "confidence": "high",
+        "rationale": "WHOOP API health/fitness data for Wrath Shield"
+      },
+      {
+        "motion_workspace": "my_team",
+        "motion_project_name": "Cloze CRM Integration",
+        "github_owner": "CryptoJym",
+        "github_repo": "cloze-crm-mcp",
+        "confidence": "high",
+        "rationale": "Cloze CRM MCP with Six Sigma validation"
+      },
+      {
+        "motion_workspace": "vuplicity",
+        "motion_project_name": "InformData Integration",
+        "github_owner": "vuplicity",
+        "github_repo": "informdata-mcp",
+        "confidence": "high",
+        "rationale": "InformData background check MCP for Vuplicity"
+      }
+    ],
+    "low_priority_rnd": [
+      {
+        "motion_workspace": "hyro_education_development",
+        "motion_project_name": "EEG Research",
+        "github_owner": "CryptoJym",
+        "github_repo": "eeg-burst-recorder",
+        "confidence": "medium",
+        "rationale": "BCI research - EEG burst detection for MW75 Neuro"
+      },
+      {
+        "motion_workspace": "hyro_education_development",
+        "motion_project_name": "Brain Visualization",
+        "github_owner": "CryptoJym",
+        "github_repo": "brain-visualization-app",
+        "confidence": "medium",
+        "rationale": "BCI research - brain visualization"
+      },
+      {
+        "motion_workspace": "hyro_education_development",
+        "motion_project_name": "BCI Research",
+        "github_owner": "CryptoJym",
+        "github_repo": "bci-research",
+        "confidence": "medium",
+        "rationale": "Neural-to-LLM token conversion research"
+      }
+    ],
+    "client_products": [
+      {
+        "motion_workspace": "utlyze",
+        "motion_project_name": "Utlyze Platform",
+        "github_owner": "CryptoJym",
+        "github_repo": "utlyze-futuristic",
+        "confidence": "medium",
+        "rationale": "Main Utlyze web application"
+      },
+      {
+        "motion_workspace": "utlyze",
+        "motion_project_name": "Utlyze Taskmaster",
+        "github_owner": "CryptoJym",
+        "github_repo": "utlyze-taskmaster-mem0",
+        "confidence": "medium",
+        "rationale": "Taskmaster with Mem0 cloud memory integration"
+      }
+    ]
+  },
+  "new_repos_discovered": {
+    "cryptojym": {
+      "total": 80,
+      "notable_additions": [
+        "eeg-burst-recorder - Real-time EEG burst detection",
+        "eeg-meditation-analysis - Brainwave analysis for meditation",
+        "brain-visualization-app - Brain visualization",
+        "bci-research - Neural to LLM tokens",
+        "whoop-mcp-server - WHOOP API integration",
+        "cloze-crm-mcp - Cloze CRM MCP",
+        "legal-advocate-ai - Utah family law assistant",
+        "ai-agent-village-monitor - Agent monitoring",
+        "audio-pipeline - Audio cleanup/transcription",
+        "sidekick-testing-agent - UI testing automation"
+      ]
+    },
+    "vuplicity_org": {
+      "total": 8,
+      "all_private": true,
+      "repos": [
+        "vuplicity-api - Core backend API",
+        "vuplicity-hr-portal - HR interface",
+        "vuplicity-employee-portal - Candidate portal",
+        "vuplicity-workers - Cloudflare Workers",
+        "Vuplicity-Website - Marketing site",
+        "informdata-mcp - InformData integration",
+        "informdata-api-documentation - API docs",
+        "stripe-test - Payment testing"
+      ]
+    }
+  },
+  "skipped_repos": [],
+  "errors": [],
+  "exec_priority_mappings": {
+    "description": "Motion↔GitHub mappings for executive priorities (2025-11-24)",
+    "existing_workspaces": [
+      {
+        "priority": "Utlyze MIP Vision",
+        "urgency": "HIGH",
+        "motion_workspace": "utlyze",
+        "motion_project": "Utlyze Platform Development",
+        "github_repos": [
+          {"repo": "utlyze-futuristic", "owner": "CryptoJym"},
+          {"repo": "utlyze-business-structure-site", "owner": "CryptoJym"},
+          {"repo": "utlyze-taskmaster-mem0", "owner": "CryptoJym"},
+          {"repo": "utlyze-financial-report", "owner": "CryptoJym"},
+          {"repo": "utlyze-financial-dashboard", "owner": "CryptoJym"}
+        ]
+      },
+      {
+        "priority": "New Reward AI Marketing",
+        "urgency": "HIGH",
+        "motion_workspace": "new_reward",
+        "motion_project": "New Reward Platform",
+        "github_repos": [
+          {"repo": "marketing-mcp-servers", "owner": "CryptoJym"},
+          {"repo": "ai-lead-gen-pro", "owner": "CryptoJym"},
+          {"repo": "creative-ad-analyzer", "owner": "h3ro-dev"},
+          {"repo": "seo-audit-tool", "owner": "h3ro-dev"}
+        ],
+        "needs_new_repo": "camera-ai-automation (Cody's project)"
+      },
+      {
+        "priority": "Solution Stream Fractional CAIO",
+        "urgency": "HIGH",
+        "motion_workspace": "solutionstream",
+        "motion_project": "SolutionStream Development",
+        "github_repos": [
+          {"repo": "solutionstream-site", "owner": "CryptoJym"},
+          {"repo": "solutionstream-website", "owner": "CryptoJym"},
+          {"repo": "Solutionstream", "owner": "CryptoJym"}
+        ]
+      },
+      {
+        "priority": "Kahoa AI Training",
+        "urgency": "MEDIUM",
+        "motion_workspace": "kahoa",
+        "motion_project": "Kahoa Platform",
+        "github_repos": [
+          {"repo": "kahoa-roadmap", "owner": "CryptoJym"}
+        ]
+      },
+      {
+        "priority": "Vuplicity Background Screening",
+        "urgency": "HIGH",
+        "motion_workspace": "vuplicity",
+        "motion_project": "Vuplicity Platform",
+        "github_repos": [
+          {"repo": "vuplicity-api", "owner": "vuplicity"},
+          {"repo": "vuplicity-hr-portal", "owner": "vuplicity"},
+          {"repo": "vuplicity-employee-portal", "owner": "vuplicity"},
+          {"repo": "vuplicity-workers", "owner": "vuplicity"},
+          {"repo": "Vuplicity-Website", "owner": "vuplicity"},
+          {"repo": "informdata-mcp", "owner": "vuplicity"}
+        ]
+      }
+    ],
+    "needs_new_motion_project": [
+      {
+        "priority": "AI Leadership Book & Breakfast Club",
+        "urgency": "MEDIUM",
+        "suggested_workspace": "my_team",
+        "suggested_project_name": "AI Leadership Book & Breakfast Club",
+        "github_repos": [],
+        "needs_new_repos": ["ai-native-leadership-book", "breakfast-club-executive"]
+      },
+      {
+        "priority": "X Data Lead Strategy",
+        "urgency": "MEDIUM",
+        "suggested_workspace": "my_team",
+        "suggested_project_name": "X Data Lead Strategy",
+        "github_repos": [
+          {"repo": "ai-lead-gen-pro", "owner": "CryptoJym"},
+          {"repo": "lead-scoring-agent", "owner": "h3ro-dev"},
+          {"repo": "social-media-agent", "owner": "h3ro-dev"}
+        ],
+        "needs_new_repos": ["x-data-pipeline"]
+      },
+      {
+        "priority": "IT Infrastructure & Podcast Studio",
+        "urgency": "LOW",
+        "suggested_workspace": "my_team",
+        "suggested_project_name": "IT Infrastructure & Podcast Studio",
+        "github_repos": [
+          {"repo": "audio-pipeline", "owner": "CryptoJym"},
+          {"repo": "coolify", "owner": "h3ro-dev"}
+        ],
+        "needs_new_repos": ["podcast-studio-setup", "infrastructure-config"]
+      }
+    ]
+  }
+}

@@ -49,6 +49,23 @@ CREATE TABLE IF NOT EXISTS finance_context_requests (
 );
 CREATE INDEX IF NOT EXISTS idx_ctx_status ON finance_context_requests(status);
 CREATE INDEX IF NOT EXISTS idx_ctx_txn ON finance_context_requests(txn_id);
+
+CREATE TABLE IF NOT EXISTS finance_audit (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  txn_id TEXT,
+  user_id TEXT,
+  source TEXT,
+  ts TEXT DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ','now')),
+  prev_bucket TEXT,
+  new_bucket TEXT,
+  prev_project TEXT,
+  new_project TEXT,
+  prev_reimbursable INTEGER,
+  new_reimbursable INTEGER,
+  note TEXT
+);
+CREATE INDEX IF NOT EXISTS idx_audit_txn ON finance_audit(txn_id);
+CREATE INDEX IF NOT EXISTS idx_audit_ts ON finance_audit(ts);
 `;
 
 function getDb() {
@@ -122,6 +139,8 @@ type TxnUpdate = {
   status?: 'pending_review' | 'classified' | 'confirmed';
   note?: string;
   rationale?: string;
+  confidence?: number;
+  meta?: any;
 };
 
 export type AuditRow = {
@@ -224,14 +243,11 @@ export async function upsertTransactionsFromRows(rows: TxnRow[], user_id?: strin
 
 export function listByDateRange(start: string, end: string, user_id?: string): TxnRow[] {
   const db = getDb();
-  const where: string[] = ['date >= ?', 'date < ?'];
-  const params: any[] = [start, end];
-  if (user_id) {
-    where.push("(user_id = ? OR user_id IS NULL OR user_id = 'default')");
-    params.push(user_id);
-  }
-  const sql = `SELECT * FROM finance_transactions WHERE ${where.join(' AND ')} ORDER BY date DESC`;
-  const rows = db.prepare<TxnRow>(sql).all(...params) as any[];
+  const sql = user_id
+    ? `SELECT * FROM finance_transactions WHERE date >= ? AND date < ? AND (user_id = ? OR user_id IS NULL OR user_id = 'default') ORDER BY date DESC`
+    : `SELECT * FROM finance_transactions WHERE date >= ? AND date < ? ORDER BY date DESC`;
+  const stmt = db.prepare(sql);
+  const rows = (user_id ? stmt.all(start, end, user_id) : stmt.all(start, end)) as any[];
   db.close();
   return rows.map((r) => ({
     ...r,
@@ -297,7 +313,7 @@ export function bulkUpdateVendor(
 
 export function getTransaction(id: string): TxnRow | null {
   const db = getDb();
-  const row = db.prepare<TxnRow>('SELECT * FROM finance_transactions WHERE id = ?').get(id) as any;
+  const row = db.prepare('SELECT * FROM finance_transactions WHERE id = ?').get(id) as any;
   db.close();
   if (!row) return null;
   return {
@@ -396,7 +412,7 @@ export function createContextRequest(input: Partial<ContextRequest>): ContextReq
   const db = getDb();
   if (input.txn_id) {
     const existing = db
-      .prepare<ContextRequest>(
+      .prepare(
         "SELECT * FROM finance_context_requests WHERE txn_id = ? AND status = 'pending' LIMIT 1"
       )
       .get(input.txn_id) as any;
@@ -428,7 +444,7 @@ export function createContextRequest(input: Partial<ContextRequest>): ContextReq
     created_at: now,
     updated_at: now,
   });
-  const out = db.prepare<ContextRequest>('SELECT * FROM finance_context_requests WHERE id = ?').get(id) as any;
+  const out = db.prepare('SELECT * FROM finance_context_requests WHERE id = ?').get(id) as any;
   db.close();
   return out;
 }
@@ -458,7 +474,7 @@ export function listContextRequests(
 
 export function updateContextRequest(id: string, updates: Partial<ContextRequest>): ContextRequest | null {
   const db = getDb();
-  const existing = db.prepare<ContextRequest>('SELECT * FROM finance_context_requests WHERE id = ?').get(id) as any;
+  const existing = db.prepare('SELECT * FROM finance_context_requests WHERE id = ?').get(id) as any;
   if (!existing) {
     db.close();
     return null;
@@ -489,7 +505,7 @@ export function updateContextRequest(id: string, updates: Partial<ContextRequest
         ? 1
         : 0,
   });
-  const out = db.prepare<ContextRequest>('SELECT * FROM finance_context_requests WHERE id = ?').get(id) as any;
+  const out = db.prepare('SELECT * FROM finance_context_requests WHERE id = ?').get(id) as any;
   db.close();
   return out;
 }

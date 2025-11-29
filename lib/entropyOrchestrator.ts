@@ -21,6 +21,11 @@ import type { Lifelog } from './db/types';
 import { PromptBuilder } from './PromptBuilder';
 import { DirectLLMClients } from './DirectLLMClients';
 import { initializeMemory, getAllMemories, addMemory } from './MemoryWrapper';
+import {
+  getAgent,
+  getLifeCharter,
+  determineEscalationLevel,
+} from './life-os-config';
 
 type RunOptions = {
   userId?: string;
@@ -36,6 +41,7 @@ type ParsedAction = {
   target?: string;
   due_iso?: string | null;
   confidence?: number;
+  escalation_level?: 'CRITICAL' | 'PROPOSE' | 'AUTO_EXECUTE';
   metadata?: Record<string, any>;
 };
 
@@ -101,32 +107,71 @@ export async function runEntropyCoherencePass(opts: RunOptions = {}): Promise<{
     return { processed: meaningfulLogs.length, kept: 0, dismissed: 0, contextRequests: ctxCount };
   }
 
-  // 6) Confidence gate + persist
-  const actionsToStore = parsed.map((a) => ({
-    id: crypto.randomUUID(),
-    user_id: userId,
-    type: a.action_type,
-    target: a.target ?? null,
-    title: a.title ?? null,
-    content: decorateContent(a),
-    confidence: typeof a.confidence === 'number' ? a.confidence : null,
-    status: a.confidence && a.confidence >= minConfidence ? 'proposed' : 'dismissed',
-    source: 'hourly-scan',
-    metadata: JSON.stringify({
-      due_iso: a.due_iso ?? null,
-      ...((a.metadata as any) || {}),
-    }),
-  }));
+  // 6) Confidence gate + escalation rules + persist
+  const actionsToStore = parsed.map((a) => {
+    // Determine escalation level: use LLM's suggestion or infer from content
+    let escalation = a.escalation_level;
+    if (!escalation) {
+      // Infer escalation from content using Life OS rules
+      const contentForEscalation = `${a.title || ''} ${a.content}`;
+      const domainId = (a.metadata as any)?.domain;
+      escalation = determineEscalationLevel(contentForEscalation, domainId);
+    }
+
+    // Determine status based on confidence AND escalation
+    let status: 'proposed' | 'dismissed' | 'pending_approval' | 'critical_alert' = 'dismissed';
+    const meetsConfidence = a.confidence && a.confidence >= minConfidence;
+
+    if (escalation === 'CRITICAL') {
+      // CRITICAL items always alert user immediately, regardless of confidence
+      status = 'critical_alert';
+    } else if (escalation === 'PROPOSE') {
+      // PROPOSE items queue for approval if confidence is high enough
+      status = meetsConfidence ? 'pending_approval' : 'dismissed';
+    } else {
+      // AUTO_EXECUTE items proceed if confidence is high
+      status = meetsConfidence ? 'proposed' : 'dismissed';
+    }
+
+    return {
+      id: crypto.randomUUID(),
+      user_id: userId,
+      type: a.action_type,
+      target: a.target ?? null,
+      title: a.title ?? null,
+      content: decorateContent(a),
+      confidence: typeof a.confidence === 'number' ? a.confidence : null,
+      status,
+      source: 'hourly-scan',
+      metadata: JSON.stringify({
+        due_iso: a.due_iso ?? null,
+        escalation_level: escalation,
+        ...((a.metadata as any) || {}),
+      }),
+    };
+  });
+
+  // Calculate statistics including new escalation statuses
+  const criticalAlerts = actionsToStore.filter((a) => a.status === 'critical_alert').length;
+  const pendingApproval = actionsToStore.filter((a) => a.status === 'pending_approval').length;
+  const proposed = actionsToStore.filter((a) => a.status === 'proposed').length;
+  const kept = proposed + pendingApproval + criticalAlerts;
+  const dismissed = actionsToStore.filter((a) => a.status === 'dismissed').length;
 
   if (!opts.dryRun) {
     insertAgenticActions(actionsToStore);
     setLastRunIso(db, new Date().toISOString());
-    const memo = `Entropy pass: kept=${kept}, dismissed=${dismissed}, total=${actionsToStore.length}`;
-    await addMemory(memo, userId, { type: 'entropy_pass', kept, dismissed, total: actionsToStore.length });
+    const memo = `Entropy pass: kept=${kept} (${criticalAlerts} critical, ${pendingApproval} pending_approval, ${proposed} auto), dismissed=${dismissed}`;
+    await addMemory(memo, userId, {
+      type: 'entropy_pass',
+      kept,
+      dismissed,
+      critical_alerts: criticalAlerts,
+      pending_approval: pendingApproval,
+      auto_proposed: proposed,
+      total: actionsToStore.length,
+    });
   }
-
-  const kept = actionsToStore.filter((a) => a.status === 'proposed').length;
-  const dismissed = actionsToStore.length - kept;
 
   const lowConfidence = actionsToStore.filter((a) => a.status === 'dismissed');
   let ctxCount = 0;
@@ -218,7 +263,73 @@ function extractText(log: Lifelog): string {
   }
 }
 
+/**
+ * Build system prompt from Life OS config
+ * Loads from agent.orchestrator and injects live priority stack
+ */
 function buildSystemPrompt(): string {
+  // Try to load from Life OS config
+  try {
+    const orchestratorAgent = getAgent('agent.orchestrator');
+    const charter = getLifeCharter();
+
+    if (orchestratorAgent) {
+      // Build dynamic priorities from Life Charter
+      const priorityLines = charter.priority_stack
+        .sort((a, b) => b.weight - a.weight)
+        .map((p, i) => `${i + 1}. ${p.name} (weight: ${p.weight}): ${p.description}`)
+        .join('\n');
+
+      // Get escalation rules
+      const escalationRules = `
+Escalation Levels:
+- CRITICAL (${charter.escalation_levels.CRITICAL.response_time}): ${charter.escalation_levels.CRITICAL.triggers.join(', ')}
+- PROPOSE (${charter.escalation_levels.PROPOSE.response_time}): ${charter.escalation_levels.PROPOSE.triggers.join(', ')}
+- AUTO_EXECUTE (${charter.escalation_levels.AUTO_EXECUTE.response_time}): ${charter.escalation_levels.AUTO_EXECUTE.triggers.join(', ')}
+`;
+
+      // Build the enriched prompt
+      let prompt = orchestratorAgent.system_prompt;
+
+      // Replace {{PRIORITIES}} placeholder if exists, otherwise append
+      if (prompt.includes('{{PRIORITIES}}')) {
+        prompt = prompt.replace('{{PRIORITIES}}', priorityLines);
+      } else {
+        prompt += `\n\nCanonical priorities (from Life Charter):\n${priorityLines}`;
+      }
+
+      // Add escalation awareness
+      prompt += `\n\n${escalationRules}`;
+
+      // Add JSON output format
+      prompt += `
+
+Output FORMAT (strict JSON only):
+{
+  "actions": [
+    {
+      "action_type": "task | email_draft | text_message | reminder | calendar_event | note",
+      "title": "short title",
+      "content": "precise draft / task body",
+      "target": "todoist|motion|gmail|outlook|calendar|sms|github|other",
+      "due_iso": "2025-11-20T18:00:00Z or null",
+      "confidence": 0.0-1.0,
+      "escalation_level": "CRITICAL | PROPOSE | AUTO_EXECUTE",
+      "metadata": { "assignees": [], "project": "...", "time_block_minutes": 30, "domain": "..." }
+    }
+  ]
+}
+
+If insufficient signal, return an empty actions array.`;
+
+      console.log('[entropy] Using Life OS config system prompt');
+      return prompt.trim();
+    }
+  } catch (e) {
+    console.warn('[entropy] Failed to load Life OS config, using fallback prompt:', e);
+  }
+
+  // Fallback to hardcoded prompt if config fails
   return `
 You are WRATH-SHIELD EA, an always-on executive agent for James Brady.
 Goal: reduce entropy and increase coherence. On each pass, you:
@@ -243,7 +354,7 @@ Output FORMAT (strict JSON only):
 
 Canonical priorities to consider (summary):
 - Taxes (TC-40/TC-40W), Custody filing due 2025-12-15, Hyro homeschooling + Muay Thai.
-- Cody’s research check-ins, High Desert automation deliverables.
+- Cody's research check-ins, High Desert automation deliverables.
 - CEO-of-One brief draft (pending transcript), Motion MCP bring-up, GitHub timeline indexing.
 - Portfolio pillars: Utlyze, Vuplicity, New Reward, High Desert, Motion backbone, Brainwave Lab.
 
@@ -331,6 +442,14 @@ async function callSingleModel(model: string, prompt: ChatPrompt): Promise<strin
       messages: prompt.messages,
       temperature: prompt.temperature,
       max_tokens: prompt.max_tokens,
+      metadata: {
+        date: new Date().toISOString().split('T')[0],
+        has_whoop_data: false,
+        has_manipulations: false,
+        wrath_deployed: false,
+        memory_count: 0,
+        anchor_count: 0,
+      },
     },
     model
   );

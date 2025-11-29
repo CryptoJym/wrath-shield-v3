@@ -54,7 +54,8 @@
     "legal:scrape:mycase": "cd packages/legal-scrapers && python mycase_scraper.py",
     "legal:scrape:school": "cd packages/legal-scrapers && python boost_school_scraper.py",
     "legal:analyze": "cd packages/legal-scrapers && python unified_legal_analyzer.py",
-    "legal:dashboard": "cd packages/legal-scrapers && streamlit run action_item_dashboard.py"
+    "legal:dashboard": "cd packages/legal-scrapers && streamlit run action_item_dashboard.py",
+    "finance:ingest:apple": "tsx scripts/ingest-apple-receipts.ts"
   },
   "keywords": [],
   "author": "",
@@ -62,6 +63,7 @@
   "type": "commonjs",
   "dependencies": {
     "@clerk/nextjs": "^5.7.5",
+    "@getzep/zep-cloud": "^3.13.0",
     "@types/better-sqlite3": "^7.6.13",
     "@types/node": "^24.9.1",
     "@types/react": "^18.3.27",

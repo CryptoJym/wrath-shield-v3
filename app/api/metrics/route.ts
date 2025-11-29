@@ -1,5 +1,3 @@
-export const dynamic = 'force-dynamic';
-
 /**
  * Wrath Shield v3 - Metrics API Endpoint
  *
@@ -128,6 +126,9 @@ function setCachedMetrics(date: string, data: MetricsResponse): void {
  * Primarily used for testing to ensure cache isolation between tests.
  * Can also be used for manual cache invalidation if needed.
  */
+/**
+ * Clear the metrics cache (exported for testing)
+ */
 export function clearMetricsCache(): void {
   metricsCache.clear();
 }
@@ -210,7 +211,7 @@ function calculateTotals(
  *
  * Returns aggregated metrics for today, 7-day, and 30-day periods.
  */
-export async function GET(request: NextRequest): Promise<NextResponse> {
+export async function GET(request: NextRequest) {
   try {
     const today = getCurrentDate();
 

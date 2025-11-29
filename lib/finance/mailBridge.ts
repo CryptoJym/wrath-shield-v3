@@ -86,13 +86,13 @@ async function searchGmail(creds: GmailCreds, query: string) {
   oAuth2Client.setCredentials({ refresh_token: refreshToken });
   const gmail = google.gmail({ version: 'v1', auth: oAuth2Client });
   const res = await gmail.users.messages.list({ userId: 'me', q: query, maxResults: 5 });
-  const ids = res.data.messages?.map((m) => m.id) || [];
+  const ids = (res.data.messages?.map((m) => m.id).filter((id): id is string => !!id)) || [];
   const out: { subject?: string; from?: string; snippet?: string; date?: string }[] = [];
   for (const id of ids) {
     const msg = await gmail.users.messages.get({ userId: 'me', id, format: 'metadata', metadataHeaders: ['Subject', 'From', 'Date'] });
     const headers = msg.data.payload?.headers || [];
-    const h = (n: string) => headers.find((hh) => hh.name?.toLowerCase() === n.toLowerCase())?.value;
-    out.push({ subject: h('Subject'), from: h('From'), date: h('Date'), snippet: msg.data.snippet });
+    const h = (n: string) => headers.find((hh) => hh.name?.toLowerCase() === n.toLowerCase())?.value ?? undefined;
+    out.push({ subject: h('Subject'), from: h('From'), date: h('Date'), snippet: msg.data.snippet ?? undefined });
   }
   return out;
 }
@@ -174,7 +174,7 @@ export async function resolveViaMail(limit = 5, userId?: string) {
     };
     const tryOutlook = async () => {
       try {
-        hits = await searchOutlook(q, mailbox);
+        hits = await searchOutlook(q, mailbox ?? undefined);
       } catch (_e) {
         // ignore
       }

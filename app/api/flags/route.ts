@@ -1,5 +1,3 @@
-export const dynamic = 'force-dynamic';
-
 /**
  * Wrath Shield v3 - Flags API Route
  *
@@ -7,6 +5,8 @@ export const dynamic = 'force-dynamic';
  */
 
 import { NextRequest, NextResponse } from 'next/server';
+
+export const dynamic = 'force-dynamic';
 import { getPendingFlags, getResolvedFlags, getAllFlags } from '@/lib/db/queries';
 
 /**

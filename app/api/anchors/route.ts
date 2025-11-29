@@ -6,8 +6,7 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { getAnchors, addAnchor } from '@/lib/MemoryWrapper';
-
-const DEFAULT_USER_ID = 'default'; // Multi-user support: default if none provided
+import { currentUserOrThrow } from '@/lib/auth/user';
 
 /**
  * GET /api/anchors
@@ -22,7 +21,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     const { searchParams } = new URL(request.url);
     const since = searchParams.get('since') || undefined;
     const category = searchParams.get('category') || undefined;
-    const userId = searchParams.get('userId') || DEFAULT_USER_ID;
+    const { userId } = currentUserOrThrow();
 
     const anchors = await getAnchors(userId, {
       since,
@@ -57,6 +56,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
 export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
     const body = await request.json();
+    const { userId } = currentUserOrThrow();
 
     // Validate required fields
     if (!body.text || typeof body.text !== 'string') {
@@ -88,11 +88,6 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
         { status: 400 }
       );
     }
-
-    // Optional user selection
-    const userId = typeof body.userId === 'string' && body.userId.trim() !== ''
-      ? body.userId.trim()
-      : DEFAULT_USER_ID;
 
     // Add anchor to Mem0 for the chosen user
     await addAnchor(body.text, body.category, body.date, userId);

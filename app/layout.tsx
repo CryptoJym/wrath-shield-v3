@@ -31,11 +31,16 @@ export default function RootLayout({
           <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
             <a href="/" style={{ fontWeight: 600 }}>Wrath Shield v3</a>
             <a href="/chat" style={{ color: 'var(--color-text-secondary)' }}>Agentic Grok Chat</a>
+            <a href="/agents/roster" style={{ color: 'var(--color-text-secondary)' }}>Team Roster</a>
             <a href="/inbox" style={{ color: 'var(--color-text-secondary)' }}>Inbox</a>
+            <a href="/pm" style={{ color: 'var(--color-text-secondary)' }}>PM</a>
             <a href="/finance" style={{ color: 'var(--color-text-secondary)' }}>Finance</a>
+            <a href="/comms" style={{ color: 'var(--color-text-secondary)' }}>Comms</a>
+            <a href="/hyro" style={{ color: 'var(--color-text-secondary)' }}>Education</a>
             <a href="/eeg" style={{ color: 'var(--color-text-secondary)' }}>EEG</a>
             <a href="/feed" style={{ color: 'var(--color-text-secondary)' }}>Feed</a>
             <a href="/tasks" style={{ color: 'var(--color-text-secondary)' }}>Tasks</a>
+            <a href="/legal" style={{ color: 'var(--color-text-secondary)' }}>Legal Advisor</a>
             <a href="/privacy" style={{ color: 'var(--color-text-secondary)' }}>Privacy</a>
           </div>
           {hasClerk ? (

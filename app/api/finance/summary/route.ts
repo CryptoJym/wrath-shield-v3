@@ -51,6 +51,7 @@ export async function GET(request: Request) {
       back90: { start: back90Start.toISOString().slice(0, 10), end: new Date().toISOString().slice(0, 10), buckets: buckets90, count: rows90.length },
     });
   } catch (e: any) {
-    return NextResponse.json({ error: e?.message || 'finance summary failed', buckets: {}, count: 0 }, { status: 200 });
+    console.error('[finance/summary] Error:', e);
+    return NextResponse.json({ error: e?.message || 'finance summary failed', buckets: {}, count: 0 }, { status: 500 });
   }
 }

@@ -10,10 +10,10 @@ import Link from 'next/link';
 import PsychSparkline from '@/components/PsychSparkline';
 import SyncControls from '@/components/SyncControls';
 import LimitlessKeyForm from '@/components/LimitlessKeyForm';
-import dynamic from 'next/dynamic';
-const PrivacyControls = dynamic(() => import('@/components/PrivacyControls'), { ssr: false });
 
-function parseJson<T>(s: string | null | undefined, fallback: T): T {
+export const dynamic = 'force-dynamic';
+
+function parseJson<T>(fallback: T, s?: string | null): T {
   if (!s) return fallback;
   try { return JSON.parse(s) as T; } catch { return fallback; }
 }
@@ -43,12 +43,12 @@ function compact(n: number | null | undefined): string {
   return new Intl.NumberFormat(undefined, { notation: 'compact' }).format(n);
 }
 
-export default async function MetricsPage({ searchParams }: { searchParams?: Record<string, string | string[] | undefined> }) {
+export default async function MetricsPage() {
   const latest = getLatestPsychSignal();
   const series = getPsychSignalsLastNDays(14);
-  const emotions = parseJson<Record<string, number>>(latest?.emotions_json, {});
-  const topTerms = parseJson<Array<[string, number]>>(latest?.top_terms_json, []);
-  const sources = parseJson<Record<string, number>>(latest?.sources_json, {});
+  const emotions = parseJson<Record<string, number>>({}, latest?.emotions_json);
+  const topTerms = parseJson<Array<[string, number]>>([], latest?.top_terms_json);
+  const sources = parseJson<Record<string, number>>({}, latest?.sources_json);
   const chronological = [...series].reverse();
   const sentimentValues = chronological.map(s => (typeof s.sentiment_score === 'number' ? s.sentiment_score : 0));
   const recordValues = chronological.map(s => s.records ?? 0);
@@ -66,33 +66,15 @@ export default async function MetricsPage({ searchParams }: { searchParams?: Rec
   const sys = await fetchSystemStatus();
 
   // Baselines
-  const selectedRange = (() => {
-    const r = (searchParams?.range as string | undefined) || '';
-    const n = parseInt(r, 10);
-    return [7, 30, 90, 365].includes(n) ? n : 0;
-  })();
-
   async function fetchBaselines() {
     try {
       const base = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:4242';
-      const url = selectedRange ? `${base}/api/metrics/baselines?range=${selectedRange}` : `${base}/api/metrics/baselines`;
-      const r = await fetch(url, { cache: 'no-store' });
+      const r = await fetch(`${base}/api/metrics/baselines`, { cache: 'no-store' });
       if (!r.ok) return null;
       return r.json();
     } catch { return null; }
   }
   const bl = await fetchBaselines();
-
-  // EEG summary (last 60 minutes) from Agentic Grok
-  async function fetchEegSummary() {
-    try {
-      const base = process.env.AGENTIC_GROK_URL || 'http://localhost:8001';
-      const r = await fetch(`${base}/api/eeg/summary?minutes=60`, { cache: 'no-store' });
-      if (!r.ok) return null;
-      return r.json();
-    } catch { return null; }
-  }
-  const eeg = await fetchEegSummary();
 
   function deltaBadge(current: number | null | undefined, baseline: number | null | undefined, opts: { higherIsBetter: boolean }) {
     if (current == null || baseline == null) return null;
@@ -120,24 +102,6 @@ export default async function MetricsPage({ searchParams }: { searchParams?: Rec
             <li>Heart rate variability (HRV) tracking</li>
             <li>Historical comparisons and insights</li>
           </ul>
-        </div>
-
-        <div className="card">
-          <h2 className="text-green mb-2">EEG Activity (last 60 min)</h2>
-          {!eeg?.ok || !Array.isArray(eeg?.series) || eeg.series.length === 0 ? (
-            <p className="text-secondary">No EEG data in the last hour.</p>
-          ) : (
-            <div className="space-y-2">
-              <PsychSparkline
-                title="Tokens/min (60m)"
-                values={eeg.series.map((p: any) => Number(p.tokens) || 0)}
-                labels={eeg.series.map((p: any) => String(p.bucket))}
-                color="#a78bfa"
-                decimals={0}
-              />
-              <div className="text-secondary text-sm">Last token: {eeg.last_token ?? '—'}</div>
-            </div>
-          )}
         </div>
 
         <div className="card">
@@ -224,84 +188,48 @@ export default async function MetricsPage({ searchParams }: { searchParams?: Rec
 
         <div className="card">
           <h2 className="text-green mb-2">WHOOP Baselines</h2>
-          <div className="flex items-center gap-2 mb-3 text-xs">
-            <span className="text-secondary">Range:</span>
-            {[7,30,90,365].map(r => (
-              <a key={r} href={`?range=${r}`} className={`px-2 py-1 rounded border ${selectedRange===r ? 'border-green text-green' : 'border-white/10 text-secondary'}`}>{r}d</a>
-            ))}
-            {selectedRange ? (<a href="?" className="ml-2 underline text-secondary">reset</a>) : null}
-          </div>
           {!bl?.ok ? (
             <p className="text-secondary">Baselines unavailable.</p>
-          ) : selectedRange && bl?.b ? (
-            <div className="grid md:grid-cols-2 gap-4 text-secondary">
-              <div>
-                <strong>{selectedRange} days</strong>
-                <div className="mt-1">HRV: {bl.b.avg_hrv?.toFixed(1) ?? '—'} ms</div>
-                <div className="mt-1">RHR: {bl.b.avg_rhr?.toFixed(1) ?? '—'} bpm</div>
-                <div className="mt-1">Recovery: {bl.b.avg_recovery?.toFixed(1) ?? '—'}%</div>
-                <div className="mt-1">Sleep perf: {bl.b.avg_sleep_performance?.toFixed(1) ?? '—'}%</div>
-              </div>
-              <div>
-                <strong>Today</strong>
-                <div className="mt-1">
-                  Recovery: {bl.today?.recovery?.score ?? '—'}%
-                  {deltaBadge(bl.today?.recovery?.score, bl.b.avg_recovery, { higherIsBetter: true })}
-                </div>
-                <div className="mt-1">
-                  HRV: {bl.today?.recovery?.hrv ?? '—'} ms
-                  {deltaBadge(bl.today?.recovery?.hrv, bl.b.avg_hrv, { higherIsBetter: true })}
-                </div>
-                <div className="mt-1">
-                  RHR: {bl.today?.recovery?.rhr ?? '—'} bpm
-                  {deltaBadge(bl.today?.recovery?.rhr, bl.b.avg_rhr, { higherIsBetter: false })}
-                </div>
-                <div className="mt-1">
-                  Sleep perf: {bl.today?.sleep?.performance ?? '—'}%
-                  {deltaBadge(bl.today?.sleep?.performance, bl.b.avg_sleep_performance, { higherIsBetter: true })}
-                </div>
-              </div>
-            </div>
           ) : (
             <div className="grid md:grid-cols-2 gap-4 text-secondary">
               <div>
                 <strong>30 days</strong>
-                <div className="mt-1">HRV: {bl.b30?.avg_hrv?.toFixed(1) ?? '—'} ms</div>
-                <div className="mt-1">RHR: {bl.b30?.avg_rhr?.toFixed(1) ?? '—'} bpm</div>
-                <div className="mt-1">Recovery: {bl.b30?.avg_recovery?.toFixed(1) ?? '—'}%</div>
-                <div className="mt-1">Sleep perf: {bl.b30?.avg_sleep_performance?.toFixed(1) ?? '—'}%</div>
+                <div className="mt-1">HRV: {bl.b30.avg_hrv?.toFixed(1) ?? '—'} ms</div>
+                <div className="mt-1">RHR: {bl.b30.avg_rhr?.toFixed(1) ?? '—'} bpm</div>
+                <div className="mt-1">Recovery: {bl.b30.avg_recovery?.toFixed(1) ?? '—'}%</div>
+                <div className="mt-1">Sleep perf: {bl.b30.avg_sleep_performance?.toFixed(1) ?? '—'}%</div>
               </div>
               <div>
                 <strong>90 days</strong>
-                <div className="mt-1">HRV: {bl.b90?.avg_hrv?.toFixed(1) ?? '—'} ms</div>
-                <div className="mt-1">RHR: {bl.b90?.avg_rhr?.toFixed(1) ?? '—'} bpm</div>
-                <div className="mt-1">Recovery: {bl.b90?.avg_recovery?.toFixed(1) ?? '—'}%</div>
-                <div className="mt-1">Sleep perf: {bl.b90?.avg_sleep_performance?.toFixed(1) ?? '—'}%</div>
+                <div className="mt-1">HRV: {bl.b90.avg_hrv?.toFixed(1) ?? '—'} ms</div>
+                <div className="mt-1">RHR: {bl.b90.avg_rhr?.toFixed(1) ?? '—'} bpm</div>
+                <div className="mt-1">Recovery: {bl.b90.avg_recovery?.toFixed(1) ?? '—'}%</div>
+                <div className="mt-1">Sleep perf: {bl.b90.avg_sleep_performance?.toFixed(1) ?? '—'}%</div>
               </div>
               <div>
                 <strong>Today</strong>
                 <div className="mt-1">
                   Recovery: {bl.today?.recovery?.score ?? '—'}%
-                  {deltaBadge(bl.today?.recovery?.score, bl.b30?.avg_recovery, { higherIsBetter: true })}
+                  {deltaBadge(bl.today?.recovery?.score, bl.b30.avg_recovery, { higherIsBetter: true })}
                 </div>
                 <div className="mt-1">
                   HRV: {bl.today?.recovery?.hrv ?? '—'} ms
-                  {deltaBadge(bl.today?.recovery?.hrv, bl.b30?.avg_hrv, { higherIsBetter: true })}
+                  {deltaBadge(bl.today?.recovery?.hrv, bl.b30.avg_hrv, { higherIsBetter: true })}
                 </div>
                 <div className="mt-1">
                   RHR: {bl.today?.recovery?.rhr ?? '—'} bpm
-                  {deltaBadge(bl.today?.recovery?.rhr, bl.b30?.avg_rhr, { higherIsBetter: false })}
+                  {deltaBadge(bl.today?.recovery?.rhr, bl.b30.avg_rhr, { higherIsBetter: false })}
                 </div>
                 <div className="mt-1">
                   Sleep perf: {bl.today?.sleep?.performance ?? '—'}%
-                  {deltaBadge(bl.today?.sleep?.performance, bl.b30?.avg_sleep_performance, { higherIsBetter: true })}
+                  {deltaBadge(bl.today?.sleep?.performance, bl.b30.avg_sleep_performance, { higherIsBetter: true })}
                 </div>
               </div>
               <div>
                 <strong>Recovery bands (90d)</strong>
-                <div className="mt-1">High (≥70): {bl.b90?.recovery_distribution?.high}</div>
-                <div className="mt-1">Medium (40–69): {bl.b90?.recovery_distribution?.medium}</div>
-                <div className="mt-1">Low (&lt;40): {bl.b90?.recovery_distribution?.low}</div>
+                <div className="mt-1">High (≥70): {bl.b90.recovery_distribution.high}</div>
+                <div className="mt-1">Medium (40–69): {bl.b90.recovery_distribution.medium}</div>
+                <div className="mt-1">Low (&lt;40): {bl.b90.recovery_distribution.low}</div>
               </div>
             </div>
           )}
@@ -314,18 +242,18 @@ export default async function MetricsPage({ searchParams }: { searchParams?: Rec
           ) : (
             <div className="grid md:grid-cols-2 gap-4 text-secondary">
               <div>
-                <strong>EEG (Timescale)</strong>
+                <strong>EEG</strong>
                 <div className="mt-1">tokens: {sys?.db?.eeg_tokens?.row_count ?? '—'}</div>
                 <div className="mt-1">status: {sys?.db?.eeg_tokens?.has_data ? '✅ Connected' : '❌ No data'}</div>
               </div>
               <div>
-                <strong>WHOOP (Local SQLite)</strong>
+                <strong>WHOOP</strong>
                 <div className="mt-1">cycles: {sys.local.counts?.cycles ?? 0}, recoveries: {sys.local.counts?.recoveries ?? 0}, sleeps: {sys.local.counts?.sleeps ?? 0}</div>
                 <div className="mt-1">token days left: {sys.local.whoop?.token?.days_left ?? '—'}</div>
                 <div className="mt-1 text-xs">redirect_uri: {process.env.WHOOP_REDIRECT_URI || 'not set'}</div>
               </div>
               <div>
-                <strong>Limitless (Local SQLite)</strong>
+                <strong>Limitless</strong>
                 <div className="mt-1">lifelogs: {sys.local.counts?.lifelogs ?? 0}</div>
                 <div className="mt-1">last pull: {sys.local.limitless?.last_pull_date ?? '—'}</div>
                 <LimitlessKeyForm />
@@ -347,27 +275,6 @@ export default async function MetricsPage({ searchParams }: { searchParams?: Rec
             </div>
           )}
           <SyncControls />
-        </div>
-
-        <div className="card">
-          <h2 className="text-green mb-2">EEG Snapshot</h2>
-          <p className="text-secondary mb-2">Live dashboard embed (from Streamlit). For the full experience, open the EEG page.</p>
-          <div className="mb-2">
-            <a className="underline text-secondary" href="/eeg">Open full EEG dashboard →</a>
-          </div>
-          <div className="rounded overflow-hidden border border-neutral-800">
-            <iframe
-              src={process.env.NEXT_PUBLIC_STREAMLIT_URL || 'http://localhost:8501'}
-              style={{ width: '100%', height: '480px', border: '0' }}
-              title="EEG Dashboard"
-            />
-          </div>
-        </div>
-
-        <div className="card">
-          <h2 className="text-green mb-2">Privacy & Data Controls</h2>
-          <p className="text-secondary mb-2">Manage local WHOOP/Limitless records (SQLite only). This does not affect the EEG Timescale database.</p>
-          <PrivacyControls />
         </div>
       </div>
     </div>

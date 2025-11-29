@@ -1,0 +1,23 @@
+{
+  "project": "wrath-shield",
+  "canonical_location": "/Users/jamesbrady/Projects/apps/wrath-shield-v3",
+  "version": "3.0.0-unified",
+  "last_updated": "2025-11-28",
+  "status": "ACTIVE - PRIMARY CODEBASE",
+  "merged_from": "wrath-shield-clean (2025-11-28)",
+  "features": [
+    "multi-agent orchestration",
+    "agent graph visualization",
+    "inbox routing",
+    "finance cycle reports with Plaid",
+    "comms integration pipeline",
+    "hyro voice interface",
+    "pm agent with Motion/GitHub sync",
+    "zep memory integration",
+    "legal advisor"
+  ],
+  "ai_instructions": {
+    "verification": "Check for components/agents/, components/comms/, components/finance/, components/hyro/, lib/pm/, lib/hyro/, lib/memory/zep.ts",
+    "if_directories_missing": "STOP - This codebase may be corrupted or regressed. Verify all key directories exist before making changes."
+  }
+}

@@ -163,13 +163,12 @@ async function getDailyTasks(date: string): Promise<DailyTask[]> {
     },
   ];
 
-  if (!taskState) {
+  if (!taskState?.value_enc) {
     return defaultTasks;
   }
 
   try {
-    const raw = taskState.value_enc ?? '[]';
-    const savedTasks = JSON.parse(raw);
+    const savedTasks = JSON.parse(taskState.value_enc);
     return defaultTasks.map((task, idx) => ({
       ...task,
       completed: savedTasks[idx]?.completed || false,
@@ -211,9 +210,9 @@ async function calculateGatingState(): Promise<GatingState> {
   let flagsStomped = 0;
   if (isGated) {
     const stompedSetting = getSetting('deck_flags_stomped');
-    if (stompedSetting) {
+    if (stompedSetting?.value_enc) {
       try {
-        flagsStomped = parseInt(stompedSetting.value_enc ?? '0', 10) || 0;
+        flagsStomped = parseInt(stompedSetting.value_enc, 10) || 0;
       } catch {
         flagsStomped = 0;
       }
@@ -258,10 +257,9 @@ function handleCompleteTask(body: DeckRequest, date: string): NextResponse {
     { category: 'body', completed: false },
   ];
 
-  if (taskState) {
+  if (taskState?.value_enc) {
     try {
-      const raw = taskState.value_enc ?? '[]';
-      tasks = JSON.parse(raw);
+      tasks = JSON.parse(taskState.value_enc);
     } catch {
       // Use defaults
     }
@@ -328,8 +326,7 @@ async function handleStompFlag(body: DeckRequest, date: string): Promise<NextRes
     id: randomUUID(),
     flag_id: flag.id,
     assured_text: `[Deck Unlock] Flag stomped: ${flag.original_text}`,
-    // Normalize to supported type union; stomp acts as a resolve/dismiss operation
-    action_type: 'dismiss',
+    action_type: 'dismiss' as const, // 'stomp' action maps to dismiss
     context: null,
     delta_uix: flag.severity * 15, // 15 UIX per severity point
     user_notes: null,
@@ -341,9 +338,9 @@ async function handleStompFlag(body: DeckRequest, date: string): Promise<NextRes
   // Increment stomped count
   const stompedSetting = getSetting('deck_flags_stomped');
   let stompedCount = 0;
-  if (stompedSetting) {
+  if (stompedSetting?.value_enc) {
     try {
-      stompedCount = parseInt(stompedSetting.value_enc ?? '0', 10) || 0;
+      stompedCount = parseInt(stompedSetting.value_enc, 10) || 0;
     } catch {
       stompedCount = 0;
     }

@@ -69,3 +69,21 @@ next-env.d.ts
 .turbo
 logs/
 .analysis/
+
+# Claude Code task files
+.claude_tasks/
+.claude_results/
+
+# Temporary credentials/secrets
+.tmp_*
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Data exports (sensitive)
+packages/legal-scrapers/*.json
+!packages/legal-scrapers/package.json
+
+# Jest summary
+jest-summary.json

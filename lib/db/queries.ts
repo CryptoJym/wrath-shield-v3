@@ -51,11 +51,11 @@ function hasUserIdColumn(table: string): boolean {
 function resolveUserId(userId?: string): string {
   if (userId && userId.trim() !== '') return userId.trim();
   try {
-    const db = getDatabase();
+    const db = getDatabase().getRawDb() as any;
     // Direct read; value may be plain UUID (not encrypted)
     const row = db
-      .prepare<{ value_enc: string }>(`SELECT value_enc FROM settings WHERE key = 'default_user_id' LIMIT 1`)
-      .get();
+      .prepare(`SELECT value_enc FROM settings WHERE key = 'default_user_id' LIMIT 1`)
+      .get() as { value_enc: string } | undefined;
     const vid = row?.value_enc?.trim();
     if (vid && /^[0-9a-fA-F-]{36}$/.test(vid)) return vid; // UUID pattern
   } catch {}
@@ -68,7 +68,7 @@ function resolveUserId(userId?: string): string {
 export function insertCycles(cycles: CycleInput[]): void {
   if (cycles.length === 0) return;
 
-  const db = getDatabase();
+  const db = getDatabase().getRawDb() as any;
 
   const scoped = hasUserIdColumn('cycles');
   const upsert = scoped
@@ -119,7 +119,7 @@ export function insertCycles(cycles: CycleInput[]): void {
         );
       }
     }
-  });
+  })();
 }
 
 /**
@@ -128,7 +128,7 @@ export function insertCycles(cycles: CycleInput[]): void {
 export function insertRecoveries(recoveries: RecoveryInput[]): void {
   if (recoveries.length === 0) return;
 
-  const db = getDatabase();
+  const db = getDatabase().getRawDb() as any;
 
   const scoped = hasUserIdColumn('recoveries');
   const upsert = scoped
@@ -183,7 +183,7 @@ export function insertRecoveries(recoveries: RecoveryInput[]): void {
         );
       }
     }
-  });
+  })();
 }
 
 /**
@@ -192,7 +192,7 @@ export function insertRecoveries(recoveries: RecoveryInput[]): void {
 export function insertSleeps(sleeps: SleepInput[]): void {
   if (sleeps.length === 0) return;
 
-  const db = getDatabase();
+  const db = getDatabase().getRawDb() as any;
 
   const scoped = hasUserIdColumn('sleeps');
   const upsert = scoped
@@ -251,7 +251,7 @@ export function insertSleeps(sleeps: SleepInput[]): void {
         );
       }
     }
-  });
+  })();
 }
 
 /**
@@ -260,7 +260,7 @@ export function insertSleeps(sleeps: SleepInput[]): void {
 export function insertLifelogs(lifelogs: LifelogInput[]): void {
   if (lifelogs.length === 0) return;
 
-  const db = getDatabase();
+  const db = getDatabase().getRawDb() as any;
   const scoped = hasUserIdColumn('lifelogs');
   const upsert = scoped ? db.prepare(`
     INSERT INTO lifelogs (id, date, title, manipulation_count, wrath_deployed, raw_json, user_id)
@@ -308,14 +308,14 @@ export function insertLifelogs(lifelogs: LifelogInput[]): void {
         );
       }
     }
-  });
+  })();
 }
 
 /** Explicit user-scoped lifelog insert */
 export function insertLifelogsForUser(lifelogs: LifelogInput[], userId?: string): void {
   if (lifelogs.length === 0) return;
   const uid = resolveUserId(userId);
-  const db = getDatabase();
+  const db = getDatabase().getRawDb() as any;
   const upsert = db.prepare(`
     INSERT INTO lifelogs (id, date, title, manipulation_count, wrath_deployed, raw_json, user_id)
     VALUES (?, ?, ?, ?, ?, ?, ?)
@@ -340,7 +340,7 @@ export function insertLifelogsForUser(lifelogs: LifelogInput[], userId?: string)
         uid
       );
     }
-  });
+  })();
 }
 
 /**
@@ -349,7 +349,7 @@ export function insertLifelogsForUser(lifelogs: LifelogInput[], userId?: string)
 export function insertTokens(tokens: TokenInput[]): void {
   if (tokens.length === 0) return;
 
-  const db = getDatabase();
+  const db = getDatabase().getRawDb() as any;
   const uidDefault = resolveUserId();
   const scoped = hasUserIdColumn('tokens');
   const upsert = scoped
@@ -391,13 +391,13 @@ export function insertTokens(tokens: TokenInput[]): void {
         );
       }
     }
-  });
+  })();
 }
 
 export function insertTokensForUser(tokens: TokenInput[], userId?: string): void {
   if (tokens.length === 0) return;
   const uid = resolveUserId(userId);
-  const db = getDatabase();
+  const db = getDatabase().getRawDb() as any;
   const upsert = db.prepare(`
     INSERT INTO tokens (provider, access_token_enc, refresh_token_enc, expires_at, user_id)
     VALUES (?, ?, ?, ?, ?)
@@ -417,7 +417,7 @@ export function insertTokensForUser(tokens: TokenInput[], userId?: string): void
         uid
       );
     }
-  });
+  })();
 }
 
 /**
@@ -426,7 +426,7 @@ export function insertTokensForUser(tokens: TokenInput[], userId?: string): void
 export function insertScores(scores: ScoreInput[]): void {
   if (scores.length === 0) return;
 
-  const db = getDatabase();
+  const db = getDatabase().getRawDb() as any;
   const scoped = hasUserIdColumn('scores');
   const upsert = scoped
     ? db.prepare(`
@@ -455,13 +455,13 @@ export function insertScores(scores: ScoreInput[]): void {
         upsert.run(score.date, score.unbending_score, score.recovery_compliance);
       }
     }
-  });
+  })();
 }
 
 export function insertScoresForUser(scores: ScoreInput[], userId?: string): void {
   if (scores.length === 0) return;
   const uid = resolveUserId(userId);
-  const db = getDatabase();
+  const db = getDatabase().getRawDb() as any;
   const upsert = db.prepare(`
     INSERT INTO scores (date, unbending_score, recovery_compliance, user_id)
     VALUES (?, ?, ?, ?)
@@ -475,7 +475,7 @@ export function insertScoresForUser(scores: ScoreInput[], userId?: string): void
     for (const score of scores) {
       upsert.run(score.date, score.unbending_score, score.recovery_compliance, uid);
     }
-  });
+  })();
 }
 
 /**
@@ -484,7 +484,7 @@ export function insertScoresForUser(scores: ScoreInput[], userId?: string): void
 export function insertSettings(settings: SettingInput[]): void {
   if (settings.length === 0) return;
 
-  const db = getDatabase();
+  const db = getDatabase().getRawDb() as any;
   const uidDefault = resolveUserId();
   const scoped = hasUserIdColumn('settings');
   const upsert = scoped
@@ -511,13 +511,13 @@ export function insertSettings(settings: SettingInput[]): void {
         upsert.run(setting.key, setting.value_enc);
       }
     }
-  });
+  })();
 }
 
 export function insertSettingsForUser(settings: SettingInput[], userId?: string): void {
   if (settings.length === 0) return;
   const uid = resolveUserId(userId);
-  const db = getDatabase();
+  const db = getDatabase().getRawDb() as any;
   const upsert = db.prepare(`
     INSERT INTO settings (key, value_enc, user_id)
     VALUES (?, ?, ?)
@@ -529,7 +529,7 @@ export function insertSettingsForUser(settings: SettingInput[], userId?: string)
     for (const setting of settings) {
       upsert.run(setting.key, setting.value_enc, uid);
     }
-  });
+  })();
 }
 
 /**
@@ -538,7 +538,7 @@ export function insertSettingsForUser(settings: SettingInput[], userId?: string)
 export function insertFlags(flags: FlagInput[]): void {
   if (flags.length === 0) return;
 
-  const db = getDatabase();
+  const db = getDatabase().getRawDb() as any;
 
   const upsert = db.prepare(`
     INSERT INTO flags (id, status, original_text, detected_at, severity, manipulation_type)
@@ -563,7 +563,7 @@ export function insertFlags(flags: FlagInput[]): void {
         flag.manipulation_type
       );
     }
-  });
+  })();
 }
 
 /**
@@ -572,7 +572,7 @@ export function insertFlags(flags: FlagInput[]): void {
 export function insertTweaks(tweaks: TweakInput[]): void {
   if (tweaks.length === 0) return;
 
-  const db = getDatabase();
+  const db = getDatabase().getRawDb() as any;
 
   const upsert = db.prepare(`
     INSERT INTO tweaks (id, flag_id, assured_text, action_type, context, delta_uix, user_notes)
@@ -599,18 +599,18 @@ export function insertTweaks(tweaks: TweakInput[]): void {
         tweak.user_notes
       );
     }
-  });
+  })();
 }
 
 /**
  * Get metrics for last N days (defaults to 7)
  */
 export function getMetricsLastNDays(days: number = 7, userId?: string): DailyMetrics[] {
-  const db = getDatabase();
+  const db = getDatabase().getRawDb() as any;
   const uid = resolveUserId(userId);
 
   const scoped = hasUserIdColumn('cycles');
-  const query = db.prepare<DailyMetrics>(`
+  const query = db.prepare(`
     SELECT
       COALESCE(c.date, r.date, s.date, l.date, sc.date) as date,
       c.strain,
@@ -636,19 +636,19 @@ export function getMetricsLastNDays(days: number = 7, userId?: string): DailyMet
     ORDER BY date DESC
   `);
 
-  return scoped ? query.all(days, uid, uid, uid, uid, uid) : query.all(days);
+  return (scoped ? query.all(days, uid, uid, uid, uid, uid) : query.all(days)) as DailyMetrics[];
 }
 
 /**
  * Get latest recovery data
  */
 export function getLatestRecovery(userId?: string): Recovery | null {
-  const db = getDatabase();
+  const db = getDatabase().getRawDb() as any;
   const uid = resolveUserId(userId);
   const scoped = hasUserIdColumn('recoveries');
   const query = scoped
-    ? db.prepare<Recovery>(`SELECT * FROM recoveries WHERE user_id = ? ORDER BY date DESC LIMIT 1`)
-    : db.prepare<Recovery>(`SELECT * FROM recoveries ORDER BY date DESC LIMIT 1`);
+    ? db.prepare(`SELECT * FROM recoveries WHERE user_id = ? ORDER BY date DESC LIMIT 1`)
+    : db.prepare(`SELECT * FROM recoveries ORDER BY date DESC LIMIT 1`);
   return scoped ? (query.get(uid) || null) : (query.get() || null);
 }
 
@@ -656,12 +656,12 @@ export function getLatestRecovery(userId?: string): Recovery | null {
  * Get latest cycle data
  */
 export function getLatestCycle(userId?: string): Cycle | null {
-  const db = getDatabase();
+  const db = getDatabase().getRawDb() as any;
   const uid = resolveUserId(userId);
   const scoped = hasUserIdColumn('cycles');
   const query = scoped
-    ? db.prepare<Cycle>(`SELECT * FROM cycles WHERE user_id = ? ORDER BY date DESC LIMIT 1`)
-    : db.prepare<Cycle>(`SELECT * FROM cycles ORDER BY date DESC LIMIT 1`);
+    ? db.prepare(`SELECT * FROM cycles WHERE user_id = ? ORDER BY date DESC LIMIT 1`)
+    : db.prepare(`SELECT * FROM cycles ORDER BY date DESC LIMIT 1`);
   return scoped ? (query.get(uid) || null) : (query.get() || null);
 }
 
@@ -669,12 +669,12 @@ export function getLatestCycle(userId?: string): Cycle | null {
  * Get latest sleep data
  */
 export function getLatestSleep(userId?: string): Sleep | null {
-  const db = getDatabase();
+  const db = getDatabase().getRawDb() as any;
   const uid = resolveUserId(userId);
   const scoped = hasUserIdColumn('sleeps');
   const query = scoped
-    ? db.prepare<Sleep>(`SELECT * FROM sleeps WHERE user_id = ? ORDER BY date DESC LIMIT 1`)
-    : db.prepare<Sleep>(`SELECT * FROM sleeps ORDER BY date DESC LIMIT 1`);
+    ? db.prepare(`SELECT * FROM sleeps WHERE user_id = ? ORDER BY date DESC LIMIT 1`)
+    : db.prepare(`SELECT * FROM sleeps ORDER BY date DESC LIMIT 1`);
   return scoped ? (query.get(uid) || null) : (query.get() || null);
 }
 
@@ -682,12 +682,12 @@ export function getLatestSleep(userId?: string): Sleep | null {
  * Get recovery scores for last N days (descending)
  */
 export function getRecoveriesLastNDays(days: number = 14, userId?: string): Recovery[] {
-  const db = getDatabase();
+  const db = getDatabase().getRawDb() as any;
   const uid = resolveUserId(userId);
   const scoped = hasUserIdColumn('recoveries');
   const query = scoped
-    ? db.prepare<Recovery>(`SELECT * FROM recoveries WHERE user_id = ? ORDER BY date DESC LIMIT ?`)
-    : db.prepare<Recovery>(`SELECT * FROM recoveries ORDER BY date DESC LIMIT ?`);
+    ? db.prepare(`SELECT * FROM recoveries WHERE user_id = ? ORDER BY date DESC LIMIT ?`)
+    : db.prepare(`SELECT * FROM recoveries ORDER BY date DESC LIMIT ?`);
   return scoped ? query.all(uid, days) : query.all(days);
 }
 
@@ -697,7 +697,7 @@ function dateNDaysAgo(n: number): string {
 }
 
 export function getBaselines(days: number = 30, userId?: string) {
-  const db = getDatabase();
+  const db = getDatabase().getRawDb() as any;
   const uid = resolveUserId(userId);
   const start = dateNDaysAgo(days);
   const end = new Date().toISOString().slice(0,10);
@@ -705,30 +705,30 @@ export function getBaselines(days: number = 30, userId?: string) {
   const scopedSleep = hasUserIdColumn('sleeps');
 
   const recRow = scopedRec
-    ? db.prepare<{ avg_hrv: number|null; avg_rhr: number|null; avg_score: number|null; n: number }>(
+    ? db.prepare(
         `SELECT AVG(hrv) as avg_hrv, AVG(rhr) as avg_rhr, AVG(score) as avg_score, COUNT(*) as n FROM recoveries WHERE date >= ? AND date <= ? AND user_id = ?`
       ).get(start, end, uid)
-    : db.prepare<{ avg_hrv: number|null; avg_rhr: number|null; avg_score: number|null; n: number }>(
+    : db.prepare(
         `SELECT AVG(hrv) as avg_hrv, AVG(rhr) as avg_rhr, AVG(score) as avg_score, COUNT(*) as n FROM recoveries WHERE date >= ? AND date <= ?`
       ).get(start, end);
 
   const slpRow = scopedSleep
-    ? db.prepare<{ avg_perf: number|null; n: number }>(
+    ? db.prepare(
         `SELECT AVG(performance) as avg_perf, COUNT(*) as n FROM sleeps WHERE date >= ? AND date <= ? AND user_id = ?`
       ).get(start, end, uid)
-    : db.prepare<{ avg_perf: number|null; n: number }>(
+    : db.prepare(
         `SELECT AVG(performance) as avg_perf, COUNT(*) as n FROM sleeps WHERE date >= ? AND date <= ?`
       ).get(start, end);
 
   const distRow = scopedRec
-    ? db.prepare<{ high: number; med: number; low: number }>(
+    ? db.prepare(
         `SELECT 
             SUM(CASE WHEN score >= 70 THEN 1 ELSE 0 END) as high,
             SUM(CASE WHEN score >= 40 AND score < 70 THEN 1 ELSE 0 END) as med,
             SUM(CASE WHEN score < 40 THEN 1 ELSE 0 END) as low
          FROM recoveries WHERE date >= ? AND date <= ? AND user_id = ?`
       ).get(start, end, uid)
-    : db.prepare<{ high: number; med: number; low: number }>(
+    : db.prepare(
         `SELECT 
             SUM(CASE WHEN score >= 70 THEN 1 ELSE 0 END) as high,
             SUM(CASE WHEN score >= 40 AND score < 70 THEN 1 ELSE 0 END) as med,
@@ -749,7 +749,7 @@ export function getBaselines(days: number = 30, userId?: string) {
 }
 
 export function getTodaySnapshot(userId?: string) {
-  const db = getDatabase();
+  const db = getDatabase().getRawDb() as any;
   const uid = resolveUserId(userId);
   const today = new Date().toISOString().slice(0,10);
   const scopedRec = hasUserIdColumn('recoveries');
@@ -767,11 +767,11 @@ export function getTodaySnapshot(userId?: string) {
  * Get OAuth token for a provider
  */
 export function getToken(provider: 'whoop' | 'limitless', userId?: string): Token | null {
-  const db = getDatabase();
+  const db = getDatabase().getRawDb() as any;
   const uid = resolveUserId(userId);
   const scoped = hasUserIdColumn('tokens');
   if (scoped) {
-    const q = db.prepare<Token>(`SELECT * FROM tokens WHERE provider = ? AND user_id = ?`);
+    const q = db.prepare(`SELECT * FROM tokens WHERE provider = ? AND user_id = ?`);
     const row = q.get(provider, uid) as Token | undefined;
     if (row) return row;
     // Fallback to 'default' user scope if specific not found
@@ -781,7 +781,7 @@ export function getToken(provider: 'whoop' | 'limitless', userId?: string): Toke
     }
     return null;
   } else {
-    const q = db.prepare<Token>(`SELECT * FROM tokens WHERE provider = ?`);
+    const q = db.prepare(`SELECT * FROM tokens WHERE provider = ?`);
     return (q.get(provider) as Token | undefined) || null;
   }
 }
@@ -790,12 +790,12 @@ export function getToken(provider: 'whoop' | 'limitless', userId?: string): Toke
  * Get setting by key
  */
 export function getSetting(key: string, userId?: string): Setting | null {
-  const db = getDatabase();
+  const db = getDatabase().getRawDb() as any;
   const uid = resolveUserId(userId);
   const scoped = hasUserIdColumn('settings');
   const query = scoped
-    ? db.prepare<Setting>(`SELECT * FROM settings WHERE key = ? AND user_id = ?`)
-    : db.prepare<Setting>(`SELECT * FROM settings WHERE key = ?`);
+    ? db.prepare(`SELECT * FROM settings WHERE key = ? AND user_id = ?`)
+    : db.prepare(`SELECT * FROM settings WHERE key = ?`);
   return scoped ? (query.get(key, uid) || null) : (query.get(key) || null);
 }
 
@@ -803,12 +803,12 @@ export function getSetting(key: string, userId?: string): Setting | null {
  * Get all lifelogs for a specific date
  */
 export function getLifelogsForDate(date: string, userId?: string): Lifelog[] {
-  const db = getDatabase();
+  const db = getDatabase().getRawDb() as any;
   const uid = resolveUserId(userId);
   const scoped = hasUserIdColumn('lifelogs');
   const query = scoped
-    ? db.prepare<Lifelog>(`SELECT * FROM lifelogs WHERE date = ? AND user_id = ? ORDER BY created_at DESC`)
-    : db.prepare<Lifelog>(`SELECT * FROM lifelogs WHERE date = ? ORDER BY created_at DESC`);
+    ? db.prepare(`SELECT * FROM lifelogs WHERE date = ? AND user_id = ? ORDER BY created_at DESC`)
+    : db.prepare(`SELECT * FROM lifelogs WHERE date = ? ORDER BY created_at DESC`);
   return scoped ? query.all(date, uid) : query.all(date);
 }
 
@@ -816,12 +816,12 @@ export function getLifelogsForDate(date: string, userId?: string): Lifelog[] {
  * Get unbending score for a date range
  */
 export function getUnbendingScores(startDate: string, endDate: string, userId?: string): Score[] {
-  const db = getDatabase();
+  const db = getDatabase().getRawDb() as any;
   const uid = resolveUserId(userId);
   const scoped = hasUserIdColumn('scores');
   const query = scoped
-    ? db.prepare<Score>(`SELECT * FROM scores WHERE date >= ? AND date <= ? AND user_id = ? ORDER BY date DESC`)
-    : db.prepare<Score>(`SELECT * FROM scores WHERE date >= ? AND date <= ? ORDER BY date DESC`);
+    ? db.prepare(`SELECT * FROM scores WHERE date >= ? AND date <= ? AND user_id = ? ORDER BY date DESC`)
+    : db.prepare(`SELECT * FROM scores WHERE date >= ? AND date <= ? ORDER BY date DESC`);
   return scoped ? query.all(startDate, endDate, uid) : query.all(startDate, endDate);
 }
 
@@ -829,7 +829,7 @@ export function getUnbendingScores(startDate: string, endDate: string, userId?: 
  * Calculate and insert unbending score for a specific date
  */
 export function calculateUnbendingScore(date: string, userId?: string): number | null {
-  const db = getDatabase();
+  const db = getDatabase().getRawDb() as any;
   const uid = resolveUserId(userId);
   const scoped = hasUserIdColumn('lifelogs');
 
@@ -862,8 +862,8 @@ export function calculateUnbendingScore(date: string, userId?: string): number |
  * Get flag by ID (Burst Forge)
  */
 export function getFlag(id: string): Flag | null {
-  const db = getDatabase();
-  const query = db.prepare<Flag>(`
+  const db = getDatabase().getRawDb() as any;
+  const query = db.prepare(`
     SELECT * FROM flags WHERE id = ?
   `);
   return query.get(id) || null;
@@ -873,8 +873,8 @@ export function getFlag(id: string): Flag | null {
  * Get all tweaks for a specific flag (Burst Forge)
  */
 export function getTweaksByFlagId(flagId: string): Tweak[] {
-  const db = getDatabase();
-  const query = db.prepare<Tweak>(`
+  const db = getDatabase().getRawDb() as any;
+  const query = db.prepare(`
     SELECT * FROM tweaks WHERE flag_id = ? ORDER BY created_at DESC
   `);
   return query.all(flagId);
@@ -884,7 +884,7 @@ export function getTweaksByFlagId(flagId: string): Tweak[] {
  * Update flag status (Burst Forge)
  */
 export function updateFlagStatus(id: string, status: 'pending' | 'resolved' | 'dismissed'): void {
-  const db = getDatabase();
+  const db = getDatabase().getRawDb() as any;
   const update = db.prepare(`
     UPDATE flags
     SET status = ?, updated_at = strftime('%s', 'now')
@@ -897,8 +897,8 @@ export function updateFlagStatus(id: string, status: 'pending' | 'resolved' | 'd
  * Get all pending flags (Burst Forge)
  */
 export function getPendingFlags(): Flag[] {
-  const db = getDatabase();
-  const query = db.prepare<Flag>(`
+  const db = getDatabase().getRawDb() as any;
+  const query = db.prepare(`
     SELECT * FROM flags WHERE status = 'pending' ORDER BY detected_at DESC
   `);
   return query.all();
@@ -908,8 +908,8 @@ export function getPendingFlags(): Flag[] {
  * Get resolved flags (for FlagRadar visualization)
  */
 export function getResolvedFlags(): Flag[] {
-  const db = getDatabase();
-  const query = db.prepare<Flag>(`
+  const db = getDatabase().getRawDb() as any;
+  const query = db.prepare(`
     SELECT * FROM flags WHERE status = 'resolved' ORDER BY detected_at DESC
   `);
   return query.all();
@@ -919,7 +919,7 @@ export function getResolvedFlags(): Flag[] {
  * Users - Create new user profile
  */
 export function createUser(input: Omit<UserInput, 'id'> & { id: string }): void {
-  const db = getDatabase();
+  const db = getDatabase().getRawDb() as any;
   const insert = db.prepare(`
     INSERT INTO users (id, email, name, timezone)
     VALUES (?, ?, ?, ?)
@@ -931,7 +931,7 @@ export function createUser(input: Omit<UserInput, 'id'> & { id: string }): void 
  * Users - Update existing user profile
  */
 export function updateUser(id: string, updates: Partial<Omit<UserInput, 'id'>>): void {
-  const db = getDatabase();
+  const db = getDatabase().getRawDb() as any;
   const fields: string[] = [];
   const values: any[] = [];
   if (updates.email !== undefined) { fields.push('email = ?'); values.push(updates.email); }
@@ -947,8 +947,8 @@ export function updateUser(id: string, updates: Partial<Omit<UserInput, 'id'>>):
  * Users - Get a user by id
  */
 export function getUser(id: string): User | null {
-  const db = getDatabase();
-  const query = db.prepare<User>(`SELECT * FROM users WHERE id = ?`);
+  const db = getDatabase().getRawDb() as any;
+  const query = db.prepare(`SELECT * FROM users WHERE id = ?`);
   return query.get(id) || null;
 }
 
@@ -956,8 +956,8 @@ export function getUser(id: string): User | null {
  * Users - List users
  */
 export function listUsers(limit: number = 50, offset: number = 0): User[] {
-  const db = getDatabase();
-  const query = db.prepare<User>(`SELECT * FROM users ORDER BY created_at DESC LIMIT ? OFFSET ?`);
+  const db = getDatabase().getRawDb() as any;
+  const query = db.prepare(`SELECT * FROM users ORDER BY created_at DESC LIMIT ? OFFSET ?`);
   return query.all(limit, offset);
 }
 
@@ -965,8 +965,8 @@ export function listUsers(limit: number = 50, offset: number = 0): User[] {
  * Get total UIX score (sum of all delta_uix values from tweaks)
  */
 export function getTotalUIXScore(): number {
-  const db = getDatabase();
-  const query = db.prepare<{ total: number | null }>(`
+  const db = getDatabase().getRawDb() as any;
+  const query = db.prepare(`
     SELECT SUM(delta_uix) as total FROM tweaks
   `);
   const result = query.get();
@@ -977,10 +977,10 @@ export function getTotalUIXScore(): number {
  * Get all tweaks from the last N hours (for metrics calculation)
  */
 export function getTweaksLastNHours(hours: number = 72): Tweak[] {
-  const db = getDatabase();
+  const db = getDatabase().getRawDb() as any;
   const cutoff = Math.floor(Date.now() / 1000) - hours * 3600;
 
-  const query = db.prepare<Tweak>(`
+  const query = db.prepare(`
     SELECT * FROM tweaks
     WHERE created_at >= ?
     ORDER BY created_at DESC
@@ -992,8 +992,8 @@ export function getTweaksLastNHours(hours: number = 72): Tweak[] {
  * Get all flags (not just pending)
  */
 export function getAllFlags(): Flag[] {
-  const db = getDatabase();
-  const query = db.prepare<Flag>(`
+  const db = getDatabase().getRawDb() as any;
+  const query = db.prepare(`
     SELECT * FROM flags ORDER BY detected_at DESC
   `);
   return query.all();
@@ -1001,7 +1001,7 @@ export function getAllFlags(): Flag[] {
 
 /** Psych Signals - Get latest summary */
 export function getLatestPsychSignal(userId?: string): PsychSignal | null {
-  const db = getDatabase();
+  const db = getDatabase().getRawDb() as any;
   const uid = resolveUserId(userId);
   // Check if table exists
   try {
@@ -1012,14 +1012,14 @@ export function getLatestPsychSignal(userId?: string): PsychSignal | null {
   }
   const scoped = hasUserIdColumn('psych_signals');
   const query = scoped
-    ? db.prepare<PsychSignal>(`SELECT * FROM psych_signals WHERE user_id = ? ORDER BY date DESC, created_at DESC LIMIT 1`)
-    : db.prepare<PsychSignal>(`SELECT * FROM psych_signals ORDER BY date DESC, created_at DESC LIMIT 1`);
+    ? db.prepare(`SELECT * FROM psych_signals WHERE user_id = ? ORDER BY date DESC, created_at DESC LIMIT 1`)
+    : db.prepare(`SELECT * FROM psych_signals ORDER BY date DESC, created_at DESC LIMIT 1`);
   return scoped ? (query.get(uid) || null) : (query.get() || null);
 }
 
 /** Psych Signals - Last N days (descending) */
 export function getPsychSignalsLastNDays(days: number = 14, userId?: string): PsychSignal[] {
-  const db = getDatabase();
+  const db = getDatabase().getRawDb() as any;
   // Table existence check
   try {
     const chk = db.prepare(`SELECT name FROM sqlite_master WHERE type='table' AND name='psych_signals'`).get();
@@ -1030,10 +1030,10 @@ export function getPsychSignalsLastNDays(days: number = 14, userId?: string): Ps
   const uid = resolveUserId(userId);
   const scoped = hasUserIdColumn('psych_signals');
   const query = scoped
-    ? db.prepare<PsychSignal>(
+    ? db.prepare(
         `SELECT * FROM psych_signals WHERE user_id = ? ORDER BY date DESC LIMIT ?`
       )
-    : db.prepare<PsychSignal>(
+    : db.prepare(
         `SELECT * FROM psych_signals ORDER BY date DESC LIMIT ?`
       );
   return scoped ? query.all(uid, days) : query.all(days);
@@ -1045,7 +1045,7 @@ export function getPsychSignalsLastNDays(days: number = 14, userId?: string): Ps
 
 function hasAgenticTable(): boolean {
   try {
-    const db = getDatabase();
+    const db = getDatabase().getRawDb() as any;
     const row = db.prepare(`SELECT name FROM sqlite_master WHERE type='table' AND name='agentic_actions'`).get();
     return !!row;
   } catch {
@@ -1055,7 +1055,7 @@ function hasAgenticTable(): boolean {
 
 export function insertAgenticActions(actions: AgenticActionInput[]): void {
   if (actions.length === 0 || !hasAgenticTable()) return;
-  const db = getDatabase();
+  const db = getDatabase().getRawDb() as any;
   const uidDefault = resolveUserId();
   const stmt = db.prepare(`
     INSERT INTO agentic_actions (id, user_id, type, target, title, content, confidence, status, source, metadata)
@@ -1087,30 +1087,37 @@ export function insertAgenticActions(actions: AgenticActionInput[]): void {
         a.metadata ?? null
       );
     }
-  });
+  })();
 }
 
 export function listAgenticActions(opts: { status?: AgenticAction['status']; limit?: number; userId?: string } = {}): AgenticAction[] {
   if (!hasAgenticTable()) return [];
-  const db = getDatabase();
+  const db = getDatabase().getRawDb() as any;
   const { status, limit = 50 } = opts;
   const uid = resolveUserId(opts.userId);
   const scoped = hasUserIdColumn('agentic_actions');
   if (status) {
     const query = scoped
-      ? db.prepare<AgenticAction>(`SELECT * FROM agentic_actions WHERE status = ? AND user_id = ? ORDER BY created_at DESC LIMIT ?`)
-      : db.prepare<AgenticAction>(`SELECT * FROM agentic_actions WHERE status = ? ORDER BY created_at DESC LIMIT ?`);
+      ? db.prepare(`SELECT * FROM agentic_actions WHERE status = ? AND user_id = ? ORDER BY created_at DESC LIMIT ?`)
+      : db.prepare(`SELECT * FROM agentic_actions WHERE status = ? ORDER BY created_at DESC LIMIT ?`);
     return scoped ? query.all(status, uid, limit) : query.all(status, limit);
   }
   const query = scoped
-    ? db.prepare<AgenticAction>(`SELECT * FROM agentic_actions WHERE user_id = ? ORDER BY created_at DESC LIMIT ?`)
-    : db.prepare<AgenticAction>(`SELECT * FROM agentic_actions ORDER BY created_at DESC LIMIT ?`);
+    ? db.prepare(`SELECT * FROM agentic_actions WHERE user_id = ? ORDER BY created_at DESC LIMIT ?`)
+    : db.prepare(`SELECT * FROM agentic_actions ORDER BY created_at DESC LIMIT ?`);
   return scoped ? query.all(uid, limit) : query.all(limit);
+}
+
+export function getAgenticActionById(id: string): AgenticAction | null {
+  if (!hasAgenticTable()) return null;
+  const db = getDatabase().getRawDb() as any;
+  const stmt = db.prepare(`SELECT * FROM agentic_actions WHERE id = ?`);
+  return stmt.get(id) || null;
 }
 
 export function updateAgenticActionStatus(id: string, status: AgenticAction['status']): void {
   if (!hasAgenticTable()) return;
-  const db = getDatabase();
+  const db = getDatabase().getRawDb() as any;
   const stmt = db.prepare(`UPDATE agentic_actions SET status = ?, updated_at = strftime('%s','now') WHERE id = ?`);
   stmt.run(status, id);
 }
@@ -1121,7 +1128,7 @@ export function updateAgenticActionStatusWithMeta(
   metadata?: Record<string, any>
 ): void {
   if (!hasAgenticTable()) return;
-  const db = getDatabase();
+  const db = getDatabase().getRawDb() as any;
   const metaJson = metadata ? JSON.stringify(metadata) : null;
   const stmt = db.prepare(
     `UPDATE agentic_actions SET status = ?, metadata = COALESCE(?, metadata), updated_at = strftime('%s','now') WHERE id = ?`

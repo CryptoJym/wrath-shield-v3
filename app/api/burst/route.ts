@@ -84,13 +84,13 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     let primeCompleted = false;
     let lockCompleted = false;
 
-    if (lastPrime && lastPrime.value_enc) {
-      const primeDate = new Date(parseInt(String(lastPrime.value_enc)) * 1000).toISOString().split('T')[0];
+    if (lastPrime?.value_enc) {
+      const primeDate = new Date(parseInt(lastPrime.value_enc) * 1000).toISOString().split('T')[0];
       primeCompleted = primeDate === today;
     }
 
-    if (lastLock && lastLock.value_enc) {
-      const lockDate = new Date(parseInt(String(lastLock.value_enc)) * 1000).toISOString().split('T')[0];
+    if (lastLock?.value_enc) {
+      const lockDate = new Date(parseInt(lastLock.value_enc) * 1000).toISOString().split('T')[0];
       lockCompleted = lockDate === today;
     }
 
