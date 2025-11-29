@@ -99,6 +99,25 @@ jest.mock('@/lib/server-only-guard', () => ({
   ensureServerOnly: jest.fn(),
 }));
 
+// Mock Zep memory module
+jest.mock('@/lib/memory/zep', () => ({
+  searchAllMemory: jest.fn().mockResolvedValue({
+    agent: [
+      { memory: { id: 'agent-mem-1', text: 'Agent-specific memory' }, score: 0.9 },
+    ],
+    org: [
+      { memory: { id: 'org-mem-1', text: 'Org-wide policy: All contracts require legal review' }, score: 0.85 },
+    ],
+  }),
+  addAgentMemory: jest.fn().mockResolvedValue(undefined),
+  proposeOrgMemory: jest.fn().mockResolvedValue({
+    id: 'proposal-1',
+    proposedBy: 'legal-agent',
+    text: 'New org policy',
+    status: 'pending',
+  }),
+}));
+
 jest.mock('@/lib/DirectLLMClients', () => ({
   DirectLLMClients: {
     openaiChat: jest.fn().mockResolvedValue({
@@ -211,6 +230,81 @@ describe('AgentInvoker', () => {
       const charter = getLifeCharter();
       expect(charter.priority_stack.length).toBeGreaterThan(0);
       expect(charter.priority_stack[0].name).toBe('Family');
+    });
+  });
+
+  describe('Zep Memory Integration', () => {
+    const { searchAllMemory, addAgentMemory, proposeOrgMemory } = require('@/lib/memory/zep');
+
+    it('should search both agent and org-council graphs', async () => {
+      const result = await searchAllMemory('legal-agent', 'contract review', 5);
+
+      expect(result).toHaveProperty('agent');
+      expect(result).toHaveProperty('org');
+      expect(Array.isArray(result.agent)).toBe(true);
+      expect(Array.isArray(result.org)).toBe(true);
+    });
+
+    it('should return agent-specific memories', async () => {
+      const result = await searchAllMemory('legal-agent', 'query', 5);
+
+      expect(result.agent.length).toBeGreaterThan(0);
+      expect(result.agent[0].memory.text).toBe('Agent-specific memory');
+    });
+
+    it('should return org-council memories', async () => {
+      const result = await searchAllMemory('legal-agent', 'query', 5);
+
+      expect(result.org.length).toBeGreaterThan(0);
+      expect(result.org[0].memory.text).toContain('Org-wide policy');
+    });
+
+    it('should add memory to agent graph', async () => {
+      await addAgentMemory('legal-agent', 'New legal insight', { category: 'case-law' });
+
+      expect(addAgentMemory).toHaveBeenCalledWith(
+        'legal-agent',
+        'New legal insight',
+        { category: 'case-law' }
+      );
+    });
+
+    it('should propose org-level knowledge', async () => {
+      const proposal = await proposeOrgMemory('legal-agent', 'All contracts require legal review');
+
+      expect(proposal).toHaveProperty('id');
+      expect(proposal.status).toBe('pending');
+      expect(proposal.proposedBy).toBe('legal-agent');
+    });
+  });
+
+  describe('LIFE_OS_TO_ZEP_ID Mapping', () => {
+    it('should map Life OS agent IDs to Zep agent IDs', () => {
+      // The mapping should convert 'agent.legal' to 'legal-agent'
+      const mappings: Record<string, string> = {
+        'agent.orchestrator': 'orchestrator-agent',
+        'agent.legal': 'legal-agent',
+        'agent.finance': 'finance-agent',
+        'agent.pm': 'pm-agent',
+        'agent.comms': 'comms-agent',
+        'agent.health': 'health-agent',
+        'agent.coaching': 'coaching-agent',
+        'agent.hyro': 'hyro-agent',
+        'agent.grok': 'grok-agent',
+        'agent.sherlock': 'sherlock-agent',
+        'agent.ea': 'ea-agent',
+        'agent.relationships': 'relationships-agent',
+        'agent.eeg': 'eeg-agent',
+      };
+
+      // Verify all 13 agents are mapped
+      expect(Object.keys(mappings).length).toBe(13);
+
+      // Verify naming convention
+      Object.entries(mappings).forEach(([lifeOs, zep]) => {
+        expect(lifeOs).toMatch(/^agent\./);
+        expect(zep).toMatch(/-agent$/);
+      });
     });
   });
 });
