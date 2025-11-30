@@ -66,6 +66,25 @@ CREATE TABLE IF NOT EXISTS finance_audit (
 );
 CREATE INDEX IF NOT EXISTS idx_audit_txn ON finance_audit(txn_id);
 CREATE INDEX IF NOT EXISTS idx_audit_ts ON finance_audit(ts);
+
+CREATE TABLE IF NOT EXISTS finance_reports (
+  id TEXT PRIMARY KEY,
+  user_id TEXT,
+  cycle_start TEXT NOT NULL,
+  cycle_end TEXT NOT NULL,
+  employee TEXT DEFAULT 'James Brady',
+  purpose TEXT,
+  total_reimbursable REAL DEFAULT 0,
+  total_spent REAL DEFAULT 0,
+  transaction_count INTEGER DEFAULT 0,
+  status TEXT DEFAULT 'draft',
+  generated_at TEXT DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ','now')),
+  submitted_at TEXT,
+  pdf_path TEXT,
+  meta TEXT
+);
+CREATE INDEX IF NOT EXISTS idx_reports_cycle ON finance_reports(cycle_start, cycle_end);
+CREATE INDEX IF NOT EXISTS idx_reports_status ON finance_reports(status);
 `;
 
 function getDb() {
@@ -508,4 +527,337 @@ export function updateContextRequest(id: string, updates: Partial<ContextRequest
   const out = db.prepare('SELECT * FROM finance_context_requests WHERE id = ?').get(id) as any;
   db.close();
   return out;
+}
+
+// ============================================================================
+// Finance Reports & Cycles
+// ============================================================================
+
+export type FinanceReport = {
+  id: string;
+  user_id?: string;
+  cycle_start: string;
+  cycle_end: string;
+  employee: string;
+  purpose?: string;
+  total_reimbursable: number;
+  total_spent: number;
+  transaction_count: number;
+  status: 'draft' | 'submitted' | 'approved';
+  generated_at?: string;
+  submitted_at?: string;
+  pdf_path?: string;
+  meta?: any;
+};
+
+export type CycleInfo = {
+  start: string;
+  end: string;
+  status: 'current' | 'closed';
+  reimbursable: number;
+  total: number;
+  count: number;
+  report_id?: string;
+  report_status?: string;
+};
+
+// Expense cycles run 8th to 8th (based on historical data)
+const CYCLE_DAY = 8;
+
+/**
+ * Generate all expense cycles from earliest transaction to present.
+ * Cycles run from the 8th of one month to the 8th of the next.
+ */
+export function generateAllCycles(user_id?: string): CycleInfo[] {
+  const db = getDb();
+
+  // Get earliest transaction date (exclude NULL/empty dates)
+  const whereBase = "WHERE date IS NOT NULL AND date != ''";
+  const whereUser = user_id
+    ? `${whereBase} AND (user_id = ? OR user_id IS NULL OR user_id = 'default')`
+    : whereBase;
+  const earliest = db.prepare(
+    `SELECT MIN(date) as min_date FROM finance_transactions ${whereUser}`
+  ).get(user_id ? [user_id] : []) as any;
+
+  if (!earliest?.min_date) {
+    db.close();
+    return [];
+  }
+
+  const minDate = new Date(earliest.min_date);
+  const now = new Date();
+  const cycles: CycleInfo[] = [];
+
+  // Start from the cycle containing the earliest transaction
+  let cycleStart = new Date(minDate.getFullYear(), minDate.getMonth(), CYCLE_DAY);
+  if (minDate.getDate() < CYCLE_DAY) {
+    cycleStart.setMonth(cycleStart.getMonth() - 1);
+  }
+
+  // Generate cycles until we pass today
+  while (cycleStart <= now) {
+    const cycleEnd = new Date(cycleStart);
+    cycleEnd.setMonth(cycleEnd.getMonth() + 1);
+
+    const startStr = cycleStart.toISOString().split('T')[0];
+    const endStr = cycleEnd.toISOString().split('T')[0];
+
+    // Get transaction stats for this cycle
+    const statsQuery = user_id
+      ? `SELECT
+          COUNT(*) as count,
+          COALESCE(SUM(amount), 0) as total,
+          COALESCE(SUM(CASE WHEN reimbursable = 1 THEN amount ELSE 0 END), 0) as reimbursable
+         FROM finance_transactions
+         WHERE date >= ? AND date < ? AND (user_id = ? OR user_id IS NULL OR user_id = 'default')`
+      : `SELECT
+          COUNT(*) as count,
+          COALESCE(SUM(amount), 0) as total,
+          COALESCE(SUM(CASE WHEN reimbursable = 1 THEN amount ELSE 0 END), 0) as reimbursable
+         FROM finance_transactions
+         WHERE date >= ? AND date < ?`;
+
+    const stats = db.prepare(statsQuery).get(
+      user_id ? [startStr, endStr, user_id] : [startStr, endStr]
+    ) as any;
+
+    // Check if there's a report for this cycle
+    const reportQuery = user_id
+      ? `SELECT id, status FROM finance_reports
+         WHERE cycle_start = ? AND cycle_end = ? AND (user_id = ? OR user_id IS NULL OR user_id = 'default')
+         LIMIT 1`
+      : `SELECT id, status FROM finance_reports WHERE cycle_start = ? AND cycle_end = ? LIMIT 1`;
+
+    const report = db.prepare(reportQuery).get(
+      user_id ? [startStr, endStr, user_id] : [startStr, endStr]
+    ) as any;
+
+    const isCurrent = cycleEnd > now;
+
+    cycles.push({
+      start: startStr,
+      end: endStr,
+      status: isCurrent ? 'current' : 'closed',
+      reimbursable: Math.abs(stats?.reimbursable || 0),
+      total: Math.abs(stats?.total || 0),
+      count: stats?.count || 0,
+      report_id: report?.id,
+      report_status: report?.status,
+    });
+
+    cycleStart = cycleEnd;
+  }
+
+  db.close();
+  return cycles.reverse(); // Most recent first
+}
+
+/**
+ * Create a new expense report for a cycle
+ */
+export function createReport(input: {
+  cycle_start: string;
+  cycle_end: string;
+  user_id?: string;
+  employee?: string;
+  purpose?: string;
+}): FinanceReport {
+  const db = getDb();
+  const id = `rpt_${uuidv4().slice(0, 8)}`;
+
+  // Calculate stats from transactions
+  const statsQuery = input.user_id
+    ? `SELECT
+        COUNT(*) as count,
+        COALESCE(SUM(amount), 0) as total,
+        COALESCE(SUM(CASE WHEN reimbursable = 1 THEN amount ELSE 0 END), 0) as reimbursable
+       FROM finance_transactions
+       WHERE date >= ? AND date < ? AND (user_id = ? OR user_id IS NULL OR user_id = 'default')`
+    : `SELECT
+        COUNT(*) as count,
+        COALESCE(SUM(amount), 0) as total,
+        COALESCE(SUM(CASE WHEN reimbursable = 1 THEN amount ELSE 0 END), 0) as reimbursable
+       FROM finance_transactions
+       WHERE date >= ? AND date < ?`;
+
+  const stats = db.prepare(statsQuery).get(
+    input.user_id
+      ? [input.cycle_start, input.cycle_end, input.user_id]
+      : [input.cycle_start, input.cycle_end]
+  ) as any;
+
+  db.prepare(
+    `INSERT INTO finance_reports
+      (id, user_id, cycle_start, cycle_end, employee, purpose, total_reimbursable, total_spent, transaction_count, status)
+     VALUES (@id, @user_id, @cycle_start, @cycle_end, @employee, @purpose, @total_reimbursable, @total_spent, @transaction_count, @status)`
+  ).run({
+    id,
+    user_id: input.user_id || 'default',
+    cycle_start: input.cycle_start,
+    cycle_end: input.cycle_end,
+    employee: input.employee || 'James Brady',
+    purpose: input.purpose || `AI Tools and Services (${formatCycleLabel(input.cycle_start, input.cycle_end)})`,
+    total_reimbursable: Math.abs(stats?.reimbursable || 0),
+    total_spent: Math.abs(stats?.total || 0),
+    transaction_count: stats?.count || 0,
+    status: 'draft',
+  });
+
+  const out = db.prepare('SELECT * FROM finance_reports WHERE id = ?').get(id) as any;
+  db.close();
+  return {
+    ...out,
+    meta: out.meta ? safeParse(out.meta) : undefined,
+  };
+}
+
+/**
+ * List all reports
+ */
+export function listReports(user_id?: string): FinanceReport[] {
+  const db = getDb();
+  const where = user_id
+    ? "WHERE (user_id = ? OR user_id IS NULL OR user_id = 'default')"
+    : '';
+  const rows = db.prepare(
+    `SELECT * FROM finance_reports ${where} ORDER BY cycle_start DESC`
+  ).all(user_id ? [user_id] : []) as any[];
+  db.close();
+  return rows.map(r => ({
+    ...r,
+    meta: r.meta ? safeParse(r.meta) : undefined,
+  }));
+}
+
+/**
+ * Get a single report by ID
+ */
+export function getReport(id: string, user_id?: string): FinanceReport | null {
+  const db = getDb();
+  const where = user_id
+    ? "WHERE id = ? AND (user_id = ? OR user_id IS NULL OR user_id = 'default')"
+    : 'WHERE id = ?';
+  const row = db.prepare(`SELECT * FROM finance_reports ${where}`).get(
+    user_id ? [id, user_id] : [id]
+  ) as any;
+  db.close();
+  if (!row) return null;
+  return {
+    ...row,
+    meta: row.meta ? safeParse(row.meta) : undefined,
+  };
+}
+
+/**
+ * Get report by cycle dates
+ */
+export function getReportByCycle(cycle_start: string, cycle_end: string, user_id?: string): FinanceReport | null {
+  const db = getDb();
+  const where = user_id
+    ? "WHERE cycle_start = ? AND cycle_end = ? AND (user_id = ? OR user_id IS NULL OR user_id = 'default')"
+    : 'WHERE cycle_start = ? AND cycle_end = ?';
+  const row = db.prepare(`SELECT * FROM finance_reports ${where}`).get(
+    user_id ? [cycle_start, cycle_end, user_id] : [cycle_start, cycle_end]
+  ) as any;
+  db.close();
+  if (!row) return null;
+  return {
+    ...row,
+    meta: row.meta ? safeParse(row.meta) : undefined,
+  };
+}
+
+/**
+ * Update a report
+ */
+export function updateReport(id: string, updates: Partial<FinanceReport>, user_id?: string): FinanceReport | null {
+  const db = getDb();
+  // Include user_id check for security - only allow updating own reports
+  const query = user_id
+    ? `SELECT * FROM finance_reports WHERE id = ? AND (user_id = ? OR user_id IS NULL OR user_id = 'default')`
+    : `SELECT * FROM finance_reports WHERE id = ?`;
+  const existing = db.prepare(query).get(user_id ? [id, user_id] : [id]) as any;
+  if (!existing) {
+    db.close();
+    return null;
+  }
+
+  const setParts: string[] = [];
+  const params: any = { id };
+
+  if (updates.status !== undefined) {
+    setParts.push('status = @status');
+    params.status = updates.status;
+    if (updates.status === 'submitted') {
+      setParts.push("submitted_at = strftime('%Y-%m-%dT%H:%M:%SZ','now')");
+    }
+  }
+  if (updates.purpose !== undefined) {
+    setParts.push('purpose = @purpose');
+    params.purpose = updates.purpose;
+  }
+  if (updates.employee !== undefined) {
+    setParts.push('employee = @employee');
+    params.employee = updates.employee;
+  }
+  if (updates.pdf_path !== undefined) {
+    setParts.push('pdf_path = @pdf_path');
+    params.pdf_path = updates.pdf_path;
+  }
+  if (updates.meta !== undefined) {
+    setParts.push('meta = @meta');
+    params.meta = JSON.stringify(updates.meta);
+  }
+
+  if (setParts.length) {
+    db.prepare(`UPDATE finance_reports SET ${setParts.join(', ')} WHERE id = @id`).run(params);
+  }
+
+  const out = db.prepare('SELECT * FROM finance_reports WHERE id = ?').get(id) as any;
+  db.close();
+  return {
+    ...out,
+    meta: out.meta ? safeParse(out.meta) : undefined,
+  };
+}
+
+/**
+ * Get transactions for a report (reimbursable only)
+ */
+export function getReportTransactions(cycle_start: string, cycle_end: string, user_id?: string): TxnRow[] {
+  const db = getDb();
+  const where = user_id
+    ? `WHERE date >= ? AND date < ? AND reimbursable = 1 AND (user_id = ? OR user_id IS NULL OR user_id = 'default')`
+    : `WHERE date >= ? AND date < ? AND reimbursable = 1`;
+  const rows = db.prepare(
+    `SELECT * FROM finance_transactions ${where} ORDER BY date ASC`
+  ).all(user_id ? [cycle_start, cycle_end, user_id] : [cycle_start, cycle_end]) as any[];
+  db.close();
+  return rows.map(r => ({
+    ...r,
+    meta: r.meta ? safeParse(r.meta) : undefined,
+    recurring: !!r.recurring,
+    reimbursable: !!r.reimbursable,
+  }));
+}
+
+/**
+ * Format a cycle label for display (e.g., "Nov 8 → Dec 8, 2025")
+ */
+export function formatCycleLabel(start: string, end: string): string {
+  const startDate = new Date(start + 'T00:00:00');
+  const endDate = new Date(end + 'T00:00:00');
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+  const startMonth = months[startDate.getMonth()];
+  const startDay = startDate.getDate();
+  const endMonth = months[endDate.getMonth()];
+  const endDay = endDate.getDate();
+  const year = endDate.getFullYear();
+
+  if (startDate.getFullYear() === endDate.getFullYear()) {
+    return `${startMonth} ${startDay} → ${endMonth} ${endDay}, ${year}`;
+  }
+  return `${startMonth} ${startDay}, ${startDate.getFullYear()} → ${endMonth} ${endDay}, ${year}`;
 }

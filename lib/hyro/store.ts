@@ -228,7 +228,8 @@ export function listLearningItems(options?: {
   const params: any[] = [];
 
   if (options?.user_id) {
-    where.push('user_id = ?');
+    // Include 'default' fallback so existing data is visible when logged in via Clerk
+    where.push("(user_id = ? OR user_id IS NULL OR user_id = 'default')");
     params.push(options.user_id);
   }
 
@@ -299,7 +300,8 @@ export function createDailyRecommendation(rec: Omit<DailyRecommendation, 'id' | 
 
 export function getDailyRecommendation(user_id: string, date: string): DailyRecommendation | null {
   const db = getDb();
-  const row = db.prepare('SELECT * FROM daily_recommendations WHERE user_id = ? AND date = ?').get(user_id, date) as any;
+  // Include 'default' fallback so existing data is visible when logged in via Clerk
+  const row = db.prepare("SELECT * FROM daily_recommendations WHERE (user_id = ? OR user_id IS NULL OR user_id = 'default') AND date = ?").get(user_id, date) as any;
   db.close();
 
   if (!row) return null;

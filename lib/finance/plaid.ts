@@ -8,7 +8,7 @@ const PLAID_CLIENT_ID = process.env.PLAID_CLIENT_ID;
 const PLAID_SECRET = process.env.PLAID_SECRET;
 const PLAID_ENV = (process.env.PLAID_ENV || 'development') as keyof typeof PlaidEnvironments;
 
-type PlaidTokenStore = Record<string, { access_token: string; cursor?: string; item_id?: string }>;
+type PlaidTokenStore = Record<string, { access_token: string; cursor?: string; item_id?: string; user_id?: string }>;
 
 function getTokens(): PlaidTokenStore {
   const file = path.resolve(process.cwd(), '.data', 'finance', 'plaid-tokens.json');
@@ -66,7 +66,16 @@ export async function fetchPlaidTransactions(userId?: string): Promise<TxnRow[]>
   const client = getPlaidClient();
   const results: TxnRow[] = [];
 
-  for (const itemId of Object.keys(tokens)) {
+  // Filter tokens by user_id for security - only sync accounts belonging to this user
+  // Also include tokens with no user_id (legacy) or 'default' (single-user mode)
+  const userItemIds = Object.keys(tokens).filter(itemId => {
+    const tokenUserId = tokens[itemId].user_id;
+    if (!userId) return true; // No user specified, sync all (dev mode)
+    if (!tokenUserId || tokenUserId === 'default') return true; // Legacy/default tokens
+    return tokenUserId === userId; // Match user
+  });
+
+  for (const itemId of userItemIds) {
     let cursor = tokens[itemId].cursor;
     let hasMore = true;
     while (hasMore) {
