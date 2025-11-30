@@ -117,22 +117,6 @@ describe('Configuration Loader', () => {
       const config = getConfig();
       expect(config.limitless.apiKey).toBe('test-limitless-key');
     });
-
-    it('should use default Qdrant values when not specified', () => {
-      delete process.env.QDRANT_HOST;
-      delete process.env.QDRANT_PORT;
-      const config = getConfig();
-      expect(config.qdrant.host).toBe('localhost');
-      expect(config.qdrant.port).toBe(6333);
-    });
-
-    it('should use custom Qdrant values when specified', () => {
-      process.env.QDRANT_HOST = 'custom-host';
-      process.env.QDRANT_PORT = '9999';
-      const config = getConfig();
-      expect(config.qdrant.host).toBe('custom-host');
-      expect(config.qdrant.port).toBe(9999);
-    });
   });
 
   describe('Configuration Caching', () => {

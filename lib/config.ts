@@ -80,10 +80,6 @@ export type AppConfig = {
   crypto: {
     databaseEncryptionKey: Buffer;
   };
-  qdrant: {
-    host: string;
-    port: number;
-  };
 };
 
 /**
@@ -175,11 +171,6 @@ export function getConfig(): AppConfig {
     apiKey: optEnv('OPENAI_API_KEY'),
   };
 
-  const qdrantConfig = {
-    host: process.env.QDRANT_HOST ?? 'localhost',
-    port: parseInt(process.env.QDRANT_PORT ?? '6333', 10),
-  };
-
   // If there are any validation errors, throw with all details
   if (errors.length > 0) {
     const errorMessages = errors.map(e => `  - ${e.field}: ${e.message}`).join('\n');
@@ -196,7 +187,6 @@ export function getConfig(): AppConfig {
     openrouter: openrouterConfig!,
     openai: openaiConfig,
     crypto: cryptoConfig!,
-    qdrant: qdrantConfig,
   };
 }
 

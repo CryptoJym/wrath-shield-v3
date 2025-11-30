@@ -53,13 +53,14 @@ Option B (script):
 ```
 
 ## Memory model & policy
+- Primary: **Zep Cloud** - Unified temporal knowledge graph for all agents
+- Fallback: Local SQLite (when Zep unavailable)
 - Grok has two memory tools:
   - memory_search (read) → calls Next /api/memory/search
-  - memory_add (write) → writes to Agentic Grok’s mem_store.db
+  - memory_add (write) → writes to Zep or local store
 - Built‑in policy in Grok orchestrator enforces:
   - Save only durable facts (preferences, goals, anchors with date)
   - Avoid secrets/ephemeral info; cap N writes per chat (default 3)
-- Next’s MemoryWrapper prefers Grok → Qdrant → local SQLite.
 
 ## Key API routes (Next)
 - GET /api/metrics — aggregates (today, last 7/30 days)
@@ -191,11 +192,11 @@ Current benchmarks (from test suite):
 - **Framework**: Next.js 14 with App Router
 - **Language**: TypeScript
 - **Database**: SQLite with better-sqlite3
-- **Vector DB**: Qdrant (local or cloud)
-- **Memory**: Mem0 (semantic memory wrapper)
+- **Memory**: Zep Cloud (temporal knowledge graph) + SQLite fallback
+- **Auth**: Clerk
 - **Encryption**: Node.js crypto (AES-256-GCM)
 - **Testing**: Jest + @testing-library/react
-- **APIs**: WHOOP, Limitless, OpenRouter
+- **APIs**: WHOOP, Limitless, OpenRouter, Plaid
 
 ## Contributing
 

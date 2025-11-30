@@ -4,7 +4,7 @@
  * Handles execution of agentic actions (email drafts, tasks, reminders, etc.)
  */
 
-import { getAgenticActionById, updateAgenticActionStatusWithMeta } from '@/lib/db/queries';
+import { getAgenticActionById, updateAgenticActionStatusWithMeta, listAgenticActions } from '@/lib/db/queries';
 
 export interface ExecutionResult {
   success: boolean;
@@ -139,4 +139,32 @@ async function executeNote(action: any): Promise<ExecutionResult> {
     message: `Note "${action.title}" saved`,
     data: { note_id: action.id }
   };
+}
+
+/**
+ * Run all queued high-confidence actions
+ * Used by scheduled jobs to auto-execute trusted actions
+ */
+export async function runActionExecutors(): Promise<{
+  executed: number;
+  failed: number;
+  results: ExecutionResult[];
+}> {
+  const queued = listAgenticActions({ status: 'queued', limit: 100 });
+  const results: ExecutionResult[] = [];
+  let executed = 0;
+  let failed = 0;
+
+  for (const action of queued) {
+    const result = await executeSingleAction(action.id);
+    results.push(result);
+    if (result.success) {
+      executed++;
+    } else {
+      failed++;
+    }
+  }
+
+  console.log(`[Executors] Processed ${queued.length} queued actions: ${executed} executed, ${failed} failed`);
+  return { executed, failed, results };
 }

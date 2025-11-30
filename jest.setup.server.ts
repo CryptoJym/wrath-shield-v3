@@ -36,5 +36,3 @@ process.env.WHOOP_REDIRECT_URI = process.env.WHOOP_REDIRECT_URI ?? 'http://local
 process.env.OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY ?? 'test-openrouter-key';
 process.env.DATABASE_ENCRYPTION_KEY =
   process.env.DATABASE_ENCRYPTION_KEY ?? Buffer.from('a'.repeat(32)).toString('base64');
-process.env.QDRANT_HOST = process.env.QDRANT_HOST ?? 'localhost';
-process.env.QDRANT_PORT = process.env.QDRANT_PORT ?? '6333';
