@@ -1,0 +1,227 @@
+{
+  "verifiedAt": "2025-12-01T17:00:00Z",
+  "student": {
+    "name": "Hyro Brady",
+    "school": "Canyon Grove Academy",
+    "program": "CGA Secondary",
+    "class": "SJ Tuesday 6 25-26",
+    "grade": "6th"
+  },
+  "platforms": {
+    "boost": {
+      "url": "https://boost.lifted-management.com",
+      "loginMethod": "Google OAuth via hyrob11016@canyongrove.com",
+      "version": "v1.2.0",
+      "lastAccessed": "2025-12-01T17:00:00Z",
+      "courses": [
+        "Language Arts",
+        "Math",
+        "Physical Education",
+        "Science",
+        "Social Studies",
+        "Fine Arts"
+      ],
+      "masteryChart": {
+        "description": "Spider/radar chart showing mastery across subjects",
+        "subjects": {
+          "Social Studies": "~20%",
+          "Language Arts": "~20%",
+          "Fine Arts": "~20%",
+          "Science": "~40%",
+          "Math": "~40%",
+          "Library Media": "~60%",
+          "Physical Education": "~100%"
+        }
+      },
+      "schedule": {
+        "semesterEnd": "2025-12-19",
+        "winterBreak": "2025-12-22 to 2026-01-02",
+        "onlineTutoringAvailable": true,
+        "teacherHours": "3:00-4:00 PM on campus"
+      },
+      "upcomingEvents": [
+        {
+          "date": "2025-12-05",
+          "event": "Aladdin Jr Play (Junior High Only)",
+          "type": "performance"
+        },
+        {
+          "date": "2025-12-12",
+          "event": "Tabitha's Way Food Bank Service Learning",
+          "type": "service"
+        },
+        {
+          "date": "2025-12-19",
+          "event": "End of Semester 1 - All classes must be finished",
+          "type": "academic"
+        }
+      ]
+    },
+    "zearn": {
+      "platform": "Zearn Math",
+      "class": "SJ Tuesday 6 25-26",
+      "confidence": "HIGH (triple verified)",
+      "overallProgress": {
+        "totalBadges": 192,
+        "totalPossible": 208,
+        "percentComplete": 92.3
+      },
+      "gradeProgress": {
+        "grade5": {
+          "status": "COMPLETE",
+          "badges": 136,
+          "total": 136,
+          "percent": 100
+        },
+        "grade6": {
+          "status": "IN_PROGRESS",
+          "badges": 56,
+          "total": 72,
+          "percent": 78
+        }
+      },
+      "currentPosition": {
+        "mission": "G6 M5",
+        "missionName": "Arithmetic in Base Ten",
+        "lessonProgress": "1/15 complete, 1 in progress",
+        "percentComplete": 7
+      },
+      "completedMissions": [
+        {"grade": "G5", "mission": 1, "name": "Place Value with Decimal Fractions", "badges": 16, "total": 16, "status": "COMPLETE"},
+        {"grade": "G5", "mission": 2, "name": "Base Ten Operations", "badges": 29, "total": 29, "status": "COMPLETE"},
+        {"grade": "G5", "mission": 3, "name": "Add and Subtract Fractions", "badges": 16, "total": 16, "status": "COMPLETE"},
+        {"grade": "G5", "mission": 4, "name": "Multiply and Divide Fractions and Decimals", "badges": 32, "total": 32, "status": "COMPLETE"},
+        {"grade": "G5", "mission": 5, "name": "Volume, Area, and Shapes", "badges": 19, "total": 19, "status": "COMPLETE"},
+        {"grade": "G5", "mission": 6, "name": "The Coordinate Plane", "badges": 24, "total": 24, "status": "COMPLETE"},
+        {"grade": "G6", "mission": 1, "name": "Area and Surface Area", "badges": 15, "total": 15, "status": "COMPLETE"},
+        {"grade": "G6", "mission": 2, "name": "Introducing Ratios", "badges": 14, "total": 14, "status": "COMPLETE"},
+        {"grade": "G6", "mission": 3, "name": "Unit Rates and Percentages", "badges": 12, "total": 14, "status": "COMPLETE_WITH_SKIPS", "note": "2 lessons skipped"},
+        {"grade": "G6", "mission": 4, "name": "Dividing Fractions", "badges": 14, "total": 14, "status": "COMPLETE"}
+      ],
+      "paceStatus": "ON_TRACK"
+    },
+    "lexia": {
+      "platform": "Lexia Core5 Reading",
+      "status": "REQUIRES_DEVICE_SETUP",
+      "note": "Needs teacher email to register device",
+      "screenshot": "/tmp/lexia-01-landing.png"
+    }
+  },
+  "languageArtsAnalysis": {
+    "currentStatus": "NEEDS_ATTENTION",
+    "boostMastery": "~20%",
+    "need": "AI-interactive program for typing instead of handwriting",
+    "recommendedPrograms": [
+      {
+        "name": "Quill.org",
+        "url": "https://www.quill.org/",
+        "type": "FREE (non-profit)",
+        "aiPowered": true,
+        "grades": "Elementary through High School",
+        "features": [
+          "AI-powered writing prompts with targeted feedback",
+          "Grammar practice (250+ activities)",
+          "Sentence combining exercises",
+          "Reading for Evidence with custom feedback",
+          "All typing-based, no handwriting required"
+        ],
+        "bestFor": "Grammar, writing skills, reading comprehension",
+        "recommendation": "HIGHLY RECOMMENDED - Free, AI-powered, computer-based"
+      },
+      {
+        "name": "NoRedInk",
+        "url": "https://www.noredink.com/",
+        "type": "FREE basic / Premium available",
+        "aiPowered": true,
+        "grades": "Grades 3-12 (expanded to elementary 2024)",
+        "features": [
+          "AI-powered Grading Assistant (2024-2025)",
+          "Personalized exercises using student interests",
+          "Adaptive grammar and writing practice",
+          "Scaffolded writing assignments",
+          "Short Response Guided Drafts"
+        ],
+        "bestFor": "Grammar mastery, personalized engagement",
+        "recommendation": "EXCELLENT - Interest-driven, adaptive learning"
+      },
+      {
+        "name": "Khanmigo (Khan Academy)",
+        "url": "https://www.khanmigo.ai/",
+        "type": "Subscription ($4/month for parents)",
+        "aiPowered": true,
+        "grades": "Elementary through College",
+        "features": [
+          "Speech-to-text AND text-to-speech",
+          "No typing required option (can speak)",
+          "AI writing tutor with guided prompts",
+          "Immediate feedback",
+          "Debate practice"
+        ],
+        "bestFor": "Students who struggle with typing, need voice input",
+        "recommendation": "GREAT for accommodations - voice input available"
+      },
+      {
+        "name": "IXL Language Arts",
+        "url": "https://www.ixl.com/ela",
+        "type": "Subscription",
+        "aiPowered": false,
+        "grades": "Pre-K through 12",
+        "features": [
+          "2,100+ language arts skills",
+          "Adaptive questions",
+          "Step-by-step explanations",
+          "Personalized recommendations",
+          "Audio support"
+        ],
+        "bestFor": "Comprehensive skill building, proven results",
+        "recommendation": "SOLID CHOICE - Comprehensive but not AI-powered"
+      }
+    ],
+    "accommodationTools": {
+      "forWritingDifficulties": [
+        {
+          "tool": "Speech-to-Text",
+          "options": ["Khanmigo", "Google Voice Typing", "Apple Dictation", "OtterAI"],
+          "note": "Allows speaking instead of typing"
+        },
+        {
+          "tool": "AudioPen",
+          "description": "Voice note app that transcribes to text",
+          "bestFor": "Quick idea capture"
+        }
+      ]
+    }
+  },
+  "recommendations": {
+    "immediate": [
+      {
+        "priority": 1,
+        "action": "Sign up for Quill.org",
+        "reason": "Free, AI-powered, computer-based writing/grammar practice",
+        "url": "https://www.quill.org/"
+      },
+      {
+        "priority": 2,
+        "action": "Complete Zearn G6 M5 before semester end",
+        "reason": "14 lessons remaining, deadline Dec 19",
+        "target": "~1 lesson per day"
+      },
+      {
+        "priority": 3,
+        "action": "Try NoRedInk for personalized grammar",
+        "reason": "Interest-based learning increases engagement"
+      }
+    ],
+    "forMath": "Continue Zearn - excellent progress (92% complete)",
+    "forLanguageArts": "Transition to computer-based AI tools (Quill or NoRedInk)",
+    "forAccommodations": "Consider Khanmigo for speech-to-text writing support"
+  },
+  "sources": [
+    "https://www.quill.org/",
+    "https://www.noredink.com/",
+    "https://www.khanmigo.ai/",
+    "https://www.ixl.com/ela",
+    "https://boost.lifted-management.com/",
+    "https://www.zearn.org/"
+  ]
+}

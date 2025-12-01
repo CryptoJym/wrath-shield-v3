@@ -1,0 +1,180 @@
+{
+  "verificationMetadata": {
+    "verifiedAt": "2025-12-01T14:15:00Z",
+    "verificationMethod": "triple_visual_count",
+    "confidenceLevel": "HIGH",
+    "screenshotSource": "/tmp/zearn-badge-*.png",
+    "verificationParameters": {
+      "method1": "row_by_row_visual_count",
+      "method2": "colored_vs_gray_badge_differentiation",
+      "method3": "total_slots_per_mission_validation"
+    }
+  },
+  "student": {
+    "name": "Hyro",
+    "class": "SJ Tuesday 6 25-26",
+    "platform": "Zearn Math"
+  },
+  "currentPosition": {
+    "mission": "G6 M5",
+    "missionName": "Arithmetic in Base Ten",
+    "lessonProgress": "1/15 complete, 1 in progress",
+    "percentComplete": 7,
+    "status": "ACTIVE",
+    "nextLesson": 2
+  },
+  "gradeProgress": {
+    "grade5": {
+      "status": "COMPLETE",
+      "totalBadges": 136,
+      "totalSlots": 136,
+      "percentComplete": 100,
+      "confidence": "HIGH"
+    },
+    "grade6": {
+      "status": "IN_PROGRESS",
+      "totalBadges": 56,
+      "totalSlots": 72,
+      "percentComplete": 78,
+      "confidence": "HIGH"
+    }
+  },
+  "missions": [
+    {
+      "grade": "G5",
+      "mission": 1,
+      "name": "Place Value with Decimal Fractions",
+      "earnedBadges": 16,
+      "totalSlots": 16,
+      "percentComplete": 100,
+      "status": "COMPLETE",
+      "confidence": "HIGH",
+      "verificationNotes": "2 rows x 8 badges, all colored"
+    },
+    {
+      "grade": "G5",
+      "mission": 2,
+      "name": "Base Ten Operations",
+      "earnedBadges": 29,
+      "totalSlots": 29,
+      "percentComplete": 100,
+      "status": "COMPLETE",
+      "confidence": "HIGH",
+      "verificationNotes": "4 rows (8+8+8+5), all colored"
+    },
+    {
+      "grade": "G5",
+      "mission": 3,
+      "name": "Add and Subtract Fractions",
+      "earnedBadges": 16,
+      "totalSlots": 16,
+      "percentComplete": 100,
+      "status": "COMPLETE",
+      "confidence": "HIGH",
+      "verificationNotes": "2 rows x 8 badges, all colored"
+    },
+    {
+      "grade": "G5",
+      "mission": 4,
+      "name": "Multiply and Divide Fractions and Decimals",
+      "earnedBadges": 32,
+      "totalSlots": 32,
+      "percentComplete": 100,
+      "status": "COMPLETE",
+      "confidence": "HIGH",
+      "verificationNotes": "4 rows x 8 badges, all colored"
+    },
+    {
+      "grade": "G5",
+      "mission": 5,
+      "name": "Volume, Area, and Shapes",
+      "earnedBadges": 19,
+      "totalSlots": 19,
+      "percentComplete": 100,
+      "status": "COMPLETE",
+      "confidence": "HIGH",
+      "verificationNotes": "3 rows (8+8+3), all colored"
+    },
+    {
+      "grade": "G5",
+      "mission": 6,
+      "name": "The Coordinate Plane",
+      "earnedBadges": 24,
+      "totalSlots": 24,
+      "percentComplete": 100,
+      "status": "COMPLETE",
+      "confidence": "HIGH",
+      "verificationNotes": "3 rows x 8 badges, all colored"
+    },
+    {
+      "grade": "G6",
+      "mission": 1,
+      "name": "Area and Surface Area",
+      "earnedBadges": 15,
+      "totalSlots": 15,
+      "percentComplete": 100,
+      "status": "COMPLETE",
+      "confidence": "HIGH",
+      "verificationNotes": "3 rows (7+7+1), all colored"
+    },
+    {
+      "grade": "G6",
+      "mission": 2,
+      "name": "Introducing Ratios",
+      "earnedBadges": 14,
+      "totalSlots": 14,
+      "percentComplete": 100,
+      "status": "COMPLETE",
+      "confidence": "HIGH",
+      "verificationNotes": "2 rows x 7 badges, all colored"
+    },
+    {
+      "grade": "G6",
+      "mission": 3,
+      "name": "Unit Rates and Percentages",
+      "earnedBadges": 12,
+      "totalSlots": 14,
+      "percentComplete": 86,
+      "status": "COMPLETE_WITH_SKIPS",
+      "skippedLessons": 2,
+      "confidence": "HIGH",
+      "verificationNotes": "Row 1: 7 colored, Row 2: 5 colored + 2 GRAY (positions 6-7 locked/skipped)"
+    },
+    {
+      "grade": "G6",
+      "mission": 4,
+      "name": "Dividing Fractions",
+      "earnedBadges": 14,
+      "totalSlots": 14,
+      "percentComplete": 100,
+      "status": "COMPLETE",
+      "confidence": "HIGH",
+      "verificationNotes": "2 rows x 7 badges, all colored"
+    },
+    {
+      "grade": "G6",
+      "mission": 5,
+      "name": "Arithmetic in Base Ten",
+      "earnedBadges": 1,
+      "totalSlots": 15,
+      "percentComplete": 7,
+      "status": "IN_PROGRESS",
+      "inProgressLessons": 1,
+      "lockedLessons": 13,
+      "confidence": "HIGH",
+      "verificationNotes": "Row 1: 1 green (earned) + 1 YELLOW (in progress) + 6 GRAY. Row 2: 7 GRAY (locked)"
+    }
+  ],
+  "totals": {
+    "totalEarnedBadges": 192,
+    "totalPossibleBadges": 208,
+    "overallPercentComplete": 92.3,
+    "confidence": "HIGH"
+  },
+  "curriculumFrame": {
+    "completedMissions": 10,
+    "totalMissions": 11,
+    "currentMissionIndex": 11,
+    "positionDescription": "Hyro has completed ALL Grade 5 Zearn Math (6 missions, 136 badges) and nearly all Grade 6 (4 of 5 missions complete). Currently on final G6 mission with 1 lesson done and 1 in progress."
+  }
+}
