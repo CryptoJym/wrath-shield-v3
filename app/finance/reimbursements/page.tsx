@@ -203,51 +203,160 @@ export default function ReimbursementsPage() {
     if (!cycleData?.transactions || !selectedCycle) return;
 
     const reimbursable = cycleData.transactions.filter((t) => t.reimbursable);
+    const nonReimbursable = cycleData.transactions.filter((t) => !t.reimbursable);
     const total = reimbursable.reduce((sum, t) => sum + t.amount, 0);
+    const nonReimbTotal = nonReimbursable.reduce((sum, t) => sum + t.amount, 0);
 
     // Format dates nicely
     const formatDate = (dateStr: string) => {
       const d = new Date(dateStr + 'T00:00:00');
-      return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+      return d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+    };
+
+    const formatCurrency = (amount: number) => {
+      const sign = amount < 0 ? '-' : '';
+      return `${sign}$${Math.abs(amount).toFixed(2)}`;
     };
 
     const csvRows: string[][] = [];
 
-    // Header section with date range
-    csvRows.push(['Utlyze Expense Reimbursement Report']);
-    csvRows.push(['Period:', `${formatDate(selectedCycle.start)} - ${formatDate(selectedCycle.end)}`]);
-    csvRows.push(['Generated:', new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })]);
-    csvRows.push(['Total Reimbursable:', `$${total.toFixed(2)}`]);
-    csvRows.push([]);
+    // ═══════════════════════════════════════════════════════════════
+    // HEADER SECTION - Professional title block
+    // ═══════════════════════════════════════════════════════════════
+    csvRows.push(['═══════════════════════════════════════════════════════════════════════════════════════════']);
+    csvRows.push(['']);
+    csvRows.push(['                    UTLYZE AI R&D EXPENSE REIMBURSEMENT REPORT']);
+    csvRows.push(['']);
+    csvRows.push(['═══════════════════════════════════════════════════════════════════════════════════════════']);
+    csvRows.push(['']);
+    csvRows.push(['Report Period:', '', `${formatDate(selectedCycle.start)} — ${formatDate(selectedCycle.end)}`]);
+    csvRows.push(['Generated:', '', new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' })]);
+    csvRows.push(['Prepared By:', '', 'Wrath Shield Finance Agent']);
+    csvRows.push(['']);
 
-    // Summary by Company (Vuplicity, Solution Stream, etc.)
-    csvRows.push(['SUMMARY BY COMPANY']);
-    csvRows.push(['Company', 'Count', 'Amount']);
+    // ═══════════════════════════════════════════════════════════════
+    // EXECUTIVE SUMMARY
+    // ═══════════════════════════════════════════════════════════════
+    csvRows.push(['───────────────────────────────────────────────────────────────────────────────────────────']);
+    csvRows.push(['EXECUTIVE SUMMARY']);
+    csvRows.push(['───────────────────────────────────────────────────────────────────────────────────────────']);
+    csvRows.push(['']);
+    csvRows.push(['', 'REIMBURSABLE EXPENSES:', '', formatCurrency(total)]);
+    csvRows.push(['', 'Non-Reimbursable:', '', formatCurrency(nonReimbTotal)]);
+    csvRows.push(['', 'Total Transactions:', '', `${cycleData.transactions.length} items`]);
+    csvRows.push(['', 'Reimbursable Items:', '', `${reimbursable.length} items`]);
+    csvRows.push(['']);
+
+    // ═══════════════════════════════════════════════════════════════
+    // BREAKDOWN BY BILLING COMPANY
+    // ═══════════════════════════════════════════════════════════════
+    csvRows.push(['───────────────────────────────────────────────────────────────────────────────────────────']);
+    csvRows.push(['BREAKDOWN BY BILLING COMPANY']);
+    csvRows.push(['───────────────────────────────────────────────────────────────────────────────────────────']);
+    csvRows.push(['']);
+    csvRows.push(['', 'Company', 'Items', 'Amount', '% of Total']);
+    csvRows.push(['', '─────────────────────', '─────', '─────────────', '──────────']);
     companyStats.forEach((stat) => {
-      csvRows.push([stat.company, stat.count.toString(), stat.total.toFixed(2)]);
+      const pct = total > 0 ? ((stat.total / total) * 100).toFixed(1) : '0.0';
+      csvRows.push(['', stat.company, stat.count.toString(), formatCurrency(stat.total), `${pct}%`]);
     });
-    csvRows.push([]);
+    csvRows.push(['', '─────────────────────', '─────', '─────────────', '──────────']);
+    csvRows.push(['', 'TOTAL', reimbursable.length.toString(), formatCurrency(total), '100%']);
+    csvRows.push(['']);
 
-    // Summary by Assignee
-    csvRows.push(['SUMMARY BY ASSIGNEE']);
-    csvRows.push(['Assignee', 'Count', 'Amount']);
+    // ═══════════════════════════════════════════════════════════════
+    // BREAKDOWN BY ASSIGNEE
+    // ═══════════════════════════════════════════════════════════════
+    csvRows.push(['───────────────────────────────────────────────────────────────────────────────────────────']);
+    csvRows.push(['BREAKDOWN BY ASSIGNEE']);
+    csvRows.push(['───────────────────────────────────────────────────────────────────────────────────────────']);
+    csvRows.push(['']);
+    csvRows.push(['', 'Assignee', 'Items', 'Amount', '% of Total']);
+    csvRows.push(['', '─────────────────────', '─────', '─────────────', '──────────']);
     assigneeBreakdown.forEach((stat) => {
-      csvRows.push([stat.assignee, stat.count.toString(), stat.total.toFixed(2)]);
+      const pct = total > 0 ? ((stat.total / total) * 100).toFixed(1) : '0.0';
+      csvRows.push(['', stat.assignee || 'Unassigned', stat.count.toString(), formatCurrency(stat.total), `${pct}%`]);
     });
-    csvRows.push([]);
+    csvRows.push(['']);
 
-    // Detail section
-    csvRows.push(['TRANSACTION DETAILS']);
-    csvRows.push(['Date', 'Description', 'Amount', 'Assignee', 'Usage Note']);
-    reimbursable.forEach((t) => {
+    // ═══════════════════════════════════════════════════════════════
+    // DETAILED TRANSACTION LIST
+    // ═══════════════════════════════════════════════════════════════
+    csvRows.push(['───────────────────────────────────────────────────────────────────────────────────────────']);
+    csvRows.push(['DETAILED TRANSACTION LIST - REIMBURSABLE ITEMS']);
+    csvRows.push(['───────────────────────────────────────────────────────────────────────────────────────────']);
+    csvRows.push(['']);
+    csvRows.push(['#', 'Date', 'Vendor/Description', 'Amount', 'Company', 'Assignee', 'Usage Notes']);
+    csvRows.push(['──', '────────────', '─────────────────────────────────────', '───────────', '──────────────', '──────────────', '────────────────────────────────']);
+
+    // Sort by company, then by date
+    const sortedReimbursable = [...reimbursable].sort((a, b) => {
+      const compA = a.company || 'ZZZZ';
+      const compB = b.company || 'ZZZZ';
+      if (compA !== compB) return compA.localeCompare(compB);
+      return a.date.localeCompare(b.date);
+    });
+
+    let currentCompany = '';
+    let companySubtotal = 0;
+    let itemNum = 0;
+
+    sortedReimbursable.forEach((t, idx) => {
+      const company = t.company || 'Unassigned';
+
+      // Add company section header when company changes
+      if (company !== currentCompany) {
+        if (currentCompany !== '') {
+          // Add subtotal for previous company
+          csvRows.push(['', '', '', '───────────', '', '', '']);
+          csvRows.push(['', '', `Subtotal - ${currentCompany}:`, formatCurrency(companySubtotal), '', '', '']);
+          csvRows.push(['']);
+        }
+        currentCompany = company;
+        companySubtotal = 0;
+        csvRows.push(['', '', `▸ ${company.toUpperCase()}`, '', '', '', '']);
+      }
+
+      itemNum++;
+      companySubtotal += t.amount;
+      const vendor = (t.vendor || t.raw_desc || 'Unknown').substring(0, 40);
+      const note = (t.usage_note || '').substring(0, 35);
+      const dateFormatted = new Date(t.date + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+
       csvRows.push([
-        t.date,
-        t.vendor || t.raw_desc || '',
-        t.amount.toFixed(2),
+        itemNum.toString(),
+        dateFormatted,
+        vendor,
+        formatCurrency(t.amount),
+        company,
         t.assignee || '',
-        t.usage_note || '',
+        note,
       ]);
     });
+
+    // Final company subtotal
+    if (currentCompany !== '') {
+      csvRows.push(['', '', '', '───────────', '', '', '']);
+      csvRows.push(['', '', `Subtotal - ${currentCompany}:`, formatCurrency(companySubtotal), '', '', '']);
+    }
+
+    csvRows.push(['']);
+    csvRows.push(['═══════════════════════════════════════════════════════════════════════════════════════════']);
+    csvRows.push(['', '', 'GRAND TOTAL REIMBURSABLE:', formatCurrency(total), '', '', '']);
+    csvRows.push(['═══════════════════════════════════════════════════════════════════════════════════════════']);
+    csvRows.push(['']);
+
+    // ═══════════════════════════════════════════════════════════════
+    // FOOTER / NOTES
+    // ═══════════════════════════════════════════════════════════════
+    csvRows.push(['NOTES:']);
+    csvRows.push(['• All amounts are in USD']);
+    csvRows.push(['• AI/SaaS expenses are categorized for R&D tax credit eligibility']);
+    csvRows.push(['• Credits and refunds are shown as negative amounts']);
+    csvRows.push(['• Report generated automatically by Wrath Shield Finance Agent']);
+    csvRows.push(['']);
+    csvRows.push(['───────────────────────────────────────────────────────────────────────────────────────────']);
+    csvRows.push(['', '', '', '', '', '', 'End of Report']);
 
     const csv = csvRows.map((row) => row.map((cell) => `"${cell}"`).join(',')).join('\n');
     const blob = new Blob([csv], { type: 'text/csv' });

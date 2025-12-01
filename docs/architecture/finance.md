@@ -71,6 +71,48 @@ Full-featured reimbursement tracking at `/finance/reimbursements`:
 - `GET /api/finance/transactions` - List transactions
 - `PATCH /api/finance/transactions/[id]` - Update single transaction
 - `POST /api/finance/transactions/bulk` - Bulk update transactions
+- `POST /api/finance/reimbursement/ai-review` - AI-powered batch review
+
+### AI-Powered Expense Review
+
+The system can automatically review all transactions in a billing cycle and make reimbursement decisions:
+
+**API**: `POST /api/finance/reimbursement/ai-review`
+```json
+{
+  "cycleStart": "2025-11-08",
+  "cycleEnd": "2025-12-08",
+  "dryRun": true
+}
+```
+
+**Features**:
+- Batch processing (20 transactions per LLM call)
+- Supports OpenAI (gpt-4o), OpenRouter, or xAI
+- Determines: reimbursable (true/false), company assignment, assignee
+- Dry run mode to preview decisions before applying
+- Returns summary by company with totals
+
+**Classification Criteria**:
+- **Reimbursable**: AI/SaaS tools (OpenAI, Anthropic, Cursor), cloud infra, dev tools, work meals
+- **Not Reimbursable**: Personal streaming, groceries, personal subscriptions
+- **Company Assignment**: FCRA work → VUPLICITY, AI R&D → UTLYZE, consulting → SOLUTION_STREAM
+
+**Response**:
+```json
+{
+  "reviewed": 127,
+  "updated": 127,
+  "summary": {
+    "reimbursable": 40,
+    "nonReimbursable": 87,
+    "byCompany": {
+      "UTLYZE": { "count": 36, "total": 2015.98 },
+      "VUPLICITY": { "count": 2, "total": 203.38 }
+    }
+  }
+}
+```
 
 ## Finance Agent with Zep Memory
 
@@ -144,6 +186,7 @@ Defined in `lib/finance/rules.ts`:
 - `app/api/finance/` - All finance API endpoints
 - `app/api/finance/agent-memory/route.ts` - Agent memory API
 - `app/api/finance/reimbursement/` - Reimbursement endpoints
+- `app/api/finance/reimbursement/ai-review/route.ts` - AI-powered batch review
 - `app/api/finance/transactions/` - Transaction CRUD
 
 ### Components
@@ -191,8 +234,10 @@ ZEP_API_KEY=
 
 ## Future Enhancements
 - [x] Reimbursable packet export (CSV)
+- [x] AI-powered batch expense review
 - [ ] PDF export with company letterhead
 - [ ] Anomaly detection vs 90d baseline
 - [ ] QBO connector (mirror expenses/bills)
 - [ ] Receipt image attachment via Comms agent
 - [ ] Automated reimbursement submission workflow
+- [ ] UI button to trigger AI review from reimbursements page
