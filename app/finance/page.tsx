@@ -7,7 +7,8 @@ import { CycleSelector, CycleOption } from "@/components/finance/CycleSelector";
 import { ReportsArchive, ReportEntry } from "@/components/finance/ReportsArchive";
 import { SummaryDashboard } from "@/components/finance/SummaryDashboard";
 import { TopVendorsCard } from "@/components/finance/TopVendorsCard";
-import { ChevronDown, ChevronUp, AlertCircle, Loader2 } from "lucide-react";
+import { ChevronDown, ChevronUp, AlertCircle, Loader2, Briefcase, ArrowRight } from "lucide-react";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json());
@@ -220,6 +221,28 @@ export default function FinancePage() {
           </div>
           <PlaidLink onSuccess={() => mutateTxns?.()} />
         </header>
+
+        {/* Utlyze Expense Reimbursements Link */}
+        <Link href="/finance/reimbursements">
+          <div className="bg-gradient-to-r from-emerald-500/10 to-blue-500/10 border border-emerald-500/30 rounded-2xl p-5 hover:border-emerald-500/50 hover:from-emerald-500/20 hover:to-blue-500/20 transition-all cursor-pointer group">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <div className="p-3 bg-emerald-500/20 rounded-xl">
+                  <Briefcase className="w-6 h-6 text-emerald-400" />
+                </div>
+                <div>
+                  <h2 className="text-lg font-semibold text-slate-50 flex items-center gap-2">
+                    Utlyze Expense Reimbursements
+                  </h2>
+                  <p className="text-sm text-slate-400">
+                    Review AI/SaaS expenses, assign to team members, and export reports
+                  </p>
+                </div>
+              </div>
+              <ArrowRight className="w-5 h-5 text-slate-400 group-hover:text-emerald-400 group-hover:translate-x-1 transition-all" />
+            </div>
+          </div>
+        </Link>
 
         {/* Cycle Selector */}
         <CycleSelector

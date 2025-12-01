@@ -22,7 +22,14 @@ CREATE TABLE IF NOT EXISTS finance_transactions (
   source TEXT,
   meta TEXT,
   status TEXT DEFAULT 'pending_review', -- pending_review | classified | confirmed
-  confidence REAL DEFAULT 0
+  confidence REAL DEFAULT 0,
+  -- New fields for reimbursement tracking
+  company TEXT, -- UTLYZE | VUPLICITY | NEW_REWARD | SOLUTION_STREAM | KAHOA | PERSONAL
+  assignee TEXT, -- James Brady | Josh Smith | Cody Vincent | Carl | etc.
+  usage_note TEXT, -- How the product was used
+  utilization_score REAL DEFAULT 0, -- 0-100 Utlyze metric for ROI/usage
+  receipt_verified INTEGER DEFAULT 0, -- Has email receipt been matched
+  receipt_email_id TEXT -- Reference to email containing receipt
 );
 CREATE INDEX IF NOT EXISTS idx_finance_date ON finance_transactions(date);
 CREATE INDEX IF NOT EXISTS idx_finance_bucket ON finance_transactions(bucket);
@@ -94,6 +101,7 @@ function getDb() {
   db.exec(schema);
   migrateContextTable(db);
   migrateUserColumns(db);
+  migrateReimbursementColumns(db);
   return db;
 }
 
@@ -132,6 +140,34 @@ function migrateUserColumns(db: BetterSqlite3.Database) {
   );
 }
 
+function migrateReimbursementColumns(db: BetterSqlite3.Database) {
+  const check = (col: string) =>
+    (db.prepare("PRAGMA table_info('finance_transactions')").all() as any[]).some((c) => c.name === col);
+  const alters: string[] = [];
+  if (!check('company')) alters.push("ALTER TABLE finance_transactions ADD COLUMN company TEXT;");
+  if (!check('assignee')) alters.push("ALTER TABLE finance_transactions ADD COLUMN assignee TEXT;");
+  if (!check('usage_note')) alters.push("ALTER TABLE finance_transactions ADD COLUMN usage_note TEXT;");
+  if (!check('utilization_score')) alters.push("ALTER TABLE finance_transactions ADD COLUMN utilization_score REAL DEFAULT 0;");
+  if (!check('receipt_verified')) alters.push("ALTER TABLE finance_transactions ADD COLUMN receipt_verified INTEGER DEFAULT 0;");
+  if (!check('receipt_email_id')) alters.push("ALTER TABLE finance_transactions ADD COLUMN receipt_email_id TEXT;");
+  if (alters.length) {
+    const tx = db.transaction(() => alters.forEach((sql) => db.exec(sql)));
+    tx();
+  }
+  db.exec(
+    `CREATE INDEX IF NOT EXISTS idx_finance_company ON finance_transactions(company);
+     CREATE INDEX IF NOT EXISTS idx_finance_assignee ON finance_transactions(assignee);`
+  );
+}
+
+// Company options for expense attribution
+export const COMPANIES = ['UTLYZE', 'VUPLICITY', 'NEW_REWARD', 'SOLUTION_STREAM', 'KAHOA', 'PERSONAL'] as const;
+export type Company = typeof COMPANIES[number];
+
+// Known assignees for expense tracking
+export const ASSIGNEES = ['James Brady', 'Josh Smith', 'Cody Vincent', 'Carl', 'Other'] as const;
+export type Assignee = typeof ASSIGNEES[number];
+
 export type TxnRow = {
   id: string;
   user_id?: string;
@@ -149,6 +185,13 @@ export type TxnRow = {
   meta?: any;
   status?: 'pending_review' | 'classified' | 'confirmed';
   confidence?: number;
+  // Reimbursement tracking fields
+  company?: Company;
+  assignee?: Assignee | string;
+  usage_note?: string;
+  utilization_score?: number;
+  receipt_verified?: boolean;
+  receipt_email_id?: string;
 };
 
 type TxnUpdate = {
@@ -860,4 +903,531 @@ export function formatCycleLabel(start: string, end: string): string {
     return `${startMonth} ${startDay} → ${endMonth} ${endDay}, ${year}`;
   }
   return `${startMonth} ${startDay}, ${startDate.getFullYear()} → ${endMonth} ${endDay}, ${year}`;
+}
+
+// ============================================================================
+// Transaction Meta Updates (for Reimbursement Tracking)
+// ============================================================================
+
+export type TransactionMetaUpdate = {
+  company?: Company | null;
+  assignee?: string | null;
+  usage_note?: string | null;
+  utilization_score?: number | null;
+  receipt_verified?: boolean | null;
+  receipt_email_id?: string | null;
+  reimbursable?: boolean | null;
+  bucket?: string | null;
+  status?: 'pending_review' | 'classified' | 'confirmed';
+};
+
+/**
+ * Update transaction metadata fields (company, assignee, usage_note, etc.)
+ * Used for reimbursement tracking and expense categorization.
+ */
+export function updateTransactionMeta(
+  id: string,
+  updates: TransactionMetaUpdate,
+  user_id?: string,
+  source = 'user'
+): TxnRow | null {
+  const db = getDb();
+
+  // Get existing transaction
+  const query = user_id
+    ? `SELECT * FROM finance_transactions WHERE id = ? AND (user_id = ? OR user_id IS NULL OR user_id = 'default')`
+    : `SELECT * FROM finance_transactions WHERE id = ?`;
+  const existing = db.prepare(query).get(user_id ? [id, user_id] : [id]) as any;
+
+  if (!existing) {
+    db.close();
+    return null;
+  }
+
+  // Build update parts dynamically
+  const setParts: string[] = [];
+  const params: any = { id };
+
+  if (updates.company !== undefined) {
+    setParts.push('company = @company');
+    params.company = updates.company;
+  }
+  if (updates.assignee !== undefined) {
+    setParts.push('assignee = @assignee');
+    params.assignee = updates.assignee;
+  }
+  if (updates.usage_note !== undefined) {
+    setParts.push('usage_note = @usage_note');
+    params.usage_note = updates.usage_note;
+  }
+  if (updates.utilization_score !== undefined) {
+    setParts.push('utilization_score = @utilization_score');
+    params.utilization_score = updates.utilization_score;
+  }
+  if (updates.receipt_verified !== undefined) {
+    setParts.push('receipt_verified = @receipt_verified');
+    params.receipt_verified = updates.receipt_verified === null ? null : updates.receipt_verified ? 1 : 0;
+  }
+  if (updates.receipt_email_id !== undefined) {
+    setParts.push('receipt_email_id = @receipt_email_id');
+    params.receipt_email_id = updates.receipt_email_id;
+  }
+  if (updates.reimbursable !== undefined) {
+    setParts.push('reimbursable = @reimbursable');
+    params.reimbursable = updates.reimbursable === null ? null : updates.reimbursable ? 1 : 0;
+  }
+  if (updates.bucket !== undefined) {
+    setParts.push('bucket = @bucket');
+    params.bucket = updates.bucket;
+  }
+  if (updates.status !== undefined) {
+    setParts.push('status = @status');
+    params.status = updates.status;
+  }
+
+  if (setParts.length === 0) {
+    db.close();
+    return {
+      ...existing,
+      meta: existing.meta ? safeParse(existing.meta) : undefined,
+      recurring: !!existing.recurring,
+      reimbursable: !!existing.reimbursable,
+      receipt_verified: !!existing.receipt_verified,
+    };
+  }
+
+  // Execute update
+  db.prepare(`UPDATE finance_transactions SET ${setParts.join(', ')} WHERE id = @id`).run(params);
+
+  // Audit the change if reimbursable changed
+  if (updates.reimbursable !== undefined && updates.reimbursable !== !!existing.reimbursable) {
+    auditTxn(id, user_id, source, {
+      bucket: existing.bucket,
+      project: existing.project,
+      reimbursable: existing.reimbursable,
+    }, {
+      bucket: updates.bucket ?? existing.bucket,
+      project: existing.project,
+      reimbursable: updates.reimbursable,
+    });
+  }
+
+  // Return updated transaction
+  const updated = db.prepare('SELECT * FROM finance_transactions WHERE id = ?').get(id) as any;
+  db.close();
+
+  return {
+    ...updated,
+    meta: updated.meta ? safeParse(updated.meta) : undefined,
+    recurring: !!updated.recurring,
+    reimbursable: !!updated.reimbursable,
+    receipt_verified: !!updated.receipt_verified,
+  };
+}
+
+/**
+ * Bulk update transaction meta for multiple IDs at once.
+ * Useful for marking multiple transactions as reimbursable.
+ */
+export function bulkUpdateTransactionMeta(
+  ids: string[],
+  updates: TransactionMetaUpdate,
+  user_id?: string,
+  source = 'bulk_user'
+): number {
+  if (!ids.length) return 0;
+
+  const db = getDb();
+  let updated = 0;
+
+  const tx = db.transaction(() => {
+    for (const id of ids) {
+      const query = user_id
+        ? `SELECT * FROM finance_transactions WHERE id = ? AND (user_id = ? OR user_id IS NULL OR user_id = 'default')`
+        : `SELECT * FROM finance_transactions WHERE id = ?`;
+      const existing = db.prepare(query).get(user_id ? [id, user_id] : [id]) as any;
+
+      if (!existing) continue;
+
+      const setParts: string[] = [];
+      const params: any = { id };
+
+      if (updates.company !== undefined) {
+        setParts.push('company = @company');
+        params.company = updates.company;
+      }
+      if (updates.assignee !== undefined) {
+        setParts.push('assignee = @assignee');
+        params.assignee = updates.assignee;
+      }
+      if (updates.usage_note !== undefined) {
+        setParts.push('usage_note = @usage_note');
+        params.usage_note = updates.usage_note;
+      }
+      if (updates.reimbursable !== undefined) {
+        setParts.push('reimbursable = @reimbursable');
+        params.reimbursable = updates.reimbursable === null ? null : updates.reimbursable ? 1 : 0;
+      }
+      if (updates.bucket !== undefined) {
+        setParts.push('bucket = @bucket');
+        params.bucket = updates.bucket;
+      }
+      if (updates.status !== undefined) {
+        setParts.push('status = @status');
+        params.status = updates.status;
+      }
+
+      if (setParts.length > 0) {
+        db.prepare(`UPDATE finance_transactions SET ${setParts.join(', ')} WHERE id = @id`).run(params);
+        updated++;
+      }
+    }
+  });
+
+  tx();
+  db.close();
+  return updated;
+}
+
+/**
+ * Get all transactions for a cycle (not just reimbursable).
+ * Used for the reimbursement review page.
+ */
+export function getCycleTransactions(
+  cycle_start: string,
+  cycle_end: string,
+  user_id?: string,
+  options?: {
+    reimbursableOnly?: boolean;
+    bucketFilter?: string[];
+    sortBy?: 'date' | 'amount' | 'vendor';
+    sortDir?: 'asc' | 'desc';
+  }
+): TxnRow[] {
+  const db = getDb();
+  const where: string[] = ['date >= ?', 'date < ?'];
+  const params: any[] = [cycle_start, cycle_end];
+
+  if (user_id) {
+    where.push("(user_id = ? OR user_id IS NULL OR user_id = 'default')");
+    params.push(user_id);
+  }
+
+  if (options?.reimbursableOnly) {
+    where.push('reimbursable = 1');
+  }
+
+  if (options?.bucketFilter?.length) {
+    const placeholders = options.bucketFilter.map(() => '?').join(', ');
+    where.push(`bucket IN (${placeholders})`);
+    params.push(...options.bucketFilter);
+  }
+
+  const sortCol = options?.sortBy || 'date';
+  const sortDir = options?.sortDir || 'desc';
+
+  const sql = `SELECT * FROM finance_transactions WHERE ${where.join(' AND ')} ORDER BY ${sortCol} ${sortDir.toUpperCase()}`;
+  const rows = db.prepare(sql).all(...params) as any[];
+  db.close();
+
+  return rows.map(r => ({
+    ...r,
+    meta: r.meta ? safeParse(r.meta) : undefined,
+    recurring: !!r.recurring,
+    reimbursable: !!r.reimbursable,
+    receipt_verified: !!r.receipt_verified,
+  }));
+}
+
+/**
+ * Get cycle stats breakdown by assignee
+ */
+export function getCycleStatsByAssignee(
+  cycle_start: string,
+  cycle_end: string,
+  user_id?: string
+): { assignee: string; count: number; total: number; reimbursable: number }[] {
+  const db = getDb();
+  const where = user_id
+    ? `WHERE date >= ? AND date < ? AND reimbursable = 1 AND (user_id = ? OR user_id IS NULL OR user_id = 'default')`
+    : `WHERE date >= ? AND date < ? AND reimbursable = 1`;
+
+  const sql = `
+    SELECT
+      COALESCE(assignee, 'Unassigned') as assignee,
+      COUNT(*) as count,
+      COALESCE(SUM(amount), 0) as total,
+      COALESCE(SUM(CASE WHEN reimbursable = 1 THEN amount ELSE 0 END), 0) as reimbursable
+    FROM finance_transactions
+    ${where}
+    GROUP BY COALESCE(assignee, 'Unassigned')
+    ORDER BY total DESC
+  `;
+
+  const rows = db.prepare(sql).all(user_id ? [cycle_start, cycle_end, user_id] : [cycle_start, cycle_end]) as any[];
+  db.close();
+
+  return rows.map(r => ({
+    assignee: r.assignee,
+    count: r.count,
+    total: Math.abs(r.total),
+    reimbursable: Math.abs(r.reimbursable),
+  }));
+}
+
+// ============================================================================
+// Zep Memory Integration for Finance Agent
+// ============================================================================
+
+/**
+ * Store reimbursement decision to Zep memory for historical context.
+ * This allows the finance agent to learn from past determinations.
+ *
+ * @param txn - The transaction that was classified
+ * @param decision - The reimbursement decision details
+ */
+export async function recordReimbursementDecisionToMemory(
+  txn: TxnRow,
+  decision: {
+    reimbursable: boolean;
+    assignee?: string;
+    usage_note?: string;
+    company?: string;
+    source: string;
+  }
+): Promise<void> {
+  try {
+    // Dynamic import to avoid circular dependencies and client-side imports
+    const { addAgentMemory } = await import('@/lib/memory/zep');
+
+    const memoryText = `Reimbursement Decision: ${txn.vendor || txn.raw_desc} on ${txn.date} for $${Math.abs(txn.amount).toFixed(2)} was marked as ${decision.reimbursable ? 'REIMBURSABLE' : 'NOT REIMBURSABLE'}${decision.assignee ? ` for ${decision.assignee}` : ''}${decision.usage_note ? `. Usage: ${decision.usage_note}` : ''}.`;
+
+    await addAgentMemory('finance-agent', memoryText, {
+      type: 'reimbursement_decision',
+      txn_id: txn.id,
+      vendor: txn.vendor,
+      amount: Math.abs(txn.amount),
+      date: txn.date,
+      bucket: txn.bucket,
+      reimbursable: decision.reimbursable,
+      assignee: decision.assignee,
+      company: decision.company || 'UTLYZE',
+      usage_note: decision.usage_note,
+      decision_source: decision.source,
+      timestamp: new Date().toISOString(),
+    });
+
+    console.log(`[Finance] Recorded reimbursement decision to Zep memory for ${txn.vendor}`);
+  } catch (error) {
+    // Log but don't fail - Zep memory is enhancement, not critical path
+    console.warn('[Finance] Failed to record to Zep memory:', error);
+  }
+}
+
+/**
+ * Search Zep memory for similar past reimbursement decisions.
+ * Useful for auto-suggesting classifications based on historical patterns.
+ *
+ * @param vendor - Vendor name to search for
+ * @param limit - Max results to return
+ */
+export async function searchReimbursementHistory(
+  vendor: string,
+  limit: number = 5
+): Promise<Array<{
+  vendor: string;
+  reimbursable: boolean;
+  assignee?: string;
+  usage_note?: string;
+  date: string;
+  amount: number;
+}>> {
+  try {
+    const { searchAgentMemory } = await import('@/lib/memory/zep');
+
+    const results = await searchAgentMemory('finance-agent', `reimbursement ${vendor}`, limit);
+
+    return results
+      .filter(r => r.memory.metadata?.type === 'reimbursement_decision')
+      .map(r => ({
+        vendor: r.memory.metadata?.vendor || '',
+        reimbursable: r.memory.metadata?.reimbursable ?? false,
+        assignee: r.memory.metadata?.assignee,
+        usage_note: r.memory.metadata?.usage_note,
+        date: r.memory.metadata?.date || '',
+        amount: r.memory.metadata?.amount || 0,
+      }));
+  } catch (error) {
+    console.warn('[Finance] Failed to search Zep memory:', error);
+    return [];
+  }
+}
+
+/**
+ * Store a completed expense report to Zep memory for historical tracking.
+ */
+export async function recordReportToMemory(
+  report: FinanceReport,
+  cycleLabel: string
+): Promise<void> {
+  try {
+    const { addAgentMemory } = await import('@/lib/memory/zep');
+
+    const memoryText = `Expense Report Submitted: ${cycleLabel} for ${report.employee}. Total reimbursable: $${report.total_reimbursable.toFixed(2)} across ${report.transaction_count} transactions. Purpose: ${report.purpose || 'AI Tools and Services'}.`;
+
+    await addAgentMemory('finance-agent', memoryText, {
+      type: 'expense_report',
+      report_id: report.id,
+      cycle_start: report.cycle_start,
+      cycle_end: report.cycle_end,
+      employee: report.employee,
+      total_reimbursable: report.total_reimbursable,
+      total_spent: report.total_spent,
+      transaction_count: report.transaction_count,
+      status: report.status,
+      submitted_at: report.submitted_at,
+      timestamp: new Date().toISOString(),
+    });
+
+    console.log(`[Finance] Recorded expense report ${report.id} to Zep memory`);
+  } catch (error) {
+    console.warn('[Finance] Failed to record report to Zep memory:', error);
+  }
+}
+
+// ============================================================================
+// Transaction Reclassification
+// ============================================================================
+
+/**
+ * Reset and reclassify transactions that were incorrectly marked.
+ * This is useful for bulk correction of misclassified data.
+ *
+ * @param dateStart - Start date (YYYY-MM-DD)
+ * @param dateEnd - End date (YYYY-MM-DD)
+ * @param dryRun - If true, just return counts without updating
+ */
+export function resetAndReclassifyTransactions(
+  dateStart: string,
+  dateEnd: string,
+  dryRun = false
+): {
+  total: number;
+  reset: number;
+  reclassified: { bucket: string; count: number; reimbursable: number }[];
+} {
+  // Dynamic import classify to avoid circular dependency
+  const { classify } = require('./rules');
+
+  const db = getDb();
+
+  // Get all transactions in date range
+  const txns = db
+    .prepare(
+      `SELECT * FROM finance_transactions WHERE date >= ? AND date < ?`
+    )
+    .all(dateStart, dateEnd) as any[];
+
+  const results: { bucket: string; count: number; reimbursable: number }[] = [];
+  const bucketStats: Record<string, { count: number; reimbursable: number }> = {};
+  let resetCount = 0;
+
+  if (!dryRun) {
+    // Start a transaction for atomic updates
+    const updateStmt = db.prepare(`
+      UPDATE finance_transactions
+      SET bucket = ?, reimbursable = ?, confidence = ?, status = ?
+      WHERE id = ?
+    `);
+
+    const runUpdates = db.transaction(() => {
+      for (const txn of txns) {
+        // Apply new classification rules
+        // IMPORTANT: Reset bucket and confidence to force re-evaluation
+        const classified = classify({
+          ...txn,
+          meta: txn.meta ? safeParse(txn.meta) : undefined,
+          recurring: !!txn.recurring,
+          reimbursable: false, // Reset to false for reclassification
+          receipt_verified: !!txn.receipt_verified,
+          bucket: 'unknown', // Reset bucket to force re-classification
+          confidence: 0, // Reset confidence to force re-classification
+        });
+
+        const newReimbursable = classified.reimbursable ? 1 : 0;
+
+        // Track if this was a change
+        if (
+          txn.bucket !== classified.bucket ||
+          txn.reimbursable !== newReimbursable
+        ) {
+          resetCount++;
+        }
+
+        updateStmt.run(
+          classified.bucket,
+          newReimbursable,
+          classified.confidence ?? 0,
+          classified.status ?? 'classified',
+          txn.id
+        );
+
+        // Track bucket stats
+        if (!bucketStats[classified.bucket]) {
+          bucketStats[classified.bucket] = { count: 0, reimbursable: 0 };
+        }
+        bucketStats[classified.bucket].count++;
+        if (classified.reimbursable) {
+          bucketStats[classified.bucket].reimbursable += Math.abs(txn.amount);
+        }
+      }
+    });
+
+    runUpdates();
+  } else {
+    // Dry run - just calculate what would happen
+    for (const txn of txns) {
+      // IMPORTANT: Reset bucket and confidence to force re-evaluation
+      const classified = classify({
+        ...txn,
+        meta: txn.meta ? safeParse(txn.meta) : undefined,
+        recurring: !!txn.recurring,
+        reimbursable: false,
+        receipt_verified: !!txn.receipt_verified,
+        bucket: 'unknown', // Reset bucket to force re-classification
+        confidence: 0, // Reset confidence to force re-classification
+      });
+
+      const newReimbursable = classified.reimbursable ? 1 : 0;
+
+      if (
+        txn.bucket !== classified.bucket ||
+        txn.reimbursable !== newReimbursable
+      ) {
+        resetCount++;
+      }
+
+      if (!bucketStats[classified.bucket]) {
+        bucketStats[classified.bucket] = { count: 0, reimbursable: 0 };
+      }
+      bucketStats[classified.bucket].count++;
+      if (classified.reimbursable) {
+        bucketStats[classified.bucket].reimbursable += Math.abs(txn.amount);
+      }
+    }
+  }
+
+  db.close();
+
+  // Convert stats to array
+  for (const [bucket, stats] of Object.entries(bucketStats)) {
+    results.push({ bucket, ...stats });
+  }
+  results.sort((a, b) => b.reimbursable - a.reimbursable);
+
+  return {
+    total: txns.length,
+    reset: resetCount,
+    reclassified: results,
+  };
 }

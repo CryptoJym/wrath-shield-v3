@@ -22,10 +22,11 @@ Wrath Shield is a personal AI assistant platform with:
 - Multi-agent orchestration system
 - Agent graph visualization (interactive SVG network)
 - Inbox routing and PM agent
-- Finance tracking with Plaid integration and cycle reports
+- **Finance tracking with Plaid integration, expense reimbursements, and AI agent chat**
 - Communication integrations (iMessage, SMS, Email)
 - Hyro voice interface with recommendations
 - Zep-based memory system (cloud-hosted temporal knowledge graph)
+- Dual-graph memory architecture (private agent + org-council)
 - Legal advisor module
 - WHOOP and Limitless data integration
 
