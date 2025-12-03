@@ -1,13 +1,17 @@
 /**
  * Legal Advisor LLM Client
  *
- * Uses OpenRouter with GPT-5.1 (primary) or Grok-4.1 (fallback) for real legal reasoning.
+ * Uses Grok 4.1 Fast (primary) or GPT-5.1 (fallback) for real legal reasoning.
  * Integrates with Mem0/MemoryWrapper for persistent case memory.
  *
  * NOW INTEGRATED WITH LIFE OS CONFIG:
  * - Loads system prompt from agent.legal config
  * - Integrates Vuplicity domain context for FCRA-related matters
  * - Applies escalation rules from Life Charter
+ *
+ * APPROVED MODELS:
+ * - xAI: grok-4-1-fast (primary - fast legal analysis)
+ * - OpenAI: gpt-5.1 (fallback - complex reasoning)
  */
 
 import { ensureServerOnly } from '../server-only-guard';
@@ -21,10 +25,10 @@ import {
 
 ensureServerOnly('lib/legal/LegalAdvisorLLM');
 
-// Models from OpenRouter (verified available)
-const PRIMARY_MODEL = 'x-ai/grok-4.1-fast'; // Grok 4.1 - fast reasoning
-const FALLBACK_MODEL = 'openai/gpt-4.1'; // GPT-4.1 fallback
-const RESEARCH_MODEL = 'x-ai/grok-4'; // For deep research
+// APPROVED MODELS ONLY
+const PRIMARY_MODEL = 'grok-4-1-fast'; // xAI Grok 4.1 Fast - fast reasoning
+const FALLBACK_MODEL = 'gpt-5.1'; // OpenAI GPT-5.1 fallback
+const RESEARCH_MODEL = 'grok-4-1-fast'; // For deep research (same as primary)
 
 export interface LegalContext {
   caseNumber: string;

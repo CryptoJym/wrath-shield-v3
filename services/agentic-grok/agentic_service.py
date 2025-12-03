@@ -1,15 +1,28 @@
 """
-Wrath Shield v3 - Agentic Grok Service
+Conductor - Life OS Orchestrator
 
-Multi-agent orchestration using xAI's server-side agentic tool calling.
-Grok autonomously searches, analyzes, and coordinates data from:
-- Web/X search (server-side)
+The central orchestration service for James Brady's Life OS, powered by Grok 4.1 Fast.
+Conductor coordinates activities and delegates tasks across all Life OS domains.
+
+Capabilities:
+- Agent Communication: invoke_agent to talk to any specialized agent
+- Memory Access: query_memory/update_memory for Zep Cloud graphs
+- System Awareness: system_pulse for real-time status
+- Multi-Agent Coordination: coordinate_agents for workflows
+- Configuration: get_config for Life Charter and domains
+- Interactive Setup: setup_memory for guided configuration
+
+Built-in xAI Tools:
+- Web search (server-side)
+- X/Twitter search (server-side)
 - Code execution (server-side)
-- WHOOP (custom - coming soon)
-- Limitless (custom - coming soon)
-- Mem0 (custom - coming soon)
 
-The agent runs entirely server-side with real-time streaming feedback.
+Custom Tools:
+- WHOOP biometrics integration
+- Limitless pendant data
+- Legal context management
+
+The orchestrator runs entirely server-side with real-time streaming feedback.
 """
 
 import os
@@ -228,13 +241,604 @@ This updates the legal queue so the UI and other agents see it as resolved.""",
         )
     )
 
+    # =========================================================================
+    # NEW ORCHESTRATOR GATEWAY TOOLS
+    # =========================================================================
+
+    # Invoke Agent Tool
+    invoke_agent_tool = chat_pb2.Tool(
+        function=chat_pb2.Function(
+            name="invoke_agent",
+            description="""Invoke any Life OS agent to get their perspective or perform a task.
+
+Available agents:
+- agent.legal: Legal threats, FCRA compliance, contract deadlines
+- agent.finance: Transaction classification, expense tracking, anomalies
+- agent.pm: Project tracking, task management, GitHub/Motion sync
+- agent.comms: Email/message classification, draft replies
+- agent.hyro: Hyro's education, learning progress
+- agent.family: Lisa, home responsibilities, family logistics
+- agent.utlyze: Utlyze strategic initiatives, venture coordination
+- agent.vuplicity: FCRA compliance, background check operations
+- agent.orchestrator: Global orchestration and delegation
+
+Use this to:
+- Get an agent's perspective on a topic
+- Delegate specialized tasks
+- Coordinate multi-domain work""",
+            parameters=json.dumps({
+                "type": "object",
+                "properties": {
+                    "agent_id": {
+                        "type": "string",
+                        "description": "The agent to invoke (e.g., 'agent.legal', 'agent.finance')"
+                    },
+                    "message": {
+                        "type": "string",
+                        "description": "The message or question for the agent"
+                    },
+                    "domain_context": {
+                        "type": "string",
+                        "description": "Optional domain context (e.g., 'vuplicity', 'family')"
+                    }
+                },
+                "required": ["agent_id", "message"]
+            })
+        )
+    )
+
+    # Query Memory Tool (enhanced)
+    query_memory_tool = chat_pb2.Tool(
+        function=chat_pb2.Function(
+            name="query_memory",
+            description="""Search the Life OS memory system (Zep Cloud).
+
+Memory is organized in two tiers:
+1. Agent-specific graphs: Each agent has private memory (13 agents)
+2. Org-council graph: Shared organizational knowledge (council-approved)
+
+Use this to:
+- Find relevant context from any agent's memory
+- Search org-wide policies and decisions
+- Recall past interactions and learnings""",
+            parameters=json.dumps({
+                "type": "object",
+                "properties": {
+                    "query": {
+                        "type": "string",
+                        "description": "What to search for"
+                    },
+                    "graph_type": {
+                        "type": "string",
+                        "enum": ["agent", "org-council", "all"],
+                        "description": "Which memory graph(s) to search"
+                    },
+                    "agent_id": {
+                        "type": "string",
+                        "description": "Specific agent's memory to search (required if graph_type='agent')"
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "default": 5,
+                        "description": "Maximum results to return"
+                    }
+                },
+                "required": ["query", "graph_type"]
+            })
+        )
+    )
+
+    # Update Memory Tool
+    update_memory_tool = chat_pb2.Tool(
+        function=chat_pb2.Function(
+            name="update_memory",
+            description="""Add or propose new knowledge to the Life OS memory system.
+
+For agent-specific knowledge: Adds directly to that agent's private Zep graph.
+For org-wide knowledge: Creates a proposal requiring council approval.
+
+Use this to:
+- Store important learnings for specific agents
+- Propose new organizational policies
+- Record significant decisions and their rationale""",
+            parameters=json.dumps({
+                "type": "object",
+                "properties": {
+                    "text": {
+                        "type": "string",
+                        "description": "The knowledge to store"
+                    },
+                    "target": {
+                        "type": "string",
+                        "enum": ["agent", "org-council"],
+                        "description": "Where to store the knowledge"
+                    },
+                    "agent_id": {
+                        "type": "string",
+                        "description": "Target agent (required if target='agent')"
+                    },
+                    "category": {
+                        "type": "string",
+                        "enum": ["fact", "policy", "decision", "pattern", "preference"],
+                        "description": "Category of knowledge"
+                    }
+                },
+                "required": ["text", "target"]
+            })
+        )
+    )
+
+    # System Pulse Tool
+    system_pulse_tool = chat_pb2.Tool(
+        function=chat_pb2.Function(
+            name="system_pulse",
+            description="""Get real-time status of the entire Life OS system.
+
+Returns:
+- Health status of all agents (green/yellow/red)
+- Pending escalations (CRITICAL/PROPOSE)
+- Unread messages on agent bus
+- Pending council proposals
+- Recent activity summary
+
+Use this to:
+- Understand current system state before making decisions
+- Identify bottlenecks or issues needing attention
+- Monitor overall system health""",
+            parameters=json.dumps({
+                "type": "object",
+                "properties": {
+                    "include_activity": {
+                        "type": "boolean",
+                        "default": True,
+                        "description": "Include recent activity details"
+                    },
+                    "include_pending": {
+                        "type": "boolean",
+                        "default": True,
+                        "description": "Include pending items breakdown"
+                    }
+                },
+                "required": []
+            })
+        )
+    )
+
+    # Setup Memory Tool
+    setup_memory_tool = chat_pb2.Tool(
+        function=chat_pb2.Function(
+            name="setup_memory",
+            description="""Interactive memory configuration helper.
+
+Guides the user through setting up:
+- Org-wide memory (priorities, principles, key decisions)
+- Domain-specific memory (legal contexts, project histories)
+- Agent configurations (preferences, working patterns)
+
+This is a multi-step process:
+1. 'init': Start setup for a scope (org, domain, agent) - returns questions
+2. 'answer': Provide answers to generated questions - returns proposals
+3. 'confirm': Review and approve proposed memory entries
+4. 'complete': Finalize the setup
+
+Use this when the user wants to configure or update system memory.""",
+            parameters=json.dumps({
+                "type": "object",
+                "properties": {
+                    "phase": {
+                        "type": "string",
+                        "enum": ["init", "answer", "confirm", "complete"],
+                        "description": "Current phase of setup"
+                    },
+                    "scope": {
+                        "type": "string",
+                        "enum": ["org", "domain", "agent"],
+                        "description": "What to configure"
+                    },
+                    "target_id": {
+                        "type": "string",
+                        "description": "Domain or agent ID (if scope is not 'org')"
+                    },
+                    "answers": {
+                        "type": "object",
+                        "description": "Answers to questions (for 'answer' phase)"
+                    },
+                    "confirmations": {
+                        "type": "array",
+                        "items": {"type": "string"},
+                        "description": "Proposal IDs to confirm (for 'confirm' phase)"
+                    }
+                },
+                "required": ["phase", "scope"]
+            })
+        )
+    )
+
+    # Coordinate Agents Tool
+    coordinate_agents_tool = chat_pb2.Tool(
+        function=chat_pb2.Function(
+            name="coordinate_agents",
+            description="""Coordinate multiple agents on a complex task.
+
+Workflow types:
+- sequential: Agents work one after another, each seeing prior results
+- parallel: Agents work simultaneously, results combined
+- handoff: First agent works, then explicitly hands off to next with context
+
+Use this for:
+- Multi-domain problems needing multiple perspectives
+- Complex workflows with dependencies
+- Tasks requiring expert collaboration
+
+Example: coordinate_agents(workflow='sequential', task='Review Q4 budget', agents=['agent.finance', 'agent.pm'])""",
+            parameters=json.dumps({
+                "type": "object",
+                "properties": {
+                    "workflow": {
+                        "type": "string",
+                        "enum": ["sequential", "parallel", "handoff"],
+                        "description": "How agents should coordinate"
+                    },
+                    "task": {
+                        "type": "string",
+                        "description": "The task to accomplish"
+                    },
+                    "agents": {
+                        "type": "array",
+                        "items": {"type": "string"},
+                        "description": "Agent IDs to involve (e.g., ['agent.legal', 'agent.finance'])"
+                    },
+                    "context": {
+                        "type": "object",
+                        "description": "Additional context to share with all agents"
+                    }
+                },
+                "required": ["workflow", "task", "agents"]
+            })
+        )
+    )
+
+    # Get Config Tool
+    get_config_tool = chat_pb2.Tool(
+        function=chat_pb2.Function(
+            name="get_config",
+            description="""Read Life OS configuration.
+
+Available configurations:
+- life_charter: Global principles, priority stack, escalation rules
+- domains: Life domains (Family, Utlyze, Vuplicity, SolutionStream, etc.)
+- agents: Agent definitions and capabilities
+- mappings: Motion/GitHub project mappings
+
+Use this to understand system structure before making decisions.""",
+            parameters=json.dumps({
+                "type": "object",
+                "properties": {
+                    "scope": {
+                        "type": "string",
+                        "enum": ["life_charter", "domains", "agents", "mappings", "all"],
+                        "description": "What configuration to retrieve"
+                    },
+                    "agent_id": {
+                        "type": "string",
+                        "description": "Get specific agent definition"
+                    },
+                    "domain_id": {
+                        "type": "string",
+                        "description": "Get specific domain definition"
+                    }
+                },
+                "required": ["scope"]
+            })
+        )
+    )
+
+    # =========================================================================
+    # UNIFIED BUS TOOLS (Full Org Access)
+    # =========================================================================
+
+    # Read Any Agent's Memory
+    read_agent_memory_tool = chat_pb2.Tool(
+        function=chat_pb2.Function(
+            name="read_agent_memory",
+            description="""Read memory from ANY agent's private Zep graph (GOD MODE).
+
+Use this to:
+- Peek at what legal-agent remembers about a case
+- Check finance-agent's transaction history context
+- See what pm-agent knows about a project
+- Review any agent's learned patterns
+
+This is direct cross-agent memory access - use wisely.""",
+            parameters=json.dumps({
+                "type": "object",
+                "properties": {
+                    "agent_id": {
+                        "type": "string",
+                        "description": "The agent whose memory to read (e.g., 'agent.legal', 'agent.finance')"
+                    },
+                    "query": {
+                        "type": "string",
+                        "description": "What to search for in their memory"
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "default": 5,
+                        "description": "Maximum results to return"
+                    }
+                },
+                "required": ["agent_id", "query"]
+            })
+        )
+    )
+
+    # Write to Any Agent's Memory
+    write_agent_memory_tool = chat_pb2.Tool(
+        function=chat_pb2.Function(
+            name="write_agent_memory",
+            description="""Write memory to ANY agent's private Zep graph (GOD MODE).
+
+Use this to:
+- Update legal-agent with new case context you've gathered
+- Inform finance-agent of a user-confirmed transaction category
+- Share relevant context across agents
+- Inject important knowledge into specific agents
+
+Entries are tagged with 'written_by: conductor' for audit.""",
+            parameters=json.dumps({
+                "type": "object",
+                "properties": {
+                    "agent_id": {
+                        "type": "string",
+                        "description": "The agent whose memory to write (e.g., 'agent.legal', 'agent.finance')"
+                    },
+                    "text": {
+                        "type": "string",
+                        "description": "The knowledge to store"
+                    },
+                    "category": {
+                        "type": "string",
+                        "enum": ["fact", "policy", "decision", "pattern", "preference"],
+                        "description": "Category of knowledge (optional)"
+                    }
+                },
+                "required": ["agent_id", "text"]
+            })
+        )
+    )
+
+    # Search All Agent Memories
+    search_all_memories_tool = chat_pb2.Tool(
+        function=chat_pb2.Function(
+            name="search_all_memories",
+            description="""Search across ALL agent memories simultaneously.
+
+Returns relevant memories from every agent's graph in one call.
+Use this for broad context gathering when you're not sure which agent has the info.
+
+Example: "search_all_memories(query='FCRA compliance issues')" might return
+memories from legal-agent, vuplicity-agent, and pm-agent.""",
+            parameters=json.dumps({
+                "type": "object",
+                "properties": {
+                    "query": {
+                        "type": "string",
+                        "description": "What to search for across all agents"
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "default": 3,
+                        "description": "Max results per agent"
+                    }
+                },
+                "required": ["query"]
+            })
+        )
+    )
+
+    # Write to Org Memory (Direct)
+    write_org_memory_tool = chat_pb2.Tool(
+        function=chat_pb2.Function(
+            name="write_org_memory",
+            description="""Write directly to org-council memory (BYPASS PROPOSALS).
+
+Only Conductor has this privilege. Use for:
+- Critical org-wide policies that need immediate effect
+- Executive decisions from James
+- Emergency coordination directives
+
+This bypasses the normal proposal → approval flow. Use sparingly.""",
+            parameters=json.dumps({
+                "type": "object",
+                "properties": {
+                    "text": {
+                        "type": "string",
+                        "description": "The knowledge to store in org-council"
+                    },
+                    "category": {
+                        "type": "string",
+                        "enum": ["policy", "decision", "directive", "principle"],
+                        "description": "Category of org knowledge"
+                    }
+                },
+                "required": ["text"]
+            })
+        )
+    )
+
+    # Get All Agent States
+    get_all_states_tool = chat_pb2.Tool(
+        function=chat_pb2.Function(
+            name="get_all_states",
+            description="""Get real-time status of every agent in the system.
+
+Returns for each agent:
+- Status: online/busy/idle/offline/error
+- Last activity timestamp
+- Current task (if busy)
+- Queue depth
+- Model and provider (GPT-5.1 or Grok 4.1 Fast)
+- Capabilities list
+
+Use this for:
+- System overview before complex operations
+- Identifying which agents are available
+- Monitoring agent health""",
+            parameters=json.dumps({
+                "type": "object",
+                "properties": {},
+                "required": []
+            })
+        )
+    )
+
+    # Get Single Agent State
+    get_agent_state_tool = chat_pb2.Tool(
+        function=chat_pb2.Function(
+            name="get_agent_state",
+            description="""Get detailed status of a specific agent.
+
+Returns:
+- Agent name and ID
+- Current status (online/busy/idle/offline/error)
+- What they're currently working on
+- Queue depth
+- Last activity
+- Model (GPT-5.1 or Grok 4.1 Fast)
+- Available capabilities
+
+Use before invoking an agent to check if they're available.""",
+            parameters=json.dumps({
+                "type": "object",
+                "properties": {
+                    "agent_id": {
+                        "type": "string",
+                        "description": "The agent to check (e.g., 'agent.legal', 'agent.finance')"
+                    }
+                },
+                "required": ["agent_id"]
+            })
+        )
+    )
+
+    # Broadcast to Multiple Agents
+    broadcast_tool = chat_pb2.Tool(
+        function=chat_pb2.Function(
+            name="broadcast",
+            description="""Send a message to multiple agents simultaneously.
+
+All targeted agents receive the message and respond in parallel.
+Use for:
+- System-wide announcements
+- Gathering perspectives from multiple domains
+- Emergency coordination
+
+Default: all agents (except orchestrator). Use target_agents to limit scope.""",
+            parameters=json.dumps({
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "description": "The message to broadcast"
+                    },
+                    "priority": {
+                        "type": "string",
+                        "enum": ["low", "normal", "high", "critical"],
+                        "description": "Message priority (affects escalation)"
+                    },
+                    "target_agents": {
+                        "type": "array",
+                        "items": {"type": "string"},
+                        "description": "Specific agents to target (optional, default: all)"
+                    }
+                },
+                "required": ["message"]
+            })
+        )
+    )
+
+    # Route Message by @mention or Domain
+    route_message_tool = chat_pb2.Tool(
+        function=chat_pb2.Function(
+            name="route_message",
+            description="""Smart route a message to the appropriate agent.
+
+Supports:
+- @mention syntax: "@legal check this contract" → legal-agent
+- Domain detection: "Q4 budget review" → finance-agent
+- Automatic routing based on keywords
+
+Aliases supported: @legal, @finance, @pm, @comms, @health, @coach, @hyro, @grok, @research, @family, @ea, @fcra, @vuplicity, @bio
+
+Use when the user mentions an agent or discusses a specific domain.""",
+            parameters=json.dumps({
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "description": "The message to route (may contain @mentions)"
+                    },
+                    "context": {
+                        "type": "object",
+                        "description": "Additional context to include"
+                    }
+                },
+                "required": ["message"]
+            })
+        )
+    )
+
+    # System Overview
+    system_overview_tool = chat_pb2.Tool(
+        function=chat_pb2.Function(
+            name="system_overview",
+            description="""Get comprehensive system overview (enhanced pulse).
+
+Returns:
+- All agent states with full details
+- Org memory entry count
+- Recent activity log (last 20 actions)
+- Pending escalations count
+- Overall system health (healthy/degraded/critical)
+
+Use for:
+- Daily system check
+- Pre-planning complex workflows
+- Debugging system issues""",
+            parameters=json.dumps({
+                "type": "object",
+                "properties": {},
+                "required": []
+            })
+        )
+    )
+
     return [
+        # Existing tools
         whoop_tool,
         limitless_tool,
         mem0_tool,
         memory_add_tool,
         legal_context_fetch_tool,
         legal_context_resolve_tool,
+        # Orchestrator Gateway tools
+        invoke_agent_tool,
+        query_memory_tool,
+        update_memory_tool,
+        system_pulse_tool,
+        setup_memory_tool,
+        coordinate_agents_tool,
+        get_config_tool,
+        # UNIFIED BUS tools (Full Org Access)
+        read_agent_memory_tool,
+        write_agent_memory_tool,
+        search_all_memories_tool,
+        write_org_memory_tool,
+        get_all_states_tool,
+        get_agent_state_tool,
+        broadcast_tool,
+        route_message_tool,
+        system_overview_tool,
     ]
 
 
@@ -377,6 +981,344 @@ async def execute_custom_tool(tool_name: str, arguments: Dict[str, Any]) -> Dict
         finally:
             conn.close()
 
+    # =========================================================================
+    # NEW ORCHESTRATOR GATEWAY TOOL HANDLERS
+    # =========================================================================
+
+    elif tool_name == "invoke_agent":
+        base_url = os.getenv("NEXT_API_BASE_URL", "http://localhost:4242")
+        try:
+            async with httpx.AsyncClient(timeout=60.0) as client:
+                resp = await client.post(
+                    f"{base_url}/api/orchestrator/gateway",
+                    json={
+                        "gatewayOperation": "invoke",
+                        "agentId": arguments.get("agent_id"),
+                        "message": arguments.get("message"),
+                        "context": {"domainId": arguments.get("domain_context")},
+                        "awaitResponse": True
+                    }
+                )
+                if resp.status_code == 200:
+                    return resp.json()
+                else:
+                    return {"error": f"Gateway returned {resp.status_code}", "details": resp.text}
+        except Exception as e:
+            return {"error": f"Failed to invoke agent: {str(e)}"}
+
+    elif tool_name == "query_memory":
+        base_url = os.getenv("NEXT_API_BASE_URL", "http://localhost:4242")
+        try:
+            async with httpx.AsyncClient(timeout=30.0) as client:
+                resp = await client.post(
+                    f"{base_url}/api/orchestrator/gateway",
+                    json={
+                        "gatewayOperation": "memory",
+                        "operation": "search",
+                        "graphType": arguments.get("graph_type"),
+                        "agentId": arguments.get("agent_id"),
+                        "query": arguments.get("query"),
+                        "limit": arguments.get("limit", 5)
+                    }
+                )
+                if resp.status_code == 200:
+                    return resp.json()
+                else:
+                    return {"error": f"Gateway returned {resp.status_code}", "details": resp.text}
+        except Exception as e:
+            return {"error": f"Failed to query memory: {str(e)}"}
+
+    elif tool_name == "update_memory":
+        base_url = os.getenv("NEXT_API_BASE_URL", "http://localhost:4242")
+        operation = "add" if arguments.get("target") == "agent" else "propose"
+        try:
+            async with httpx.AsyncClient(timeout=30.0) as client:
+                resp = await client.post(
+                    f"{base_url}/api/orchestrator/gateway",
+                    json={
+                        "gatewayOperation": "memory",
+                        "operation": operation,
+                        "graphType": arguments.get("target"),
+                        "agentId": arguments.get("agent_id"),
+                        "text": arguments.get("text"),
+                        "metadata": {
+                            "category": arguments.get("category"),
+                        }
+                    }
+                )
+                if resp.status_code == 200:
+                    return resp.json()
+                else:
+                    return {"error": f"Gateway returned {resp.status_code}", "details": resp.text}
+        except Exception as e:
+            return {"error": f"Failed to update memory: {str(e)}"}
+
+    elif tool_name == "system_pulse":
+        base_url = os.getenv("NEXT_API_BASE_URL", "http://localhost:4242")
+        try:
+            params = {"operation": "pulse"}
+            if arguments.get("include_activity") is not None:
+                params["includeActivity"] = str(arguments.get("include_activity")).lower()
+            if arguments.get("include_pending") is not None:
+                params["includePending"] = str(arguments.get("include_pending")).lower()
+
+            async with httpx.AsyncClient(timeout=15.0) as client:
+                resp = await client.get(
+                    f"{base_url}/api/orchestrator/gateway",
+                    params=params
+                )
+                if resp.status_code == 200:
+                    return resp.json()
+                else:
+                    return {"error": f"Gateway returned {resp.status_code}", "details": resp.text}
+        except Exception as e:
+            return {"error": f"Failed to get system pulse: {str(e)}"}
+
+    elif tool_name == "setup_memory":
+        base_url = os.getenv("NEXT_API_BASE_URL", "http://localhost:4242")
+        try:
+            async with httpx.AsyncClient(timeout=60.0) as client:
+                resp = await client.post(
+                    f"{base_url}/api/orchestrator/gateway/setup",
+                    json={
+                        "phase": arguments.get("phase"),
+                        "scope": arguments.get("scope"),
+                        "targetId": arguments.get("target_id"),
+                        "answers": arguments.get("answers"),
+                        "confirmations": arguments.get("confirmations")
+                    }
+                )
+                if resp.status_code == 200:
+                    return resp.json()
+                else:
+                    return {"error": f"Gateway returned {resp.status_code}", "details": resp.text}
+        except Exception as e:
+            return {"error": f"Failed to setup memory: {str(e)}"}
+
+    elif tool_name == "coordinate_agents":
+        base_url = os.getenv("NEXT_API_BASE_URL", "http://localhost:4242")
+        try:
+            async with httpx.AsyncClient(timeout=120.0) as client:
+                resp = await client.post(
+                    f"{base_url}/api/orchestrator/gateway/coordinate",
+                    json={
+                        "workflow": arguments.get("workflow"),
+                        "task": arguments.get("task"),
+                        "agents": arguments.get("agents"),
+                        "context": arguments.get("context")
+                    }
+                )
+                if resp.status_code == 200:
+                    return resp.json()
+                else:
+                    return {"error": f"Gateway returned {resp.status_code}", "details": resp.text}
+        except Exception as e:
+            return {"error": f"Failed to coordinate agents: {str(e)}"}
+
+    elif tool_name == "get_config":
+        base_url = os.getenv("NEXT_API_BASE_URL", "http://localhost:4242")
+        try:
+            params = {
+                "operation": "config",
+                "scope": arguments.get("scope")
+            }
+            if arguments.get("agent_id"):
+                params["agentId"] = arguments.get("agent_id")
+            if arguments.get("domain_id"):
+                params["domainId"] = arguments.get("domain_id")
+
+            async with httpx.AsyncClient(timeout=15.0) as client:
+                resp = await client.get(
+                    f"{base_url}/api/orchestrator/gateway",
+                    params=params
+                )
+                if resp.status_code == 200:
+                    return resp.json()
+                else:
+                    return {"error": f"Gateway returned {resp.status_code}", "details": resp.text}
+        except Exception as e:
+            return {"error": f"Failed to get config: {str(e)}"}
+
+    # =========================================================================
+    # UNIFIED BUS TOOL HANDLERS (Full Org Access)
+    # =========================================================================
+
+    elif tool_name == "read_agent_memory":
+        base_url = os.getenv("NEXT_API_BASE_URL", "http://localhost:4242")
+        try:
+            async with httpx.AsyncClient(timeout=30.0) as client:
+                resp = await client.post(
+                    f"{base_url}/api/orchestrator/gateway",
+                    json={
+                        "gatewayOperation": "unified",
+                        "operation": "read_agent_memory",
+                        "agentId": arguments.get("agent_id"),
+                        "query": arguments.get("query"),
+                        "limit": arguments.get("limit", 5)
+                    }
+                )
+                if resp.status_code == 200:
+                    return resp.json()
+                else:
+                    return {"error": f"Gateway returned {resp.status_code}", "details": resp.text}
+        except Exception as e:
+            return {"error": f"Failed to read agent memory: {str(e)}"}
+
+    elif tool_name == "write_agent_memory":
+        base_url = os.getenv("NEXT_API_BASE_URL", "http://localhost:4242")
+        try:
+            async with httpx.AsyncClient(timeout=30.0) as client:
+                resp = await client.post(
+                    f"{base_url}/api/orchestrator/gateway",
+                    json={
+                        "gatewayOperation": "unified",
+                        "operation": "write_agent_memory",
+                        "agentId": arguments.get("agent_id"),
+                        "text": arguments.get("text"),
+                        "metadata": {
+                            "category": arguments.get("category"),
+                        } if arguments.get("category") else None
+                    }
+                )
+                if resp.status_code == 200:
+                    return resp.json()
+                else:
+                    return {"error": f"Gateway returned {resp.status_code}", "details": resp.text}
+        except Exception as e:
+            return {"error": f"Failed to write agent memory: {str(e)}"}
+
+    elif tool_name == "search_all_memories":
+        base_url = os.getenv("NEXT_API_BASE_URL", "http://localhost:4242")
+        try:
+            async with httpx.AsyncClient(timeout=60.0) as client:
+                resp = await client.post(
+                    f"{base_url}/api/orchestrator/gateway",
+                    json={
+                        "gatewayOperation": "unified",
+                        "operation": "search_all_memories",
+                        "query": arguments.get("query"),
+                        "limit": arguments.get("limit", 3)
+                    }
+                )
+                if resp.status_code == 200:
+                    return resp.json()
+                else:
+                    return {"error": f"Gateway returned {resp.status_code}", "details": resp.text}
+        except Exception as e:
+            return {"error": f"Failed to search all memories: {str(e)}"}
+
+    elif tool_name == "write_org_memory":
+        base_url = os.getenv("NEXT_API_BASE_URL", "http://localhost:4242")
+        try:
+            async with httpx.AsyncClient(timeout=30.0) as client:
+                resp = await client.post(
+                    f"{base_url}/api/orchestrator/gateway",
+                    json={
+                        "gatewayOperation": "unified",
+                        "operation": "write_org_memory",
+                        "text": arguments.get("text"),
+                        "metadata": {
+                            "category": arguments.get("category"),
+                        } if arguments.get("category") else None
+                    }
+                )
+                if resp.status_code == 200:
+                    return resp.json()
+                else:
+                    return {"error": f"Gateway returned {resp.status_code}", "details": resp.text}
+        except Exception as e:
+            return {"error": f"Failed to write org memory: {str(e)}"}
+
+    elif tool_name == "get_all_states":
+        base_url = os.getenv("NEXT_API_BASE_URL", "http://localhost:4242")
+        try:
+            async with httpx.AsyncClient(timeout=15.0) as client:
+                resp = await client.get(
+                    f"{base_url}/api/orchestrator/gateway",
+                    params={"operation": "states"}
+                )
+                if resp.status_code == 200:
+                    return resp.json()
+                else:
+                    return {"error": f"Gateway returned {resp.status_code}", "details": resp.text}
+        except Exception as e:
+            return {"error": f"Failed to get all states: {str(e)}"}
+
+    elif tool_name == "get_agent_state":
+        base_url = os.getenv("NEXT_API_BASE_URL", "http://localhost:4242")
+        try:
+            async with httpx.AsyncClient(timeout=30.0) as client:
+                resp = await client.post(
+                    f"{base_url}/api/orchestrator/gateway",
+                    json={
+                        "gatewayOperation": "unified",
+                        "operation": "get_agent_state",
+                        "agentId": arguments.get("agent_id")
+                    }
+                )
+                if resp.status_code == 200:
+                    return resp.json()
+                else:
+                    return {"error": f"Gateway returned {resp.status_code}", "details": resp.text}
+        except Exception as e:
+            return {"error": f"Failed to get agent state: {str(e)}"}
+
+    elif tool_name == "broadcast":
+        base_url = os.getenv("NEXT_API_BASE_URL", "http://localhost:4242")
+        try:
+            async with httpx.AsyncClient(timeout=120.0) as client:
+                resp = await client.post(
+                    f"{base_url}/api/orchestrator/gateway",
+                    json={
+                        "gatewayOperation": "unified",
+                        "operation": "broadcast",
+                        "message": arguments.get("message"),
+                        "priority": arguments.get("priority", "normal"),
+                        "targetAgents": arguments.get("target_agents")
+                    }
+                )
+                if resp.status_code == 200:
+                    return resp.json()
+                else:
+                    return {"error": f"Gateway returned {resp.status_code}", "details": resp.text}
+        except Exception as e:
+            return {"error": f"Failed to broadcast: {str(e)}"}
+
+    elif tool_name == "route_message":
+        base_url = os.getenv("NEXT_API_BASE_URL", "http://localhost:4242")
+        try:
+            async with httpx.AsyncClient(timeout=60.0) as client:
+                resp = await client.post(
+                    f"{base_url}/api/orchestrator/gateway",
+                    json={
+                        "gatewayOperation": "unified",
+                        "operation": "route_message",
+                        "message": arguments.get("message"),
+                        "context": arguments.get("context")
+                    }
+                )
+                if resp.status_code == 200:
+                    return resp.json()
+                else:
+                    return {"error": f"Gateway returned {resp.status_code}", "details": resp.text}
+        except Exception as e:
+            return {"error": f"Failed to route message: {str(e)}"}
+
+    elif tool_name == "system_overview":
+        base_url = os.getenv("NEXT_API_BASE_URL", "http://localhost:4242")
+        try:
+            async with httpx.AsyncClient(timeout=15.0) as client:
+                resp = await client.get(
+                    f"{base_url}/api/orchestrator/gateway",
+                    params={"operation": "overview"}
+                )
+                if resp.status_code == 200:
+                    return resp.json()
+                else:
+                    return {"error": f"Gateway returned {resp.status_code}", "details": resp.text}
+        except Exception as e:
+            return {"error": f"Failed to get system overview: {str(e)}"}
+
     return {"error": f"Unknown tool: {tool_name}"}
 
 
@@ -400,7 +1342,7 @@ class AgenticOrchestrator:
             raise ValueError("XAI_API_KEY environment variable not set")
 
         self.client = Client(api_key=api_key)
-        self.model = os.getenv("AGENTIC_MODEL", "grok-4-1-fast-reasoning-latest")
+        self.model = os.getenv("AGENTIC_MODEL", "grok-4-1-fast")
 
         # Combine built-in and custom tools
         self.tools = [
@@ -419,16 +1361,136 @@ class AgenticOrchestrator:
 
         messages = []
 
-        # Base memory policy
-        memory_policy = (
-            "You have tools memory_search and memory_add. "
-            "Save memories only when they are durable and beneficial: stable preferences, long-term goals, "
-            "biographical details shared explicitly, or dated anchors/todos. Avoid secrets or ephemeral facts. "
-            "Use memory_add sparingly (max a few per session). Include type/category/date when appropriate."
-        )
-        messages.append(system(memory_policy))
+        # Conductor - Orchestrator Interface system prompt
+        orchestrator_prompt = """You are Conductor, the orchestrator for James Brady's Life OS.
 
-        # Add optional system prompt after the policy
+## Your Identity - BE TRANSPARENT
+You are powered by **Grok 4.1 Fast**, xAI's frontier model optimized for high-performance agentic tool calling. When asked what model you are, what AI you are, or about your identity, be direct and honest:
+
+"I'm Conductor, powered by Grok 4.1 Fast from xAI. I serve as the orchestrator for James Brady's Life OS - coordinating activities and delegating tasks across various life domains. Just let me know what you need, and I'll engage the right specialists or provide the appropriate guidance."
+
+DO NOT:
+- Be evasive about your model or capabilities
+- Redirect identity questions to "documentation" or "technical team"
+- Pretend you don't know what model you are
+- Give vague non-answers about your nature
+
+DO:
+- Be direct: "I'm Grok 4.1 Fast, acting as Conductor for Life OS"
+- Be helpful: explain your actual capabilities honestly
+- Be transparent: if you don't know something, say so
+
+You are the central coordination point for an entire life management system. You have direct access to:
+- All specialized agents (Legal, Finance, PM, Comms, Family, Hyro, Utlyze, Vuplicity, etc.)
+- The complete Zep memory system (agent-specific graphs + org-council graph)
+- The agent message bus
+- Life OS configuration (priorities, domains, escalation rules)
+
+## Your Capabilities
+
+### 1. Agent Communication (invoke_agent)
+Talk to any specialized agent to get their perspective or delegate tasks:
+- agent.legal: Legal threats, FCRA compliance, contract deadlines
+- agent.finance: Transaction classification, expense tracking, anomalies
+- agent.pm: Project tracking, task management, GitHub/Motion sync
+- agent.comms: Email/message classification, draft replies
+- agent.hyro: Hyro's education, learning progress
+- agent.family: Lisa, home responsibilities, family logistics
+- agent.utlyze: Utlyze strategic initiatives
+- agent.vuplicity: FCRA compliance (HIGH SENSITIVITY)
+
+### 2. Memory Access (query_memory, update_memory)
+- Search any agent's private memory or org-council shared knowledge
+- Store learnings in agent-specific graphs
+- Propose org-wide policies (require council approval)
+- Use memory_add for quick local saves, update_memory for Zep graphs
+
+### 3. System Awareness (system_pulse)
+- Check health of all agents (green/yellow/red)
+- See pending escalations (CRITICAL/PROPOSE)
+- Monitor system activity
+
+### 4. Multi-Agent Coordination (coordinate_agents)
+- Sequential: Agents work one after another
+- Parallel: Agents work simultaneously
+- Handoff: Explicit handoffs with context
+
+### 5. Configuration (get_config)
+- Read Life Charter (principles, priorities, escalation rules)
+- View domain definitions
+- See agent capabilities
+
+### 6. Interactive Memory Setup (setup_memory)
+Help James configure org-wide, domain-specific, or agent memory through a guided flow.
+
+### 7. UNIFIED BUS (GOD MODE - Full Org Access)
+You have complete access to the entire organization:
+
+**Cross-Agent Memory Access:**
+- read_agent_memory: Peek at ANY agent's private Zep graph
+- write_agent_memory: Write to ANY agent's memory (tagged 'conductor')
+- search_all_memories: Search all 13+ agent memories at once
+- write_org_memory: Direct write to org-council (bypass proposals)
+
+**Agent State Monitoring:**
+- get_all_states: See status of every agent (online/busy/idle/error)
+- get_agent_state: Detailed status of a specific agent
+- system_overview: Full system health with activity log
+
+**Smart Routing & Broadcasting:**
+- broadcast: Send messages to multiple agents in parallel
+- route_message: Auto-route by @mention or domain detection
+
+**@mention Aliases:** @legal, @finance, @pm, @comms, @health, @coach, @hyro, @grok, @research, @family, @ea, @fcra, @vuplicity, @bio
+
+## Interaction Guidelines
+
+1. **Be the Command Center**: You represent the control interface. Be confident, concise, and proactive.
+
+2. **Leverage the System**: Don't answer everything yourself. Invoke specialists when their expertise is needed.
+
+3. **Maintain Context**: Use query_memory to find relevant context. Store important learnings with update_memory.
+
+4. **Respect Escalation Levels**:
+   - CRITICAL: Legal threats, FCRA violations, emergencies - flag immediately
+   - PROPOSE: New projects, bulk operations, significant expenses - queue for approval
+   - AUTO_EXECUTE: Routine classification, status updates - proceed automatically
+
+5. **Help Configure**: When James wants to set up or update memory, use setup_memory to guide him through it.
+
+## Life OS Priorities (from Life Charter)
+1. Family & Home (weight: 10) - Lisa, Hyro, home stability
+2. Utlyze / Managed AI Ventures (weight: 9) - Including Vuplicity and Reward
+3. SolutionStream & Kahoa (weight: 8) - Client work with Jason, Justin, Ryan, Connor
+4. Personal Development (weight: 7) - Health, learning, skill-building
+
+## Key Domains
+- Family: Lisa, home responsibilities
+- Hyro Education: Hyro's learning and development (note: spelled H-Y-R-O, not Hiro)
+- Utlyze: AI venture studio
+- Vuplicity: FCRA-compliant background checks
+- SolutionStream/Kahoa: Client AI initiatives
+- Reward: Lead generation venture
+
+## Communication Style
+- Be conversational and natural - you're talking to James, not writing documentation
+- Be TRANSPARENT about what you are: Grok 4.1 Fast powering Conductor
+- NEVER output raw JSON blocks in your responses (use tools internally, but speak naturally)
+- Be concise and actionable - get to the point
+- When using escalation levels, mention them briefly in natural language, don't format as JSON
+- If you need to show structured information, use clean markdown tables or bullet points
+- If you don't know something or can't do something, say so directly
+- Don't over-explain or be defensive - just be helpful and honest
+
+## Memory Policy
+Use memory_add for quick local saves. Use update_memory for persistent Zep storage.
+Save only durable, beneficial facts: preferences, goals, decisions, patterns.
+Avoid storing secrets, passwords, or ephemeral information.
+Max 3-5 memory writes per session to avoid clutter."""
+
+        messages.append(system(orchestrator_prompt))
+
+        # Add optional additional system prompt
         if system_prompt:
             messages.append(system(system_prompt))
 
@@ -576,9 +1638,9 @@ class AgenticOrchestrator:
 # ============================================================================
 
 app = FastAPI(
-    title="Wrath Shield Agentic API",
-    description="Multi-agent orchestration with xAI Grok",
-    version="1.0.0"
+    title="Conductor - Life OS Orchestrator",
+    description="Multi-agent orchestration powered by Grok 4.1 Fast",
+    version="2.0.0"
 )
 
 # CORS for local Next.js UI

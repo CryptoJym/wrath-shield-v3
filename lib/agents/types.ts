@@ -6,7 +6,7 @@
 
 export type EscalationLevel = 'CRITICAL' | 'PROPOSE' | 'AUTO_EXECUTE';
 
-export type LLMProvider = 'openrouter' | 'openai' | 'xai';
+export type LLMProvider = 'openai' | 'xai';
 
 export interface AgentInvocation {
   /** Agent ID from Life OS config (e.g., 'agent.finance', 'agent.legal') */
@@ -89,26 +89,29 @@ export interface AgentActivity {
 /**
  * Agent-specific provider configuration
  * Maps agent IDs to their preferred LLM providers
+ *
+ * APPROVED MODELS ONLY:
+ * - OpenAI: gpt-5.1 (for structured analysis, finance, complex reasoning)
+ * - xAI: grok-4-1-fast (for fast iteration, research, legal advocacy)
  */
 export const AGENT_PROVIDER_MAP: Record<string, { provider: LLMProvider; model: string }> = {
-  // Orchestrator and coaching use Claude via OpenRouter
-  'agent.orchestrator': { provider: 'openrouter', model: 'anthropic/claude-3.5-sonnet:beta' },
-  'agent.coaching': { provider: 'openrouter', model: 'anthropic/claude-3.5-sonnet:beta' },
+  // === xAI Grok 4.1 Fast ===
+  // Fast iteration, research, advocacy, real-time tasks
+  'agent.orchestrator': { provider: 'xai', model: 'grok-4-1-fast' },
+  'agent.legal': { provider: 'xai', model: 'grok-4-1-fast' },
+  'agent.grok': { provider: 'xai', model: 'grok-4-1-fast' },
+  'agent.research': { provider: 'xai', model: 'grok-4-1-fast' },
+  'agent.comms': { provider: 'xai', model: 'grok-4-1-fast' },
+  'agent.pm': { provider: 'xai', model: 'grok-4-1-fast' },
+  'agent.hyro': { provider: 'xai', model: 'grok-4-1-fast' },
 
-  // Legal uses Grok for aggressive advocacy
-  'agent.legal': { provider: 'xai', model: 'grok-3' },
+  // === OpenAI GPT-5.1 ===
+  // Structured analysis, complex reasoning, financial work
+  'agent.finance': { provider: 'openai', model: 'gpt-5.1' },
+  'agent.coaching': { provider: 'openai', model: 'gpt-5.1' },
+  'agent.ea': { provider: 'openai', model: 'gpt-5.1' },
+  'agent.health': { provider: 'openai', model: 'gpt-5.1' },
 
-  // Finance uses GPT for structured analysis
-  'agent.finance': { provider: 'openai', model: 'gpt-4.1' },
-
-  // Research uses Grok for fast iteration
-  'agent.grok': { provider: 'xai', model: 'grok-3' },
-  'agent.research': { provider: 'xai', model: 'grok-3' },
-
-  // Personal agents use Claude
-  'agent.ea': { provider: 'openrouter', model: 'anthropic/claude-3.5-sonnet:beta' },
-  'agent.health': { provider: 'openrouter', model: 'anthropic/claude-3.5-sonnet:beta' },
-
-  // Default fallback
-  'default': { provider: 'openrouter', model: 'anthropic/claude-3.5-sonnet:beta' },
+  // Default fallback - Grok for speed
+  'default': { provider: 'xai', model: 'grok-4-1-fast' },
 };

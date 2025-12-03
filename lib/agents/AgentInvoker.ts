@@ -48,6 +48,7 @@ const MAX_ACTIVITY_LOG = 1000;
  */
 const LIFE_OS_TO_ZEP_ID: Record<string, ZepAgentId> = {
   'agent.orchestrator': 'orchestrator-agent',
+  'agent.orchestrator.interface': 'orchestrator-agent', // Power interface uses orchestrator memory
   'agent.legal': 'legal-agent',
   'agent.finance': 'finance-agent',
   'agent.pm': 'pm-agent',
@@ -55,7 +56,7 @@ const LIFE_OS_TO_ZEP_ID: Record<string, ZepAgentId> = {
   'agent.health': 'health-agent',
   'agent.coaching': 'coaching-agent',
   'agent.hyro': 'hyro-agent',
-  'agent.grok': 'grok-agent',
+    'agent.grok': 'orchestrator-agent', // Legacy - redirects to orchestrator
   'agent.sherlock': 'sherlock-agent',
   'agent.ea': 'ea-agent',
   'agent.relationships': 'relationships-agent',
@@ -233,54 +234,7 @@ When you detect CRITICAL items, flag them explicitly. For PROPOSE items, clearly
 }
 
 /**
- * Call OpenRouter API
- */
-async function callOpenRouter(
-  prompt: ConstructedPrompt,
-  model: string
-): Promise<{ content: string; model: string; usage: { prompt: number; completion: number; total: number } }> {
-  const apiKey = process.env.OPENROUTER_API_KEY;
-  if (!apiKey) throw new Error('OPENROUTER_API_KEY not configured');
-
-  const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${apiKey}`,
-      'HTTP-Referer': 'https://wrath-shield.com',
-      'X-Title': 'Wrath Shield v3 - Life OS',
-    },
-    body: JSON.stringify({
-      model,
-      messages: prompt.messages,
-      temperature: prompt.temperature ?? 0.7,
-      max_tokens: prompt.max_tokens ?? 2048,
-    }),
-  });
-
-  if (!response.ok) {
-    throw new Error(`OpenRouter API error (${response.status}): ${await response.text()}`);
-  }
-
-  const data: any = await response.json();
-  const choice = data?.choices?.[0];
-  if (!choice?.message?.content) {
-    throw new Error('OpenRouter response missing content');
-  }
-
-  return {
-    content: choice.message.content.trim(),
-    model: data.model,
-    usage: {
-      prompt: data.usage?.prompt_tokens || 0,
-      completion: data.usage?.completion_tokens || 0,
-      total: data.usage?.total_tokens || 0,
-    },
-  };
-}
-
-/**
- * Call OpenAI API directly
+ * Call OpenAI API directly (GPT-5.1)
  */
 async function callOpenAI(
   prompt: ConstructedPrompt,
@@ -295,7 +249,7 @@ async function callOpenAI(
 }
 
 /**
- * Call xAI (Grok) API directly
+ * Call xAI API directly (Grok 4.1 Fast)
  */
 async function callXAI(
   prompt: ConstructedPrompt,
@@ -311,6 +265,10 @@ async function callXAI(
 
 /**
  * Route to the appropriate LLM provider
+ *
+ * APPROVED PROVIDERS:
+ * - openai: GPT-5.1 for structured analysis, finance, complex reasoning
+ * - xai: Grok 4.1 Fast for fast iteration, research, real-time tasks
  */
 async function routeToLLM(
   prompt: ConstructedPrompt,
@@ -318,14 +276,14 @@ async function routeToLLM(
   model: string
 ): Promise<{ content: string; model: string; usage: { prompt: number; completion: number; total: number } }> {
   switch (provider) {
-    case 'openrouter':
-      return callOpenRouter(prompt, model);
     case 'openai':
       return callOpenAI(prompt, model);
     case 'xai':
       return callXAI(prompt, model);
     default:
-      return callOpenRouter(prompt, model);
+      // Default to xAI Grok 4.1 Fast for speed
+      console.warn(`[AgentInvoker] Unknown provider "${provider}", falling back to xAI`);
+      return callXAI(prompt, 'grok-4-1-fast');
   }
 }
 
