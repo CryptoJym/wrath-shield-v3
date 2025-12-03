@@ -1,0 +1,285 @@
+{
+  "version": 2,
+  "description": "Universal Hierarchical Taxonomy for Life OS PM System",
+  "last_updated": "2025-12-01",
+
+  "organization": {
+    "umbrella": {
+      "id": "utlyze",
+      "name": "Utlyze",
+      "description": "AI-first managed intelligence provider and venture studio",
+      "owner": "James Brady",
+      "github_orgs": ["h3ro-dev", "Utlyze"]
+    },
+
+    "business_units": [
+      {
+        "id": "vuplicity",
+        "name": "Vuplicity",
+        "description": "AI-powered FCRA-compliant background screening - checks in minutes, not days",
+        "parent": "utlyze",
+        "sensitivity": "high_compliance",
+        "github_orgs": ["vuplicity"],
+        "key_products": ["veri", "crime-pointer-engine", "vuplicity-api"],
+        "domains_used": ["product-core", "infrastructure", "operations", "client-delivery"]
+      },
+      {
+        "id": "newreward",
+        "name": "NewReward",
+        "description": "AI-first lead generation agency with campaign engines and automation",
+        "parent": "utlyze",
+        "github_orgs": ["NewReward"],
+        "integrations": ["n8n", "ghl", "simpletexting"],
+        "domains_used": ["product-core", "internal-tools", "growth-marketing", "client-delivery"]
+      },
+      {
+        "id": "hdws",
+        "name": "High Desert Water Systems",
+        "description": "Water systems automation, marketing, field ops, and billing",
+        "parent": "utlyze",
+        "github_orgs": [],
+        "domains_used": ["infrastructure", "growth-marketing", "operations"]
+      }
+    ],
+
+    "rd_division": {
+      "id": "rd",
+      "name": "R&D",
+      "description": "Research & Development division - EEG, Burst Recorder, Symbiosis, consciousness frameworks",
+      "parent": "utlyze",
+      "github_orgs": [],
+      "special_routing": ["philosophy", "physics", "consciousness", "neuroscience", "tokenization", "holonomic", "attractor", "eeg", "burst", "symbiosis"],
+      "domains_used": ["research-experiments"],
+      "contains_orphans": true,
+      "orphan_holding_pen": true
+    },
+
+    "legacy_personal": {
+      "id": "cryptojym",
+      "name": "CryptoJym",
+      "description": "Legacy GitHub org - personal brand, experiments, archived material. Not a business unit.",
+      "owner": "James Brady",
+      "github_orgs": ["CryptoJym"],
+      "domains_used": ["personal", "research-experiments", "archived"],
+      "note": "Legacy org for personal repos, NOT a business unit"
+    },
+
+    "partner_companies": [
+      {
+        "id": "kahoa",
+        "name": "Kahoa",
+        "description": "AI Training, CAIO consulting, Intelligent Engineer curriculum",
+        "owner": "Kahoa Leadership",
+        "cross_lateral_with": ["utlyze"],
+        "github_orgs": [],
+        "domains_used": ["client-delivery", "internal-tools", "operations"]
+      },
+      {
+        "id": "solutionstream",
+        "name": "SolutionStream",
+        "description": "Enterprise staffing, CAIO consulting, software delivery",
+        "owner": "Jason Thelin",
+        "cross_lateral_with": ["utlyze", "kahoa"],
+        "github_orgs": [],
+        "domains_used": ["client-delivery", "operations"]
+      }
+    ]
+  },
+
+  "domains": [
+    {
+      "id": "product-core",
+      "name": "Product Core",
+      "description": "Core product code that customers interact with directly",
+      "criteria": [
+        "Customers interact with it directly",
+        "Core to primary business value",
+        "Maintained on long-term roadmap"
+      ],
+      "color": "bg-blue-500",
+      "icon": "package"
+    },
+    {
+      "id": "infrastructure",
+      "name": "Infrastructure",
+      "description": "Pipelines, DevOps, CI/CD, environments, IaC",
+      "criteria": [
+        "IaC, Docker, Cloud Run, K8s",
+        "Monitoring and observability",
+        "CI/CD pipelines"
+      ],
+      "color": "bg-slate-500",
+      "icon": "server"
+    },
+    {
+      "id": "internal-tools",
+      "name": "Internal Tools",
+      "description": "Tools built for internal use, not clients",
+      "criteria": [
+        "MCP integrations",
+        "Local automation scripts",
+        "Internal dashboards",
+        "Developer tooling"
+      ],
+      "color": "bg-purple-500",
+      "icon": "wrench"
+    },
+    {
+      "id": "client-delivery",
+      "name": "Client Delivery",
+      "description": "Client-specific implementations and customizations",
+      "criteria": [
+        "Contains client-specific code",
+        "Deployed for specific customer",
+        "Enterprise setups"
+      ],
+      "color": "bg-emerald-500",
+      "icon": "briefcase"
+    },
+    {
+      "id": "research-experiments",
+      "name": "Research & Experiments",
+      "description": "R&D, spikes, consciousness/neuroscience work, orphan experiments",
+      "criteria": [
+        "EEG, holonomic models, consciousness",
+        "Tokenization theory, attractor fields",
+        "Unclear experiments needing clarity",
+        "Philosophy, physics research"
+      ],
+      "color": "bg-amber-500",
+      "icon": "flask",
+      "special_routing": true
+    },
+    {
+      "id": "growth-marketing",
+      "name": "Growth & Marketing",
+      "description": "Funnels, campaigns, landing pages, lead gen",
+      "criteria": [
+        "Landing pages and funnels",
+        "LinkedIn/social automation",
+        "Marketing assets"
+      ],
+      "color": "bg-pink-500",
+      "icon": "trending-up"
+    },
+    {
+      "id": "operations",
+      "name": "Operations",
+      "description": "Finance, HR, legal, compliance, FCRA, tax",
+      "criteria": [
+        "Financial systems",
+        "HR and staffing",
+        "Legal/compliance",
+        "FCRA-related operations"
+      ],
+      "color": "bg-orange-500",
+      "icon": "clipboard-list"
+    },
+    {
+      "id": "personal",
+      "name": "Personal",
+      "description": "Family, health, personal finance, scheduling",
+      "criteria": [
+        "Family-related",
+        "Personal health tracking",
+        "Personal finance",
+        "Life scheduling"
+      ],
+      "color": "bg-cyan-500",
+      "icon": "user"
+    },
+    {
+      "id": "archived",
+      "name": "Archived",
+      "description": "Deprecated, abandoned, or replaced projects",
+      "criteria": [
+        "No longer maintained",
+        "Replaced by newer project",
+        "Abandoned experiment"
+      ],
+      "color": "bg-gray-500",
+      "icon": "archive"
+    }
+  ],
+
+  "hierarchy_types": {
+    "root_project": {
+      "description": "Standalone project with its own purpose, users, and roadmap",
+      "criteria_threshold": 3,
+      "criteria": [
+        "Defines a standalone purpose",
+        "Supports external customers or users",
+        "Has (or will have) a roadmap",
+        "Is monetized or operationally critical",
+        "Contains multiple components or dependencies"
+      ]
+    },
+    "sub_project": {
+      "description": "Component that exists to support a parent project",
+      "criteria_threshold": 3,
+      "criteria": [
+        "Exists to support a parent project",
+        "Cannot function without its parent",
+        "Has no independent customers",
+        "Relies on the parent roadmap",
+        "Is internal infrastructure, data pipeline, agent, or shared lib"
+      ]
+    },
+    "orphan": {
+      "description": "Repo with unclear purpose or no known parent - placed in R&D division",
+      "criteria": [
+        "Purpose is unclear",
+        "Is an experiment/spike",
+        "Has no known parent",
+        "In progress with no roadmap",
+        "Doesn't clearly fit any business unit"
+      ],
+      "default_placement": "rd",
+      "requires_clarity_task": true
+    }
+  },
+
+  "agent_actions": {
+    "classification": [
+      "assign_business_unit",
+      "classify_as_root_project",
+      "classify_as_sub_project",
+      "mark_as_orphan"
+    ],
+    "domain": [
+      "set_domain",
+      "reclassify_domain"
+    ],
+    "hierarchy": [
+      "set_parent",
+      "remove_parent",
+      "promote_orphan_to_project",
+      "demote_root_to_subproject",
+      "merge_projects"
+    ],
+    "maintenance": [
+      "archive_project",
+      "unarchive_project",
+      "rename_project",
+      "create_clarity_task"
+    ],
+    "automation": [
+      "sync_repo_metadata",
+      "sync_mcp_context",
+      "generate_structure_documentation",
+      "update_project_dashboard",
+      "link_child_repos"
+    ]
+  },
+
+  "classification_patterns": {
+    "vuplicity": ["vuplicity", "fcra", "background-check", "screening", "veri", "crime", "cra"],
+    "newreward": ["reward", "lead-gen", "campaign", "incentive", "points"],
+    "hdws": ["hdws", "water", "high-desert"],
+    "rd": ["eeg", "burst", "symbiosis", "holonomic", "consciousness", "neuroscience", "attractor", "tokeniz", "philosophy", "physics"],
+    "kahoa": ["kahoa", "caio", "intelligent-engineer", "training"],
+    "solutionstream": ["solutionstream", "staffing"],
+    "cryptojym": ["crypto", "jym", "personal"],
+    "utlyze": ["utlyze", "life-os", "wrath-shield", "managed-intelligence"]
+  }
+}

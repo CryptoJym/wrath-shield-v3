@@ -3,11 +3,11 @@
 /**
  * GitHub Repos Management Page
  *
- * Shows all GitHub repos for the configured user and allows
- * mapping them to internal projects.
+ * Shows all GitHub repos across multiple organizations and allows
+ * mapping them to internal projects with purpose/goal metadata.
  */
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 import useSWR from 'swr';
 import {
   Github,
@@ -22,7 +22,16 @@ import {
   Globe,
   Lock,
   Code,
+  Building2,
+  Target,
+  Sparkles,
+  Search,
+  Filter,
+  Tag,
+  GitBranch,
+  FileText,
 } from 'lucide-react';
+import { PMChat } from '@/components/ui/agent-chat-widget';
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
@@ -38,6 +47,10 @@ interface GitHubRepo {
   updated_at: string;
   pushed_at: string;
   mapping: RepoMapping | null;
+  owner?: {
+    login: string;
+    type: string;
+  };
 }
 
 interface RepoMapping {
@@ -46,6 +59,9 @@ interface RepoMapping {
   project_name: string | null;
   enabled: boolean;
   last_synced_at: number | null;
+  purpose?: string; // What is this repo for?
+  domain?: string; // R&D, Sales, Legal, etc.
+  priority?: 'high' | 'medium' | 'low';
 }
 
 interface Project {
@@ -53,6 +69,37 @@ interface Project {
   name: string;
   source?: string;
 }
+
+// Domains from project-taxonomy.json - canonical source of truth
+const REPO_DOMAINS = [
+  { value: 'product-core', label: 'Product Core', color: 'bg-blue-500' },
+  { value: 'infrastructure', label: 'Infrastructure', color: 'bg-slate-500' },
+  { value: 'internal-tools', label: 'Internal Tools', color: 'bg-purple-500' },
+  { value: 'client-delivery', label: 'Client Delivery', color: 'bg-emerald-500' },
+  { value: 'research-experiments', label: 'Research & Experiments', color: 'bg-amber-500' },
+  { value: 'growth-marketing', label: 'Growth & Marketing', color: 'bg-pink-500' },
+  { value: 'operations', label: 'Operations', color: 'bg-orange-500' },
+  { value: 'personal', label: 'Personal', color: 'bg-cyan-500' },
+  { value: 'archived', label: 'Archived', color: 'bg-gray-500' },
+];
+
+// Business units from project-taxonomy.json
+const BUSINESS_UNITS = [
+  { value: 'utlyze', label: 'Utlyze (Umbrella)', color: 'bg-indigo-500' },
+  { value: 'vuplicity', label: 'Vuplicity (FCRA/Screening)', color: 'bg-blue-600' },
+  { value: 'newreward', label: 'NewReward (Lead Gen)', color: 'bg-green-500' },
+  { value: 'hdws', label: 'HDWS (Water Systems)', color: 'bg-cyan-600' },
+  { value: 'rd', label: 'R&D Division', color: 'bg-amber-600' },
+  { value: 'cryptojym', label: 'CryptoJym (Legacy/Personal)', color: 'bg-pink-600' },
+  { value: 'kahoa', label: 'Kahoa (Partner)', color: 'bg-purple-600' },
+  { value: 'solutionstream', label: 'SolutionStream (Partner)', color: 'bg-rose-500' },
+];
+
+const REPO_PRIORITIES = [
+  { value: 'high', label: 'High Priority', color: 'text-rose-400' },
+  { value: 'medium', label: 'Medium', color: 'text-amber-400' },
+  { value: 'low', label: 'Low Priority', color: 'text-slate-400' },
+];
 
 function Toast({ message, type, onClose }: {
   message: string;
@@ -78,17 +125,85 @@ export default function GitHubReposPage() {
     refreshInterval: 60000,
   });
   const { data: projectsData } = useSWR('/api/pm/projects', fetcher);
+  const { data: orgsData } = useSWR('/api/pm/orgs', fetcher);
 
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' | 'info' } | null>(null);
   const [filter, setFilter] = useState<'all' | 'mapped' | 'unmapped'>('all');
   const [updatingRepo, setUpdatingRepo] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedOrg, setSelectedOrg] = useState<string>('all');
+  const [selectedDomain, setSelectedDomain] = useState<string>('all');
+  const [selectedLanguage, setSelectedLanguage] = useState<string>('all');
+
+  // Extract data (must be before useMemo hooks)
+  const repos: GitHubRepo[] = data?.repos || [];
+  const mappings: RepoMapping[] = data?.mappings || [];
+  const projects: Project[] = projectsData?.projects || [];
+  const orgs = orgsData?.orgs || [];
+  const username = data?.username || 'Unknown';
+  const unmappedCount = data?.unmapped_count || 0;
 
   const showToast = useCallback((message: string, type: 'success' | 'error' | 'info' = 'success') => {
     setToast({ message, type });
     setTimeout(() => setToast(null), 3000);
   }, []);
 
-  const handleMapRepo = async (repoFullName: string, projectId: string | null, projectName: string | null, enabled: boolean) => {
+  // Get unique orgs and languages from repos - MUST be before early returns
+  const uniqueOrgs = useMemo(() => {
+    const orgsSet = new Set(repos.map(r => r.owner?.login || r.full_name.split('/')[0]));
+    return Array.from(orgsSet).sort();
+  }, [repos]);
+
+  const uniqueLanguages = useMemo(() => {
+    const langSet = new Set(repos.map(r => r.language).filter(Boolean) as string[]);
+    return Array.from(langSet).sort();
+  }, [repos]);
+
+  // Filter repos with multiple criteria - MUST be before early returns
+  const filteredRepos = useMemo(() => {
+    return repos.filter(repo => {
+      // Status filter
+      if (filter === 'mapped' && repo.mapping === null) return false;
+      if (filter === 'unmapped' && repo.mapping !== null) return false;
+
+      // Search filter
+      if (searchQuery) {
+        const query = searchQuery.toLowerCase();
+        const matchesName = repo.name.toLowerCase().includes(query);
+        const matchesDesc = repo.description?.toLowerCase().includes(query);
+        const matchesPurpose = repo.mapping?.purpose?.toLowerCase().includes(query);
+        if (!matchesName && !matchesDesc && !matchesPurpose) return false;
+      }
+
+      // Org filter
+      if (selectedOrg !== 'all') {
+        const repoOrg = repo.owner?.login || repo.full_name.split('/')[0];
+        if (repoOrg !== selectedOrg) return false;
+      }
+
+      // Domain filter
+      if (selectedDomain !== 'all') {
+        if (repo.mapping?.domain !== selectedDomain) return false;
+      }
+
+      // Language filter
+      if (selectedLanguage !== 'all') {
+        if (repo.language !== selectedLanguage) return false;
+      }
+
+      return true;
+    });
+  }, [repos, filter, searchQuery, selectedOrg, selectedDomain, selectedLanguage]);
+
+  const handleMapRepo = async (
+    repoFullName: string,
+    projectId: string | null,
+    projectName: string | null,
+    enabled: boolean,
+    purpose?: string,
+    domain?: string,
+    priority?: string
+  ) => {
     setUpdatingRepo(repoFullName);
     try {
       const res = await fetch('/api/pm/github/repos', {
@@ -99,6 +214,9 @@ export default function GitHubReposPage() {
           project_id: projectId,
           project_name: projectName,
           enabled,
+          purpose,
+          domain,
+          priority,
         }),
       });
 
@@ -172,20 +290,6 @@ export default function GitHubReposPage() {
     );
   }
 
-  const repos: GitHubRepo[] = data?.repos || [];
-  const mappings: RepoMapping[] = data?.mappings || [];
-  const projects: Project[] = projectsData?.projects || [];
-  const username = data?.username || 'Unknown';
-  const unmappedCount = data?.unmapped_count || 0;
-
-  // Filter repos
-  const filteredRepos = repos.filter(repo => {
-    if (filter === 'all') return true;
-    if (filter === 'mapped') return repo.mapping !== null;
-    if (filter === 'unmapped') return repo.mapping === null;
-    return true;
-  });
-
   return (
     <div className="min-h-screen bg-slate-950 text-slate-50">
       <div className="max-w-7xl mx-auto px-6 py-10 space-y-8">
@@ -219,7 +323,7 @@ export default function GitHubReposPage() {
         </header>
 
         {/* Stats */}
-        <section className="grid md:grid-cols-3 gap-4">
+        <section className="grid md:grid-cols-4 gap-4">
           <StatCard
             icon={Github}
             label="Total Repos"
@@ -244,6 +348,92 @@ export default function GitHubReposPage() {
             bgColor="bg-amber-500/10"
             borderColor="border-amber-500/30"
           />
+          <StatCard
+            icon={Building2}
+            label="Organizations"
+            value={uniqueOrgs.length}
+            color="text-purple-400"
+            bgColor="bg-purple-500/10"
+            borderColor="border-purple-500/30"
+          />
+        </section>
+
+        {/* Search and Filters */}
+        <section className="space-y-4">
+          {/* Search Bar */}
+          <div className="relative">
+            <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" />
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search repos by name, description, or purpose..."
+              className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-800/50 border border-slate-700 text-sm text-slate-100 placeholder-slate-500 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
+            />
+          </div>
+
+          {/* Filter Row */}
+          <div className="flex flex-wrap gap-3">
+            {/* Org Filter */}
+            <div className="flex items-center gap-2">
+              <Building2 size={16} className="text-slate-500" />
+              <select
+                value={selectedOrg}
+                onChange={(e) => setSelectedOrg(e.target.value)}
+                className="px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 text-sm text-slate-100"
+              >
+                <option value="all">All Organizations ({uniqueOrgs.length})</option>
+                {uniqueOrgs.map(org => (
+                  <option key={org} value={org}>{org}</option>
+                ))}
+              </select>
+            </div>
+
+            {/* Domain Filter */}
+            <div className="flex items-center gap-2">
+              <Target size={16} className="text-slate-500" />
+              <select
+                value={selectedDomain}
+                onChange={(e) => setSelectedDomain(e.target.value)}
+                className="px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 text-sm text-slate-100"
+              >
+                <option value="all">All Domains</option>
+                {REPO_DOMAINS.map(d => (
+                  <option key={d.value} value={d.value}>{d.label}</option>
+                ))}
+              </select>
+            </div>
+
+            {/* Language Filter */}
+            <div className="flex items-center gap-2">
+              <Code size={16} className="text-slate-500" />
+              <select
+                value={selectedLanguage}
+                onChange={(e) => setSelectedLanguage(e.target.value)}
+                className="px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 text-sm text-slate-100"
+              >
+                <option value="all">All Languages</option>
+                {uniqueLanguages.map(lang => (
+                  <option key={lang} value={lang}>{lang}</option>
+                ))}
+              </select>
+            </div>
+
+            {/* Clear Filters */}
+            {(searchQuery || selectedOrg !== 'all' || selectedDomain !== 'all' || selectedLanguage !== 'all') && (
+              <button
+                onClick={() => {
+                  setSearchQuery('');
+                  setSelectedOrg('all');
+                  setSelectedDomain('all');
+                  setSelectedLanguage('all');
+                }}
+                className="px-3 py-2 rounded-lg bg-slate-700 hover:bg-slate-600 text-sm text-slate-300 transition"
+              >
+                Clear Filters
+              </button>
+            )}
+          </div>
         </section>
 
         {/* Filter Tabs */}
@@ -270,6 +460,10 @@ export default function GitHubReposPage() {
               </span>
             </button>
           ))}
+          <div className="flex-1" />
+          <span className="text-sm text-slate-500 self-center">
+            Showing {filteredRepos.length} of {repos.length} repos
+          </span>
         </div>
 
         {/* Repos List */}
@@ -297,6 +491,9 @@ export default function GitHubReposPage() {
           )}
         </section>
       </div>
+
+      {/* PM Chat Widget - with refresh callback */}
+      <PMChat defaultCollapsed={true} onRefresh={() => mutate()} />
 
       {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
     </div>
@@ -341,13 +538,18 @@ function RepoCard({
 }: {
   repo: GitHubRepo;
   projects: Project[];
-  onMap: (repoFullName: string, projectId: string | null, projectName: string | null, enabled: boolean) => void;
+  onMap: (repoFullName: string, projectId: string | null, projectName: string | null, enabled: boolean, purpose?: string, domain?: string, priority?: string) => void;
   isUpdating: boolean;
 }) {
   const [expanded, setExpanded] = useState(false);
   const [selectedProject, setSelectedProject] = useState<string>(repo.mapping?.project_id || '');
   const [customProjectName, setCustomProjectName] = useState(repo.mapping?.project_name || '');
   const [enabled, setEnabled] = useState(repo.mapping?.enabled ?? true);
+  const [purpose, setPurpose] = useState(repo.mapping?.purpose || '');
+  const [domain, setDomain] = useState(repo.mapping?.domain || '');
+  const [priority, setPriority] = useState(repo.mapping?.priority || 'medium');
+
+  const repoOrg = repo.owner?.login || repo.full_name.split('/')[0];
 
   const isMapped = repo.mapping !== null;
   const lastUpdated = new Date(repo.updated_at).toLocaleDateString();
@@ -372,7 +574,10 @@ function RepoCard({
       repo.full_name,
       selectedProject || null,
       project?.name || customProjectName || null,
-      enabled
+      enabled,
+      purpose || undefined,
+      domain || undefined,
+      priority || undefined
     );
   };
 
@@ -387,6 +592,11 @@ function RepoCard({
         <div className="flex items-start justify-between gap-4">
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 mb-2 flex-wrap">
+              {/* Org Badge */}
+              <span className="flex items-center gap-1 px-2 py-0.5 text-xs rounded bg-purple-900/50 text-purple-300">
+                <Building2 size={12} />
+                {repoOrg}
+              </span>
               {repo.private ? (
                 <Lock size={14} className="text-amber-400" />
               ) : (
@@ -399,6 +609,14 @@ function RepoCard({
                 <span className="flex items-center gap-1.5 text-xs text-slate-400">
                   <span className={`w-2 h-2 rounded-full ${languageColors[repo.language] || languageColors.default}`} />
                   {repo.language}
+                </span>
+              )}
+              {/* Domain Badge */}
+              {repo.mapping?.domain && (
+                <span className={`px-2 py-0.5 text-xs rounded ${
+                  REPO_DOMAINS.find(d => d.value === repo.mapping?.domain)?.color || 'bg-slate-500'
+                } text-white`}>
+                  {REPO_DOMAINS.find(d => d.value === repo.mapping?.domain)?.label || repo.mapping.domain}
                 </span>
               )}
               {isMapped ? (
@@ -464,35 +682,98 @@ function RepoCard({
           </div>
         )}
 
+        {/* Purpose/Goal Display */}
+        {repo.mapping?.purpose && (
+          <div className="flex items-start gap-2 text-sm p-2 rounded-lg bg-slate-800/30">
+            <Target size={14} className="text-sky-400 mt-0.5 flex-shrink-0" />
+            <div>
+              <span className="text-slate-500 text-xs">Purpose: </span>
+              <span className="text-slate-300">{repo.mapping.purpose}</span>
+            </div>
+          </div>
+        )}
+
         {/* Expanded Mapping Form */}
         {expanded && (
           <div className="pt-3 border-t border-slate-700/50 space-y-4">
+            {/* Purpose/Goal - Full Width */}
+            <div className="space-y-2">
+              <label className="text-sm text-slate-400 flex items-center gap-2">
+                <Target size={14} />
+                What is this repo for? (Purpose/Goal)
+              </label>
+              <textarea
+                value={purpose}
+                onChange={(e) => setPurpose(e.target.value)}
+                placeholder="e.g., Main SaaS product for lead generation, handles user auth and payment processing..."
+                rows={2}
+                className="w-full px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 text-sm text-slate-100 placeholder-slate-500 resize-none"
+              />
+            </div>
+
             <div className="grid md:grid-cols-2 gap-4">
-              {/* Project Selection */}
+              {/* Business Unit */}
               <div className="space-y-2">
-                <label className="text-sm text-slate-400">Link to Project</label>
+                <label className="text-sm text-slate-400 flex items-center gap-2">
+                  <Building2 size={14} />
+                  Business Unit
+                </label>
+                <select
+                  value={customProjectName}
+                  onChange={(e) => setCustomProjectName(e.target.value)}
+                  className="w-full px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 text-sm text-slate-100"
+                >
+                  <option value="">-- Select business unit --</option>
+                  {BUSINESS_UNITS.map(u => (
+                    <option key={u.value} value={u.value}>{u.label}</option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Domain/Category */}
+              <div className="space-y-2">
+                <label className="text-sm text-slate-400">Domain/Category</label>
+                <select
+                  value={domain}
+                  onChange={(e) => setDomain(e.target.value)}
+                  className="w-full px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 text-sm text-slate-100"
+                >
+                  <option value="">-- Select domain --</option>
+                  {REPO_DOMAINS.map(d => (
+                    <option key={d.value} value={d.value}>{d.label}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-4">
+              {/* Priority */}
+              <div className="space-y-2">
+                <label className="text-sm text-slate-400">Priority</label>
+                <select
+                  value={priority}
+                  onChange={(e) => setPriority(e.target.value as 'high' | 'medium' | 'low')}
+                  className="w-full px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 text-sm text-slate-100"
+                >
+                  {REPO_PRIORITIES.map(p => (
+                    <option key={p.value} value={p.value}>{p.label}</option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Link to Project (optional) */}
+              <div className="space-y-2">
+                <label className="text-sm text-slate-400">Link to GitHub Project (optional)</label>
                 <select
                   value={selectedProject}
                   onChange={(e) => setSelectedProject(e.target.value)}
                   className="w-full px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 text-sm text-slate-100"
                 >
-                  <option value="">-- Select a project --</option>
+                  <option value="">-- None --</option>
                   {projects.map(p => (
                     <option key={p.id} value={p.id}>{p.name}</option>
                   ))}
                 </select>
-              </div>
-
-              {/* Custom Project Name */}
-              <div className="space-y-2">
-                <label className="text-sm text-slate-400">Or create new project name</label>
-                <input
-                  type="text"
-                  value={customProjectName}
-                  onChange={(e) => setCustomProjectName(e.target.value)}
-                  placeholder="e.g., My Project"
-                  className="w-full px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 text-sm text-slate-100 placeholder-slate-500"
-                />
               </div>
             </div>
 
