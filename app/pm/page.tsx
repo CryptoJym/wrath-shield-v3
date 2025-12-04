@@ -1289,20 +1289,38 @@ function UnifiedTaskCard({
   const handleStatusUpdate = async (newStatus: 'in_progress' | 'done') => {
     setIsUpdating(true);
     try {
+      // For completion, pass title and description for LLM summary
+      const payload: Record<string, any> = {
+        id: task.id,
+        status: newStatus,
+      };
+
+      // Include task details for intelligent completion
+      if (newStatus === 'done') {
+        payload.title = task.title;
+        payload.description = task.description;
+      }
+
       const res = await fetch('/api/pm/tasks', {
         method: 'PATCH',
         headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ id: task.id, status: newStatus }),
+        body: JSON.stringify(payload),
       });
 
+      const data = await res.json();
+
       if (res.ok) {
-        setUpdateSuccess(newStatus === 'done' ? 'Marked as complete!' : 'Started!');
+        // Show completion summary if available
+        const successMsg = data.completion?.summary
+          ? `Completed: ${data.completion.summary.slice(0, 50)}...`
+          : (newStatus === 'done' ? 'Marked as complete!' : 'Started!');
+        setUpdateSuccess(successMsg);
         setTimeout(() => {
           onRefresh?.();
           setUpdateSuccess(null);
-        }, 800);
+        }, newStatus === 'done' ? 1500 : 800); // Longer delay for completion to read summary
       } else {
-        console.error('Failed to update task:', await res.text());
+        console.error('Failed to update task:', data.error || 'Unknown error');
       }
     } catch (error) {
       console.error('Failed to update task:', error);

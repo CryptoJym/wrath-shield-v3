@@ -82,6 +82,10 @@ export interface RepoProjectMapping {
   project_name: string | null;
   enabled: boolean;
   last_synced_at: number | null;
+  // Extended metadata for repo identification
+  purpose?: string | null; // What is this repo for?
+  domain?: string | null; // R&D, Sales, Legal, etc.
+  priority?: 'high' | 'medium' | 'low' | null;
 }
 
 class GitHubClient {
@@ -169,8 +173,21 @@ class GitHubClient {
   getRepoMappings(): RepoProjectMapping[] {
     try {
       const db = getDatabase().getRawDb();
+
+      // Ensure extended columns exist
+      try {
+        db.exec(`
+          ALTER TABLE github_repo_mappings ADD COLUMN purpose TEXT;
+          ALTER TABLE github_repo_mappings ADD COLUMN domain TEXT;
+          ALTER TABLE github_repo_mappings ADD COLUMN priority TEXT DEFAULT 'medium';
+        `);
+      } catch {
+        // Columns already exist
+      }
+
       const rows = db.prepare(`
-        SELECT repo_full_name, project_id, project_name, enabled, last_synced_at
+        SELECT repo_full_name, project_id, project_name, enabled, last_synced_at,
+               purpose, domain, priority
         FROM github_repo_mappings
         ORDER BY repo_full_name
       `).all() as RepoProjectMapping[];
@@ -187,31 +204,51 @@ class GitHubClient {
   setRepoMapping(mapping: RepoProjectMapping): void {
     const db = getDatabase().getRawDb();
 
-    // Ensure table exists
+    // Ensure table exists with all columns
     db.exec(`
       CREATE TABLE IF NOT EXISTS github_repo_mappings (
         repo_full_name TEXT PRIMARY KEY,
         project_id TEXT,
         project_name TEXT,
         enabled INTEGER DEFAULT 1,
-        last_synced_at INTEGER
+        last_synced_at INTEGER,
+        purpose TEXT,
+        domain TEXT,
+        priority TEXT DEFAULT 'medium'
       )
     `);
 
+    // Ensure extended columns exist (for existing tables)
+    try {
+      db.exec(`
+        ALTER TABLE github_repo_mappings ADD COLUMN purpose TEXT;
+        ALTER TABLE github_repo_mappings ADD COLUMN domain TEXT;
+        ALTER TABLE github_repo_mappings ADD COLUMN priority TEXT DEFAULT 'medium';
+      `);
+    } catch {
+      // Columns already exist
+    }
+
     db.prepare(`
-      INSERT INTO github_repo_mappings (repo_full_name, project_id, project_name, enabled, last_synced_at)
-      VALUES (@repo_full_name, @project_id, @project_name, @enabled, @last_synced_at)
+      INSERT INTO github_repo_mappings (repo_full_name, project_id, project_name, enabled, last_synced_at, purpose, domain, priority)
+      VALUES (@repo_full_name, @project_id, @project_name, @enabled, @last_synced_at, @purpose, @domain, @priority)
       ON CONFLICT(repo_full_name) DO UPDATE SET
         project_id = @project_id,
         project_name = @project_name,
         enabled = @enabled,
-        last_synced_at = @last_synced_at
+        last_synced_at = @last_synced_at,
+        purpose = @purpose,
+        domain = @domain,
+        priority = @priority
     `).run({
       repo_full_name: mapping.repo_full_name,
       project_id: mapping.project_id,
       project_name: mapping.project_name,
       enabled: mapping.enabled ? 1 : 0,
       last_synced_at: mapping.last_synced_at,
+      purpose: mapping.purpose || null,
+      domain: mapping.domain || null,
+      priority: mapping.priority || 'medium',
     });
   }
 
@@ -403,6 +440,23 @@ class GitHubClient {
   }
 
   /**
+   * Add a comment to an issue
+   */
+  async addIssueComment(
+    owner: string,
+    repo: string,
+    issueNumber: number,
+    body: string
+  ): Promise<{ id: number; html_url: string; body: string }> {
+    const endpoint = `/repos/${owner}/${repo}/issues/${issueNumber}/comments`;
+    const comment = await this.fetch<{ id: number; html_url: string; body: string }>(endpoint, {
+      method: 'POST',
+      body: JSON.stringify({ body }),
+    });
+    return comment;
+  }
+
+  /**
    * Close an issue
    */
   async closeIssue(owner: string, repo: string, issueNumber: number): Promise<GitHubIssue> {
@@ -515,6 +569,87 @@ class GitHubClient {
       updated_at: m.updated_at,
     }));
   }
+
+  /**
+   * Get commits from a repository
+   */
+  async getCommits(
+    owner: string,
+    repo: string,
+    options?: {
+      since?: string; // ISO date string
+      until?: string;
+      limit?: number;
+      sha?: string; // Branch or commit SHA
+    }
+  ): Promise<GitHubCommit[]> {
+    const params = new URLSearchParams({
+      per_page: String(options?.limit || 30),
+    });
+
+    if (options?.since) {
+      params.append('since', options.since);
+    }
+    if (options?.until) {
+      params.append('until', options.until);
+    }
+    if (options?.sha) {
+      params.append('sha', options.sha);
+    }
+
+    const endpoint = `/repos/${owner}/${repo}/commits?${params}`;
+    const commits = await this.fetch<any[]>(endpoint);
+
+    return commits.map((c) => ({
+      sha: c.sha,
+      commit: {
+        message: c.commit.message,
+        author: c.commit.author ? {
+          name: c.commit.author.name,
+          email: c.commit.author.email,
+          date: c.commit.author.date,
+        } : null,
+        committer: c.commit.committer ? {
+          name: c.commit.committer.name,
+          email: c.commit.committer.email,
+          date: c.commit.committer.date,
+        } : null,
+      },
+      author: c.author ? {
+        login: c.author.login,
+        avatar_url: c.author.avatar_url,
+      } : null,
+      html_url: c.html_url,
+      stats: c.stats,
+    }));
+  }
+}
+
+export interface GitHubCommit {
+  sha: string;
+  commit: {
+    message: string;
+    author: {
+      name: string;
+      email: string;
+      date: string;
+    } | null;
+    committer: {
+      name: string;
+      email: string;
+      date: string;
+    } | null;
+  };
+  author: {
+    login: string;
+    avatar_url: string;
+  } | null;
+  html_url: string;
+  stats?: {
+    total: number;
+    additions: number;
+    deletions: number;
+  };
 }
 
 // Singleton instance
