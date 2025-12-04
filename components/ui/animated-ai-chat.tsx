@@ -395,7 +395,7 @@ export function AnimatedAIChat() {
                             className="inline-block"
                         >
                             <h1 className="text-3xl font-medium tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white/90 to-white/40 pb-1">
-                                How can I help today?
+                                Orchestrator
                             </h1>
                             <motion.div 
                                 className="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"
@@ -404,13 +404,13 @@ export function AnimatedAIChat() {
                                 transition={{ delay: 0.5, duration: 0.8 }}
                             />
                         </motion.div>
-                        <motion.p 
-                            className="text-sm text-white/40"
+                        <motion.p
+                            className="text-sm text-white/50 max-w-md mx-auto"
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ delay: 0.3 }}
                         >
-                            Type a command or ask a question
+                            Hello! I'm Conductor, the orchestrator for James Brady's Life OS. I can help coordinate activities and delegate tasks across your various domains. How can I assist you today?
                         </motion.p>
                     </div>
 
@@ -462,13 +462,13 @@ export function AnimatedAIChat() {
                         <div className="p-4">
                             <div ref={listRef} className="p-0 max-h-[480px] overflow-auto space-y-3">
                                 {messages.length === 0 && (
-                                    <div className="text-white/40 text-sm">No messages yet. Say hello!</div>
+                                    <div className="text-white/40 text-sm">Ready to coordinate. Ask me anything about your Life OS domains.</div>
                                 )}
                                 {messages.map((m, idx) => (
                                     <motion.div key={idx} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.15 }} className={cn("w-full flex", m.role === 'user' ? 'justify-end' : 'justify-start')}>
                                         <div className={cn('rounded-2xl px-3 py-2 text-sm max-w-[85%] sm:max-w-[600px] lg:max-w-[720px] break-words relative shadow-sm border', m.role === 'user' ? 'bg-white text-[#0A0A0B] border-black/10' : 'bg-[#16161a] text-white/90 border-violet-500/20')} style={{ lineHeight: 1.55, overflowWrap: 'anywhere' }}>
                                             <div className="flex items-center gap-2 mb-1">
-                                                <span className={cn('text-[10px] px-1.5 py-0.5 rounded-md uppercase tracking-wide font-semibold', m.role === 'user' ? 'bg-black/10 text-black/70' : 'bg-violet-500/15 text-violet-300')}>{m.role === 'user' ? 'You' : 'Grok'}</span>
+                                                <span className={cn('text-[10px] px-1.5 py-0.5 rounded-md uppercase tracking-wide font-semibold', m.role === 'user' ? 'bg-black/10 text-black/70' : 'bg-violet-500/15 text-violet-300')}>{m.role === 'user' ? 'You' : 'Orchestrator'}</span>
                                                 {m.role === 'assistant' && isStreaming && idx === messages.length - 1 && (
                                                     <span className="text-[10px] text-white/70 flex items-center gap-1">Thinking<TypingDots /></span>
                                                 )}
@@ -508,7 +508,7 @@ export function AnimatedAIChat() {
                                 onKeyDown={handleKeyDown}
                                 onFocus={() => setInputFocused(true)}
                                 onBlur={() => setInputFocused(false)}
-                                placeholder="Ask Grok a question..."
+                                placeholder="Ask the Orchestrator..."
                                 containerClassName="w-full"
                                 className={cn(
                                     "w-full px-4 py-3",
@@ -591,7 +591,7 @@ export function AnimatedAIChat() {
                         <motion.div className="pointer-events-none fixed left-[50vw] bottom-6 -translate-x-1/2 backdrop-blur-2xl bg-white/[0.06] rounded-full px-3 py-1.5 shadow-lg border border-white/[0.08]" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 20 }}>
                             <div className="flex items-center gap-2">
                                 <div className="w-6 h-6 rounded-full bg-white/[0.1] flex items-center justify-center text-center">
-                                    <span className="text-[11px] font-medium text-white/90">G</span>
+                                    <span className="text-[11px] font-medium text-white/90">O</span>
                                 </div>
                                 <div className="flex items-center gap-2 text-xs text-white/80">
                                     <span>Thinking</span>

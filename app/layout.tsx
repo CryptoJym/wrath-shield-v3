@@ -30,7 +30,7 @@ export default function RootLayout({
         <nav style={{ display: 'flex', gap: '1rem', alignItems: 'center', justifyContent: 'space-between' }}>
           <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
             <a href="/" style={{ fontWeight: 600 }}>Wrath Shield v3</a>
-            <a href="/chat" style={{ color: 'var(--color-text-secondary)' }}>Agentic Grok Chat</a>
+            <a href="/chat" style={{ color: 'var(--color-text-secondary)' }}>Orchestrator</a>
             <a href="/agents/roster" style={{ color: 'var(--color-text-secondary)' }}>Team Roster</a>
             <a href="/inbox" style={{ color: 'var(--color-text-secondary)' }}>Inbox</a>
             <a href="/pm" style={{ color: 'var(--color-text-secondary)' }}>PM</a>

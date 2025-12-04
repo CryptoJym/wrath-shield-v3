@@ -6,6 +6,7 @@
  * - Fetching projects/workspaces
  * - Creating/updating tasks
  * - Syncing task state
+ * - Auto-detection of default workspace
  */
 
 import { safeConfig } from '@/lib/safe-config';
@@ -53,6 +54,8 @@ export interface MotionTaskSummary {
 class MotionClient {
   private apiKey: string | null;
   private baseUrl = 'https://api.usemotion.com/v1';
+  private cachedWorkspaces: MotionWorkspace[] | null = null;
+  private defaultWorkspaceId: string | null = null;
 
   constructor() {
     this.apiKey = safeConfig('MOTION_API_KEY', '');
@@ -60,6 +63,49 @@ class MotionClient {
 
   isConfigured(): boolean {
     return !!this.apiKey;
+  }
+
+  /**
+   * Get the default workspace ID (auto-detected or from env)
+   */
+  async getDefaultWorkspaceId(): Promise<string | null> {
+    // Return cached if available
+    if (this.defaultWorkspaceId) {
+      return this.defaultWorkspaceId;
+    }
+
+    // Check environment variable first
+    const envWorkspaceId = safeConfig('MOTION_DEFAULT_WORKSPACE_ID', '');
+    if (envWorkspaceId) {
+      this.defaultWorkspaceId = envWorkspaceId;
+      return this.defaultWorkspaceId;
+    }
+
+    // Auto-detect from workspaces
+    try {
+      const workspaces = await this.getWorkspaces();
+      if (workspaces.length === 1) {
+        // Single workspace - use it as default
+        this.defaultWorkspaceId = workspaces[0].id;
+        console.log(`[Motion] Auto-detected default workspace: ${workspaces[0].name} (${this.defaultWorkspaceId})`);
+      } else if (workspaces.length > 1) {
+        // Multiple workspaces - use the first one but log a warning
+        this.defaultWorkspaceId = workspaces[0].id;
+        console.warn(`[Motion] Multiple workspaces found (${workspaces.length}). Using first: ${workspaces[0].name}. Set MOTION_DEFAULT_WORKSPACE_ID to override.`);
+      }
+      return this.defaultWorkspaceId;
+    } catch (error) {
+      console.error('[Motion] Failed to auto-detect workspace:', error);
+      return null;
+    }
+  }
+
+  /**
+   * Reset cached workspace data (useful after configuration changes)
+   */
+  resetCache(): void {
+    this.cachedWorkspaces = null;
+    this.defaultWorkspaceId = null;
   }
 
   private async fetch<T>(
@@ -89,11 +135,15 @@ class MotionClient {
   }
 
   /**
-   * Fetch all workspaces
+   * Fetch all workspaces (with caching)
    */
   async getWorkspaces(): Promise<MotionWorkspace[]> {
+    if (this.cachedWorkspaces) {
+      return this.cachedWorkspaces;
+    }
     const response = await this.fetch<{ workspaces: MotionWorkspace[] }>('/workspaces');
-    return response.workspaces || [];
+    this.cachedWorkspaces = response.workspaces || [];
+    return this.cachedWorkspaces;
   }
 
   /**
@@ -141,6 +191,37 @@ class MotionClient {
     return this.fetch<MotionTask>('/tasks', {
       method: 'POST',
       body: JSON.stringify(params),
+    });
+  }
+
+  /**
+   * Create a task with auto-detected workspace
+   * Uses default workspace if workspaceId is not provided
+   */
+  async createTaskAuto(params: {
+    name: string;
+    description?: string;
+    priority?: MotionTask['priority'];
+    dueDate?: string;
+    projectId?: string;
+    assigneeId?: string;
+    labels?: string[];
+    workspaceId?: string;
+  }): Promise<MotionTask | null> {
+    let workspaceId = params.workspaceId;
+
+    if (!workspaceId) {
+      workspaceId = await this.getDefaultWorkspaceId() || undefined;
+    }
+
+    if (!workspaceId) {
+      console.error('[Motion] Cannot create task: No workspace ID available');
+      return null;
+    }
+
+    return this.createTask({
+      ...params,
+      workspaceId,
     });
   }
 

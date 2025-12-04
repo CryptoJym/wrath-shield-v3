@@ -257,7 +257,7 @@ async function getFinanceStatus(): Promise<Agent> {
 }
 
 async function getPMStatus(): Promise<Agent> {
-    // Project Maestro - check 'events' or 'tasks'
+    // Project Maestro - GitHub-native PM system
     return {
         id: "pm",
         name: "Project Maestro",
@@ -267,8 +267,14 @@ async function getPMStatus(): Promise<Agent> {
         mp: 90,
         last_sync: new Date().toISOString(),
         open_items: 2,
-        // Verified: Motion↔GitHub sync exists, project inventory partial, cron scheduler partial
-        capabilities: ["Motion↔GitHub sync", "Project tracking", "Task orchestration"],
+        // GitHub-native PM: Multi-org support, commit intelligence, temporal grounding
+        capabilities: [
+            "GitHub issue tracking",
+            "Multi-org repo management",
+            "Commit intelligence (Tongue & Quill bullets)",
+            "Temporal grounding",
+            "Repo purpose/domain mapping"
+        ],
         link: "/pm",
         avatar: "/assets/agents/pm.png"
     };

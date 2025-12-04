@@ -58,7 +58,7 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { repo_full_name, project_id, project_name, enabled } = body;
+    const { repo_full_name, project_id, project_name, enabled, purpose, domain, priority } = body;
 
     if (!repo_full_name) {
       return NextResponse.json(
@@ -73,6 +73,10 @@ export async function POST(req: NextRequest) {
       project_name: project_name || null,
       enabled: enabled !== false,
       last_synced_at: null,
+      // Extended metadata
+      purpose: purpose || null,
+      domain: domain || null,
+      priority: priority || 'medium',
     });
 
     return NextResponse.json({

@@ -4,12 +4,13 @@ import {
   createNotification,
   listPendingActions,
 } from '@/lib/legal/store';
+import { sendEmail } from '@/lib/emailSender';
 
 // POST - Execute an approved action
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { id } = body;
+    const { id, dryRun = false } = body;
 
     if (!id) {
       return NextResponse.json({ error: 'Action ID required' }, { status: 400 });
@@ -28,15 +29,61 @@ export async function POST(req: NextRequest) {
     }
 
     // Execute based on action type
-    let result: { success: boolean; message: string; error?: string } = { success: false, message: '' };
+    let result: { success: boolean; message: string; error?: string; emailId?: string } = { success: false, message: '' };
 
     switch (action.action_type) {
       case 'email_draft':
-        // For now, just mark as executed - in future, could integrate with email system
-        result = {
-          success: true,
-          message: `Email draft "${action.title}" has been prepared. You can copy the content and send manually.`,
-        };
+        // Actually send the email
+        const payload = action.payload || {};
+        const to = payload.to || payload.recipient;
+        const subject = payload.subject || action.title;
+        const text = payload.body || payload.content || action.description || '';
+
+        if (!to) {
+          result = {
+            success: false,
+            message: 'Email execution failed',
+            error: 'No recipient specified in email draft payload',
+          };
+          break;
+        }
+
+        if (dryRun) {
+          result = {
+            success: true,
+            message: `[DRY RUN] Would send email to ${to}: "${subject}"`,
+          };
+          break;
+        }
+
+        try {
+          const emailResult = await sendEmail({
+            to,
+            subject,
+            text,
+            preferredProfile: payload.profile || 'universal',
+          });
+
+          if (emailResult.ok) {
+            result = {
+              success: true,
+              message: `Email sent successfully to ${to} via ${emailResult.profile}`,
+              emailId: emailResult.id,
+            };
+          } else {
+            result = {
+              success: false,
+              message: 'Email send failed',
+              error: 'Email transport returned failure',
+            };
+          }
+        } catch (emailError: any) {
+          result = {
+            success: false,
+            message: 'Email execution failed',
+            error: emailError.message || 'Unknown email error',
+          };
+        }
         break;
 
       case 'file_motion':
@@ -67,7 +114,7 @@ export async function POST(req: NextRequest) {
         };
     }
 
-    if (result.success) {
+    if (result.success && !dryRun) {
       // Update action status to executed
       updatePendingAction(id, { status: 'executed' });
 
@@ -79,7 +126,7 @@ export async function POST(req: NextRequest) {
         severity: 'info',
         related_id: id,
       });
-    } else {
+    } else if (!result.success) {
       // Update action with error
       updatePendingAction(id, { error_message: result.error });
 
@@ -97,6 +144,8 @@ export async function POST(req: NextRequest) {
       success: result.success,
       message: result.message,
       error: result.error,
+      emailId: result.emailId,
+      dryRun,
     });
   } catch (error) {
     console.error('Failed to execute action:', error);

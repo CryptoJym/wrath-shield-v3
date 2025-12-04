@@ -93,7 +93,7 @@ const graphIdToLifeOsId: Record<string, string> = {
   'solutionstream': 'agent.solutionstream',
   'kahoa': 'agent.kahoa',
   'family': 'agent.family',
-  'hiro': 'agent.hiro',
+  'hyro': 'agent.hyro',
 };
 
 export const AgentDetailPanel: React.FC<AgentDetailPanelProps> = ({ agent, onClose }) => {
