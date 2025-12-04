@@ -199,6 +199,25 @@ module.exports = {
       log_date_format: 'YYYY-MM-DD HH:mm:ss Z',
       merge_logs: true,
     },
+    {
+      name: 'proactive-tick',
+      script: 'bash',
+      args: "-lc 'curl -s \"http://localhost:4242/api/proactive/tick?secret=${PROACTIVE_SECRET}\" || true'",
+      cwd: __dirname,
+      instances: 1,
+      exec_mode: 'fork',
+      autorestart: false,
+      watch: false,
+      cron_restart: '* * * * *', // every minute
+      env: {
+        NODE_ENV: 'production',
+        PROACTIVE_SECRET: process.env.PROACTIVE_SECRET || '',
+      },
+      error_file: './logs/proactive-tick-error.log',
+      out_file: './logs/proactive-tick-out.log',
+      log_date_format: 'YYYY-MM-DD HH:mm:ss Z',
+      merge_logs: true,
+    },
   ],
 
   // Deployment configuration (optional)
