@@ -55,7 +55,7 @@ function loadDestinyMessages(): string {
 
 // Search Zep memory for relevant context
 async function searchZepContext(query: string): Promise<string> {
-  const ZEP_API_KEY = process.env.ZEP_API_KEY;
+  const ZEP_API_KEY = process.env.ZEP_API_KEY || process.env.ZEP_LEGAL_API_KEY;
   if (!ZEP_API_KEY) return '';
 
   try {

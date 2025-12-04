@@ -23,9 +23,9 @@
         "description": "New Reward AI-first lead-gen & marketing."
       },
       {
-        "id": "ws_hiro",
+        "id": "ws_hyro",
         "name": "hyro_education_development",
-        "description": "Hiro's education & development tracking."
+        "description": "Hyro's education & development tracking."
       },
       {
         "id": "ws_lisa",
@@ -220,10 +220,10 @@
       "sync_labels": false
     },
     {
-      "id": "mapping_hiro",
-      "domains": ["hiro_education"],
-      "motion_workspace_id": "ws_hiro",
-      "motion_projects": ["Hiro Development", "Learning Milestones"],
+      "id": "mapping_hyro",
+      "domains": ["hyro_education"],
+      "motion_workspace_id": "ws_hyro",
+      "motion_projects": ["Hyro Development", "Learning Milestones"],
       "github_repos": [],
       "direction": "motion_only",
       "auto_create_issue": false,

@@ -14,7 +14,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import useSWR from 'swr';
 import {
-  ClipboardList,
   CheckCircle,
   Clock,
   AlertCircle,
@@ -26,7 +25,6 @@ import {
   X,
   PlayCircle,
   XCircle,
-  CheckCircle2,
   ExternalLink,
   Github,
   GitBranch,
@@ -37,7 +35,10 @@ import {
   GitCommit,
   TrendingUp,
   AlertTriangle,
-  Zap
+  Zap,
+  Search,
+  SortAsc,
+  Archive
 } from 'lucide-react';
 import { PMChat } from '@/components/ui/agent-chat-widget';
 
@@ -313,6 +314,8 @@ export default function PMPage() {
 
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' | 'info' } | null>(null);
   const [filter, setFilter] = useState<'all' | 'pending' | 'processing' | 'done'>('all');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [sortBy, setSortBy] = useState<'updated' | 'created' | 'priority' | 'due'>('updated');
   const [actioningId, setActioningId] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<'tasks' | 'repos' | 'progress'>('tasks');
   const [autoOrganizing, setAutoOrganizing] = useState(false);
@@ -451,18 +454,70 @@ export default function PMPage() {
 
   const projectsCount = dashboard?.projects.total || 0;
 
-  // Filter unified tasks
-  const filteredTasks = allTasks.filter(task => {
-    if (filter === 'all') return true;
-    if (filter === 'pending') return task.status === 'pending';
-    if (filter === 'processing') return task.status === 'in_progress';
-    if (filter === 'done') return task.status === 'done';
-    return false;
-  });
+  // Filter unified tasks - "All" shows only ACTIVE tasks, not done
+  const activeTasks = allTasks.filter(task => task.status !== 'done' && task.status !== 'failed');
+  const archivedTasks = allTasks.filter(task => task.status === 'done');
+
+  // Priority order for sorting
+  const priorityOrder: Record<string, number> = { urgent: 0, high: 1, medium: 2, low: 3, none: 4 };
+
+  // Helper to check if task is overdue or due soon
+  const getDueStatus = (task: UnifiedTask): 'overdue' | 'due_soon' | 'normal' => {
+    if (!task.due_date) return 'normal';
+    const due = new Date(task.due_date);
+    const now = new Date();
+    const daysUntil = Math.ceil((due.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
+    if (daysUntil < 0) return 'overdue';
+    if (daysUntil <= 3) return 'due_soon';
+    return 'normal';
+  };
+
+  // Filter by status, then search, then sort
+  const filteredTasks = allTasks
+    .filter(task => {
+      // Status filter
+      if (filter === 'all' && (task.status === 'done' || task.status === 'failed')) return false;
+      if (filter === 'pending' && task.status !== 'pending' && task.status !== 'backlog') return false;
+      if (filter === 'processing' && task.status !== 'in_progress') return false;
+      if (filter === 'done' && task.status !== 'done') return false;
+      return true;
+    })
+    .filter(task => {
+      // Search filter
+      if (!searchQuery.trim()) return true;
+      const query = searchQuery.toLowerCase();
+      return (
+        task.title.toLowerCase().includes(query) ||
+        task.description?.toLowerCase().includes(query) ||
+        task.labels.some(l => l.toLowerCase().includes(query)) ||
+        task.project_name?.toLowerCase().includes(query) ||
+        task.assignee?.toLowerCase().includes(query)
+      );
+    })
+    .sort((a, b) => {
+      // Sort logic
+      switch (sortBy) {
+        case 'priority':
+          return (priorityOrder[a.priority] ?? 4) - (priorityOrder[b.priority] ?? 4);
+        case 'due':
+          if (!a.due_date && !b.due_date) return 0;
+          if (!a.due_date) return 1;
+          if (!b.due_date) return -1;
+          return new Date(a.due_date).getTime() - new Date(b.due_date).getTime();
+        case 'created':
+          return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+        case 'updated':
+        default:
+          return new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime();
+      }
+    });
+
+  // Count tasks by urgency for quick stats
+  const urgentCount = activeTasks.filter(t => getDueStatus(t) === 'overdue' || getDueStatus(t) === 'due_soon').length;
 
   const config = pmStatus ? STATUS_CONFIG[pmStatus.status] : STATUS_CONFIG.green;
   const StatusIcon = config.icon;
-  const showDebug = process.env.NODE_ENV === 'development';
+  const showDebug = false; // Hide debug panel in production
 
   // Show loading state
   if (!dashboardData && !dashboardError) {
@@ -601,85 +656,142 @@ export default function PMPage() {
         {/* Tasks Tab Content */}
         {activeTab === 'tasks' && (
           <>
-        {/* Stats Overview */}
-        <section className="grid md:grid-cols-4 gap-4">
-          <StatCard
-            icon={FolderKanban}
-            label="Total Projects"
-            value={projectsCount}
-            color="text-sky-400"
-            bgColor="bg-sky-500/10"
-            borderColor="border-sky-500/30"
-          />
-          <StatCard
-            icon={Clock}
-            label="Pending"
-            value={tasksByStatus.pending}
-            color="text-amber-400"
-            bgColor="bg-amber-500/10"
-            borderColor="border-amber-500/30"
-          />
-          <StatCard
-            icon={PlayCircle}
-            label="In Progress"
-            value={tasksByStatus.processing}
-            color="text-blue-400"
-            bgColor="bg-blue-500/10"
-            borderColor="border-blue-500/30"
-          />
-          <StatCard
-            icon={CheckCircle2}
-            label="Completed"
-            value={tasksByStatus.done}
-            color="text-emerald-400"
-            bgColor="bg-emerald-500/10"
-            borderColor="border-emerald-500/30"
-          />
+        {/* Search and Filter Bar */}
+        <section className="space-y-4">
+          {/* Search and Sort Row */}
+          <div className="flex flex-col sm:flex-row gap-3">
+            {/* Search Input */}
+            <div className="relative flex-1">
+              <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" />
+              <input
+                type="text"
+                placeholder="Search tasks by title, description, labels..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-10 pr-4 py-2.5 bg-slate-800/50 border border-slate-700 rounded-lg text-slate-200 placeholder-slate-500 focus:outline-none focus:border-slate-500 focus:ring-1 focus:ring-slate-500 transition"
+              />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery('')}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300"
+                >
+                  <X size={16} />
+                </button>
+              )}
+            </div>
+
+            {/* Sort Dropdown */}
+            <div className="flex items-center gap-2">
+              <SortAsc size={16} className="text-slate-500" />
+              <select
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value as any)}
+                className="bg-slate-800 border border-slate-700 rounded-lg px-3 py-2.5 text-sm text-slate-300 focus:outline-none focus:border-slate-500"
+              >
+                <option value="updated">Recently Updated</option>
+                <option value="created">Recently Created</option>
+                <option value="priority">Priority</option>
+                <option value="due">Due Date</option>
+              </select>
+            </div>
+
+            {/* Refresh Button */}
+            <button
+              onClick={() => mutateDashboard()}
+              className="px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-slate-300 hover:bg-slate-700 hover:text-slate-100 transition flex items-center gap-2"
+            >
+              <RefreshCw size={16} />
+              <span className="hidden sm:inline">Refresh</span>
+            </button>
+          </div>
+
+          {/* Quick Stats Strip */}
+          <div className="flex items-center gap-6 px-4 py-3 bg-slate-800/30 rounded-lg border border-slate-800">
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-blue-400" />
+              <span className="text-sm text-slate-400">
+                <span className="font-semibold text-slate-200">{tasksByStatus.processing}</span> In Progress
+              </span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-amber-400" />
+              <span className="text-sm text-slate-400">
+                <span className="font-semibold text-slate-200">{tasksByStatus.pending}</span> Pending
+              </span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-emerald-400" />
+              <span className="text-sm text-slate-400">
+                <span className="font-semibold text-slate-200">{tasksByStatus.done}</span> Done
+              </span>
+            </div>
+            {urgentCount > 0 && (
+              <div className="flex items-center gap-2 ml-auto">
+                <AlertTriangle size={14} className="text-rose-400" />
+                <span className="text-sm text-rose-400 font-medium">
+                  {urgentCount} due soon
+                </span>
+              </div>
+            )}
+          </div>
         </section>
 
         {/* Filter Tabs */}
         <div className="flex gap-2 border-b border-slate-800 pb-3">
           {[
-            { key: 'all', label: 'All Items', count: allTasks.length },
-            { key: 'pending', label: 'Pending', count: tasksByStatus.pending },
-            { key: 'processing', label: 'In Progress', count: tasksByStatus.processing },
-            { key: 'done', label: 'Completed', count: tasksByStatus.done },
+            { key: 'all', label: 'Active', count: activeTasks.length, color: 'bg-blue-500' },
+            { key: 'pending', label: 'Pending', count: tasksByStatus.pending + tasksByStatus.backlog, color: 'bg-amber-500' },
+            { key: 'processing', label: 'In Progress', count: tasksByStatus.processing, color: 'bg-sky-500' },
+            { key: 'done', label: 'Archived', count: archivedTasks.length, color: 'bg-slate-500' },
           ].map(tab => (
             <button
               key={tab.key}
               onClick={() => setFilter(tab.key as any)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition ${
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2 ${
                 filter === tab.key
                   ? 'bg-slate-700 text-slate-100 border border-slate-600'
                   : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'
               }`}
             >
-              {tab.label} {tab.count > 0 && (
-                <span className={`ml-1.5 px-1.5 py-0.5 text-xs rounded ${
-                  filter === tab.key ? 'bg-slate-600' : 'bg-slate-800'
-                }`}>
-                  {tab.count}
-                </span>
-              )}
+              {tab.key === 'done' && <Archive size={14} />}
+              {tab.label}
+              <span className={`px-1.5 py-0.5 text-xs rounded ${
+                filter === tab.key ? tab.color + ' text-white' : 'bg-slate-800 text-slate-400'
+              }`}>
+                {tab.count}
+              </span>
             </button>
           ))}
         </div>
 
         {/* Projects/Tasks List */}
         <section className="space-y-4">
+          {filter === 'done' && (
+            <div className="rounded-lg bg-slate-800/50 border border-slate-700 px-4 py-3 mb-4">
+              <div className="flex items-center gap-2 text-slate-300">
+                <CheckCircle size={18} className="text-emerald-400" />
+                <span className="font-medium">Archived Tasks</span>
+                <span className="text-slate-500 text-sm">- Completed items from GitHub and local sources</span>
+              </div>
+            </div>
+          )}
           {filteredTasks.length === 0 ? (
             <div className="rounded-xl border border-slate-800 bg-slate-900/50 p-12 text-center">
               <ListTodo size={48} className="mx-auto text-slate-600 mb-4" />
-              <p className="text-slate-400 text-lg">No items to display</p>
+              <p className="text-slate-400 text-lg">
+                {filter === 'done' ? 'No archived tasks yet' : 'No items to display'}
+              </p>
               <p className="text-slate-500 text-sm mt-2">
                 {filter === 'all'
                   ? dashboard?.integrations.github.configured
-                    ? 'No tasks found in GitHub. Create issues in your enabled repositories.'
+                    ? 'No active tasks found. Create issues in your enabled repositories.'
                     : 'No tasks yet. Configure GitHub integration in .env.local'
-                  : `No items with status "${filter}"`
+                  : filter === 'done'
+                    ? 'Completed tasks will appear here with their project relations.'
+                    : `No items with status "${filter}"`
                 }
               </p>
-              {!dashboard?.integrations.github.configured && (
+              {!dashboard?.integrations.github.configured && filter !== 'done' && (
                 <div className="mt-4 text-xs text-slate-600 space-y-1">
                   <p>Add to .env.local:</p>
                   <p>GITHUB_ACCESS_TOKEN, GITHUB_REPO_OWNER, GITHUB_REPO_NAME</p>
@@ -695,6 +807,7 @@ export default function PMPage() {
                   onAction={handleAction}
                   isActioning={actioningId === task.id}
                   onRefresh={mutateDashboard}
+                  showProjectRelation={filter === 'done'}
                 />
               ))}
             </div>
@@ -1188,46 +1301,18 @@ export default function PMPage() {
   );
 }
 
-function StatCard({
-  icon: Icon,
-  label,
-  value,
-  color,
-  bgColor,
-  borderColor
-}: {
-  icon: any;
-  label: string;
-  value: number;
-  color: string;
-  bgColor: string;
-  borderColor: string;
-}) {
-  return (
-    <div className={`rounded-xl border ${borderColor} ${bgColor} p-4`}>
-      <div className="flex items-center gap-3">
-        <div className={`p-2 rounded-lg bg-slate-800/50 ${color}`}>
-          <Icon size={24} />
-        </div>
-        <div>
-          <div className="text-2xl font-bold text-slate-100">{value}</div>
-          <div className="text-sm text-slate-400">{label}</div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 function UnifiedTaskCard({
   task,
   onAction,
   isActioning,
   onRefresh,
+  showProjectRelation,
 }: {
   task: UnifiedTask;
   onAction: (id: string, action: 'accept' | 'reject' | 'complete', resolution?: string) => void;
   isActioning: boolean;
   onRefresh?: () => void;
+  showProjectRelation?: boolean;
 }) {
   const [expanded, setExpanded] = useState(false);
   const [resolution, setResolution] = useState('');
@@ -1301,6 +1386,8 @@ function UnifiedTaskCard({
         payload.description = task.description;
       }
 
+      console.log('[PM Task] Updating task:', payload);
+
       const res = await fetch('/api/pm/tasks', {
         method: 'PATCH',
         headers: { 'content-type': 'application/json' },
@@ -1308,22 +1395,31 @@ function UnifiedTaskCard({
       });
 
       const data = await res.json();
+      console.log('[PM Task] Update response:', { ok: res.ok, data });
 
-      if (res.ok) {
+      if (res.ok && data.ok) {
         // Show completion summary if available
         const successMsg = data.completion?.summary
           ? `Completed: ${data.completion.summary.slice(0, 50)}...`
           : (newStatus === 'done' ? 'Marked as complete!' : 'Started!');
         setUpdateSuccess(successMsg);
-        setTimeout(() => {
-          onRefresh?.();
+
+        // Wait a bit then refresh the dashboard data
+        setTimeout(async () => {
+          console.log('[PM Task] Refreshing dashboard data...');
+          await onRefresh?.();
+          console.log('[PM Task] Dashboard refresh complete');
           setUpdateSuccess(null);
-        }, newStatus === 'done' ? 1500 : 800); // Longer delay for completion to read summary
+        }, newStatus === 'done' ? 1500 : 800);
       } else {
-        console.error('Failed to update task:', data.error || 'Unknown error');
+        console.error('[PM Task] Update failed:', data.error || 'Unknown error');
+        setUpdateSuccess(`Error: ${data.error || 'Update failed'}`);
+        setTimeout(() => setUpdateSuccess(null), 3000);
       }
     } catch (error) {
-      console.error('Failed to update task:', error);
+      console.error('[PM Task] Exception during update:', error);
+      setUpdateSuccess('Error: Network or server error');
+      setTimeout(() => setUpdateSuccess(null), 3000);
     } finally {
       setIsUpdating(false);
     }
@@ -1357,9 +1453,33 @@ function UnifiedTaskCard({
             </h3>
             <div className="flex gap-3 mt-2 text-xs text-slate-400 flex-wrap">
               {task.assignee && <span>Assignee: {task.assignee}</span>}
-              {task.due_date && !isNaN(new Date(task.due_date).getTime()) && (
-                <span>Due: {new Date(task.due_date).toLocaleDateString()}</span>
-              )}
+              {task.due_date && !isNaN(new Date(task.due_date).getTime()) && (() => {
+                const due = new Date(task.due_date!);
+                const now = new Date();
+                const daysUntil = Math.ceil((due.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
+                const isOverdue = daysUntil < 0;
+                const isDueSoon = daysUntil >= 0 && daysUntil <= 3;
+                return (
+                  <span className={`flex items-center gap-1 px-2 py-0.5 rounded ${
+                    isOverdue
+                      ? 'bg-rose-900/50 text-rose-300 font-medium'
+                      : isDueSoon
+                        ? 'bg-amber-900/50 text-amber-300 font-medium'
+                        : ''
+                  }`}>
+                    {isOverdue && <AlertTriangle size={12} />}
+                    {isDueSoon && !isOverdue && <Clock size={12} />}
+                    {isOverdue
+                      ? `Overdue by ${Math.abs(daysUntil)} day${Math.abs(daysUntil) !== 1 ? 's' : ''}`
+                      : isDueSoon
+                        ? daysUntil === 0
+                          ? 'Due today!'
+                          : `Due in ${daysUntil} day${daysUntil !== 1 ? 's' : ''}`
+                        : `Due: ${due.toLocaleDateString()}`
+                    }
+                  </span>
+                );
+              })()}
               {task.updated_at && !isNaN(new Date(task.updated_at).getTime()) && (
                 <span>Updated: {new Date(task.updated_at).toLocaleDateString()}</span>
               )}
@@ -1388,10 +1508,56 @@ function UnifiedTaskCard({
           </div>
         </div>
 
-        {/* Description */}
+        {/* Project Relation - shown in archived view */}
+        {showProjectRelation && (task.project_name || task.source === 'github') && (
+          <div className="flex items-center gap-3 p-3 rounded-lg bg-slate-800/70 border border-slate-700/50">
+            <FolderKanban size={16} className="text-indigo-400 flex-shrink-0" />
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-2 flex-wrap">
+                {task.project_name && (
+                  <span className="text-sm text-indigo-300 font-medium">{task.project_name}</span>
+                )}
+                {task.source === 'github' && task.url && (
+                  <a
+                    href={task.url.split('/issues')[0]}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1 text-xs text-slate-400 hover:text-slate-200"
+                  >
+                    <Github size={12} />
+                    {task.id.replace('github-', '').replace(/-\d+$/, '')}
+                  </a>
+                )}
+              </div>
+              {task.updated_at && (
+                <div className="text-xs text-slate-500 mt-0.5">
+                  Completed: {new Date(task.updated_at).toLocaleString()}
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* Description - improved formatting */}
         {task.description && (
-          <div className="text-sm text-slate-300 line-clamp-2">
-            {task.description}
+          <div className="text-sm text-slate-300">
+            <div className="line-clamp-3 leading-relaxed whitespace-pre-line">
+              {task.description.split('\n').map((line, i) => (
+                <span key={i}>
+                  {line.startsWith('- ') || line.startsWith('* ') ? (
+                    <span className="flex items-start gap-2">
+                      <span className="text-slate-500 mt-1">•</span>
+                      <span>{line.slice(2)}</span>
+                    </span>
+                  ) : line.startsWith('# ') || line.startsWith('## ') ? (
+                    <span className="font-semibold text-slate-200">{line.replace(/^#+\s*/, '')}</span>
+                  ) : (
+                    line
+                  )}
+                  {i < task.description!.split('\n').length - 1 && <br />}
+                </span>
+              ))}
+            </div>
           </div>
         )}
 
@@ -1411,17 +1577,58 @@ function UnifiedTaskCard({
           <div className="pt-3 border-t border-slate-700/50 space-y-3">
             {task.description && (
               <div className="text-sm">
-                <span className="text-slate-500">Full Description:</span>
-                <div className="mt-1 p-2 rounded bg-slate-800/50 text-slate-300 whitespace-pre-wrap">
-                  {task.description}
+                <span className="text-slate-500 text-xs uppercase tracking-wide">Full Description</span>
+                <div className="mt-2 p-3 rounded-lg bg-slate-800/50 text-slate-300 text-sm leading-relaxed border border-slate-700/30">
+                  {task.description.split('\n').map((line, i) => {
+                    if (!line.trim()) return <div key={i} className="h-2" />;
+                    if (line.startsWith('# ')) return <h3 key={i} className="text-base font-semibold text-slate-100 mt-3 first:mt-0">{line.slice(2)}</h3>;
+                    if (line.startsWith('## ')) return <h4 key={i} className="text-sm font-semibold text-slate-200 mt-2 first:mt-0">{line.slice(3)}</h4>;
+                    if (line.startsWith('### ')) return <h5 key={i} className="text-sm font-medium text-slate-300 mt-2 first:mt-0">{line.slice(4)}</h5>;
+                    if (line.startsWith('- ') || line.startsWith('* ')) {
+                      return (
+                        <div key={i} className="flex items-start gap-2 ml-2">
+                          <span className="text-slate-500 mt-0.5">•</span>
+                          <span>{line.slice(2)}</span>
+                        </div>
+                      );
+                    }
+                    if (line.match(/^\d+\.\s/)) {
+                      return (
+                        <div key={i} className="flex items-start gap-2 ml-2">
+                          <span className="text-slate-400 font-mono text-xs">{line.match(/^\d+/)?.[0]}.</span>
+                          <span>{line.replace(/^\d+\.\s*/, '')}</span>
+                        </div>
+                      );
+                    }
+                    if (line.startsWith('```')) return <div key={i} className="h-1" />;
+                    if (line.startsWith('> ')) {
+                      return (
+                        <div key={i} className="border-l-2 border-slate-600 pl-3 italic text-slate-400">
+                          {line.slice(2)}
+                        </div>
+                      );
+                    }
+                    return <p key={i} className="my-1">{line}</p>;
+                  })}
                 </div>
               </div>
             )}
-            <div className="text-xs text-slate-500">
-              <div>Source ID: {task.source_id}</div>
-              <div>Task ID: {task.id}</div>
+            <div className="grid grid-cols-2 gap-4 text-xs text-slate-500 p-2 rounded bg-slate-800/30">
+              <div>
+                <span className="text-slate-600">Source ID:</span> {task.source_id}
+              </div>
+              <div>
+                <span className="text-slate-600">Task ID:</span> {task.id}
+              </div>
               {task.created_at && !isNaN(new Date(task.created_at).getTime()) && (
-                <div>Created: {new Date(task.created_at).toLocaleString()}</div>
+                <div>
+                  <span className="text-slate-600">Created:</span> {new Date(task.created_at).toLocaleString()}
+                </div>
+              )}
+              {task.source === 'github' && task.url && (
+                <div>
+                  <span className="text-slate-600">Repo:</span> {task.id.replace('github-', '').replace(/-\d+$/, '')}
+                </div>
               )}
             </div>
           </div>

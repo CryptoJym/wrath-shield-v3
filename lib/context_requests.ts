@@ -610,7 +610,7 @@ function agentIdToBusId(lifeOsAgentId: string): AgentId | null {
     'agent.vuplicity': 'legal-agent', // Route to legal due to compliance
     'agent.solutionstream': 'pm-agent',
     'agent.kahoa': 'pm-agent',
-    'agent.hiro': 'pm-agent',
+    'agent.hiro': 'hyro-agent', // Legacy alias for agent.hyro
     'agent.family': 'pm-agent',
     'agent.hyro': 'hyro-agent',
     'agent.grok': 'hyro-agent', // Research agent routes through hyro

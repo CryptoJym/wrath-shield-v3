@@ -14,15 +14,15 @@
       "github_orgs": []
     },
     {
-      "id": "hiro_education",
-      "name": "Hiro Education & Development",
+      "id": "hyro_education",
+      "name": "Hyro Education & Development",
       "type": "personal",
-      "description": "Project group tracking Hiro's education, development, and long-term growth.",
+      "description": "Project group tracking Hyro's education, development, and long-term growth.",
       "owner": "James Brady",
-      "key_people": ["Hiro Brady", "James Brady", "Lisa Brady"],
-      "default_agent": "agent.hiro",
+      "key_people": ["Hyro Brady", "James Brady", "Lisa Brady"],
+      "default_agent": "agent.hyro",
       "priority_weight": 9,
-      "motion_workspace": "ws_hiro",
+      "motion_workspace": "ws_hyro",
       "github_orgs": []
     },
     {

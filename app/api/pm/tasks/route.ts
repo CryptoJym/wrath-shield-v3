@@ -96,6 +96,8 @@ export async function PATCH(req: NextRequest) {
     const body = await req.json();
     const { id, status, title, description, priority, due_date, assignee, labels, completionNote } = body;
 
+    console.log('[PM Tasks API] PATCH request:', { id, status, title: title?.slice(0, 50) });
+
     if (!id) {
       return NextResponse.json(
         { ok: false, error: 'Missing required field: id' },
@@ -105,6 +107,7 @@ export async function PATCH(req: NextRequest) {
 
     // For GitHub tasks being marked as 'done', use intelligent completion
     if (status === 'done' && id.startsWith('github-')) {
+      console.log('[PM Tasks API] Using intelligent completion for GitHub task');
       // Parse the task ID: github-owner-repo-issueNumber
       const parts = id.split('-');
       if (parts.length >= 4) {
@@ -117,6 +120,7 @@ export async function PATCH(req: NextRequest) {
         const taskTitle = title || `Task #${issueNumber}`;
 
         // Use intelligent completion
+        console.log('[PM Tasks API] Calling completeTaskWithIntelligence:', { taskId: id, repoFullName, issueNumber });
         const result = await completeTaskWithIntelligence({
           taskId: id,
           title: taskTitle,
@@ -126,12 +130,15 @@ export async function PATCH(req: NextRequest) {
           completionNote,
         });
 
+        console.log('[PM Tasks API] Intelligent completion result:', result);
+
         if (result.success) {
-          // Fetch the updated task to return
-          const task = await updateTask(id, { status: 'done' });
+          // The GitHub issue is already closed by completeTaskWithIntelligence
+          // Just return success - no need to call updateTask again
+          console.log('[PM Tasks API] Task completed successfully via intelligent completion');
           return NextResponse.json({
             ok: true,
-            task,
+            task: { id, status: 'done' }, // Return minimal task info
             completion: {
               summary: result.summary,
               commentUrl: result.commentUrl,

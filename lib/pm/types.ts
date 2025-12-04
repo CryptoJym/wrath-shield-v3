@@ -1,13 +1,15 @@
 /**
  * PM Types and Models
  *
- * Unified data model for project management that aggregates
- * data from GitHub, Motion, and local context requests.
+ * GitHub-native project management data model.
+ * Primary source is GitHub issues/milestones, with local SQLite for quick tasks.
+ *
+ * Motion has been deprecated - all task management flows through GitHub.
  */
 
 export type TaskStatus = 'pending' | 'in_progress' | 'done' | 'failed' | 'backlog';
 export type TaskPriority = 'urgent' | 'high' | 'medium' | 'low' | 'none';
-export type TaskSource = 'github' | 'motion' | 'local';
+export type TaskSource = 'github' | 'local';
 
 export interface UnifiedTask {
   id: string;
@@ -64,10 +66,6 @@ export interface PMDashboardData {
   recent_projects: UnifiedProject[];
   integrations: {
     github: {
-      configured: boolean;
-      error?: string;
-    };
-    motion: {
       configured: boolean;
       error?: string;
     };
