@@ -62,7 +62,8 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
-    "@clerk/nextjs": "^5.7.5",
+    "@babel/plugin-transform-private-methods": "^7.27.1",
+    "@clerk/nextjs": "^6.35.5",
     "@getzep/zep-cloud": "^3.13.0",
     "@types/better-sqlite3": "^7.6.13",
     "@types/node": "^24.9.1",
