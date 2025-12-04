@@ -1,15 +1,25 @@
 /**
  * PM Integration Layer
  *
- * Aggregates tasks and projects from multiple sources:
- * - GitHub (issues as tasks, milestones as projects)
- * - Motion (tasks and projects)
+ * GitHub-native project management system.
+ * Aggregates tasks and projects from:
+ * - GitHub (issues as tasks, milestones as projects) - PRIMARY SOURCE
+ * - Local tasks (SQLite-persisted PM items)
  * - Local context requests (routed PM items)
+ *
+ * Motion has been deprecated in favor of a unified GitHub-centric workflow.
  */
 
 import githubClient, { type GitHubIssue } from '@/lib/integrations/GitHubClient';
-import motionClient, { type MotionTask, type MotionProject } from '@/lib/integrations/MotionClient';
 import { getAllContextRequests, type ContextRequest } from '@/lib/context_requests';
+import {
+  getLocalTasks,
+  createLocalTask,
+  updateLocalTask,
+  deleteLocalTask,
+  getLocalTask,
+  type LocalTask,
+} from './local-task-store';
 import type {
   UnifiedTask,
   UnifiedProject,
@@ -68,67 +78,6 @@ function githubIssueToTask(issue: GitHubIssue): UnifiedTask {
 }
 
 /**
- * Map Motion task to unified task
- */
-function motionTaskToTask(task: MotionTask): UnifiedTask {
-  const statusMap: Record<string, TaskStatus> = {
-    COMPLETED: 'done',
-    IN_PROGRESS: 'in_progress',
-    TODO: 'pending',
-    BACKLOG: 'backlog',
-  };
-
-  const priorityMap: Record<string, TaskPriority> = {
-    URGENT: 'urgent',
-    HIGH: 'high',
-    MEDIUM: 'medium',
-    LOW: 'low',
-    NONE: 'none',
-  };
-
-  // Handle Motion API returning status/priority as object or string
-  const normalizeStatus = (status: any): TaskStatus => {
-    if (!status) return 'pending';
-    if (typeof status === 'object' && status.name) {
-      const nameUpper = String(status.name).toUpperCase().replace(/\s+/g, '_');
-      return statusMap[nameUpper] || 'pending';
-    }
-    return statusMap[String(status)] || 'pending';
-  };
-
-  const normalizePriority = (priority: any): TaskPriority => {
-    if (!priority) return 'medium';
-    if (typeof priority === 'object' && priority.name) {
-      const nameUpper = String(priority.name).toUpperCase();
-      return priorityMap[nameUpper] || 'medium';
-    }
-    return priorityMap[String(priority)] || 'medium';
-  };
-
-  return {
-    id: `motion-${task.id}`,
-    source: 'motion',
-    source_id: task.id,
-    title: task.name || 'Untitled Task',
-    description: task.description || null,
-    status: normalizeStatus(task.status),
-    priority: normalizePriority(task.priority),
-    created_at: task.createdTime,
-    updated_at: task.createdTime, // Motion doesn't provide updated_at
-    due_date: task.dueDate,
-    url: task.url || null,
-    project_id: task.projectId ? `motion-project-${task.projectId}` : null,
-    project_name: null, // Would need to fetch project details
-    assignee: task.assigneeId || null,
-    labels: task.labels || [],
-    metadata: {
-      workspaceId: task.workspaceId,
-      projectId: task.projectId,
-    },
-  };
-}
-
-/**
  * Map context request to unified task
  */
 function contextRequestToTask(req: ContextRequest): UnifiedTask {
@@ -141,7 +90,7 @@ function contextRequestToTask(req: ContextRequest): UnifiedTask {
   };
 
   return {
-    id: `local-${req.id}`,
+    id: `context-${req.id}`,
     source: 'local',
     source_id: req.id,
     title: req.event_payload.subject || req.event_payload.preview?.slice(0, 60) || 'Untitled',
@@ -162,6 +111,34 @@ function contextRequestToTask(req: ContextRequest): UnifiedTask {
       contact: req.event_payload.contact,
       resolution_summary: req.resolution_summary,
       follow_up_questions: req.follow_up_questions,
+      is_context_request: true,
+    },
+  };
+}
+
+/**
+ * Map local task to unified task
+ */
+function localTaskToUnifiedTask(task: LocalTask): UnifiedTask {
+  return {
+    id: `local-${task.id}`,
+    source: 'local',
+    source_id: task.id,
+    title: task.title,
+    description: task.description,
+    status: task.status,
+    priority: task.priority,
+    created_at: new Date(task.created_at * 1000).toISOString(),
+    updated_at: new Date(task.updated_at * 1000).toISOString(),
+    due_date: task.due_date,
+    url: null,
+    project_id: task.project_id,
+    project_name: task.project_name,
+    assignee: task.assignee,
+    labels: task.labels,
+    metadata: {
+      ...task.metadata,
+      is_local_task: true,
     },
   };
 }
@@ -173,7 +150,7 @@ export async function getAllTasks(): Promise<UnifiedTask[]> {
   const tasks: UnifiedTask[] = [];
   const errors: string[] = [];
 
-  // Fetch GitHub tasks
+  // Fetch GitHub tasks (PRIMARY SOURCE)
   if (githubClient.isConfigured()) {
     try {
       const githubIssues = await githubClient.getIssues({ state: 'all', limit: 100 });
@@ -184,24 +161,22 @@ export async function getAllTasks(): Promise<UnifiedTask[]> {
     }
   }
 
-  // Fetch Motion tasks
-  if (motionClient.isConfigured()) {
-    try {
-      const motionTasks = await motionClient.getTasks({ limit: 100 });
-      tasks.push(...motionTasks.map(motionTaskToTask));
-    } catch (error) {
-      console.error('[PM Integration] Motion fetch error:', error);
-      errors.push(`Motion: ${error instanceof Error ? error.message : 'Unknown error'}`);
-    }
+  // Fetch local SQLite tasks
+  try {
+    const localTasks = getLocalTasks({ limit: 100 });
+    tasks.push(...localTasks.map(localTaskToUnifiedTask));
+  } catch (error) {
+    console.error('[PM Integration] Local tasks error:', error);
+    errors.push(`Local Tasks: ${error instanceof Error ? error.message : 'Unknown error'}`);
   }
 
-  // Fetch local context requests
+  // Fetch local context requests (routed items)
   try {
     const contextRequests = getAllContextRequests({ target: 'pm' });
     tasks.push(...contextRequests.map(contextRequestToTask));
   } catch (error) {
     console.error('[PM Integration] Context requests error:', error);
-    errors.push(`Local: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    errors.push(`Context Requests: ${error instanceof Error ? error.message : 'Unknown error'}`);
   }
 
   // Sort by updated_at descending
@@ -212,11 +187,12 @@ export async function getAllTasks(): Promise<UnifiedTask[]> {
 
 /**
  * Fetch all projects from all sources
+ * Projects are derived from GitHub milestones and repository organization
  */
 export async function getAllProjects(): Promise<UnifiedProject[]> {
   const projects: UnifiedProject[] = [];
 
-  // Fetch GitHub milestones as projects
+  // Fetch GitHub milestones as projects (PRIMARY SOURCE)
   if (githubClient.isConfigured()) {
     try {
       const milestones = await githubClient.getMilestones({ state: 'all' });
@@ -235,33 +211,6 @@ export async function getAllProjects(): Promise<UnifiedProject[]> {
       })));
     } catch (error) {
       console.error('[PM Integration] GitHub milestones error:', error);
-    }
-  }
-
-  // Fetch Motion projects
-  if (motionClient.isConfigured()) {
-    try {
-      const workspaces = await motionClient.getWorkspaces();
-      for (const workspace of workspaces) {
-        const motionProjects = await motionClient.getProjects(workspace.id);
-        projects.push(...motionProjects.map(p => ({
-          id: `motion-project-${p.id}`,
-          source: 'motion' as TaskSource,
-          source_id: p.id,
-          name: p.name,
-          description: p.description,
-          status: p.status === 'ARCHIVED' ? 'archived' as const : 'active' as const,
-          created_at: p.createdTime,
-          updated_at: p.createdTime,
-          url: null,
-          task_count: 0, // Would need to count tasks
-          metadata: {
-            workspaceId: p.workspaceId,
-          },
-        })));
-      }
-    } catch (error) {
-      console.error('[PM Integration] Motion projects error:', error);
     }
   }
 
@@ -326,15 +275,13 @@ export async function getPMDashboardData(): Promise<PMDashboardData> {
       github: {
         configured: githubClient.isConfigured(),
       },
-      motion: {
-        configured: motionClient.isConfigured(),
-      },
     },
   };
 }
 
 /**
  * Create a task in the appropriate system
+ * Primary target is GitHub issues, with local SQLite as fallback
  */
 export async function createTask(params: {
   title: string;
@@ -342,9 +289,13 @@ export async function createTask(params: {
   priority?: TaskPriority;
   source?: TaskSource;
   project_id?: string;
+  project_name?: string;
   repo_full_name?: string; // For GitHub: owner/repo format
+  due_date?: string;
+  assignee?: string;
+  labels?: string[];
 }): Promise<UnifiedTask | null> {
-  const source = params.source || 'local';
+  const source = params.source || 'github'; // Default to GitHub
 
   if (source === 'github' && githubClient.isConfigured()) {
     // Get repo to create issue in - either specified or first enabled repo
@@ -355,7 +306,8 @@ export async function createTask(params: {
         repoFullName = enabledRepos[0].repo_full_name;
       } else {
         console.error('[PM Integration] No repo specified and no enabled repos found');
-        return null;
+        // Fall back to local task
+        return createLocalTaskFallback(params);
       }
     }
 
@@ -368,13 +320,35 @@ export async function createTask(params: {
     return githubIssueToTask(issue);
   }
 
-  if (source === 'motion' && motionClient.isConfigured()) {
-    // Would need workspace ID - for now, return null
-    return null;
-  }
+  // Local SQLite task for 'local' source or when GitHub isn't configured
+  return createLocalTaskFallback(params);
+}
 
-  // Default to local (context request)
-  return null;
+/**
+ * Helper to create local task with params
+ */
+function createLocalTaskFallback(params: {
+  title: string;
+  description?: string;
+  priority?: TaskPriority;
+  project_id?: string;
+  project_name?: string;
+  due_date?: string;
+  assignee?: string;
+  labels?: string[];
+}): UnifiedTask {
+  const localTask = createLocalTask({
+    title: params.title,
+    description: params.description,
+    priority: params.priority || 'medium',
+    project_id: params.project_id,
+    project_name: params.project_name,
+    due_date: params.due_date,
+    assignee: params.assignee,
+    labels: params.labels,
+  });
+
+  return localTaskToUnifiedTask(localTask);
 }
 
 /**
@@ -387,6 +361,9 @@ export async function updateTask(
     title?: string;
     description?: string;
     priority?: TaskPriority;
+    due_date?: string | null;
+    assignee?: string | null;
+    labels?: string[];
   }
 ): Promise<UnifiedTask | null> {
   // Parse task ID - format is "source-rest" or "github-owner-repo-issueNumber"
@@ -395,19 +372,25 @@ export async function updateTask(
 
   if (source === 'github' && githubClient.isConfigured()) {
     // Task ID format: github-owner-repo-issueNumber
-    // parts: ['github', 'owner', 'repo', 'issueNumber']
+    // Note: repo name can contain hyphens, so we can't just split by '-'
+    // The issue number is always the last part
     if (parts.length < 4) {
       console.error('[PM Integration] Invalid GitHub task ID format:', taskId);
       return null;
     }
-    const owner = parts[1];
-    const repo = parts[2];
-    const issueNumber = parseInt(parts[3]);
 
+    // Issue number is always the last part
+    const issueNumber = parseInt(parts[parts.length - 1]);
     if (isNaN(issueNumber)) {
       console.error('[PM Integration] Invalid issue number in task ID:', taskId);
       return null;
     }
+
+    // Owner is the second part
+    const owner = parts[1];
+
+    // Repo name is everything between owner and issue number (parts 2 to length-2)
+    const repo = parts.slice(2, parts.length - 1).join('-');
 
     const githubUpdates: any = {};
 
@@ -420,21 +403,50 @@ export async function updateTask(
     return githubIssueToTask(issue);
   }
 
-  if (source === 'motion' && motionClient.isConfigured()) {
-    // Task ID format: motion-taskId
-    const motionTaskId = parts.slice(1).join('-'); // Handle task IDs that might contain dashes
-    const motionUpdates: any = {};
+  if (source === 'local') {
+    // Local SQLite task - ID format: local-local_TIMESTAMP_RANDOM
+    const localTaskId = parts.slice(1).join('-'); // Reconstruct the original ID
 
-    if (updates.status === 'done') motionUpdates.status = 'COMPLETED';
-    if (updates.status === 'in_progress') motionUpdates.status = 'IN_PROGRESS';
-    if (updates.status === 'pending') motionUpdates.status = 'TODO';
-    if (updates.title) motionUpdates.name = updates.title;
-    if (updates.description) motionUpdates.description = updates.description;
+    const localTask = updateLocalTask(localTaskId, {
+      status: updates.status,
+      title: updates.title,
+      description: updates.description,
+      priority: updates.priority,
+      due_date: updates.due_date,
+      assignee: updates.assignee,
+      labels: updates.labels,
+    });
 
-    const task = await motionClient.updateTask(motionTaskId, motionUpdates);
-    return motionTaskToTask(task);
+    if (localTask) {
+      return localTaskToUnifiedTask(localTask);
+    }
+    console.error('[PM Integration] Failed to update local task:', localTaskId);
+    return null;
   }
 
-  // Local updates handled through context_requests
+  // Context requests are read-only for now
+  if (source === 'context') {
+    console.warn('[PM Integration] Context requests are read-only');
+    return null;
+  }
+
+  console.error('[PM Integration] Unknown task source:', source);
   return null;
+}
+
+/**
+ * Delete a task from its source system
+ */
+export async function deleteTask(taskId: string): Promise<boolean> {
+  const parts = taskId.split('-');
+  const source = parts[0];
+
+  if (source === 'local') {
+    const localTaskId = parts.slice(1).join('-');
+    return deleteLocalTask(localTaskId);
+  }
+
+  // GitHub and Motion don't support delete through our interface
+  console.warn('[PM Integration] Delete not supported for source:', source);
+  return false;
 }
