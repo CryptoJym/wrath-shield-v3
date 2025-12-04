@@ -33,12 +33,21 @@ describe('Legal chat route', () => {
   const fetchMock = jest.fn();
   const detectLegalDomain = require('@/lib/legal/LegalPersonaSystem').detectLegalDomain as jest.Mock;
   const transfigurePersona = require('@/lib/legal/LegalPersonaSystem').transfigurePersona as jest.Mock;
+  const originalWarn = console.warn;
+  const originalLog = console.log;
 
   beforeEach(() => {
     jest.clearAllMocks();
     process.env.OPENROUTER_API_KEY = 'test-openrouter';
     process.env.ZEP_API_KEY = 'test-zep';
     (global as any).fetch = fetchMock;
+    console.warn = jest.fn();
+    console.log = jest.fn();
+  });
+
+  afterEach(() => {
+    console.warn = originalWarn;
+    console.log = originalLog;
   });
 
   it('transfigures persona and returns metadata', async () => {

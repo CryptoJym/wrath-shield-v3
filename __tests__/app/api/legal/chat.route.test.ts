@@ -41,12 +41,21 @@ jest.mock('fs', () => ({
 
 describe('/api/legal/chat route (new persona flow)', () => {
   const fetchMock = jest.fn();
+  const originalWarn = console.warn;
+  const originalLog = console.log;
 
   beforeEach(() => {
     jest.clearAllMocks();
     process.env.OPENROUTER_API_KEY = 'test-openrouter';
     process.env.ZEP_API_KEY = 'test-zep';
     (global as any).fetch = fetchMock;
+    console.warn = jest.fn();
+    console.log = jest.fn();
+  });
+
+  afterEach(() => {
+    console.warn = originalWarn;
+    console.log = originalLog;
   });
 
   it('returns messages array on GET', async () => {
