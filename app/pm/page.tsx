@@ -8,6 +8,7 @@
  * - Tasks breakdown (pending/in-progress/done)
  * - Recent activity feed
  * - Routing accept/reject/complete actions
+ * - Repository organization with AI suggestions
  */
 
 import { useState, useEffect, useCallback } from 'react';
@@ -27,8 +28,18 @@ import {
   XCircle,
   CheckCircle2,
   ExternalLink,
-  Github
+  Github,
+  GitBranch,
+  Loader2,
+  Sparkles,
+  RefreshCw,
+  Calendar,
+  GitCommit,
+  TrendingUp,
+  AlertTriangle,
+  Zap
 } from 'lucide-react';
+import { PMChat } from '@/components/ui/agent-chat-widget';
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
@@ -51,7 +62,7 @@ interface PMStatus {
 
 interface UnifiedTask {
   id: string;
-  source: 'github' | 'motion' | 'local';
+  source: 'github' | 'local';
   source_id: string;
   title: string;
   description: string | null;
@@ -90,7 +101,6 @@ interface PMDashboardData {
   recent_tasks: UnifiedTask[];
   integrations: {
     github: { configured: boolean; error?: string };
-    motion: { configured: boolean; error?: string };
   };
 }
 
@@ -111,6 +121,97 @@ interface ContextRequest {
   status: 'pending' | 'processing' | 'dispatched' | 'done' | 'failed';
   resolution_summary?: string;
   follow_up_questions?: string[];
+}
+
+interface RepoSuggestion {
+  repo: {
+    name: string;
+    full_name: string;
+    description?: string;
+    language?: string;
+    updated_at?: string;
+  };
+  suggestions: Array<{
+    projectTitle: string;
+    projectId?: string;
+    confidence: number;
+    rationale: string;
+    source: string;
+  }>;
+  autoAssignable: boolean;
+}
+
+interface OrganizationStatus {
+  totalRepos: number;
+  unmappedRepos: number;
+  mappedRepos: number;
+  enabledRepos: number;
+  projectCount: number;
+  lastUpdated: string;
+}
+
+interface TemporalContext {
+  current_timestamp: number;
+  current_date: string;
+  current_time: string;
+  day_of_week: string;
+  week_of_year: number;
+  quarter: number;
+  fiscal_year: number;
+  time_zone: string;
+  business_hours: boolean;
+}
+
+interface TimeElapsed {
+  seconds: number;
+  minutes: number;
+  hours: number;
+  days: number;
+  weeks: number;
+  months: number;
+  human_readable: string;
+  is_stale: boolean;
+  staleness_level: 'fresh' | 'aging' | 'stale' | 'very_stale' | 'ancient';
+}
+
+interface TemporalSummary {
+  ok: boolean;
+  context: TemporalContext;
+  last_sync: TimeElapsed | null;
+  last_commit_analysis: TimeElapsed | null;
+  stale_items: {
+    syncs: number;
+    analyses: number;
+  };
+  grounding_statement: string;
+  timestamp: string;
+}
+
+interface CommitAnalysis {
+  id: string;
+  repo_full_name: string;
+  commit_sha: string;
+  commit_message: string;
+  author: string;
+  authored_at: string;
+  category: string;
+  impact_level: string;
+  bullet_statement: string;
+  related_issues: string[];
+  ambiguities: string[];
+}
+
+interface ProgressReport {
+  period: { start: string; end: string };
+  summary: {
+    total_commits: number;
+    by_category: Record<string, number>;
+    by_impact: Record<string, number>;
+    ambiguities_count: number;
+  };
+  bullet_statements: string[];
+  top_contributors: { author: string; commits: number }[];
+  needs_attention: string[];
 }
 
 const STATUS_CONFIG = {
@@ -191,9 +292,32 @@ export default function PMPage() {
     refreshInterval: 30000
   });
 
+  // Repo organization data
+  const { data: repoSuggestionsData, mutate: mutateSuggestions } = useSWR('/api/pm/repos?action=suggestions&limit=20', fetcher, {
+    refreshInterval: 60000
+  });
+  const { data: repoStatusData, mutate: mutateRepoStatus } = useSWR('/api/pm/repos?action=status', fetcher, {
+    refreshInterval: 60000
+  });
+
+  // Temporal and commit intelligence data
+  const { data: temporalData, mutate: mutateTemporal } = useSWR<TemporalSummary>('/api/pm/temporal', fetcher, {
+    refreshInterval: 30000
+  });
+  const { data: progressData, mutate: mutateProgress } = useSWR('/api/pm/commits?action=report', fetcher, {
+    refreshInterval: 60000
+  });
+  const { data: recentCommitsData } = useSWR('/api/pm/commits?action=recent&limit=10', fetcher, {
+    refreshInterval: 60000
+  });
+
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' | 'info' } | null>(null);
   const [filter, setFilter] = useState<'all' | 'pending' | 'processing' | 'done'>('all');
   const [actioningId, setActioningId] = useState<string | null>(null);
+  const [activeTab, setActiveTab] = useState<'tasks' | 'repos' | 'progress'>('tasks');
+  const [autoOrganizing, setAutoOrganizing] = useState(false);
+  const [applyingRepo, setApplyingRepo] = useState<string | null>(null);
+  const [analyzingCommits, setAnalyzingCommits] = useState(false);
 
   const showToast = useCallback((message: string, type: 'success' | 'error' | 'info' = 'success') => {
     setToast({ message, type });
@@ -224,9 +348,87 @@ export default function PMPage() {
     }
   };
 
+  // Repo organization handlers
+  const handleAutoOrganize = async () => {
+    setAutoOrganizing(true);
+    try {
+      const res = await fetch('/api/pm/repos', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ action: 'auto-organize' }),
+      });
+      const data = await res.json();
+      if (data.result) {
+        showToast(`Auto-organized ${data.result.applied} repos`, 'success');
+        mutateSuggestions();
+        mutateRepoStatus();
+      }
+    } catch (error) {
+      showToast('Failed to auto-organize', 'error');
+    } finally {
+      setAutoOrganizing(false);
+    }
+  };
+
+  const handleApplySuggestion = async (repoFullName: string, projectTitle: string, projectId?: string) => {
+    setApplyingRepo(repoFullName);
+    try {
+      const res = await fetch('/api/pm/repos', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({
+          action: 'set-mapping',
+          repoFullName,
+          projectId,
+          projectName: projectTitle,
+          enabled: true,
+        }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        showToast(`Mapped ${repoFullName} to ${projectTitle}`, 'success');
+        mutateSuggestions();
+        mutateRepoStatus();
+      }
+    } catch (error) {
+      showToast('Failed to apply mapping', 'error');
+    } finally {
+      setApplyingRepo(null);
+    }
+  };
+
+  // Commit analysis handler
+  const handleAnalyzeCommits = async () => {
+    setAnalyzingCommits(true);
+    try {
+      const res = await fetch('/api/pm/commits', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ action: 'analyze' }),
+      });
+      const data = await res.json();
+      if (data.ok) {
+        showToast(`Analyzed ${data.result?.analyzed || 0} commits`, 'success');
+        mutateProgress();
+        mutateTemporal();
+      } else {
+        showToast(data.error || 'Analysis failed', 'error');
+      }
+    } catch (error) {
+      showToast('Failed to analyze commits', 'error');
+    } finally {
+      setAnalyzingCommits(false);
+    }
+  };
+
   const pmStatus = statusData as PMStatus | undefined;
   const requests = (requestsData?.requests || []) as ContextRequest[];
   const dashboard = dashboardData as PMDashboardData | undefined;
+  const repoSuggestions = (repoSuggestionsData?.suggestions || []) as RepoSuggestion[];
+  const repoStatus = repoStatusData?.status as OrganizationStatus | undefined;
+  const temporal = temporalData as TemporalSummary | undefined;
+  const progressReport = progressData?.ok ? progressData.report as ProgressReport : undefined;
+  const recentCommits = (recentCommitsData?.analyses || []) as CommitAnalysis[];
 
   // Combine local context requests with unified tasks from integrations
   const allTasks = dashboard?.recent_tasks || [];
@@ -312,12 +514,55 @@ export default function PMPage() {
                 Manage routed items, track project status, and coordinate tasks
               </p>
               <div className="flex gap-3 mt-3">
+                <button
+                  onClick={() => setActiveTab('tasks')}
+                  className={`flex items-center gap-2 px-3 py-1.5 text-sm rounded-lg transition ${
+                    activeTab === 'tasks'
+                      ? 'bg-sky-600 text-white'
+                      : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                  }`}
+                >
+                  <ListTodo size={16} />
+                  Tasks
+                </button>
+                <button
+                  onClick={() => setActiveTab('repos')}
+                  className={`flex items-center gap-2 px-3 py-1.5 text-sm rounded-lg transition ${
+                    activeTab === 'repos'
+                      ? 'bg-purple-600 text-white'
+                      : 'bg-purple-900/30 text-purple-300 border border-purple-500/30 hover:bg-purple-900/50'
+                  }`}
+                >
+                  <GitBranch size={16} />
+                  Repo Organization
+                  {repoStatus && repoStatus.unmappedRepos > 0 && (
+                    <span className="ml-1 px-1.5 py-0.5 text-xs rounded bg-purple-500 text-white">
+                      {repoStatus.unmappedRepos}
+                    </span>
+                  )}
+                </button>
+                <button
+                  onClick={() => setActiveTab('progress')}
+                  className={`flex items-center gap-2 px-3 py-1.5 text-sm rounded-lg transition ${
+                    activeTab === 'progress'
+                      ? 'bg-emerald-600 text-white'
+                      : 'bg-emerald-900/30 text-emerald-300 border border-emerald-500/30 hover:bg-emerald-900/50'
+                  }`}
+                >
+                  <TrendingUp size={16} />
+                  Progress
+                  {temporal?.stale_items && (temporal.stale_items.syncs > 0 || temporal.stale_items.analyses > 0) && (
+                    <span className="ml-1 px-1.5 py-0.5 text-xs rounded bg-amber-500 text-white">
+                      !
+                    </span>
+                  )}
+                </button>
                 <a
                   href="/pm/github"
-                  className="flex items-center gap-2 px-3 py-1.5 text-sm rounded-lg bg-purple-900/30 text-purple-300 border border-purple-500/30 hover:bg-purple-900/50 transition"
+                  className="flex items-center gap-2 px-3 py-1.5 text-sm rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 transition"
                 >
                   <Github size={16} />
-                  GitHub Repos
+                  GitHub Projects
                 </a>
               </div>
             </div>
@@ -337,7 +582,7 @@ export default function PMPage() {
 
         {showDebug && (
           <div className="text-xs bg-slate-800 rounded p-3 mb-2 space-y-1 border border-slate-700">
-            <div className="text-slate-400 font-semibold">Debug: PM data</div>
+            <div className="text-slate-400 font-semibold">Debug: PM data (GitHub-native)</div>
             <div className="text-slate-500">
               Total tasks: {dashboard?.tasks.total ?? 0} | Pending: {tasksByStatus.pending} | In Progress: {tasksByStatus.processing} | Done: {tasksByStatus.done} | Failed: {tasksByStatus.failed}
             </div>
@@ -345,14 +590,17 @@ export default function PMPage() {
               Projects: {projectsCount} | Health: {pmStatus?.health_score ?? '-'} | Status: {pmStatus?.status ?? '-'}
             </div>
             <div className="text-slate-500">
-              Sources → GitHub: {dashboard?.tasks.by_source?.github ?? 0} | Motion: {dashboard?.tasks.by_source?.motion ?? 0} | Local: {dashboard?.tasks.by_source?.local ?? 0}
+              Sources → GitHub: {dashboard?.tasks.by_source?.github ?? 0} | Local: {dashboard?.tasks.by_source?.local ?? 0}
             </div>
             <div className="text-slate-500">
-              Integrations → GitHub: {dashboard?.integrations.github.configured ? '✓' : '✗'} | Motion: {dashboard?.integrations.motion.configured ? '✓' : '✗'}
+              Integration → GitHub: {dashboard?.integrations.github.configured ? '✓ Connected' : '✗ Not configured'}
             </div>
           </div>
         )}
 
+        {/* Tasks Tab Content */}
+        {activeTab === 'tasks' && (
+          <>
         {/* Stats Overview */}
         <section className="grid md:grid-cols-4 gap-4">
           <StatCard
@@ -425,17 +673,16 @@ export default function PMPage() {
               <p className="text-slate-400 text-lg">No items to display</p>
               <p className="text-slate-500 text-sm mt-2">
                 {filter === 'all'
-                  ? dashboard?.integrations.github.configured || dashboard?.integrations.motion.configured
-                    ? 'No tasks found in connected systems. Create tasks in GitHub or Motion.'
-                    : 'No tasks yet. Configure GitHub or Motion integrations in .env.local'
+                  ? dashboard?.integrations.github.configured
+                    ? 'No tasks found in GitHub. Create issues in your enabled repositories.'
+                    : 'No tasks yet. Configure GitHub integration in .env.local'
                   : `No items with status "${filter}"`
                 }
               </p>
-              {!dashboard?.integrations.github.configured && !dashboard?.integrations.motion.configured && (
+              {!dashboard?.integrations.github.configured && (
                 <div className="mt-4 text-xs text-slate-600 space-y-1">
                   <p>Add to .env.local:</p>
                   <p>GITHUB_ACCESS_TOKEN, GITHUB_REPO_OWNER, GITHUB_REPO_NAME</p>
-                  <p>or MOTION_API_KEY</p>
                 </div>
               )}
             </div>
@@ -488,7 +735,453 @@ export default function PMPage() {
             </div>
           </section>
         )}
+          </>
+        )}
+
+        {/* Repos Tab Content */}
+        {activeTab === 'repos' && (
+          <section className="space-y-6">
+            {/* Repo Stats */}
+            {repoStatus && (
+              <div className="grid md:grid-cols-4 gap-4">
+                <div className="rounded-xl border border-purple-500/30 bg-purple-500/10 p-4">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 rounded-lg bg-slate-800/50 text-purple-400">
+                      <Github size={24} />
+                    </div>
+                    <div>
+                      <div className="text-2xl font-bold text-slate-100">{repoStatus.totalRepos}</div>
+                      <div className="text-sm text-slate-400">Total Repos</div>
+                    </div>
+                  </div>
+                </div>
+                <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 p-4">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 rounded-lg bg-slate-800/50 text-amber-400">
+                      <GitBranch size={24} />
+                    </div>
+                    <div>
+                      <div className="text-2xl font-bold text-slate-100">{repoStatus.unmappedRepos}</div>
+                      <div className="text-sm text-slate-400">Unmapped</div>
+                    </div>
+                  </div>
+                </div>
+                <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-4">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 rounded-lg bg-slate-800/50 text-emerald-400">
+                      <CheckCircle size={24} />
+                    </div>
+                    <div>
+                      <div className="text-2xl font-bold text-slate-100">{repoStatus.mappedRepos}</div>
+                      <div className="text-sm text-slate-400">Mapped</div>
+                    </div>
+                  </div>
+                </div>
+                <div className="rounded-xl border border-sky-500/30 bg-sky-500/10 p-4">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 rounded-lg bg-slate-800/50 text-sky-400">
+                      <FolderKanban size={24} />
+                    </div>
+                    <div>
+                      <div className="text-2xl font-bold text-slate-100">{repoStatus.projectCount}</div>
+                      <div className="text-sm text-slate-400">Projects</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Auto-organize Controls */}
+            <div className="flex items-center gap-4">
+              <button
+                onClick={handleAutoOrganize}
+                disabled={autoOrganizing}
+                className="flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-500 text-white rounded-lg transition disabled:opacity-50 font-medium"
+              >
+                {autoOrganizing ? (
+                  <Loader2 size={16} className="animate-spin" />
+                ) : (
+                  <Sparkles size={16} />
+                )}
+                {autoOrganizing ? 'Auto-organizing...' : 'Auto-organize High Confidence'}
+              </button>
+              <button
+                onClick={() => {
+                  mutateSuggestions();
+                  mutateRepoStatus();
+                }}
+                className="flex items-center gap-2 px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg transition font-medium"
+              >
+                <RefreshCw size={16} />
+                Refresh
+              </button>
+              {repoSuggestions.filter(s => s.autoAssignable).length > 0 && (
+                <span className="text-sm text-emerald-400">
+                  {repoSuggestions.filter(s => s.autoAssignable).length} repos ready for auto-assignment
+                </span>
+              )}
+            </div>
+
+            {/* Suggestions List */}
+            <div className="space-y-4">
+              <h2 className="text-xl font-semibold">Organization Suggestions</h2>
+              {repoSuggestions.length === 0 ? (
+                <div className="rounded-xl border border-slate-700 bg-slate-800/30 p-12 text-center">
+                  <GitBranch size={48} className="mx-auto text-slate-600 mb-4" />
+                  <p className="text-slate-400 text-lg">No unmapped repositories</p>
+                  <p className="text-slate-500 text-sm mt-2">
+                    All your repositories have been organized into projects
+                  </p>
+                </div>
+              ) : (
+                <div className="space-y-3">
+                  {repoSuggestions.map((suggestion) => (
+                    <div
+                      key={suggestion.repo.full_name}
+                      className={`rounded-xl border p-4 ${
+                        suggestion.autoAssignable
+                          ? 'border-emerald-500/30 bg-emerald-500/5'
+                          : 'border-slate-700 bg-slate-800/30'
+                      }`}
+                    >
+                      <div className="flex items-start justify-between gap-4">
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2 mb-2">
+                            <Github size={16} className="text-slate-400" />
+                            <span className="font-medium text-slate-100">{suggestion.repo.name}</span>
+                            {suggestion.repo.language && (
+                              <span className="px-2 py-0.5 text-xs rounded bg-slate-700 text-slate-300">
+                                {suggestion.repo.language}
+                              </span>
+                            )}
+                            {suggestion.autoAssignable && (
+                              <span className="px-2 py-0.5 text-xs rounded bg-emerald-900/50 text-emerald-300">
+                                Auto-assignable
+                              </span>
+                            )}
+                          </div>
+                          {suggestion.repo.description && (
+                            <p className="text-sm text-slate-400 mb-3 line-clamp-2">
+                              {suggestion.repo.description}
+                            </p>
+                          )}
+
+                          {/* Suggestions */}
+                          <div className="space-y-2">
+                            {suggestion.suggestions.slice(0, 3).map((sug, idx) => (
+                              <div
+                                key={idx}
+                                className="flex items-center justify-between p-2 rounded-lg bg-slate-800/50 border border-slate-700/50"
+                              >
+                                <div className="flex items-center gap-3 min-w-0">
+                                  <div className="text-sm">
+                                    <span className="font-medium text-slate-200">{sug.projectTitle}</span>
+                                    <span className="text-slate-500 ml-2">
+                                      ({Math.round(sug.confidence * 100)}% confidence)
+                                    </span>
+                                  </div>
+                                  <span className="px-1.5 py-0.5 text-xs rounded bg-slate-700 text-slate-400">
+                                    {sug.source}
+                                  </span>
+                                </div>
+                                <button
+                                  onClick={() => handleApplySuggestion(
+                                    suggestion.repo.full_name,
+                                    sug.projectTitle,
+                                    sug.projectId
+                                  )}
+                                  disabled={applyingRepo === suggestion.repo.full_name}
+                                  className="flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-lg bg-purple-600 hover:bg-purple-500 text-white transition disabled:opacity-50"
+                                >
+                                  {applyingRepo === suggestion.repo.full_name ? (
+                                    <Loader2 size={14} className="animate-spin" />
+                                  ) : (
+                                    <Check size={14} />
+                                  )}
+                                  Apply
+                                </button>
+                              </div>
+                            ))}
+                          </div>
+
+                          {suggestion.suggestions.length > 0 && suggestion.suggestions[0].rationale && (
+                            <p className="text-xs text-slate-500 mt-2 italic">
+                              {suggestion.suggestions[0].rationale}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </section>
+        )}
+
+        {/* Progress Tab Content */}
+        {activeTab === 'progress' && (
+          <section className="space-y-6">
+            {/* Temporal Grounding Card */}
+            {temporal?.context && (
+              <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/5 p-6">
+                <div className="flex items-start justify-between mb-4">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 rounded-lg bg-emerald-600/20 text-emerald-400">
+                      <Calendar size={24} />
+                    </div>
+                    <div>
+                      <h2 className="text-lg font-semibold text-slate-100">Temporal Grounding</h2>
+                      <p className="text-sm text-slate-400">Current context awareness</p>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-2xl font-bold text-emerald-400">
+                      {temporal.context.current_time}
+                    </div>
+                    <div className="text-sm text-slate-400">
+                      {temporal.context.day_of_week}, {temporal.context.current_date}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="p-4 rounded-lg bg-slate-800/50 border border-slate-700/50 mb-4">
+                  <p className="text-sm text-slate-300 italic">
+                    {temporal.grounding_statement}
+                  </p>
+                </div>
+
+                <div className="grid md:grid-cols-4 gap-4">
+                  <div className="p-3 rounded-lg bg-slate-800/30">
+                    <div className="text-xs text-slate-500 uppercase tracking-wide">Quarter</div>
+                    <div className="text-lg font-semibold text-slate-200">Q{temporal.context.quarter}</div>
+                  </div>
+                  <div className="p-3 rounded-lg bg-slate-800/30">
+                    <div className="text-xs text-slate-500 uppercase tracking-wide">Week</div>
+                    <div className="text-lg font-semibold text-slate-200">{temporal.context.week_of_year}</div>
+                  </div>
+                  <div className="p-3 rounded-lg bg-slate-800/30">
+                    <div className="text-xs text-slate-500 uppercase tracking-wide">Business Hours</div>
+                    <div className={`text-lg font-semibold ${temporal.context.business_hours ? 'text-emerald-400' : 'text-slate-400'}`}>
+                      {temporal.context.business_hours ? 'Active' : 'Inactive'}
+                    </div>
+                  </div>
+                  <div className="p-3 rounded-lg bg-slate-800/30">
+                    <div className="text-xs text-slate-500 uppercase tracking-wide">Last Sync</div>
+                    <div className={`text-lg font-semibold ${temporal.last_sync?.is_stale ? 'text-amber-400' : 'text-slate-200'}`}>
+                      {temporal.last_sync?.human_readable || 'Never'}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Stale Alerts */}
+                {(temporal.stale_items.syncs > 0 || temporal.stale_items.analyses > 0) && (
+                  <div className="mt-4 p-3 rounded-lg bg-amber-900/20 border border-amber-500/30 flex items-center gap-3">
+                    <AlertTriangle size={20} className="text-amber-400" />
+                    <span className="text-sm text-amber-300">
+                      Attention needed: {temporal.stale_items.syncs} stale syncs, {temporal.stale_items.analyses} stale analyses
+                    </span>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Commit Analysis Controls */}
+            <div className="flex items-center gap-4">
+              <button
+                onClick={handleAnalyzeCommits}
+                disabled={analyzingCommits}
+                className="flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg transition disabled:opacity-50 font-medium"
+              >
+                {analyzingCommits ? (
+                  <Loader2 size={16} className="animate-spin" />
+                ) : (
+                  <GitCommit size={16} />
+                )}
+                {analyzingCommits ? 'Analyzing...' : 'Analyze Recent Commits'}
+              </button>
+              <button
+                onClick={() => {
+                  mutateProgress();
+                  mutateTemporal();
+                }}
+                className="flex items-center gap-2 px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg transition font-medium"
+              >
+                <RefreshCw size={16} />
+                Refresh
+              </button>
+            </div>
+
+            {/* Progress Report */}
+            {progressReport && (
+              <div className="space-y-6">
+                {/* Summary Stats */}
+                <div className="grid md:grid-cols-4 gap-4">
+                  <div className="rounded-xl border border-sky-500/30 bg-sky-500/10 p-4">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 rounded-lg bg-slate-800/50 text-sky-400">
+                        <GitCommit size={24} />
+                      </div>
+                      <div>
+                        <div className="text-2xl font-bold text-slate-100">{progressReport.summary.total_commits}</div>
+                        <div className="text-sm text-slate-400">Total Commits</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-4">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 rounded-lg bg-slate-800/50 text-emerald-400">
+                        <Zap size={24} />
+                      </div>
+                      <div>
+                        <div className="text-2xl font-bold text-slate-100">{progressReport.summary.by_category?.feature || 0}</div>
+                        <div className="text-sm text-slate-400">Features</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 p-4">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 rounded-lg bg-slate-800/50 text-amber-400">
+                        <CheckCircle size={24} />
+                      </div>
+                      <div>
+                        <div className="text-2xl font-bold text-slate-100">{progressReport.summary.by_category?.bugfix || 0}</div>
+                        <div className="text-sm text-slate-400">Bug Fixes</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="rounded-xl border border-rose-500/30 bg-rose-500/10 p-4">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 rounded-lg bg-slate-800/50 text-rose-400">
+                        <AlertTriangle size={24} />
+                      </div>
+                      <div>
+                        <div className="text-2xl font-bold text-slate-100">{progressReport.summary.ambiguities_count}</div>
+                        <div className="text-sm text-slate-400">Need Review</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Bullet Statements */}
+                {progressReport.bullet_statements.length > 0 && (
+                  <div className="rounded-xl border border-slate-700 bg-slate-800/30 p-6">
+                    <h3 className="text-lg font-semibold text-slate-100 mb-4 flex items-center gap-2">
+                      <TrendingUp size={20} className="text-emerald-400" />
+                      Progress Bullets (Tongue & Quill Style)
+                    </h3>
+                    <ul className="space-y-3">
+                      {progressReport.bullet_statements.map((bullet, idx) => (
+                        <li key={idx} className="flex items-start gap-3">
+                          <span className="text-emerald-400 mt-1">•</span>
+                          <span className="text-slate-300 text-sm">{bullet}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {/* Top Contributors */}
+                {progressReport.top_contributors.length > 0 && (
+                  <div className="rounded-xl border border-slate-700 bg-slate-800/30 p-6">
+                    <h3 className="text-lg font-semibold text-slate-100 mb-4">Top Contributors</h3>
+                    <div className="space-y-2">
+                      {progressReport.top_contributors.map((contributor, idx) => (
+                        <div key={idx} className="flex items-center justify-between p-3 rounded-lg bg-slate-800/50">
+                          <span className="text-slate-200">{contributor.author}</span>
+                          <span className="text-slate-400">{contributor.commits} commits</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Needs Attention */}
+                {progressReport.needs_attention.length > 0 && (
+                  <div className="rounded-xl border border-amber-500/30 bg-amber-500/5 p-6">
+                    <h3 className="text-lg font-semibold text-amber-400 mb-4 flex items-center gap-2">
+                      <AlertTriangle size={20} />
+                      Needs PM Review
+                    </h3>
+                    <ul className="space-y-2">
+                      {progressReport.needs_attention.map((item, idx) => (
+                        <li key={idx} className="text-sm text-slate-300 p-2 rounded bg-slate-800/30">
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Recent Commit Analyses */}
+            {recentCommits.length > 0 && (
+              <div className="rounded-xl border border-slate-700 bg-slate-800/30 p-6">
+                <h3 className="text-lg font-semibold text-slate-100 mb-4">Recent Commit Analysis</h3>
+                <div className="space-y-3">
+                  {recentCommits.slice(0, 5).map((commit) => (
+                    <div
+                      key={commit.id}
+                      className="p-4 rounded-lg bg-slate-800/50 border border-slate-700/50 hover:border-slate-600 transition"
+                    >
+                      <div className="flex items-start justify-between gap-4 mb-2">
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2 flex-wrap mb-1">
+                            <span className={`px-2 py-0.5 text-xs rounded font-medium ${
+                              commit.category === 'feature' ? 'bg-emerald-900/50 text-emerald-300' :
+                              commit.category === 'bugfix' ? 'bg-amber-900/50 text-amber-300' :
+                              commit.category === 'enhancement' ? 'bg-sky-900/50 text-sky-300' :
+                              commit.category === 'refactor' ? 'bg-purple-900/50 text-purple-300' :
+                              'bg-slate-700 text-slate-300'
+                            }`}>
+                              {commit.category}
+                            </span>
+                            <span className={`px-2 py-0.5 text-xs rounded ${
+                              commit.impact_level === 'critical' ? 'bg-rose-900/50 text-rose-300' :
+                              commit.impact_level === 'high' ? 'bg-orange-900/50 text-orange-300' :
+                              commit.impact_level === 'medium' ? 'bg-amber-900/50 text-amber-300' :
+                              'bg-slate-700 text-slate-400'
+                            }`}>
+                              {commit.impact_level}
+                            </span>
+                            <span className="text-xs text-slate-500">{commit.repo_full_name}</span>
+                          </div>
+                          <p className="text-sm text-slate-200 truncate">{commit.commit_message.split('\n')[0]}</p>
+                        </div>
+                        <div className="text-xs text-slate-500 flex-shrink-0">
+                          {commit.author}
+                        </div>
+                      </div>
+                      <p className="text-xs text-slate-400 italic mt-2">{commit.bullet_statement}</p>
+                      {commit.ambiguities.length > 0 && (
+                        <div className="mt-2 flex items-center gap-2 text-xs text-amber-400">
+                          <AlertTriangle size={12} />
+                          {commit.ambiguities[0]}
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Empty State */}
+            {!progressReport && recentCommits.length === 0 && (
+              <div className="rounded-xl border border-slate-700 bg-slate-800/30 p-12 text-center">
+                <GitCommit size={48} className="mx-auto text-slate-600 mb-4" />
+                <p className="text-slate-400 text-lg">No commit analyses yet</p>
+                <p className="text-slate-500 text-sm mt-2">
+                  Click "Analyze Recent Commits" to generate progress tracking data
+                </p>
+              </div>
+            )}
+          </section>
+        )}
       </div>
+
+      {/* PM Chat Widget */}
+      <PMChat defaultCollapsed={true} />
 
       {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
     </div>
@@ -582,7 +1275,6 @@ function UnifiedTaskCard({
 
   const sourceConfig = {
     github: { label: 'GitHub', color: 'text-purple-400', bg: 'bg-purple-900/50' },
-    motion: { label: 'Motion', color: 'text-cyan-400', bg: 'bg-cyan-900/50' },
     local: { label: 'Local', color: 'text-slate-400', bg: 'bg-slate-900/50' },
   };
 
@@ -591,7 +1283,11 @@ function UnifiedTaskCard({
   const priorityStyle = priorityConfig[task.priority];
   const sourceStyle = sourceConfig[task.source];
 
+  const [isUpdating, setIsUpdating] = useState(false);
+  const [updateSuccess, setUpdateSuccess] = useState<string | null>(null);
+
   const handleStatusUpdate = async (newStatus: 'in_progress' | 'done') => {
+    setIsUpdating(true);
     try {
       const res = await fetch('/api/pm/tasks', {
         method: 'PATCH',
@@ -600,10 +1296,18 @@ function UnifiedTaskCard({
       });
 
       if (res.ok) {
-        onRefresh?.();
+        setUpdateSuccess(newStatus === 'done' ? 'Marked as complete!' : 'Started!');
+        setTimeout(() => {
+          onRefresh?.();
+          setUpdateSuccess(null);
+        }, 800);
+      } else {
+        console.error('Failed to update task:', await res.text());
       }
     } catch (error) {
       console.error('Failed to update task:', error);
+    } finally {
+      setIsUpdating(false);
     }
   };
 
@@ -708,31 +1412,42 @@ function UnifiedTaskCard({
         {/* Action Buttons */}
         {task.status !== 'done' && task.source !== 'local' && (
           <div className="flex gap-2 pt-2 border-t border-slate-700/50">
-            {task.status === 'pending' && (
-              <button
-                onClick={() => handleStatusUpdate('in_progress')}
-                disabled={isActioning}
-                className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-sm font-medium transition disabled:opacity-50"
-              >
-                <PlayCircle size={16} />
-                Start
-              </button>
-            )}
-            {(task.status === 'in_progress' || task.status === 'pending') && (
-              <button
-                onClick={() => handleStatusUpdate('done')}
-                disabled={isActioning}
-                className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-medium transition disabled:opacity-50"
-              >
+            {updateSuccess ? (
+              <div className="flex items-center gap-2 text-sm text-emerald-400 font-medium animate-pulse">
                 <CheckCircle size={16} />
-                Complete
-              </button>
-            )}
-            {isActioning && (
-              <div className="flex items-center gap-2 text-sm text-slate-400">
-                <div className="w-4 h-4 border-2 border-slate-600 border-t-slate-400 rounded-full animate-spin" />
-                Processing...
+                {updateSuccess}
               </div>
+            ) : (
+              <>
+                {task.status === 'pending' && (
+                  <button
+                    onClick={() => handleStatusUpdate('in_progress')}
+                    disabled={isActioning || isUpdating}
+                    className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-sm font-medium transition disabled:opacity-50"
+                  >
+                    {isUpdating ? (
+                      <div className="w-4 h-4 border-2 border-blue-300 border-t-white rounded-full animate-spin" />
+                    ) : (
+                      <PlayCircle size={16} />
+                    )}
+                    Start
+                  </button>
+                )}
+                {(task.status === 'in_progress' || task.status === 'pending') && (
+                  <button
+                    onClick={() => handleStatusUpdate('done')}
+                    disabled={isActioning || isUpdating}
+                    className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-medium transition disabled:opacity-50"
+                  >
+                    {isUpdating ? (
+                      <div className="w-4 h-4 border-2 border-emerald-300 border-t-white rounded-full animate-spin" />
+                    ) : (
+                      <CheckCircle size={16} />
+                    )}
+                    Complete
+                  </button>
+                )}
+              </>
             )}
           </div>
         )}
