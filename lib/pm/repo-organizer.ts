@@ -23,7 +23,7 @@ import {
   type ProjectContext,
   type OrganizationRule,
 } from './pm-memory';
-import OpenRouterClient from '../OpenRouterClient';
+import { getOpenRouterClient } from '../OpenRouterClient';
 
 ensureServerOnly('lib/pm/repo-organizer');
 
@@ -250,8 +250,18 @@ If no project is a good fit, respond with:
 }`;
 
   try {
-    const llm = new OpenRouterClient();
-    const response = await llm.chat([{ role: 'user', content: prompt }]);
+    const llm = getOpenRouterClient();
+    // Use getCoachingResponse with a properly constructed prompt
+    const constructedPrompt = {
+      messages: [
+        { role: 'system' as const, content: 'You are a project organization assistant. Respond with valid JSON only.' },
+        { role: 'user' as const, content: prompt }
+      ],
+      temperature: 0.3,
+      max_tokens: 500,
+    };
+    const coachingResponse = await llm.getCoachingResponse(constructedPrompt);
+    const response = coachingResponse.content;
 
     // Parse JSON from response
     const jsonMatch = response.match(/\{[\s\S]*\}/);

@@ -67,7 +67,38 @@ async function xaiChat(prompt: ConstructedPrompt, model: string): Promise<Direct
   };
 }
 
+async function openRouterChat(prompt: ConstructedPrompt, model: string): Promise<DirectChatResponse> {
+  const key = process.env.OPENROUTER_API_KEY;
+  if (!key) throw new Error('OPENROUTER_API_KEY not set');
+  const resp = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${key}`,
+      'HTTP-Referer': 'https://wrath-shield.com',
+      'X-Title': 'Wrath Shield Link'
+    },
+    body: JSON.stringify({
+      model,
+      messages: prompt.messages,
+      temperature: prompt.temperature,
+      max_tokens: prompt.max_tokens,
+      response_format: { type: 'json_object' },
+    }),
+  });
+  if (!resp.ok) throw new Error(`OpenRouter API error ${resp.status}: ${await resp.text()}`);
+  const data: any = await resp.json();
+  const choice = data?.choices?.[0];
+  if (!choice?.message?.content) throw new Error('OpenRouter response missing content');
+  return {
+    content: choice.message.content,
+    model: data.model || model,
+    finish_reason: choice.finish_reason,
+  };
+}
+
 export const DirectLLMClients = {
   openaiChat,
   xaiChat,
+  openRouterChat,
 };

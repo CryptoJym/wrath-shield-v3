@@ -48,9 +48,10 @@ function githubIssueToTask(issue: GitHubIssue): UnifiedTask {
   }
 
   // Include repo info in the task ID for multi-repo support
+  // Use __ as separator between owner and repo to handle hyphens in names
   const repoFullName = issue.repo_full_name || '';
   const taskId = repoFullName
-    ? `github-${repoFullName.replace('/', '-')}-${issue.number}`
+    ? `github-${repoFullName.replace('/', '__')}-${issue.number}`
     : `github-${issue.id}`;
 
   return {
@@ -366,31 +367,32 @@ export async function updateTask(
     labels?: string[];
   }
 ): Promise<UnifiedTask | null> {
-  // Parse task ID - format is "source-rest" or "github-owner-repo-issueNumber"
-  const parts = taskId.split('-');
-  const source = parts[0];
+  // Parse task ID - format is "github-owner__repo-issueNumber" or "local-..."
+  const source = taskId.split('-')[0];
 
   if (source === 'github' && githubClient.isConfigured()) {
-    // Task ID format: github-owner-repo-issueNumber
-    // Note: repo name can contain hyphens, so we can't just split by '-'
-    // The issue number is always the last part
-    if (parts.length < 4) {
+    // Task ID format: github-owner__repo-issueNumber (__ separates owner from repo)
+    // Remove 'github-' prefix and extract issue number from end
+    const withoutPrefix = taskId.slice(7); // Remove 'github-'
+    const lastDash = withoutPrefix.lastIndexOf('-');
+
+    if (lastDash === -1) {
       console.error('[PM Integration] Invalid GitHub task ID format:', taskId);
       return null;
     }
 
-    // Issue number is always the last part
-    const issueNumber = parseInt(parts[parts.length - 1]);
+    const issueNumber = parseInt(withoutPrefix.slice(lastDash + 1));
     if (isNaN(issueNumber)) {
       console.error('[PM Integration] Invalid issue number in task ID:', taskId);
       return null;
     }
 
-    // Owner is the second part
-    const owner = parts[1];
+    const ownerRepo = withoutPrefix.slice(0, lastDash);
 
-    // Repo name is everything between owner and issue number (parts 2 to length-2)
-    const repo = parts.slice(2, parts.length - 1).join('-');
+    // Split by __ to separate owner and repo (fallback for old format without __)
+    const [owner, repo] = ownerRepo.includes('__')
+      ? ownerRepo.split('__')
+      : [ownerRepo.split('-')[0], ownerRepo.split('-').slice(1).join('-')];
 
     const githubUpdates: any = {};
 
@@ -405,7 +407,7 @@ export async function updateTask(
 
   if (source === 'local') {
     // Local SQLite task - ID format: local-local_TIMESTAMP_RANDOM
-    const localTaskId = parts.slice(1).join('-'); // Reconstruct the original ID
+    const localTaskId = taskId.slice(6); // Remove 'local-' prefix
 
     const localTask = updateLocalTask(localTaskId, {
       status: updates.status,
@@ -449,4 +451,40 @@ export async function deleteTask(taskId: string): Promise<boolean> {
   // GitHub and Motion don't support delete through our interface
   console.warn('[PM Integration] Delete not supported for source:', source);
   return false;
+}
+
+/**
+ * Create task from queued signal (used by queue processor)
+ * This is imported dynamically by task-queue.ts to avoid circular dependencies
+ */
+export async function createTaskFromSignal(
+  signal: {
+    id: string;
+    source: string;
+    signal_type: string;
+    payload: Record<string, unknown>;
+    confidence: number;
+  },
+  triage: {
+    action: string;
+    suggested_title?: string;
+    suggested_labels?: string[];
+    assigned_project?: string;
+    due_date?: string;
+    priority: string;
+  }
+): Promise<UnifiedTask | null> {
+  const taskParams = {
+    title: triage.suggested_title || `Signal from ${signal.source}`,
+    description: JSON.stringify(signal.payload, null, 2),
+    priority: (triage.priority === 'critical' ? 'urgent' : triage.priority) as TaskPriority,
+    source: (triage.action === 'github_issue' ? 'github' : 'local') as TaskSource,
+    project_name: triage.assigned_project,
+    due_date: triage.due_date,
+    labels: triage.suggested_labels || [signal.source, signal.signal_type],
+  };
+
+  console.log(`[PM Integration] Creating task from signal ${signal.id}:`, taskParams.title);
+
+  return createTask(taskParams);
 }

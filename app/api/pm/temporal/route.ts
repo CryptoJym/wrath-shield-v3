@@ -32,7 +32,8 @@ export async function GET(req: NextRequest) {
 
     // Default: Get full agent temporal summary (grounding)
     if (!action) {
-      const summary = getAgentTemporalSummary();
+      const timezone = searchParams.get('tz') || undefined;
+      const summary = getAgentTemporalSummary(timezone);
 
       return NextResponse.json({
         ok: true,

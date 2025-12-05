@@ -56,7 +56,7 @@ const LIFE_OS_TO_ZEP_ID: Record<string, ZepAgentId> = {
   'agent.health': 'health-agent',
   'agent.coaching': 'coaching-agent',
   'agent.hyro': 'hyro-agent',
-    'agent.grok': 'orchestrator-agent', // Legacy - redirects to orchestrator
+  'agent.grok': 'orchestrator-agent', // Legacy - redirects to orchestrator
   'agent.sherlock': 'sherlock-agent',
   'agent.ea': 'ea-agent',
   'agent.relationships': 'relationships-agent',
@@ -264,6 +264,21 @@ async function callXAI(
 }
 
 /**
+ * Call OpenRouter API directly
+ */
+async function callOpenRouter(
+  prompt: ConstructedPrompt,
+  model: string
+): Promise<{ content: string; model: string; usage: { prompt: number; completion: number; total: number } }> {
+  const result = await DirectLLMClients.openRouterChat(prompt, model);
+  return {
+    content: result.content,
+    model: result.model,
+    usage: { prompt: 0, completion: 0, total: 0 },
+  };
+}
+
+/**
  * Route to the appropriate LLM provider
  *
  * APPROVED PROVIDERS:
@@ -415,7 +430,7 @@ export class AgentInvoker {
         domain_id: domainId,
         model: actualModel,
         tokens_used: tokensUsed.total,
-      }).catch(() => {}); // Fire-and-forget, errors already logged
+      }).catch(() => { }); // Fire-and-forget, errors already logged
     }
 
     // 9. Log activity

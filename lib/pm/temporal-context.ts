@@ -351,7 +351,7 @@ export function getStaleEvents(
  * Generate a temporal summary for the PM agent
  * This is the main function to ground the agent in the present
  */
-export function getAgentTemporalSummary(): {
+export function getAgentTemporalSummary(timezone?: string): {
   context: TemporalContext;
   last_sync: TimeElapsed | null;
   last_commit_analysis: TimeElapsed | null;
@@ -361,7 +361,7 @@ export function getAgentTemporalSummary(): {
   };
   grounding_statement: string;
 } {
-  const context = getCurrentContext();
+  const context = getCurrentContext(timezone);
   const lastSync = getTimeSinceEvent('sync', 'github_refresh', 'sync');
   const lastAnalysis = getTimeSinceEvent('commit_analysis', 'batch', 'commit');
 

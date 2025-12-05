@@ -9,6 +9,13 @@
  *
  * Uses both private memory (wrath-shield-pm-agent) and can propose
  * organizational policies to the council.
+ *
+ * ENHANCED (Phase 4): Now includes temporal memory capabilities:
+ * - Bi-temporal fact storage (when happened vs when learned)
+ * - Historical state queries ("What was the priority last week?")
+ * - Entity relationship tracking
+ * - Pattern-based predictions
+ * - Correction feedback learning
  */
 
 import { ensureServerOnly } from '../server-only-guard';
@@ -22,6 +29,17 @@ import {
   type ZepSearchResult,
   type OrgCouncilProposal,
 } from '../memory/zep';
+
+// Temporal memory imports (Phase 4)
+import {
+  recordFact,
+  recordRelationship,
+  getCurrentState,
+  getHistoricalState,
+  type EntityType,
+  type FactSource
+} from './temporal-memory';
+import { recordCorrection as recordTemporalCorrection } from './correction-feedback';
 
 // Prevent client-side imports
 ensureServerOnly('lib/pm/pm-memory');
@@ -88,7 +106,7 @@ export async function getPMContext(
  */
 export async function addPMMemory(
   text: string,
-  category: 'assignment' | 'project' | 'rule' | 'pattern' | 'decision' | 'sync',
+  category: 'assignment' | 'project' | 'rule' | 'pattern' | 'decision' | 'sync' | 'suggestion' | 'triage' | 'continuity',
   metadata?: Record<string, any>
 ): Promise<void> {
   const prefixedText = `[PM - ${category.toUpperCase()}] ${text}`;
@@ -362,6 +380,313 @@ export async function getOrganizationalPolicies(
   limit: number = 10
 ): Promise<ZepSearchResult[]> {
   return searchOrgMemory(query, limit);
+}
+
+// ============================================================================
+// NEW: Temporal Memory Enhancements (Phase 4)
+// ============================================================================
+
+/**
+ * Record a decision with bi-temporal tracking
+ */
+export async function recordDecisionWithTemporal(params: {
+  entity_type: EntityType;
+  entity_id: string;
+  attribute: string;
+  value: any;
+  valid_from?: Date;
+  source?: FactSource;
+  confidence?: number;
+  metadata?: Record<string, unknown>;
+}): Promise<void> {
+  // Record to Zep (semantic memory)
+  await addPMMemory(
+    `Decision: ${params.entity_type} ${params.entity_id} ${params.attribute} = ${JSON.stringify(params.value)}`,
+    'decision',
+    { ...params }
+  );
+
+  // Record to temporal layer
+  await recordFact({
+    entity_type: params.entity_type,
+    entity_id: params.entity_id,
+    attribute: params.attribute,
+    value: params.value,
+    valid_from: params.valid_from,
+    source: params.source || 'manual',
+    confidence: params.confidence ?? 1.0,
+    metadata: params.metadata
+  });
+
+  console.log(`[PMMemory] Recorded temporal decision: ${params.entity_type}/${params.entity_id}.${params.attribute}`);
+}
+
+/**
+ * Get historical context for an entity at a specific point in time
+ */
+export async function getHistoricalContext(params: {
+  entity_type: EntityType;
+  entity_id: string;
+  point_in_time?: Date;
+}): Promise<Record<string, any>> {
+  const state = params.point_in_time
+    ? getHistoricalState(params.entity_type, params.entity_id, params.point_in_time)
+    : getCurrentState(params.entity_type, params.entity_id);
+
+  return state.attributes;
+}
+
+/**
+ * Record an entity relationship (e.g., task assigned to person)
+ */
+export async function recordEntityRelationship(params: {
+  from_entity_type: EntityType;
+  from_entity_id: string;
+  to_entity_type: EntityType;
+  to_entity_id: string;
+  relationship_type: 'assigned_to' | 'belongs_to' | 'blocks' | 'depends_on' | 'related_to' | 'created_by';
+  metadata?: Record<string, unknown>;
+}): Promise<void> {
+  await recordRelationship({
+    from_entity_type: params.from_entity_type,
+    from_entity_id: params.from_entity_id,
+    to_entity_type: params.to_entity_type,
+    to_entity_id: params.to_entity_id,
+    relationship_type: params.relationship_type,
+    metadata: params.metadata
+  });
+
+  console.log(`[PMMemory] Recorded relationship: ${params.from_entity_type}/${params.from_entity_id} --[${params.relationship_type}]--> ${params.to_entity_type}/${params.to_entity_id}`);
+}
+
+/**
+ * Enhanced correction learning with temporal feedback
+ */
+export async function learnFromCorrectionWithTemporal(params: {
+  repoName: string;
+  wrongProject: string;
+  correctProject: string;
+  reason?: string;
+}): Promise<void> {
+  // Original Zep logging (keep for backward compatibility)
+  await learnFromCorrection(
+    params.repoName,
+    params.wrongProject,
+    params.correctProject,
+    params.reason
+  );
+
+  // NEW: Record to corrections table for feedback learning
+  await recordTemporalCorrection({
+    correction_type: 'assignment',
+    original_entity_type: 'repo',
+    original_entity_id: params.repoName,
+    original_value: { project: params.wrongProject },
+    corrected_value: { project: params.correctProject },
+    context: {
+      repo: params.repoName,
+      timestamp: new Date().toISOString()
+    },
+    reason: params.reason
+  });
+
+  console.log(`[PMMemory] Recorded temporal correction: ${params.repoName}`);
+}
+
+/**
+ * Enhanced repo assignment with temporal tracking
+ */
+export async function recordRepoAssignmentWithTemporal(assignment: RepoAssignment): Promise<void> {
+  // Original function (keep for backward compatibility)
+  await recordRepoAssignment(assignment);
+
+  // NEW: Record to temporal layer
+  await recordFact({
+    entity_type: 'project',
+    entity_id: assignment.projectId,
+    attribute: 'repo_assignment',
+    value: {
+      repo: assignment.repoFullName,
+      rationale: assignment.rationale
+    },
+    source: assignment.source === 'manual' ? 'manual' : 'ai_suggestion',
+    confidence: assignment.confidence,
+    metadata: {
+      repo_name: assignment.repoName,
+      assigned_by: assignment.assignedBy,
+      assigned_at: assignment.assignedAt
+    }
+  });
+
+  // Record relationship: repo belongs_to project
+  await recordRelationship({
+    from_entity_type: 'project' as EntityType,
+    from_entity_id: assignment.repoName,
+    to_entity_type: 'project',
+    to_entity_id: assignment.projectId,
+    relationship_type: 'belongs_to',
+    metadata: {
+      repo_full_name: assignment.repoFullName
+    }
+  });
+}
+
+// ============================================================================
+// NEW: AI Integration Memory Functions (Phase 5 - AI-Powered Triage)
+// ============================================================================
+
+/**
+ * Search PM memories for AI triage/suggestion context
+ * Alias for searchPMMemory with better return type for AI modules
+ */
+export async function searchPMMemories(
+  query: string,
+  limit: number = 10
+): Promise<Array<{ text: string; score?: number; metadata?: Record<string, unknown> }>> {
+  try {
+    const results = await searchPMMemory(query, limit);
+    return results.map(r => ({
+      text: r.memory.text,
+      score: r.score,
+      metadata: r.memory.metadata,
+    }));
+  } catch (error) {
+    console.warn(`[PM Memory] Search failed (non-fatal):`, error);
+    return [];
+  }
+}
+
+/**
+ * Get triage context for a signal
+ * Combines private PM memories + org-council policies
+ */
+export async function getTriageContext(
+  signalSource: string,
+  signalType: string,
+  keywords: string[]
+): Promise<{
+  privateContext: string;
+  orgContext: string;
+  combinedContext: string;
+}> {
+  const query = `triage ${signalSource} ${signalType} ${keywords.join(' ')}`.trim();
+
+  const { private: privateResults, org: orgResults } = await getPMContext(query, 5);
+
+  const privateContext = privateResults.length > 0
+    ? 'Past Triage Decisions:\n' + privateResults.map((r, i) => `${i + 1}. ${r.memory.text}`).join('\n')
+    : '';
+
+  const orgContext = orgResults.length > 0
+    ? 'Organizational Policies:\n' + orgResults.map((r, i) => `${i + 1}. ${r.memory.text}`).join('\n')
+    : '';
+
+  const combinedContext = [privateContext, orgContext].filter(Boolean).join('\n\n');
+
+  return { privateContext, orgContext, combinedContext };
+}
+
+/**
+ * Get suggestion context for pattern analysis
+ */
+export async function getSuggestionContext(
+  entityType: EntityType,
+  entityId: string,
+  suggestionType: string
+): Promise<{
+  patterns: string;
+  examples: string;
+}> {
+  const patternQuery = `${suggestionType} patterns ${entityType}`;
+  const exampleQuery = `${suggestionType} ${entityType} examples`;
+
+  const [patternResults, exampleResults] = await Promise.all([
+    searchPMMemory(patternQuery, 5),
+    searchPMMemory(exampleQuery, 5),
+  ]);
+
+  const patterns = patternResults.length > 0
+    ? patternResults.map(r => r.memory.text).join('\n')
+    : '';
+
+  const examples = exampleResults.length > 0
+    ? exampleResults.map(r => r.memory.text).join('\n')
+    : '';
+
+  return { patterns, examples };
+}
+
+/**
+ * Record AI triage decision for learning
+ */
+export async function recordTriageDecision(params: {
+  signalId: string;
+  signalSource: string;
+  signalType: string;
+  action: string;
+  escalation: string;
+  priority: string;
+  confidence: number;
+  rationale: string;
+  aiPowered: boolean;
+}): Promise<void> {
+  const text = `Triage Decision: Signal ${params.signalId} from ${params.signalSource}/${params.signalType}
+Action: ${params.action} | Escalation: ${params.escalation} | Priority: ${params.priority}
+Confidence: ${(params.confidence * 100).toFixed(0)}%
+AI-Powered: ${params.aiPowered ? 'Yes' : 'No'}
+Rationale: ${params.rationale}`;
+
+  await addPMMemory(text, 'decision', {
+    signal_id: params.signalId,
+    signal_source: params.signalSource,
+    signal_type: params.signalType,
+    action: params.action,
+    escalation: params.escalation,
+    priority: params.priority,
+    confidence: params.confidence,
+    ai_powered: params.aiPowered,
+  });
+}
+
+/**
+ * Record AI suggestion for learning
+ */
+export async function recordSuggestionFeedback(params: {
+  suggestionId: string;
+  suggestionType: string;
+  entityType: string;
+  entityId: string;
+  suggestedValue: unknown;
+  accepted: boolean;
+  userFeedback?: string;
+}): Promise<void> {
+  const text = `Suggestion Feedback: ${params.suggestionType} for ${params.entityType}/${params.entityId}
+Suggested: ${JSON.stringify(params.suggestedValue)}
+Outcome: ${params.accepted ? 'Accepted' : 'Rejected'}
+${params.userFeedback ? `User Feedback: ${params.userFeedback}` : ''}`;
+
+  await addPMMemory(text, 'pattern', {
+    suggestion_id: params.suggestionId,
+    suggestion_type: params.suggestionType,
+    entity_type: params.entityType,
+    entity_id: params.entityId,
+    suggested_value: params.suggestedValue,
+    accepted: params.accepted,
+    feedback: params.userFeedback,
+  });
+
+  // If rejected, also record as a correction for learning
+  if (!params.accepted) {
+    await recordTemporalCorrection({
+      correction_type: 'suggestion',
+      original_entity_type: params.entityType,
+      original_entity_id: params.entityId,
+      original_value: { suggestion: params.suggestedValue },
+      corrected_value: { rejected: true },
+      context: { suggestion_id: params.suggestionId },
+      reason: params.userFeedback,
+    });
+  }
 }
 
 export {

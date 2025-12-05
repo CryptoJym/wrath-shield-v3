@@ -38,9 +38,18 @@ import {
   Zap,
   Search,
   SortAsc,
-  Archive
+  Archive,
+  Brain
 } from 'lucide-react';
 import { PMChat } from '@/components/ui/agent-chat-widget';
+import { AgentAnatomyCard } from '@/components/pm/AgentAnatomyCard';
+import { AgentAnatomyNetwork } from '@/components/pm/AgentAnatomyNetwork';
+import { EscalationsPanel, type Escalation } from '@/components/pm/EscalationsPanel';
+import { ProposalsPanel, type Proposal } from '@/components/pm/ProposalsPanel';
+import { CouncilActivityPanel, type AutoAction } from '@/components/pm/CouncilActivityPanel';
+import { SuggestionsPanel, type Suggestion } from '@/components/pm/SuggestionsPanel';
+import { RepoMindMap } from '@/components/pm/RepoMindMap';
+import { AITriageDashboard } from '@/components/pm/AITriageDashboard';
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
@@ -283,6 +292,13 @@ function Toast({ message, type, onClose }: {
 }
 
 export default function PMPage() {
+  const [userTimezone, setUserTimezone] = useState<string>('UTC');
+  const [dismissedSuggestionIds, setDismissedSuggestionIds] = useState<Set<string>>(new Set());
+
+  useEffect(() => {
+    setUserTimezone(Intl.DateTimeFormat().resolvedOptions().timeZone);
+  }, []);
+
   const { data: statusData, error: statusError, mutate: mutateStatus } = useSWR('/api/pm/status', fetcher, {
     refreshInterval: 10000
   });
@@ -302,9 +318,14 @@ export default function PMPage() {
   });
 
   // Temporal and commit intelligence data
-  const { data: temporalData, mutate: mutateTemporal } = useSWR<TemporalSummary>('/api/pm/temporal', fetcher, {
-    refreshInterval: 30000
-  });
+  // Pass timezone to API for accurate local time context
+  const { data: temporalData, mutate: mutateTemporal } = useSWR<TemporalSummary>(
+    `/api/pm/temporal?tz=${encodeURIComponent(userTimezone)}`,
+    fetcher,
+    {
+      refreshInterval: 30000
+    }
+  );
   const { data: progressData, mutate: mutateProgress } = useSWR('/api/pm/commits?action=report', fetcher, {
     refreshInterval: 60000
   });
@@ -312,12 +333,20 @@ export default function PMPage() {
     refreshInterval: 60000
   });
 
+  // Council data - escalations, proposals, auto-actions, suggestions
+  const { data: councilData, mutate: mutateCouncil } = useSWR('/api/pm/council', fetcher, {
+    refreshInterval: 15000
+  });
+  const { data: suggestionsData, mutate: mutateSuggestions2 } = useSWR('/api/pm/suggestions', fetcher, {
+    refreshInterval: 30000
+  });
+
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' | 'info' } | null>(null);
   const [filter, setFilter] = useState<'all' | 'pending' | 'processing' | 'done'>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState<'updated' | 'created' | 'priority' | 'due'>('updated');
   const [actioningId, setActioningId] = useState<string | null>(null);
-  const [activeTab, setActiveTab] = useState<'tasks' | 'repos' | 'progress'>('tasks');
+  const [activeTab, setActiveTab] = useState<'tasks' | 'repos' | 'progress' | 'ai'>('tasks');
   const [autoOrganizing, setAutoOrganizing] = useState(false);
   const [applyingRepo, setApplyingRepo] = useState<string | null>(null);
   const [analyzingCommits, setAnalyzingCommits] = useState(false);
@@ -424,6 +453,161 @@ export default function PMPage() {
     }
   };
 
+  // Council action handlers
+  const handleAcknowledgeEscalation = async (id: string) => {
+    try {
+      const res = await fetch('/api/pm/council/escalations', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ escalation_id: id, action: 'acknowledge' }),
+      });
+      const data = await res.json();
+      if (data.ok) {
+        showToast('Escalation acknowledged', 'success');
+        mutateCouncil();
+      } else {
+        showToast(data.error || 'Failed to acknowledge', 'error');
+      }
+    } catch (error) {
+      showToast('Failed to acknowledge escalation', 'error');
+    }
+  };
+
+  const handleResolveEscalation = async (id: string, resolution: string) => {
+    try {
+      const res = await fetch('/api/pm/council/escalations', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ escalation_id: id, action: 'resolve', resolution }),
+      });
+      const data = await res.json();
+      if (data.ok) {
+        showToast('Escalation resolved', 'success');
+        mutateCouncil();
+      } else {
+        showToast(data.error || 'Failed to resolve', 'error');
+      }
+    } catch (error) {
+      showToast('Failed to resolve escalation', 'error');
+    }
+  };
+
+  const handleSnoozeEscalation = async (id: string, until: Date) => {
+    try {
+      const res = await fetch('/api/pm/council/escalations', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ escalation_id: id, action: 'snooze', snooze_until: until.toISOString() }),
+      });
+      const data = await res.json();
+      if (data.ok) {
+        showToast('Escalation snoozed', 'success');
+        mutateCouncil();
+      } else {
+        showToast(data.error || 'Failed to snooze', 'error');
+      }
+    } catch (error) {
+      showToast('Failed to snooze escalation', 'error');
+    }
+  };
+
+  const handleApproveProposal = async (id: string, params?: any) => {
+    try {
+      const res = await fetch('/api/pm/council/proposals', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ proposal_id: id, action: 'approve', modified_params: params }),
+      });
+      const data = await res.json();
+      if (data.ok) {
+        showToast('Proposal approved', 'success');
+        mutateCouncil();
+        mutateDashboard();
+      } else {
+        showToast(data.error || 'Failed to approve', 'error');
+      }
+    } catch (error) {
+      showToast('Failed to approve proposal', 'error');
+    }
+  };
+
+  const handleRejectProposal = async (id: string, reason: string) => {
+    try {
+      const res = await fetch('/api/pm/council/proposals', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ proposal_id: id, action: 'reject', reason }),
+      });
+      const data = await res.json();
+      if (data.ok) {
+        showToast('Proposal rejected (feedback recorded)', 'success');
+        mutateCouncil();
+      } else {
+        showToast(data.error || 'Failed to reject', 'error');
+      }
+    } catch (error) {
+      showToast('Failed to reject proposal', 'error');
+    }
+  };
+
+  const handleDeferProposal = async (id: string) => {
+    try {
+      const res = await fetch('/api/pm/council/proposals', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ proposal_id: id, action: 'defer' }),
+      });
+      const data = await res.json();
+      if (data.ok) {
+        showToast('Proposal deferred', 'success');
+        mutateCouncil();
+      } else {
+        showToast(data.error || 'Failed to defer', 'error');
+      }
+    } catch (error) {
+      showToast('Failed to defer proposal', 'error');
+    }
+  };
+
+  const handleAcceptSuggestion = async (id: string) => {
+    try {
+      const res = await fetch('/api/pm/suggestions', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ suggestion_id: id, action: 'accept' }),
+      });
+      const data = await res.json();
+      if (data.ok) {
+        showToast('Suggestion accepted', 'success');
+        mutateSuggestions2();
+        mutateDashboard();
+      } else {
+        showToast(data.error || 'Failed to accept', 'error');
+      }
+    } catch (error) {
+      showToast('Failed to accept suggestion', 'error');
+    }
+  };
+
+  const handleRejectSuggestion = async (id: string) => {
+    try {
+      const res = await fetch('/api/pm/suggestions', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ suggestion_id: id, action: 'reject' }),
+      });
+      const data = await res.json();
+      if (data.ok) {
+        showToast('Suggestion rejected (feedback recorded)', 'success');
+        mutateSuggestions2();
+      } else {
+        showToast(data.error || 'Failed to reject', 'error');
+      }
+    } catch (error) {
+      showToast('Failed to reject suggestion', 'error');
+    }
+  };
+
   const pmStatus = statusData as PMStatus | undefined;
   const requests = (requestsData?.requests || []) as ContextRequest[];
   const dashboard = dashboardData as PMDashboardData | undefined;
@@ -433,17 +617,24 @@ export default function PMPage() {
   const progressReport = progressData?.ok ? progressData.report as ProgressReport : undefined;
   const recentCommits = (recentCommitsData?.analyses || []) as CommitAnalysis[];
 
+  // Extract council data
+  const escalations = (councilData?.escalations?.active || []) as Escalation[];
+  const proposals = (councilData?.proposals?.pending || []) as Proposal[];
+  const autoActions = (councilData?.auto_actions?.recent || []) as AutoAction[];
+  const suggestions = (suggestionsData?.suggestions || []) as Suggestion[];
+  const needsAttentionCount = escalations.length + proposals.length;
+
   // Combine local context requests with unified tasks from integrations
   const allTasks = dashboard?.recent_tasks || [];
   const localRequests = requests;
 
   // Use dashboard stats if available, otherwise fall back to local requests
-  const tasksByStatus = dashboard ? {
-    pending: dashboard.tasks.pending,
-    processing: dashboard.tasks.in_progress,
-    done: dashboard.tasks.done,
-    failed: dashboard.tasks.failed,
-    backlog: dashboard.tasks.backlog,
+  const tasksByStatus = dashboard?.tasks ? {
+    pending: dashboard.tasks.pending ?? 0,
+    processing: dashboard.tasks.in_progress ?? 0,
+    done: dashboard.tasks.done ?? 0,
+    failed: dashboard.tasks.failed ?? 0,
+    backlog: dashboard.tasks.backlog ?? 0,
   } : {
     pending: requests.filter(r => r.status === 'pending').length,
     processing: requests.filter(r => r.status === 'processing').length,
@@ -452,7 +643,7 @@ export default function PMPage() {
     backlog: 0,
   };
 
-  const projectsCount = dashboard?.projects.total || 0;
+  const projectsCount = dashboard?.projects?.total ?? 0;
 
   // Filter unified tasks - "All" shows only ACTIVE tasks, not done
   const activeTasks = allTasks.filter(task => task.status !== 'done' && task.status !== 'failed');
@@ -571,22 +762,20 @@ export default function PMPage() {
               <div className="flex gap-3 mt-3">
                 <button
                   onClick={() => setActiveTab('tasks')}
-                  className={`flex items-center gap-2 px-3 py-1.5 text-sm rounded-lg transition ${
-                    activeTab === 'tasks'
-                      ? 'bg-sky-600 text-white'
-                      : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
-                  }`}
+                  className={`flex items-center gap-2 px-3 py-1.5 text-sm rounded-lg transition ${activeTab === 'tasks'
+                    ? 'bg-sky-600 text-white'
+                    : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                    }`}
                 >
                   <ListTodo size={16} />
                   Tasks
                 </button>
                 <button
                   onClick={() => setActiveTab('repos')}
-                  className={`flex items-center gap-2 px-3 py-1.5 text-sm rounded-lg transition ${
-                    activeTab === 'repos'
-                      ? 'bg-purple-600 text-white'
-                      : 'bg-purple-900/30 text-purple-300 border border-purple-500/30 hover:bg-purple-900/50'
-                  }`}
+                  className={`flex items-center gap-2 px-3 py-1.5 text-sm rounded-lg transition ${activeTab === 'repos'
+                    ? 'bg-purple-600 text-white'
+                    : 'bg-purple-900/30 text-purple-300 border border-purple-500/30 hover:bg-purple-900/50'
+                    }`}
                 >
                   <GitBranch size={16} />
                   Repo Organization
@@ -598,11 +787,10 @@ export default function PMPage() {
                 </button>
                 <button
                   onClick={() => setActiveTab('progress')}
-                  className={`flex items-center gap-2 px-3 py-1.5 text-sm rounded-lg transition ${
-                    activeTab === 'progress'
-                      ? 'bg-emerald-600 text-white'
-                      : 'bg-emerald-900/30 text-emerald-300 border border-emerald-500/30 hover:bg-emerald-900/50'
-                  }`}
+                  className={`flex items-center gap-2 px-3 py-1.5 text-sm rounded-lg transition ${activeTab === 'progress'
+                    ? 'bg-emerald-600 text-white'
+                    : 'bg-emerald-900/30 text-emerald-300 border border-emerald-500/30 hover:bg-emerald-900/50'
+                    }`}
                 >
                   <TrendingUp size={16} />
                   Progress
@@ -611,6 +799,16 @@ export default function PMPage() {
                       !
                     </span>
                   )}
+                </button>
+                <button
+                  onClick={() => setActiveTab('ai')}
+                  className={`flex items-center gap-2 px-3 py-1.5 text-sm rounded-lg transition ${activeTab === 'ai'
+                    ? 'bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white'
+                    : 'bg-violet-900/30 text-violet-300 border border-violet-500/30 hover:bg-violet-900/50'
+                    }`}
+                >
+                  <Brain size={16} />
+                  AI Intelligence
                 </button>
                 <a
                   href="/pm/github"
@@ -639,16 +837,16 @@ export default function PMPage() {
           <div className="text-xs bg-slate-800 rounded p-3 mb-2 space-y-1 border border-slate-700">
             <div className="text-slate-400 font-semibold">Debug: PM data (GitHub-native)</div>
             <div className="text-slate-500">
-              Total tasks: {dashboard?.tasks.total ?? 0} | Pending: {tasksByStatus.pending} | In Progress: {tasksByStatus.processing} | Done: {tasksByStatus.done} | Failed: {tasksByStatus.failed}
+              Total tasks: {dashboard?.tasks?.total ?? 0} | Pending: {tasksByStatus.pending} | In Progress: {tasksByStatus.processing} | Done: {tasksByStatus.done} | Failed: {tasksByStatus.failed}
             </div>
             <div className="text-slate-500">
               Projects: {projectsCount} | Health: {pmStatus?.health_score ?? '-'} | Status: {pmStatus?.status ?? '-'}
             </div>
             <div className="text-slate-500">
-              Sources → GitHub: {dashboard?.tasks.by_source?.github ?? 0} | Local: {dashboard?.tasks.by_source?.local ?? 0}
+              Sources → GitHub: {dashboard?.tasks?.by_source?.github ?? 0} | Local: {dashboard?.tasks?.by_source?.local ?? 0}
             </div>
             <div className="text-slate-500">
-              Integration → GitHub: {dashboard?.integrations.github.configured ? '✓ Connected' : '✗ Not configured'}
+              Integration → GitHub: {dashboard?.integrations?.github?.configured ? '✓ Connected' : '✗ Not configured'}
             </div>
           </div>
         )}
@@ -656,198 +854,260 @@ export default function PMPage() {
         {/* Tasks Tab Content */}
         {activeTab === 'tasks' && (
           <>
-        {/* Search and Filter Bar */}
-        <section className="space-y-4">
-          {/* Search and Sort Row */}
-          <div className="flex flex-col sm:flex-row gap-3">
-            {/* Search Input */}
-            <div className="relative flex-1">
-              <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" />
-              <input
-                type="text"
-                placeholder="Search tasks by title, description, labels..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 bg-slate-800/50 border border-slate-700 rounded-lg text-slate-200 placeholder-slate-500 focus:outline-none focus:border-slate-500 focus:ring-1 focus:ring-slate-500 transition"
-              />
-              {searchQuery && (
-                <button
-                  onClick={() => setSearchQuery('')}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300"
-                >
-                  <X size={16} />
-                </button>
-              )}
-            </div>
+            {/* Council Section - Needs Attention */}
+            {needsAttentionCount > 0 && (
+              <section className="space-y-4 mb-6">
+                <h2 className="text-lg font-semibold text-slate-100 flex items-center gap-2">
+                  <AlertCircle size={20} className="text-rose-400" />
+                  Needs Your Attention ({needsAttentionCount})
+                </h2>
 
-            {/* Sort Dropdown */}
-            <div className="flex items-center gap-2">
-              <SortAsc size={16} className="text-slate-500" />
-              <select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value as any)}
-                className="bg-slate-800 border border-slate-700 rounded-lg px-3 py-2.5 text-sm text-slate-300 focus:outline-none focus:border-slate-500"
-              >
-                <option value="updated">Recently Updated</option>
-                <option value="created">Recently Created</option>
-                <option value="priority">Priority</option>
-                <option value="due">Due Date</option>
-              </select>
-            </div>
+                {/* Escalations Panel - Critical items always first */}
+                {escalations.length > 0 && (
+                  <EscalationsPanel
+                    escalations={escalations}
+                    onAcknowledge={handleAcknowledgeEscalation}
+                    onResolve={handleResolveEscalation}
+                    onSnooze={handleSnoozeEscalation}
+                    onRefresh={mutateCouncil}
+                  />
+                )}
 
-            {/* Refresh Button */}
-            <button
-              onClick={() => mutateDashboard()}
-              className="px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-slate-300 hover:bg-slate-700 hover:text-slate-100 transition flex items-center gap-2"
-            >
-              <RefreshCw size={16} />
-              <span className="hidden sm:inline">Refresh</span>
-            </button>
-          </div>
-
-          {/* Quick Stats Strip */}
-          <div className="flex items-center gap-6 px-4 py-3 bg-slate-800/30 rounded-lg border border-slate-800">
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-blue-400" />
-              <span className="text-sm text-slate-400">
-                <span className="font-semibold text-slate-200">{tasksByStatus.processing}</span> In Progress
-              </span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-amber-400" />
-              <span className="text-sm text-slate-400">
-                <span className="font-semibold text-slate-200">{tasksByStatus.pending}</span> Pending
-              </span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-emerald-400" />
-              <span className="text-sm text-slate-400">
-                <span className="font-semibold text-slate-200">{tasksByStatus.done}</span> Done
-              </span>
-            </div>
-            {urgentCount > 0 && (
-              <div className="flex items-center gap-2 ml-auto">
-                <AlertTriangle size={14} className="text-rose-400" />
-                <span className="text-sm text-rose-400 font-medium">
-                  {urgentCount} due soon
-                </span>
-              </div>
+                {/* Proposals Panel - Items needing approval */}
+                {proposals.length > 0 && (
+                  <ProposalsPanel
+                    proposals={proposals}
+                    onApprove={handleApproveProposal}
+                    onReject={handleRejectProposal}
+                    onDefer={handleDeferProposal}
+                    onRefresh={mutateCouncil}
+                  />
+                )}
+              </section>
             )}
-          </div>
-        </section>
 
-        {/* Filter Tabs */}
-        <div className="flex gap-2 border-b border-slate-800 pb-3">
-          {[
-            { key: 'all', label: 'Active', count: activeTasks.length, color: 'bg-blue-500' },
-            { key: 'pending', label: 'Pending', count: tasksByStatus.pending + tasksByStatus.backlog, color: 'bg-amber-500' },
-            { key: 'processing', label: 'In Progress', count: tasksByStatus.processing, color: 'bg-sky-500' },
-            { key: 'done', label: 'Archived', count: archivedTasks.length, color: 'bg-slate-500' },
-          ].map(tab => (
-            <button
-              key={tab.key}
-              onClick={() => setFilter(tab.key as any)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2 ${
-                filter === tab.key
-                  ? 'bg-slate-700 text-slate-100 border border-slate-600'
-                  : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'
-              }`}
-            >
-              {tab.key === 'done' && <Archive size={14} />}
-              {tab.label}
-              <span className={`px-1.5 py-0.5 text-xs rounded ${
-                filter === tab.key ? tab.color + ' text-white' : 'bg-slate-800 text-slate-400'
-              }`}>
-                {tab.count}
-              </span>
-            </button>
-          ))}
-        </div>
+            {/* Council Activity and Suggestions - Side by side */}
+            {(autoActions.length > 0 || suggestions.length > 0) && (
+              <section className="grid md:grid-cols-2 gap-4 mb-6">
+                {/* Council Activity - What was done automatically */}
+                {autoActions.length > 0 && (
+                  <CouncilActivityPanel
+                    autoActions={autoActions}
+                    onRefresh={mutateCouncil}
+                  />
+                )}
 
-        {/* Projects/Tasks List */}
-        <section className="space-y-4">
-          {filter === 'done' && (
-            <div className="rounded-lg bg-slate-800/50 border border-slate-700 px-4 py-3 mb-4">
-              <div className="flex items-center gap-2 text-slate-300">
-                <CheckCircle size={18} className="text-emerald-400" />
-                <span className="font-medium">Archived Tasks</span>
-                <span className="text-slate-500 text-sm">- Completed items from GitHub and local sources</span>
-              </div>
-            </div>
-          )}
-          {filteredTasks.length === 0 ? (
-            <div className="rounded-xl border border-slate-800 bg-slate-900/50 p-12 text-center">
-              <ListTodo size={48} className="mx-auto text-slate-600 mb-4" />
-              <p className="text-slate-400 text-lg">
-                {filter === 'done' ? 'No archived tasks yet' : 'No items to display'}
-              </p>
-              <p className="text-slate-500 text-sm mt-2">
-                {filter === 'all'
-                  ? dashboard?.integrations.github.configured
-                    ? 'No active tasks found. Create issues in your enabled repositories.'
-                    : 'No tasks yet. Configure GitHub integration in .env.local'
-                  : filter === 'done'
-                    ? 'Completed tasks will appear here with their project relations.'
-                    : `No items with status "${filter}"`
-                }
-              </p>
-              {!dashboard?.integrations.github.configured && filter !== 'done' && (
-                <div className="mt-4 text-xs text-slate-600 space-y-1">
-                  <p>Add to .env.local:</p>
-                  <p>GITHUB_ACCESS_TOKEN, GITHUB_REPO_OWNER, GITHUB_REPO_NAME</p>
+                {/* Suggestions - AI recommendations */}
+                {suggestions.length > 0 && (
+                  <SuggestionsPanel
+                    suggestions={suggestions}
+                    onAccept={handleAcceptSuggestion}
+                    onReject={handleRejectSuggestion}
+                    onRefresh={mutateSuggestions2}
+                    dismissedIds={dismissedSuggestionIds}
+                    onDismiss={(id) => setDismissedSuggestionIds(prev => new Set(prev).add(id))}
+                    onRestore={(id) => setDismissedSuggestionIds(prev => {
+                      const next = new Set(prev);
+                      next.delete(id);
+                      return next;
+                    })}
+                  />
+                )}
+              </section>
+            )}
+
+            {/* Search and Filter Bar */}
+            <section className="space-y-4">
+              {/* Search and Sort Row */}
+              <div className="flex flex-col sm:flex-row gap-3">
+                {/* Search Input */}
+                <div className="relative flex-1">
+                  <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" />
+                  <input
+                    type="text"
+                    placeholder="Search tasks by title, description, labels..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full pl-10 pr-4 py-2.5 bg-slate-800/50 border border-slate-700 rounded-lg text-slate-200 placeholder-slate-500 focus:outline-none focus:border-slate-500 focus:ring-1 focus:ring-slate-500 transition"
+                  />
+                  {searchQuery && (
+                    <button
+                      onClick={() => setSearchQuery('')}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300"
+                    >
+                      <X size={16} />
+                    </button>
+                  )}
                 </div>
-              )}
-            </div>
-          ) : (
-            <div className="grid gap-4">
-              {filteredTasks.map(task => (
-                <UnifiedTaskCard
-                  key={task.id}
-                  task={task}
-                  onAction={handleAction}
-                  isActioning={actioningId === task.id}
-                  onRefresh={mutateDashboard}
-                  showProjectRelation={filter === 'done'}
-                />
-              ))}
-            </div>
-          )}
-        </section>
 
-        {/* Recent Activity Feed */}
-        {pmStatus?.recent_items && pmStatus.recent_items.length > 0 && (
-          <section className="rounded-xl border border-slate-800 bg-slate-900/50 p-6 space-y-4">
-            <div className="flex items-center gap-2">
-              <Activity size={20} className="text-slate-400" />
-              <h2 className="text-lg font-semibold">Recent Activity</h2>
-            </div>
-            <div className="space-y-2">
-              {pmStatus.recent_items.map(item => (
-                <div
-                  key={item.id}
-                  className="flex items-center justify-between px-4 py-3 rounded-lg bg-slate-800/50 border border-slate-700/50 hover:border-slate-600 transition"
+                {/* Sort Dropdown */}
+                <div className="flex items-center gap-2">
+                  <SortAsc size={16} className="text-slate-500" />
+                  <select
+                    value={sortBy}
+                    onChange={(e) => setSortBy(e.target.value as any)}
+                    className="bg-slate-800 border border-slate-700 rounded-lg px-3 py-2.5 text-sm text-slate-300 focus:outline-none focus:border-slate-500"
+                  >
+                    <option value="updated">Recently Updated</option>
+                    <option value="created">Recently Created</option>
+                    <option value="priority">Priority</option>
+                    <option value="due">Due Date</option>
+                  </select>
+                </div>
+
+                {/* Refresh Button */}
+                <button
+                  onClick={() => mutateDashboard()}
+                  className="px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-slate-300 hover:bg-slate-700 hover:text-slate-100 transition flex items-center gap-2"
                 >
-                  <div className="flex items-center gap-3 min-w-0">
-                    <span className={`px-2 py-1 text-xs rounded font-medium ${
-                      item.status === 'done' ? 'bg-emerald-900/50 text-emerald-300' :
-                      item.status === 'pending' ? 'bg-amber-900/50 text-amber-300' :
-                      item.status === 'processing' ? 'bg-blue-900/50 text-blue-300' :
-                      'bg-slate-700 text-slate-300'
-                    }`}>
-                      {item.status}
-                    </span>
-                    <span className="text-slate-300 truncate">
-                      {item.event_subject || item.channel || 'Item'}
-                    </span>
-                  </div>
-                  <span className="text-xs text-slate-500 flex-shrink-0 ml-4">
-                    {formatRelativeTime(item.created_at)}
+                  <RefreshCw size={16} />
+                  <span className="hidden sm:inline">Refresh</span>
+                </button>
+              </div>
+
+              {/* Quick Stats Strip */}
+              <div className="flex items-center gap-6 px-4 py-3 bg-slate-800/30 rounded-lg border border-slate-800">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full bg-blue-400" />
+                  <span className="text-sm text-slate-400">
+                    <span className="font-semibold text-slate-200">{tasksByStatus.processing}</span> In Progress
                   </span>
                 </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full bg-amber-400" />
+                  <span className="text-sm text-slate-400">
+                    <span className="font-semibold text-slate-200">{tasksByStatus.pending}</span> Pending
+                  </span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full bg-emerald-400" />
+                  <span className="text-sm text-slate-400">
+                    <span className="font-semibold text-slate-200">{tasksByStatus.done}</span> Done
+                  </span>
+                </div>
+                {urgentCount > 0 && (
+                  <div className="flex items-center gap-2 ml-auto">
+                    <AlertTriangle size={14} className="text-rose-400" />
+                    <span className="text-sm text-rose-400 font-medium">
+                      {urgentCount} due soon
+                    </span>
+                  </div>
+                )}
+              </div>
+            </section>
+
+            {/* Filter Tabs */}
+            <div className="flex gap-2 border-b border-slate-800 pb-3">
+              {[
+                { key: 'all', label: 'Active', count: activeTasks.length, color: 'bg-blue-500' },
+                { key: 'pending', label: 'Pending', count: tasksByStatus.pending + tasksByStatus.backlog, color: 'bg-amber-500' },
+                { key: 'processing', label: 'In Progress', count: tasksByStatus.processing, color: 'bg-sky-500' },
+                { key: 'done', label: 'Archived', count: archivedTasks.length, color: 'bg-slate-500' },
+              ].map(tab => (
+                <button
+                  key={tab.key}
+                  onClick={() => setFilter(tab.key as any)}
+                  className={`px-4 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2 ${filter === tab.key
+                    ? 'bg-slate-700 text-slate-100 border border-slate-600'
+                    : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'
+                    }`}
+                >
+                  {tab.key === 'done' && <Archive size={14} />}
+                  {tab.label}
+                  <span className={`px-1.5 py-0.5 text-xs rounded ${filter === tab.key ? tab.color + ' text-white' : 'bg-slate-800 text-slate-400'
+                    }`}>
+                    {tab.count}
+                  </span>
+                </button>
               ))}
             </div>
-          </section>
-        )}
+
+            {/* Projects/Tasks List */}
+            <section className="space-y-4">
+              {filter === 'done' && (
+                <div className="rounded-lg bg-slate-800/50 border border-slate-700 px-4 py-3 mb-4">
+                  <div className="flex items-center gap-2 text-slate-300">
+                    <CheckCircle size={18} className="text-emerald-400" />
+                    <span className="font-medium">Archived Tasks</span>
+                    <span className="text-slate-500 text-sm">- Completed items from GitHub and local sources</span>
+                  </div>
+                </div>
+              )}
+              {filteredTasks.length === 0 ? (
+                <div className="rounded-xl border border-slate-800 bg-slate-900/50 p-12 text-center">
+                  <ListTodo size={48} className="mx-auto text-slate-600 mb-4" />
+                  <p className="text-slate-400 text-lg">
+                    {filter === 'done' ? 'No archived tasks yet' : 'No items to display'}
+                  </p>
+                  <p className="text-slate-500 text-sm mt-2">
+                    {filter === 'all'
+                      ? dashboard?.integrations?.github?.configured
+                        ? 'No active tasks found. Create issues in your enabled repositories.'
+                        : 'No tasks yet. Configure GitHub integration in .env.local'
+                      : filter === 'done'
+                        ? 'Completed tasks will appear here with their project relations.'
+                        : `No items with status "${filter}"`
+                    }
+                  </p>
+                  {!dashboard?.integrations?.github?.configured && filter !== 'done' && (
+                    <div className="mt-4 text-xs text-slate-600 space-y-1">
+                      <p>Add to .env.local:</p>
+                      <p>GITHUB_ACCESS_TOKEN, GITHUB_REPO_OWNER, GITHUB_REPO_NAME</p>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <div className="grid gap-4">
+                  {filteredTasks.map(task => (
+                    <UnifiedTaskCard
+                      key={task.id}
+                      task={task}
+                      onAction={handleAction}
+                      isActioning={actioningId === task.id}
+                      onRefresh={mutateDashboard}
+                      showProjectRelation={filter === 'done'}
+                    />
+                  ))}
+                </div>
+              )}
+            </section>
+
+            {/* Agent Anatomy Network - Visual System Map */}
+            <AgentAnatomyNetwork />
+
+            {/* Recent Activity Feed */}
+            {pmStatus?.recent_items && pmStatus.recent_items.length > 0 && (
+              <section className="rounded-xl border border-slate-800 bg-slate-900/50 p-6 space-y-4">
+                <div className="flex items-center gap-2">
+                  <Activity size={20} className="text-slate-400" />
+                  <h2 className="text-lg font-semibold">Recent Activity</h2>
+                </div>
+                <div className="space-y-2">
+                  {pmStatus.recent_items.map(item => (
+                    <div
+                      key={item.id}
+                      className="flex items-center justify-between px-4 py-3 rounded-lg bg-slate-800/50 border border-slate-700/50 hover:border-slate-600 transition"
+                    >
+                      <div className="flex items-center gap-3 min-w-0">
+                        <span className={`px-2 py-1 text-xs rounded font-medium ${item.status === 'done' ? 'bg-emerald-900/50 text-emerald-300' :
+                          item.status === 'pending' ? 'bg-amber-900/50 text-amber-300' :
+                            item.status === 'processing' ? 'bg-blue-900/50 text-blue-300' :
+                              'bg-slate-700 text-slate-300'
+                          }`}>
+                          {item.status}
+                        </span>
+                        <span className="text-slate-300 truncate">
+                          {item.event_subject || item.channel || 'Item'}
+                        </span>
+                      </div>
+                      <span className="text-xs text-slate-500 flex-shrink-0 ml-4">
+                        {formatRelativeTime(item.created_at)}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
           </>
         )}
 
@@ -935,99 +1195,9 @@ export default function PMPage() {
               )}
             </div>
 
-            {/* Suggestions List */}
+            {/* Repo Mind Map Visualization */}
             <div className="space-y-4">
-              <h2 className="text-xl font-semibold">Organization Suggestions</h2>
-              {repoSuggestions.length === 0 ? (
-                <div className="rounded-xl border border-slate-700 bg-slate-800/30 p-12 text-center">
-                  <GitBranch size={48} className="mx-auto text-slate-600 mb-4" />
-                  <p className="text-slate-400 text-lg">No unmapped repositories</p>
-                  <p className="text-slate-500 text-sm mt-2">
-                    All your repositories have been organized into projects
-                  </p>
-                </div>
-              ) : (
-                <div className="space-y-3">
-                  {repoSuggestions.map((suggestion) => (
-                    <div
-                      key={suggestion.repo.full_name}
-                      className={`rounded-xl border p-4 ${
-                        suggestion.autoAssignable
-                          ? 'border-emerald-500/30 bg-emerald-500/5'
-                          : 'border-slate-700 bg-slate-800/30'
-                      }`}
-                    >
-                      <div className="flex items-start justify-between gap-4">
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-center gap-2 mb-2">
-                            <Github size={16} className="text-slate-400" />
-                            <span className="font-medium text-slate-100">{suggestion.repo.name}</span>
-                            {suggestion.repo.language && (
-                              <span className="px-2 py-0.5 text-xs rounded bg-slate-700 text-slate-300">
-                                {suggestion.repo.language}
-                              </span>
-                            )}
-                            {suggestion.autoAssignable && (
-                              <span className="px-2 py-0.5 text-xs rounded bg-emerald-900/50 text-emerald-300">
-                                Auto-assignable
-                              </span>
-                            )}
-                          </div>
-                          {suggestion.repo.description && (
-                            <p className="text-sm text-slate-400 mb-3 line-clamp-2">
-                              {suggestion.repo.description}
-                            </p>
-                          )}
-
-                          {/* Suggestions */}
-                          <div className="space-y-2">
-                            {suggestion.suggestions.slice(0, 3).map((sug, idx) => (
-                              <div
-                                key={idx}
-                                className="flex items-center justify-between p-2 rounded-lg bg-slate-800/50 border border-slate-700/50"
-                              >
-                                <div className="flex items-center gap-3 min-w-0">
-                                  <div className="text-sm">
-                                    <span className="font-medium text-slate-200">{sug.projectTitle}</span>
-                                    <span className="text-slate-500 ml-2">
-                                      ({Math.round(sug.confidence * 100)}% confidence)
-                                    </span>
-                                  </div>
-                                  <span className="px-1.5 py-0.5 text-xs rounded bg-slate-700 text-slate-400">
-                                    {sug.source}
-                                  </span>
-                                </div>
-                                <button
-                                  onClick={() => handleApplySuggestion(
-                                    suggestion.repo.full_name,
-                                    sug.projectTitle,
-                                    sug.projectId
-                                  )}
-                                  disabled={applyingRepo === suggestion.repo.full_name}
-                                  className="flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-lg bg-purple-600 hover:bg-purple-500 text-white transition disabled:opacity-50"
-                                >
-                                  {applyingRepo === suggestion.repo.full_name ? (
-                                    <Loader2 size={14} className="animate-spin" />
-                                  ) : (
-                                    <Check size={14} />
-                                  )}
-                                  Apply
-                                </button>
-                              </div>
-                            ))}
-                          </div>
-
-                          {suggestion.suggestions.length > 0 && suggestion.suggestions[0].rationale && (
-                            <p className="text-xs text-slate-500 mt-2 italic">
-                              {suggestion.suggestions[0].rationale}
-                            </p>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
+              <RepoMindMap />
             </div>
           </section>
         )}
@@ -1241,21 +1411,21 @@ export default function PMPage() {
                       <div className="flex items-start justify-between gap-4 mb-2">
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center gap-2 flex-wrap mb-1">
-                            <span className={`px-2 py-0.5 text-xs rounded font-medium ${
-                              commit.category === 'feature' ? 'bg-emerald-900/50 text-emerald-300' :
+                            <span className={`px-2 py-0.5 text-xs rounded font-medium ${commit.category === 'feature' ? 'bg-emerald-900/50 text-emerald-300' :
                               commit.category === 'bugfix' ? 'bg-amber-900/50 text-amber-300' :
-                              commit.category === 'enhancement' ? 'bg-sky-900/50 text-sky-300' :
-                              commit.category === 'refactor' ? 'bg-purple-900/50 text-purple-300' :
-                              'bg-slate-700 text-slate-300'
-                            }`}>
+                                commit.category === 'enhancement' ? 'bg-sky-900/50 text-sky-300' :
+                                  commit.category === 'refactor' ? 'bg-purple-900/50 text-purple-300' :
+                                    'bg-slate-700 text-slate-300'
+                              }`}>
                               {commit.category}
                             </span>
-                            <span className={`px-2 py-0.5 text-xs rounded ${
-                              commit.impact_level === 'critical' ? 'bg-rose-900/50 text-rose-300' :
-                              commit.impact_level === 'high' ? 'bg-orange-900/50 text-orange-300' :
-                              commit.impact_level === 'medium' ? 'bg-amber-900/50 text-amber-300' :
-                              'bg-slate-700 text-slate-400'
-                            }`}>
+                            <span
+                              title={`Impact Level: ${commit.impact_level}. Determined by commit message keywords and scope.`}
+                              className={`px-2 py-0.5 text-xs rounded cursor-help ${commit.impact_level === 'critical' ? 'bg-rose-900/50 text-rose-300' :
+                                commit.impact_level === 'high' ? 'bg-orange-900/50 text-orange-300' :
+                                  commit.impact_level === 'medium' ? 'bg-amber-900/50 text-amber-300' :
+                                    'bg-slate-700 text-slate-400'
+                                }`}>
                               {commit.impact_level}
                             </span>
                             <span className="text-xs text-slate-500">{commit.repo_full_name}</span>
@@ -1289,6 +1459,13 @@ export default function PMPage() {
                 </p>
               </div>
             )}
+          </section>
+        )}
+
+        {/* AI Intelligence Tab Content */}
+        {activeTab === 'ai' && (
+          <section className="space-y-6">
+            <AITriageDashboard />
           </section>
         )}
       </div>
@@ -1404,13 +1581,15 @@ function UnifiedTaskCard({
           : (newStatus === 'done' ? 'Marked as complete!' : 'Started!');
         setUpdateSuccess(successMsg);
 
-        // Wait a bit then refresh the dashboard data
-        setTimeout(async () => {
-          console.log('[PM Task] Refreshing dashboard data...');
-          await onRefresh?.();
-          console.log('[PM Task] Dashboard refresh complete');
+        // Immediately refresh the dashboard data (don't wait)
+        console.log('[PM Task] Refreshing dashboard data...');
+        // Call refresh immediately, then clear success message after delay
+        onRefresh?.();
+
+        // Clear success message after showing it briefly
+        setTimeout(() => {
           setUpdateSuccess(null);
-        }, newStatus === 'done' ? 1500 : 800);
+        }, newStatus === 'done' ? 2000 : 1000);
       } else {
         console.error('[PM Task] Update failed:', data.error || 'Unknown error');
         setUpdateSuccess(`Error: ${data.error || 'Update failed'}`);
@@ -1460,13 +1639,12 @@ function UnifiedTaskCard({
                 const isOverdue = daysUntil < 0;
                 const isDueSoon = daysUntil >= 0 && daysUntil <= 3;
                 return (
-                  <span className={`flex items-center gap-1 px-2 py-0.5 rounded ${
-                    isOverdue
-                      ? 'bg-rose-900/50 text-rose-300 font-medium'
-                      : isDueSoon
-                        ? 'bg-amber-900/50 text-amber-300 font-medium'
-                        : ''
-                  }`}>
+                  <span className={`flex items-center gap-1 px-2 py-0.5 rounded ${isOverdue
+                    ? 'bg-rose-900/50 text-rose-300 font-medium'
+                    : isDueSoon
+                      ? 'bg-amber-900/50 text-amber-300 font-medium'
+                      : ''
+                    }`}>
                     {isOverdue && <AlertTriangle size={12} />}
                     {isDueSoon && !isOverdue && <Clock size={12} />}
                     {isOverdue
@@ -1733,9 +1911,8 @@ function ProjectCard({
   const isOverdue = request.status === 'pending' && age > 86400; // 24 hours
 
   return (
-    <div className={`rounded-xl border ${config.border} ${config.bg} overflow-hidden transition ${
-      isOverdue ? 'ring-2 ring-rose-500/50' : ''
-    }`}>
+    <div className={`rounded-xl border ${config.border} ${config.bg} overflow-hidden transition ${isOverdue ? 'ring-2 ring-rose-500/50' : ''
+      }`}>
       <div className="p-4 space-y-3">
         {/* Header */}
         <div className="flex items-start justify-between gap-4">
