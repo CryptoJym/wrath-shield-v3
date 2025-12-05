@@ -5,9 +5,11 @@
 
 import { NextResponse } from 'next/server';
 import { connectorManager } from '@/lib/hyro/connectors';
+import { getStudentIdFromRequest } from '@/lib/hyro/student-auth';
 
 export async function GET() {
   try {
+    const studentId = await getStudentIdFromRequest();
     const statuses = connectorManager.getConnectorStatus();
 
     return NextResponse.json({

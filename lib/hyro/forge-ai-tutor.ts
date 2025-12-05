@@ -19,7 +19,7 @@ import { getOpenRouterClient, CoachingResponse } from '../OpenRouterClient';
 import { getDatabase } from '../db/Database';
 import { randomUUID } from 'crypto';
 import { StatName, STAT_NAMES, Quest } from './forge-types';
-import { getAllProficiency, getStatProficiency, StatProficiency } from './forge-proficiency';
+import { getProficiencyProfile, getSkillProficiency, SkillProficiency } from './forge-proficiency';
 import { getZPDState, getLearningVelocity, detectFlowState, ZPDState } from './forge-zpd-engine';
 import { getSessionContext, getTodaySession, SessionContext } from './forge-session-orchestrator';
 import { getActiveSkillGaps, SkillGap, getDiagnosticOverview } from './forge-diagnostics';
@@ -69,7 +69,7 @@ export interface TutorConversation {
 
 export interface TutorContext {
   child_name: string;
-  proficiency: StatProficiency[];
+  proficiency: SkillProficiency[];
   zpd_states: ZPDState[];
   session_context: SessionContext;
   active_skill_gaps: SkillGap[];
@@ -177,7 +177,9 @@ Quest format:
  * Build complete tutor context from all Hyro systems
  */
 export function buildTutorContext(): TutorContext {
-  const proficiency = getAllProficiency();
+  // Get proficiency for all stats as an array
+  const proficiencyProfile = getProficiencyProfile();
+  const proficiency = Object.values(proficiencyProfile.stats);
   const sessionContext = getSessionContext();
   const currentSession = getTodaySession();
   const skillGaps = getActiveSkillGaps();
@@ -223,12 +225,12 @@ export function buildTutorContext(): TutorContext {
  * Format context for LLM consumption
  */
 function formatContextForLLM(context: TutorContext): string {
-  const weakestStats = context.proficiency
-    .sort((a, b) => a.estimated_level - b.estimated_level)
+  const weakestStats = [...context.proficiency]
+    .sort((a, b) => a.level - b.level)
     .slice(0, 3);
 
-  const strongestStats = context.proficiency
-    .sort((a, b) => b.estimated_level - a.estimated_level)
+  const strongestStats = [...context.proficiency]
+    .sort((a, b) => b.level - a.level)
     .slice(0, 2);
 
   const flowStatsInFlow = context.flow_states.filter((f) => f.in_flow);
@@ -238,14 +240,14 @@ function formatContextForLLM(context: TutorContext): string {
     '',
     `CURRENT PROFICIENCY LEVELS:`,
     ...context.proficiency.map(
-      (p) => `  ${p.stat_name}: ${p.estimated_level}/100 (confidence: ${Math.round(p.confidence * 100)}%)`
+      (p) => `  ${p.stat_name}: ${p.level}/100 (uncertainty: ${p.uncertainty})`
     ),
     '',
     `WEAKEST AREAS (focus here):`,
-    ...weakestStats.map((s) => `  - ${s.stat_name}: ${s.estimated_level}/100`),
+    ...weakestStats.map((s) => `  - ${s.stat_name}: ${s.level}/100`),
     '',
     `STRONGEST AREAS:`,
-    ...strongestStats.map((s) => `  - ${s.stat_name}: ${s.estimated_level}/100`),
+    ...strongestStats.map((s) => `  - ${s.stat_name}: ${s.level}/100`),
     '',
     `ZONE OF PROXIMAL DEVELOPMENT:`,
     ...context.zpd_states.map(
@@ -459,20 +461,15 @@ export async function chat(
     // Store interaction in memory
     await addEducationMemory(
       `Tutor conversation - User asked about: "${userMessage.substring(0, 50)}..." Intent: ${intent}`,
-      'study_pattern',
+      'pattern',
       { intent, timestamp: Date.now() }
     );
 
-    // Award XP if specified
+    // Award XP if specified (TODO: add studentId to tutor functions for full multi-tenant)
     if (parsedResponse.xp_awarded && parsedResponse.xp_awarded > 0) {
       try {
         const { awardXP } = await import('./forge-xp');
-        awardXP({
-          amount: parsedResponse.xp_awarded,
-          source: 'engagement',
-          source_id: randomUUID(),
-          notes: 'Tutor interaction XP',
-        });
+        awardXP('hyro', parsedResponse.xp_awarded, 'engagement', randomUUID());
       } catch (e) {
         console.log('[AI Tutor] Could not award XP');
       }
@@ -508,7 +505,7 @@ export async function generateQuest(
     if (weakestWithGap) {
       targetStat = weakestWithGap.stat_name;
     } else {
-      targetStat = context.proficiency.sort((a, b) => a.estimated_level - b.estimated_level)[0]?.stat_name || 'reading_comprehension';
+      targetStat = [...context.proficiency].sort((a, b) => a.level - b.level)[0]?.stat_name || 'reading';
     }
   }
 
@@ -590,12 +587,22 @@ Generate a quest that fits this profile. Return ONLY valid JSON.`;
     const quest: Quest = {
       id: questId,
       title: questData.title,
-      description: questData.description,
+      description: questData.description || null,
       quest_type: questData.quest_type || 'daily',
       status: 'active',
       xp_reward: questData.xp_reward || 50,
-      difficulty: questData.difficulty || 'normal',
+      difficulty: questData.difficulty || 'medium',
       required_stat: targetStat,
+      stat_boost: null,
+      achievement_unlock: null,
+      started_at: now,
+      completed_at: null,
+      due_at: null,
+      platform: null,
+      external_id: null,
+      external_url: null,
+      is_recurring: false,
+      recurrence_pattern: null,
       created_at: now,
     };
 

@@ -181,8 +181,10 @@ describe('Forge XP System', () => {
   });
 
   describe('Award XP', () => {
+    const testStudentId = 'test-student';
+
     it('should award XP and update character', () => {
-      const result = awardXP(50, 'quest', 'quest-123');
+      const result = awardXP(testStudentId, 50, 'quest', 'quest-123');
 
       expect(result.awarded_xp).toBe(50);
       expect(result.previous_xp).toBe(0);
@@ -191,13 +193,13 @@ describe('Forge XP System', () => {
     });
 
     it('should apply multiplier to XP', () => {
-      const result = awardXP(50, 'quest', 'quest-123', 2.0);
+      const result = awardXP(testStudentId, 50, 'quest', 'quest-123', 2.0);
 
       expect(result.awarded_xp).toBe(100);
     });
 
     it('should trigger level up', () => {
-      const result = awardXP(110, 'quest', 'quest-123');
+      const result = awardXP(testStudentId, 110, 'quest', 'quest-123');
 
       expect(result.level_up).toBe(true);
       expect(result.new_level).toBe(2);
@@ -206,13 +208,13 @@ describe('Forge XP System', () => {
     it('should update title on level up', () => {
       // Award enough XP to reach level 5
       const level5XP = cumulativeXpForLevel(5);
-      const result = awardXP(level5XP, 'quest', 'quest-123');
+      const result = awardXP(testStudentId, level5XP, 'quest', 'quest-123');
 
       expect(result.new_title).toBe('Journeyman Scholar');
     });
 
     it('should log XP transaction', () => {
-      awardXP(50, 'quest', 'quest-123', 1.0, 'Test quest completion');
+      awardXP(testStudentId, 50, 'quest', 'quest-123', 1.0, 'Test quest completion');
 
       const log = testDb.prepare(`SELECT * FROM hyro_xp_log LIMIT 1`).get() as any;
 
@@ -225,7 +227,7 @@ describe('Forge XP System', () => {
     it('should unlock achievements on level up', () => {
       // Award enough XP to reach level 5
       const level5XP = cumulativeXpForLevel(5);
-      const result = awardXP(level5XP, 'quest', 'big-quest');
+      const result = awardXP(testStudentId, level5XP, 'quest', 'big-quest');
 
       // Should unlock the level 5 achievement
       expect(result.achievements_unlocked.length).toBeGreaterThan(0);
@@ -234,21 +236,23 @@ describe('Forge XP System', () => {
   });
 
   describe('XP Summary', () => {
+    const testStudentId = 'test-student';
+
     beforeEach(() => {
       // Add some XP entries
-      awardXP(50, 'quest', 'q1');
-      awardXP(30, 'srs_review', 's1');
-      awardXP(20, 'daily', 'd1');
+      awardXP(testStudentId, 50, 'quest', 'q1');
+      awardXP(testStudentId, 30, 'srs_review', 's1');
+      awardXP(testStudentId, 20, 'daily', 'd1');
     });
 
     it('should calculate total XP correctly', () => {
-      const summary = getXPSummary();
+      const summary = getXPSummary(testStudentId);
 
       expect(summary.total).toBe(100);
     });
 
     it('should calculate XP by source', () => {
-      const summary = getXPSummary();
+      const summary = getXPSummary(testStudentId);
 
       expect(summary.by_source.quest).toBe(50);
       expect(summary.by_source.srs_review).toBe(30);
@@ -256,27 +260,29 @@ describe('Forge XP System', () => {
     });
 
     it('should include today XP for recent entries', () => {
-      const summary = getXPSummary();
+      const summary = getXPSummary(testStudentId);
 
       expect(summary.today).toBe(100);
     });
   });
 
   describe('Recent XP', () => {
+    const testStudentId = 'test-student';
+
     beforeEach(() => {
       for (let i = 0; i < 10; i++) {
-        awardXP(10 + i, 'quest', `quest-${i}`);
+        awardXP(testStudentId, 10 + i, 'quest', `quest-${i}`);
       }
     });
 
     it('should return recent XP entries', () => {
-      const recent = getRecentXP(5);
+      const recent = getRecentXP(testStudentId, 5);
 
       expect(recent.length).toBe(5);
     });
 
     it('should return entries in descending order by created_at', () => {
-      const recent = getRecentXP(3);
+      const recent = getRecentXP(testStudentId, 3);
 
       // Returns 3 most recent entries (order by created_at DESC)
       expect(recent.length).toBe(3);
@@ -288,8 +294,10 @@ describe('Forge XP System', () => {
   });
 
   describe('Streak Management', () => {
+    const testStudentId = 'test-student';
+
     it('should start streak at 1 for first session', () => {
-      const result = updateStreak();
+      const result = updateStreak(testStudentId);
 
       expect(result.current_streak).toBe(1);
       expect(result.longest_streak).toBe(1);
@@ -302,7 +310,7 @@ describe('Forge XP System', () => {
         UPDATE hyro_character SET last_session_at = ?, current_streak = 1 WHERE id = 'hyro'
       `).run(yesterday);
 
-      const result = updateStreak();
+      const result = updateStreak(testStudentId);
 
       expect(result.current_streak).toBe(2);
       expect(result.streak_bonus_xp).toBe(4); // 2 * 2 = 4
@@ -315,7 +323,7 @@ describe('Forge XP System', () => {
         UPDATE hyro_character SET last_session_at = ?, current_streak = 5 WHERE id = 'hyro'
       `).run(threeDaysAgo);
 
-      const result = updateStreak();
+      const result = updateStreak(testStudentId);
 
       expect(result.current_streak).toBe(1); // Reset to 1
     });
@@ -331,7 +339,7 @@ describe('Forge XP System', () => {
         UPDATE hyro_character SET last_session_at = ? WHERE id = 'hyro'
       `).run(yesterday);
 
-      const result = updateStreak();
+      const result = updateStreak(testStudentId);
 
       // Current streak increases to 6, but longest stays at 10
       expect(result.current_streak).toBe(6);
@@ -345,7 +353,7 @@ describe('Forge XP System', () => {
         UPDATE hyro_character SET longest_streak = 5, current_streak = 5, last_session_at = ? WHERE id = 'hyro'
       `).run(yesterday);
 
-      const result = updateStreak();
+      const result = updateStreak(testStudentId);
 
       expect(result.current_streak).toBe(6);
       expect(result.longest_streak).toBe(6);
@@ -353,10 +361,12 @@ describe('Forge XP System', () => {
   });
 
   describe('Multiple Level Ups', () => {
+    const testStudentId = 'test-student';
+
     it('should handle multiple level ups in one XP award', () => {
       // Award enough XP to complete through level 5 (which puts you at level 6)
       const level5XP = cumulativeXpForLevel(5);
-      const result = awardXP(level5XP, 'bonus', 'huge-bonus');
+      const result = awardXP(testStudentId, level5XP, 'bonus', 'huge-bonus');
 
       // Completing all XP through level 5 means you're now level 6
       expect(result.new_level).toBe(6);
@@ -365,6 +375,8 @@ describe('Forge XP System', () => {
   });
 
   describe('XP Sources', () => {
+    const testStudentId = 'test-student';
+
     it('should accept all valid XP sources', () => {
       const sources = [
         'quest', 'daily', 'streak', 'achievement', 'srs', 'srs_review',
@@ -374,7 +386,7 @@ describe('Forge XP System', () => {
       ] as const;
 
       for (const source of sources) {
-        const result = awardXP(10, source, `test-${source}`);
+        const result = awardXP(testStudentId, 10, source, `test-${source}`);
         expect(result.awarded_xp).toBe(10);
       }
     });

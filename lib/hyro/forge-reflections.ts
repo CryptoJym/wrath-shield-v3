@@ -340,8 +340,8 @@ export function submitReflection(
     reflectionId
   );
 
-  // Award XP
-  awardXP(xpEarned, 'reflection_completed', reflectionId);
+  // Award XP (TODO: add studentId to reflection functions for full multi-tenant)
+  awardXP('hyro', xpEarned, 'reflection_completed', reflectionId);
 
   const reflection = db.prepare(`SELECT * FROM hyro_reflection_journal WHERE id = ?`).get(reflectionId) as Reflection;
 

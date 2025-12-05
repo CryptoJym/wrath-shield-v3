@@ -21,22 +21,24 @@ import {
   getReadingStats,
   getBooksInProgress,
 } from '@/lib/hyro/forge-reading';
+import { getStudentIdFromRequest } from '@/lib/hyro/student-auth';
 
 export async function GET(request: NextRequest) {
   try {
+    const studentId = await getStudentIdFromRequest();
     const { searchParams } = new URL(request.url);
     const action = searchParams.get('action');
     const bookId = searchParams.get('bookId');
 
     // Get library
     if (action === 'library') {
-      const books = getLibrary();
+      const books = getLibrary(studentId);
       return NextResponse.json({ books, count: books.length });
     }
 
     // Get specific book with progress
     if (bookId && action === 'details') {
-      const book = getBookWithProgress(bookId);
+      const book = getBookWithProgress(studentId, bookId);
       if (!book) {
         return NextResponse.json({ error: 'Book not found' }, { status: 404 });
       }
@@ -45,40 +47,40 @@ export async function GET(request: NextRequest) {
 
     // Get book chapters
     if (bookId && action === 'chapters') {
-      const chapters = getBookChapters(bookId);
+      const chapters = getBookChapters(studentId, bookId);
       return NextResponse.json({ chapters, count: chapters.length });
     }
 
     // Get book progress
     if (bookId && action === 'progress') {
-      const progress = getBookProgress(bookId);
-      const chapterProgress = getChapterProgress(bookId);
+      const progress = getBookProgress(studentId, bookId);
+      const chapterProgress = getChapterProgress(studentId, bookId);
       return NextResponse.json({ progress, chapter_progress: chapterProgress });
     }
 
     // Get recent sessions
     if (action === 'recent-sessions') {
       const limit = parseInt(searchParams.get('limit') || '10');
-      const sessions = getRecentSessions(limit);
+      const sessions = getRecentSessions(studentId, limit);
       return NextResponse.json({ sessions, count: sessions.length });
     }
 
     // Get reading stats
     if (action === 'stats') {
-      const stats = getReadingStats();
+      const stats = getReadingStats(studentId);
       return NextResponse.json(stats);
     }
 
     // Get books in progress
     if (action === 'in-progress') {
-      const books = getBooksInProgress();
+      const books = getBooksInProgress(studentId);
       return NextResponse.json({ books, count: books.length });
     }
 
     // Default: get library with stats
-    const library = getLibrary();
-    const stats = getReadingStats();
-    const inProgress = getBooksInProgress();
+    const library = getLibrary(studentId);
+    const stats = getReadingStats(studentId);
+    const inProgress = getBooksInProgress(studentId);
 
     return NextResponse.json({
       library,
@@ -100,6 +102,7 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
+    const studentId = await getStudentIdFromRequest();
     const body = await request.json();
     const { action } = body;
 
@@ -110,7 +113,7 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ error: 'title and author are required' }, { status: 400 });
       }
 
-      const book = addBookToLibrary({
+      const book = addBookToLibrary(studentId, {
         title, author, genre, difficulty_level, page_count, chapter_count,
         estimated_hours, cover_image_url, description, themes, source,
         external_id, stat_primary, stat_secondary,
@@ -141,7 +144,7 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ error: 'book_id is required' }, { status: 400 });
       }
 
-      const session = startReadingSession(book_id, chapter_id, pages_start);
+      const session = startReadingSession(studentId, book_id, chapter_id, pages_start);
       return NextResponse.json({ session, message: 'Reading session started' });
     }
 
@@ -152,7 +155,7 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ error: 'session_id is required' }, { status: 400 });
       }
 
-      const result = endReadingSession(session_id, {
+      const result = endReadingSession(studentId, session_id, {
         pages_end, focus_self_rating, interruption_count, environment,
       });
 
@@ -171,7 +174,7 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ error: 'chapter_id is required' }, { status: 400 });
       }
 
-      const result = completeChapter(chapter_id, comprehension_score, discussion_depth);
+      const result = completeChapter(studentId, chapter_id, comprehension_score, discussion_depth);
       return NextResponse.json({
         ...result,
         message: `Chapter completed! +${result.xp_earned} XP`,
@@ -185,7 +188,7 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ error: 'book_id is required' }, { status: 400 });
       }
 
-      const result = completeBook(book_id);
+      const result = completeBook(studentId, book_id);
       return NextResponse.json({
         ...result,
         message: result.xp_earned > 0

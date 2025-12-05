@@ -58,7 +58,7 @@ function resolveUserId(userId?: string): string {
       .get() as { value_enc: string } | undefined;
     const vid = row?.value_enc?.trim();
     if (vid && /^[0-9a-fA-F-]{36}$/.test(vid)) return vid; // UUID pattern
-  } catch {}
+  } catch { }
   return 'default';
 }
 
@@ -252,6 +252,22 @@ export function insertSleeps(sleeps: SleepInput[]): void {
       }
     }
   })();
+}
+
+/**
+ * Get all lifelogs for last N days
+ */
+export function getLifelogsLastNDays(days: number = 7, userId?: string): Lifelog[] {
+  const db = getDatabase().getRawDb() as any;
+  const uid = resolveUserId(userId);
+  const scoped = hasUserIdColumn('lifelogs');
+  const limitDate = dateNDaysAgo(days);
+
+  const query = scoped
+    ? db.prepare(`SELECT * FROM lifelogs WHERE date >= ? AND user_id = ? ORDER BY date DESC, created_at DESC`)
+    : db.prepare(`SELECT * FROM lifelogs WHERE date >= ? ORDER BY date DESC, created_at DESC`);
+
+  return scoped ? query.all(limitDate, uid) : query.all(limitDate);
 }
 
 /**
@@ -693,48 +709,48 @@ export function getRecoveriesLastNDays(days: number = 14, userId?: string): Reco
 
 function dateNDaysAgo(n: number): string {
   const d = new Date(Date.now() - n * 86400000);
-  return d.toISOString().slice(0,10);
+  return d.toISOString().slice(0, 10);
 }
 
 export function getBaselines(days: number = 30, userId?: string) {
   const db = getDatabase().getRawDb() as any;
   const uid = resolveUserId(userId);
   const start = dateNDaysAgo(days);
-  const end = new Date().toISOString().slice(0,10);
+  const end = new Date().toISOString().slice(0, 10);
   const scopedRec = hasUserIdColumn('recoveries');
   const scopedSleep = hasUserIdColumn('sleeps');
 
   const recRow = scopedRec
     ? db.prepare(
-        `SELECT AVG(hrv) as avg_hrv, AVG(rhr) as avg_rhr, AVG(score) as avg_score, COUNT(*) as n FROM recoveries WHERE date >= ? AND date <= ? AND user_id = ?`
-      ).get(start, end, uid)
+      `SELECT AVG(hrv) as avg_hrv, AVG(rhr) as avg_rhr, AVG(score) as avg_score, COUNT(*) as n FROM recoveries WHERE date >= ? AND date <= ? AND user_id = ?`
+    ).get(start, end, uid)
     : db.prepare(
-        `SELECT AVG(hrv) as avg_hrv, AVG(rhr) as avg_rhr, AVG(score) as avg_score, COUNT(*) as n FROM recoveries WHERE date >= ? AND date <= ?`
-      ).get(start, end);
+      `SELECT AVG(hrv) as avg_hrv, AVG(rhr) as avg_rhr, AVG(score) as avg_score, COUNT(*) as n FROM recoveries WHERE date >= ? AND date <= ?`
+    ).get(start, end);
 
   const slpRow = scopedSleep
     ? db.prepare(
-        `SELECT AVG(performance) as avg_perf, COUNT(*) as n FROM sleeps WHERE date >= ? AND date <= ? AND user_id = ?`
-      ).get(start, end, uid)
+      `SELECT AVG(performance) as avg_perf, COUNT(*) as n FROM sleeps WHERE date >= ? AND date <= ? AND user_id = ?`
+    ).get(start, end, uid)
     : db.prepare(
-        `SELECT AVG(performance) as avg_perf, COUNT(*) as n FROM sleeps WHERE date >= ? AND date <= ?`
-      ).get(start, end);
+      `SELECT AVG(performance) as avg_perf, COUNT(*) as n FROM sleeps WHERE date >= ? AND date <= ?`
+    ).get(start, end);
 
   const distRow = scopedRec
     ? db.prepare(
-        `SELECT 
+      `SELECT 
             SUM(CASE WHEN score >= 70 THEN 1 ELSE 0 END) as high,
             SUM(CASE WHEN score >= 40 AND score < 70 THEN 1 ELSE 0 END) as med,
             SUM(CASE WHEN score < 40 THEN 1 ELSE 0 END) as low
          FROM recoveries WHERE date >= ? AND date <= ? AND user_id = ?`
-      ).get(start, end, uid)
+    ).get(start, end, uid)
     : db.prepare(
-        `SELECT 
+      `SELECT 
             SUM(CASE WHEN score >= 70 THEN 1 ELSE 0 END) as high,
             SUM(CASE WHEN score >= 40 AND score < 70 THEN 1 ELSE 0 END) as med,
             SUM(CASE WHEN score < 40 THEN 1 ELSE 0 END) as low
          FROM recoveries WHERE date >= ? AND date <= ?`
-      ).get(start, end);
+    ).get(start, end);
 
   return {
     window_days: days,
@@ -751,7 +767,7 @@ export function getBaselines(days: number = 30, userId?: string) {
 export function getTodaySnapshot(userId?: string) {
   const db = getDatabase().getRawDb() as any;
   const uid = resolveUserId(userId);
-  const today = new Date().toISOString().slice(0,10);
+  const today = new Date().toISOString().slice(0, 10);
   const scopedRec = hasUserIdColumn('recoveries');
   const scopedSleep = hasUserIdColumn('sleeps');
   const rec = scopedRec
@@ -1031,11 +1047,11 @@ export function getPsychSignalsLastNDays(days: number = 14, userId?: string): Ps
   const scoped = hasUserIdColumn('psych_signals');
   const query = scoped
     ? db.prepare(
-        `SELECT * FROM psych_signals WHERE user_id = ? ORDER BY date DESC LIMIT ?`
-      )
+      `SELECT * FROM psych_signals WHERE user_id = ? ORDER BY date DESC LIMIT ?`
+    )
     : db.prepare(
-        `SELECT * FROM psych_signals ORDER BY date DESC LIMIT ?`
-      );
+      `SELECT * FROM psych_signals ORDER BY date DESC LIMIT ?`
+    );
   return scoped ? query.all(uid, days) : query.all(days);
 }
 

@@ -108,13 +108,21 @@ export async function PATCH(req: NextRequest) {
     // For GitHub tasks being marked as 'done', use intelligent completion
     if (status === 'done' && id.startsWith('github-')) {
       console.log('[PM Tasks API] Using intelligent completion for GitHub task');
-      // Parse the task ID: github-owner-repo-issueNumber
-      const parts = id.split('-');
-      if (parts.length >= 4) {
-        const issueNumber = parseInt(parts[parts.length - 1]);
-        const owner = parts[1];
-        const repo = parts.slice(2, parts.length - 1).join('-');
-        const repoFullName = `${owner}/${repo}`;
+      // Parse the task ID: github-owner__repo-issueNumber (__ separates owner from repo)
+      // Remove 'github-' prefix and extract issue number from end
+      const withoutPrefix = id.slice(7); // Remove 'github-'
+      const lastDash = withoutPrefix.lastIndexOf('-');
+      const issueNumber = parseInt(withoutPrefix.slice(lastDash + 1));
+      const ownerRepo = withoutPrefix.slice(0, lastDash);
+
+      // Split by __ to separate owner and repo
+      const [owner, repo] = ownerRepo.includes('__')
+        ? ownerRepo.split('__')
+        : [ownerRepo.split('-')[0], ownerRepo.split('-').slice(1).join('-')]; // Fallback for old format
+
+      const repoFullName = `${owner}/${repo}`;
+
+      if (owner && repo && !isNaN(issueNumber)) {
 
         // Get task title from body or fetch it
         const taskTitle = title || `Task #${issueNumber}`;

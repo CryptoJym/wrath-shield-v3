@@ -16,7 +16,8 @@ import { StatName, STAT_NAMES } from './forge-types';
 import { getTotalDueCount, getDueCards, SRSCard } from './forge-srs';
 import { getBooksInProgress, BookWithProgress } from './forge-reading';
 import { getActiveQuests, getQuestsDueToday, getOverdueQuests } from './forge-quest-generator';
-import { getAllStatsWithTrend, StatWithTrend } from './forge-stats';
+import { getAllStatsWithTrend } from './forge-stats';
+import type { StatWithTrend } from './forge-types';
 import { getStatsNeedingDiagnostic, getActiveSkillGaps, SkillGap } from './forge-diagnostics';
 import type { Quest } from './forge-types';
 
@@ -179,13 +180,14 @@ export function getSessionContext(): SessionContext {
     }
   }
 
-  // Get quest context
-  const activeQuests = getActiveQuests();
-  const questsDueToday = getQuestsDueToday();
-  const overdueQuests = getOverdueQuests();
+  // Get quest context (TODO: pass actual studentId for multi-tenant)
+  const studentId = 'hyro';
+  const activeQuests = getActiveQuests(studentId);
+  const questsDueToday = getQuestsDueToday(studentId);
+  const overdueQuests = getOverdueQuests(studentId);
 
   // Get reading context
-  const booksInProgress = getBooksInProgress();
+  const booksInProgress = getBooksInProgress(studentId);
 
   // Get diagnostic context
   const statsNeedingDiagnostic = getStatsNeedingDiagnostic();

@@ -4,7 +4,7 @@
 -- Focus: Reading comprehension, writing skills, grammar, vocabulary
 -- Philosophy: Test understanding of language as a tool for thought and communication
 
-INSERT INTO hyro_question_bank (id, domain, standard_id, topic_id, question_type, question_text, answer_options, correct_answer, explanation, difficulty, difficulty_tier, bloom_level, dok_level, hints) VALUES
+INSERT OR IGNORE INTO hyro_question_bank (id, domain, standard_id, topic_id, question_type, question_text, answer_options, correct_answer, explanation, difficulty, difficulty_tier, bloom_level, dok_level, hints) VALUES
 
 -- =============================================================================
 -- READING LITERATURE (RL)

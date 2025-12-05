@@ -150,32 +150,34 @@ const BOOK_COMPLETION_XP: Record<DifficultyLevel, number> = {
 
 /**
  * Get all books in the library
+ * Returns both shared books (student_id IS NULL) and student-specific books
  */
-export function getLibrary(activeOnly: boolean = true): Book[] {
+export function getLibrary(studentId: string, activeOnly: boolean = true): Book[] {
   const db = getDatabase();
   const query = activeOnly
-    ? `SELECT * FROM hyro_library WHERE is_active = 1 ORDER BY title`
-    : `SELECT * FROM hyro_library ORDER BY title`;
-  return db.prepare(query).all() as Book[];
+    ? `SELECT * FROM hyro_library WHERE (student_id = ? OR student_id IS NULL) AND is_active = 1 ORDER BY title`
+    : `SELECT * FROM hyro_library WHERE (student_id = ? OR student_id IS NULL) ORDER BY title`;
+  return db.prepare(query).all(studentId) as Book[];
 }
 
 /**
  * Get a book by ID
+ * Returns book if it's shared or belongs to the student
  */
-export function getBook(bookId: string): Book | null {
+export function getBook(studentId: string, bookId: string): Book | null {
   const db = getDatabase();
-  return db.prepare(`SELECT * FROM hyro_library WHERE id = ?`).get(bookId) as Book | null;
+  return db.prepare(`SELECT * FROM hyro_library WHERE id = ? AND (student_id = ? OR student_id IS NULL)`).get(bookId, studentId) as Book | null;
 }
 
 /**
  * Get a book with its progress and chapters
  */
-export function getBookWithProgress(bookId: string): BookWithProgress | null {
-  const book = getBook(bookId);
+export function getBookWithProgress(studentId: string, bookId: string): BookWithProgress | null {
+  const book = getBook(studentId, bookId);
   if (!book) return null;
 
   const db = getDatabase();
-  const progress = db.prepare(`SELECT * FROM hyro_book_progress WHERE book_id = ?`).get(bookId) as BookProgress | null;
+  const progress = db.prepare(`SELECT * FROM hyro_book_progress WHERE book_id = ? AND student_id = ?`).get(bookId, studentId) as BookProgress | null;
   const chapters = db.prepare(`SELECT * FROM hyro_book_chapters WHERE book_id = ? ORDER BY chapter_number`).all(bookId) as BookChapter[];
 
   return { ...book, progress, chapters };
@@ -184,7 +186,7 @@ export function getBookWithProgress(bookId: string): BookWithProgress | null {
 /**
  * Add a book to the library
  */
-export function addBookToLibrary(params: {
+export function addBookToLibrary(studentId: string, params: {
   title: string;
   author: string;
   genre?: string;
@@ -205,12 +207,13 @@ export function addBookToLibrary(params: {
 
   db.prepare(`
     INSERT INTO hyro_library (
-      id, title, author, genre, difficulty_level, page_count, chapter_count,
+      id, student_id, title, author, genre, difficulty_level, page_count, chapter_count,
       estimated_hours, cover_image_url, description, themes, source,
       external_id, stat_primary, stat_secondary
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
   `).run(
     id,
+    studentId,
     params.title,
     params.author,
     params.genre || null,
@@ -227,7 +230,7 @@ export function addBookToLibrary(params: {
     params.stat_secondary || null
   );
 
-  return getBook(id)!;
+  return getBook(studentId, id)!;
 }
 
 /**
@@ -276,7 +279,7 @@ export function addChapter(params: {
 /**
  * Get chapters for a book
  */
-export function getBookChapters(bookId: string): BookChapter[] {
+export function getBookChapters(studentId: string, bookId: string): BookChapter[] {
   const db = getDatabase();
   return db.prepare(`
     SELECT * FROM hyro_book_chapters WHERE book_id = ? ORDER BY chapter_number
@@ -291,6 +294,7 @@ export function getBookChapters(bookId: string): BookChapter[] {
  * Start a new reading session
  */
 export function startReadingSession(
+  studentId: string,
   bookId: string,
   chapterId?: string,
   pagesStart?: number
@@ -302,37 +306,37 @@ export function startReadingSession(
   return db.transaction(() => {
     // Create session
     db.prepare(`
-      INSERT INTO hyro_reading_sessions (id, book_id, chapter_id, started_at, pages_start)
-      VALUES (?, ?, ?, ?, ?)
-    `).run(id, bookId, chapterId || null, now, pagesStart || null);
+      INSERT INTO hyro_reading_sessions (id, student_id, book_id, chapter_id, started_at, pages_start)
+      VALUES (?, ?, ?, ?, ?, ?)
+    `).run(id, studentId, bookId, chapterId || null, now, pagesStart || null);
 
     // Ensure book progress exists
-    const bookProgress = db.prepare(`SELECT * FROM hyro_book_progress WHERE book_id = ?`).get(bookId);
+    const bookProgress = db.prepare(`SELECT * FROM hyro_book_progress WHERE book_id = ? AND student_id = ?`).get(bookId, studentId);
     if (!bookProgress) {
       db.prepare(`
-        INSERT INTO hyro_book_progress (id, book_id, status, started_at)
-        VALUES (?, ?, 'reading', ?)
-      `).run(randomUUID(), bookId, now);
+        INSERT INTO hyro_book_progress (id, student_id, book_id, status, started_at)
+        VALUES (?, ?, ?, 'reading', ?)
+      `).run(randomUUID(), studentId, bookId, now);
     } else if ((bookProgress as BookProgress).status === 'not_started') {
       db.prepare(`
         UPDATE hyro_book_progress SET status = 'reading', started_at = ?, updated_at = unixepoch()
-        WHERE book_id = ?
-      `).run(now, bookId);
+        WHERE book_id = ? AND student_id = ?
+      `).run(now, bookId, studentId);
     }
 
     // Ensure chapter progress exists if chapter specified
     if (chapterId) {
-      const chapterProgress = db.prepare(`SELECT * FROM hyro_chapter_progress WHERE chapter_id = ?`).get(chapterId);
+      const chapterProgress = db.prepare(`SELECT * FROM hyro_chapter_progress WHERE chapter_id = ? AND student_id = ?`).get(chapterId, studentId);
       if (!chapterProgress) {
         db.prepare(`
-          INSERT INTO hyro_chapter_progress (id, book_id, chapter_id, status, first_read_at)
-          VALUES (?, ?, ?, 'in_progress', ?)
-        `).run(randomUUID(), bookId, chapterId, now);
+          INSERT INTO hyro_chapter_progress (id, student_id, book_id, chapter_id, status, first_read_at)
+          VALUES (?, ?, ?, ?, 'in_progress', ?)
+        `).run(randomUUID(), studentId, bookId, chapterId, now);
       } else if ((chapterProgress as ChapterProgress).status === 'not_started') {
         db.prepare(`
           UPDATE hyro_chapter_progress SET status = 'in_progress', first_read_at = ?, updated_at = unixepoch()
-          WHERE chapter_id = ?
-        `).run(now, chapterId);
+          WHERE chapter_id = ? AND student_id = ?
+        `).run(now, chapterId, studentId);
       }
     }
 
@@ -344,6 +348,7 @@ export function startReadingSession(
  * End a reading session and calculate XP
  */
 export function endReadingSession(
+  studentId: string,
   sessionId: string,
   metrics: SessionMetrics
 ): { session: ReadingSession; xp_earned: number; should_prompt_comprehension: boolean } {
@@ -351,7 +356,7 @@ export function endReadingSession(
   const now = Math.floor(Date.now() / 1000);
 
   return db.transaction(() => {
-    const session = db.prepare(`SELECT * FROM hyro_reading_sessions WHERE id = ?`).get(sessionId) as ReadingSession;
+    const session = db.prepare(`SELECT * FROM hyro_reading_sessions WHERE id = ? AND student_id = ?`).get(sessionId, studentId) as ReadingSession;
     if (!session) throw new Error(`Session not found: ${sessionId}`);
     if (session.ended_at) throw new Error(`Session already ended: ${sessionId}`);
 
@@ -360,7 +365,7 @@ export function endReadingSession(
 
     // Calculate XP
     let xpEarned = 0;
-    const book = getBook(session.book_id);
+    const book = getBook(studentId, session.book_id);
 
     // Check daily XP cap for this book
     const today = new Date().toISOString().split('T')[0];
@@ -368,8 +373,8 @@ export function endReadingSession(
     const todayXP = db.prepare(`
       SELECT COALESCE(SUM(xp_earned), 0) as total
       FROM hyro_reading_sessions
-      WHERE book_id = ? AND started_at >= ?
-    `).get(session.book_id, todayStart) as { total: number };
+      WHERE book_id = ? AND student_id = ? AND started_at >= ?
+    `).get(session.book_id, studentId, todayStart) as { total: number };
 
     const remainingDailyXP = Math.max(0, XP_CAP_PER_BOOK_PER_DAY - todayXP.total);
 
@@ -408,8 +413,8 @@ export function endReadingSession(
           current_page = COALESCE(?, current_page),
           xp_earned = xp_earned + ?,
           updated_at = unixepoch()
-      WHERE book_id = ?
-    `).run(durationMinutes, metrics.pages_end, xpEarned, session.book_id);
+      WHERE book_id = ? AND student_id = ?
+    `).run(durationMinutes, metrics.pages_end, xpEarned, session.book_id, studentId);
 
     // Update chapter progress if applicable
     if (session.chapter_id) {
@@ -418,13 +423,13 @@ export function endReadingSession(
         SET total_time_minutes = total_time_minutes + ?,
             session_count = session_count + 1,
             updated_at = unixepoch()
-        WHERE chapter_id = ?
-      `).run(durationMinutes, session.chapter_id);
+        WHERE chapter_id = ? AND student_id = ?
+      `).run(durationMinutes, session.chapter_id, studentId);
     }
 
     // Award XP
     if (xpEarned > 0) {
-      awardXP(xpEarned, 'reading_session', sessionId);
+      awardXP(studentId, xpEarned, 'reading_session', sessionId);
     }
 
     // Determine if we should prompt for comprehension (sessions >= 10 minutes)
@@ -448,6 +453,7 @@ export function endReadingSession(
  * Complete a chapter
  */
 export function completeChapter(
+  studentId: string,
   chapterId: string,
   comprehensionScore?: number,
   discussionDepth?: 'surface' | 'moderate' | 'deep'
@@ -459,20 +465,20 @@ export function completeChapter(
     const chapter = db.prepare(`SELECT * FROM hyro_book_chapters WHERE id = ?`).get(chapterId) as BookChapter;
     if (!chapter) throw new Error(`Chapter not found: ${chapterId}`);
 
-    let progress = db.prepare(`SELECT * FROM hyro_chapter_progress WHERE chapter_id = ?`).get(chapterId) as ChapterProgress | null;
+    let progress = db.prepare(`SELECT * FROM hyro_chapter_progress WHERE chapter_id = ? AND student_id = ?`).get(chapterId, studentId) as ChapterProgress | null;
 
     if (!progress) {
       // Create progress entry
       db.prepare(`
-        INSERT INTO hyro_chapter_progress (id, book_id, chapter_id, status, first_read_at, completed_at, comprehension_score, discussion_depth)
-        VALUES (?, ?, ?, 'completed', ?, ?, ?, ?)
-      `).run(randomUUID(), chapter.book_id, chapterId, now, now, comprehensionScore || null, discussionDepth || null);
+        INSERT INTO hyro_chapter_progress (id, student_id, book_id, chapter_id, status, first_read_at, completed_at, comprehension_score, discussion_depth)
+        VALUES (?, ?, ?, ?, 'completed', ?, ?, ?, ?)
+      `).run(randomUUID(), studentId, chapter.book_id, chapterId, now, now, comprehensionScore || null, discussionDepth || null);
     } else if (progress.status !== 'completed') {
       db.prepare(`
         UPDATE hyro_chapter_progress
         SET status = 'completed', completed_at = ?, comprehension_score = ?, discussion_depth = ?, updated_at = unixepoch()
-        WHERE chapter_id = ?
-      `).run(now, comprehensionScore || progress.comprehension_score, discussionDepth || progress.discussion_depth, chapterId);
+        WHERE chapter_id = ? AND student_id = ?
+      `).run(now, comprehensionScore || progress.comprehension_score, discussionDepth || progress.discussion_depth, chapterId, studentId);
     }
 
     // Calculate XP
@@ -484,25 +490,25 @@ export function completeChapter(
     // Update book progress chapter count
     db.prepare(`
       UPDATE hyro_book_progress
-      SET chapters_completed = (SELECT COUNT(*) FROM hyro_chapter_progress WHERE book_id = ? AND status = 'completed'),
+      SET chapters_completed = (SELECT COUNT(*) FROM hyro_chapter_progress WHERE book_id = ? AND student_id = ? AND status = 'completed'),
           xp_earned = xp_earned + ?,
           updated_at = unixepoch()
-      WHERE book_id = ?
-    `).run(chapter.book_id, xpEarned, chapter.book_id);
+      WHERE book_id = ? AND student_id = ?
+    `).run(chapter.book_id, studentId, xpEarned, chapter.book_id, studentId);
 
     // Award XP
-    const book = getBook(chapter.book_id);
-    awardXP(xpEarned, 'chapter_completed', chapterId);
+    const book = getBook(studentId, chapter.book_id);
+    awardXP(studentId, xpEarned, 'chapter_completed', chapterId);
 
     // Check if book is now complete
-    const bookProgress = db.prepare(`SELECT * FROM hyro_book_progress WHERE book_id = ?`).get(chapter.book_id) as BookProgress;
-    const bookInfo = getBook(chapter.book_id);
+    const bookProgress = db.prepare(`SELECT * FROM hyro_book_progress WHERE book_id = ? AND student_id = ?`).get(chapter.book_id, studentId) as BookProgress;
+    const bookInfo = getBook(studentId, chapter.book_id);
     if (bookInfo && bookProgress.chapters_completed >= (bookInfo.chapter_count || 0)) {
-      completeBook(chapter.book_id);
+      completeBook(studentId, chapter.book_id);
     }
 
     return {
-      chapter_progress: db.prepare(`SELECT * FROM hyro_chapter_progress WHERE chapter_id = ?`).get(chapterId) as ChapterProgress,
+      chapter_progress: db.prepare(`SELECT * FROM hyro_chapter_progress WHERE chapter_id = ? AND student_id = ?`).get(chapterId, studentId) as ChapterProgress,
       xp_earned: xpEarned,
     };
   });
@@ -511,15 +517,15 @@ export function completeChapter(
 /**
  * Complete a book
  */
-export function completeBook(bookId: string): { book_progress: BookProgress; xp_earned: number } {
+export function completeBook(studentId: string, bookId: string): { book_progress: BookProgress; xp_earned: number } {
   const db = getDatabase();
   const now = Math.floor(Date.now() / 1000);
 
   return db.transaction(() => {
-    const book = getBook(bookId);
+    const book = getBook(studentId, bookId);
     if (!book) throw new Error(`Book not found: ${bookId}`);
 
-    const progress = db.prepare(`SELECT * FROM hyro_book_progress WHERE book_id = ?`).get(bookId) as BookProgress;
+    const progress = db.prepare(`SELECT * FROM hyro_book_progress WHERE book_id = ? AND student_id = ?`).get(bookId, studentId) as BookProgress;
     if (!progress) throw new Error(`No progress found for book: ${bookId}`);
     if (progress.status === 'completed') {
       return { book_progress: progress, xp_earned: 0 };
@@ -533,8 +539,8 @@ export function completeBook(bookId: string): { book_progress: BookProgress; xp_
       SELECT AVG(comprehension_score) as avg_score,
              GROUP_CONCAT(discussion_depth) as depths
       FROM hyro_chapter_progress
-      WHERE book_id = ? AND comprehension_score IS NOT NULL
-    `).get(bookId) as { avg_score: number | null; depths: string | null };
+      WHERE book_id = ? AND student_id = ? AND comprehension_score IS NOT NULL
+    `).get(bookId, studentId) as { avg_score: number | null; depths: string | null };
 
     let overallDepth = 'surface';
     if (comprehensionStats.depths) {
@@ -549,14 +555,14 @@ export function completeBook(bookId: string): { book_progress: BookProgress; xp_
       UPDATE hyro_book_progress
       SET status = 'completed', completed_at = ?, average_comprehension = ?, overall_depth = ?,
           xp_earned = xp_earned + ?, updated_at = unixepoch()
-      WHERE book_id = ?
-    `).run(now, comprehensionStats.avg_score, overallDepth, xpEarned, bookId);
+      WHERE book_id = ? AND student_id = ?
+    `).run(now, comprehensionStats.avg_score, overallDepth, xpEarned, bookId, studentId);
 
     // Award XP
-    awardXP(xpEarned, 'book_completed', bookId);
+    awardXP(studentId, xpEarned, 'book_completed', bookId);
 
     return {
-      book_progress: db.prepare(`SELECT * FROM hyro_book_progress WHERE book_id = ?`).get(bookId) as BookProgress,
+      book_progress: db.prepare(`SELECT * FROM hyro_book_progress WHERE book_id = ? AND student_id = ?`).get(bookId, studentId) as BookProgress,
       xp_earned: xpEarned,
     };
   });
@@ -569,41 +575,41 @@ export function completeBook(bookId: string): { book_progress: BookProgress; xp_
 /**
  * Get book progress
  */
-export function getBookProgress(bookId: string): BookProgress | null {
+export function getBookProgress(studentId: string, bookId: string): BookProgress | null {
   const db = getDatabase();
-  return db.prepare(`SELECT * FROM hyro_book_progress WHERE book_id = ?`).get(bookId) as BookProgress | null;
+  return db.prepare(`SELECT * FROM hyro_book_progress WHERE book_id = ? AND student_id = ?`).get(bookId, studentId) as BookProgress | null;
 }
 
 /**
  * Get chapter progress for a book
  */
-export function getChapterProgress(bookId: string): ChapterProgress[] {
+export function getChapterProgress(studentId: string, bookId: string): ChapterProgress[] {
   const db = getDatabase();
   return db.prepare(`
     SELECT cp.* FROM hyro_chapter_progress cp
     JOIN hyro_book_chapters bc ON cp.chapter_id = bc.id
-    WHERE cp.book_id = ?
+    WHERE cp.book_id = ? AND cp.student_id = ?
     ORDER BY bc.chapter_number
-  `).all(bookId) as ChapterProgress[];
+  `).all(bookId, studentId) as ChapterProgress[];
 }
 
 /**
  * Get recent reading sessions
  */
-export function getRecentSessions(limit: number = 10): ReadingSession[] {
+export function getRecentSessions(studentId: string, limit: number = 10): ReadingSession[] {
   const db = getDatabase();
   return db.prepare(`
     SELECT * FROM hyro_reading_sessions
-    WHERE ended_at IS NOT NULL
+    WHERE student_id = ? AND ended_at IS NOT NULL
     ORDER BY ended_at DESC
     LIMIT ?
-  `).all(limit) as ReadingSession[];
+  `).all(studentId, limit) as ReadingSession[];
 }
 
 /**
  * Get reading statistics
  */
-export function getReadingStats(): ReadingStats {
+export function getReadingStats(studentId: string): ReadingStats {
   const db = getDatabase();
 
   const bookStats = db.prepare(`
@@ -616,18 +622,24 @@ export function getReadingStats(): ReadingStats {
       SUM(session_count) as total_sessions,
       SUM(xp_earned) as total_xp_earned
     FROM hyro_book_progress
-  `).get() as any;
+    WHERE student_id = ?
+  `).get(studentId) as any;
 
-  const totalChapters = db.prepare(`SELECT COUNT(*) as count FROM hyro_book_chapters`).get() as { count: number };
+  const totalChapters = db.prepare(`
+    SELECT COUNT(*) as count
+    FROM hyro_book_chapters bc
+    JOIN hyro_book_progress bp ON bc.book_id = bp.book_id
+    WHERE bp.student_id = ?
+  `).get(studentId) as { count: number };
 
   // Calculate streak
   const recentDates = db.prepare(`
     SELECT DISTINCT date(started_at, 'unixepoch') as session_date
     FROM hyro_reading_sessions
-    WHERE ended_at IS NOT NULL
+    WHERE student_id = ? AND ended_at IS NOT NULL
     ORDER BY session_date DESC
     LIMIT 30
-  `).all() as { session_date: string }[];
+  `).all(studentId) as { session_date: string }[];
 
   let streak = 0;
   const today = new Date();
@@ -662,13 +674,13 @@ export function getReadingStats(): ReadingStats {
 /**
  * Get books currently being read
  */
-export function getBooksInProgress(): BookWithProgress[] {
+export function getBooksInProgress(studentId: string): BookWithProgress[] {
   const db = getDatabase();
   const progresses = db.prepare(`
     SELECT bp.book_id FROM hyro_book_progress bp
-    WHERE bp.status = 'reading'
+    WHERE bp.student_id = ? AND bp.status = 'reading'
     ORDER BY bp.updated_at DESC
-  `).all() as { book_id: string }[];
+  `).all(studentId) as { book_id: string }[];
 
-  return progresses.map(p => getBookWithProgress(p.book_id)!).filter(Boolean);
+  return progresses.map(p => getBookWithProgress(studentId, p.book_id)!).filter(Boolean);
 }

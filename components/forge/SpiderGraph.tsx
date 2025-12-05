@@ -56,24 +56,26 @@ export function SpiderGraph({
 
   return (
     <div className={`flex flex-col items-center ${className}`}>
-      <ResponsiveContainer width={dimensions.width} height={dimensions.height}>
-        <RadarChart cx="50%" cy="50%" outerRadius="75%" data={chartData}>
+      <ResponsiveContainer width="100%" height="100%" minHeight={300}>
+        <RadarChart cx="50%" cy="50%" outerRadius="65%" data={chartData}>
           <PolarGrid
-            stroke="#374151"
-            strokeOpacity={0.5}
+            stroke="#52525b" // zinc-600
+            strokeOpacity={0.3}
+            strokeDasharray="4 4"
           />
           <PolarAngleAxis
             dataKey="subject"
             tick={{
-              fill: '#9CA3AF',
-              fontSize: size === 'sm' ? 10 : 12,
+              fill: '#a1a1aa', // zinc-400
+              fontSize: 11,
+              fontWeight: 600,
             }}
             tickLine={false}
           />
           <PolarRadiusAxis
             angle={30}
             domain={[0, 100]}
-            tick={{ fill: '#6B7280', fontSize: 10 }}
+            tick={{ fill: '#71717a', fontSize: 9 }} // zinc-500
             tickCount={5}
             axisLine={false}
           />
@@ -83,57 +85,72 @@ export function SpiderGraph({
             <Radar
               name="Grade 6 Average"
               dataKey="benchmark"
-              stroke="#6B7280"
-              fill="#6B7280"
+              stroke="#71717a"
+              fill="#71717a"
               fillOpacity={0.1}
-              strokeDasharray="5 5"
+              strokeDasharray="3 3"
               strokeWidth={1}
             />
           )}
 
-          {/* Player stats */}
+          {/* Player stats - Holographic look */}
+          <defs>
+            <linearGradient id="radarFill" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor="#22d3ee" stopOpacity={0.6} />
+              <stop offset="95%" stopColor="#8b5cf6" stopOpacity={0.4} />
+            </linearGradient>
+          </defs>
           <Radar
             name="Hyro's Stats"
             dataKey="value"
-            stroke="#3B82F6"
-            fill="#3B82F6"
-            fillOpacity={0.4}
+            stroke="#22d3ee" // cyan-400
+            fill="url(#radarFill)"
+            fillOpacity={1}
             strokeWidth={2}
             dot={{
-              r: 4,
-              fill: '#3B82F6',
-              stroke: '#1E40AF',
-              strokeWidth: 1,
+              r: 3,
+              fill: '#22d3ee',
+              strokeWidth: 0,
+            }}
+            activeDot={{
+              r: 5,
+              fill: '#fff',
+              stroke: '#22d3ee',
+              strokeWidth: 2,
             }}
           />
 
           <Tooltip
+            cursor={false}
             content={({ payload, label }) => {
               if (!payload || payload.length === 0) return null;
               const playerValue = payload.find((p) => p.dataKey === 'value')?.value;
               const benchmarkValue = payload.find((p) => p.dataKey === 'benchmark')?.value;
 
               return (
-                <div className="bg-gray-800 border border-gray-600 rounded-lg p-3 shadow-lg">
-                  <p className="text-white font-semibold mb-1">{label}</p>
-                  <p className="text-blue-400">
-                    Current: <span className="font-bold">{playerValue}</span>
-                  </p>
-                  {showBenchmark && (
-                    <p className="text-gray-400 text-sm">
-                      Grade 6 Avg: {benchmarkValue}
+                <div className="bg-zinc-900/90 backdrop-blur-md border border-white/10 rounded-xl p-4 shadow-xl z-50">
+                  <p className="text-white font-bold mb-2 text-sm uppercase tracking-wider">{label}</p>
+                  <div className="space-y-1">
+                    <p className="text-cyan-400 flex justify-between gap-4 text-sm">
+                      <span>Current:</span>
+                      <span className="font-bold font-mono">{playerValue}</span>
                     </p>
-                  )}
+                    {showBenchmark && (
+                      <p className="text-zinc-500 flex justify-between gap-4 text-xs">
+                        <span>Grade 6 Avg:</span>
+                        <span className="font-mono">{benchmarkValue}</span>
+                      </p>
+                    )}
+                  </div>
                   {playerValue !== undefined && benchmarkValue !== undefined && (
-                    <p className={`text-sm mt-1 ${
-                      Number(playerValue) >= Number(benchmarkValue)
-                        ? 'text-green-400'
-                        : 'text-yellow-400'
-                    }`}>
+                    <div className={`mt-2 text-xs font-medium px-2 py-1 rounded-md inline-block ${Number(playerValue) >= Number(benchmarkValue)
+                        ? 'bg-emerald-500/10 text-emerald-400'
+                        : 'bg-amber-500/10 text-amber-400'
+                      }`}>
                       {Number(playerValue) >= Number(benchmarkValue)
-                        ? 'Above average'
-                        : 'Room to grow'}
-                    </p>
+                        ? 'Above Average'
+                        : 'Room for Growth'}
+                    </div>
                   )}
                 </div>
               );
@@ -143,10 +160,12 @@ export function SpiderGraph({
           {showBenchmark && (
             <Legend
               wrapperStyle={{
-                paddingTop: '10px',
+                paddingTop: '0px',
+                marginTop: '-5px',
+                fontSize: '10px'
               }}
               formatter={(value) => (
-                <span className="text-gray-300 text-sm">{value}</span>
+                <span className="text-zinc-400 text-[10px] uppercase tracking-wider font-medium">{value}</span>
               )}
             />
           )}
@@ -174,33 +193,31 @@ export function StatBar({
   const benchmarkPercentage = Math.min(100, (benchmark / 100) * 100);
 
   return (
-    <div className="mb-3">
-      <div className="flex justify-between items-center mb-1">
-        <span className="text-sm text-gray-300">{name}</span>
+    <div className="mb-4">
+      <div className="flex justify-between items-center mb-1.5">
+        <span className="text-xs font-medium text-zinc-400 uppercase tracking-wide">{name}</span>
         <div className="flex items-center gap-2">
-          <span className="text-sm font-mono text-white">{value}</span>
+          <span className="text-sm font-bold font-mono text-white">{value}</span>
           {trend && (
-            <span className={`text-xs ${
-              trend === 'up' ? 'text-green-400' :
-              trend === 'down' ? 'text-red-400' :
-              'text-gray-400'
-            }`}>
-              {trend === 'up' ? '+' : trend === 'down' ? '-' : '='}
+            <span className={`text-[10px] ${trend === 'up' ? 'text-emerald-400' :
+              trend === 'down' ? 'text-rose-400' :
+                'text-zinc-500'
+              }`}>
+              {trend === 'up' ? '▲' : trend === 'down' ? '▼' : '−'}
             </span>
           )}
         </div>
       </div>
-      <div className="relative h-2 bg-gray-700 rounded-full overflow-hidden">
+      <div className="relative h-1.5 bg-zinc-800 rounded-full overflow-hidden">
         {/* Benchmark marker */}
         <div
-          className="absolute top-0 bottom-0 w-0.5 bg-gray-400 z-10"
+          className="absolute top-0 bottom-0 w-0.5 bg-zinc-600 z-10"
           style={{ left: `${benchmarkPercentage}%` }}
         />
         {/* Value bar */}
         <div
-          className={`h-full rounded-full transition-all duration-500 ${
-            value >= benchmark ? 'bg-blue-500' : 'bg-yellow-500'
-          }`}
+          className={`h-full rounded-full transition-all duration-1000 ease-out ${value >= benchmark ? 'bg-gradient-to-r from-cyan-500 to-blue-500' : 'bg-gradient-to-r from-amber-500 to-orange-500'
+            }`}
           style={{ width: `${percentage}%` }}
         />
       </div>

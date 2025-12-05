@@ -407,11 +407,11 @@ describe('Diagnostic Assessment System - Core Logic', () => {
 
   describe('STAT_NAMES Integration', () => {
     const STAT_NAMES: StatName[] = [
-      'reading_comprehension',
-      'vocabulary',
+      'reading',
+      'math',
       'critical_thinking',
-      'math_reasoning',
-      'writing',
+      'science',
+      'coding',
       'study_skills',
     ];
 
@@ -423,11 +423,11 @@ describe('Diagnostic Assessment System - Core Logic', () => {
     });
 
     test('stats needing diagnostic excludes completed stats', () => {
-      const completedStats = new Set(['reading_comprehension', 'vocabulary']);
+      const completedStats = new Set(['reading', 'math']);
       const statsNeedingDiagnostic = STAT_NAMES.filter((stat) => !completedStats.has(stat));
 
-      expect(statsNeedingDiagnostic).not.toContain('reading_comprehension');
-      expect(statsNeedingDiagnostic).not.toContain('vocabulary');
+      expect(statsNeedingDiagnostic).not.toContain('reading');
+      expect(statsNeedingDiagnostic).not.toContain('math');
       expect(statsNeedingDiagnostic).toContain('critical_thinking');
     });
   });

@@ -56,7 +56,7 @@ CREATE INDEX IF NOT EXISTS idx_clusters_name ON hyro_concept_clusters(name);
 -- ============================================================================
 
 -- Mathematics <-> Science Connections
-INSERT INTO hyro_cross_domain_connections (id, source_topic_id, target_topic_id, source_domain, target_domain, connection_type, strength, description, examples, learning_opportunities) VALUES
+INSERT OR IGNORE INTO hyro_cross_domain_connections (id, source_topic_id, target_topic_id, source_domain, target_domain, connection_type, strength, description, examples, learning_opportunities) VALUES
   ('xd_math_sci_001', 'topic_ratios_intro', 'topic_sci_models', 'mathematics', 'science', 'applies_in', 'strong',
    'Ratios express relationships in scientific models - density, speed, concentration',
    '["Density = mass/volume ratio", "Speed = distance/time ratio", "Concentration = solute/solution ratio"]',
@@ -98,7 +98,7 @@ INSERT INTO hyro_cross_domain_connections (id, source_topic_id, target_topic_id,
    'Science experiments are perfect for learning statistics because the context makes it meaningful.');
 
 -- Mathematics <-> Language Arts Connections
-INSERT INTO hyro_cross_domain_connections (id, source_topic_id, target_topic_id, source_domain, target_domain, connection_type, strength, description, examples, learning_opportunities) VALUES
+INSERT OR IGNORE INTO hyro_cross_domain_connections (id, source_topic_id, target_topic_id, source_domain, target_domain, connection_type, strength, description, examples, learning_opportunities) VALUES
   ('xd_math_ela_001', 'topic_word_problems', 'topic_ela_vocab_context', 'mathematics', 'language_arts', 'supports', 'strong',
    'Word problems require careful reading comprehension',
    '["Key words like per, each, total indicate operations", "Understanding problem structure", "Extracting relevant information"]',
@@ -115,7 +115,7 @@ INSERT INTO hyro_cross_domain_connections (id, source_topic_id, target_topic_id,
    'Analyzing word problems IS text analysis. The skills transfer both ways.');
 
 -- Mathematics <-> Critical Thinking Connections
-INSERT INTO hyro_cross_domain_connections (id, source_topic_id, target_topic_id, source_domain, target_domain, connection_type, strength, description, examples, learning_opportunities) VALUES
+INSERT OR IGNORE INTO hyro_cross_domain_connections (id, source_topic_id, target_topic_id, source_domain, target_domain, connection_type, strength, description, examples, learning_opportunities) VALUES
   ('xd_math_ct_001', 'topic_equations_reasoning', 'topic_ct_logical_reasoning', 'mathematics', 'critical_thinking', 'same_concept', 'essential',
    'Mathematical proof and logical reasoning are the SAME skill',
    '["If-then reasoning in proofs", "Valid steps follow from premises", "Counterexamples disprove claims"]',
@@ -132,7 +132,7 @@ INSERT INTO hyro_cross_domain_connections (id, source_topic_id, target_topic_id,
    'Statistical literacy is critical thinking literacy. They are inseparable.');
 
 -- Science <-> Language Arts Connections
-INSERT INTO hyro_cross_domain_connections (id, source_topic_id, target_topic_id, source_domain, target_domain, connection_type, strength, description, examples, learning_opportunities) VALUES
+INSERT OR IGNORE INTO hyro_cross_domain_connections (id, source_topic_id, target_topic_id, source_domain, target_domain, connection_type, strength, description, examples, learning_opportunities) VALUES
   ('xd_sci_ela_001', 'topic_sci_investigation', 'topic_ela_informational', 'science', 'language_arts', 'supports', 'strong',
    'Scientific papers are informational texts. Reading science = reading practice.',
    '["Abstract as summary", "Methods section structure", "Results interpretation"]',
@@ -149,7 +149,7 @@ INSERT INTO hyro_cross_domain_connections (id, source_topic_id, target_topic_id,
    'Science writing demands clarity. It is excellent writing practice.');
 
 -- Science <-> Critical Thinking Connections
-INSERT INTO hyro_cross_domain_connections (id, source_topic_id, target_topic_id, source_domain, target_domain, connection_type, strength, description, examples, learning_opportunities) VALUES
+INSERT OR IGNORE INTO hyro_cross_domain_connections (id, source_topic_id, target_topic_id, source_domain, target_domain, connection_type, strength, description, examples, learning_opportunities) VALUES
   ('xd_sci_ct_001', 'topic_sci_investigation', 'topic_ct_hypothesis_testing', 'science', 'critical_thinking', 'same_concept', 'essential',
    'The scientific method IS systematic hypothesis testing',
    '["Formulating testable predictions", "Designing fair tests", "Revising based on evidence"]',
@@ -166,7 +166,7 @@ INSERT INTO hyro_cross_domain_connections (id, source_topic_id, target_topic_id,
    'Scientific data analysis develops general pattern recognition.');
 
 -- LLM Communications <-> Critical Thinking Connections
-INSERT INTO hyro_cross_domain_connections (id, source_topic_id, target_topic_id, source_domain, target_domain, connection_type, strength, description, examples, learning_opportunities) VALUES
+INSERT OR IGNORE INTO hyro_cross_domain_connections (id, source_topic_id, target_topic_id, source_domain, target_domain, connection_type, strength, description, examples, learning_opportunities) VALUES
   ('xd_llm_ct_001', 'topic_llm_assumptions', 'topic_ct_assumption_identification', 'llm_communications', 'critical_thinking', 'same_concept', 'essential',
    'Identifying assumptions in AI prompts uses the same skill as general assumption identification',
    '["Hidden premises in questions", "Unstated constraints", "Implicit goals"]',
@@ -188,7 +188,7 @@ INSERT INTO hyro_cross_domain_connections (id, source_topic_id, target_topic_id,
    'AI hallucination awareness builds healthy skepticism of all sources.');
 
 -- LLM Communications <-> Language Arts Connections
-INSERT INTO hyro_cross_domain_connections (id, source_topic_id, target_topic_id, source_domain, target_domain, connection_type, strength, description, examples, learning_opportunities) VALUES
+INSERT OR IGNORE INTO hyro_cross_domain_connections (id, source_topic_id, target_topic_id, source_domain, target_domain, connection_type, strength, description, examples, learning_opportunities) VALUES
   ('xd_llm_ela_001', 'topic_llm_idea_capture', 'topic_ela_writing_clarity', 'llm_communications', 'language_arts', 'same_concept', 'essential',
    'Articulating ideas to AI requires the same clarity as good writing',
    '["Clear thesis", "Logical organization", "Precise word choice"]',
@@ -205,7 +205,7 @@ INSERT INTO hyro_cross_domain_connections (id, source_topic_id, target_topic_id,
    'Context in prompts mirrors good writing structure.');
 
 -- LLM Communications <-> Mathematics Connections
-INSERT INTO hyro_cross_domain_connections (id, source_topic_id, target_topic_id, source_domain, target_domain, connection_type, strength, description, examples, learning_opportunities) VALUES
+INSERT OR IGNORE INTO hyro_cross_domain_connections (id, source_topic_id, target_topic_id, source_domain, target_domain, connection_type, strength, description, examples, learning_opportunities) VALUES
   ('xd_llm_math_001', 'topic_llm_probability', 'topic_stat_probability', 'llm_communications', 'mathematics', 'same_concept', 'essential',
    'Understanding AI probability IS understanding probability math',
    '["Token probability distributions", "Why likely isnt certain", "Probability sampling"]',
@@ -217,7 +217,7 @@ INSERT INTO hyro_cross_domain_connections (id, source_topic_id, target_topic_id,
    'Embeddings extend coordinate thinking to many dimensions.');
 
 -- Meta-Learning <-> All Domains Connections
-INSERT INTO hyro_cross_domain_connections (id, source_topic_id, target_topic_id, source_domain, target_domain, connection_type, strength, description, examples, learning_opportunities) VALUES
+INSERT OR IGNORE INTO hyro_cross_domain_connections (id, source_topic_id, target_topic_id, source_domain, target_domain, connection_type, strength, description, examples, learning_opportunities) VALUES
   ('xd_ml_math_001', 'topic_ml_deliberate', 'topic_math_practice', 'llm_communications', 'mathematics', 'applies_in', 'essential',
    'Deliberate practice principles apply directly to math skill building',
    '["Focus on weak areas", "Get immediate feedback", "Push beyond comfort zone"]',
@@ -237,7 +237,7 @@ INSERT INTO hyro_cross_domain_connections (id, source_topic_id, target_topic_id,
 -- CONCEPT CLUSTERS - Big Ideas That Span Domains
 -- ============================================================================
 
-INSERT INTO hyro_concept_clusters (id, name, description, big_idea, domains_involved, topic_ids, mastery_synergy) VALUES
+INSERT OR IGNORE INTO hyro_concept_clusters (id, name, description, big_idea, domains_involved, topic_ids, mastery_synergy) VALUES
   ('cluster_proportion', 'Proportional Relationships',
    'The concept of proportion appears everywhere - ratios, rates, scaling, similarity',
    'Things can relate to each other in consistent ways, and these relationships let us predict and understand.',
@@ -299,7 +299,7 @@ CREATE TABLE IF NOT EXISTS hyro_connection_weights (
   description TEXT
 );
 
-INSERT INTO hyro_connection_weights (id, connection_type, mastery_boost, description) VALUES
+INSERT OR IGNORE INTO hyro_connection_weights (id, connection_type, mastery_boost, description) VALUES
   ('weight_same_concept', 'same_concept', 0.3, 'Same concept in different context - high transfer'),
   ('weight_applies_in', 'applies_in', 0.2, 'Direct application - moderate transfer'),
   ('weight_supports', 'supports', 0.15, 'Supporting skill - some transfer'),

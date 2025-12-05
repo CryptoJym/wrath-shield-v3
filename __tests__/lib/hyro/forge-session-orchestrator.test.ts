@@ -412,11 +412,11 @@ describe('Session Orchestrator - Core Logic', () => {
     });
 
     test('focus stat filters activities', () => {
-      const focusStat: StatName = 'vocabulary';
+      const focusStat: StatName = 'reading';
       const activities: Array<{ stat_focus: StatName[] }> = [
-        { stat_focus: ['vocabulary'] },
-        { stat_focus: ['reading_comprehension'] },
-        { stat_focus: ['vocabulary', 'critical_thinking'] },
+        { stat_focus: ['reading'] },
+        { stat_focus: ['math'] },
+        { stat_focus: ['reading', 'critical_thinking'] },
       ];
 
       const relevantActivities = activities.filter((a) =>
@@ -481,10 +481,10 @@ describe('Session Orchestrator - Core Logic', () => {
 
     test('stat focus distribution tracks activity targets', () => {
       const activities: Array<{ stat_focus: StatName[] }> = [
-        { stat_focus: ['vocabulary', 'reading_comprehension'] },
-        { stat_focus: ['vocabulary'] },
-        { stat_focus: ['math_reasoning'] },
-        { stat_focus: ['vocabulary'] },
+        { stat_focus: ['reading', 'science'] },
+        { stat_focus: ['reading'] },
+        { stat_focus: ['math'] },
+        { stat_focus: ['reading'] },
       ];
 
       const statCounts: Record<string, number> = {};
@@ -494,9 +494,9 @@ describe('Session Orchestrator - Core Logic', () => {
         }
       }
 
-      expect(statCounts['vocabulary']).toBe(3);
-      expect(statCounts['reading_comprehension']).toBe(1);
-      expect(statCounts['math_reasoning']).toBe(1);
+      expect(statCounts['reading']).toBe(3);
+      expect(statCounts['science']).toBe(1);
+      expect(statCounts['math']).toBe(1);
     });
 
     test('weekly session count calculated from timestamp', () => {

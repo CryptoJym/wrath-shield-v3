@@ -12,6 +12,15 @@ export async function GET() {
   const executed = listAgenticActions({ status: 'executed', limit: 200, userId });
   const failed = listAgenticActions({ status: 'failed', limit: 50, userId });
 
+  // Get AI-driven continuity narrative
+  let narrative = null;
+  try {
+    const { getContinuityNarrative } = await import('@/lib/ea/continuity-aggregator');
+    narrative = await getContinuityNarrative(userId);
+  } catch (e) {
+    console.error('Failed to get continuity narrative', e);
+  }
+
   return NextResponse.json({
     counts: {
       proposed: proposed.length,
@@ -19,6 +28,7 @@ export async function GET() {
       executed: executed.length,
       failed: failed.length,
     },
+    narrative,
     samples: {
       proposed: proposed.slice(0, 5),
       queued: queued.slice(0, 5),

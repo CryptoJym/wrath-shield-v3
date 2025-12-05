@@ -12,11 +12,14 @@ import {
   completeIntelItem,
   skipIntelItem,
   getIntelHistory,
+  generateDailyIntel,
   generateSampleIntel,
 } from '@/lib/hyro/forge-intel';
+import { getStudentIdFromRequest } from '@/lib/hyro/student-auth';
 
 export async function GET(request: NextRequest) {
   try {
+    const studentId = await getStudentIdFromRequest();
     const { searchParams } = new URL(request.url);
     const date = searchParams.get('date');
     const itemId = searchParams.get('id');
@@ -24,7 +27,7 @@ export async function GET(request: NextRequest) {
 
     // Get single item
     if (itemId) {
-      const item = getIntelItem(itemId);
+      const item = getIntelItem(studentId, itemId);
       if (!item) {
         return NextResponse.json({ error: 'Intel item not found' }, { status: 404 });
       }
@@ -34,20 +37,20 @@ export async function GET(request: NextRequest) {
     // Get history
     if (action === 'history') {
       const days = parseInt(searchParams.get('days') || '7');
-      const history = getIntelHistory(days);
+      const history = getIntelHistory(studentId, days);
       return NextResponse.json({ history, days });
     }
 
     // Get daily feed (optionally for specific date)
-    const feed = getDailyFeed(date || undefined);
+    const feed = getDailyFeed(studentId, date || undefined);
 
-    // If no items for today, generate sample content
+    // If no items for today, generate content from pool
     if (feed.items.length === 0) {
-      generateSampleIntel(date || undefined);
-      const updatedFeed = getDailyFeed(date || undefined);
+      generateDailyIntel(studentId, date || undefined);
+      const updatedFeed = getDailyFeed(studentId, date || undefined);
       return NextResponse.json({
         ...updatedFeed,
-        message: 'Generated fresh daily intel',
+        message: 'Generated fresh daily intel from content pool',
       });
     }
 
@@ -63,6 +66,7 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
+    const studentId = await getStudentIdFromRequest();
     const body = await request.json();
     const { action, id } = body;
 
@@ -89,7 +93,7 @@ export async function POST(request: NextRequest) {
         );
       }
 
-      const item = createIntelItem({
+      const item = createIntelItem(studentId, {
         title,
         summary,
         content_type,
@@ -111,7 +115,7 @@ export async function POST(request: NextRequest) {
       if (!id) {
         return NextResponse.json({ error: 'id is required' }, { status: 400 });
       }
-      const item = viewIntelItem(id);
+      const item = viewIntelItem(studentId, id);
       return NextResponse.json({ item, message: 'Marked as viewed' });
     }
 
@@ -120,7 +124,7 @@ export async function POST(request: NextRequest) {
       if (!id) {
         return NextResponse.json({ error: 'id is required' }, { status: 400 });
       }
-      const result = completeIntelItem(id);
+      const result = completeIntelItem(studentId, id);
       return NextResponse.json({
         ...result,
         message: result.xp_earned > 0
@@ -134,18 +138,18 @@ export async function POST(request: NextRequest) {
       if (!id) {
         return NextResponse.json({ error: 'id is required' }, { status: 400 });
       }
-      const item = skipIntelItem(id);
+      const item = skipIntelItem(studentId, id);
       return NextResponse.json({ item, message: 'Intel skipped' });
     }
 
-    // Generate sample intel
+    // Generate daily intel from content pool
     if (action === 'generate') {
       const date = body.date;
-      const items = generateSampleIntel(date);
+      const items = generateDailyIntel(studentId, date);
       return NextResponse.json({
         items,
         count: items.length,
-        message: `Generated ${items.length} intel items`,
+        message: `Generated ${items.length} intel items from content pool`,
       });
     }
 

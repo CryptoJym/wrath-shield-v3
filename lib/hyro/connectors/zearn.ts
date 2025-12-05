@@ -322,7 +322,8 @@ export class ZearnConnector extends BaseConnector {
       estimated_minutes: 30,
     };
 
-    const result = generateQuestFromAssignment(questInput);
+    // TODO: Pass actual studentId when connectors are fully multi-tenant
+    const result = generateQuestFromAssignment('hyro', questInput);
     return !!result;
   }
 }

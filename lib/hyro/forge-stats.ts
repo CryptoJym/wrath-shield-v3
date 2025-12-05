@@ -34,28 +34,28 @@ const GRADE_6_BENCHMARKS: Record<StatName, number> = {
 // ============================================================================
 
 /**
- * Get character profile
+ * Get character profile for a student
  */
-export function getCharacter(): Character | null {
+export function getCharacter(studentId: string = 'hyro'): Character | null {
   const db = getDatabase();
 
   const character = db.prepare(`
-    SELECT * FROM hyro_character WHERE id = 'hyro'
-  `).get() as Character | undefined;
+    SELECT * FROM hyro_character WHERE student_id = ?
+  `).get(studentId) as Character | undefined;
 
   return character || null;
 }
 
 /**
- * Get full character sheet with stats and recent activity
+ * Get full character sheet with stats and recent activity for a student
  */
-export function getCharacterSheet(): CharacterSheet | null {
+export function getCharacterSheet(studentId: string = 'hyro'): CharacterSheet | null {
   const db = getDatabase();
 
-  const character = getCharacter();
+  const character = getCharacter(studentId);
   if (!character) return null;
 
-  const stats = getAllStatsWithTrend();
+  const stats = getAllStatsWithTrend(studentId);
   const levelProgress = getLevelProgress(character.total_xp);
 
   // Get recent achievements
@@ -90,36 +90,36 @@ export function getCharacterSheet(): CharacterSheet | null {
 // ============================================================================
 
 /**
- * Get all stats
+ * Get all stats for a student
  */
-export function getAllStats(): Stat[] {
+export function getAllStats(studentId: string = 'hyro'): Stat[] {
   const db = getDatabase();
 
   return db.prepare(`
-    SELECT * FROM hyro_stats ORDER BY stat_name
-  `).all() as Stat[];
+    SELECT * FROM hyro_stats WHERE student_id = ? ORDER BY stat_name
+  `).all(studentId) as Stat[];
 }
 
 /**
- * Get a single stat by name
+ * Get a single stat by name for a student
  */
-export function getStat(statName: StatName): Stat | null {
+export function getStat(statName: StatName, studentId: string = 'hyro'): Stat | null {
   const db = getDatabase();
 
   const stat = db.prepare(`
-    SELECT * FROM hyro_stats WHERE stat_name = ?
-  `).get(statName) as Stat | undefined;
+    SELECT * FROM hyro_stats WHERE stat_name = ? AND student_id = ?
+  `).get(statName, studentId) as Stat | undefined;
 
   return stat || null;
 }
 
 /**
- * Get all stats with trend information (for spider graph)
+ * Get all stats with trend information (for spider graph) for a student
  */
-export function getAllStatsWithTrend(): StatWithTrend[] {
+export function getAllStatsWithTrend(studentId: string = 'hyro'): StatWithTrend[] {
   const db = getDatabase();
 
-  const stats = getAllStats();
+  const stats = getAllStats(studentId);
   const weekAgo = Math.floor(Date.now() / 1000) - (7 * 86400);
 
   return stats.map(stat => {
@@ -150,17 +150,18 @@ export function getAllStatsWithTrend(): StatWithTrend[] {
 }
 
 /**
- * Update a stat value
+ * Update a stat value for a student
  */
 export function updateStat(
   statName: StatName,
   newValue: number,
   reason: string,
-  sessionId?: string
+  sessionId?: string,
+  studentId: string = 'hyro'
 ): StatUpdateResult {
   const db = getDatabase();
 
-  const currentStat = getStat(statName);
+  const currentStat = getStat(statName, studentId);
   if (!currentStat) {
     throw new Error(`Stat not found: ${statName}`);
   }
@@ -224,25 +225,26 @@ export function updateStat(
 /**
  * Apply temporary modifier to a stat
  */
-export function applyStatModifier(statName: StatName, modifier: number): void {
+export function applyStatModifier(statName: StatName, modifier: number, studentId: string = 'hyro'): void {
   const db = getDatabase();
 
   db.prepare(`
     UPDATE hyro_stats
     SET modifier = ?, updated_at = unixepoch()
-    WHERE stat_name = ?
-  `).run(modifier, statName);
+    WHERE stat_name = ? AND student_id = ?
+  `).run(modifier, statName, studentId);
 }
 
 /**
- * Clear all stat modifiers
+ * Clear all stat modifiers for a student
  */
-export function clearStatModifiers(): void {
+export function clearStatModifiers(studentId: string = 'hyro'): void {
   const db = getDatabase();
 
   db.prepare(`
     UPDATE hyro_stats SET modifier = 0, updated_at = unixepoch()
-  `).run();
+    WHERE student_id = ?
+  `).run(studentId);
 }
 
 // ============================================================================
@@ -252,9 +254,9 @@ export function clearStatModifiers(): void {
 /**
  * Get data formatted for Recharts RadarChart (spider graph)
  */
-export function getSpiderGraphData(): SpiderGraphData {
-  const stats = getAllStatsWithTrend();
-  const character = getCharacter();
+export function getSpiderGraphData(studentId: string = 'hyro'): SpiderGraphData {
+  const stats = getAllStatsWithTrend(studentId);
+  const character = getCharacter(studentId);
 
   // Find most recent assessment date
   let lastAssessment: string | null = null;
@@ -292,7 +294,8 @@ export function getSpiderGraphData(): SpiderGraphData {
  */
 export function getStatHistory(
   statName: StatName,
-  days: number = 30
+  days: number = 30,
+  studentId: string = 'hyro'
 ): Array<{
   date: string;
   value: number;
@@ -305,9 +308,9 @@ export function getStatHistory(
   const history = db.prepare(`
     SELECT new_value as value, change_reason, created_at
     FROM hyro_stat_history
-    WHERE stat_name = ? AND created_at >= ?
+    WHERE stat_name = ? AND student_id = ? AND created_at >= ?
     ORDER BY created_at ASC
-  `).all(statName, since) as { value: number; change_reason: string; created_at: number }[];
+  `).all(statName, studentId, since) as { value: number; change_reason: string; created_at: number }[];
 
   return history.map(h => ({
     date: new Date(h.created_at * 1000).toISOString().split('T')[0],
@@ -319,13 +322,13 @@ export function getStatHistory(
 /**
  * Calculate overall "power level" from all stats
  */
-export function calculatePowerLevel(): {
+export function calculatePowerLevel(studentId: string = 'hyro'): {
   power_level: number;
   rank: string;
   strongest_stat: string;
   weakest_stat: string;
 } {
-  const stats = getAllStats();
+  const stats = getAllStats(studentId);
 
   if (stats.length === 0) {
     return {

@@ -19,9 +19,11 @@ import {
   getRecentDiscussions,
   PROMPT_TYPE_INFO,
 } from '@/lib/hyro/forge-comprehension';
+import { getStudentIdFromRequest } from '@/lib/hyro/student-auth';
 
 export async function GET(request: NextRequest) {
   try {
+    const studentId = await getStudentIdFromRequest();
     const { searchParams } = new URL(request.url);
     const action = searchParams.get('action');
     const bookId = searchParams.get('bookId');
@@ -36,14 +38,14 @@ export async function GET(request: NextRequest) {
 
     // Get prompts for a book
     if (bookId && action === 'prompts') {
-      const prompts = getPromptsForBook(bookId, promptType as any);
+      const prompts = getPromptsForBook(studentId, bookId, promptType as any);
       return NextResponse.json({ prompts, count: prompts.length });
     }
 
     // Get random prompt for a book
     if (bookId && action === 'random-prompt') {
       const chapterId = searchParams.get('chapterId') || undefined;
-      const prompt = getRandomPrompt(bookId, chapterId, promptType as any);
+      const prompt = getRandomPrompt(studentId, bookId, chapterId, promptType as any);
       if (!prompt) {
         return NextResponse.json({ error: 'No prompts available for this book' }, { status: 404 });
       }
@@ -52,28 +54,28 @@ export async function GET(request: NextRequest) {
 
     // Get specific prompt
     if (promptId) {
-      const prompt = getPrompt(promptId);
+      const prompt = getPrompt(studentId, promptId);
       if (!prompt) {
         return NextResponse.json({ error: 'Prompt not found' }, { status: 404 });
       }
-      const responses = getResponsesForPrompt(promptId);
+      const responses = getResponsesForPrompt(studentId, promptId);
       return NextResponse.json({ prompt, responses });
     }
 
     // Get discussion
     if (discussionId) {
-      const discussion = getDiscussion(discussionId);
+      const discussion = getDiscussion(studentId, discussionId);
       if (!discussion) {
         return NextResponse.json({ error: 'Discussion not found' }, { status: 404 });
       }
-      const exchanges = getDiscussionExchanges(discussionId);
+      const exchanges = getDiscussionExchanges(studentId, discussionId);
       return NextResponse.json({ discussion, exchanges });
     }
 
     // Get recent discussions for a book
     if (bookId && action === 'discussions') {
       const limit = parseInt(searchParams.get('limit') || '10');
-      const discussions = getRecentDiscussions(bookId, limit);
+      const discussions = getRecentDiscussions(studentId, bookId, limit);
       return NextResponse.json({ discussions, count: discussions.length });
     }
 
@@ -89,6 +91,7 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
+    const studentId = await getStudentIdFromRequest();
     const body = await request.json();
     const { action } = body;
 
@@ -99,7 +102,7 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ error: 'book_id, prompt_type, and prompt_text are required' }, { status: 400 });
       }
 
-      const prompt = createPrompt({
+      const prompt = createPrompt(studentId, {
         book_id, chapter_id, prompt_type, prompt_text, context_excerpt,
         evaluation_rubric, exemplar_response, common_misconceptions,
         difficulty_level, stat_targeted,
@@ -115,7 +118,7 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ error: 'prompt_id and response_text are required' }, { status: 400 });
       }
 
-      const result = await submitResponse({
+      const result = await submitResponse(studentId, {
         prompt_id,
         response_text,
         session_id,
@@ -136,7 +139,7 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ error: 'book_id is required' }, { status: 400 });
       }
 
-      const result = startDiscussion(book_id, initial_prompt_id);
+      const result = startDiscussion(studentId, book_id, initial_prompt_id);
       return NextResponse.json({
         ...result,
         message: 'Discussion started! Answer the prompt to continue.',
@@ -150,7 +153,7 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ error: 'discussion_id and response are required' }, { status: 400 });
       }
 
-      const result = continueDiscussion(discussion_id, response, response_time_seconds);
+      const result = continueDiscussion(studentId, discussion_id, response, response_time_seconds);
       return NextResponse.json({
         ...result,
         message: result.should_conclude
@@ -166,7 +169,7 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ error: 'discussion_id is required' }, { status: 400 });
       }
 
-      const result = concludeDiscussion(discussion_id);
+      const result = concludeDiscussion(studentId, discussion_id);
       return NextResponse.json({
         ...result,
         message: `Discussion complete! +${result.xp_earned} XP. Depth: ${result.summary.depth_achieved}`,

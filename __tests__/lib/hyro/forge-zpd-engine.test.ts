@@ -23,7 +23,7 @@ jest.mock('../../../lib/db/Database', () => ({
 jest.mock('../../../lib/hyro/forge-proficiency', () => ({
   getAllProficiency: jest.fn(() => []),
   getStatProficiency: jest.fn(() => ({
-    stat_name: 'reading_comprehension',
+    stat_name: 'reading',
     estimated_level: 50,
     confidence: 0.7,
   })),
@@ -36,7 +36,7 @@ jest.mock('../../../lib/hyro/forge-diagnostics', () => ({
 describe('ZPD Engine - Core Algorithms', () => {
   describe('scoreContentFit', () => {
     const createMockZPDState = (overrides: Partial<ZPDState> = {}): ZPDState => ({
-      stat_name: 'reading_comprehension',
+      stat_name: 'reading',
       current_level: 50,
       confidence: 0.7,
       zpd_lower: 47.5, // 5% below
@@ -110,7 +110,7 @@ describe('ZPD Engine - Core Algorithms', () => {
     test('ZPD lower bound is 5% below current level', () => {
       // For a student at level 50, ZPD lower should be ~47.5
       const zpdState: ZPDState = {
-        stat_name: 'vocabulary',
+        stat_name: 'reading',
         current_level: 50,
         confidence: 0.5,
         zpd_lower: 45, // Exact value depends on ZPD_OFFSET_LOWER constant
@@ -195,7 +195,7 @@ describe('ZPD Engine - Core Algorithms', () => {
   describe('Adaptive Difficulty Adjustment', () => {
     test('success at challenging level increases difficulty', () => {
       const zpdState: ZPDState = {
-        stat_name: 'reading_comprehension',
+        stat_name: 'reading',
         current_level: 50,
         confidence: 0.7,
         zpd_lower: 47.5,
@@ -223,7 +223,7 @@ describe('ZPD Engine - Core Algorithms', () => {
 
     test('failure above ZPD significantly decreases difficulty', () => {
       const zpdState: ZPDState = {
-        stat_name: 'reading_comprehension',
+        stat_name: 'reading',
         current_level: 50,
         confidence: 0.7,
         zpd_lower: 47.5,

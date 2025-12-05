@@ -360,7 +360,7 @@ export function getSessionQuestions(sessionId: string): QuestionWithAnswer[] {
     JOIN hyro_diagnostic_questions q ON q.id = r.question_id
     WHERE r.session_id = ?
     ORDER BY r.created_at ASC
-  `).all(sessionId);
+  `).all(sessionId) as Array<Record<string, unknown>>;
 
   return rows.map(row => ({
     ...parseQuestion(row),
@@ -576,7 +576,7 @@ export function completeDiagnosticSession(sessionId: string): DiagnosticResult {
 
   if (responsesWithConfidence.length >= 3) {
     const predictions = responsesWithConfidence.map(r => (r.confidence_before || 3) * 20);
-    const actual = responsesWithConfidence.map(r => r.is_correct ? 100 : 0);
+    const actual: number[] = responsesWithConfidence.map(r => r.is_correct ? 100 : 0);
     const errors = predictions.map((p, i) => Math.abs(p - actual[i]));
     const avgError = errors.reduce((a, b) => a + b, 0) / errors.length;
     const avgPrediction = predictions.reduce((a, b) => a + b, 0) / predictions.length;
@@ -666,13 +666,8 @@ export function completeDiagnosticSession(sessionId: string): DiagnosticResult {
     // Update the stat based on diagnostic
     updateStat(session.stat_name, clampedLevel, 'Diagnostic assessment result', sessionId);
 
-    // Award XP for completing diagnostic
-    awardXP({
-      amount: 50,
-      source: 'achievement',
-      source_id: resultId,
-      notes: `Completed ${session.stat_name} diagnostic assessment`,
-    });
+    // Award XP for completing diagnostic (TODO: add studentId to diagnostic functions for full multi-tenant)
+    awardXP('hyro', 50, 'diagnostic', resultId);
 
     return {
       id: resultId,

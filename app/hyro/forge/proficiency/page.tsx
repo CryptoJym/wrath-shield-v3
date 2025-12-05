@@ -3,10 +3,11 @@
 /**
  * HYRO FORGE: Skill Proficiency Page
  * Detailed view of skill progress and mastery levels
+ * Premium "Ultra-Edge" UI Overhaul
  */
 
 import { useState, useEffect, useCallback, useMemo } from 'react';
-import { ArrowLeft, Trophy, Loader2, Target, Star, TrendingUp, Brain } from 'lucide-react';
+import { ArrowLeft, Trophy, Loader2, Target, Star, TrendingUp, Brain, Shield } from 'lucide-react';
 import Link from 'next/link';
 import { SkillDashboard, type Skill } from '@/components/forge/proficiency';
 
@@ -88,122 +89,167 @@ export default function ProficiencyPage() {
 
   if (loading && skills.length === 0) {
     return (
-      <div style={styles.loadingContainer}>
-        <Loader2 size={32} style={{ animation: 'spin 1s linear infinite' }} />
-        <span>Loading skill proficiency...</span>
+      <div className="min-h-screen bg-zinc-950 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin h-12 w-12 border-4 border-amber-500 border-t-transparent rounded-full mx-auto mb-4" />
+          <p className="text-zinc-400 uppercase tracking-widest text-sm">Calibrating Skill Matrix...</p>
+        </div>
       </div>
     );
   }
 
   return (
-    <div style={styles.container}>
-      {/* Header */}
-      <header style={styles.header}>
-        <div style={styles.headerLeft}>
-          <Link href="/hyro/forge" style={styles.backButton}>
-            <ArrowLeft size={20} />
-            Back to Forge
-          </Link>
-          <h1 style={styles.title}>
-            <Trophy size={28} style={{ color: '#f59e0b' }} />
-            Skill Proficiency
-          </h1>
-        </div>
+    <div className="min-h-screen bg-zinc-950 text-white selection:bg-amber-500/30">
+      {/* Ambient Background */}
+      <div className="fixed inset-0 pointer-events-none">
+        <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-amber-900/10 rounded-full blur-[120px]" />
+        <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-emerald-900/10 rounded-full blur-[120px]" />
+      </div>
 
-        {/* Category Filter */}
-        <select
-          value={categoryFilter}
-          onChange={(e) => setCategoryFilter(e.target.value)}
-          style={styles.categorySelect}
-        >
-          {categoryList.map((cat) => (
-            <option key={cat.value} value={cat.value}>
-              {cat.label}
-            </option>
-          ))}
-        </select>
+      {/* Header */}
+      <header className="relative z-10 border-b border-white/5 bg-zinc-900/50 backdrop-blur-xl sticky top-0">
+        <div className="max-w-7xl mx-auto px-6 py-4">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div className="flex items-center gap-4">
+              <Link
+                href="/hyro/forge"
+                className="p-2 hover:bg-white/5 rounded-lg transition-colors text-zinc-400 hover:text-white"
+              >
+                <ArrowLeft size={20} />
+              </Link>
+              <div>
+                <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-zinc-400 flex items-center gap-3">
+                  <Trophy className="text-amber-400" size={24} />
+                  SKILL PROFICIENCY
+                </h1>
+              </div>
+            </div>
+
+            {/* Category Filter */}
+            <div className="relative">
+              <select
+                value={categoryFilter}
+                onChange={(e) => setCategoryFilter(e.target.value)}
+                className="appearance-none bg-zinc-900/80 border border-white/10 rounded-lg pl-4 pr-10 py-2 text-sm text-zinc-300 focus:outline-none focus:border-amber-500/50 focus:ring-1 focus:ring-amber-500/50 transition-all cursor-pointer hover:bg-zinc-800"
+              >
+                {categoryList.map((cat) => (
+                  <option key={cat.value} value={cat.value}>
+                    {cat.label}
+                  </option>
+                ))}
+              </select>
+              <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-zinc-500">
+                <Target size={14} />
+              </div>
+            </div>
+          </div>
+        </div>
       </header>
 
       {/* Stats Bar */}
       {stats && (
-        <div style={styles.statsBar}>
-          <div style={styles.statItem}>
-            <Target size={16} />
-            <span style={styles.statValue}>
-              {stats.unlocked_skills}/{stats.total_skills}
-            </span>
-            <span style={styles.statLabel}>Unlocked</span>
-          </div>
-          <div style={styles.statItem}>
-            <Star size={16} color="#f59e0b" />
-            <span style={styles.statValue}>{stats.mastered_skills}</span>
-            <span style={styles.statLabel}>Mastered</span>
-          </div>
-          <div style={styles.statItem}>
-            <TrendingUp size={16} color="#10b981" />
-            <span style={styles.statValue}>{Math.round(stats.avg_proficiency)}%</span>
-            <span style={styles.statLabel}>Average</span>
-          </div>
-          <div style={styles.statItem}>
-            <Brain size={16} color="#a78bfa" />
-            <span style={styles.statValue}>{stats.total_practice_sessions}</span>
-            <span style={styles.statLabel}>Practices</span>
+        <div className="relative z-10 border-b border-white/5 bg-zinc-900/30 backdrop-blur-md">
+          <div className="max-w-7xl mx-auto px-6 py-4">
+            <div className="flex flex-wrap justify-center gap-8 md:gap-16">
+              <div className="flex flex-col items-center gap-1">
+                <div className="flex items-center gap-2 text-zinc-400 text-xs uppercase tracking-widest font-medium">
+                  <Target size={14} />
+                  <span>Unlocked</span>
+                </div>
+                <span className="text-xl font-bold text-white">
+                  {stats.unlocked_skills}<span className="text-zinc-600 text-sm font-normal">/{stats.total_skills}</span>
+                </span>
+              </div>
+
+              <div className="flex flex-col items-center gap-1">
+                <div className="flex items-center gap-2 text-zinc-400 text-xs uppercase tracking-widest font-medium">
+                  <Star size={14} className="text-amber-400" />
+                  <span>Mastered</span>
+                </div>
+                <span className="text-xl font-bold text-amber-400 glow-text-amber">
+                  {stats.mastered_skills}
+                </span>
+              </div>
+
+              <div className="flex flex-col items-center gap-1">
+                <div className="flex items-center gap-2 text-zinc-400 text-xs uppercase tracking-widest font-medium">
+                  <TrendingUp size={14} className="text-emerald-400" />
+                  <span>Average</span>
+                </div>
+                <span className="text-xl font-bold text-emerald-400">
+                  {Math.round(stats.avg_proficiency)}%
+                </span>
+              </div>
+
+              <div className="flex flex-col items-center gap-1">
+                <div className="flex items-center gap-2 text-zinc-400 text-xs uppercase tracking-widest font-medium">
+                  <Brain size={14} className="text-purple-400" />
+                  <span>Practices</span>
+                </div>
+                <span className="text-xl font-bold text-white">
+                  {stats.total_practice_sessions}
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       )}
 
       {/* Stat Summaries */}
       {Object.keys(statSummaries).length > 0 && (
-        <div style={styles.statSummaries}>
-          {Object.entries(statSummaries).map(([stat, data]) => (
-            <div key={stat} style={styles.statSummaryCard}>
-              <span style={styles.statSummaryName}>{stat}</span>
-              <div style={styles.statSummaryBar}>
-                <div
-                  style={{
-                    ...styles.statSummaryFill,
-                    width: `${data.avgLevel}%`,
-                  }}
-                />
-              </div>
-              <span style={styles.statSummaryValue}>{Math.round(data.avgLevel)}%</span>
+        <div className="relative z-10 border-b border-white/5 bg-zinc-950/50 backdrop-blur-sm overflow-x-auto">
+          <div className="max-w-7xl mx-auto px-6 py-3">
+            <div className="flex gap-4 min-w-max">
+              {Object.entries(statSummaries).map(([stat, data]) => (
+                <div key={stat} className="flex items-center gap-3 px-3 py-1.5 bg-zinc-900/50 rounded-lg border border-white/5">
+                  <span className="text-xs font-medium text-zinc-400 capitalize w-16 truncate">{stat}</span>
+                  <div className="w-16 h-1.5 bg-zinc-800 rounded-full overflow-hidden">
+                    <div
+                      className="h-full bg-gradient-to-r from-amber-500 to-emerald-500 rounded-full"
+                      style={{ width: `${data.avgLevel}%` }}
+                    />
+                  </div>
+                  <span className="text-xs font-bold text-white w-8 text-right">{Math.round(data.avgLevel)}%</span>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
       )}
 
       {/* Strength/Weakness Hints */}
       {stats && stats.strongest_category && stats.weakest_category && (
-        <div style={styles.hintBar}>
-          <div style={styles.hint}>
-            <TrendingUp size={14} color="#10b981" />
-            <span>Strongest: </span>
-            <strong style={{ color: '#10b981', textTransform: 'capitalize' }}>
-              {stats.strongest_category.replace('_', ' ')}
-            </strong>
-          </div>
-          <div style={styles.hint}>
-            <Target size={14} color="#f59e0b" />
-            <span>Focus Area: </span>
-            <strong style={{ color: '#f59e0b', textTransform: 'capitalize' }}>
-              {stats.weakest_category.replace('_', ' ')}
-            </strong>
+        <div className="relative z-10 bg-zinc-900/20 border-b border-white/5">
+          <div className="max-w-7xl mx-auto px-6 py-2 flex justify-center gap-8 text-xs">
+            <div className="flex items-center gap-2 text-zinc-400">
+              <TrendingUp size={12} className="text-emerald-400" />
+              <span>Strongest: <strong className="text-emerald-400 capitalize ml-1">{stats.strongest_category.replace('_', ' ')}</strong></span>
+            </div>
+            <div className="flex items-center gap-2 text-zinc-400">
+              <Target size={12} className="text-amber-400" />
+              <span>Focus Area: <strong className="text-amber-400 capitalize ml-1">{stats.weakest_category.replace('_', ' ')}</strong></span>
+            </div>
           </div>
         </div>
       )}
 
       {/* Error State */}
       {error && (
-        <div style={styles.error}>
-          {error}
-          <button onClick={fetchProficiency} style={styles.retryButton}>
-            Retry
+        <div className="max-w-md mx-auto mt-8 p-6 bg-red-950/30 border border-red-500/30 rounded-2xl text-center backdrop-blur-md">
+          <Shield className="w-12 h-12 text-red-500 mx-auto mb-4" />
+          <h3 className="text-lg font-bold text-red-400 mb-2">Data Retrieval Failed</h3>
+          <p className="text-zinc-400 mb-4">{error}</p>
+          <button
+            onClick={fetchProficiency}
+            className="px-4 py-2 bg-red-500/20 hover:bg-red-500/30 text-red-400 border border-red-500/50 rounded-lg transition-all"
+          >
+            Retry Connection
           </button>
         </div>
       )}
 
       {/* Main Content */}
-      <main style={styles.main}>
+      <main className="relative z-10 max-w-7xl mx-auto p-6">
         <SkillDashboard
           skills={skills}
           categoryFilter={categoryFilter || undefined}
@@ -212,175 +258,3 @@ export default function ProficiencyPage() {
     </div>
   );
 }
-
-const styles: Record<string, React.CSSProperties> = {
-  container: {
-    minHeight: '100vh',
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  loadingContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    minHeight: '50vh',
-    gap: '1rem',
-    color: '#888',
-  },
-  header: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: '1rem',
-    borderBottom: '1px solid #333',
-    flexWrap: 'wrap',
-    gap: '1rem',
-  },
-  headerLeft: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '1rem',
-    flexWrap: 'wrap',
-  },
-  backButton: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '0.5rem',
-    padding: '0.5rem 1rem',
-    background: 'transparent',
-    border: '1px solid #333',
-    borderRadius: '0.375rem',
-    color: '#888',
-    textDecoration: 'none',
-    fontSize: '0.875rem',
-    cursor: 'pointer',
-  },
-  title: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '0.75rem',
-    fontSize: '1.5rem',
-    fontWeight: 700,
-    margin: 0,
-  },
-  categorySelect: {
-    padding: '0.5rem 1rem',
-    background: '#1a1a1a',
-    border: '1px solid #333',
-    borderRadius: '0.5rem',
-    color: '#fff',
-    fontSize: '0.875rem',
-    cursor: 'pointer',
-  },
-  statsBar: {
-    display: 'flex',
-    gap: '2rem',
-    padding: '1rem',
-    background: '#1a1a1a',
-    borderBottom: '1px solid #333',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-  },
-  statItem: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '0.5rem',
-    color: '#888',
-  },
-  statValue: {
-    fontSize: '1.25rem',
-    fontWeight: 700,
-    color: '#fff',
-  },
-  statLabel: {
-    fontSize: '0.75rem',
-    textTransform: 'uppercase',
-  },
-  statSummaries: {
-    display: 'flex',
-    gap: '0.75rem',
-    padding: '1rem',
-    background: '#0f0f0f',
-    borderBottom: '1px solid #333',
-    overflowX: 'auto',
-    flexWrap: 'nowrap',
-  },
-  statSummaryCard: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '0.5rem',
-    padding: '0.5rem 0.875rem',
-    background: '#1a1a1a',
-    borderRadius: '0.5rem',
-    border: '1px solid #333',
-    minWidth: 'fit-content',
-  },
-  statSummaryName: {
-    fontSize: '0.75rem',
-    fontWeight: 500,
-    textTransform: 'capitalize',
-    color: '#ccc',
-    minWidth: '70px',
-  },
-  statSummaryBar: {
-    width: '60px',
-    height: '6px',
-    background: '#333',
-    borderRadius: '3px',
-    overflow: 'hidden',
-  },
-  statSummaryFill: {
-    height: '100%',
-    background: 'linear-gradient(90deg, #f59e0b, #10b981)',
-    borderRadius: '3px',
-    transition: 'width 0.3s ease',
-  },
-  statSummaryValue: {
-    fontSize: '0.75rem',
-    fontWeight: 600,
-    color: '#888',
-    minWidth: '30px',
-    textAlign: 'right',
-  },
-  hintBar: {
-    display: 'flex',
-    gap: '2rem',
-    padding: '0.75rem 1rem',
-    background: '#0f0f0f',
-    borderBottom: '1px solid #333',
-    justifyContent: 'center',
-    flexWrap: 'wrap',
-  },
-  hint: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '0.5rem',
-    fontSize: '0.8125rem',
-    color: '#888',
-  },
-  error: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: '1rem',
-    padding: '1rem',
-    background: 'rgba(239, 68, 68, 0.1)',
-    color: '#ef4444',
-  },
-  retryButton: {
-    padding: '0.5rem 1rem',
-    background: '#ef4444',
-    border: 'none',
-    borderRadius: '0.375rem',
-    color: '#fff',
-    cursor: 'pointer',
-  },
-  main: {
-    flex: 1,
-    padding: '1rem',
-    maxWidth: '900px',
-    margin: '0 auto',
-    width: '100%',
-  },
-};

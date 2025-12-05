@@ -102,9 +102,10 @@ export function getTitleForLevel(level: number): string {
 // ============================================================================
 
 /**
- * Award XP to Hyro and handle level-ups
+ * Award XP to a student and handle level-ups
  */
 export function awardXP(
+  studentId: string,
   amount: number,
   source: XPSource,
   sourceId?: string,
@@ -115,8 +116,8 @@ export function awardXP(
 
   // Get current character state
   const character = db.prepare(`
-    SELECT * FROM hyro_character WHERE id = 'hyro'
-  `).get() as { total_xp: number; level: number; title: string } | undefined;
+    SELECT * FROM hyro_character WHERE student_id = ?
+  `).get(studentId) as { total_xp: number; level: number; title: string } | undefined;
 
   if (!character) {
     throw new Error('Character not initialized');
@@ -134,23 +135,23 @@ export function awardXP(
   return db.transaction(() => {
     // Log XP transaction
     db.prepare(`
-      INSERT INTO hyro_xp_log (id, amount, source, source_id, multiplier, notes)
-      VALUES (?, ?, ?, ?, ?, ?)
-    `).run(randomUUID(), awardedXp, source, sourceId || null, multiplier, notes || null);
+      INSERT INTO hyro_xp_log (id, student_id, amount, source, source_id, multiplier, notes)
+      VALUES (?, ?, ?, ?, ?, ?, ?)
+    `).run(randomUUID(), studentId, awardedXp, source, sourceId || null, multiplier, notes || null);
 
     // Update character XP and level
     if (levelUp) {
       db.prepare(`
         UPDATE hyro_character
         SET total_xp = ?, level = ?, title = ?, updated_at = unixepoch()
-        WHERE id = 'hyro'
-      `).run(newTotalXp, newLevel, newTitle);
+        WHERE student_id = ?
+      `).run(newTotalXp, newLevel, newTitle, studentId);
     } else {
       db.prepare(`
         UPDATE hyro_character
         SET total_xp = ?, updated_at = unixepoch()
-        WHERE id = 'hyro'
-      `).run(newTotalXp);
+        WHERE student_id = ?
+      `).run(newTotalXp, studentId);
     }
 
     // Check for achievements
@@ -161,25 +162,25 @@ export function awardXP(
       SELECT a.* FROM hyro_achievements a
       WHERE a.requirement_type = 'stat_level'
         AND a.requirement_value <= ?
-        AND a.id NOT IN (SELECT achievement_id FROM hyro_earned_achievements)
-    `).all(newLevel) as Achievement[];
+        AND a.id NOT IN (SELECT achievement_id FROM hyro_earned_achievements WHERE student_id = ?)
+    `).all(newLevel, studentId) as Achievement[];
 
     for (const achievement of levelAchievements) {
       db.prepare(`
-        INSERT INTO hyro_earned_achievements (id, achievement_id)
-        VALUES (?, ?)
-      `).run(randomUUID(), achievement.id);
+        INSERT INTO hyro_earned_achievements (id, student_id, achievement_id)
+        VALUES (?, ?, ?)
+      `).run(randomUUID(), studentId, achievement.id);
 
       // Award bonus XP (recursive but won't trigger more achievements)
       if (achievement.xp_bonus > 0) {
         db.prepare(`
-          INSERT INTO hyro_xp_log (id, amount, source, source_id, notes)
-          VALUES (?, ?, 'achievement', ?, ?)
-        `).run(randomUUID(), achievement.xp_bonus, achievement.id, `Achievement: ${achievement.name}`);
+          INSERT INTO hyro_xp_log (id, student_id, amount, source, source_id, notes)
+          VALUES (?, ?, ?, 'achievement', ?, ?)
+        `).run(randomUUID(), studentId, achievement.xp_bonus, achievement.id, `Achievement: ${achievement.name}`);
 
         db.prepare(`
-          UPDATE hyro_character SET total_xp = total_xp + ? WHERE id = 'hyro'
-        `).run(achievement.xp_bonus);
+          UPDATE hyro_character SET total_xp = total_xp + ? WHERE student_id = ?
+        `).run(achievement.xp_bonus, studentId);
       }
 
       achievementsUnlocked.push(achievement);
@@ -205,7 +206,7 @@ export function awardXP(
 /**
  * Get XP summary for various time periods
  */
-export function getXPSummary(): {
+export function getXPSummary(studentId: string): {
   today: number;
   this_week: number;
   this_month: number;
@@ -221,27 +222,28 @@ export function getXPSummary(): {
 
   const today = db.prepare(`
     SELECT COALESCE(SUM(amount), 0) as total FROM hyro_xp_log
-    WHERE created_at >= ?
-  `).get(todayStart) as { total: number };
+    WHERE student_id = ? AND created_at >= ?
+  `).get(studentId, todayStart) as { total: number };
 
   const week = db.prepare(`
     SELECT COALESCE(SUM(amount), 0) as total FROM hyro_xp_log
-    WHERE created_at >= ?
-  `).get(weekStart) as { total: number };
+    WHERE student_id = ? AND created_at >= ?
+  `).get(studentId, weekStart) as { total: number };
 
   const month = db.prepare(`
     SELECT COALESCE(SUM(amount), 0) as total FROM hyro_xp_log
-    WHERE created_at >= ?
-  `).get(monthStart) as { total: number };
+    WHERE student_id = ? AND created_at >= ?
+  `).get(studentId, monthStart) as { total: number };
 
   const character = db.prepare(`
-    SELECT total_xp FROM hyro_character WHERE id = 'hyro'
-  `).get() as { total_xp: number } | undefined;
+    SELECT total_xp FROM hyro_character WHERE student_id = ?
+  `).get(studentId) as { total_xp: number } | undefined;
 
   const bySource = db.prepare(`
     SELECT source, COALESCE(SUM(amount), 0) as total FROM hyro_xp_log
+    WHERE student_id = ?
     GROUP BY source
-  `).all() as { source: XPSource; total: number }[];
+  `).all(studentId) as { source: XPSource; total: number }[];
 
   const sourceMap: Record<XPSource, number> = {
     quest: 0,
@@ -262,6 +264,10 @@ export function getXPSummary(): {
     comprehension_response: 0,
     discussion_exchange: 0,
     discussion_completed: 0,
+    // Phase 4 sources (AI Tutor and Diagnostics)
+    diagnostic: 0,
+    engagement: 0,
+    study_pattern: 0,
   };
 
   for (const row of bySource) {
@@ -280,7 +286,7 @@ export function getXPSummary(): {
 /**
  * Get recent XP transactions
  */
-export function getRecentXP(limit: number = 20): Array<{
+export function getRecentXP(studentId: string, limit: number = 20): Array<{
   id: string;
   amount: number;
   source: XPSource;
@@ -292,9 +298,10 @@ export function getRecentXP(limit: number = 20): Array<{
 
   return db.prepare(`
     SELECT * FROM hyro_xp_log
+    WHERE student_id = ?
     ORDER BY created_at DESC
     LIMIT ?
-  `).all(limit) as Array<{
+  `).all(studentId, limit) as Array<{
     id: string;
     amount: number;
     source: XPSource;
@@ -311,7 +318,7 @@ export function getRecentXP(limit: number = 20): Array<{
 /**
  * Update streak based on session activity
  */
-export function updateStreak(): {
+export function updateStreak(studentId: string): {
   current_streak: number;
   longest_streak: number;
   streak_bonus_xp: number;
@@ -320,8 +327,8 @@ export function updateStreak(): {
 
   const character = db.prepare(`
     SELECT current_streak, longest_streak, last_session_at
-    FROM hyro_character WHERE id = 'hyro'
-  `).get() as { current_streak: number; longest_streak: number; last_session_at: number | null } | undefined;
+    FROM hyro_character WHERE student_id = ?
+  `).get(studentId) as { current_streak: number; longest_streak: number; last_session_at: number | null } | undefined;
 
   if (!character) {
     throw new Error('Character not initialized');
@@ -354,12 +361,12 @@ export function updateStreak(): {
   db.prepare(`
     UPDATE hyro_character
     SET current_streak = ?, longest_streak = ?, last_session_at = ?, updated_at = unixepoch()
-    WHERE id = 'hyro'
-  `).run(newStreak, newLongestStreak, now);
+    WHERE student_id = ?
+  `).run(newStreak, newLongestStreak, now, studentId);
 
   // Award streak bonus XP if applicable
   if (streakBonusXp > 0) {
-    awardXP(streakBonusXp, 'streak', undefined, 1.0, `${newStreak}-day streak bonus`);
+    awardXP(studentId, streakBonusXp, 'streak', undefined, 1.0, `${newStreak}-day streak bonus`);
   }
 
   return {

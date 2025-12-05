@@ -23,6 +23,8 @@ export interface GitHubRepo {
   open_issues_count: number;
   updated_at: string;
   pushed_at: string;
+  archived?: boolean;
+  stargazers_count?: number;
 }
 
 export interface GitHubIssue {

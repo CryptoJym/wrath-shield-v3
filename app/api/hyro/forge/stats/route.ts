@@ -12,9 +12,11 @@ import {
   getStatHistory,
 } from '@/lib/hyro/forge-stats';
 import type { StatName } from '@/lib/hyro/forge-types';
+import { getStudentIdFromRequest } from '@/lib/hyro/student-auth';
 
 export async function GET(request: NextRequest) {
   try {
+    const studentId = await getStudentIdFromRequest();
     const { searchParams } = new URL(request.url);
     const format = searchParams.get('format') || 'spider';
     const statName = searchParams.get('stat') as StatName | null;
@@ -22,7 +24,7 @@ export async function GET(request: NextRequest) {
 
     // If requesting history for a specific stat
     if (statName && searchParams.get('history') === 'true') {
-      const history = getStatHistory(statName, historyDays);
+      const history = getStatHistory(statName, historyDays, studentId);
       return NextResponse.json({
         success: true,
         data: {
@@ -34,7 +36,7 @@ export async function GET(request: NextRequest) {
 
     // Spider graph format (for Recharts RadarChart)
     if (format === 'spider') {
-      const spiderData = getSpiderGraphData();
+      const spiderData = getSpiderGraphData(studentId);
       return NextResponse.json({
         success: true,
         data: spiderData,
@@ -42,7 +44,7 @@ export async function GET(request: NextRequest) {
     }
 
     // Full stats with trend information
-    const stats = getAllStatsWithTrend();
+    const stats = getAllStatsWithTrend(studentId);
     return NextResponse.json({
       success: true,
       data: { stats },
@@ -61,6 +63,7 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
+    const studentId = await getStudentIdFromRequest();
     const body = await request.json();
     const { stat_name, value, reason, session_id } = body;
 
@@ -93,7 +96,8 @@ export async function POST(request: NextRequest) {
       stat_name as StatName,
       value,
       reason || 'manual_update',
-      session_id
+      session_id,
+      studentId
     );
 
     return NextResponse.json({

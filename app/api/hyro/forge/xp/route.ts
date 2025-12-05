@@ -14,9 +14,11 @@ import {
 } from '@/lib/hyro/forge-xp';
 import { getCharacter } from '@/lib/hyro/forge-stats';
 import type { XPSource } from '@/lib/hyro/forge-types';
+import { getStudentIdFromRequest } from '@/lib/hyro/student-auth';
 
 export async function GET(request: NextRequest) {
   try {
+    const studentId = await getStudentIdFromRequest();
     const { searchParams } = new URL(request.url);
     const includeHistory = searchParams.get('history') === 'true';
     const historyLimit = parseInt(searchParams.get('limit') || '20', 10);
@@ -29,7 +31,7 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    const summary = getXPSummary();
+    const summary = getXPSummary(studentId);
     const levelProgress = getLevelProgress(character.total_xp);
 
     const response: Record<string, unknown> = {
@@ -48,7 +50,7 @@ export async function GET(request: NextRequest) {
     };
 
     if (includeHistory) {
-      const history = getRecentXP(historyLimit);
+      const history = getRecentXP(studentId, historyLimit);
       (response.data as Record<string, unknown>).history = history;
     }
 
@@ -67,12 +69,13 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
+    const studentId = await getStudentIdFromRequest();
     const body = await request.json();
     const { action } = body;
 
     // Handle streak update action
     if (action === 'update_streak') {
-      const streakResult = updateStreak();
+      const streakResult = updateStreak(studentId);
       return NextResponse.json({
         success: true,
         data: streakResult,
@@ -108,6 +111,7 @@ export async function POST(request: NextRequest) {
     }
 
     const result = awardXP(
+      studentId,
       amount,
       source as XPSource,
       source_id,

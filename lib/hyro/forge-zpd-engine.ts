@@ -14,8 +14,26 @@
 
 import { getDatabase } from '@/lib/db/Database';
 import { StatName, STAT_NAMES } from './forge-types';
-import { getAllProficiency, getStatProficiency, StatProficiency } from './forge-proficiency';
+import { getProficiencyProfile, getSkillProficiency, SkillProficiency } from './forge-proficiency';
 import { getLatestResult, DiagnosticResult } from './forge-diagnostics';
+
+// ============================================================================
+// State Vector Types (from Manifold)
+// ============================================================================
+
+export interface StateVector {
+  coherence: number;    // 0-100: Internal consistency of knowledge
+  entropy: number;      // 0-100: Ability to handle uncertainty/novelty
+  generativity: number; // 0-100: Capacity for novel value creation
+  n_items_used: number;
+}
+
+export interface ManifoldZPDRecommendation {
+  content_type: 'novel_ambiguous' | 'structured_practice' | 'transfer_task' | 'foundational' | 'balanced';
+  scaffolding_level: 'minimal' | 'moderate' | 'significant';
+  rationale: string;
+  target_dimensions: string[]; // Which C/E/G dimensions to develop
+}
 
 // ============================================================================
 // Types
@@ -102,9 +120,9 @@ export function getZPDState(statName: StatName): ZPDState {
   const db = getDatabase();
 
   // Get current proficiency
-  const proficiency = getStatProficiency(statName);
-  const currentLevel = proficiency?.estimated_level ?? 50;
-  const confidence = proficiency?.confidence ?? 0.5;
+  const proficiency = getSkillProficiency(statName);
+  const currentLevel = proficiency?.level ?? 50;
+  const confidence = 1 - (proficiency?.uncertainty ?? 0.5);
 
   // Get recent performance data
   const recentPerformance = getRecentPerformance(statName);
@@ -580,4 +598,189 @@ function formatStatName(stat: StatName): string {
     .split('_')
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ');
+}
+
+// ============================================================================
+// State Vector Integration (Manifold)
+// ============================================================================
+
+/**
+ * Get state vector for a stat from the database
+ */
+export function getStateVector(statName: StatName, studentId?: string): StateVector | null {
+  const db = getDatabase();
+  const id = studentId ? `sv_${studentId}_${statName}` : null;
+
+  // If no studentId, get from hyro_state_vectors with default student
+  const query = studentId
+    ? `SELECT * FROM hyro_state_vectors WHERE student_id = ? AND stat_name = ?`
+    : `SELECT * FROM hyro_state_vectors WHERE stat_name = ? LIMIT 1`;
+
+  const vector = studentId
+    ? db.prepare(query).get(studentId, statName) as any
+    : db.prepare(query).get(statName) as any;
+
+  if (!vector) {
+    return null;
+  }
+
+  return {
+    coherence: vector.coherence ?? 50,
+    entropy: vector.entropy ?? 50,
+    generativity: vector.generativity ?? 50,
+    n_items_used: vector.n_items_used ?? 0,
+  };
+}
+
+/**
+ * Get manifold-based ZPD recommendation using state vectors
+ * Implements the rules from HYRO_MANIFOLD_FOUNDATION.md section 8.2
+ */
+export function getManifoldZPDRecommendation(
+  statName: StatName,
+  studentId?: string
+): ManifoldZPDRecommendation {
+  const stateVector = getStateVector(statName, studentId);
+
+  // Default if no state vector data
+  if (!stateVector || stateVector.n_items_used < 3) {
+    return {
+      content_type: 'balanced',
+      scaffolding_level: 'moderate',
+      rationale: 'Insufficient data for manifold recommendation. Using balanced approach.',
+      target_dimensions: ['coherence', 'entropy', 'generativity'],
+    };
+  }
+
+  const { coherence, entropy, generativity } = stateVector;
+
+  // Classification based on HYRO_MANIFOLD_FOUNDATION.md section 8.2
+  // High = > 65, Low = < 40
+
+  // Case 1: High Coherence, Low Entropy → Ready for novel/ambiguous content
+  if (coherence > 65 && entropy < 40) {
+    return {
+      content_type: 'novel_ambiguous',
+      scaffolding_level: 'minimal',
+      rationale: `Strong knowledge coherence (${coherence}) but limited entropy tolerance (${entropy}). Ready to stretch comfort with ambiguity.`,
+      target_dimensions: ['entropy', 'generativity'],
+    };
+  }
+
+  // Case 2: Low Coherence, High Entropy → Needs structured practice
+  if (coherence < 40 && entropy > 65) {
+    return {
+      content_type: 'structured_practice',
+      scaffolding_level: 'significant',
+      rationale: `High adaptability (${entropy}) but fragmented understanding (${coherence}). Focus on building integrated knowledge.`,
+      target_dimensions: ['coherence'],
+    };
+  }
+
+  // Case 3: High Generativity → Ready for transfer tasks
+  if (generativity > 65) {
+    return {
+      content_type: 'transfer_task',
+      scaffolding_level: 'minimal',
+      rationale: `Strong generative capacity (${generativity}). Ready for cross-domain application and creative transfer.`,
+      target_dimensions: ['generativity', 'entropy'],
+    };
+  }
+
+  // Case 4: Low Generativity → Focus on foundational understanding
+  if (generativity < 40) {
+    return {
+      content_type: 'foundational',
+      scaffolding_level: 'moderate',
+      rationale: `Limited generative capacity (${generativity}). Build foundational understanding before transfer tasks.`,
+      target_dimensions: ['coherence', 'generativity'],
+    };
+  }
+
+  // Case 5: Balanced profile → Continue balanced development
+  return {
+    content_type: 'balanced',
+    scaffolding_level: determineScaffoldingLevel(coherence, entropy, generativity),
+    rationale: `Balanced manifold position (C:${coherence}, E:${entropy}, G:${generativity}). Continue well-rounded development.`,
+    target_dimensions: identifyWeakestDimensions(coherence, entropy, generativity),
+  };
+}
+
+/**
+ * Get enhanced ZPD state that incorporates state vectors
+ */
+export function getEnhancedZPDState(statName: StatName, studentId?: string): ZPDState & {
+  manifold_recommendation: ManifoldZPDRecommendation;
+  state_vector: StateVector | null;
+} {
+  const baseZPDState = getZPDState(statName);
+  const stateVector = getStateVector(statName, studentId);
+  const manifoldRecommendation = getManifoldZPDRecommendation(statName, studentId);
+
+  // Adjust ZPD bounds based on state vector if available
+  if (stateVector && stateVector.n_items_used >= 3) {
+    // High entropy tolerance → widen the upper ZPD bound (can handle more challenge)
+    if (stateVector.entropy > 65) {
+      baseZPDState.zpd_upper = Math.min(100, baseZPDState.zpd_upper + 5);
+      baseZPDState.optimal_difficulty = Math.min(100, baseZPDState.optimal_difficulty + 3);
+    }
+
+    // Low entropy tolerance → narrow the ZPD (needs more structure)
+    if (stateVector.entropy < 40) {
+      baseZPDState.zpd_upper = Math.max(baseZPDState.zpd_lower + 10, baseZPDState.zpd_upper - 5);
+      baseZPDState.optimal_difficulty = Math.max(
+        baseZPDState.zpd_lower + 5,
+        baseZPDState.optimal_difficulty - 3
+      );
+    }
+
+    // Low coherence → recommend scaffolding
+    if (stateVector.coherence < 40) {
+      baseZPDState.scaffolding_recommended = true;
+    }
+  }
+
+  return {
+    ...baseZPDState,
+    manifold_recommendation: manifoldRecommendation,
+    state_vector: stateVector,
+  };
+}
+
+/**
+ * Get all enhanced ZPD states
+ */
+export function getAllEnhancedZPDStates(studentId?: string) {
+  return STAT_NAMES.map(stat => getEnhancedZPDState(stat, studentId));
+}
+
+// Helper: Determine scaffolding level based on overall manifold position
+function determineScaffoldingLevel(
+  coherence: number,
+  entropy: number,
+  generativity: number
+): 'minimal' | 'moderate' | 'significant' {
+  const average = (coherence + entropy + generativity) / 3;
+
+  if (average > 60) return 'minimal';
+  if (average > 40) return 'moderate';
+  return 'significant';
+}
+
+// Helper: Identify weakest dimensions to target
+function identifyWeakestDimensions(
+  coherence: number,
+  entropy: number,
+  generativity: number
+): string[] {
+  const dims = [
+    { name: 'coherence', value: coherence },
+    { name: 'entropy', value: entropy },
+    { name: 'generativity', value: generativity },
+  ];
+
+  dims.sort((a, b) => a.value - b.value);
+
+  // Return the two weakest
+  return dims.slice(0, 2).map(d => d.name);
 }

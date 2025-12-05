@@ -152,10 +152,10 @@ const XP_DEEP_INSIGHT_BONUS = 20;
 /**
  * Get all prompts for a book
  */
-export function getPromptsForBook(bookId: string, type?: PromptType): ComprehensionPrompt[] {
+export function getPromptsForBook(studentId: string, bookId: string, type?: PromptType): ComprehensionPrompt[] {
   const db = getDatabase();
-  let query = `SELECT * FROM hyro_comprehension_prompts WHERE book_id = ? AND is_active = 1`;
-  const params: any[] = [bookId];
+  let query = `SELECT * FROM hyro_comprehension_prompts WHERE student_id = ? AND book_id = ? AND is_active = 1`;
+  const params: any[] = [studentId, bookId];
 
   if (type) {
     query += ` AND prompt_type = ?`;
@@ -169,18 +169,18 @@ export function getPromptsForBook(bookId: string, type?: PromptType): Comprehens
 /**
  * Get a prompt by ID
  */
-export function getPrompt(promptId: string): ComprehensionPrompt | null {
+export function getPrompt(studentId: string, promptId: string): ComprehensionPrompt | null {
   const db = getDatabase();
-  return db.prepare(`SELECT * FROM hyro_comprehension_prompts WHERE id = ?`).get(promptId) as ComprehensionPrompt | null;
+  return db.prepare(`SELECT * FROM hyro_comprehension_prompts WHERE student_id = ? AND id = ?`).get(studentId, promptId) as ComprehensionPrompt | null;
 }
 
 /**
  * Get a random prompt for a book (prioritizes less-used prompts)
  */
-export function getRandomPrompt(bookId: string, chapterId?: string, type?: PromptType): ComprehensionPrompt | null {
+export function getRandomPrompt(studentId: string, bookId: string, chapterId?: string, type?: PromptType): ComprehensionPrompt | null {
   const db = getDatabase();
-  let query = `SELECT * FROM hyro_comprehension_prompts WHERE book_id = ? AND is_active = 1`;
-  const params: any[] = [bookId];
+  let query = `SELECT * FROM hyro_comprehension_prompts WHERE student_id = ? AND book_id = ? AND is_active = 1`;
+  const params: any[] = [studentId, bookId];
 
   if (chapterId) {
     query += ` AND (chapter_id = ? OR chapter_id IS NULL)`;
@@ -198,7 +198,7 @@ export function getRandomPrompt(bookId: string, chapterId?: string, type?: Promp
 /**
  * Create a new prompt
  */
-export function createPrompt(params: {
+export function createPrompt(studentId: string, params: {
   book_id: string;
   chapter_id?: string;
   prompt_type: PromptType;
@@ -215,12 +215,13 @@ export function createPrompt(params: {
 
   db.prepare(`
     INSERT INTO hyro_comprehension_prompts (
-      id, book_id, chapter_id, prompt_type, prompt_text, context_excerpt,
+      id, student_id, book_id, chapter_id, prompt_type, prompt_text, context_excerpt,
       evaluation_rubric, exemplar_response, common_misconceptions,
       difficulty_level, stat_targeted
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
   `).run(
     id,
+    studentId,
     params.book_id,
     params.chapter_id || null,
     params.prompt_type,
@@ -233,7 +234,7 @@ export function createPrompt(params: {
     params.stat_targeted || 'reading'
   );
 
-  return getPrompt(id)!;
+  return getPrompt(studentId, id)!;
 }
 
 // ============================================================================
@@ -382,7 +383,7 @@ function evaluateResponseLocally(
  * Submit a response to a comprehension prompt
  * Now supports async AI evaluation
  */
-export async function submitResponse(params: {
+export async function submitResponse(studentId: string, params: {
   prompt_id: string;
   response_text: string;
   session_id?: string;
@@ -394,7 +395,7 @@ export async function submitResponse(params: {
   const id = randomUUID();
 
   // Note: We need to evaluate BEFORE the transaction since it's async
-  const prompt = getPrompt(params.prompt_id);
+  const prompt = getPrompt(studentId, params.prompt_id);
   if (!prompt) throw new Error(`Prompt not found: ${params.prompt_id}`);
 
   // Evaluate response (async - may call LLM)
@@ -420,13 +421,14 @@ export async function submitResponse(params: {
     // Insert response
     db.prepare(`
       INSERT INTO hyro_comprehension_responses (
-        id, prompt_id, session_id, response_text, response_time_seconds, word_count,
+        id, student_id, prompt_id, session_id, response_text, response_time_seconds, word_count,
         ai_score, ai_feedback, ai_strengths, ai_growth_areas, ai_depth_rating,
         evidence_use_score, reasoning_score, analysis_depth_score, connection_score,
         xp_earned
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `).run(
       id,
+      studentId,
       params.prompt_id,
       params.session_id || null,
       params.response_text,
@@ -456,19 +458,19 @@ export async function submitResponse(params: {
     `).run(evaluation.score, evaluation.score, params.prompt_id);
 
     // Award XP
-    awardXP(xpEarned, 'comprehension_response', id);
+    awardXP(studentId, xpEarned, 'comprehension_response', id);
 
     // Update reading session if applicable
     if (params.session_id) {
       db.prepare(`
         UPDATE hyro_reading_sessions
         SET comprehension_response_id = ?
-        WHERE id = ?
-      `).run(id, params.session_id);
+        WHERE student_id = ? AND id = ?
+      `).run(id, studentId, params.session_id);
     }
 
     return {
-      response: db.prepare(`SELECT * FROM hyro_comprehension_responses WHERE id = ?`).get(id) as ComprehensionResponse,
+      response: db.prepare(`SELECT * FROM hyro_comprehension_responses WHERE student_id = ? AND id = ?`).get(studentId, id) as ComprehensionResponse,
       evaluation,
       xp_earned: xpEarned,
     };
@@ -478,13 +480,13 @@ export async function submitResponse(params: {
 /**
  * Get responses for a prompt
  */
-export function getResponsesForPrompt(promptId: string): ComprehensionResponse[] {
+export function getResponsesForPrompt(studentId: string, promptId: string): ComprehensionResponse[] {
   const db = getDatabase();
   return db.prepare(`
     SELECT * FROM hyro_comprehension_responses
-    WHERE prompt_id = ?
+    WHERE student_id = ? AND prompt_id = ?
     ORDER BY created_at DESC
-  `).all(promptId) as ComprehensionResponse[];
+  `).all(studentId, promptId) as ComprehensionResponse[];
 }
 
 // ============================================================================
@@ -494,7 +496,7 @@ export function getResponsesForPrompt(promptId: string): ComprehensionResponse[]
 /**
  * Start a Socratic discussion
  */
-export function startDiscussion(bookId: string, initialPromptId?: string): {
+export function startDiscussion(studentId: string, bookId: string, initialPromptId?: string): {
   discussion: ReadingDiscussion;
   first_exchange: DiscussionExchange;
 } {
@@ -507,9 +509,9 @@ export function startDiscussion(bookId: string, initialPromptId?: string): {
     // Get or create initial prompt
     let prompt: ComprehensionPrompt | null = null;
     if (initialPromptId) {
-      prompt = getPrompt(initialPromptId);
+      prompt = getPrompt(studentId, initialPromptId);
     } else {
-      prompt = getRandomPrompt(bookId);
+      prompt = getRandomPrompt(studentId, bookId);
     }
 
     if (!prompt) {
@@ -518,22 +520,22 @@ export function startDiscussion(bookId: string, initialPromptId?: string): {
 
     // Create discussion
     db.prepare(`
-      INSERT INTO hyro_reading_discussions (id, book_id, initial_prompt_id, started_at)
-      VALUES (?, ?, ?, ?)
-    `).run(discussionId, bookId, prompt.id, now);
+      INSERT INTO hyro_reading_discussions (id, student_id, book_id, initial_prompt_id, started_at)
+      VALUES (?, ?, ?, ?, ?)
+    `).run(discussionId, studentId, bookId, prompt.id, now);
 
     // Create first exchange
     db.prepare(`
-      INSERT INTO hyro_discussion_exchanges (id, discussion_id, exchange_number, ai_prompt)
-      VALUES (?, ?, 1, ?)
-    `).run(exchangeId, discussionId, prompt.prompt_text);
+      INSERT INTO hyro_discussion_exchanges (id, student_id, discussion_id, exchange_number, ai_prompt)
+      VALUES (?, ?, ?, 1, ?)
+    `).run(exchangeId, studentId, discussionId, prompt.prompt_text);
 
     // Update discussion exchange count
-    db.prepare(`UPDATE hyro_reading_discussions SET exchange_count = 1 WHERE id = ?`).run(discussionId);
+    db.prepare(`UPDATE hyro_reading_discussions SET exchange_count = 1 WHERE student_id = ? AND id = ?`).run(studentId, discussionId);
 
     return {
-      discussion: db.prepare(`SELECT * FROM hyro_reading_discussions WHERE id = ?`).get(discussionId) as ReadingDiscussion,
-      first_exchange: db.prepare(`SELECT * FROM hyro_discussion_exchanges WHERE id = ?`).get(exchangeId) as DiscussionExchange,
+      discussion: db.prepare(`SELECT * FROM hyro_reading_discussions WHERE student_id = ? AND id = ?`).get(studentId, discussionId) as ReadingDiscussion,
+      first_exchange: db.prepare(`SELECT * FROM hyro_discussion_exchanges WHERE student_id = ? AND id = ?`).get(studentId, exchangeId) as DiscussionExchange,
     };
   });
 }
@@ -542,6 +544,7 @@ export function startDiscussion(bookId: string, initialPromptId?: string): {
  * Continue a discussion by responding to an exchange
  */
 export function continueDiscussion(
+  studentId: string,
   discussionId: string,
   response: string,
   responseTimeSeconds?: number
@@ -554,17 +557,17 @@ export function continueDiscussion(
   const db = getDatabase();
 
   return db.transaction(() => {
-    const discussion = db.prepare(`SELECT * FROM hyro_reading_discussions WHERE id = ?`).get(discussionId) as ReadingDiscussion;
+    const discussion = db.prepare(`SELECT * FROM hyro_reading_discussions WHERE student_id = ? AND id = ?`).get(studentId, discussionId) as ReadingDiscussion;
     if (!discussion) throw new Error(`Discussion not found: ${discussionId}`);
     if (discussion.status !== 'active') throw new Error(`Discussion is not active: ${discussionId}`);
 
     // Find current unanswered exchange
     const currentExchange = db.prepare(`
       SELECT * FROM hyro_discussion_exchanges
-      WHERE discussion_id = ? AND user_response IS NULL
+      WHERE student_id = ? AND discussion_id = ? AND user_response IS NULL
       ORDER BY exchange_number DESC
       LIMIT 1
-    `).get(discussionId) as DiscussionExchange;
+    `).get(studentId, discussionId) as DiscussionExchange;
 
     if (!currentExchange) throw new Error(`No pending exchange in discussion: ${discussionId}`);
 
@@ -629,27 +632,27 @@ export function continueDiscussion(
       const nextPrompt = generateFollowUpPrompt(followUpType, currentExchange.ai_prompt, response);
 
       db.prepare(`
-        INSERT INTO hyro_discussion_exchanges (id, discussion_id, exchange_number, ai_prompt)
-        VALUES (?, ?, ?, ?)
-      `).run(nextId, discussionId, discussion.exchange_count + 1, nextPrompt);
+        INSERT INTO hyro_discussion_exchanges (id, student_id, discussion_id, exchange_number, ai_prompt)
+        VALUES (?, ?, ?, ?, ?)
+      `).run(nextId, studentId, discussionId, discussion.exchange_count + 1, nextPrompt);
 
       db.prepare(`
-        UPDATE hyro_reading_discussions SET exchange_count = exchange_count + 1 WHERE id = ?
-      `).run(discussionId);
+        UPDATE hyro_reading_discussions SET exchange_count = exchange_count + 1 WHERE student_id = ? AND id = ?
+      `).run(studentId, discussionId);
 
-      nextExchange = db.prepare(`SELECT * FROM hyro_discussion_exchanges WHERE id = ?`).get(nextId) as DiscussionExchange;
+      nextExchange = db.prepare(`SELECT * FROM hyro_discussion_exchanges WHERE student_id = ? AND id = ?`).get(studentId, nextId) as DiscussionExchange;
     }
 
     // Award XP
-    awardXP(xpEarned, 'discussion_exchange', currentExchange.id);
+    awardXP(studentId, xpEarned, 'discussion_exchange', currentExchange.id);
 
     // Update total XP
     db.prepare(`
-      UPDATE hyro_reading_discussions SET total_xp_earned = total_xp_earned + ? WHERE id = ?
-    `).run(xpEarned, discussionId);
+      UPDATE hyro_reading_discussions SET total_xp_earned = total_xp_earned + ? WHERE student_id = ? AND id = ?
+    `).run(xpEarned, studentId, discussionId);
 
     return {
-      updated_exchange: db.prepare(`SELECT * FROM hyro_discussion_exchanges WHERE id = ?`).get(currentExchange.id) as DiscussionExchange,
+      updated_exchange: db.prepare(`SELECT * FROM hyro_discussion_exchanges WHERE student_id = ? AND id = ?`).get(studentId, currentExchange.id) as DiscussionExchange,
       next_exchange: nextExchange,
       xp_earned: xpEarned,
       should_conclude: shouldConclude,
@@ -678,7 +681,7 @@ function generateFollowUpPrompt(type: FollowUpType, previousPrompt: string, user
 /**
  * Conclude a discussion
  */
-export function concludeDiscussion(discussionId: string): {
+export function concludeDiscussion(studentId: string, discussionId: string): {
   discussion: ReadingDiscussion;
   xp_earned: number;
   summary: {
@@ -691,13 +694,13 @@ export function concludeDiscussion(discussionId: string): {
   const now = Math.floor(Date.now() / 1000);
 
   return db.transaction(() => {
-    const discussion = db.prepare(`SELECT * FROM hyro_reading_discussions WHERE id = ?`).get(discussionId) as ReadingDiscussion;
+    const discussion = db.prepare(`SELECT * FROM hyro_reading_discussions WHERE student_id = ? AND id = ?`).get(studentId, discussionId) as ReadingDiscussion;
     if (!discussion) throw new Error(`Discussion not found: ${discussionId}`);
 
     // Get all exchanges
     const exchanges = db.prepare(`
-      SELECT * FROM hyro_discussion_exchanges WHERE discussion_id = ? ORDER BY exchange_number
-    `).all(discussionId) as DiscussionExchange[];
+      SELECT * FROM hyro_discussion_exchanges WHERE student_id = ? AND discussion_id = ? ORDER BY exchange_number
+    `).all(studentId, discussionId) as DiscussionExchange[];
 
     // Calculate depth achieved
     const qualities = exchanges.filter(e => e.response_quality).map(e => e.response_quality);
@@ -732,14 +735,14 @@ export function concludeDiscussion(discussionId: string): {
       UPDATE hyro_reading_discussions
       SET status = 'concluded', concluded_at = ?, depth_achieved = ?,
           insight_moments = ?, total_xp_earned = total_xp_earned + ?
-      WHERE id = ?
-    `).run(now, depthAchieved, JSON.stringify(keyInsights), xpEarned, discussionId);
+      WHERE student_id = ? AND id = ?
+    `).run(now, depthAchieved, JSON.stringify(keyInsights), xpEarned, studentId, discussionId);
 
     // Award XP
-    awardXP(xpEarned, 'discussion_completed', discussionId);
+    awardXP(studentId, xpEarned, 'discussion_completed', discussionId);
 
     return {
-      discussion: db.prepare(`SELECT * FROM hyro_reading_discussions WHERE id = ?`).get(discussionId) as ReadingDiscussion,
+      discussion: db.prepare(`SELECT * FROM hyro_reading_discussions WHERE student_id = ? AND id = ?`).get(studentId, discussionId) as ReadingDiscussion,
       xp_earned: xpEarned,
       summary: {
         exchanges: exchanges.length,
@@ -753,30 +756,30 @@ export function concludeDiscussion(discussionId: string): {
 /**
  * Get a discussion by ID
  */
-export function getDiscussion(discussionId: string): ReadingDiscussion | null {
+export function getDiscussion(studentId: string, discussionId: string): ReadingDiscussion | null {
   const db = getDatabase();
-  return db.prepare(`SELECT * FROM hyro_reading_discussions WHERE id = ?`).get(discussionId) as ReadingDiscussion | null;
+  return db.prepare(`SELECT * FROM hyro_reading_discussions WHERE student_id = ? AND id = ?`).get(studentId, discussionId) as ReadingDiscussion | null;
 }
 
 /**
  * Get exchanges for a discussion
  */
-export function getDiscussionExchanges(discussionId: string): DiscussionExchange[] {
+export function getDiscussionExchanges(studentId: string, discussionId: string): DiscussionExchange[] {
   const db = getDatabase();
   return db.prepare(`
-    SELECT * FROM hyro_discussion_exchanges WHERE discussion_id = ? ORDER BY exchange_number
-  `).all(discussionId) as DiscussionExchange[];
+    SELECT * FROM hyro_discussion_exchanges WHERE student_id = ? AND discussion_id = ? ORDER BY exchange_number
+  `).all(studentId, discussionId) as DiscussionExchange[];
 }
 
 /**
  * Get recent discussions for a book
  */
-export function getRecentDiscussions(bookId: string, limit: number = 10): ReadingDiscussion[] {
+export function getRecentDiscussions(studentId: string, bookId: string, limit: number = 10): ReadingDiscussion[] {
   const db = getDatabase();
   return db.prepare(`
     SELECT * FROM hyro_reading_discussions
-    WHERE book_id = ?
+    WHERE student_id = ? AND book_id = ?
     ORDER BY started_at DESC
     LIMIT ?
-  `).all(bookId, limit) as ReadingDiscussion[];
+  `).all(studentId, bookId, limit) as ReadingDiscussion[];
 }

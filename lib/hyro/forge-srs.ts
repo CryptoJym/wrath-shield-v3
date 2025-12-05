@@ -416,9 +416,9 @@ export function reviewCard(
       WHERE id = ?
     `).run(newEasiness, newInterval, newRepetitions, nextReviewAt, now, newState, cardId);
 
-    // Award XP if earned
+    // Award XP if earned (TODO: add studentId to SRS functions for full multi-tenant)
     if (xpEarned > 0) {
-      awardXP(xpEarned, 'srs_review', cardId);
+      awardXP('hyro', xpEarned, 'srs_review', cardId);
     }
 
     // Update deck counts

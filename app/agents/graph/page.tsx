@@ -3,7 +3,7 @@ export const dynamic = "force-dynamic";
 
 import React, { useEffect, useMemo, useState, useRef, useCallback } from 'react';
 import Link from 'next/link';
-import { RefreshCw, AlertCircle, CheckCircle, ArrowLeft, ZoomIn, ZoomOut, Crosshair, Info, Move } from 'lucide-react';
+import { RefreshCw, AlertCircle, CheckCircle, ArrowLeft, ZoomIn, ZoomOut, Crosshair, Info, Move, Activity } from 'lucide-react';
 import { GraphLegend } from '@/components/agents/GraphLegend';
 import { AgentDetailPanel } from '@/components/agents/AgentDetailPanel';
 import { GraphFilters } from '@/components/agents/GraphFilters';
@@ -290,451 +290,246 @@ export default function AgentGraphPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <div className="max-w-7xl mx-auto px-6 py-8 space-y-6">
-        <header className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-border pb-6">
+    <div className="min-h-screen bg-slate-950 text-foreground overflow-hidden selection:bg-primary/30">
+      {/* Ambient Background */}
+      <div className="fixed inset-0 pointer-events-none">
+        <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-violet-500/5 blur-[120px]" />
+        <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] rounded-full bg-cyan-500/5 blur-[120px]" />
+      </div>
+
+      <div className="max-w-[1920px] mx-auto px-6 py-8 space-y-6 relative z-10 h-screen flex flex-col">
+        <header className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/5 pb-6 flex-shrink-0">
           <div>
-            <Link href="/agents/roster" className="text-muted-foreground hover:text-foreground flex items-center gap-2 mb-3 transition-colors">
-              <ArrowLeft size={18} /> Back to Roster
+            <Link href="/agents/roster" className="text-slate-400 hover:text-white flex items-center gap-2 mb-2 transition-colors group">
+              <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" /> Back to Roster
             </Link>
-            <h1 className="text-4xl font-bold tracking-tight mb-2 bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
-              Agent Network Graph
+            <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">
+              Neural Network Topology
             </h1>
-            <p className="text-muted-foreground">
-              Visualize agent connections and data flow across your autonomous network.
+            <p className="text-slate-400 text-sm">
+              Real-time visualization of autonomous agent interactions and data flow.
             </p>
+          </div>
+
+          <div className="flex items-center gap-4">
+            <div className="flex gap-2">
+              <div className="px-4 py-2 rounded-lg bg-slate-900/50 border border-white/10 backdrop-blur-sm">
+                <div className="text-xs text-slate-500 uppercase tracking-wider font-semibold">Active Nodes</div>
+                <div className="text-xl font-bold text-white">{nodesNorm.length}</div>
+              </div>
+              <div className="px-4 py-2 rounded-lg bg-slate-900/50 border border-white/10 backdrop-blur-sm">
+                <div className="text-xs text-slate-500 uppercase tracking-wider font-semibold">Signal Flow</div>
+                <div className="text-xl font-bold text-emerald-400">
+                  {edges.filter(e => e.healthy).length}<span className="text-slate-600 text-sm font-normal">/{edges.length}</span>
+                </div>
+              </div>
+            </div>
           </div>
         </header>
 
-        <div className="grid md:grid-cols-3 gap-4">
-          <div className="border border-border bg-card rounded-xl p-4 hover:border-primary/50 transition-all shadow-sm">
-            <div className="text-muted-foreground text-sm font-medium mb-1">Nodes</div>
-            <div className="text-3xl font-bold text-primary">{nodesNorm.length}</div>
-            <div className="text-xs text-muted-foreground mt-1">Active agents</div>
-          </div>
-          <div className="border border-border bg-card rounded-xl p-4 hover:border-primary/50 transition-all shadow-sm">
-            <div className="text-muted-foreground text-sm font-medium mb-1">Edges</div>
-            <div className="text-3xl font-bold">
-              {edges.length}
-              <span className="text-sm text-green-500 ml-2">({edges.filter(e => e.healthy).length} healthy)</span>
-            </div>
-            <div className="text-xs text-muted-foreground mt-1">Network connections</div>
-          </div>
-          <div className="border border-border bg-card rounded-xl p-4 hover:border-primary/50 transition-all shadow-sm">
-            <div className="text-muted-foreground text-sm font-medium mb-1">Last updated</div>
-            <div className="text-lg font-semibold text-foreground">{new Date(data.timestamp).toLocaleTimeString()}</div>
-            <div className="text-xs text-muted-foreground mt-1">{new Date(data.timestamp).toLocaleDateString()}</div>
-          </div>
-        </div>
-
         {error && (
-          <div className="border border-amber-500/40 bg-amber-500/10 text-amber-200 rounded-xl p-4 flex items-center gap-3 shadow-sm">
-            <AlertCircle size={20} className="flex-shrink-0" />
-            <div>
-              <div className="font-semibold mb-1">Error loading live graph</div>
-              <div className="text-sm text-amber-300/80">Showing fallback data. {error}</div>
-            </div>
+          <div className="absolute top-24 left-1/2 -translate-x-1/2 z-50 border border-red-500/30 bg-red-950/80 backdrop-blur-md text-red-200 rounded-full px-6 py-2 flex items-center gap-3 shadow-lg shadow-red-900/20">
+            <AlertCircle size={16} />
+            <span className="text-sm font-medium">Connection lost. Showing cached topology.</span>
           </div>
         )}
 
-        {loading && (
-          <div className="flex items-center gap-3 text-muted-foreground p-4 bg-card border border-border rounded-xl">
-            <RefreshCw className="animate-spin" size={18} />
-            <span>Loading graph data...</span>
-          </div>
-        )}
-
-        {!loading && (
-          <div className="grid lg:grid-cols-12 gap-6">
-            {/* Left sidebar - Filters & Legend */}
-            <div className="lg:col-span-3 space-y-4">
-              <GraphFilters
-                statusFilter={statusFilter}
-                typeFilter={typeFilter}
-                onStatusFilterChange={setStatusFilter}
-                onTypeFilterChange={setTypeFilter}
-                availableTypes={availableTypes}
-              />
-              <GraphLegend />
+        <div className="flex-1 relative border border-white/5 bg-slate-900/20 rounded-2xl overflow-hidden shadow-2xl backdrop-blur-sm">
+          {/* Controls Overlay */}
+          <div className="absolute top-4 right-4 flex flex-col gap-2 z-20">
+            <div className="bg-slate-900/80 backdrop-blur-md border border-white/10 rounded-lg p-1 flex flex-col gap-1 shadow-xl">
+              <button onClick={zoomIn} className="p-2 hover:bg-white/10 rounded-md text-slate-400 hover:text-white transition-colors" title="Zoom In">
+                <ZoomIn size={18} />
+              </button>
+              <button onClick={zoomOut} className="p-2 hover:bg-white/10 rounded-md text-slate-400 hover:text-white transition-colors" title="Zoom Out">
+                <ZoomOut size={18} />
+              </button>
+              <button onClick={resetView} className="p-2 hover:bg-white/10 rounded-md text-slate-400 hover:text-white transition-colors" title="Reset View">
+                <Crosshair size={18} />
+              </button>
             </div>
+          </div>
 
-            {/* Main Graph */}
-            <div className="lg:col-span-9 space-y-4">
-              <div className="border border-border bg-card rounded-xl p-5 space-y-4 shadow-lg">
-                <div className="flex items-center gap-2 justify-between">
-                  <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
-                    <h2 className="text-sm font-semibold text-foreground uppercase tracking-wider">Network Topology</h2>
-                    <span className="text-xs text-muted-foreground">
-                      ({nodesNorm.length} nodes, {edges.length} connections)
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <span className="text-xs text-muted-foreground mr-2 hidden sm:inline">
-                      <Move size={12} className="inline mr-1" />Drag to pan
-                    </span>
-                    <button
-                      aria-label="Zoom in"
-                      className="p-2 rounded-lg border border-border hover:border-primary/50 hover:bg-primary/10 transition-all"
-                      onClick={zoomIn}
-                    >
-                      <ZoomIn size={14} />
-                    </button>
-                    <button
-                      aria-label="Zoom out"
-                      className="p-2 rounded-lg border border-border hover:border-primary/50 hover:bg-primary/10 transition-all"
-                      onClick={zoomOut}
-                    >
-                      <ZoomOut size={14} />
-                    </button>
-                    <button
-                      aria-label="Reset view"
-                      className="p-2 rounded-lg border border-border hover:border-primary/50 hover:bg-primary/10 transition-all"
-                      onClick={resetView}
-                    >
-                      <Crosshair size={14} />
-                    </button>
-                    <span className="text-xs text-muted-foreground ml-2">
-                      {Math.round((SVG_WIDTH / viewBox.w) * 100)}%
-                    </span>
-                  </div>
+          {/* Legend Overlay */}
+          <div className="absolute bottom-4 left-4 z-20">
+            <div className="bg-slate-900/80 backdrop-blur-md border border-white/10 rounded-xl p-4 shadow-xl max-w-xs">
+              <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">System Status</h3>
+              <div className="space-y-2">
+                <div className="flex items-center gap-2 text-xs text-slate-300">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]"></span>
+                  <span>Operational</span>
                 </div>
-                <div
-                  className="relative w-full h-[600px] bg-gradient-to-br from-slate-900/50 via-slate-900/30 to-slate-800/20 border-2 border-border rounded-lg overflow-hidden shadow-inner"
-                  style={{ cursor: isPanning ? 'grabbing' : 'grab' }}
-                >
-                  <svg
-                    ref={svgRef}
-                    viewBox={`${viewBox.x} ${viewBox.y} ${viewBox.w} ${viewBox.h}`}
-                    className="w-full h-full"
-                    onWheel={onWheel}
-                    onMouseDown={startPan}
-                    onMouseMove={doPan}
-                    onMouseUp={endPan}
-                    onMouseLeave={endPan}
-                    style={{ touchAction: 'none' }}
-                  >
-                    {/* Background grid for visual reference */}
-                    <defs>
-                      <pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse">
-                        <path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(255,255,255,0.03)" strokeWidth="1" />
-                      </pattern>
-                    </defs>
-                    <rect x="-1000" y="-1000" width="4000" height="4000" fill="url(#grid)" />
-
-                    {/* Render edges first so they appear behind nodes */}
-                    {edges.map((e, idx) => {
-                      const from = nodesNorm.find(n => n.id === e.from);
-                      const to = nodesNorm.find(n => n.id === e.to);
-                      if (!from || !to) return null;
-                      const dashArray = e.type === 'control' ? '12 8' : (!e.healthy ? '8 6' : undefined);
-                      const midX = (from.sx + to.sx) / 2;
-                      const midY = (from.sy + to.sy) / 2;
-                      return (
-                        <g key={idx} className="cursor-pointer" onClick={() => setSelectedEdge(edgeAuditFor(e))}>
-                          {/* Edge glow effect */}
-                          <line
-                            x1={from.sx}
-                            y1={from.sy}
-                            x2={to.sx}
-                            y2={to.sy}
-                            stroke={edgeColor(e.healthy)}
-                            strokeWidth={8}
-                            strokeDasharray={dashArray}
-                            opacity={0.15}
-                            strokeLinecap="round"
-                          />
-                          {/* Main edge line */}
-                          <line
-                            x1={from.sx}
-                            y1={from.sy}
-                            x2={to.sx}
-                            y2={to.sy}
-                            stroke={edgeColor(e.healthy)}
-                            strokeWidth={e.healthy ? 3 : 4}
-                            strokeDasharray={dashArray}
-                            opacity={edgeOpacity(e.healthy)}
-                            strokeLinecap="round"
-                          />
-                          {e.label && (
-                            <>
-                              <rect
-                                x={midX - 35}
-                                y={midY - 12}
-                                width="70"
-                                height="24"
-                                fill="rgba(15, 23, 42, 0.95)"
-                                stroke={edgeColor(e.healthy)}
-                                strokeWidth="1.5"
-                                rx="6"
-                              />
-                              <text
-                                x={midX}
-                                y={midY + 1}
-                                fill="#e5e7eb"
-                                fontSize={14}
-                                textAnchor="middle"
-                                dominantBaseline="central"
-                                fontWeight="600"
-                              >
-                                {e.label}
-                              </text>
-                            </>
-                          )}
-                        </g>
-                      );
-                    })}
-
-                    {/* Render nodes on top */}
-                    {nodesNorm.map((n) => (
-                      <g
-                        key={n.id}
-                        className="cursor-pointer"
-                        onClick={(e) => { e.stopPropagation(); setSelectedNode(n); }}
-                        style={{ transition: 'transform 0.15s ease' }}
-                      >
-                        {/* Node outer glow */}
-                        <circle
-                          cx={n.sx}
-                          cy={n.sy}
-                          r={NODE_RADIUS + 8}
-                          fill="none"
-                          stroke={statusColor[n.status]}
-                          strokeWidth={2}
-                          opacity={0.3}
-                          className={n.status === 'green' ? 'animate-pulse' : ''}
-                        />
-                        {/* Node background */}
-                        <circle
-                          cx={n.sx}
-                          cy={n.sy}
-                          r={NODE_RADIUS}
-                          fill="#0f172a"
-                          stroke={statusColor[n.status]}
-                          strokeWidth={4}
-                        />
-                        {/* Node name */}
-                        <text
-                          x={n.sx}
-                          y={n.sy - NODE_RADIUS - 20}
-                          fill="#f1f5f9"
-                          fontSize={18}
-                          textAnchor="middle"
-                          fontWeight="700"
-                        >
-                          {n.name}
-                        </text>
-                        {/* Status indicator */}
-                        <text
-                          x={n.sx}
-                          y={n.sy + 5}
-                          fill={statusColor[n.status]}
-                          fontSize={14}
-                          textAnchor="middle"
-                          fontWeight="600"
-                        >
-                          {n.status.toUpperCase()}
-                        </text>
-                        {/* Open items count */}
-                        <text
-                          x={n.sx}
-                          y={n.sy + NODE_RADIUS + 25}
-                          fill="#94a3b8"
-                          fontSize={13}
-                          textAnchor="middle"
-                        >
-                          {n.openItems} open items
-                        </text>
-                        {/* HP bar background */}
-                        <rect
-                          x={n.sx - 30}
-                          y={n.sy + NODE_RADIUS + 35}
-                          width="60"
-                          height="6"
-                          rx="3"
-                          fill="rgba(255,255,255,0.1)"
-                        />
-                        {/* HP bar fill */}
-                        <rect
-                          x={n.sx - 30}
-                          y={n.sy + NODE_RADIUS + 35}
-                          width={(n.hp / 100) * 60}
-                          height="6"
-                          rx="3"
-                          fill={n.hp >= 80 ? '#10b981' : n.hp >= 50 ? '#f59e0b' : '#ef4444'}
-                        />
-                        {/* MP bar background */}
-                        <rect
-                          x={n.sx - 30}
-                          y={n.sy + NODE_RADIUS + 45}
-                          width="60"
-                          height="6"
-                          rx="3"
-                          fill="rgba(255,255,255,0.1)"
-                        />
-                        {/* MP bar fill */}
-                        <rect
-                          x={n.sx - 30}
-                          y={n.sy + NODE_RADIUS + 45}
-                          width={(n.mp / 100) * 60}
-                          height="6"
-                          rx="3"
-                          fill="#3b82f6"
-                        />
-                      </g>
-                    ))}
-                  </svg>
+                <div className="flex items-center gap-2 text-xs text-slate-300">
+                  <span className="w-2 h-2 rounded-full bg-amber-500 shadow-[0_0_8px_rgba(245,158,11,0.5)]"></span>
+                  <span>Degraded / Warning</span>
+                </div>
+                <div className="flex items-center gap-2 text-xs text-slate-300">
+                  <span className="w-2 h-2 rounded-full bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.5)]"></span>
+                  <span>Critical Error</span>
+                </div>
+                <div className="h-px bg-white/10 my-2"></div>
+                <div className="flex items-center gap-2 text-xs text-slate-300">
+                  <div className="w-8 h-0.5 bg-gradient-to-r from-cyan-500 to-blue-500"></div>
+                  <span>Active Data Flow</span>
                 </div>
               </div>
+            </div>
+          </div>
 
-              {/* Connection List */}
-              <div className="border border-border bg-card rounded-xl p-5 space-y-4 shadow-lg">
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
-                  <h2 className="text-sm font-semibold text-foreground uppercase tracking-wider">Network Connections</h2>
-                </div>
-                <div className="space-y-2 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
-                  {edges.length === 0 ? (
-                    <div className="text-center py-8 text-muted-foreground">
-                      <Info size={32} className="mx-auto mb-2 opacity-50" />
-                      <p>No connections match the current filters</p>
-                    </div>
-                  ) : (
-                    edges.map((e, idx) => (
-                      <button
-                        key={idx}
-                        onClick={() => setSelectedEdge(edgeAuditFor(e))}
-                        className={`w-full text-left border bg-card rounded-lg p-3 flex items-center justify-between transition-all hover:shadow-md ${
-                          selectedEdge?.id === `${e.from}-${e.to}`
-                            ? 'border-primary bg-primary/5'
-                            : 'border-border hover:border-primary/50'
-                        }`}
-                      >
-                        <div className="flex-1">
-                          <div className="text-foreground font-medium text-sm mb-1">
-                            {e.from} → {e.to}
-                            <span className="text-xs text-muted-foreground ml-2">({e.type})</span>
-                          </div>
-                          <div className="flex items-center gap-2 text-xs">
-                            <span className="text-muted-foreground">{e.label || 'link'}</span>
-                            {(e.bandwidth !== undefined || e.volume !== undefined) && (
-                              <>
-                                <span className="text-muted-foreground">·</span>
-                                <span className="text-primary font-medium">
-                                  {e.bandwidth !== undefined && `${e.bandwidth}KB/s`}
-                                  {e.bandwidth !== undefined && e.volume !== undefined && ' • '}
-                                  {e.volume !== undefined && `${e.volume}i`}
-                                </span>
-                              </>
-                            )}
-                            <span className="text-muted-foreground">·</span>
-                            <span className={e.healthy ? 'text-green-500 font-medium' : 'text-red-500 font-medium'}>
-                              {e.healthy ? 'Healthy' : 'Degraded'}
-                            </span>
-                          </div>
-                        </div>
-                        {e.healthy ? (
-                          <CheckCircle className="text-green-500 flex-shrink-0" size={20} />
-                        ) : (
-                          <AlertCircle className="text-red-500 flex-shrink-0" size={20} />
-                        )}
-                      </button>
-                    ))
+          <svg
+            ref={svgRef}
+            viewBox={`${viewBox.x} ${viewBox.y} ${viewBox.w} ${viewBox.h}`}
+            className="w-full h-full"
+            onWheel={onWheel}
+            onMouseDown={startPan}
+            onMouseMove={doPan}
+            onMouseUp={endPan}
+            onMouseLeave={endPan}
+            style={{ touchAction: 'none', cursor: isPanning ? 'grabbing' : 'grab' }}
+          >
+            {/* Dark Tech Grid Background */}
+            <defs>
+              <pattern id="tech-grid" width="100" height="100" patternUnits="userSpaceOnUse">
+                <path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(255,255,255,0.03)" strokeWidth="1" />
+                <circle cx="100" cy="100" r="1" fill="rgba(255,255,255,0.1)" />
+              </pattern>
+              <linearGradient id="edge-gradient" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stopColor="#6366f1" stopOpacity="0.5" />
+                <stop offset="100%" stopColor="#06b6d4" stopOpacity="0.5" />
+              </linearGradient>
+              <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="4" result="coloredBlur" />
+                <feMerge>
+                  <feMergeNode in="coloredBlur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
+            <rect x="-2000" y="-2000" width="8000" height="8000" fill="#020617" />
+            <rect x="-2000" y="-2000" width="8000" height="8000" fill="url(#tech-grid)" />
+
+            {/* Edges */}
+            {edges.map((e, idx) => {
+              const from = nodesNorm.find(n => n.id === e.from);
+              const to = nodesNorm.find(n => n.id === e.to);
+              if (!from || !to) return null;
+
+              // Calculate Bezier curve
+              const midX = (from.sx + to.sx) / 2;
+              const midY = (from.sy + to.sy) / 2;
+              // Add curvature based on index to avoid overlap if multiple edges
+              const curvature = 0;
+
+              const pathD = `M ${from.sx} ${from.sy} Q ${midX} ${midY} ${to.sx} ${to.sy}`;
+
+              return (
+                <g key={`${e.from}-${e.to}-${idx}`} className="group" onClick={() => setSelectedEdge(edgeAuditFor(e))}>
+                  {/* Hover Hit Area */}
+                  <path d={pathD} stroke="transparent" strokeWidth="20" fill="none" className="cursor-pointer" />
+
+                  {/* Base Line */}
+                  <path
+                    d={pathD}
+                    stroke={e.healthy ? "url(#edge-gradient)" : "#ef4444"}
+                    strokeWidth="2"
+                    strokeOpacity="0.3"
+                    fill="none"
+                    strokeDasharray={e.type === 'control' ? "4 4" : "none"}
+                  />
+
+                  {/* Animated Pulse (Data Packet) */}
+                  {e.healthy && (
+                    <circle r="3" fill="#fff">
+                      <animateMotion dur={`${Math.max(1, 4 - (e.bandwidth || 0) / 1000)}s`} repeatCount="indefinite" path={pathD}>
+                      </animateMotion>
+                    </circle>
                   )}
-                </div>
-              </div>
 
-              {/* Edge Details Panel */}
-              {selectedEdge && (
-                <div className="border-2 border-primary bg-card rounded-lg p-5 text-sm space-y-4 shadow-lg animate-in slide-in-from-bottom-2 duration-300">
-                  <div className="flex items-center justify-between pb-3 border-b border-border">
-                    <div className="flex items-center gap-2 text-foreground font-bold text-base">
-                      <Info size={16} className="text-primary" /> Connection Telemetry
-                    </div>
-                    {selectedEdge.healthy ? (
-                      <CheckCircle className="text-green-500" size={20} />
-                    ) : (
-                      <AlertCircle className="text-red-500" size={20} />
-                    )}
-                  </div>
-
-                  <div className="space-y-3">
-                    <div className="bg-secondary/30 p-3 rounded-lg space-y-2">
-                      <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">Route Information</h3>
-                      <div className="flex items-center justify-between">
-                        <span className="text-muted-foreground text-xs">Route:</span>
-                        <span className="text-foreground font-medium text-sm">{selectedEdge.from} → {selectedEdge.to}</span>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <span className="text-muted-foreground text-xs">Type:</span>
-                        <span className="text-foreground font-medium text-sm capitalize">{selectedEdge.type}</span>
-                      </div>
-                      {selectedEdge.label && (
-                        <div className="flex items-center justify-between">
-                          <span className="text-muted-foreground text-xs">Label:</span>
-                          <span className="text-foreground font-medium text-sm">{selectedEdge.label}</span>
-                        </div>
-                      )}
-                    </div>
-
-                    <div className="bg-secondary/30 p-3 rounded-lg space-y-2">
-                      <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">Health Metrics</h3>
-                      <div className="flex items-center justify-between">
-                        <span className="text-muted-foreground text-xs">Status:</span>
-                        <span className={`font-bold text-sm ${selectedEdge.healthy ? 'text-green-500' : 'text-red-500'}`}>
-                          {selectedEdge.healthy ? '✓ Healthy' : '✗ Degraded'}
+                  {/* Label (visible on hover or selection) */}
+                  {e.label && (
+                    <foreignObject x={midX - 40} y={midY - 12} width={80} height={24} className="overflow-visible pointer-events-none">
+                      <div className="flex justify-center">
+                        <span className="px-2 py-0.5 rounded-full bg-slate-950/80 border border-white/10 text-[10px] text-slate-300 font-mono backdrop-blur-sm">
+                          {e.label}
                         </span>
                       </div>
-                      {selectedEdge.lastRun && (
-                        <div className="flex items-center justify-between">
-                          <span className="text-muted-foreground text-xs">Last Run:</span>
-                          <span className="text-foreground text-xs">{new Date(selectedEdge.lastRun).toLocaleString()}</span>
-                        </div>
-                      )}
-                      {selectedEdge.bandwidth !== undefined && (
-                        <div className="flex items-center justify-between">
-                          <span className="text-muted-foreground text-xs">Bandwidth:</span>
-                          <span className="text-primary font-medium text-sm">{selectedEdge.bandwidth} KB/s</span>
-                        </div>
-                      )}
-                      {selectedEdge.volume !== undefined && (
-                        <div className="flex items-center justify-between">
-                          <span className="text-muted-foreground text-xs">Volume:</span>
-                          <span className="text-primary font-medium text-sm">{selectedEdge.volume} items</span>
-                        </div>
-                      )}
-                    </div>
-                  </div>
+                    </foreignObject>
+                  )}
+                </g>
+              );
+            })}
 
-                  {selectedEdge.errorLog && (
-                    <div className="bg-red-950/20 border border-red-500/30 p-3 rounded-lg">
-                      <div className="text-xs font-semibold text-red-400 mb-2">Error Log:</div>
-                      <div className="text-xs text-red-300 font-mono">
-                        {selectedEdge.errorLog}
+            {/* Nodes */}
+            {nodesNorm.map((n) => {
+              const isGrok = n.id === 'grok';
+              const size = isGrok ? 160 : 120; // Larger size for foreignObject container
+              const offset = size / 2;
+
+              return (
+                <foreignObject
+                  key={n.id}
+                  x={n.sx - offset}
+                  y={n.sy - offset}
+                  width={size}
+                  height={size}
+                  className="overflow-visible"
+                >
+                  <div
+                    className="w-full h-full flex items-center justify-center cursor-pointer group"
+                    onClick={(e) => { e.stopPropagation(); setSelectedNode(n); }}
+                  >
+                    {/* Outer Ring (Rotating) */}
+                    <div className={`absolute inset-0 rounded-full border border-dashed border-white/20 ${n.status === 'green' ? 'animate-[spin_10s_linear_infinite]' : ''}`} />
+
+                    {/* Inner Glow Ring */}
+                    <div className={`absolute inset-2 rounded-full border border-white/10 bg-slate-900/60 backdrop-blur-xl shadow-[0_0_30px_rgba(0,0,0,0.5)] transition-all duration-300 group-hover:scale-105 group-hover:border-white/30 ${n.status === 'green' ? 'shadow-[0_0_20px_rgba(16,185,129,0.2)]' :
+                      n.status === 'yellow' ? 'shadow-[0_0_20px_rgba(245,158,11,0.2)]' :
+                        'shadow-[0_0_20px_rgba(239,68,68,0.2)]'
+                      }`}></div>
+
+                    {/* Content Container */}
+                    <div className="relative z-10 flex flex-col items-center justify-center text-center">
+                      {/* Icon */}
+                      <div className={`mb-1 ${n.status === 'green' ? 'text-emerald-400' :
+                        n.status === 'yellow' ? 'text-amber-400' :
+                          'text-red-400'
+                        }`}>
+                        {/* We can't easily render Lucide icons dynamically in foreignObject without mapping, 
+                             so we'll use a generic icon or map them if available in scope. 
+                             For now, let's use a generic 'Box' or specific if we can map. 
+                             Actually, we can just render the icon component if we map it. 
+                         */}
+                        <div className="p-2 rounded-lg bg-white/5 border border-white/5">
+                          {/* Placeholder for icon - in real implementation we'd map n.type to icon */}
+                          <div className="font-bold text-lg font-mono">{n.name.substring(0, 2).toUpperCase()}</div>
+                        </div>
+                      </div>
+
+                      {/* Name */}
+                      <div className="text-xs font-bold text-white tracking-wide shadow-black drop-shadow-md">{n.name}</div>
+
+                      {/* Stats (HP/MP) */}
+                      <div className="flex gap-1 mt-1">
+                        <div className="w-8 h-1 bg-slate-700 rounded-full overflow-hidden">
+                          <div className="h-full bg-emerald-500" style={{ width: `${n.hp}%` }} />
+                        </div>
+                        <div className="w-8 h-1 bg-slate-700 rounded-full overflow-hidden">
+                          <div className="h-full bg-blue-500" style={{ width: `${n.mp}%` }} />
+                        </div>
                       </div>
                     </div>
-                  )}
 
-                  <div className="bg-secondary/30 p-3 rounded-lg">
-                    <div className="flex items-center justify-between">
-                      <span className="text-muted-foreground text-xs">Open items (endpoints):</span>
-                      <span className="text-foreground font-medium text-sm">{selectedEdge.openItems ?? 0} items</span>
-                    </div>
+                    {/* Status Dot */}
+                    <div className={`absolute top-2 right-2 w-3 h-3 rounded-full border-2 border-slate-900 ${n.status === 'green' ? 'bg-emerald-500 animate-pulse' :
+                      n.status === 'yellow' ? 'bg-amber-500' :
+                        'bg-red-500'
+                      }`}></div>
                   </div>
-
-                  <div className="pt-2">
-                    <a
-                      href={`/agents/audit?edge=${selectedEdge.id}`}
-                      className="text-sm text-primary hover:text-primary/80 flex items-center gap-2 font-medium transition-colors"
-                    >
-                      View full audit log →
-                    </a>
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-        )}
+                </foreignObject>
+              );
+            })}
+          </svg>
+        </div>
       </div>
 
       {/* Agent Detail Slide-out Panel */}
@@ -743,6 +538,42 @@ export default function AgentGraphPage() {
           agent={selectedNode}
           onClose={() => setSelectedNode(null)}
         />
+      )}
+
+      {/* Edge Detail Panel (Floating) */}
+      {selectedEdge && (
+        <div className="fixed bottom-8 right-8 w-80 bg-slate-900/90 backdrop-blur-xl border border-white/10 rounded-xl p-5 shadow-2xl z-50 animate-in slide-in-from-bottom-4">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="font-bold text-white flex items-center gap-2">
+              <Activity size={16} className="text-cyan-400" /> Connection Data
+            </h3>
+            <button onClick={() => setSelectedEdge(null)} className="text-slate-400 hover:text-white">
+              <Crosshair size={16} className="rotate-45" />
+            </button>
+          </div>
+          <div className="space-y-3 text-sm">
+            <div className="flex justify-between py-2 border-b border-white/5">
+              <span className="text-slate-400">Source</span>
+              <span className="text-white font-mono">{selectedEdge.from}</span>
+            </div>
+            <div className="flex justify-between py-2 border-b border-white/5">
+              <span className="text-slate-400">Target</span>
+              <span className="text-white font-mono">{selectedEdge.to}</span>
+            </div>
+            <div className="flex justify-between py-2 border-b border-white/5">
+              <span className="text-slate-400">Status</span>
+              <span className={selectedEdge.healthy ? "text-emerald-400" : "text-red-400"}>
+                {selectedEdge.healthy ? "Active" : "Degraded"}
+              </span>
+            </div>
+            {selectedEdge.bandwidth && (
+              <div className="flex justify-between py-2 border-b border-white/5">
+                <span className="text-slate-400">Bandwidth</span>
+                <span className="text-cyan-400 font-mono">{selectedEdge.bandwidth} KB/s</span>
+              </div>
+            )}
+          </div>
+        </div>
       )}
     </div>
   );

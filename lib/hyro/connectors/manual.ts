@@ -271,7 +271,8 @@ export class ManualConnector extends BaseConnector {
       max_score: entry.maxScore,
     };
 
-    const result = generateQuestFromAssignment(questInput);
+    // TODO: Pass actual studentId when connectors are fully multi-tenant
+    const result = generateQuestFromAssignment('hyro', questInput);
     return !!result;
   }
 

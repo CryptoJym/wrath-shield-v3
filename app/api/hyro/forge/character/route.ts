@@ -6,10 +6,12 @@
 import { NextResponse } from 'next/server';
 import { getCharacterSheet, calculatePowerLevel } from '@/lib/hyro/forge-stats';
 import { getLevelProgress, getXPSummary } from '@/lib/hyro/forge-xp';
+import { getStudentIdFromRequest } from '@/lib/hyro/student-auth';
 
 export async function GET() {
   try {
-    const characterSheet = getCharacterSheet();
+    const studentId = await getStudentIdFromRequest();
+    const characterSheet = getCharacterSheet(studentId);
 
     if (!characterSheet) {
       return NextResponse.json(
@@ -19,8 +21,8 @@ export async function GET() {
     }
 
     const levelProgress = getLevelProgress(characterSheet.total_xp);
-    const xpSummary = getXPSummary();
-    const powerLevel = calculatePowerLevel();
+    const xpSummary = getXPSummary(studentId);
+    const powerLevel = calculatePowerLevel(studentId);
 
     return NextResponse.json({
       success: true,

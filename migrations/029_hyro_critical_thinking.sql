@@ -20,7 +20,7 @@
 -- The mathematics of reasoning
 -- ============================================================================
 
-INSERT INTO hyro_learning_standards (id, domain, standard_set, standard_code, title, description, grade_level, grade_band, strand, cluster, sequence_order, is_assessed, is_extension) VALUES
+INSERT OR IGNORE INTO hyro_learning_standards (id, domain, standard_set, standard_code, title, description, grade_level, grade_band, strand, cluster, sequence_order, is_assessed, is_extension) VALUES
   ('ct_log_1', 'critical_thinking', 'hyro_advanced', 'CT.LOG.1', 'Propositions and Truth Values', 'Understand that propositions are statements that are either true or false. Recognize that questions, commands, and opinions are not propositions.', NULL, 'middle', 'Formal Logic', 'Foundations', 1, 1, 1),
   ('ct_log_2', 'critical_thinking', 'hyro_advanced', 'CT.LOG.2', 'Logical Connectives', 'Understand and apply logical operators: AND (conjunction), OR (disjunction), NOT (negation), IF-THEN (implication), IF AND ONLY IF (biconditional).', NULL, 'middle', 'Formal Logic', 'Foundations', 2, 1, 1),
   ('ct_log_3', 'critical_thinking', 'hyro_advanced', 'CT.LOG.3', 'Truth Tables', 'Construct and interpret truth tables for compound propositions. Use truth tables to determine logical equivalence and validity.', NULL, 'middle', 'Formal Logic', 'Methods', 3, 1, 1),
@@ -37,7 +37,7 @@ INSERT INTO hyro_learning_standards (id, domain, standard_set, standard_code, ti
 -- Recognizing bad arguments in the wild
 -- ============================================================================
 
-INSERT INTO hyro_learning_standards (id, domain, standard_set, standard_code, title, description, grade_level, grade_band, strand, cluster, sequence_order, is_assessed, is_extension) VALUES
+INSERT OR IGNORE INTO hyro_learning_standards (id, domain, standard_set, standard_code, title, description, grade_level, grade_band, strand, cluster, sequence_order, is_assessed, is_extension) VALUES
   ('ct_fal_1', 'critical_thinking', 'hyro_advanced', 'CT.FAL.1', 'Ad Hominem Attacks', 'Identify ad hominem fallacies: attacking the person instead of their argument. Understand why personal attacks dont refute claims.', NULL, 'middle', 'Informal Logic', 'Attack Fallacies', 20, 1, 1),
   ('ct_fal_2', 'critical_thinking', 'hyro_advanced', 'CT.FAL.2', 'Straw Man Arguments', 'Recognize straw man fallacies: misrepresenting an opponents position to make it easier to attack. Distinguish from genuine counterarguments.', NULL, 'middle', 'Informal Logic', 'Attack Fallacies', 21, 1, 1),
   ('ct_fal_3', 'critical_thinking', 'hyro_advanced', 'CT.FAL.3', 'Appeal to Authority', 'Identify inappropriate appeals to authority. Distinguish between legitimate expertise and irrelevant credentials.', NULL, 'middle', 'Informal Logic', 'Appeal Fallacies', 22, 1, 1),
@@ -56,7 +56,7 @@ INSERT INTO hyro_learning_standards (id, domain, standard_set, standard_code, ti
 -- Dissecting and evaluating real arguments
 -- ============================================================================
 
-INSERT INTO hyro_learning_standards (id, domain, standard_set, standard_code, title, description, grade_level, grade_band, strand, cluster, sequence_order, is_assessed, is_extension) VALUES
+INSERT OR IGNORE INTO hyro_learning_standards (id, domain, standard_set, standard_code, title, description, grade_level, grade_band, strand, cluster, sequence_order, is_assessed, is_extension) VALUES
   ('ct_arg_1', 'critical_thinking', 'hyro_advanced', 'CT.ARG.1', 'Identifying Claims', 'Extract the main claim (conclusion) from an argument. Distinguish between the central thesis and supporting points.', NULL, 'middle', 'Argument Analysis', 'Argument Structure', 40, 1, 1),
   ('ct_arg_2', 'critical_thinking', 'hyro_advanced', 'CT.ARG.2', 'Finding Premises', 'Identify premises: the reasons offered in support of a conclusion. Map the structure of complex arguments.', NULL, 'middle', 'Argument Analysis', 'Argument Structure', 41, 1, 1),
   ('ct_arg_3', 'critical_thinking', 'hyro_advanced', 'CT.ARG.3', 'Evaluating Evidence Quality', 'Assess the quality of evidence: Is it relevant? Sufficient? Representative? From reliable sources? Recent enough?', NULL, 'middle', 'Argument Analysis', 'Evidence Evaluation', 42, 1, 1),
@@ -72,7 +72,7 @@ INSERT INTO hyro_learning_standards (id, domain, standard_set, standard_code, ti
 -- Building understanding from the ground up
 -- ============================================================================
 
-INSERT INTO hyro_learning_standards (id, domain, standard_set, standard_code, title, description, grade_level, grade_band, strand, cluster, sequence_order, is_assessed, is_extension) VALUES
+INSERT OR IGNORE INTO hyro_learning_standards (id, domain, standard_set, standard_code, title, description, grade_level, grade_band, strand, cluster, sequence_order, is_assessed, is_extension) VALUES
   ('ct_fpr_1', 'critical_thinking', 'hyro_advanced', 'CT.FPR.1', 'What Are First Principles?', 'Understand first principles as foundational truths that cannot be deduced from other propositions. Distinguish from assumptions and conventions.', NULL, 'middle', 'First Principles', 'Foundations', 60, 1, 1),
   ('ct_fpr_2', 'critical_thinking', 'hyro_advanced', 'CT.FPR.2', 'Deconstructing Complex Problems', 'Break down complex problems into fundamental components. Identify core elements vs accidental features.', NULL, 'middle', 'First Principles', 'Methods', 61, 1, 1),
   ('ct_fpr_3', 'critical_thinking', 'hyro_advanced', 'CT.FPR.3', 'Questioning Assumptions', 'Systematically question assumptions: Why is this done this way? What if the opposite were true? What am I taking for granted?', NULL, 'middle', 'First Principles', 'Methods', 62, 1, 1),
@@ -87,7 +87,7 @@ INSERT INTO hyro_learning_standards (id, domain, standard_set, standard_code, ti
 -- Determining what to trust in an information-saturated world
 -- ============================================================================
 
-INSERT INTO hyro_learning_standards (id, domain, standard_set, standard_code, title, description, grade_level, grade_band, strand, cluster, sequence_order, is_assessed, is_extension) VALUES
+INSERT OR IGNORE INTO hyro_learning_standards (id, domain, standard_set, standard_code, title, description, grade_level, grade_band, strand, cluster, sequence_order, is_assessed, is_extension) VALUES
   ('ct_src_1', 'critical_thinking', 'hyro_advanced', 'CT.SRC.1', 'Credibility Assessment', 'Evaluate source credibility using CRAAP test: Currency, Relevance, Authority, Accuracy, Purpose. Apply systematically to information sources.', NULL, 'middle', 'Source Evaluation', 'Credibility', 80, 1, 1),
   ('ct_src_2', 'critical_thinking', 'hyro_advanced', 'CT.SRC.2', 'Primary vs Secondary Sources', 'Distinguish primary sources (firsthand evidence) from secondary sources (interpretations). Understand when each is appropriate.', NULL, 'middle', 'Source Evaluation', 'Source Types', 81, 1, 1),
   ('ct_src_3', 'critical_thinking', 'hyro_advanced', 'CT.SRC.3', 'Detecting Bias', 'Identify bias in sources: political, commercial, ideological. Understand that bias doesnt necessarily invalidate information but requires awareness.', NULL, 'middle', 'Source Evaluation', 'Critical Reading', 82, 1, 1),
@@ -103,7 +103,7 @@ INSERT INTO hyro_learning_standards (id, domain, standard_set, standard_code, ti
 -- Making better choices through quantitative reasoning
 -- ============================================================================
 
-INSERT INTO hyro_learning_standards (id, domain, standard_set, standard_code, title, description, grade_level, grade_band, strand, cluster, sequence_order, is_assessed, is_extension) VALUES
+INSERT OR IGNORE INTO hyro_learning_standards (id, domain, standard_set, standard_code, title, description, grade_level, grade_band, strand, cluster, sequence_order, is_assessed, is_extension) VALUES
   ('ct_dec_1', 'critical_thinking', 'hyro_advanced', 'CT.DEC.1', 'Expected Value', 'Calculate and apply expected value: probability × outcome. Use expected value to compare risky options.', NULL, 'middle', 'Decision Making', 'Quantitative Tools', 100, 1, 1),
   ('ct_dec_2', 'critical_thinking', 'hyro_advanced', 'CT.DEC.2', 'Risk Assessment', 'Evaluate risks quantitatively: likelihood × severity. Distinguish between high-probability/low-impact and low-probability/high-impact risks.', NULL, 'middle', 'Decision Making', 'Quantitative Tools', 101, 1, 1),
   ('ct_dec_3', 'critical_thinking', 'hyro_advanced', 'CT.DEC.3', 'Opportunity Cost', 'Understand opportunity cost: the value of the next best alternative. Apply to decision-making by considering what youre giving up.', NULL, 'middle', 'Decision Making', 'Economic Thinking', 102, 1, 1),
@@ -118,7 +118,7 @@ INSERT INTO hyro_learning_standards (id, domain, standard_set, standard_code, ti
 -- CURRICULUM TOPICS - FORMAL LOGIC
 -- ============================================================================
 
-INSERT INTO hyro_curriculum_topics (id, domain, standard_id, topic, description, learning_objectives, difficulty_tier, estimated_minutes) VALUES
+INSERT OR IGNORE INTO hyro_curriculum_topics (id, domain, standard_id, topic, description, learning_objectives, difficulty_tier, estimated_minutes) VALUES
   ('topic_ct_propositions', 'critical_thinking', 'ct_log_1', 'Understanding Propositions', 'What makes a statement true or false', '["Define proposition as a declarative statement", "Identify whether statements are propositions", "Recognize that questions and commands are not propositions"]', 1, 25),
   ('topic_ct_truth_values', 'critical_thinking', 'ct_log_1', 'Truth Values', 'Every proposition is either true or false', '["Understand binary nature of truth", "Evaluate truth values of simple propositions", "Recognize that some propositions have unknown truth values"]', 1, 20),
   ('topic_ct_and_or', 'critical_thinking', 'ct_log_2', 'AND and OR', 'Combining propositions with conjunction and disjunction', '["Understand AND requires both parts true", "Understand OR requires at least one part true", "Apply these operators to compound statements"]', 2, 30),
@@ -138,7 +138,7 @@ INSERT INTO hyro_curriculum_topics (id, domain, standard_id, topic, description,
 -- CURRICULUM TOPICS - INFORMAL LOGIC & FALLACIES
 -- ============================================================================
 
-INSERT INTO hyro_curriculum_topics (id, domain, standard_id, topic, description, learning_objectives, difficulty_tier, estimated_minutes) VALUES
+INSERT OR IGNORE INTO hyro_curriculum_topics (id, domain, standard_id, topic, description, learning_objectives, difficulty_tier, estimated_minutes) VALUES
   ('topic_ct_ad_hominem', 'critical_thinking', 'ct_fal_1', 'Ad Hominem Fallacy', 'Attacking the person, not the argument', '["Identify ad hominem attacks", "Explain why they dont refute arguments", "Distinguish from legitimate character evidence"]', 2, 25),
   ('topic_ct_straw_man', 'critical_thinking', 'ct_fal_2', 'Straw Man Fallacy', 'Misrepresenting opponents positions', '["Recognize straw man misrepresentations", "Identify the real vs distorted argument", "Avoid committing this fallacy yourself"]', 2, 30),
   ('topic_ct_false_authority', 'critical_thinking', 'ct_fal_3', 'Appeal to False Authority', 'When expertise doesnt apply', '["Identify inappropriate appeals to authority", "Evaluate relevance of credentials", "Recognize celebrity endorsements as fallacious"]', 2, 25),
@@ -155,7 +155,7 @@ INSERT INTO hyro_curriculum_topics (id, domain, standard_id, topic, description,
 -- CURRICULUM TOPICS - ARGUMENT ANALYSIS
 -- ============================================================================
 
-INSERT INTO hyro_curriculum_topics (id, domain, standard_id, topic, description, learning_objectives, difficulty_tier, estimated_minutes) VALUES
+INSERT OR IGNORE INTO hyro_curriculum_topics (id, domain, standard_id, topic, description, learning_objectives, difficulty_tier, estimated_minutes) VALUES
   ('topic_ct_claims', 'critical_thinking', 'ct_arg_1', 'Identifying Claims', 'Finding the main point', '["Extract the main conclusion", "Distinguish claim from support", "Identify implicit conclusions"]', 2, 25),
   ('topic_ct_premises', 'critical_thinking', 'ct_arg_2', 'Finding Premises', 'The reasons offered for conclusions', '["Identify supporting premises", "Map argument structure", "Recognize indicator words (because, since, therefore)"]', 2, 30),
   ('topic_ct_evidence_quality', 'critical_thinking', 'ct_arg_3', 'Evaluating Evidence', 'Is the evidence any good?', '["Apply relevance test", "Assess sufficiency of evidence", "Evaluate source quality"]', 3, 35),
@@ -168,7 +168,7 @@ INSERT INTO hyro_curriculum_topics (id, domain, standard_id, topic, description,
 -- CURRICULUM TOPICS - FIRST PRINCIPLES REASONING
 -- ============================================================================
 
-INSERT INTO hyro_curriculum_topics (id, domain, standard_id, topic, description, learning_objectives, difficulty_tier, estimated_minutes) VALUES
+INSERT OR IGNORE INTO hyro_curriculum_topics (id, domain, standard_id, topic, description, learning_objectives, difficulty_tier, estimated_minutes) VALUES
   ('topic_ct_what_first_prin', 'critical_thinking', 'ct_fpr_1', 'What Are First Principles?', 'Foundational truths we build from', '["Define first principles", "Distinguish from assumptions", "Identify fundamental vs derived truths"]', 2, 30),
   ('topic_ct_decompose', 'critical_thinking', 'ct_fpr_2', 'Problem Decomposition', 'Breaking things down', '["Decompose complex problems", "Identify core components", "Separate essential from accidental"]', 3, 35),
   ('topic_ct_question_assume', 'critical_thinking', 'ct_fpr_3', 'Questioning Assumptions', 'What if the opposite were true?', '["Challenge unstated assumptions", "Ask why systematically", "Identify what youre taking for granted"]', 2, 30),
@@ -181,7 +181,7 @@ INSERT INTO hyro_curriculum_topics (id, domain, standard_id, topic, description,
 -- CURRICULUM TOPICS - SOURCE EVALUATION
 -- ============================================================================
 
-INSERT INTO hyro_curriculum_topics (id, domain, standard_id, topic, description, learning_objectives, difficulty_tier, estimated_minutes) VALUES
+INSERT OR IGNORE INTO hyro_curriculum_topics (id, domain, standard_id, topic, description, learning_objectives, difficulty_tier, estimated_minutes) VALUES
   ('topic_ct_craap', 'critical_thinking', 'ct_src_1', 'CRAAP Test', 'Currency, Relevance, Authority, Accuracy, Purpose', '["Apply CRAAP test to sources", "Evaluate each dimension", "Make informed credibility judgments"]', 2, 30),
   ('topic_ct_primary_sec', 'critical_thinking', 'ct_src_2', 'Primary vs Secondary Sources', 'Firsthand vs interpreted', '["Distinguish primary from secondary sources", "Know when to use each", "Trace back to primary sources"]', 2, 25),
   ('topic_ct_bias_detect', 'critical_thinking', 'ct_src_3', 'Detecting Bias', 'Everyone has an angle', '["Identify political bias", "Recognize commercial interests", "Understand ideological framing"]', 2, 30),
@@ -196,7 +196,7 @@ INSERT INTO hyro_curriculum_topics (id, domain, standard_id, topic, description,
 -- CURRICULUM TOPICS - DECISION MAKING
 -- ============================================================================
 
-INSERT INTO hyro_curriculum_topics (id, domain, standard_id, topic, description, learning_objectives, difficulty_tier, estimated_minutes) VALUES
+INSERT OR IGNORE INTO hyro_curriculum_topics (id, domain, standard_id, topic, description, learning_objectives, difficulty_tier, estimated_minutes) VALUES
   ('topic_ct_expected_value', 'critical_thinking', 'ct_dec_1', 'Expected Value', 'Probability × Outcome', '["Calculate expected value", "Compare risky options", "Apply to real decisions"]', 3, 35),
   ('topic_ct_risk_assess', 'critical_thinking', 'ct_dec_2', 'Risk Assessment', 'Likelihood × Severity', '["Evaluate risk quantitatively", "Distinguish high/low probability and impact", "Prioritize risks appropriately"]', 3, 30),
   ('topic_ct_opp_cost', 'critical_thinking', 'ct_dec_3', 'Opportunity Cost', 'What are you giving up?', '["Define opportunity cost", "Identify next best alternative", "Factor into decisions"]', 2, 25),
@@ -211,7 +211,7 @@ INSERT INTO hyro_curriculum_topics (id, domain, standard_id, topic, description,
 -- QUESTION BANK - FORMAL LOGIC
 -- ============================================================================
 
-INSERT INTO hyro_question_bank (id, domain, standard_id, topic_id, question_type, question_text, answer_options, correct_answer, explanation, difficulty, difficulty_tier, bloom_level, dok_level, hints) VALUES
+INSERT OR IGNORE INTO hyro_question_bank (id, domain, standard_id, topic_id, question_type, question_text, answer_options, correct_answer, explanation, difficulty, difficulty_tier, bloom_level, dok_level, hints) VALUES
   ('q_ct_log_001', 'critical_thinking', 'ct_log_1', 'topic_ct_propositions', 'multiple_choice', 'Which of the following is a proposition?', '["What time is it?", "Close the door", "The Earth is round", "I hope it rains"]', 'The Earth is round', 'A proposition is a declarative statement that is either true or false. "The Earth is round" can be evaluated as true or false. Questions and commands are not propositions.', 30, 1, 'understand', 2, '["Propositions are statements", "They must be true or false"]'),
 
   ('q_ct_log_002', 'critical_thinking', 'ct_log_2', 'topic_ct_and_or', 'multiple_choice', 'If P is "Its raining" and Q is "Its cold", when is "P AND Q" true?', '["When at least one is true", "When both are true", "When neither is true", "When exactly one is true"]', 'When both are true', 'A conjunction (AND) is only true when both parts are true. If either P or Q is false, then P AND Q is false.', 25, 1, 'understand', 2, '["AND requires both parts", "Think about when both conditions hold"]'),
@@ -236,7 +236,7 @@ INSERT INTO hyro_question_bank (id, domain, standard_id, topic_id, question_type
 -- QUESTION BANK - INFORMAL LOGIC & FALLACIES
 -- ============================================================================
 
-INSERT INTO hyro_question_bank (id, domain, standard_id, topic_id, question_type, question_text, answer_options, correct_answer, explanation, difficulty, difficulty_tier, bloom_level, dok_level, hints) VALUES
+INSERT OR IGNORE INTO hyro_question_bank (id, domain, standard_id, topic_id, question_type, question_text, answer_options, correct_answer, explanation, difficulty, difficulty_tier, bloom_level, dok_level, hints) VALUES
   ('q_ct_fal_001', 'critical_thinking', 'ct_fal_1', 'topic_ct_ad_hominem', 'multiple_choice', '"You cant trust Sarahs argument about climate change - shes not even a scientist!" What fallacy is this?', '["Appeal to authority", "Ad hominem", "Straw man", "Red herring"]', 'Ad hominem', 'This attacks Sarah personally (her credentials) rather than addressing her actual argument. Even non-scientists can make valid arguments if they cite proper evidence.', 35, 2, 'analyze', 2, '["Is this attacking the person or the argument?", "Does not being a scientist make the argument wrong?"]'),
 
   ('q_ct_fal_002', 'critical_thinking', 'ct_fal_2', 'topic_ct_straw_man', 'multiple_choice', 'Alex says "We should have some gun regulations." Ben responds "Alex wants to ban all guns and take away our rights!" What fallacy is this?', '["Ad hominem", "Straw man", "Slippery slope", "False dichotomy"]', 'Straw man', 'Ben misrepresents Alexs position (some regulations) as an extreme position (ban all guns) to make it easier to attack. This is a straw man fallacy.', 40, 2, 'analyze', 3, '["Is Ben representing Alex accurately?", "Did Alex say ban all guns?"]'),
@@ -247,11 +247,11 @@ INSERT INTO hyro_question_bank (id, domain, standard_id, topic_id, question_type
 
   ('q_ct_fal_005', 'critical_thinking', 'ct_fal_6', 'topic_ct_slippery_slope', 'multiple_choice', '"If we let students turn in homework one day late, soon theyll want a week, then a month, and eventually well have no deadlines at all!" What fallacy is this?', '["False dichotomy", "Slippery slope", "Hasty generalization", "Red herring"]', 'Slippery slope', 'This claims one small change will inevitably lead to extreme consequences without justification. A one-day extension doesnt necessarily lead to no deadlines.', 35, 2, 'analyze', 3, '["Is each step inevitable?", "Does A necessarily lead to Z?"]'),
 
-  ('q_ct_fal_006', 'critical_thinking', 'ct_fal_7', 'topic_ct_circular', 'multiple_choice', '"God exists because the Bible says so, and the Bible is true because it\'s the word of God." What fallacy is this?', '["Appeal to authority", "Circular reasoning", "Straw man", "Red herring"]', 'Circular reasoning', 'This uses the conclusion (God exists) as part of the evidence. The argument goes in a circle: Bible proves God, God proves Bible. No independent justification is provided.', 40, 2, 'analyze', 3, '["Is the conclusion used in the premise?", "Does this go in a circle?"]'),
+  ('q_ct_fal_006', 'critical_thinking', 'ct_fal_7', 'topic_ct_circular', 'multiple_choice', '"God exists because the Bible says so, and the Bible is true because it''s the word of God." What fallacy is this?', '["Appeal to authority", "Circular reasoning", "Straw man", "Red herring"]', 'Circular reasoning', 'This uses the conclusion (God exists) as part of the evidence. The argument goes in a circle: Bible proves God, God proves Bible. No independent justification is provided.', 40, 2, 'analyze', 3, '["Is the conclusion used in the premise?", "Does this go in a circle?"]'),
 
   ('q_ct_fal_007', 'critical_thinking', 'ct_fal_8', 'topic_ct_hasty_gen', 'multiple_choice', '"I met two rude people from that city, so everyone from there must be rude." What fallacy is this?', '["Hasty generalization", "Straw man", "False dichotomy", "Appeal to emotion"]', 'Hasty generalization', 'This draws a broad conclusion about an entire city from only two examples. The sample size is far too small to support such a sweeping generalization.', 30, 2, 'analyze', 2, '["How many people were observed?", "Is this enough to judge everyone?"]'),
 
-  ('q_ct_fal_008', 'critical_thinking', 'ct_fal_9', 'topic_ct_correlation', 'multiple_choice', '"Ice cream sales and drowning deaths both increase in summer. Therefore, ice cream causes drowning." What\'s wrong with this reasoning?', '["Its circular", "It confuses correlation with causation", "Its a straw man", "Its an appeal to emotion"]', 'It confuses correlation with causation', 'Both ice cream sales and drowning increase in summer because of a third factor: warm weather. Correlation doesnt prove causation. They happen together but neither causes the other.', 40, 2, 'analyze', 3, '["Do they happen together?", "Does one cause the other, or is there another explanation?"]'),
+  ('q_ct_fal_008', 'critical_thinking', 'ct_fal_9', 'topic_ct_correlation', 'multiple_choice', '"Ice cream sales and drowning deaths both increase in summer. Therefore, ice cream causes drowning." What''s wrong with this reasoning?', '["Its circular", "It confuses correlation with causation", "Its a straw man", "Its an appeal to emotion"]', 'It confuses correlation with causation', 'Both ice cream sales and drowning increase in summer because of a third factor: warm weather. Correlation doesnt prove causation. They happen together but neither causes the other.', 40, 2, 'analyze', 3, '["Do they happen together?", "Does one cause the other, or is there another explanation?"]'),
 
   ('q_ct_fal_009', 'critical_thinking', 'ct_fal_10', 'topic_ct_red_herring', 'multiple_choice', 'During a debate about education funding, one candidate says "My opponent doesnt even recycle!" What fallacy is this?', '["Ad hominem", "Red herring", "Straw man", "False dichotomy"]', 'Red herring', 'This introduces an irrelevant topic (recycling) to distract from the actual issue (education funding). Its a diversion tactic to avoid addressing the real argument.', 35, 2, 'analyze', 2, '["Is recycling relevant to education funding?", "Is this changing the subject?"]'),
 
@@ -261,7 +261,7 @@ INSERT INTO hyro_question_bank (id, domain, standard_id, topic_id, question_type
 -- QUESTION BANK - ARGUMENT ANALYSIS
 -- ============================================================================
 
-INSERT INTO hyro_question_bank (id, domain, standard_id, topic_id, question_type, question_text, answer_options, correct_answer, explanation, difficulty, difficulty_tier, bloom_level, dok_level, hints) VALUES
+INSERT OR IGNORE INTO hyro_question_bank (id, domain, standard_id, topic_id, question_type, question_text, answer_options, correct_answer, explanation, difficulty, difficulty_tier, bloom_level, dok_level, hints) VALUES
   ('q_ct_arg_001', 'critical_thinking', 'ct_arg_1', 'topic_ct_claims', 'multiple_choice', 'In this passage, what is the main claim? "Students should start school later. Research shows teenagers need more sleep. Countries with later start times have better outcomes."', '["Research shows teenagers need more sleep", "Students should start school later", "Countries with later times have better outcomes", "Teenagers need sleep"]', 'Students should start school later', 'The main claim is the conclusion the author wants you to accept. The other statements are premises (evidence) offered to support the main claim that school should start later.', 35, 2, 'analyze', 2, '["What is being argued FOR?", "Which statement do the others support?"]'),
 
   ('q_ct_arg_002', 'critical_thinking', 'ct_arg_2', 'topic_ct_premises', 'multiple_choice', 'How many premises support this argument? "We should exercise regularly (1) because it improves heart health, (2) boosts mental health, and (3) increases lifespan."', '["1", "2", "3", "4"]', '3', 'There are three premises (reasons) offered: improves heart health, boosts mental health, and increases lifespan. All three support the conclusion to exercise regularly.', 30, 2, 'analyze', 2, '["Count the reasons given", "Look for multiple because statements"]'),
@@ -280,7 +280,7 @@ INSERT INTO hyro_question_bank (id, domain, standard_id, topic_id, question_type
 -- QUESTION BANK - FIRST PRINCIPLES REASONING
 -- ============================================================================
 
-INSERT INTO hyro_question_bank (id, domain, standard_id, topic_id, question_type, question_text, answer_options, correct_answer, explanation, difficulty, difficulty_tier, bloom_level, dok_level, hints) VALUES
+INSERT OR IGNORE INTO hyro_question_bank (id, domain, standard_id, topic_id, question_type, question_text, answer_options, correct_answer, explanation, difficulty, difficulty_tier, bloom_level, dok_level, hints) VALUES
   ('q_ct_fpr_001', 'critical_thinking', 'ct_fpr_1', 'topic_ct_what_first_prin', 'multiple_choice', 'Which is a FIRST PRINCIPLE rather than a derived conclusion?', '["Democracy is the best government", "Matter is composed of atoms", "Humans have rights", "Force equals mass times acceleration"]', 'Force equals mass times acceleration', 'F=ma is a fundamental law of physics that cannot be derived from other propositions - its a first principle. The others are conclusions derived from other reasoning or values.', 50, 3, 'analyze', 3, '["Which is fundamental and underived?", "Which is the most basic truth?"]'),
 
   ('q_ct_fpr_002', 'critical_thinking', 'ct_fpr_2', 'topic_ct_decompose', 'multiple_choice', 'To understand "Why is the sky blue?" from first principles, you should first ask:', '["What did my teacher say?", "What do most people think?", "What is light and how does it interact with atmosphere?", "What does Wikipedia say?"]', 'What is light and how does it interact with atmosphere?', 'First principles reasoning breaks down to fundamentals. Understanding light, atmosphere, and their interaction gets to the physical basis, rather than accepting explanations from authority.', 45, 2, 'apply', 3, '["What are the basic components?", "What fundamental physics explains this?"]'),
@@ -297,7 +297,7 @@ INSERT INTO hyro_question_bank (id, domain, standard_id, topic_id, question_type
 -- QUESTION BANK - SOURCE EVALUATION
 -- ============================================================================
 
-INSERT INTO hyro_question_bank (id, domain, standard_id, topic_id, question_type, question_text, answer_options, correct_answer, explanation, difficulty, difficulty_tier, bloom_level, dok_level, hints) VALUES
+INSERT OR IGNORE INTO hyro_question_bank (id, domain, standard_id, topic_id, question_type, question_text, answer_options, correct_answer, explanation, difficulty, difficulty_tier, bloom_level, dok_level, hints) VALUES
   ('q_ct_src_001', 'critical_thinking', 'ct_src_1', 'topic_ct_craap', 'multiple_choice', 'You find a website about nutrition from 1995. Which CRAAP criterion is most problematic?', '["Currency", "Relevance", "Authority", "Accuracy"]', 'Currency', 'A 1995 source on nutrition is 30+ years old. Nutritional science has evolved significantly. Currency (how recent) is the main concern, though other factors matter too.', 35, 2, 'evaluate', 2, '["How old is this?", "Has science changed since then?"]'),
 
   ('q_ct_src_002', 'critical_thinking', 'ct_src_2', 'topic_ct_primary_sec', 'multiple_choice', 'For researching the Constitutional Convention, which is a PRIMARY source?', '["A history textbook chapter on the Convention", "James Madisons notes from the Convention", "A documentary about the founding fathers", "A Wikipedia article on the Constitution"]', 'James Madisons notes from the Convention', 'Madisons notes are firsthand accounts from someone present. The others are interpretations or summaries created later - secondary sources.', 40, 2, 'analyze', 2, '["Who was there?", "Which is firsthand evidence?"]'),
@@ -318,14 +318,14 @@ INSERT INTO hyro_question_bank (id, domain, standard_id, topic_id, question_type
 -- QUESTION BANK - DECISION MAKING
 -- ============================================================================
 
-INSERT INTO hyro_question_bank (id, domain, standard_id, topic_id, question_type, question_text, answer_options, correct_answer, explanation, difficulty, difficulty_tier, bloom_level, dok_level, hints) VALUES
+INSERT OR IGNORE INTO hyro_question_bank (id, domain, standard_id, topic_id, question_type, question_text, answer_options, correct_answer, explanation, difficulty, difficulty_tier, bloom_level, dok_level, hints) VALUES
   ('q_ct_dec_001', 'critical_thinking', 'ct_dec_1', 'topic_ct_expected_value', 'multiple_choice', 'Option A: 100% chance of $10. Option B: 50% chance of $25. Which has higher expected value?', '["Option A", "Option B", "Equal", "Cannot determine"]', 'Option B', 'Expected value = probability × outcome. A: 1.0 × $10 = $10. B: 0.5 × $25 = $12.50. Option B has higher expected value despite the risk.', 40, 2, 'apply', 2, '["Multiply probability by amount", "1.0 × 10 vs 0.5 × 25"]'),
 
   ('q_ct_dec_002', 'critical_thinking', 'ct_dec_2', 'topic_ct_risk_assess', 'multiple_choice', 'Risk A: 80% chance of minor injury. Risk B: 1% chance of death. Which should you prioritize avoiding?', '["Risk A - its more likely", "Risk B - severity matters more", "Equal priority", "Depends on circumstances"]', 'Depends on circumstances', 'Good answer. Risk = likelihood × severity. Both matter. High probability/low impact vs low probability/high impact require different strategies. Context determines which is worse.', 50, 3, 'evaluate', 3, '["Consider both dimensions", "What matters more in this context?"]'),
 
   ('q_ct_dec_003', 'critical_thinking', 'ct_dec_3', 'topic_ct_opp_cost', 'multiple_choice', 'You spend 3 hours watching TV. The opportunity cost is:', '["$0 - TV was free", "Whatever you would have done with those 3 hours instead", "The cost of your TV", "The electricity used"]', 'Whatever you would have done with those 3 hours instead', 'Opportunity cost is the value of the next best alternative. Those 3 hours could have been spent studying, exercising, working, etc. Thats what you gave up.', 35, 2, 'understand', 2, '["What else could you have done?", "What did you give up?"]'),
 
-  ('q_ct_dec_004', 'critical_thinking', 'ct_dec_4', 'topic_ct_sunk_cost', 'multiple_choice', 'You paid $100 for a concert ticket. You\'re sick on concert day. Should you go?', '["Yes - you paid $100", "Decide based only on whether going now is worth feeling worse", "The $100 is lost either way", "Both B and C"]', 'Both B and C', 'The $100 is a sunk cost - you cant get it back whether you go or not. Decide based on future consequences: is suffering through the concert worth it? Ignore the sunk cost.', 45, 2, 'apply', 3, '["Can you get the $100 back?", "What matters going forward?"]'),
+  ('q_ct_dec_004', 'critical_thinking', 'ct_dec_4', 'topic_ct_sunk_cost', 'multiple_choice', 'You paid $100 for a concert ticket. You''re sick on concert day. Should you go?', '["Yes - you paid $100", "Decide based only on whether going now is worth feeling worse", "The $100 is lost either way", "Both B and C"]', 'Both B and C', 'The $100 is a sunk cost - you cant get it back whether you go or not. Decide based on future consequences: is suffering through the concert worth it? Ignore the sunk cost.', 45, 2, 'apply', 3, '["Can you get the $100 back?", "What matters going forward?"]'),
 
   ('q_ct_dec_005', 'critical_thinking', 'ct_dec_5', 'topic_ct_reversible', 'multiple_choice', 'Which decision deserves the MOST careful deliberation?', '["What to have for lunch", "Which college to attend", "Which movie to watch", "What shirt to wear"]', 'Which college to attend', 'College choice is largely irreversible and has long-term consequences. The others are easily reversible decisions that deserve less deliberation. Two-way doors can be walked through quickly.', 30, 2, 'evaluate', 2, '["Which can you undo?", "Which has lasting effects?"]'),
 
@@ -341,7 +341,7 @@ INSERT INTO hyro_question_bank (id, domain, standard_id, topic_id, question_type
 -- PREREQUISITES
 -- ============================================================================
 
-INSERT INTO hyro_skill_prerequisites (id, skill_id, skill_type, prerequisite_id, prerequisite_type, strength) VALUES
+INSERT OR IGNORE INTO hyro_skill_prerequisites (id, skill_id, skill_type, prerequisite_id, prerequisite_type, strength) VALUES
   -- Formal Logic chain
   ('prereq_ct_001', 'topic_ct_and_or', 'topic', 'topic_ct_propositions', 'topic', 'required'),
   ('prereq_ct_002', 'topic_ct_conditional', 'topic', 'topic_ct_and_or', 'topic', 'required'),

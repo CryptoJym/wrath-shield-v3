@@ -107,7 +107,11 @@ export type XPSource =
   // Phase 3: Comprehension System
   | 'comprehension_response'
   | 'discussion_exchange'
-  | 'discussion_completed';
+  | 'discussion_completed'
+  // Phase 4: AI Tutor and Diagnostics
+  | 'diagnostic'
+  | 'engagement'
+  | 'study_pattern';
 
 export interface XPTransaction {
   id: string;

@@ -13,7 +13,7 @@
 -- Understanding how AI systems actually work
 -- ============================================================================
 
-INSERT INTO hyro_learning_standards (id, domain, standard_set, standard_code, title, description, grade_level, grade_band, strand, cluster, sequence_order, is_assessed, is_extension) VALUES
+INSERT OR IGNORE INTO hyro_learning_standards (id, domain, standard_set, standard_code, title, description, grade_level, grade_band, strand, cluster, sequence_order, is_assessed, is_extension) VALUES
   -- Core Concepts
   ('llm_tf_1', 'llm_communications', 'hyro_advanced', 'LLM.TF.1', 'What LLMs Actually Are', 'Understand that LLMs are statistical pattern matchers trained on text, not thinking beings. They predict probable next tokens based on patterns learned from training data.', NULL, 'middle', 'Technical Foundations', 'Core Concepts', 40, 1, 1),
   ('llm_tf_2', 'llm_communications', 'hyro_advanced', 'LLM.TF.2', 'Token Prediction', 'Understand that LLMs work by predicting the most likely next token (word piece) given all previous tokens. This is the fundamental operation.', NULL, 'middle', 'Technical Foundations', 'Core Concepts', 41, 1, 1),
@@ -37,7 +37,7 @@ INSERT INTO hyro_learning_standards (id, domain, standard_set, standard_code, ti
 -- Learning how to learn - the ultimate skill multiplier
 -- ============================================================================
 
-INSERT INTO hyro_learning_standards (id, domain, standard_set, standard_code, title, description, grade_level, grade_band, strand, cluster, sequence_order, is_assessed, is_extension) VALUES
+INSERT OR IGNORE INTO hyro_learning_standards (id, domain, standard_set, standard_code, title, description, grade_level, grade_band, strand, cluster, sequence_order, is_assessed, is_extension) VALUES
   -- Learning Science
   ('llm_ml_1', 'llm_communications', 'hyro_advanced', 'LLM.ML.1', 'How Memory Works', 'Understand the difference between working memory and long-term memory. Know why spaced repetition beats cramming and how sleep consolidates learning.', NULL, 'middle', 'Meta-Learning', 'Learning Science', 60, 1, 1),
   ('llm_ml_2', 'llm_communications', 'hyro_advanced', 'LLM.ML.2', 'Active vs Passive Learning', 'Understand why active recall (testing yourself) beats passive review (re-reading). Generate answers, dont just recognize them.', NULL, 'middle', 'Meta-Learning', 'Learning Science', 61, 1, 1),
@@ -66,7 +66,7 @@ INSERT INTO hyro_learning_standards (id, domain, standard_set, standard_code, ti
 -- CURRICULUM TOPICS - TECHNICAL FOUNDATIONS
 -- ============================================================================
 
-INSERT INTO hyro_curriculum_topics (id, domain, standard_id, topic, description, learning_objectives, difficulty_tier, estimated_minutes) VALUES
+INSERT OR IGNORE INTO hyro_curriculum_topics (id, domain, standard_id, topic, description, learning_objectives, difficulty_tier, estimated_minutes) VALUES
   -- Core LLM Concepts
   ('topic_llm_what_is_llm', 'llm_communications', 'llm_tf_1', 'What is an LLM?', 'Understanding Large Language Models as pattern matchers', '["Explain that LLMs predict text based on patterns", "Distinguish LLMs from traditional programs", "Understand that LLMs dont truly understand like humans"]', 1, 25),
   ('topic_llm_tokens', 'llm_communications', 'llm_tf_2', 'Tokens and Tokenization', 'How text is broken into pieces for AI processing', '["Understand words are broken into tokens", "Know that tokens affect cost and limits", "See how tokenization affects different languages"]', 2, 30),
@@ -90,7 +90,7 @@ INSERT INTO hyro_curriculum_topics (id, domain, standard_id, topic, description,
 -- CURRICULUM TOPICS - META-LEARNING
 -- ============================================================================
 
-INSERT INTO hyro_curriculum_topics (id, domain, standard_id, topic, description, learning_objectives, difficulty_tier, estimated_minutes) VALUES
+INSERT OR IGNORE INTO hyro_curriculum_topics (id, domain, standard_id, topic, description, learning_objectives, difficulty_tier, estimated_minutes) VALUES
   -- Learning Science
   ('topic_ml_memory', 'llm_communications', 'llm_ml_1', 'Memory Systems', 'Understanding how your brain stores information', '["Know working memory is limited", "Understand long-term memory needs consolidation", "Learn why sleep matters for learning"]', 2, 30),
   ('topic_ml_recall', 'llm_communications', 'llm_ml_2', 'Active Recall', 'Testing yourself to learn better', '["Know testing beats re-reading", "Understand retrieval practice strengthens memory", "Apply self-testing strategies"]', 2, 25),
@@ -119,7 +119,7 @@ INSERT INTO hyro_curriculum_topics (id, domain, standard_id, topic, description,
 -- QUESTION BANK - TECHNICAL FOUNDATIONS
 -- ============================================================================
 
-INSERT INTO hyro_question_bank (id, domain, standard_id, topic_id, question_type, question_text, answer_options, correct_answer, explanation, difficulty, difficulty_tier, bloom_level, dok_level, hints) VALUES
+INSERT OR IGNORE INTO hyro_question_bank (id, domain, standard_id, topic_id, question_type, question_text, answer_options, correct_answer, explanation, difficulty, difficulty_tier, bloom_level, dok_level, hints) VALUES
   -- Core Concepts
   ('q_llm_tf_001', 'llm_communications', 'llm_tf_1', 'topic_llm_what_is_llm', 'multiple_choice', 'What is an LLM fundamentally doing when it responds to you?', '["Thinking about your question like a human", "Looking up answers in a database", "Predicting probable next words based on patterns it learned", "Running logical rules like a calculator"]', 'Predicting probable next words based on patterns it learned', 'LLMs are statistical pattern matchers. They dont think, understand, or look things up - they predict what text is likely to come next based on patterns in their training data.', 35, 2, 'understand', 2, '["Think about what AI learned from", "Its not thinking or looking things up"]'),
 
@@ -149,7 +149,7 @@ INSERT INTO hyro_question_bank (id, domain, standard_id, topic_id, question_type
 -- QUESTION BANK - META-LEARNING
 -- ============================================================================
 
-INSERT INTO hyro_question_bank (id, domain, standard_id, topic_id, question_type, question_text, answer_options, correct_answer, explanation, difficulty, difficulty_tier, bloom_level, dok_level, hints) VALUES
+INSERT OR IGNORE INTO hyro_question_bank (id, domain, standard_id, topic_id, question_type, question_text, answer_options, correct_answer, explanation, difficulty, difficulty_tier, bloom_level, dok_level, hints) VALUES
   ('q_llm_ml_001', 'llm_communications', 'llm_ml_1', 'topic_ml_memory', 'multiple_choice', 'Why is sleeping after learning important?', '["It isnt - you should study more instead", "Sleep consolidates memories from working memory to long-term storage", "Sleep helps you forget wrong answers", "Its just for rest"]', 'Sleep consolidates memories from working memory to long-term storage', 'During sleep, your brain replays and strengthens the neural connections formed during learning, moving information into long-term memory. Skipping sleep undermines learning.', 35, 2, 'understand', 2, '["What happens to memories during sleep?", "Why do you forget when tired?"]'),
 
   ('q_llm_ml_002', 'llm_communications', 'llm_ml_2', 'topic_ml_recall', 'multiple_choice', 'Which study method leads to better long-term retention?', '["Re-reading your notes multiple times", "Highlighting important passages", "Closing your notes and trying to recall what you learned", "Listening to lectures again"]', 'Closing your notes and trying to recall what you learned', 'Active recall - testing yourself - strengthens memory far more than passive review. The effort of retrieval makes the memory stronger. Re-reading feels easier but is far less effective.', 40, 2, 'analyze', 3, '["Which requires more mental effort?", "What strengthens a memory trace?"]'),
@@ -186,7 +186,7 @@ INSERT INTO hyro_question_bank (id, domain, standard_id, topic_id, question_type
 -- PREREQUISITES FOR NEW TOPICS
 -- ============================================================================
 
-INSERT INTO hyro_skill_prerequisites (id, skill_id, skill_type, prerequisite_id, prerequisite_type, strength) VALUES
+INSERT OR IGNORE INTO hyro_skill_prerequisites (id, skill_id, skill_type, prerequisite_id, prerequisite_type, strength) VALUES
   -- Technical Foundations Chain
   ('prereq_llm_tf_001', 'topic_llm_tokens', 'topic', 'topic_llm_what_is_llm', 'topic', 'required'),
   ('prereq_llm_tf_002', 'topic_llm_next_token', 'topic', 'topic_llm_tokens', 'topic', 'required'),
@@ -221,7 +221,7 @@ INSERT INTO hyro_skill_prerequisites (id, skill_id, skill_type, prerequisite_id,
 -- LEARNING PROGRESSIONS - NEW STRANDS
 -- ============================================================================
 
-INSERT INTO hyro_learning_progressions (id, name, domain, description, grade_span, progression_type, topic_sequence, estimated_weeks) VALUES
+INSERT OR IGNORE INTO hyro_learning_progressions (id, name, domain, description, grade_span, progression_type, topic_sequence, estimated_weeks) VALUES
   ('prog_llm_technical', 'Understanding AI', 'llm_communications', 'How LLMs actually work - demystifying the technology', '6-12', 'standard',
    '["topic_llm_what_is_llm", "topic_llm_tokens", "topic_llm_next_token", "topic_llm_training", "topic_llm_context", "topic_llm_probability", "topic_llm_temperature", "topic_llm_hallucination"]', 4),
   ('prog_llm_math_foundations', 'AI Math Concepts', 'llm_communications', 'The mathematics behind AI - conceptual understanding', '7-12', 'acceleration',

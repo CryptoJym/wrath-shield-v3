@@ -11,6 +11,13 @@ export type TaskStatus = 'pending' | 'in_progress' | 'done' | 'failed' | 'backlo
 export type TaskPriority = 'urgent' | 'high' | 'medium' | 'low' | 'none';
 export type TaskSource = 'github' | 'local';
 
+// Task Queue / Triage types
+export type SignalSource = 'comms' | 'inbox' | 'legal' | 'finance' | 'eeg' | 'github' | 'calendar';
+export type SignalType = 'task' | 'deadline' | 'follow_up' | 'energy_window' | 'commit' | 'mention';
+export type QueueAction = 'github_issue' | 'local_task' | 'defer' | 'ignore' | 'escalate';
+export type EscalationLevel = 'auto' | 'propose' | 'critical';
+export type QueueItemStatus = 'pending' | 'processing' | 'completed' | 'failed' | 'deferred';
+
 export interface UnifiedTask {
   id: string;
   source: TaskSource;

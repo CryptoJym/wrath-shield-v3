@@ -34,8 +34,8 @@ export async function GET(request: NextRequest) {
             child_name: context.child_name,
             proficiency: context.proficiency.map((p) => ({
               stat_name: p.stat_name,
-              level: p.estimated_level,
-              confidence: p.confidence,
+              level: p.level,
+              uncertainty: p.uncertainty,
             })),
             zpd_summary: context.zpd_states.map((z) => ({
               stat_name: z.stat_name,

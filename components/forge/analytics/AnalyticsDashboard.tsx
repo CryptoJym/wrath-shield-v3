@@ -4,13 +4,17 @@
  * AnalyticsDashboard Component
  * Comprehensive learning analytics with activity timeline,
  * performance metrics, and AI-generated insights
+ * Premium "Ultra-Edge" UI Overhaul
  */
 
 import { useState, useMemo } from 'react';
 import {
   TrendingUp, TrendingDown, Clock, Target, Calendar,
-  Brain, Zap, Award, BarChart3, Activity, ChevronRight
+  Brain, Zap, Award, BarChart3, Activity, ChevronRight, Minus
 } from 'lucide-react';
+import {
+  AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
+} from 'recharts';
 
 interface DailyActivity {
   date: string;
@@ -50,17 +54,17 @@ interface AnalyticsDashboardProps {
   onTimeRangeChange?: (range: '7d' | '30d' | '90d') => void;
 }
 
-const insightStyles: Record<string, { bg: string; color: string; icon: typeof TrendingUp }> = {
-  strength: { bg: 'rgba(16, 185, 129, 0.15)', color: '#10b981', icon: TrendingUp },
-  opportunity: { bg: 'rgba(245, 158, 11, 0.15)', color: '#f59e0b', icon: Target },
-  recommendation: { bg: 'rgba(59, 130, 246, 0.15)', color: '#60a5fa', icon: Brain },
-  milestone: { bg: 'rgba(139, 92, 246, 0.15)', color: '#a78bfa', icon: Award },
+const insightStyles: Record<string, { bg: string; color: string; icon: any; border: string }> = {
+  strength: { bg: 'bg-emerald-500/10', color: 'text-emerald-400', icon: TrendingUp, border: 'border-emerald-500/20' },
+  opportunity: { bg: 'bg-amber-500/10', color: 'text-amber-400', icon: Target, border: 'border-amber-500/20' },
+  recommendation: { bg: 'bg-blue-500/10', color: 'text-blue-400', icon: Brain, border: 'border-blue-500/20' },
+  milestone: { bg: 'bg-purple-500/10', color: 'text-purple-400', icon: Award, border: 'border-purple-500/20' },
 };
 
 export function AnalyticsDashboard({
-  dailyActivity,
-  metrics,
-  insights,
+  dailyActivity = [],
+  metrics = [],
+  insights = [],
   streakDays,
   totalXP,
   level,
@@ -68,13 +72,6 @@ export function AnalyticsDashboard({
   timeRange = '7d',
   onTimeRangeChange,
 }: AnalyticsDashboardProps) {
-  const [selectedMetric, setSelectedMetric] = useState<string | null>(null);
-
-  // Calculate max values for chart scaling
-  const maxXP = useMemo(
-    () => Math.max(...dailyActivity.map((d) => d.xp_earned), 1),
-    [dailyActivity]
-  );
 
   // Calculate totals for time range
   const totals = useMemo(() => {
@@ -90,497 +87,253 @@ export function AnalyticsDashboard({
     );
   }, [dailyActivity]);
 
+  // Format data for Recharts
+  const chartData = useMemo(() => {
+    return dailyActivity.map(day => ({
+      ...day,
+      displayDate: new Date(day.date).toLocaleDateString('en-US', { weekday: 'short' }),
+    }));
+  }, [dailyActivity]);
+
   return (
-    <div style={styles.container}>
+    <div className="space-y-8">
       {/* Header Stats */}
-      <div style={styles.headerStats}>
-        <div style={styles.levelCard}>
-          <div style={styles.levelBadge}>
-            <span style={styles.levelNumber}>Lv. {level}</span>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* Level Card */}
+        <div className="md:col-span-2 bg-zinc-900/40 backdrop-blur-md border border-white/5 rounded-2xl p-6 relative overflow-hidden group">
+          <div className="absolute inset-0 bg-gradient-to-r from-purple-500/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+
+          <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div className="flex items-center gap-4">
+              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500 to-blue-600 flex items-center justify-center shadow-lg shadow-purple-500/20">
+                <span className="text-2xl font-bold text-white">{level}</span>
+              </div>
+              <div>
+                <h3 className="text-sm text-zinc-400 uppercase tracking-widest font-medium">Current Level</h3>
+                <div className="text-3xl font-bold text-white tracking-tight">{(totalXP ?? 0).toLocaleString()} <span className="text-sm text-zinc-500 font-normal">XP</span></div>
+              </div>
+            </div>
+
+            <div className="flex-1 max-w-md">
+              <div className="flex justify-between text-xs mb-2">
+                <span className="text-zinc-400">Progress to Level {level + 1}</span>
+                <span className="text-purple-400 font-mono">{xpToNextLevel} XP remaining</span>
+              </div>
+              <div className="h-2 bg-zinc-800 rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-gradient-to-r from-purple-500 to-blue-500 rounded-full transition-all duration-500"
+                  style={{ width: `${Math.min((((totalXP ?? 0) % 1000) / 1000) * 100, 100)}%` }}
+                />
+              </div>
+            </div>
           </div>
-          <div style={styles.levelInfo}>
-            <span style={styles.levelLabel}>Total XP</span>
-            <span style={styles.xpValue}>{totalXP.toLocaleString()}</span>
-          </div>
-          <div style={styles.xpProgress}>
-            <div
-              style={{
-                ...styles.xpProgressFill,
-                width: `${Math.min(((totalXP % 1000) / 1000) * 100, 100)}%`,
-              }}
-            />
-          </div>
-          <span style={styles.xpToNext}>{xpToNextLevel} XP to level {level + 1}</span>
         </div>
 
-        <div style={styles.streakCard}>
-          <Zap size={24} color="#f59e0b" />
-          <span style={styles.streakNumber}>{streakDays}</span>
-          <span style={styles.streakLabel}>Day Streak</span>
+        {/* Streak Card */}
+        <div className="bg-zinc-900/40 backdrop-blur-md border border-amber-500/20 rounded-2xl p-6 flex flex-col items-center justify-center relative overflow-hidden">
+          <div className="absolute inset-0 bg-amber-500/5" />
+          <Zap className="text-amber-400 mb-2" size={32} />
+          <div className="text-4xl font-bold text-white tracking-tight">{streakDays}</div>
+          <div className="text-xs text-amber-500/80 uppercase tracking-widest font-medium mt-1">Day Streak</div>
         </div>
       </div>
 
       {/* Time Range Toggle */}
-      <div style={styles.timeToggle}>
-        {(['7d', '30d', '90d'] as const).map((range) => (
-          <button
-            key={range}
-            onClick={() => onTimeRangeChange?.(range)}
-            style={{
-              ...styles.timeButton,
-              ...(timeRange === range ? styles.timeButtonActive : {}),
-            }}
-          >
-            {range === '7d' ? '7 Days' : range === '30d' ? '30 Days' : '90 Days'}
-          </button>
-        ))}
-      </div>
-
-      {/* Activity Chart */}
-      <div style={styles.chartSection}>
-        <h3 style={styles.sectionTitle}>
-          <Activity size={18} />
-          Activity
-        </h3>
-        <div style={styles.chart}>
-          {dailyActivity.map((day, i) => {
-            const height = (day.xp_earned / maxXP) * 100;
-            const date = new Date(day.date);
-            const isToday = new Date().toDateString() === date.toDateString();
-
-            return (
-              <div key={day.date} style={styles.chartBar}>
-                <div
-                  style={{
-                    ...styles.barFill,
-                    height: `${Math.max(height, 5)}%`,
-                    background: isToday
-                      ? 'linear-gradient(180deg, #f59e0b, #d97706)'
-                      : day.xp_earned > 0
-                      ? 'linear-gradient(180deg, #3b82f6, #1d4ed8)'
-                      : '#333',
-                  }}
-                />
-                <span style={styles.barLabel}>
-                  {date.toLocaleDateString('en-US', { weekday: 'short' }).charAt(0)}
-                </span>
-              </div>
-            );
-          })}
-        </div>
-        <div style={styles.chartLegend}>
-          <span>+{totals.xp} XP this period</span>
-        </div>
-      </div>
-
-      {/* Quick Stats */}
-      <div style={styles.quickStats}>
-        <div style={styles.quickStatCard}>
-          <Clock size={16} color="#3b82f6" />
-          <span style={styles.quickStatValue}>{Math.round(totals.reading / 60)}h</span>
-          <span style={styles.quickStatLabel}>Reading</span>
-        </div>
-        <div style={styles.quickStatCard}>
-          <Brain size={16} color="#a78bfa" />
-          <span style={styles.quickStatValue}>{totals.cards}</span>
-          <span style={styles.quickStatLabel}>Cards</span>
-        </div>
-        <div style={styles.quickStatCard}>
-          <Target size={16} color="#10b981" />
-          <span style={styles.quickStatValue}>{totals.discussions}</span>
-          <span style={styles.quickStatLabel}>Discussions</span>
-        </div>
-        <div style={styles.quickStatCard}>
-          <BarChart3 size={16} color="#f59e0b" />
-          <span style={styles.quickStatValue}>{totals.intel}</span>
-          <span style={styles.quickStatLabel}>Intel</span>
-        </div>
-      </div>
-
-      {/* Performance Metrics */}
-      <div style={styles.metricsSection}>
-        <h3 style={styles.sectionTitle}>
-          <BarChart3 size={18} />
-          Performance Metrics
-        </h3>
-        <div style={styles.metricsList}>
-          {metrics.map((metric) => (
-            <div key={metric.name} style={styles.metricCard}>
-              <div style={styles.metricHeader}>
-                <span style={styles.metricName}>{metric.name}</span>
-                <div
-                  style={{
-                    ...styles.trendBadge,
-                    color:
-                      metric.trend === 'up'
-                        ? '#10b981'
-                        : metric.trend === 'down'
-                        ? '#ef4444'
-                        : '#888',
-                  }}
-                >
-                  {metric.trend === 'up' && <TrendingUp size={12} />}
-                  {metric.trend === 'down' && <TrendingDown size={12} />}
-                  {metric.change_percent !== 0 &&
-                    `${metric.change_percent > 0 ? '+' : ''}${metric.change_percent}%`}
-                </div>
-              </div>
-              <div style={styles.metricValue}>
-                {metric.current}
-                {metric.name.toLowerCase().includes('accuracy') && '%'}
-                {metric.name.toLowerCase().includes('time') && 'm'}
-              </div>
-              <div style={styles.metricBar}>
-                <div
-                  style={{
-                    ...styles.metricBarFill,
-                    width: `${Math.min(metric.current, 100)}%`,
-                  }}
-                />
-              </div>
-            </div>
+      <div className="flex justify-end">
+        <div className="bg-zinc-900/50 p-1 rounded-lg border border-white/5 inline-flex">
+          {(['7d', '30d', '90d'] as const).map((range) => (
+            <button
+              key={range}
+              onClick={() => onTimeRangeChange?.(range)}
+              className={`px-4 py-1.5 rounded-md text-xs font-medium transition-all ${timeRange === range
+                ? 'bg-zinc-800 text-white shadow-sm'
+                : 'text-zinc-500 hover:text-zinc-300'
+                }`}
+            >
+              {range === '7d' ? '7 Days' : range === '30d' ? '30 Days' : '90 Days'}
+            </button>
           ))}
         </div>
       </div>
 
-      {/* AI Insights */}
-      <div style={styles.insightsSection}>
-        <h3 style={styles.sectionTitle}>
-          <Brain size={18} />
-          AI Insights
-        </h3>
-        <div style={styles.insightsList}>
-          {insights.map((insight) => {
-            const style = insightStyles[insight.type] || insightStyles.recommendation;
-            const Icon = style.icon;
+      {/* Activity Chart */}
+      <section className="bg-zinc-900/40 backdrop-blur-md border border-white/5 rounded-2xl p-6">
+        <div className="flex items-center gap-2 mb-6">
+          <Activity className="text-blue-400" size={20} />
+          <h3 className="text-lg font-bold text-white">Activity Vector</h3>
+        </div>
 
-            return (
-              <div
-                key={insight.id}
-                style={{
-                  ...styles.insightCard,
-                  borderLeftColor: style.color,
-                }}
-              >
-                <div
-                  style={{
-                    ...styles.insightIcon,
-                    background: style.bg,
-                    color: style.color,
-                  }}
-                >
-                  <Icon size={16} />
+        <div className="h-[300px] w-full">
+          <ResponsiveContainer width="100%" height="100%">
+            <AreaChart data={chartData}>
+              <defs>
+                <linearGradient id="colorXp" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor="#8b5cf6" stopOpacity={0.3} />
+                  <stop offset="95%" stopColor="#8b5cf6" stopOpacity={0} />
+                </linearGradient>
+              </defs>
+              <CartesianGrid strokeDasharray="3 3" stroke="#333" vertical={false} />
+              <XAxis
+                dataKey="displayDate"
+                stroke="#666"
+                tick={{ fill: '#666', fontSize: 12 }}
+                axisLine={false}
+                tickLine={false}
+                dy={10}
+              />
+              <YAxis
+                stroke="#666"
+                tick={{ fill: '#666', fontSize: 12 }}
+                axisLine={false}
+                tickLine={false}
+                dx={-10}
+              />
+              <Tooltip
+                contentStyle={{ backgroundColor: '#18181b', borderColor: '#333', borderRadius: '8px' }}
+                itemStyle={{ color: '#fff' }}
+                labelStyle={{ color: '#9ca3af' }}
+              />
+              <Area
+                type="monotone"
+                dataKey="xp_earned"
+                stroke="#8b5cf6"
+                strokeWidth={3}
+                fillOpacity={1}
+                fill="url(#colorXp)"
+              />
+            </AreaChart>
+          </ResponsiveContainer>
+        </div>
+
+        <div className="mt-4 pt-4 border-t border-white/5 flex justify-center">
+          <span className="text-sm text-zinc-400">
+            Total Output: <span className="text-purple-400 font-bold">+{totals.xp} XP</span> this period
+          </span>
+        </div>
+      </section>
+
+      {/* Quick Stats Grid */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <QuickStatCard
+          label="Reading Time"
+          value={`${Math.round(totals.reading / 60)}h`}
+          icon={Clock}
+          color="text-blue-400"
+          bg="bg-blue-500/10"
+        />
+        <QuickStatCard
+          label="Cards Reviewed"
+          value={totals.cards}
+          icon={Brain}
+          color="text-purple-400"
+          bg="bg-purple-500/10"
+        />
+        <QuickStatCard
+          label="Discussions"
+          value={totals.discussions}
+          icon={Target}
+          color="text-emerald-400"
+          bg="bg-emerald-500/10"
+        />
+        <QuickStatCard
+          label="Intel Gathered"
+          value={totals.intel}
+          icon={BarChart3}
+          color="text-amber-400"
+          bg="bg-amber-500/10"
+        />
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        {/* Performance Metrics */}
+        <section className="bg-zinc-900/40 backdrop-blur-md border border-white/5 rounded-2xl p-6">
+          <div className="flex items-center gap-2 mb-6">
+            <BarChart3 className="text-emerald-400" size={20} />
+            <h3 className="text-lg font-bold text-white">Performance Metrics</h3>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {metrics.map((metric) => (
+              <div key={metric.name} className="bg-zinc-950/50 border border-white/5 rounded-xl p-4 hover:border-white/10 transition-colors">
+                <div className="flex justify-between items-start mb-2">
+                  <span className="text-xs text-zinc-500 uppercase tracking-wider font-medium">{metric.name}</span>
+                  <div className={`flex items-center gap-1 text-xs font-bold ${metric.trend === 'up' ? 'text-emerald-400' :
+                    metric.trend === 'down' ? 'text-red-400' : 'text-zinc-500'
+                    }`}>
+                    {metric.trend === 'up' ? <TrendingUp size={12} /> :
+                      metric.trend === 'down' ? <TrendingDown size={12} /> :
+                        <Minus size={12} />}
+                    {metric.change_percent !== 0 && `${Math.abs(metric.change_percent)}%`}
+                  </div>
                 </div>
-                <div style={styles.insightContent}>
-                  <h4 style={styles.insightTitle}>{insight.title}</h4>
-                  <p style={styles.insightDescription}>{insight.description}</p>
-                  {insight.action && (
-                    <button style={styles.insightAction}>
-                      {insight.action}
-                      <ChevronRight size={14} />
-                    </button>
-                  )}
+
+                <div className="text-2xl font-bold text-white mb-3">
+                  {metric.current}
+                  <span className="text-sm text-zinc-500 font-normal ml-1">
+                    {metric.name.toLowerCase().includes('accuracy') ? '%' :
+                      metric.name.toLowerCase().includes('time') ? 'm' : ''}
+                  </span>
+                </div>
+
+                <div className="h-1.5 bg-zinc-800 rounded-full overflow-hidden">
+                  <div
+                    className="h-full bg-gradient-to-r from-blue-500 to-emerald-500 rounded-full"
+                    style={{ width: `${Math.min(metric.current, 100)}%` }}
+                  />
                 </div>
               </div>
-            );
-          })}
-        </div>
+            ))}
+          </div>
+        </section>
+
+        {/* AI Insights */}
+        <section className="bg-zinc-900/40 backdrop-blur-md border border-white/5 rounded-2xl p-6">
+          <div className="flex items-center gap-2 mb-6">
+            <Brain className="text-blue-400" size={20} />
+            <h3 className="text-lg font-bold text-white">Neural Insights</h3>
+          </div>
+
+          <div className="space-y-4">
+            {insights.map((insight) => {
+              const style = insightStyles[insight.type] || insightStyles.recommendation;
+              const Icon = style.icon;
+
+              return (
+                <div
+                  key={insight.id}
+                  className={`flex gap-4 p-4 rounded-xl border ${style.border} ${style.bg} bg-opacity-50`}
+                >
+                  <div className={`w-8 h-8 rounded-lg ${style.bg} flex items-center justify-center flex-shrink-0`}>
+                    <Icon size={16} className={style.color} />
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="text-sm font-bold text-white mb-1">{insight.title}</h4>
+                    <p className="text-xs text-zinc-300 leading-relaxed mb-2">{insight.description}</p>
+                    {insight.action && (
+                      <button className="flex items-center gap-1 text-[10px] uppercase tracking-wider font-bold text-white/70 hover:text-white transition-colors">
+                        {insight.action}
+                        <ChevronRight size={12} />
+                      </button>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </section>
       </div>
     </div>
   );
 }
 
-const styles: Record<string, React.CSSProperties> = {
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '1.5rem',
-  },
-  headerStats: {
-    display: 'grid',
-    gridTemplateColumns: '1fr auto',
-    gap: '1rem',
-  },
-  levelCard: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '0.5rem',
-    padding: '1rem',
-    background: 'linear-gradient(135deg, #1e293b, #0f172a)',
-    borderRadius: '0.75rem',
-    border: '1px solid #333',
-  },
-  levelBadge: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '0.5rem',
-  },
-  levelNumber: {
-    fontSize: '1.5rem',
-    fontWeight: 700,
-    background: 'linear-gradient(135deg, #f59e0b, #d97706)',
-    WebkitBackgroundClip: 'text',
-    WebkitTextFillColor: 'transparent',
-  },
-  levelInfo: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'baseline',
-  },
-  levelLabel: {
-    fontSize: '0.75rem',
-    color: '#888',
-    textTransform: 'uppercase',
-  },
-  xpValue: {
-    fontSize: '1.25rem',
-    fontWeight: 600,
-  },
-  xpProgress: {
-    height: '6px',
-    background: '#333',
-    borderRadius: '3px',
-    overflow: 'hidden',
-  },
-  xpProgressFill: {
-    height: '100%',
-    background: 'linear-gradient(90deg, #f59e0b, #10b981)',
-    borderRadius: '3px',
-    transition: 'width 0.3s ease',
-  },
-  xpToNext: {
-    fontSize: '0.75rem',
-    color: '#888',
-    textAlign: 'right',
-  },
-  streakCard: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: '1rem 1.5rem',
-    background: 'rgba(245, 158, 11, 0.1)',
-    border: '1px solid rgba(245, 158, 11, 0.3)',
-    borderRadius: '0.75rem',
-    minWidth: '100px',
-  },
-  streakNumber: {
-    fontSize: '2rem',
-    fontWeight: 700,
-    color: '#f59e0b',
-    lineHeight: 1,
-  },
-  streakLabel: {
-    fontSize: '0.75rem',
-    color: '#888',
-    textTransform: 'uppercase',
-  },
-  timeToggle: {
-    display: 'flex',
-    gap: '0.5rem',
-    padding: '0.25rem',
-    background: '#1a1a1a',
-    borderRadius: '0.5rem',
-    width: 'fit-content',
-  },
-  timeButton: {
-    padding: '0.5rem 1rem',
-    background: 'transparent',
-    border: 'none',
-    borderRadius: '0.375rem',
-    color: '#888',
-    fontSize: '0.8125rem',
-    cursor: 'pointer',
-    transition: 'all 0.2s ease',
-  },
-  timeButtonActive: {
-    background: '#333',
-    color: '#fff',
-  },
-  chartSection: {
-    padding: '1rem',
-    background: '#1a1a1a',
-    borderRadius: '0.75rem',
-    border: '1px solid #333',
-  },
-  sectionTitle: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '0.5rem',
-    margin: '0 0 1rem 0',
-    fontSize: '1rem',
-    fontWeight: 600,
-    color: '#ccc',
-  },
-  chart: {
-    display: 'flex',
-    alignItems: 'flex-end',
-    gap: '0.5rem',
-    height: '120px',
-    padding: '0.5rem 0',
-  },
-  chartBar: {
-    flex: 1,
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    gap: '0.375rem',
-    height: '100%',
-  },
-  barFill: {
-    width: '100%',
-    maxWidth: '24px',
-    borderRadius: '4px 4px 0 0',
-    transition: 'height 0.3s ease',
-  },
-  barLabel: {
-    fontSize: '0.625rem',
-    color: '#666',
-  },
-  chartLegend: {
-    display: 'flex',
-    justifyContent: 'center',
-    paddingTop: '0.75rem',
-    borderTop: '1px solid #333',
-    fontSize: '0.875rem',
-    color: '#10b981',
-    fontWeight: 500,
-  },
-  quickStats: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(4, 1fr)',
-    gap: '0.75rem',
-  },
-  quickStatCard: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    gap: '0.25rem',
-    padding: '0.875rem 0.5rem',
-    background: '#1a1a1a',
-    borderRadius: '0.5rem',
-    border: '1px solid #333',
-  },
-  quickStatValue: {
-    fontSize: '1.25rem',
-    fontWeight: 700,
-  },
-  quickStatLabel: {
-    fontSize: '0.6875rem',
-    color: '#888',
-    textTransform: 'uppercase',
-  },
-  metricsSection: {
-    padding: '1rem',
-    background: '#1a1a1a',
-    borderRadius: '0.75rem',
-    border: '1px solid #333',
-  },
-  metricsList: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
-    gap: '0.75rem',
-  },
-  metricCard: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '0.375rem',
-    padding: '0.75rem',
-    background: '#0f0f0f',
-    borderRadius: '0.5rem',
-    border: '1px solid #333',
-  },
-  metricHeader: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  metricName: {
-    fontSize: '0.8125rem',
-    color: '#888',
-  },
-  trendBadge: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '0.25rem',
-    fontSize: '0.75rem',
-    fontWeight: 500,
-  },
-  metricValue: {
-    fontSize: '1.5rem',
-    fontWeight: 700,
-  },
-  metricBar: {
-    height: '4px',
-    background: '#333',
-    borderRadius: '2px',
-    overflow: 'hidden',
-  },
-  metricBarFill: {
-    height: '100%',
-    background: 'linear-gradient(90deg, #3b82f6, #10b981)',
-    borderRadius: '2px',
-    transition: 'width 0.3s ease',
-  },
-  insightsSection: {
-    padding: '1rem',
-    background: '#1a1a1a',
-    borderRadius: '0.75rem',
-    border: '1px solid #333',
-  },
-  insightsList: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '0.75rem',
-  },
-  insightCard: {
-    display: 'flex',
-    gap: '0.875rem',
-    padding: '0.875rem',
-    background: '#0f0f0f',
-    borderRadius: '0.5rem',
-    borderLeft: '3px solid',
-  },
-  insightIcon: {
-    width: '36px',
-    height: '36px',
-    borderRadius: '50%',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexShrink: 0,
-  },
-  insightContent: {
-    flex: 1,
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '0.25rem',
-  },
-  insightTitle: {
-    margin: 0,
-    fontSize: '0.9375rem',
-    fontWeight: 600,
-  },
-  insightDescription: {
-    margin: 0,
-    fontSize: '0.8125rem',
-    color: '#888',
-    lineHeight: 1.4,
-  },
-  insightAction: {
-    display: 'inline-flex',
-    alignItems: 'center',
-    gap: '0.25rem',
-    marginTop: '0.5rem',
-    padding: '0.375rem 0.75rem',
-    background: 'transparent',
-    border: '1px solid #444',
-    borderRadius: '999px',
-    color: '#ccc',
-    fontSize: '0.75rem',
-    cursor: 'pointer',
-    width: 'fit-content',
-  },
-};
-
-export default AnalyticsDashboard;
+function QuickStatCard({ label, value, icon: Icon, color, bg }: any) {
+  return (
+    <div className="bg-zinc-900/40 backdrop-blur-md border border-white/5 rounded-xl p-4 flex flex-col items-center justify-center text-center">
+      <div className={`p-2 rounded-lg ${bg} mb-2`}>
+        <Icon className={color} size={16} />
+      </div>
+      <div className="text-xl font-bold text-white tracking-tight">{value}</div>
+      <div className="text-[10px] uppercase tracking-widest font-medium text-zinc-500">{label}</div>
+    </div>
+  );
+}

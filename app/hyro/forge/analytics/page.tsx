@@ -3,10 +3,11 @@
 /**
  * HYRO FORGE: Analytics Page
  * Comprehensive learning analytics and AI-powered insights
+ * Premium "Ultra-Edge" UI Overhaul
  */
 
 import { useState, useEffect, useCallback } from 'react';
-import { ArrowLeft, BarChart3, Loader2 } from 'lucide-react';
+import { ArrowLeft, BarChart3, Loader2, Shield } from 'lucide-react';
 import Link from 'next/link';
 import { AnalyticsDashboard } from '@/components/forge/analytics';
 
@@ -83,41 +84,62 @@ export default function AnalyticsPage() {
 
   if (loading && !data) {
     return (
-      <div style={styles.loadingContainer}>
-        <Loader2 size={32} style={{ animation: 'spin 1s linear infinite' }} />
-        <span>Loading analytics...</span>
+      <div className="min-h-screen bg-zinc-950 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin h-12 w-12 border-4 border-purple-500 border-t-transparent rounded-full mx-auto mb-4" />
+          <p className="text-zinc-400 uppercase tracking-widest text-sm">Analyzing Neural Patterns...</p>
+        </div>
       </div>
     );
   }
 
   return (
-    <div style={styles.container}>
+    <div className="min-h-screen bg-zinc-950 text-white selection:bg-purple-500/30">
+      {/* Ambient Background */}
+      <div className="fixed inset-0 pointer-events-none">
+        <div className="absolute top-[-20%] right-[-10%] w-[50%] h-[50%] bg-purple-900/10 rounded-full blur-[120px]" />
+        <div className="absolute bottom-[-20%] left-[-10%] w-[50%] h-[50%] bg-blue-900/10 rounded-full blur-[120px]" />
+      </div>
+
       {/* Header */}
-      <header style={styles.header}>
-        <div style={styles.headerLeft}>
-          <Link href="/hyro/forge" style={styles.backButton}>
-            <ArrowLeft size={20} />
-            Back to Forge
-          </Link>
-          <h1 style={styles.title}>
-            <BarChart3 size={28} style={{ color: '#10b981' }} />
-            Learning Analytics
-          </h1>
+      <header className="relative z-10 border-b border-white/5 bg-zinc-900/50 backdrop-blur-xl sticky top-0">
+        <div className="max-w-7xl mx-auto px-6 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <Link
+                href="/hyro/forge"
+                className="p-2 hover:bg-white/5 rounded-lg transition-colors text-zinc-400 hover:text-white"
+              >
+                <ArrowLeft size={20} />
+              </Link>
+              <div>
+                <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-zinc-400 flex items-center gap-3">
+                  <BarChart3 className="text-purple-400" size={24} />
+                  NEURAL ANALYTICS
+                </h1>
+              </div>
+            </div>
+          </div>
         </div>
       </header>
 
       {/* Error State */}
       {error && (
-        <div style={styles.error}>
-          {error}
-          <button onClick={() => fetchAnalytics(timeRange)} style={styles.retryButton}>
-            Retry
+        <div className="max-w-md mx-auto mt-8 p-6 bg-red-950/30 border border-red-500/30 rounded-2xl text-center backdrop-blur-md">
+          <Shield className="w-12 h-12 text-red-500 mx-auto mb-4" />
+          <h3 className="text-lg font-bold text-red-400 mb-2">Analysis Failed</h3>
+          <p className="text-zinc-400 mb-4">{error}</p>
+          <button
+            onClick={() => fetchAnalytics(timeRange)}
+            className="px-4 py-2 bg-red-500/20 hover:bg-red-500/30 text-red-400 border border-red-500/50 rounded-lg transition-all"
+          >
+            Retry Analysis
           </button>
         </div>
       )}
 
       {/* Main Content */}
-      <main style={styles.main}>
+      <main className="relative z-10 max-w-7xl mx-auto p-6">
         {data ? (
           <AnalyticsDashboard
             dailyActivity={data.daily_activity}
@@ -130,102 +152,18 @@ export default function AnalyticsPage() {
             timeRange={timeRange}
             onTimeRangeChange={handleTimeRangeChange}
           />
-        ) : (
-          <div style={styles.emptyState}>
-            <BarChart3 size={48} style={{ opacity: 0.3 }} />
-            <h3>No Analytics Data</h3>
-            <p style={{ color: '#888' }}>
-              Start learning to see your progress here!
+        ) : !loading && !error ? (
+          <div className="flex flex-col items-center justify-center py-20 text-center">
+            <div className="p-6 bg-zinc-900/50 rounded-full mb-4">
+              <BarChart3 size={48} className="text-zinc-600" />
+            </div>
+            <h3 className="text-xl font-bold text-white mb-2">No Data Available</h3>
+            <p className="text-zinc-400 max-w-md">
+              Engage with learning modules to generate neural analytics data.
             </p>
           </div>
-        )}
+        ) : null}
       </main>
     </div>
   );
 }
-
-const styles: Record<string, React.CSSProperties> = {
-  container: {
-    minHeight: '100vh',
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  loadingContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    minHeight: '50vh',
-    gap: '1rem',
-    color: '#888',
-  },
-  header: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: '1rem',
-    borderBottom: '1px solid #333',
-    flexWrap: 'wrap',
-    gap: '1rem',
-  },
-  headerLeft: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '1rem',
-    flexWrap: 'wrap',
-  },
-  backButton: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '0.5rem',
-    padding: '0.5rem 1rem',
-    background: 'transparent',
-    border: '1px solid #333',
-    borderRadius: '0.375rem',
-    color: '#888',
-    textDecoration: 'none',
-    fontSize: '0.875rem',
-    cursor: 'pointer',
-  },
-  title: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '0.75rem',
-    fontSize: '1.5rem',
-    fontWeight: 700,
-    margin: 0,
-  },
-  error: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: '1rem',
-    padding: '1rem',
-    background: 'rgba(239, 68, 68, 0.1)',
-    color: '#ef4444',
-  },
-  retryButton: {
-    padding: '0.5rem 1rem',
-    background: '#ef4444',
-    border: 'none',
-    borderRadius: '0.375rem',
-    color: '#fff',
-    cursor: 'pointer',
-  },
-  main: {
-    flex: 1,
-    padding: '1rem',
-    maxWidth: '900px',
-    margin: '0 auto',
-    width: '100%',
-  },
-  emptyState: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: '4rem',
-    gap: '1rem',
-    textAlign: 'center',
-  },
-};

@@ -10,17 +10,51 @@ import {
   getOrganizationalPolicies,
   getRepoOrganizationContext,
   proposeOrganizationPolicy,
+  getHistoricalContext,
 } from '@/lib/pm/pm-memory';
+
+// Phase 4 imports
+import {
+  getEntityHistory,
+  getCurrentState,
+  getHistoricalState,
+  getTemporalStats,
+  type EntityType
+} from '@/lib/pm/temporal-memory';
+import {
+  runPatternExtraction,
+  getPattern,
+  getPatternsByType,
+  type PatternType
+} from '@/lib/pm/pattern-extraction';
+import {
+  generateDailySuggestions,
+  suggestTaskPriority,
+  predictCompletionTime
+} from '@/lib/pm/predictive-suggestions';
+import {
+  recordCorrection,
+  getAccuracyMetrics,
+  learnFromCorrections
+} from '@/lib/pm/correction-feedback';
 
 /**
  * PM Memory API
  *
  * GET /api/pm/memory?action=...
- *   - search: Search PM memories
+ *   - search: Search PM memories (Zep)
  *   - context: Get combined PM + org context
  *   - structure: Get organization structure from memory
  *   - policies: Get organizational policies
  *   - repo-context: Get context for a specific repo
+ *
+ *   PHASE 4 (Temporal Memory):
+ *   - history: Get entity history (temporal facts)
+ *   - state: Get current or historical entity state
+ *   - patterns: Get extracted patterns
+ *   - suggestions: Get predictive suggestions
+ *   - accuracy: Get accuracy metrics
+ *   - stats: Get temporal memory statistics
  *
  * POST /api/pm/memory
  *   - add: Add PM memory
@@ -28,6 +62,11 @@ import {
  *   - record-project: Record project context
  *   - record-rule: Record organization rule
  *   - propose-policy: Propose organizational policy
+ *
+ *   PHASE 4 (Learning):
+ *   - correction: Record a correction for learning
+ *   - learn: Trigger learning from corrections
+ *   - extract-patterns: Run pattern extraction
  */
 
 export async function GET(request: NextRequest) {
@@ -128,6 +167,151 @@ export async function GET(request: NextRequest) {
           action: 'repo-context',
           repoName,
           context,
+          timestamp: new Date().toISOString(),
+        });
+      }
+
+      // ========================================================================
+      // Phase 4: Temporal Memory Actions
+      // ========================================================================
+
+      case 'history': {
+        const entity_type = searchParams.get('entity_type') as EntityType;
+        const entity_id = searchParams.get('entity_id');
+
+        if (!entity_type || !entity_id) {
+          return NextResponse.json({ error: 'Missing entity_type or entity_id' }, { status: 400 });
+        }
+
+        const history = getEntityHistory(entity_type, entity_id);
+
+        return NextResponse.json({
+          action: 'history',
+          entity_type,
+          entity_id,
+          history,
+          fact_count: history.length,
+          timestamp: new Date().toISOString(),
+        });
+      }
+
+      case 'state': {
+        const entity_type = searchParams.get('entity_type') as EntityType;
+        const entity_id = searchParams.get('entity_id');
+        const point_in_time = searchParams.get('point_in_time');
+
+        if (!entity_type || !entity_id) {
+          return NextResponse.json({ error: 'Missing entity_type or entity_id' }, { status: 400 });
+        }
+
+        const state = point_in_time
+          ? getHistoricalState(entity_type, entity_id, new Date(point_in_time))
+          : getCurrentState(entity_type, entity_id);
+
+        return NextResponse.json({
+          action: 'state',
+          entity_type,
+          entity_id,
+          point_in_time: point_in_time || 'current',
+          state,
+          timestamp: new Date().toISOString(),
+        });
+      }
+
+      case 'patterns': {
+        const pattern_type = searchParams.get('pattern_type') as PatternType | null;
+        const pattern_id = searchParams.get('pattern_id');
+        const extract = searchParams.get('extract') === 'true';
+
+        if (pattern_id) {
+          const pattern = await getPattern(pattern_id);
+          if (!pattern) {
+            return NextResponse.json({ error: 'Pattern not found' }, { status: 404 });
+          }
+          return NextResponse.json({
+            action: 'patterns',
+            pattern,
+            timestamp: new Date().toISOString(),
+          });
+        }
+
+        if (extract) {
+          const patterns = await runPatternExtraction();
+          return NextResponse.json({
+            action: 'patterns',
+            message: 'Pattern extraction complete',
+            patterns,
+            count: patterns.length,
+            timestamp: new Date().toISOString(),
+          });
+        }
+
+        if (pattern_type) {
+          const patterns = await getPatternsByType(pattern_type);
+          return NextResponse.json({
+            action: 'patterns',
+            pattern_type,
+            patterns,
+            count: patterns.length,
+            timestamp: new Date().toISOString(),
+          });
+        }
+
+        return NextResponse.json({
+          error: 'Specify pattern_id, pattern_type, or extract=true'
+        }, { status: 400 });
+      }
+
+      case 'suggestions': {
+        const task_id = searchParams.get('task_id');
+        const suggestion_type = searchParams.get('type');
+
+        if (task_id && suggestion_type === 'priority') {
+          const suggestion = await suggestTaskPriority(task_id);
+          return NextResponse.json({
+            action: 'suggestions',
+            type: 'priority',
+            task_id,
+            suggestion,
+            timestamp: new Date().toISOString(),
+          });
+        }
+
+        if (task_id && suggestion_type === 'completion') {
+          const suggestion = await predictCompletionTime(task_id);
+          return NextResponse.json({
+            action: 'suggestions',
+            type: 'completion',
+            task_id,
+            suggestion,
+            timestamp: new Date().toISOString(),
+          });
+        }
+
+        // Daily suggestions
+        const suggestions = await generateDailySuggestions();
+        return NextResponse.json({
+          action: 'suggestions',
+          suggestions,
+          count: suggestions.length,
+          timestamp: new Date().toISOString(),
+        });
+      }
+
+      case 'accuracy': {
+        const metrics = await getAccuracyMetrics();
+        return NextResponse.json({
+          action: 'accuracy',
+          metrics,
+          timestamp: new Date().toISOString(),
+        });
+      }
+
+      case 'stats': {
+        const stats = getTemporalStats();
+        return NextResponse.json({
+          action: 'stats',
+          stats,
           timestamp: new Date().toISOString(),
         });
       }
@@ -267,6 +451,65 @@ export async function POST(request: NextRequest) {
           action: 'propose-policy',
           proposalId: proposal.id,
           status: proposal.status,
+          timestamp: new Date().toISOString(),
+        });
+      }
+
+      // ========================================================================
+      // Phase 4: Learning Actions
+      // ========================================================================
+
+      case 'correction': {
+        const { correction_type, original_entity_type, original_entity_id, original_value, corrected_value, context, reason } = body;
+
+        if (!correction_type || !original_entity_type || !original_entity_id || original_value === undefined || corrected_value === undefined) {
+          return NextResponse.json(
+            { error: 'Missing required fields: correction_type, original_entity_type, original_entity_id, original_value, corrected_value' },
+            { status: 400 }
+          );
+        }
+
+        const correction = await recordCorrection({
+          correction_type,
+          original_entity_type,
+          original_entity_id,
+          original_value,
+          corrected_value,
+          context,
+          reason
+        });
+
+        // Trigger learning immediately
+        const learning_result = await learnFromCorrections();
+
+        return NextResponse.json({
+          action: 'correction',
+          correction,
+          learning_triggered: true,
+          learning_result,
+          timestamp: new Date().toISOString(),
+        });
+      }
+
+      case 'learn': {
+        const result = await learnFromCorrections();
+
+        return NextResponse.json({
+          action: 'learn',
+          message: 'Learning complete',
+          result,
+          timestamp: new Date().toISOString(),
+        });
+      }
+
+      case 'extract-patterns': {
+        const patterns = await runPatternExtraction();
+
+        return NextResponse.json({
+          action: 'extract-patterns',
+          message: 'Pattern extraction complete',
+          patterns,
+          count: patterns.length,
           timestamp: new Date().toISOString(),
         });
       }
