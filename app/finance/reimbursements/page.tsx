@@ -202,164 +202,49 @@ export default function ReimbursementsPage() {
   const handleExportCSV = () => {
     if (!cycleData?.transactions || !selectedCycle) return;
 
-    const reimbursable = cycleData.transactions.filter((t) => t.reimbursable);
-    const nonReimbursable = cycleData.transactions.filter((t) => !t.reimbursable);
-    const total = reimbursable.reduce((sum, t) => sum + t.amount, 0);
-    const nonReimbTotal = nonReimbursable.reduce((sum, t) => sum + t.amount, 0);
+    const allTxns = cycleData.transactions;
 
-    // Format dates nicely
-    const formatDate = (dateStr: string) => {
-      const d = new Date(dateStr + 'T00:00:00');
-      return d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-    };
+    // Define CSV Headers
+    const headers = [
+      'Date',
+      'Vendor',
+      'Amount',
+      'Category',
+      'Reimbursable',
+      'Company',
+      'Assignee',
+      'Notes'
+    ];
 
-    const formatCurrency = (amount: number) => {
-      const sign = amount < 0 ? '-' : '';
-      return `${sign}$${Math.abs(amount).toFixed(2)}`;
-    };
-
-    const csvRows: string[][] = [];
-
-    // ═══════════════════════════════════════════════════════════════
-    // HEADER SECTION - Professional title block
-    // ═══════════════════════════════════════════════════════════════
-    csvRows.push(['═══════════════════════════════════════════════════════════════════════════════════════════']);
-    csvRows.push(['']);
-    csvRows.push(['                    UTLYZE AI R&D EXPENSE REIMBURSEMENT REPORT']);
-    csvRows.push(['']);
-    csvRows.push(['═══════════════════════════════════════════════════════════════════════════════════════════']);
-    csvRows.push(['']);
-    csvRows.push(['Report Period:', '', `${formatDate(selectedCycle.start)} — ${formatDate(selectedCycle.end)}`]);
-    csvRows.push(['Generated:', '', new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' })]);
-    csvRows.push(['Prepared By:', '', 'Wrath Shield Finance Agent']);
-    csvRows.push(['']);
-
-    // ═══════════════════════════════════════════════════════════════
-    // EXECUTIVE SUMMARY
-    // ═══════════════════════════════════════════════════════════════
-    csvRows.push(['───────────────────────────────────────────────────────────────────────────────────────────']);
-    csvRows.push(['EXECUTIVE SUMMARY']);
-    csvRows.push(['───────────────────────────────────────────────────────────────────────────────────────────']);
-    csvRows.push(['']);
-    csvRows.push(['', 'REIMBURSABLE EXPENSES:', '', formatCurrency(total)]);
-    csvRows.push(['', 'Non-Reimbursable:', '', formatCurrency(nonReimbTotal)]);
-    csvRows.push(['', 'Total Transactions:', '', `${cycleData.transactions.length} items`]);
-    csvRows.push(['', 'Reimbursable Items:', '', `${reimbursable.length} items`]);
-    csvRows.push(['']);
-
-    // ═══════════════════════════════════════════════════════════════
-    // BREAKDOWN BY BILLING COMPANY
-    // ═══════════════════════════════════════════════════════════════
-    csvRows.push(['───────────────────────────────────────────────────────────────────────────────────────────']);
-    csvRows.push(['BREAKDOWN BY BILLING COMPANY']);
-    csvRows.push(['───────────────────────────────────────────────────────────────────────────────────────────']);
-    csvRows.push(['']);
-    csvRows.push(['', 'Company', 'Items', 'Amount', '% of Total']);
-    csvRows.push(['', '─────────────────────', '─────', '─────────────', '──────────']);
-    companyStats.forEach((stat) => {
-      const pct = total > 0 ? ((stat.total / total) * 100).toFixed(1) : '0.0';
-      csvRows.push(['', stat.company, stat.count.toString(), formatCurrency(stat.total), `${pct}%`]);
-    });
-    csvRows.push(['', '─────────────────────', '─────', '─────────────', '──────────']);
-    csvRows.push(['', 'TOTAL', reimbursable.length.toString(), formatCurrency(total), '100%']);
-    csvRows.push(['']);
-
-    // ═══════════════════════════════════════════════════════════════
-    // BREAKDOWN BY ASSIGNEE
-    // ═══════════════════════════════════════════════════════════════
-    csvRows.push(['───────────────────────────────────────────────────────────────────────────────────────────']);
-    csvRows.push(['BREAKDOWN BY ASSIGNEE']);
-    csvRows.push(['───────────────────────────────────────────────────────────────────────────────────────────']);
-    csvRows.push(['']);
-    csvRows.push(['', 'Assignee', 'Items', 'Amount', '% of Total']);
-    csvRows.push(['', '─────────────────────', '─────', '─────────────', '──────────']);
-    assigneeBreakdown.forEach((stat) => {
-      const pct = total > 0 ? ((stat.total / total) * 100).toFixed(1) : '0.0';
-      csvRows.push(['', stat.assignee || 'Unassigned', stat.count.toString(), formatCurrency(stat.total), `${pct}%`]);
-    });
-    csvRows.push(['']);
-
-    // ═══════════════════════════════════════════════════════════════
-    // DETAILED TRANSACTION LIST
-    // ═══════════════════════════════════════════════════════════════
-    csvRows.push(['───────────────────────────────────────────────────────────────────────────────────────────']);
-    csvRows.push(['DETAILED TRANSACTION LIST - REIMBURSABLE ITEMS']);
-    csvRows.push(['───────────────────────────────────────────────────────────────────────────────────────────']);
-    csvRows.push(['']);
-    csvRows.push(['#', 'Date', 'Vendor/Description', 'Amount', 'Company', 'Assignee', 'Usage Notes']);
-    csvRows.push(['──', '────────────', '─────────────────────────────────────', '───────────', '──────────────', '──────────────', '────────────────────────────────']);
-
-    // Sort by company, then by date
-    const sortedReimbursable = [...reimbursable].sort((a, b) => {
-      const compA = a.company || 'ZZZZ';
-      const compB = b.company || 'ZZZZ';
-      if (compA !== compB) return compA.localeCompare(compB);
-      return a.date.localeCompare(b.date);
-    });
-
-    let currentCompany = '';
-    let companySubtotal = 0;
-    let itemNum = 0;
-
-    sortedReimbursable.forEach((t, idx) => {
-      const company = t.company || 'Unassigned';
-
-      // Add company section header when company changes
-      if (company !== currentCompany) {
-        if (currentCompany !== '') {
-          // Add subtotal for previous company
-          csvRows.push(['', '', '', '───────────', '', '', '']);
-          csvRows.push(['', '', `Subtotal - ${currentCompany}:`, formatCurrency(companySubtotal), '', '', '']);
-          csvRows.push(['']);
-        }
-        currentCompany = company;
-        companySubtotal = 0;
-        csvRows.push(['', '', `▸ ${company.toUpperCase()}`, '', '', '', '']);
+    // Helper to escape CSV fields
+    const escapeCsv = (field: any) => {
+      if (field === null || field === undefined) return '';
+      const stringField = String(field);
+      if (stringField.includes(',') || stringField.includes('"') || stringField.includes('\n')) {
+        return `"${stringField.replace(/"/g, '""')}"`;
       }
+      return stringField;
+    };
 
-      itemNum++;
-      companySubtotal += t.amount;
-      const vendor = (t.vendor || t.raw_desc || 'Unknown').substring(0, 40);
-      const note = (t.usage_note || '').substring(0, 35);
-      const dateFormatted = new Date(t.date + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    // Format rows
+    const rows = allTxns.map(t => {
+      const vendor = t.vendor || t.raw_desc || 'Unknown';
+      const category = t.bucket || 'Uncategorized';
 
-      csvRows.push([
-        itemNum.toString(),
-        dateFormatted,
+      return [
+        t.date,
         vendor,
-        formatCurrency(t.amount),
-        company,
+        t.amount.toFixed(2),
+        category,
+        t.reimbursable ? 'Yes' : 'No',
+        t.company || '',
         t.assignee || '',
-        note,
-      ]);
+        t.usage_note || ''
+      ].map(escapeCsv).join(',');
     });
 
-    // Final company subtotal
-    if (currentCompany !== '') {
-      csvRows.push(['', '', '', '───────────', '', '', '']);
-      csvRows.push(['', '', `Subtotal - ${currentCompany}:`, formatCurrency(companySubtotal), '', '', '']);
-    }
-
-    csvRows.push(['']);
-    csvRows.push(['═══════════════════════════════════════════════════════════════════════════════════════════']);
-    csvRows.push(['', '', 'GRAND TOTAL REIMBURSABLE:', formatCurrency(total), '', '', '']);
-    csvRows.push(['═══════════════════════════════════════════════════════════════════════════════════════════']);
-    csvRows.push(['']);
-
-    // ═══════════════════════════════════════════════════════════════
-    // FOOTER / NOTES
-    // ═══════════════════════════════════════════════════════════════
-    csvRows.push(['NOTES:']);
-    csvRows.push(['• All amounts are in USD']);
-    csvRows.push(['• AI/SaaS expenses are categorized for R&D tax credit eligibility']);
-    csvRows.push(['• Credits and refunds are shown as negative amounts']);
-    csvRows.push(['• Report generated automatically by Wrath Shield Finance Agent']);
-    csvRows.push(['']);
-    csvRows.push(['───────────────────────────────────────────────────────────────────────────────────────────']);
-    csvRows.push(['', '', '', '', '', '', 'End of Report']);
-
-    const csv = csvRows.map((row) => row.map((cell) => `"${cell}"`).join(',')).join('\n');
-    const blob = new Blob([csv], { type: 'text/csv' });
+    const csvContent = [headers.join(','), ...rows].join('\n');
+    const blob = new Blob([csvContent], { type: 'text/csv' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
@@ -451,11 +336,10 @@ export default function ReimbursementsPage() {
                           setSelectedCycle(cycle);
                           setShowCycleDropdown(false);
                         }}
-                        className={`w-full px-4 py-3 text-left hover:bg-slate-700 transition-colors flex items-center justify-between ${
-                          selectedCycle?.start === cycle.start
+                        className={`w-full px-4 py-3 text-left hover:bg-slate-700 transition-colors flex items-center justify-between ${selectedCycle?.start === cycle.start
                             ? 'bg-slate-700'
                             : ''
-                        }`}
+                          }`}
                       >
                         <div>
                           <div className="font-medium">{cycle.label}</div>
@@ -615,11 +499,10 @@ export default function ReimbursementsPage() {
               <button
                 key={tab.key}
                 onClick={() => setFilter(tab.key as typeof filter)}
-                className={`px-3 py-1.5 text-sm rounded-lg transition-colors ${
-                  filter === tab.key
+                className={`px-3 py-1.5 text-sm rounded-lg transition-colors ${filter === tab.key
                     ? 'bg-slate-700 text-slate-50'
                     : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800'
-                }`}
+                  }`}
               >
                 {tab.label}
                 {tab.count !== undefined && (

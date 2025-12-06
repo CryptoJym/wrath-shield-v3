@@ -79,17 +79,7 @@ export async function PATCH(
       return NextResponse.json({ error: 'Transaction not found' }, { status: 404 });
     }
 
-    // Record significant reimbursement decisions to Zep memory
-    if (body.reimbursable !== undefined || body.assignee !== undefined || body.usage_note !== undefined) {
-      // Fire and forget - don't block the response
-      recordReimbursementDecisionToMemory(updated, {
-        reimbursable: updated.reimbursable ?? false,
-        assignee: updated.assignee ?? undefined,
-        usage_note: updated.usage_note ?? undefined,
-        company: updated.company ?? undefined,
-        source: 'api_user_decision',
-      }).catch((e) => console.warn('[transactions/[id]] Zep memory error:', e));
-    }
+    // AI Memory recording is now handled inside updateTransactionMeta based on the input field changes.
 
     return NextResponse.json({ transaction: updated });
   } catch (e: any) {

@@ -404,7 +404,7 @@ export function updateTransaction(id: string, fields: TxnUpdate, user_id?: strin
   if (fields.rationale !== undefined) metaObj.rationale = fields.rationale;
 
   // enforce buckets: collapse work_nonreimbursable -> work_reimbursable; allowed set
-  const allowedBuckets = new Set(['work_reimbursable','personal_ai','family','entertainment','other','unknown',null]);
+  const allowedBuckets = new Set(['work_reimbursable', 'personal_ai', 'family', 'entertainment', 'other', 'unknown', null]);
   const nextBucket = fields.bucket === 'work_nonreimbursable' ? 'work_reimbursable' : fields.bucket;
   const bucketFinal = allowedBuckets.has(nextBucket ?? null) ? nextBucket : 'other';
   const reimbFinal = bucketFinal === 'work_reimbursable' ? true : fields.reimbursable;
@@ -526,9 +526,8 @@ export function listContextRequests(
     where.push("(user_id = ? OR user_id IS NULL OR user_id = 'default')");
     params.push(user_id);
   }
-  const sql = `SELECT * FROM finance_context_requests ${
-    where.length ? 'WHERE ' + where.join(' AND ') : ''
-  } ORDER BY created_at DESC`;
+  const sql = `SELECT * FROM finance_context_requests ${where.length ? 'WHERE ' + where.join(' AND ') : ''
+    } ORDER BY created_at DESC`;
   const rows = db.prepare(sql).all(...params) as any[];
   db.close();
   return rows;
@@ -564,8 +563,8 @@ export function updateContextRequest(id: string, updates: Partial<ContextRequest
       merged.reimbursable === undefined || merged.reimbursable === null
         ? null
         : merged.reimbursable
-        ? 1
-        : 0,
+          ? 1
+          : 0,
   });
   const out = db.prepare('SELECT * FROM finance_context_requests WHERE id = ?').get(id) as any;
   db.close();
@@ -756,16 +755,89 @@ export function createReport(input: {
 }
 
 /**
- * List all reports
+ * List all reports, syncing stats for drafts.
  */
 export function listReports(user_id?: string): FinanceReport[] {
   const db = getDb();
+
+  // 1. Fetch all reports
   const where = user_id
     ? "WHERE (user_id = ? OR user_id IS NULL OR user_id = 'default')"
     : '';
   const rows = db.prepare(
     `SELECT * FROM finance_reports ${where} ORDER BY cycle_start DESC`
   ).all(user_id ? [user_id] : []) as any[];
+
+  // 2. Identify drafts to sync
+  const drafts = rows.filter(r => r.status === 'draft');
+  const updates: FinanceReport[] = [];
+
+  // 3. Recalculate stats for drafts
+  if (drafts.length > 0) {
+    const updateStmt = db.prepare(`
+      UPDATE finance_reports 
+      SET total_reimbursable = @total_reimbursable,
+          total_spent = @total_spent,
+          transaction_count = @transaction_count,
+          generated_at = STRFTIME('%Y-%m-%dT%H:%M:%SZ', 'now')
+      WHERE id = @id
+    `);
+
+    const statsQueryBase = user_id
+      ? `SELECT
+          COUNT(*) as count,
+          COALESCE(SUM(amount), 0) as total,
+          COALESCE(SUM(CASE WHEN reimbursable = 1 THEN amount ELSE 0 END), 0) as reimbursable
+         FROM finance_transactions
+         WHERE date >= ? AND date < ? AND (user_id = ? OR user_id IS NULL OR user_id = 'default')`
+      : `SELECT
+          COUNT(*) as count,
+          COALESCE(SUM(amount), 0) as total,
+          COALESCE(SUM(CASE WHEN reimbursable = 1 THEN amount ELSE 0 END), 0) as reimbursable
+         FROM finance_transactions
+         WHERE date >= ? AND date < ?`;
+
+    const statsStmt = db.prepare(statsQueryBase);
+
+    const tx = db.transaction(() => {
+      for (const draft of drafts) {
+        const stats = statsStmt.get(
+          user_id
+            ? [draft.cycle_start, draft.cycle_end, user_id]
+            : [draft.cycle_start, draft.cycle_end]
+        ) as any;
+
+        const newStats = {
+          total_reimbursable: Math.abs(stats?.reimbursable || 0),
+          total_spent: Math.abs(stats?.total || 0),
+          transaction_count: stats?.count || 0,
+        };
+
+        // Only update if changed (simple optimization)
+        if (
+          Math.abs(newStats.total_reimbursable - draft.total_reimbursable) > 0.01 ||
+          Math.abs(newStats.total_spent - draft.total_spent) > 0.01 ||
+          newStats.transaction_count !== draft.transaction_count
+        ) {
+          updateStmt.run({
+            id: draft.id,
+            ...newStats
+          });
+          // Update the object in memory to return correct data immediately
+          draft.total_reimbursable = newStats.total_reimbursable;
+          draft.total_spent = newStats.total_spent;
+          draft.transaction_count = newStats.transaction_count;
+        }
+      }
+    });
+
+    try {
+      tx();
+    } catch (err) {
+      console.error("Failed to sync draft reports:", err);
+    }
+  }
+
   db.close();
   return rows.map(r => ({
     ...r,
@@ -1015,6 +1087,23 @@ export function updateTransactionMeta(
   // Return updated transaction
   const updated = db.prepare('SELECT * FROM finance_transactions WHERE id = ?').get(id) as any;
   db.close();
+
+  // Trigger AI Memory recording (Fire and Forget)
+  if (updates.reimbursable !== undefined || updates.usage_note !== undefined) {
+    recordReimbursementDecisionToMemory({
+      ...updated,
+      meta: updated.meta ? safeParse(updated.meta) : undefined,
+      recurring: !!updated.recurring,
+      reimbursable: !!updated.reimbursable,
+      receipt_verified: !!updated.receipt_verified,
+    }, {
+      reimbursable: !!updated.reimbursable,
+      assignee: updated.assignee,
+      usage_note: updated.usage_note,
+      company: updated.company,
+      source: source
+    }).catch(err => console.error('Failed to record memory:', err));
+  }
 
   return {
     ...updated,
