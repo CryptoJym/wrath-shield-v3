@@ -491,13 +491,30 @@ export async function chat(
  */
 export async function generateQuest(
   statFocus?: StatName,
-  difficultyOverride?: number
+  difficultyOverride?: number,
+  standardId?: string
 ): Promise<Quest> {
   const context = buildTutorContext();
+  const { getStandard } = await import('./education-store'); // Dynamic import to avoid cycles if any
 
   // Determine which stat to focus on
-  let targetStat: StatName;
-  if (statFocus) {
+  let targetStat: StatName = 'math'; // Default
+  let standardDescription = '';
+  let specificStandard = null;
+
+  if (standardId) {
+    const std = getStandard(standardId);
+    if (std) {
+      specificStandard = std;
+      standardDescription = `SPECIFIC STANDARD TO MASTER: ${std.id} - ${std.description}`;
+      // Map domain to stat (simple heuristic for now)
+      if (['RP', 'NS', 'EE', 'G', 'SP'].some(d => std.id.includes(d))) {
+        targetStat = 'math';
+      } else {
+        targetStat = 'reading';
+      }
+    }
+  } else if (statFocus) {
     targetStat = statFocus;
   } else {
     // Pick weakest stat that has a skill gap, or just weakest stat
@@ -521,6 +538,7 @@ CURRENT LEVEL: ${zpd.current_level}
 TARGET DIFFICULTY: ${targetDifficulty}
 PERFORMANCE TREND: ${zpd.trend}
 SCAFFOLDING NEEDED: ${zpd.scaffolding_recommended}
+${standardDescription}
 
 ${context.active_skill_gaps.some((g) => g.stat_name === targetStat) ? `SKILL GAP: ${context.active_skill_gaps.find((g) => g.stat_name === targetStat)?.topic}` : ''}
 
@@ -571,8 +589,8 @@ Generate a quest that fits this profile. Return ONLY valid JSON.`;
     db.prepare(`
       INSERT INTO hyro_quests (
         id, title, description, quest_type, status,
-        xp_reward, difficulty, required_stat, created_at
-      ) VALUES (?, ?, ?, ?, 'active', ?, ?, ?, ?)
+        xp_reward, difficulty, required_stat, created_at, standard_id
+      ) VALUES (?, ?, ?, ?, 'active', ?, ?, ?, ?, ?)
     `).run(
       questId,
       questData.title,
@@ -581,7 +599,8 @@ Generate a quest that fits this profile. Return ONLY valid JSON.`;
       questData.xp_reward || 50,
       questData.difficulty || 'normal',
       targetStat,
-      now
+      now,
+      standardId || null
     );
 
     const quest: Quest = {
@@ -604,13 +623,14 @@ Generate a quest that fits this profile. Return ONLY valid JSON.`;
       is_recurring: false,
       recurrence_pattern: null,
       created_at: now,
+      standard_id: standardId || null,
     };
 
     // Store in memory
     await addEducationMemory(
-      `Generated quest: "${quest.title}" targeting ${targetStat} at difficulty ${targetDifficulty}`,
+      `Generated quest: "${quest.title}" targeting ${targetStat} ${standardId ? `(Standard: ${standardId})` : ''} at difficulty ${targetDifficulty}`,
       'progress',
-      { quest_id: questId, stat: targetStat, difficulty: targetDifficulty }
+      { quest_id: questId, stat: targetStat, difficulty: targetDifficulty, standard_id: standardId }
     );
 
     return quest;

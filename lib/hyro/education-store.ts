@@ -123,6 +123,25 @@ export interface SyncLog {
   synced_at: number;
 }
 
+export interface Standard {
+  id: string;
+  category: string;
+  domain: string;
+  description: string;
+  prerequisites: string[];
+  cluster?: string;
+}
+
+export interface StandardMastery {
+  student_id: string;
+  standard_id: string;
+  mastery_level: number;
+  evidence_count: number;
+  last_practiced_at?: number;
+  status: 'locked' | 'unlocked' | 'practicing' | 'mastered';
+  confidence_score: number;
+}
+
 // Schema
 const schema = `
 CREATE TABLE IF NOT EXISTS assignments (
@@ -205,6 +224,27 @@ CREATE TABLE IF NOT EXISTS sync_logs (
   synced_at INTEGER NOT NULL
 );
 CREATE INDEX IF NOT EXISTS idx_sync_logs_platform ON sync_logs(platform, synced_at DESC);
+
+CREATE TABLE IF NOT EXISTS standards (
+  id TEXT PRIMARY KEY,
+  category TEXT NOT NULL,
+  domain TEXT NOT NULL,
+  description TEXT NOT NULL,
+  prerequisites TEXT, -- JSON array
+  cluster TEXT
+);
+CREATE INDEX IF NOT EXISTS idx_standards_domain ON standards(domain);
+
+CREATE TABLE IF NOT EXISTS standard_mastery (
+  student_id TEXT NOT NULL,
+  standard_id TEXT NOT NULL,
+  mastery_level REAL DEFAULT 0, -- 0-100
+  evidence_count INTEGER DEFAULT 0,
+  last_practiced_at INTEGER,
+  status TEXT DEFAULT 'locked', -- locked, unlocked, practicing, mastered
+  confidence_score REAL DEFAULT 0,
+  PRIMARY KEY (student_id, standard_id)
+);
 `;
 
 function getDb() {
@@ -789,4 +829,84 @@ export function getAssignmentStats(studentId: string): {
     by_platform: platformMap,
     completion_rate: total.count > 0 ? completed.count / total.count : 0,
   };
+}
+
+// ============================================================================
+// Standards Engine
+// ============================================================================
+
+export function upsertStandard(standard: Standard): void {
+  const db = getDb();
+  db.prepare(`
+    INSERT INTO standards (id, category, domain, description, prerequisites, cluster)
+    VALUES (@id, @category, @domain, @description, @prerequisites, @cluster)
+    ON CONFLICT(id) DO UPDATE SET
+      category = @category,
+      domain = @domain,
+      description = @description,
+      prerequisites = @prerequisites,
+      cluster = @cluster
+  `).run({
+    ...standard,
+    prerequisites: JSON.stringify(standard.prerequisites),
+  });
+  db.close();
+}
+
+export function getStandard(id: string): Standard | null {
+  const db = getDb();
+  const row = db.prepare('SELECT * FROM standards WHERE id = ?').get(id) as any;
+  db.close();
+  if (!row) return null;
+  return {
+    ...row,
+    prerequisites: JSON.parse(row.prerequisites),
+  };
+}
+
+export function getAllStandards(): Standard[] {
+  const db = getDb();
+  const rows = db.prepare('SELECT * FROM standards').all() as any[];
+  db.close();
+  return rows.map(row => ({
+    ...row,
+    prerequisites: JSON.parse(row.prerequisites),
+  }));
+}
+
+export function getStandardMastery(studentId: string, standardId: string): StandardMastery | null {
+  const db = getDb();
+  const row = db.prepare('SELECT * FROM standard_mastery WHERE student_id = ? AND standard_id = ?').get(studentId, standardId) as any;
+  db.close();
+  return row || null;
+}
+
+export function updateStandardMastery(mastery: StandardMastery): void {
+  const db = getDb();
+  db.prepare(`
+    INSERT INTO standard_mastery (
+      student_id, standard_id, mastery_level, evidence_count,
+      last_practiced_at, status, confidence_score
+    ) VALUES (
+      @student_id, @standard_id, @mastery_level, @evidence_count,
+      @last_practiced_at, @status, @confidence_score
+    )
+    ON CONFLICT(student_id, standard_id) DO UPDATE SET
+      mastery_level = @mastery_level,
+      evidence_count = @evidence_count,
+      last_practiced_at = @last_practiced_at,
+      status = @status,
+      confidence_score = @confidence_score
+  `).run({
+    ...mastery,
+    last_practiced_at: mastery.last_practiced_at || null,
+  });
+  db.close();
+}
+
+export function getAllStandardMastery(studentId: string): StandardMastery[] {
+  const db = getDb();
+  const rows = db.prepare('SELECT * FROM standard_mastery WHERE student_id = ?').all(studentId) as StandardMastery[];
+  db.close();
+  return rows;
 }

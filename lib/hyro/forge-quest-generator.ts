@@ -287,9 +287,79 @@ export function updateQuestGenerator(
   return db.prepare(`SELECT * FROM hyro_quest_generators WHERE id = ?`).get(id) as any;
 }
 
+
 // ============================================================================
-// Quest Generation
+// STANDARDS-BASED GENERATION (New Engine)
 // ============================================================================
+
+export async function generateDailyStandardsQuests(studentId: string): Promise<Quest[]> {
+  const db = getDatabase();
+  const today = new Date().toISOString().split('T')[0];
+
+  // Check limits
+  const existing = db.prepare(`
+    SELECT COUNT(*) as count FROM hyro_quests
+    WHERE student_id = ?
+    AND quest_type = 'daily'
+    AND platform = 'forge'
+    AND DATE(created_at, 'unixepoch') = ?
+  `).get(studentId, today) as { count: number };
+
+  if (existing.count >= 3) {
+    return db.prepare(`
+      SELECT * FROM hyro_quests
+      WHERE student_id = ?
+      AND quest_type = 'daily'
+      AND platform = 'forge'
+      AND DATE(created_at, 'unixepoch') = ?
+      ORDER BY created_at DESC
+    `).all(studentId, today) as Quest[];
+  }
+
+  // Import dynamically to avoid circular deps if any
+  const { getSuggestableStandards } = await import('./forge-proficiency');
+  const { generateQuest } = await import('./forge-ai-tutor');
+
+  // 1. Get Suggestable Standards
+  const suggestable = getSuggestableStandards(studentId);
+  const targetCount = 3 - existing.count;
+  const createdQuests: Quest[] = [];
+
+  // 2. Pick top standards (prioritize 'practicing')
+  // Sort by: Status=practicing first, then lowest mastery
+  // (getSuggestableStandards already returns unlocking candidates, logic inside it handles prereqs)
+  // We'll just take the first N unique ones.
+  const targets = suggestable.slice(0, targetCount);
+
+  // If we run out of targets (e.g. all mastered?), fallback to review
+  if (targets.length === 0) {
+    // Fallback logic could go here
+  }
+
+  // 3. Generate Quests
+  for (const std of targets) {
+    try {
+      const quest = await generateQuest(undefined, undefined, std.id);
+      createdQuests.push(quest);
+    } catch (err) {
+      console.error(`Failed to generate quest for standard ${std.id}:`, err);
+    }
+  }
+
+  // If we still need more quests (failed generation or not enough targets),
+  // fill with generic generation
+  while (createdQuests.length < targetCount) {
+    try {
+      const quest = await generateQuest(); // Random
+      createdQuests.push(quest);
+    } catch (err) {
+      break;
+    }
+  }
+
+  return createdQuests;
+}
+
 
 /**
  * Generate a quest from an assignment

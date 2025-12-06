@@ -10,6 +10,7 @@ import { useState, useEffect, useCallback, useMemo } from 'react';
 import { ArrowLeft, Trophy, Loader2, Target, Star, TrendingUp, Brain, Shield } from 'lucide-react';
 import Link from 'next/link';
 import { SkillDashboard, type Skill } from '@/components/forge/proficiency';
+import StandardsGraph from '@/components/hyro/StandardsGraph';
 
 interface ProficiencyStats {
   total_skills: number;
@@ -40,18 +41,38 @@ export default function ProficiencyPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  const [standards, setStandards] = useState<any[]>([]);
+  const [mastery, setMastery] = useState<any[]>([]);
+  const [viewMode, setViewMode] = useState<'list' | 'graph'>('graph');
+
   // Fetch skills and stats
   const fetchProficiency = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
 
-      const response = await fetch('/api/hyro/proficiency');
-      if (!response.ok) throw new Error('Failed to fetch proficiency data');
+      // Fetch both old and new data for now (transition period)
+      const [oldRes, newRes] = await Promise.all([
+        fetch('/api/hyro/proficiency'),
+        fetch('/api/hyro/education?action=standards')
+      ]);
 
-      const data = await response.json();
-      setSkills(data.skills || []);
-      setStats(data.stats || null);
+      if (oldRes.ok) {
+        const data = await oldRes.json();
+        setSkills(data.skills || []);
+        setStats(data.stats || null);
+      }
+
+      if (newRes.ok) {
+        const data = await newRes.json();
+        setStandards(data.standards || []);
+        setMastery(data.mastery || []);
+        // Default to graph view if we have standards data
+        if (data.standards?.length > 0) {
+          setViewMode('graph');
+        }
+      }
+
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to load proficiency');
     } finally {
@@ -98,6 +119,8 @@ export default function ProficiencyPage() {
     );
   }
 
+
+
   return (
     <div className="min-h-screen bg-zinc-950 text-white selection:bg-amber-500/30">
       {/* Ambient Background */}
@@ -125,21 +148,40 @@ export default function ProficiencyPage() {
               </div>
             </div>
 
-            {/* Category Filter */}
-            <div className="relative">
-              <select
-                value={categoryFilter}
-                onChange={(e) => setCategoryFilter(e.target.value)}
-                className="appearance-none bg-zinc-900/80 border border-white/10 rounded-lg pl-4 pr-10 py-2 text-sm text-zinc-300 focus:outline-none focus:border-amber-500/50 focus:ring-1 focus:ring-amber-500/50 transition-all cursor-pointer hover:bg-zinc-800"
-              >
-                {categoryList.map((cat) => (
-                  <option key={cat.value} value={cat.value}>
-                    {cat.label}
-                  </option>
-                ))}
-              </select>
-              <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-zinc-500">
-                <Target size={14} />
+            {/* View Toggle & Filter */}
+            <div className="flex items-center gap-4">
+              <div className="flex bg-zinc-900/80 border border-white/10 rounded-lg p-1">
+                <button
+                  onClick={() => setViewMode('list')}
+                  className={`px-3 py-1.5 rounded-md text-sm font-medium transition-all ${viewMode === 'list' ? 'bg-zinc-800 text-white shadow-sm' : 'text-zinc-400 hover:text-zinc-200'
+                    }`}
+                >
+                  List
+                </button>
+                <button
+                  onClick={() => setViewMode('graph')}
+                  className={`px-3 py-1.5 rounded-md text-sm font-medium transition-all ${viewMode === 'graph' ? 'bg-amber-900/30 text-amber-400 shadow-sm border border-amber-500/20' : 'text-zinc-400 hover:text-zinc-200'
+                    }`}
+                >
+                  Graph
+                </button>
+              </div>
+
+              <div className="relative">
+                <select
+                  value={categoryFilter}
+                  onChange={(e) => setCategoryFilter(e.target.value)}
+                  className="appearance-none bg-zinc-900/80 border border-white/10 rounded-lg pl-4 pr-10 py-2 text-sm text-zinc-300 focus:outline-none focus:border-amber-500/50 focus:ring-1 focus:ring-amber-500/50 transition-all cursor-pointer hover:bg-zinc-800"
+                >
+                  {categoryList.map((cat) => (
+                    <option key={cat.value} value={cat.value}>
+                      {cat.label}
+                    </option>
+                  ))}
+                </select>
+                <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-zinc-500">
+                  <Target size={14} />
+                </div>
               </div>
             </div>
           </div>
@@ -196,7 +238,7 @@ export default function ProficiencyPage() {
       )}
 
       {/* Stat Summaries */}
-      {Object.keys(statSummaries).length > 0 && (
+      {Object.keys(statSummaries).length > 0 && viewMode === 'list' && (
         <div className="relative z-10 border-b border-white/5 bg-zinc-950/50 backdrop-blur-sm overflow-x-auto">
           <div className="max-w-7xl mx-auto px-6 py-3">
             <div className="flex gap-4 min-w-max">
@@ -212,22 +254,6 @@ export default function ProficiencyPage() {
                   <span className="text-xs font-bold text-white w-8 text-right">{Math.round(data.avgLevel)}%</span>
                 </div>
               ))}
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Strength/Weakness Hints */}
-      {stats && stats.strongest_category && stats.weakest_category && (
-        <div className="relative z-10 bg-zinc-900/20 border-b border-white/5">
-          <div className="max-w-7xl mx-auto px-6 py-2 flex justify-center gap-8 text-xs">
-            <div className="flex items-center gap-2 text-zinc-400">
-              <TrendingUp size={12} className="text-emerald-400" />
-              <span>Strongest: <strong className="text-emerald-400 capitalize ml-1">{stats.strongest_category.replace('_', ' ')}</strong></span>
-            </div>
-            <div className="flex items-center gap-2 text-zinc-400">
-              <Target size={12} className="text-amber-400" />
-              <span>Focus Area: <strong className="text-amber-400 capitalize ml-1">{stats.weakest_category.replace('_', ' ')}</strong></span>
             </div>
           </div>
         </div>
@@ -250,10 +276,31 @@ export default function ProficiencyPage() {
 
       {/* Main Content */}
       <main className="relative z-10 max-w-7xl mx-auto p-6">
-        <SkillDashboard
-          skills={skills}
-          categoryFilter={categoryFilter || undefined}
-        />
+        {viewMode === 'graph' ? (
+          <div className="grid gap-6">
+            <div className="p-4 bg-zinc-900/50 rounded-xl border border-white/5">
+              <h3 className="text-lg font-medium text-white mb-2 flex items-center gap-2">
+                <Brain size={18} className="text-indigo-400" />
+                Curriculum Knowledge Graph
+              </h3>
+              <p className="text-sm text-zinc-400 mb-4">
+                Visualizing the connections between Common Core standards.
+                <span className="text-emerald-400 ml-2">● Mastered</span>
+                <span className="text-blue-400 ml-2">● Unlocked</span>
+                <span className="text-amber-500 ml-2">● Practicing</span>
+                <span className="text-zinc-600 ml-2">● Locked</span>
+              </p>
+              <div className="h-[600px] w-full">
+                <StandardsGraph standards={standards} mastery={mastery} />
+              </div>
+            </div>
+          </div>
+        ) : (
+          <SkillDashboard
+            skills={skills}
+            categoryFilter={categoryFilter || undefined}
+          />
+        )}
       </main>
     </div>
   );

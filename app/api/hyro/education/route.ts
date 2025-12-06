@@ -302,6 +302,20 @@ export async function GET(request: NextRequest) {
         });
       }
 
+      case 'standards': {
+        const { getAllStandards, getAllStandardMastery } = await import('@/lib/hyro/education-store');
+        const standards = getAllStandards();
+        const mastery = getAllStandardMastery(studentId);
+
+        return NextResponse.json({
+          action: 'standards',
+          studentId,
+          standards,
+          mastery,
+          timestamp: new Date().toISOString(),
+        });
+      }
+
       default:
         return NextResponse.json({ error: `Unknown action: ${action}` }, { status: 400 });
     }
@@ -513,9 +527,9 @@ export async function POST(request: NextRequest) {
         // Also update the lesson plan
         updateLessonPlan(lessonPlanId, {
           effectiveness_rating: effectiveness === 'very_effective' ? 5 :
-                               effectiveness === 'effective' ? 4 :
-                               effectiveness === 'neutral' ? 3 :
-                               effectiveness === 'ineffective' ? 2 : 1,
+            effectiveness === 'effective' ? 4 :
+              effectiveness === 'neutral' ? 3 :
+                effectiveness === 'ineffective' ? 2 : 1,
           feedback,
           status: 'completed',
         });
@@ -610,6 +624,16 @@ export async function POST(request: NextRequest) {
             totalUpdatedAssignments: totalUpdated,
             totalAssignmentsFound: totalFound,
           },
+          timestamp: new Date().toISOString(),
+        });
+      }
+
+      case 'init-standards': {
+        const { initializeStandards } = await import('@/lib/hyro/forge-proficiency');
+        const result = await initializeStandards();
+        return NextResponse.json({
+          action: 'init-standards',
+          result,
           timestamp: new Date().toISOString(),
         });
       }

@@ -591,3 +591,104 @@ export function compareToBenchmark(statName: StatName): BenchmarkComparison {
 export function getAllBenchmarks(): BenchmarkComparison[] {
   return STAT_NAMES.map(stat => compareToBenchmark(stat));
 }
+
+// ============================================================================
+// Standards Engine Integration
+// ============================================================================
+
+import {
+  Standard,
+  StandardMastery,
+  upsertStandard,
+  getStandard,
+  getAllStandards,
+  getStandardMastery,
+  getAllStandardMastery
+} from './education-store';
+import fs from 'fs';
+import path from 'path';
+
+/**
+ * Initialize standards from the JSON data file
+ */
+export async function initializeStandards(): Promise<{ count: number; domains: string[] }> {
+  const filePath = path.resolve(process.cwd(), 'data', 'standards', 'common-core-math-g6.json');
+
+  if (!fs.existsSync(filePath)) {
+    console.warn('[Standards] Data file not found:', filePath);
+    return { count: 0, domains: [] };
+  }
+
+  const fileContent = fs.readFileSync(filePath, 'utf-8');
+  const data = JSON.parse(fileContent);
+
+  let count = 0;
+  const domains = new Set<string>();
+
+  for (const domain of data.domains) {
+    domains.add(domain.name);
+    for (const std of domain.standards) {
+      upsertStandard({
+        id: std.id,
+        category: data.subject,
+        domain: domain.name,
+        description: std.description,
+        prerequisites: std.prerequisites || [],
+        cluster: std.cluster
+      });
+      count++;
+    }
+  }
+
+  return { count, domains: Array.from(domains) };
+}
+
+/**
+ * Check if a student meets the prerequisites for a standard
+ */
+export function checkPrerequisites(studentId: string, standardId: string): { met: boolean; missing: string[] } {
+  const standard = getStandard(standardId);
+  if (!standard) {
+    throw new Error(`Standard not found: ${standardId}`);
+  }
+
+  if (!standard.prerequisites || standard.prerequisites.length === 0) {
+    return { met: true, missing: [] };
+  }
+
+  const missing: string[] = [];
+  for (const reqId of standard.prerequisites) {
+    const mastery = getStandardMastery(studentId, reqId);
+    // Requirement is met if status is 'mastered' or mastery_level > 80
+    if (!mastery || (mastery.status !== 'mastered' && mastery.mastery_level < 80)) {
+      missing.push(reqId);
+    }
+  }
+
+  return { met: missing.length === 0, missing };
+}
+
+/**
+ * Get all suggestable standards (Unlocked & Not Mastered)
+ * "The Edge of Ability"
+ */
+export function getSuggestableStandards(studentId: string): Standard[] {
+  const allStandards = getAllStandards();
+  const suggestable: Standard[] = [];
+
+  for (const std of allStandards) {
+    // 1. Check if already mastered
+    const mastery = getStandardMastery(studentId, std.id);
+    if (mastery && (mastery.status === 'mastered' || mastery.mastery_level >= 90)) {
+      continue;
+    }
+
+    // 2. Check prerequisites
+    const prereqs = checkPrerequisites(studentId, std.id);
+    if (prereqs.met) {
+      suggestable.push(std);
+    }
+  }
+
+  return suggestable;
+}
