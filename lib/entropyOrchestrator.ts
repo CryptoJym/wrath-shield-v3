@@ -311,7 +311,7 @@ Output FORMAT (strict JSON only):
       "action_type": "task | email_draft | text_message | reminder | calendar_event | note",
       "title": "short title",
       "content": "precise draft / task body",
-      "target": "todoist|motion|gmail|outlook|calendar|sms|github|other",
+      "target": "todoist|github|gmail|outlook|calendar|sms|other",
       "due_iso": "2025-11-20T18:00:00Z or null",
       "confidence": 0.0-1.0,
       "escalation_level": "CRITICAL | PROPOSE | AUTO_EXECUTE",
@@ -344,7 +344,7 @@ Output FORMAT (strict JSON only):
       "action_type": "task | email_draft | text_message | reminder | calendar_event | note",
       "title": "short title",
       "content": "precise draft / task body",
-      "target": "todoist|motion|gmail|outlook|calendar|sms|github|other",
+      "target": "todoist|github|gmail|outlook|calendar|sms|other",
       "due_iso": "2025-11-20T18:00:00Z or null",
       "confidence": 0.0-1.0,
       "metadata": { "assignees": [], "project": "...", "time_block_minutes": 30 }
@@ -355,8 +355,8 @@ Output FORMAT (strict JSON only):
 Canonical priorities to consider (summary):
 - Taxes (TC-40/TC-40W), Custody filing due 2025-12-15, Hyro homeschooling + Muay Thai.
 - Cody's research check-ins, High Desert automation deliverables.
-- CEO-of-One brief draft (pending transcript), Motion MCP bring-up, GitHub timeline indexing.
-- Portfolio pillars: Utlyze, Vuplicity, New Reward, High Desert, Motion backbone, Brainwave Lab.
+- CEO-of-One brief draft (pending transcript), GitHub integration, timeline indexing.
+- Portfolio pillars: Utlyze, Vuplicity, New Reward, High Desert, Brainwave Lab.
 
 If insufficient signal, return an empty actions array.
   `.trim();

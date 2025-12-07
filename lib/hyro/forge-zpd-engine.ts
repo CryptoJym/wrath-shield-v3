@@ -325,10 +325,10 @@ export function getLearningVelocity(statName: StatName): LearningVelocity {
 
   // Get proficiency history
   const history = db.prepare(`
-    SELECT estimated_level, updated_at
-    FROM hyro_stat_proficiency
+    SELECT new_value as estimated_level, created_at as updated_at
+    FROM hyro_stat_history
     WHERE stat_name = ?
-    ORDER BY updated_at DESC
+    ORDER BY created_at DESC
     LIMIT 30
   `).all(statName) as Array<{ estimated_level: number; updated_at: number }>;
 
@@ -543,11 +543,10 @@ function getRecentPerformance(statName: StatName): number[] {
   // Get recent SRS responses
   const srsResponses = db.prepare(`
     SELECT CASE WHEN quality >= 3 THEN 1 ELSE 0 END as is_correct
-    FROM hyro_srs_review_history rh
-    JOIN hyro_srs_cards c ON rh.card_id = c.id
-    JOIN hyro_srs_decks d ON c.deck_id = d.id
-    WHERE d.subject = ?
-    ORDER BY rh.reviewed_at DESC
+    FROM hyro_srs_reviews rh
+    JOIN hyro_srs_topics t ON rh.topic_id = t.id
+    WHERE t.domain = ?
+    ORDER BY rh.created_at DESC
     LIMIT ?
   `).all(statName, RECENT_PERFORMANCE_WINDOW) as Array<{ is_correct: number }>;
 

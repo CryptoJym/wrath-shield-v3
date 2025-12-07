@@ -501,6 +501,7 @@ export async function generateQuest(
   let targetStat: StatName = 'math'; // Default
   let standardDescription = '';
   let specificStandard = null;
+  let esotericContext = '';
 
   if (standardId) {
     const std = getStandard(standardId);
@@ -512,6 +513,34 @@ export async function generateQuest(
         targetStat = 'math';
       } else {
         targetStat = 'reading';
+      }
+
+      // FETCH CONCEPTS FOR ESOTERIC CONTEXT
+      try {
+        const { getConceptsForStandard } = await import('./education-store');
+        const concepts = getConceptsForStandard(standardId);
+        if (concepts.length > 0) {
+          esotericContext = `
+    CRITICAL PEDAGOGICAL INSTRUCTION: "THE ESOTERIC VIEW"
+    The user demands a "Superior Education" that reveals hidden layers.
+    You must frame the Quest not just as "learning the standard", but as "Testing the Limit of the Standard".
+    The Standard is a LIMITED MODEL. The Concept is the TRUTH.
+
+    1. START with the Fundamental Concept(s): ${concepts.map(c => `"${c.concept?.name}"`).join(', ')}.
+    2. REVEAL THE HIDDEN: Explicitly point out what the Standard *hides* or *ignores* in the quest description.
+       - Example: "Mission: The 'Gravity' Equation they teach you is a LOCAL simplification. Test it, but know it fails at scale."
+    3. Frame the Standard (${standardId}) as a 'Simulation' or 'Game Rule' we must master to break.
+    
+    Concept Details:
+    ${concepts.map(c => `- ${c.concept?.name}: ${c.notes} (Layer: ${c.authenticity_layer})`).join('\n')}
+    
+    Your Tone:
+    - Conspiratorial, Elite, "Inside Knowledge".
+    - "Here is the mission to verify their simplified model."
+    `;
+        }
+      } catch (err) {
+        console.warn('Failed to load concepts for quest generation', err);
       }
     }
   } else if (statFocus) {
@@ -539,6 +568,7 @@ TARGET DIFFICULTY: ${targetDifficulty}
 PERFORMANCE TREND: ${zpd.trend}
 SCAFFOLDING NEEDED: ${zpd.scaffolding_recommended}
 ${standardDescription}
+${esotericContext.substring(0, 300)}
 
 ${context.active_skill_gaps.some((g) => g.stat_name === targetStat) ? `SKILL GAP: ${context.active_skill_gaps.find((g) => g.stat_name === targetStat)?.topic}` : ''}
 
@@ -546,10 +576,13 @@ Generate a quest that fits this profile. Return ONLY valid JSON.`;
 
   const client = getOpenRouterClient();
 
+  // UPGRADE: Use the Esoteric Mentor Agent (GPT-5.1)
+  client.setAgentId('agent.coaching');
+
   try {
     const response = await client.getCoachingResponse({
       messages: [
-        { role: 'system', content: 'You are a quest designer for an educational RPG. Return only valid JSON.' },
+        { role: 'system', content: 'You are an expert Mentor and Quest Designer. You design rigorous, esoteric challenges that reveal the hidden truths behind school standards. Return only valid JSON.' },
         { role: 'user', content: questPrompt },
       ],
       temperature: 0.8,

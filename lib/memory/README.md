@@ -20,7 +20,7 @@ Each Wrath Shield agent is represented as a unique **user** in a single Zep proj
 |-------|-------------|---------|
 | Finance Analyst | `finance-agent` | Financial transaction memory, vendor enrichment |
 | Legal Advocate | `legal-agent` | Legal case tracking, communication summaries |
-| Project Maestro | `pm-agent` | Project status, GitHub/Motion sync |
+| Project Maestro | `pm-agent` | Project status, GitHub sync |
 | Executive Assistant | `ea-agent` | Calendar management, travel booking |
 | Comms Scout | `comms-agent` | Email/iMessage classification, lifelogs |
 | Research Agent (Grok) | `hyro-agent` | Deep research, fact checking |
@@ -172,9 +172,9 @@ import { addMemory, getZepContext } from '@/lib/MemoryWrapper';
 
 // After GitHub sync
 await addMemory(
-  `Synced ${prCount} PRs from GitHub to Motion`,
+  `Synced ${prCount} PRs from GitHub`,
   'pm',
-  { prs: prCount, workspace: 'main', date }
+  { prs: prCount, repos: 'main', date }
 );
 
 // Get project context

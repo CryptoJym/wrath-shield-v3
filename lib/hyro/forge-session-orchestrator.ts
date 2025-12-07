@@ -200,7 +200,7 @@ export function getSessionContext(): SessionContext {
     .slice(0, 3);
 
   // Get streak (from character)
-  const character = db.prepare('SELECT streak_days FROM hyro_character LIMIT 1').get() as { streak_days: number } | undefined;
+  const character = db.prepare('SELECT current_streak FROM hyro_character LIMIT 1').get() as { current_streak: number } | undefined;
 
   return {
     due_cards_count: dueCardsCount,
@@ -213,7 +213,7 @@ export function getSessionContext(): SessionContext {
     active_skill_gaps: activeSkillGaps,
     stats_with_trend: statsWithTrend,
     weakest_stats: weakestStats,
-    streak_days: character?.streak_days || 0,
+    streak_days: character?.current_streak || 0,
   };
 }
 

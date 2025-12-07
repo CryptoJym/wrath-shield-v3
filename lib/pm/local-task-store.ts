@@ -1,7 +1,7 @@
 /**
  * Local Task Store
  *
- * SQLite-based persistence for local PM tasks that aren't synced to GitHub/Motion.
+ * SQLite-based persistence for local PM tasks that aren't synced to GitHub.
  * Provides full CRUD operations and query capabilities.
  */
 

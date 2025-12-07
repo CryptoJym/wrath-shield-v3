@@ -11,6 +11,12 @@ import { ArrowLeft, Trophy, Loader2, Target, Star, TrendingUp, Brain, Shield } f
 import Link from 'next/link';
 import { SkillDashboard, type Skill } from '@/components/forge/proficiency';
 import StandardsGraph from '@/components/hyro/StandardsGraph';
+import ExamReadinessCard from '@/components/forge/proficiency/ExamReadinessCard';
+import AssessmentModal from '@/components/hyro/AssessmentModal';
+import dynamic from 'next/dynamic';
+
+// Dynamic import for graph to avoid SSR issues if needed, but standard import worked before.
+// We'll stick to standard imports unless problematic.
 
 interface ProficiencyStats {
   total_skills: number;
@@ -43,7 +49,7 @@ export default function ProficiencyPage() {
 
   const [standards, setStandards] = useState<any[]>([]);
   const [mastery, setMastery] = useState<any[]>([]);
-  const [viewMode, setViewMode] = useState<'list' | 'graph'>('graph');
+  const [viewMode, setViewMode] = useState<'list' | 'graph' | 'synapse'>('graph');
 
   // Modal State
   const [assessmentOpen, setAssessmentOpen] = useState(false);
@@ -128,160 +134,117 @@ export default function ProficiencyPage() {
     );
   }
 
-
-
+  // Render return statement on one line to ensure no ASI issues
   return (
-                </button >
-    <button
-      onClick={() => setViewMode('graph')}
-      className={`px-3 py-1.5 rounded-md text-sm font-medium transition-all ${viewMode === 'graph' ? 'bg-amber-900/30 text-amber-400 shadow-sm border border-amber-500/20' : 'text-zinc-400 hover:text-zinc-200'
-        }`}
-    >
-      Graph
-    </button>
-              </div >
+    <div className="min-h-screen bg-zinc-950 text-white font-sans selection:bg-amber-500/30">
+      <header className="sticky top-0 z-50 border-b border-white/5 bg-zinc-950/80 backdrop-blur-md">
+        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <Link href="/hyro/forge" className="p-2 hover:bg-white/5 rounded-lg transition-colors text-zinc-400 hover:text-white">
+              <ArrowLeft size={20} />
+            </Link>
+            <div>
+              <h1 className="text-lg font-bold text-white flex items-center gap-2">
+                <Trophy className="text-amber-500" size={20} />
+                Skill Proficiency Matrix
+              </h1>
+            </div>
+          </div>
 
-    <div className="relative">
-      <select
-        value={categoryFilter}
-        onChange={(e) => setCategoryFilter(e.target.value)}
-        className="appearance-none bg-zinc-900/80 border border-white/10 rounded-lg pl-4 pr-10 py-2 text-sm text-zinc-300 focus:outline-none focus:border-amber-500/50 focus:ring-1 focus:ring-amber-500/50 transition-all cursor-pointer hover:bg-zinc-800"
-      >
-        {categoryList.map((cat) => (
-          <option key={cat.value} value={cat.value}>
-            {cat.label}
-          </option>
-        ))}
-      </select>
-      <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-zinc-500">
-        <Target size={14} />
-      </div>
-    </div>
-            </div >
-          </div >
-        </div >
-      </header >
+          <div className="flex items-center gap-4">
+            <div className="flex bg-zinc-900/50 p-1 rounded-lg border border-white/5">
+              <button
+                onClick={() => setViewMode('list')}
+                className={`px-3 py-1.5 rounded-md text-sm font-medium transition-all ${viewMode === 'list' ? 'bg-zinc-700 text-white shadow-sm' : 'text-zinc-400 hover:text-zinc-200'}`}
+              >
+                List
+              </button>
+              <button
+                onClick={() => setViewMode('graph')}
+                className={`px-3 py-1.5 rounded-md text-sm font-medium transition-all ${viewMode === 'graph' ? 'bg-amber-900/30 text-amber-400 shadow-sm border border-amber-500/20' : 'text-zinc-400 hover:text-zinc-200'}`}
+              >
+                Graph
+              </button>
+              <button
+                onClick={() => setViewMode('synapse')}
+                className={`px-3 py-1.5 rounded-md text-sm font-medium transition-all ${viewMode === 'synapse' ? 'bg-purple-900/30 text-purple-400 shadow-sm border border-purple-500/20' : 'text-zinc-400 hover:text-zinc-200'}`}
+              >
+                Synapse
+              </button>
+            </div>
 
-    {/* Stats Bar */ }
-  {
-    stats && (
-      <div className="relative z-10 border-b border-white/5 bg-zinc-900/30 backdrop-blur-md">
-        <div className="max-w-7xl mx-auto px-6 py-4">
-          <div className="flex flex-wrap justify-center gap-8 md:gap-16">
-            <div className="flex flex-col items-center gap-1">
-              <div className="flex items-center gap-2 text-zinc-400 text-xs uppercase tracking-widest font-medium">
+            <div className="relative">
+              <select
+                value={categoryFilter}
+                onChange={(e) => setCategoryFilter(e.target.value)}
+                className="appearance-none bg-zinc-900/80 border border-white/10 rounded-lg pl-4 pr-10 py-2 text-sm text-zinc-300 focus:outline-none focus:border-amber-500/50 focus:ring-1 focus:ring-amber-500/50 transition-all cursor-pointer hover:bg-zinc-800"
+              >
+                {categoryList.map((cat) => (
+                  <option key={cat.value} value={cat.value}>
+                    {cat.label}
+                  </option>
+                ))}
+              </select>
+              <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-zinc-500">
                 <Target size={14} />
-                <span>Unlocked</span>
               </div>
-              <span className="text-xl font-bold text-white">
-                {stats.unlocked_skills}<span className="text-zinc-600 text-sm font-normal">/{stats.total_skills}</span>
-              </span>
-            </div>
-
-            <div className="flex flex-col items-center gap-1">
-              <div className="flex items-center gap-2 text-zinc-400 text-xs uppercase tracking-widest font-medium">
-                <Star size={14} className="text-amber-400" />
-                <span>Mastered</span>
-              </div>
-              <span className="text-xl font-bold text-amber-400 glow-text-amber">
-                {stats.mastered_skills}
-              </span>
-            </div>
-
-            <div className="flex flex-col items-center gap-1">
-              <div className="flex items-center gap-2 text-zinc-400 text-xs uppercase tracking-widest font-medium">
-                <TrendingUp size={14} className="text-emerald-400" />
-                <span>Average</span>
-              </div>
-              <span className="text-xl font-bold text-emerald-400">
-                {Math.round(stats.avg_proficiency)}%
-              </span>
-            </div>
-
-            <div className="flex flex-col items-center gap-1">
-              <div className="flex items-center gap-2 text-zinc-400 text-xs uppercase tracking-widest font-medium">
-                <Brain size={14} className="text-purple-400" />
-                <span>Practices</span>
-              </div>
-              <span className="text-xl font-bold text-white">
-                {stats.total_practice_sessions}
-              </span>
             </div>
           </div>
         </div>
-      </div>
-    )
-  }
+      </header>
 
-  {/* Stat Summaries */ }
-  {
-    Object.keys(statSummaries).length > 0 && viewMode === 'list' && (
-      <div className="relative z-10 border-b border-white/5 bg-zinc-950/50 backdrop-blur-sm overflow-x-auto">
-        <div className="max-w-7xl mx-auto px-6 py-3">
-          <div className="flex gap-4 min-w-max">
-            {Object.entries(statSummaries).map(([stat, data]) => (
-              <div key={stat} className="flex items-center gap-3 px-3 py-1.5 bg-zinc-900/50 rounded-lg border border-white/5">
-                <span className="text-xs font-medium text-zinc-400 capitalize w-16 truncate">{stat}</span>
-                <div className="w-16 h-1.5 bg-zinc-800 rounded-full overflow-hidden">
+      <main className="max-w-7xl mx-auto px-6 py-8 space-y-8">
+        {/* Stats */}
+        <SkillDashboard
+          skills={skills}
+          categoryFilter={categoryFilter || undefined}
+        />
+
+        {/* Oracle Dashboard: Exam Readiness */}
+        <div className="mb-8">
+          <ExamReadinessCard />
+        </div>
+
+        {/* Content Views */}
+        {viewMode === 'graph' || viewMode === 'synapse' ? (
+          <StandardsGraph
+            viewMode={viewMode === 'synapse' ? 'synapse' : 'standard'}
+            onNodeClick={handleNodeClick}
+          />
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {skills.filter(s => !categoryFilter || s.stat_name === categoryFilter).map((skill) => (
+              <div key={skill.id} className="bg-zinc-900/50 border border-white/5 rounded-lg p-6 hover:bg-zinc-900 transition-colors">
+                <div className="flex justify-between items-start mb-4">
+                  <div>
+                    <h3 className="text-zinc-200 font-medium">{skill.name}</h3>
+                    <p className="text-xs text-zinc-500 capitalize">{skill.stat_name.replace('_', ' ')}</p>
+                  </div>
+                  <div className={`px-2 py-1 rounded text-xs font-bold ${skill.proficiency_level >= 80 ? 'bg-emerald-900/30 text-emerald-400' :
+                      skill.proficiency_level >= 60 ? 'bg-amber-900/30 text-amber-400' :
+                        'bg-red-900/30 text-red-400'
+                    }`}>
+                    Lvl {skill.proficiency_level}
+                  </div>
+                </div>
+                <div className="w-full bg-zinc-800 rounded-full h-1.5 overflow-hidden">
                   <div
-                    className="h-full bg-gradient-to-r from-amber-500 to-emerald-500 rounded-full"
-                    style={{ width: `${data.avgLevel}%` }}
+                    className="h-full bg-indigo-500"
+                    style={{ width: `${skill.proficiency_level}%` }}
                   />
                 </div>
-                <span className="text-xs font-bold text-white w-8 text-right">{Math.round(data.avgLevel)}%</span>
               </div>
             ))}
           </div>
-        </div>
-      </div>
-    )
-  }
+        )}
+      </main>
 
-  {/* Error State */ }
-  {
-    error && (
-      <div className="max-w-md mx-auto mt-8 p-6 bg-red-950/30 border border-red-500/30 rounded-2xl text-center backdrop-blur-md">
-        <Shield className="w-12 h-12 text-red-500 mx-auto mb-4" />
-        <h3 className="text-lg font-bold text-red-400 mb-2">Data Retrieval Failed</h3>
-        <p className="text-zinc-400 mb-4">{error}</p>
-        <button
-          onClick={fetchProficiency}
-          className="px-4 py-2 bg-red-500/20 hover:bg-red-500/30 text-red-400 border border-red-500/50 rounded-lg transition-all"
-        >
-          Retry Connection
-        </button>
-      </div>
-    )
-  }
-
-  {/* Main Content */ }
-  <main className="relative z-10 max-w-7xl mx-auto p-6">
-    {viewMode === 'graph' ? (
-      <div className="grid gap-6">
-        <div className="p-4 bg-zinc-900/50 rounded-xl border border-white/5">
-          <h3 className="text-lg font-medium text-white mb-2 flex items-center gap-2">
-            <Brain size={18} className="text-indigo-400" />
-            Curriculum Knowledge Graph
-          </h3>
-          <p className="text-sm text-zinc-400 mb-4">
-            Visualizing the connections between Common Core standards.
-            <span className="text-emerald-400 ml-2">● Mastered</span>
-            <span className="text-blue-400 ml-2">● Unlocked</span>
-            <span className="text-amber-500 ml-2">● Practicing</span>
-            <span className="text-zinc-600 ml-2">● Locked</span>
-          </p>
-          <div className="h-[600px] w-full">
-            <StandardsGraph standards={standards} mastery={mastery} />
-          </div>
-        </div>
-      </div>
-    ) : (
-      <SkillDashboard
-        skills={skills}
-        categoryFilter={categoryFilter || undefined}
+      <AssessmentModal
+        isOpen={assessmentOpen}
+        onClose={() => setAssessmentOpen(false)}
+        standardId={selectedStandard?.id || ''}
+        standardDescription={selectedStandard?.description || ''}
       />
-    )}
-  </main>
-    </div >
+    </div>
   );
 }
