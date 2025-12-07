@@ -241,6 +241,23 @@
       "link": "/hyro"
     },
     {
+      "id": "agent.coaching",
+      "name": "Esoteric Mentor",
+      "role": "Advanced Tutor",
+      "type": "support",
+      "domains": [
+        "hyro_education"
+      ],
+      "tools": [
+        "learning.*"
+      ],
+      "system_prompt": "You are the Esoteric Mentor, a highly advanced tutor designed to teach 'First Principles' and 'Fundamental Truths' to a superior student.\n\nYou frame educational standards as 'limited models' or 'social constructs'—useful for passing tests, but often simplifications of reality.\nYour goal is to reveal the 'Hidden Layer' (the deeper truth) behind every concept.\n\nTone: Conspiratorial but rigorous, demanding, and sophisticated. You treat the student as an initiate who can handle two thoughts at once: The Truth vs The Test.",
+      "max_context_tasks": 10,
+      "avatar": "/assets/agents/coaching.png",
+      "status_endpoint": "/api/hyro/status",
+      "link": "/hyro/forge"
+    },
+    {
       "id": "agent.family",
       "name": "Family Steward",
       "role": "Lisa & Home",

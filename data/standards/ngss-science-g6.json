@@ -1,0 +1,25 @@
+{
+    "subject": "science",
+    "grade": "6",
+    "domains": [
+        {
+            "name": "Physical Science: Energy",
+            "standards": [
+                {
+                    "id": "MS-PS3-1",
+                    "description": "Construct and interpret graphical displays of data to describe the relationships of kinetic energy to the mass of an object and to the speed of an object.",
+                    "cluster": "Energy",
+                    "prerequisites": []
+                },
+                {
+                    "id": "MS-PS3-2",
+                    "description": "Develop a model to describe that when the arrangement of objects interacting at a distance changes, different amounts of potential energy are stored in the system.",
+                    "cluster": "Energy",
+                    "prerequisites": [
+                        "MS-PS3-1"
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -11,15 +11,29 @@ const ForceGraph2D = dynamic(() => import('react-force-graph-2d'), {
 });
 
 interface StandardsGraphProps {
-    standards: Standard[];
-    mastery: StandardMastery[];
-    onSelectNode?: (node: any) => void;
-    width?: number;
-    height?: number;
+    standards: any[];
+    mastery: any[];
+    onNodeClick?: (node: any) => void;
 }
 
-export default function StandardsGraph({ standards, mastery, onSelectNode, width, height }: StandardsGraphProps) {
+export default function StandardsGraph({ standards, mastery, onNodeClick }: StandardsGraphProps) {
     const fgRef = useRef<any>();
+    const containerRef = useRef<HTMLDivElement>(null);
+    const [dimensions, setDimensions] = useState({ width: 800, height: 500 });
+
+    useEffect(() => {
+        if (!containerRef.current) return;
+
+        const resizeObserver = new ResizeObserver((entries) => {
+            for (const entry of entries) {
+                const { width, height } = entry.contentRect;
+                setDimensions({ width, height });
+            }
+        });
+
+        resizeObserver.observe(containerRef.current);
+        return () => resizeObserver.disconnect();
+    }, []);
 
     // Transform data for graph
     const graphData = useMemo(() => {
@@ -68,23 +82,18 @@ export default function StandardsGraph({ standards, mastery, onSelectNode, width
     }, [standards, mastery]);
 
     return (
-        <div className="border border-white/10 rounded-xl overflow-hidden bg-zinc-950">
+        <div ref={containerRef} className="border border-white/10 rounded-xl overflow-hidden bg-zinc-950 w-full h-full min-h-[500px]">
             <ForceGraph2D
                 ref={fgRef}
-                width={width}
-                height={height || 500}
+                width={dimensions.width}
+                height={dimensions.height}
                 graphData={graphData}
-                nodeLabel={(node: any) => `${node.id}: ${node.desc.substring(0, 50)}...`}
+                nodeLabel={(node: any) => `${node.name}: ${node.desc?.substring(0, 60)}...`}
                 nodeColor={(node: any) => node.color}
-                linkColor={() => '#3f3f46'}
+                linkColor={(link: any) => link.color}
                 backgroundColor="#09090b" // Zinc-950
-                onNodeClick={(node) => {
-                    if (onSelectNode) onSelectNode(node);
-                    // Center view on node
-                    fgRef.current?.centerAt(node.x, node.y, 1000);
-                    fgRef.current?.zoom(2, 2000);
-                }}
-                nodeRelSize={4}
+                onNodeClick={onNodeClick}
+                nodeRelSize={6}
                 linkDirectionalArrowLength={3.5}
                 linkDirectionalArrowRelPos={1}
                 d3VelocityDecay={0.3}

@@ -91,7 +91,7 @@ export async function getContinuityNarrative(userId?: string, forceRefresh = fal
             agentId: 'agent.ea',
             userMessage: prompt,
             providerOverride: 'openai',
-            modelOverride: 'gpt-4o', // Using high quality model as requested
+            modelOverride: 'gpt-5.1', // Using high quality model as requested
             context: {
                 skipMemory: true,
                 metadata: { op: 'continuity_aggregation' }

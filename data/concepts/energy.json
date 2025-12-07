@@ -1,0 +1,19 @@
+{
+    "id": "concept_conservation_of_energy",
+    "name": "Conservation of Energy",
+    "definition": "The fundamental principle that energy cannot be created or destroyed, only transformed. This is the UNIVERSAL TRUTH. Any formula that suggests otherwise is a limited model valid only in specific, constrained frames of reference.",
+    "discipline": "physics",
+    "layer": "fundamental",
+    "mappings": [
+        {
+            "standard_id": "MS-PS3-1",
+            "authenticity_layer": "special_case",
+            "notes": "Teaches Kinetic Energy (1/2mv^2) as if it were an isolated quantity. WARNING: This model ignores relativistic effects and thermodynamic dissipation. It is a 'useful fiction' for low-velocity macroscopic objects."
+        },
+        {
+            "standard_id": "MS-PS3-2",
+            "authenticity_layer": "special_case",
+            "notes": "Teaches Potential Energy (mgh). WARNING: This assumes a flat Earth and constant gravity (g). It is a 'local linearity' that fails at altitude. Teach the student to recognize this as a boundary condition of the model, not a law of nature."
+        }
+    ]
+}

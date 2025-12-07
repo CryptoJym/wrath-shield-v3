@@ -142,6 +142,23 @@ export interface StandardMastery {
   confidence_score: number;
 }
 
+export interface Concept {
+  id: string;
+  name: string;
+  definition: string;
+  discipline?: string;
+  layer: 'fundamental' | 'derived' | 'heuristic';
+}
+
+export interface StandardConcept {
+  standard_id: string;
+  concept_id: string;
+  authenticity_layer: 'direct' | 'approximation' | 'special_case';
+  notes?: string;
+  // Hydrated fields
+  concept?: Concept;
+}
+
 // Schema
 const schema = `
 CREATE TABLE IF NOT EXISTS assignments (
@@ -244,6 +261,22 @@ CREATE TABLE IF NOT EXISTS standard_mastery (
   status TEXT DEFAULT 'locked', -- locked, unlocked, practicing, mastered
   confidence_score REAL DEFAULT 0,
   PRIMARY KEY (student_id, standard_id)
+);
+
+CREATE TABLE IF NOT EXISTS concepts (
+  id TEXT PRIMARY KEY,
+  name TEXT NOT NULL,
+  definition TEXT NOT NULL,
+  discipline TEXT, -- physics, math, philosophy
+  layer TEXT NOT NULL DEFAULT 'fundamental' -- fundamental, derived, heuristic
+);
+
+CREATE TABLE IF NOT EXISTS standard_concepts (
+  standard_id TEXT NOT NULL,
+  concept_id TEXT NOT NULL,
+  authenticity_layer TEXT NOT NULL DEFAULT 'direct', -- direct, approximation, special_case
+  notes TEXT,
+  PRIMARY KEY (standard_id, concept_id)
 );
 `;
 
@@ -832,21 +865,83 @@ export function getAssignmentStats(studentId: string): {
 }
 
 // ============================================================================
+// Concepts Ontology (Phase 6)
+// ============================================================================
+
+export function upsertConcept(concept: Concept): void {
+  const db = getDb();
+  db.prepare(`
+    INSERT INTO concepts (id, name, definition, discipline, layer)
+    VALUES (@id, @name, @definition, @discipline, @layer)
+    ON CONFLICT(id) DO UPDATE SET
+      name = @name,
+      definition = @definition,
+      discipline = @discipline,
+      layer = @layer
+  `).run(concept);
+  db.close();
+}
+
+export function linkStandardToConcept(link: StandardConcept): void {
+  const db = getDb();
+  db.prepare(`
+    INSERT INTO standard_concepts (standard_id, concept_id, authenticity_layer, notes)
+    VALUES (@standard_id, @concept_id, @authenticity_layer, @notes)
+    ON CONFLICT(standard_id, concept_id) DO UPDATE SET
+      authenticity_layer = @authenticity_layer,
+      notes = @notes
+  `).run(link);
+  db.close();
+}
+
+export function getConceptsForStandard(standardId: string): StandardConcept[] {
+  const db = getDb();
+  const rows = db.prepare(`
+    SELECT sc.*, c.name as concept_name, c.definition as concept_def, c.layer as concept_layer, c.discipline
+    FROM standard_concepts sc
+    JOIN concepts c ON sc.concept_id = c.id
+    WHERE sc.standard_id = ?
+  `).all(standardId) as any[];
+  db.close();
+
+  return rows.map(row => ({
+    standard_id: row.standard_id,
+    concept_id: row.concept_id,
+    authenticity_layer: row.authenticity_layer,
+    notes: row.notes,
+    concept: {
+      id: row.concept_id,
+      name: row.concept_name,
+      definition: row.concept_def,
+      layer: row.concept_layer,
+      discipline: row.discipline
+    }
+  }));
+}
+
+export function getConcept(id: string): Concept | null {
+  const db = getDb();
+  const row = db.prepare('SELECT * FROM concepts WHERE id = ?').get(id) as Concept | undefined;
+  db.close();
+  return row || null;
+}
+
+// ============================================================================
 // Standards Engine
 // ============================================================================
 
 export function upsertStandard(standard: Standard): void {
   const db = getDb();
   db.prepare(`
-    INSERT INTO standards (id, category, domain, description, prerequisites, cluster)
-    VALUES (@id, @category, @domain, @description, @prerequisites, @cluster)
+    INSERT INTO standards(id, category, domain, description, prerequisites, cluster)
+    VALUES(@id, @category, @domain, @description, @prerequisites, @cluster)
     ON CONFLICT(id) DO UPDATE SET
-      category = @category,
+    category = @category,
       domain = @domain,
       description = @description,
       prerequisites = @prerequisites,
       cluster = @cluster
-  `).run({
+        `).run({
     ...standard,
     prerequisites: JSON.stringify(standard.prerequisites),
   });
@@ -884,20 +979,20 @@ export function getStandardMastery(studentId: string, standardId: string): Stand
 export function updateStandardMastery(mastery: StandardMastery): void {
   const db = getDb();
   db.prepare(`
-    INSERT INTO standard_mastery (
-      student_id, standard_id, mastery_level, evidence_count,
-      last_practiced_at, status, confidence_score
-    ) VALUES (
-      @student_id, @standard_id, @mastery_level, @evidence_count,
-      @last_practiced_at, @status, @confidence_score
-    )
+    INSERT INTO standard_mastery(
+          student_id, standard_id, mastery_level, evidence_count,
+          last_practiced_at, status, confidence_score
+        ) VALUES(
+          @student_id, @standard_id, @mastery_level, @evidence_count,
+          @last_practiced_at, @status, @confidence_score
+        )
     ON CONFLICT(student_id, standard_id) DO UPDATE SET
-      mastery_level = @mastery_level,
+    mastery_level = @mastery_level,
       evidence_count = @evidence_count,
       last_practiced_at = @last_practiced_at,
       status = @status,
       confidence_score = @confidence_score
-  `).run({
+        `).run({
     ...mastery,
     last_practiced_at: mastery.last_practiced_at || null,
   });

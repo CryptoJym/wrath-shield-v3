@@ -45,6 +45,15 @@ export default function ProficiencyPage() {
   const [mastery, setMastery] = useState<any[]>([]);
   const [viewMode, setViewMode] = useState<'list' | 'graph'>('graph');
 
+  // Modal State
+  const [assessmentOpen, setAssessmentOpen] = useState(false);
+  const [selectedStandard, setSelectedStandard] = useState<{ id: string, description: string } | null>(null);
+
+  const handleNodeClick = useCallback((node: any) => {
+    setSelectedStandard({ id: node.id, description: node.description || '' });
+    setAssessmentOpen(true);
+  }, []);
+
   // Fetch skills and stats
   const fetchProficiency = useCallback(async () => {
     try {
@@ -122,186 +131,157 @@ export default function ProficiencyPage() {
 
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-white selection:bg-amber-500/30">
-      {/* Ambient Background */}
-      <div className="fixed inset-0 pointer-events-none">
-        <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-amber-900/10 rounded-full blur-[120px]" />
-        <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-emerald-900/10 rounded-full blur-[120px]" />
+                </button >
+    <button
+      onClick={() => setViewMode('graph')}
+      className={`px-3 py-1.5 rounded-md text-sm font-medium transition-all ${viewMode === 'graph' ? 'bg-amber-900/30 text-amber-400 shadow-sm border border-amber-500/20' : 'text-zinc-400 hover:text-zinc-200'
+        }`}
+    >
+      Graph
+    </button>
+              </div >
+
+    <div className="relative">
+      <select
+        value={categoryFilter}
+        onChange={(e) => setCategoryFilter(e.target.value)}
+        className="appearance-none bg-zinc-900/80 border border-white/10 rounded-lg pl-4 pr-10 py-2 text-sm text-zinc-300 focus:outline-none focus:border-amber-500/50 focus:ring-1 focus:ring-amber-500/50 transition-all cursor-pointer hover:bg-zinc-800"
+      >
+        {categoryList.map((cat) => (
+          <option key={cat.value} value={cat.value}>
+            {cat.label}
+          </option>
+        ))}
+      </select>
+      <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-zinc-500">
+        <Target size={14} />
       </div>
-
-      {/* Header */}
-      <header className="relative z-10 border-b border-white/5 bg-zinc-900/50 backdrop-blur-xl sticky top-0">
-        <div className="max-w-7xl mx-auto px-6 py-4">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-            <div className="flex items-center gap-4">
-              <Link
-                href="/hyro/forge"
-                className="p-2 hover:bg-white/5 rounded-lg transition-colors text-zinc-400 hover:text-white"
-              >
-                <ArrowLeft size={20} />
-              </Link>
-              <div>
-                <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-zinc-400 flex items-center gap-3">
-                  <Trophy className="text-amber-400" size={24} />
-                  SKILL PROFICIENCY
-                </h1>
-              </div>
-            </div>
-
-            {/* View Toggle & Filter */}
-            <div className="flex items-center gap-4">
-              <div className="flex bg-zinc-900/80 border border-white/10 rounded-lg p-1">
-                <button
-                  onClick={() => setViewMode('list')}
-                  className={`px-3 py-1.5 rounded-md text-sm font-medium transition-all ${viewMode === 'list' ? 'bg-zinc-800 text-white shadow-sm' : 'text-zinc-400 hover:text-zinc-200'
-                    }`}
-                >
-                  List
-                </button>
-                <button
-                  onClick={() => setViewMode('graph')}
-                  className={`px-3 py-1.5 rounded-md text-sm font-medium transition-all ${viewMode === 'graph' ? 'bg-amber-900/30 text-amber-400 shadow-sm border border-amber-500/20' : 'text-zinc-400 hover:text-zinc-200'
-                    }`}
-                >
-                  Graph
-                </button>
-              </div>
-
-              <div className="relative">
-                <select
-                  value={categoryFilter}
-                  onChange={(e) => setCategoryFilter(e.target.value)}
-                  className="appearance-none bg-zinc-900/80 border border-white/10 rounded-lg pl-4 pr-10 py-2 text-sm text-zinc-300 focus:outline-none focus:border-amber-500/50 focus:ring-1 focus:ring-amber-500/50 transition-all cursor-pointer hover:bg-zinc-800"
-                >
-                  {categoryList.map((cat) => (
-                    <option key={cat.value} value={cat.value}>
-                      {cat.label}
-                    </option>
-                  ))}
-                </select>
-                <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-zinc-500">
-                  <Target size={14} />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </header>
-
-      {/* Stats Bar */}
-      {stats && (
-        <div className="relative z-10 border-b border-white/5 bg-zinc-900/30 backdrop-blur-md">
-          <div className="max-w-7xl mx-auto px-6 py-4">
-            <div className="flex flex-wrap justify-center gap-8 md:gap-16">
-              <div className="flex flex-col items-center gap-1">
-                <div className="flex items-center gap-2 text-zinc-400 text-xs uppercase tracking-widest font-medium">
-                  <Target size={14} />
-                  <span>Unlocked</span>
-                </div>
-                <span className="text-xl font-bold text-white">
-                  {stats.unlocked_skills}<span className="text-zinc-600 text-sm font-normal">/{stats.total_skills}</span>
-                </span>
-              </div>
-
-              <div className="flex flex-col items-center gap-1">
-                <div className="flex items-center gap-2 text-zinc-400 text-xs uppercase tracking-widest font-medium">
-                  <Star size={14} className="text-amber-400" />
-                  <span>Mastered</span>
-                </div>
-                <span className="text-xl font-bold text-amber-400 glow-text-amber">
-                  {stats.mastered_skills}
-                </span>
-              </div>
-
-              <div className="flex flex-col items-center gap-1">
-                <div className="flex items-center gap-2 text-zinc-400 text-xs uppercase tracking-widest font-medium">
-                  <TrendingUp size={14} className="text-emerald-400" />
-                  <span>Average</span>
-                </div>
-                <span className="text-xl font-bold text-emerald-400">
-                  {Math.round(stats.avg_proficiency)}%
-                </span>
-              </div>
-
-              <div className="flex flex-col items-center gap-1">
-                <div className="flex items-center gap-2 text-zinc-400 text-xs uppercase tracking-widest font-medium">
-                  <Brain size={14} className="text-purple-400" />
-                  <span>Practices</span>
-                </div>
-                <span className="text-xl font-bold text-white">
-                  {stats.total_practice_sessions}
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Stat Summaries */}
-      {Object.keys(statSummaries).length > 0 && viewMode === 'list' && (
-        <div className="relative z-10 border-b border-white/5 bg-zinc-950/50 backdrop-blur-sm overflow-x-auto">
-          <div className="max-w-7xl mx-auto px-6 py-3">
-            <div className="flex gap-4 min-w-max">
-              {Object.entries(statSummaries).map(([stat, data]) => (
-                <div key={stat} className="flex items-center gap-3 px-3 py-1.5 bg-zinc-900/50 rounded-lg border border-white/5">
-                  <span className="text-xs font-medium text-zinc-400 capitalize w-16 truncate">{stat}</span>
-                  <div className="w-16 h-1.5 bg-zinc-800 rounded-full overflow-hidden">
-                    <div
-                      className="h-full bg-gradient-to-r from-amber-500 to-emerald-500 rounded-full"
-                      style={{ width: `${data.avgLevel}%` }}
-                    />
-                  </div>
-                  <span className="text-xs font-bold text-white w-8 text-right">{Math.round(data.avgLevel)}%</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Error State */}
-      {error && (
-        <div className="max-w-md mx-auto mt-8 p-6 bg-red-950/30 border border-red-500/30 rounded-2xl text-center backdrop-blur-md">
-          <Shield className="w-12 h-12 text-red-500 mx-auto mb-4" />
-          <h3 className="text-lg font-bold text-red-400 mb-2">Data Retrieval Failed</h3>
-          <p className="text-zinc-400 mb-4">{error}</p>
-          <button
-            onClick={fetchProficiency}
-            className="px-4 py-2 bg-red-500/20 hover:bg-red-500/30 text-red-400 border border-red-500/50 rounded-lg transition-all"
-          >
-            Retry Connection
-          </button>
-        </div>
-      )}
-
-      {/* Main Content */}
-      <main className="relative z-10 max-w-7xl mx-auto p-6">
-        {viewMode === 'graph' ? (
-          <div className="grid gap-6">
-            <div className="p-4 bg-zinc-900/50 rounded-xl border border-white/5">
-              <h3 className="text-lg font-medium text-white mb-2 flex items-center gap-2">
-                <Brain size={18} className="text-indigo-400" />
-                Curriculum Knowledge Graph
-              </h3>
-              <p className="text-sm text-zinc-400 mb-4">
-                Visualizing the connections between Common Core standards.
-                <span className="text-emerald-400 ml-2">● Mastered</span>
-                <span className="text-blue-400 ml-2">● Unlocked</span>
-                <span className="text-amber-500 ml-2">● Practicing</span>
-                <span className="text-zinc-600 ml-2">● Locked</span>
-              </p>
-              <div className="h-[600px] w-full">
-                <StandardsGraph standards={standards} mastery={mastery} />
-              </div>
-            </div>
-          </div>
-        ) : (
-          <SkillDashboard
-            skills={skills}
-            categoryFilter={categoryFilter || undefined}
-          />
-        )}
-      </main>
     </div>
+            </div >
+          </div >
+        </div >
+      </header >
+
+    {/* Stats Bar */ }
+  {
+    stats && (
+      <div className="relative z-10 border-b border-white/5 bg-zinc-900/30 backdrop-blur-md">
+        <div className="max-w-7xl mx-auto px-6 py-4">
+          <div className="flex flex-wrap justify-center gap-8 md:gap-16">
+            <div className="flex flex-col items-center gap-1">
+              <div className="flex items-center gap-2 text-zinc-400 text-xs uppercase tracking-widest font-medium">
+                <Target size={14} />
+                <span>Unlocked</span>
+              </div>
+              <span className="text-xl font-bold text-white">
+                {stats.unlocked_skills}<span className="text-zinc-600 text-sm font-normal">/{stats.total_skills}</span>
+              </span>
+            </div>
+
+            <div className="flex flex-col items-center gap-1">
+              <div className="flex items-center gap-2 text-zinc-400 text-xs uppercase tracking-widest font-medium">
+                <Star size={14} className="text-amber-400" />
+                <span>Mastered</span>
+              </div>
+              <span className="text-xl font-bold text-amber-400 glow-text-amber">
+                {stats.mastered_skills}
+              </span>
+            </div>
+
+            <div className="flex flex-col items-center gap-1">
+              <div className="flex items-center gap-2 text-zinc-400 text-xs uppercase tracking-widest font-medium">
+                <TrendingUp size={14} className="text-emerald-400" />
+                <span>Average</span>
+              </div>
+              <span className="text-xl font-bold text-emerald-400">
+                {Math.round(stats.avg_proficiency)}%
+              </span>
+            </div>
+
+            <div className="flex flex-col items-center gap-1">
+              <div className="flex items-center gap-2 text-zinc-400 text-xs uppercase tracking-widest font-medium">
+                <Brain size={14} className="text-purple-400" />
+                <span>Practices</span>
+              </div>
+              <span className="text-xl font-bold text-white">
+                {stats.total_practice_sessions}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  {/* Stat Summaries */ }
+  {
+    Object.keys(statSummaries).length > 0 && viewMode === 'list' && (
+      <div className="relative z-10 border-b border-white/5 bg-zinc-950/50 backdrop-blur-sm overflow-x-auto">
+        <div className="max-w-7xl mx-auto px-6 py-3">
+          <div className="flex gap-4 min-w-max">
+            {Object.entries(statSummaries).map(([stat, data]) => (
+              <div key={stat} className="flex items-center gap-3 px-3 py-1.5 bg-zinc-900/50 rounded-lg border border-white/5">
+                <span className="text-xs font-medium text-zinc-400 capitalize w-16 truncate">{stat}</span>
+                <div className="w-16 h-1.5 bg-zinc-800 rounded-full overflow-hidden">
+                  <div
+                    className="h-full bg-gradient-to-r from-amber-500 to-emerald-500 rounded-full"
+                    style={{ width: `${data.avgLevel}%` }}
+                  />
+                </div>
+                <span className="text-xs font-bold text-white w-8 text-right">{Math.round(data.avgLevel)}%</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  {/* Error State */ }
+  {
+    error && (
+      <div className="max-w-md mx-auto mt-8 p-6 bg-red-950/30 border border-red-500/30 rounded-2xl text-center backdrop-blur-md">
+        <Shield className="w-12 h-12 text-red-500 mx-auto mb-4" />
+        <h3 className="text-lg font-bold text-red-400 mb-2">Data Retrieval Failed</h3>
+        <p className="text-zinc-400 mb-4">{error}</p>
+        <button
+          onClick={fetchProficiency}
+          className="px-4 py-2 bg-red-500/20 hover:bg-red-500/30 text-red-400 border border-red-500/50 rounded-lg transition-all"
+        >
+          Retry Connection
+        </button>
+      </div>
+    )
+  }
+
+  {/* Main Content */ }
+  <main className="relative z-10 max-w-7xl mx-auto p-6">
+    {viewMode === 'graph' ? (
+      <div className="grid gap-6">
+        <div className="p-4 bg-zinc-900/50 rounded-xl border border-white/5">
+          <h3 className="text-lg font-medium text-white mb-2 flex items-center gap-2">
+            <Brain size={18} className="text-indigo-400" />
+            Curriculum Knowledge Graph
+          </h3>
+          <p className="text-sm text-zinc-400 mb-4">
+            Visualizing the connections between Common Core standards.
+            <span className="text-emerald-400 ml-2">● Mastered</span>
+            <span className="text-blue-400 ml-2">● Unlocked</span>
+            <span className="text-amber-500 ml-2">● Practicing</span>
+            <span className="text-zinc-600 ml-2">● Locked</span>
+          </p>
+          <div className="h-[600px] w-full">
+            <StandardsGraph standards={standards} mastery={mastery} />
+          </div>
+        </div>
+      </div>
+    ) : (
+      <SkillDashboard
+        skills={skills}
+        categoryFilter={categoryFilter || undefined}
+      />
+    )}
+  </main>
+    </div >
   );
 }

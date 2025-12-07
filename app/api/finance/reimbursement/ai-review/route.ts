@@ -158,7 +158,7 @@ Response format:
   ]
 }`;
 
-      const model = useOpenAI ? (process.env.OPENAI_MODEL || 'gpt-4o') : (process.env.OPENROUTER_MODEL || 'x-ai/grok-4-1-fast');
+      const model = useOpenAI ? (process.env.OPENAI_MODEL || 'gpt-5.1') : (process.env.OPENROUTER_MODEL || 'x-ai/grok-4-1-fast');
       const url = useOpenAI ? OPENAI_URL : (useOpenRouter ? OR_URL : XAI_URL);
 
       try {

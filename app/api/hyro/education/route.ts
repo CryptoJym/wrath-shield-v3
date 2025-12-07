@@ -638,6 +638,48 @@ export async function POST(request: NextRequest) {
         });
       }
 
+      case 'assess-init': {
+        const { standardId, previousQuestions } = body;
+        const { generateInterviewQuestion } = await import('@/lib/hyro/forge-ai-tutor');
+        const questionData = await generateInterviewQuestion(standardId, previousQuestions || []);
+
+        return NextResponse.json({
+          action: 'assess-init',
+          standardId,
+          ...questionData,
+          timestamp: new Date().toISOString(),
+        });
+      }
+
+      case 'assess-evaluate': {
+        const { standardId, question, studentResponse } = body;
+        const { evaluateResponse } = await import('@/lib/hyro/forge-ai-tutor');
+        const result = await evaluateResponse(standardId, question, studentResponse);
+
+        // If high score, update mastery!
+        if (result.score >= 90) {
+          const { updateStandardMastery, getStandardMastery } = await import('@/lib/hyro/education-store');
+          const current = getStandardMastery(studentId, standardId);
+          updateStandardMastery({
+            student_id: studentId,
+            standard_id: standardId,
+            mastery_level: Math.max(result.score, current?.mastery_level || 0),
+            evidence_count: (current?.evidence_count || 0) + 1,
+            status: 'mastered',
+            confidence_score: 95,
+            last_practiced_at: Date.now()
+          });
+          result.feedback += " (Mastery Recorded!)";
+        }
+
+        return NextResponse.json({
+          action: 'assess-evaluate',
+          standardId,
+          result,
+          timestamp: new Date().toISOString(),
+        });
+      }
+
       default:
         return NextResponse.json({ error: `Unknown action: ${action}` }, { status: 400 });
     }

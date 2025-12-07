@@ -746,6 +746,164 @@ export function addMessage(
 }
 
 // ============================================================================
+// Assessment & Interview
+// ============================================================================
+
+export interface AssessmentResult {
+  score: number; // 0-100
+  feedback: string;
+  is_correct: boolean;
+  misconception_detected?: string;
+}
+
+/**
+ * Generate a targeted interview question for a standard
+ */
+export async function generateInterviewQuestion(
+  standardId: string,
+  previousQuestions: string[] = []
+): Promise<{ question: string; context: string }> {
+  const { getStandard, getConceptsForStandard } = await import('./education-store');
+  const standard = getStandard(standardId);
+  const concepts = getConceptsForStandard(standardId);
+
+  if (!standard) {
+    throw new Error(`Standard not found: ${standardId}`);
+  }
+
+  const client = getOpenRouterClient();
+  // Upgrade to GPT-5.1 for Superior Esoteric Reasoning
+  client.setAgentId('agent.coaching');
+
+  let conceptContext = "";
+  if (concepts.length > 0) {
+    conceptContext = `
+    CRITICAL PEDAGOGICAL INSTRUCTION: "THE ESOTERIC VIEW"
+    The user demands a "Superior Education" that reveals hidden layers.
+    You must teach the student to see the "Standard" not just as a limited model, but as a SOCIAL CONSTRUCT that hides complexity.
+
+    1. START with the Fundamental Concept(s): ${concepts.map(c => `"${c.concept?.name}"`).join(', ')}.
+    2. REVEAL THE HIDDEN: Explicitly point out what the Standard *hides* or *ignores*.
+       - Example: "The school standard says PE=mgh. What it HIDES is that gravity varies with distance. Why would they hide that? For simplicity? Control?"
+    3. Frame the Standard (${standardId}) as a 'Game' the student must play, but not believe.
+    
+    Concept Details:
+    ${concepts.map(c => `- ${c.concept?.name}: ${c.notes} (Layer: ${c.authenticity_layer})`).join('\n')}
+    
+    Your Tone:
+    - Conspiratorial but rigorous. "Here is the truth they aren't telling you yet..."
+    - Demanding. Expect the student to hold two thoughts at once: The Truth and The Test.
+    `;
+  }
+
+  const systemPrompt = `You are an expert Mentor assessing a student's mastery of Common Core Standard ${standardId}: "${standard.description}".
+  
+  ${conceptContext}
+
+  Generate a single, conceptual question to check for deep understanding.
+  - Do NOT ask a simple multiple choice question.
+  - Ask for an explanation, a real-world example, or a short problem solving step.
+  - The question should be answerable in 1-2 sentences.
+  - Avoid questions that are too complex/long.
+  
+  PREVIOUS QUESTIONS (Avoid these):
+  ${previousQuestions.join('\n')}
+  
+  Output JSON: { "question": "The question text", "context": "Brief context or scenario if needed" }`;
+
+  const response = await client.getCoachingResponse({
+    messages: [
+      { role: 'system', content: systemPrompt },
+      { role: 'user', content: "Generate the assessment question in JSON format." }
+    ],
+    temperature: 0.7,
+    max_tokens: 300,
+    metadata: {
+      date: new Date().toISOString(),
+      has_whoop_data: false,
+      has_manipulations: false,
+      wrath_deployed: false,
+      memory_count: 0,
+      anchor_count: 0
+    }
+  });
+
+  try {
+    const jsonMatch = response.content.match(/\{[\s\S]*\}/);
+    if (jsonMatch) {
+      return JSON.parse(jsonMatch[0]);
+    }
+  } catch (e) { }
+
+  return {
+    question: response.content,
+    context: ""
+  };
+}
+
+/**
+ * Evaluate a student's response to an assessment question
+ */
+export async function evaluateResponse(
+  standardId: string,
+  question: string,
+  studentResponse: string
+): Promise<AssessmentResult> {
+  const { getStandard } = await import('./education-store');
+  const std = getStandard(standardId);
+
+  const client = getOpenRouterClient();
+  // Upgrade to GPT-5.1 for Nuanced Evaluation
+  client.setAgentId('agent.coaching');
+
+  const prompt = `Evaluate this student response against standard ${standardId} ("${std?.description}").
+  
+  QUESTION: ${question}
+  STUDENT ANSWER: "${studentResponse}"
+  
+  Grade the answer on a scale of 0-100 based on correctness and depth of understanding.
+  - 90-100: Mastery (Perfect or near perfect)
+  - 70-89: Proficient (Minor errors but gets the concept)
+  - 50-69: Emerging (Partial understanding)
+  - 0-49: Beginning (Incorrect or irrelevant)
+  
+  Output JSON:
+  {
+    "score": number,
+    "feedback": "Constructive feedback to the student (2 sentences max)",
+    "is_correct": boolean,
+    "misconception_detected": "Optional description of specific error"
+  }`;
+
+  const response = await client.getCoachingResponse({
+    messages: [{ role: 'user', content: prompt }],
+    temperature: 0.3, // Lower temp for grading
+    max_tokens: 500,
+    metadata: {
+      date: new Date().toISOString(),
+      has_whoop_data: false,
+      has_manipulations: false,
+      wrath_deployed: false,
+      memory_count: 0,
+      anchor_count: 0
+    }
+  });
+
+  try {
+    const jsonMatch = response.content.match(/\{[\s\S]*\}/);
+    if (jsonMatch) {
+      return JSON.parse(jsonMatch[0]);
+    }
+  } catch (e) { }
+
+  return {
+    score: 0,
+    feedback: "Could not evaluate response. Please try again.",
+    is_correct: false
+  };
+}
+
+// ============================================================================
 // Exports
 // ============================================================================
 

@@ -1,11 +1,8 @@
-/**
- * HYRO FORGE: Skill Proficiency System
- * Evidence-based skill quantification with Bayesian estimation
- */
-
 import { getDatabase } from '@/lib/db/Database';
 import { randomUUID } from 'crypto';
 import { StatName, STAT_NAMES } from './forge-types';
+import fs from 'fs';
+import path from 'path';
 
 // ============================================================================
 // Types
@@ -603,40 +600,95 @@ import {
   getStandard,
   getAllStandards,
   getStandardMastery,
-  getAllStandardMastery
+  getAllStandardMastery,
+  upsertConcept,
+  linkStandardToConcept,
+  Concept,
+  StandardConcept
 } from './education-store';
-import fs from 'fs';
-import path from 'path';
 
 /**
- * Initialize standards from the JSON data file
+ * Initialize standards and concepts from JSON data files
  */
 export async function initializeStandards(): Promise<{ count: number; domains: string[] }> {
-  const filePath = path.resolve(process.cwd(), 'data', 'standards', 'common-core-math-g6.json');
-
-  if (!fs.existsSync(filePath)) {
-    console.warn('[Standards] Data file not found:', filePath);
-    return { count: 0, domains: [] };
-  }
-
-  const fileContent = fs.readFileSync(filePath, 'utf-8');
-  const data = JSON.parse(fileContent);
-
+  const standardsDir = path.resolve(process.cwd(), 'data', 'standards');
+  const conceptsDir = path.resolve(process.cwd(), 'data', 'concepts');
   let count = 0;
   const domains = new Set<string>();
 
-  for (const domain of data.domains) {
-    domains.add(domain.name);
-    for (const std of domain.standards) {
-      upsertStandard({
-        id: std.id,
-        category: data.subject,
-        domain: domain.name,
-        description: std.description,
-        prerequisites: std.prerequisites || [],
-        cluster: std.cluster
+  // 1. Load Concepts (The Truth Layer)
+  if (fs.existsSync(conceptsDir)) {
+    const conceptFiles = fs.readdirSync(conceptsDir).filter(f => f.endsWith('.json'));
+    for (const file of conceptFiles) {
+      const content = fs.readFileSync(path.join(conceptsDir, file), 'utf-8');
+      const data = JSON.parse(content) as (Concept & { mappings: any[] });
+
+      // Upsert Concept
+      upsertConcept({
+        id: data.id,
+        name: data.name,
+        definition: data.definition,
+        discipline: data.discipline,
+        layer: data.layer
       });
-      count++;
+
+      // Link Mappings
+      if (data.mappings) {
+        for (const map of data.mappings) {
+          linkStandardToConcept({
+            standard_id: map.standard_id,
+            concept_id: data.id,
+            authenticity_layer: map.authenticity_layer,
+            notes: map.notes
+          });
+        }
+      }
+    }
+  }
+
+  // 2. Load Standards (The Heuristic/Requirement Layer)
+  if (!fs.existsSync(standardsDir)) {
+    console.warn('[Standards] Directory not found:', standardsDir);
+    return { count: 0, domains: [] };
+  }
+
+  const files = fs.readdirSync(standardsDir).filter(f => f.endsWith('.json'));
+
+  for (const file of files) {
+    const content = fs.readFileSync(path.join(standardsDir, file), 'utf-8');
+    const data = JSON.parse(content);
+
+    // Handle "Math" & "Science" format (Nested Domains)
+    if (data.domains && Array.isArray(data.domains)) {
+      for (const domain of data.domains) {
+        domains.add(domain.name);
+        for (const std of domain.standards) {
+          upsertStandard({
+            id: std.id,
+            category: data.subject,
+            domain: domain.name,
+            description: std.description,
+            prerequisites: std.prerequisites || [],
+            cluster: std.cluster
+          });
+          count++;
+        }
+      }
+    }
+    // Handle "ELA" format (Flat Array)
+    else if (Array.isArray(data)) {
+      for (const std of data) {
+        domains.add(std.domain);
+        upsertStandard({
+          id: std.id,
+          category: std.category,
+          domain: std.domain,
+          description: std.description,
+          prerequisites: std.prerequisites || [],
+          cluster: std.cluster
+        });
+        count++;
+      }
     }
   }
 

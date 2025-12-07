@@ -16,23 +16,35 @@ import {
   Activity, Shield, Star
 } from 'lucide-react';
 
+import StandardsGraph from '@/components/hyro/StandardsGraph';
+
 export default function ParentDashboard() {
   const [summary, setSummary] = useState<ParentSummary | null>(null);
+  const [standards, setStandards] = useState<any[]>([]);
+  const [mastery, setMastery] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    async function loadSummary() {
+    async function loadData() {
       try {
-        const res = await fetch('/api/hyro/parent/summary');
-        const json = await res.json();
+        const [summaryRes, eduRes] = await Promise.all([
+          fetch('/api/hyro/parent/summary'),
+          fetch('/api/hyro/education?action=standards')
+        ]);
 
-        if (!json.success) {
-          setError(json.error || 'Failed to load summary');
+        const summaryJson = await summaryRes.json();
+        const eduJson = await eduRes.json();
+
+        if (!summaryJson.success) {
+          setError(summaryJson.error || 'Failed to load summary');
           return;
         }
 
-        setSummary(json.data);
+        setSummary(summaryJson.data);
+        setStandards(eduJson.standards || []);
+        setMastery(eduJson.mastery || []);
+
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Unknown error');
       } finally {
@@ -40,8 +52,10 @@ export default function ParentDashboard() {
       }
     }
 
-    loadSummary();
+    loadData();
   }, []);
+
+  // ... error / loading states ...
 
   if (loading) {
     return (
@@ -55,6 +69,7 @@ export default function ParentDashboard() {
   }
 
   if (error || !summary) {
+    // ... error view ...
     return (
       <div className="min-h-screen bg-zinc-950 flex items-center justify-center p-4">
         <div className="bg-red-950/30 border border-red-500/30 rounded-2xl p-8 max-w-md text-center backdrop-blur-md">
@@ -159,10 +174,33 @@ export default function ParentDashboard() {
           />
         </div>
 
+        {/* Standards Graph Section */}
+        <section className="bg-zinc-900/40 backdrop-blur-md border border-white/5 rounded-2xl overflow-hidden">
+          <div className="p-6 border-b border-white/5 flex items-center justify-between">
+            <h3 className="text-lg font-bold text-white flex items-center gap-2">
+              <Brain className="text-indigo-400" size={20} />
+              Curriculum Mastery Map
+            </h3>
+          </div>
+          <div className="p-4 h-[500px] w-full relative">
+            <div className="absolute top-4 right-4 z-10 bg-zinc-950/80 p-2 rounded-lg text-xs text-zinc-400 border border-white/5">
+              Interactive View: Scroll to Zoom, Drag to Pan
+            </div>
+            {standards.length > 0 ? (
+              <StandardsGraph standards={standards} mastery={mastery} />
+            ) : (
+              <div className="flex items-center justify-center h-full text-zinc-500">
+                No curriculum data available
+              </div>
+            )}
+          </div>
+        </section>
+
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          {/* ... existing columns ... */}
+
           {/* Left Column (Main Stats) */}
           <div className="lg:col-span-7 space-y-8">
-
             {/* Trend Analysis */}
             <section className="bg-zinc-900/40 backdrop-blur-md border border-white/5 rounded-2xl overflow-hidden">
               <div className="p-6 border-b border-white/5 flex items-center justify-between">
@@ -181,8 +219,8 @@ export default function ParentDashboard() {
                       >
                         <div className="flex items-center gap-4">
                           <div className={`p-2 rounded-lg ${trend.direction === 'up' ? 'bg-emerald-500/10 text-emerald-400' :
-                              trend.direction === 'down' ? 'bg-red-500/10 text-red-400' :
-                                'bg-zinc-500/10 text-zinc-400'
+                            trend.direction === 'down' ? 'bg-red-500/10 text-red-400' :
+                              'bg-zinc-500/10 text-zinc-400'
                             }`}>
                             {trend.direction === 'up' ? <TrendingUp size={20} /> :
                               trend.direction === 'down' ? <TrendingDown size={20} /> :
@@ -196,8 +234,8 @@ export default function ParentDashboard() {
                           </div>
                         </div>
                         <div className={`text-sm font-mono font-bold ${trend.change_percent > 0 ? 'text-emerald-400' :
-                            trend.change_percent < 0 ? 'text-red-400' :
-                              'text-zinc-500'
+                          trend.change_percent < 0 ? 'text-red-400' :
+                            'text-zinc-500'
                           }`}>
                           {trend.change_percent > 0 ? '+' : ''}{trend.change_percent}%
                         </div>
@@ -241,7 +279,7 @@ export default function ParentDashboard() {
                           </div>
                           <div className="text-right">
                             <div className="text-xl font-bold text-amber-400 font-mono">{strength.score}</div>
-                            <div className="text-[10px] text-amber-500/60 uppercase tracking-wider">Score</div>
+                            <div className="text-xs text-amber-500/60 uppercase tracking-wider">Score</div>
                           </div>
                         </div>
                       </div>

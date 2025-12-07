@@ -75,7 +75,7 @@ export async function adjudicateItem(
             agentId: 'agent.ea',
             userMessage: prompt,
             providerOverride: 'openai',
-            modelOverride: 'gpt-4o',
+            modelOverride: 'gpt-5.1',
             context: {
                 skipMemory: true, // We already injected specific memory
                 metadata: { op: 'adjudication' }
