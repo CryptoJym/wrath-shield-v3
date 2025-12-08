@@ -13,8 +13,12 @@ import open from 'open';
 import fs from 'fs';
 import path from 'path';
 import readline from 'readline';
+import dotenv from 'dotenv';
 
-const MAILBOXES = ['james@vuplicity.com'];
+const ENV_PATH_INIT = path.resolve(process.cwd(), '.env.local');
+dotenv.config({ path: ENV_PATH_INIT });
+
+const MAILBOXES = ['james@utlyze.com', 'james@vuplicity.com'];
 const PORT = 43111;
 const REDIRECT = `http://localhost:${PORT}/oauth2callback`;
 const ENV_PATH = path.resolve(process.cwd(), '.env.local');

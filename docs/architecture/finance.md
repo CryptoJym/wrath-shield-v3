@@ -88,7 +88,7 @@ The system can automatically review all transactions in a billing cycle and make
 
 **Features**:
 - Batch processing (20 transactions per LLM call)
-- Supports OpenAI (gpt-4o), OpenRouter, or xAI
+- Supports OpenAI (gpt-5.1), OpenRouter, or xAI
 - Determines: reimbursable (true/false), company assignment, assignee
 - Dry run mode to preview decisions before applying
 - Returns summary by company with totals

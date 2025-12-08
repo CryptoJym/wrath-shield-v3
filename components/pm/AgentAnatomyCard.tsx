@@ -72,6 +72,22 @@ interface ActivityLog {
   duration?: number;
 }
 
+// Real-time health status from AgentInvoker
+type HealthStatus = 'healthy' | 'idle' | 'degraded' | 'offline';
+
+interface HealthData {
+  status: HealthStatus;
+  lastActivityAgo: string;
+  memoryStatus: 'connected' | 'latent' | 'unavailable';
+  memoryLatencyMs: number | null;
+  recentErrorCount: number;
+  totalRecentCalls: number;
+  avgTokenUsage: number;
+  avgResponseLatencyMs: number;
+  healthScore: number;
+  tokenUsageTrend: 'increasing' | 'stable' | 'decreasing' | 'unknown';
+}
+
 interface AnatomyData {
   ok: boolean;
   agent: {
@@ -90,6 +106,8 @@ interface AnatomyData {
     errorRate: number;
     activeConnections: number;
   };
+  // Real-time health from AgentInvoker
+  health?: HealthData;
 }
 
 const MODULE_ICONS: Record<string, any> = {
@@ -105,6 +123,21 @@ const STATUS_STYLES: Record<string, { bg: string; text: string; border: string; 
   idle: { bg: 'bg-slate-500/10', text: 'text-slate-400', border: 'border-slate-500/30', glow: '' },
   error: { bg: 'bg-rose-500/10', text: 'text-rose-400', border: 'border-rose-500/30', glow: 'shadow-[0_0_10px_rgba(244,63,94,0.2)]' },
   disabled: { bg: 'bg-slate-800/50', text: 'text-slate-600', border: 'border-slate-700/30', glow: '' },
+};
+
+// Health status styling (for real-time agent health)
+const HEALTH_STYLES: Record<HealthStatus, { bg: string; text: string; border: string; glow: string; label: string }> = {
+  healthy: { bg: 'bg-emerald-500/10', text: 'text-emerald-400', border: 'border-emerald-500/30', glow: 'shadow-[0_0_10px_rgba(16,185,129,0.3)]', label: 'HEALTHY' },
+  idle: { bg: 'bg-sky-500/10', text: 'text-sky-400', border: 'border-sky-500/30', glow: '', label: 'IDLE' },
+  degraded: { bg: 'bg-amber-500/10', text: 'text-amber-400', border: 'border-amber-500/30', glow: 'shadow-[0_0_10px_rgba(245,158,11,0.2)]', label: 'DEGRADED' },
+  offline: { bg: 'bg-rose-500/10', text: 'text-rose-400', border: 'border-rose-500/30', glow: 'shadow-[0_0_10px_rgba(244,63,94,0.3)]', label: 'OFFLINE' },
+};
+
+// Memory status styling
+const MEMORY_STYLES: Record<string, { bg: string; text: string; icon: string }> = {
+  connected: { bg: 'bg-emerald-500/10', text: 'text-emerald-400', icon: 'text-emerald-500' },
+  latent: { bg: 'bg-amber-500/10', text: 'text-amber-400', icon: 'text-amber-500' },
+  unavailable: { bg: 'bg-rose-500/10', text: 'text-rose-400', icon: 'text-rose-500' },
 };
 
 export function AgentAnatomyCard({ defaultExpanded = false }: { defaultExpanded?: boolean }) {
@@ -125,6 +158,7 @@ export function AgentAnatomyCard({ defaultExpanded = false }: { defaultExpanded?
   const connections = data?.connections || [];
   const activity = data?.recentActivity || [];
   const metrics = data?.metrics;
+  const health = data?.health;
 
   // Mini-map visualization for collapsed state
   const MiniMap = () => (
@@ -147,6 +181,8 @@ export function AgentAnatomyCard({ defaultExpanded = false }: { defaultExpanded?
   );
 
   if (!expanded) {
+    const healthStyle = health ? HEALTH_STYLES[health.status] : null;
+
     return (
       <button
         onClick={() => setExpanded(true)}
@@ -161,12 +197,24 @@ export function AgentAnatomyCard({ defaultExpanded = false }: { defaultExpanded?
               <Layers size={20} className="text-indigo-400" />
             </div>
             <div>
-              <h3 className="font-bold text-slate-200 group-hover:text-white transition-colors tracking-tight">Agent Anatomy</h3>
+              <div className="flex items-center gap-2">
+                <h3 className="font-bold text-slate-200 group-hover:text-white transition-colors tracking-tight">Agent Anatomy</h3>
+                {healthStyle && (
+                  <span className={`px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider rounded border ${healthStyle.border} ${healthStyle.bg} ${healthStyle.text}`}>
+                    {healthStyle.label}
+                  </span>
+                )}
+              </div>
               <div className="flex items-center gap-3 mt-1">
                 {data ? (
                   <>
                     <MiniMap />
-                    <span className="text-[10px] font-mono text-slate-500 uppercase tracking-wider">{metrics?.activeConnections || 0} LINKS ACTIVE</span>
+                    {health && (
+                      <span className="text-[10px] font-mono text-slate-500 uppercase tracking-wider">
+                        {health.lastActivityAgo}
+                      </span>
+                    )}
+                    <span className="text-[10px] font-mono text-slate-500 uppercase tracking-wider">{metrics?.activeConnections || 0} LINKS</span>
                   </>
                 ) : (
                   <span className="text-xs text-slate-500">Initializing...</span>
@@ -174,7 +222,15 @@ export function AgentAnatomyCard({ defaultExpanded = false }: { defaultExpanded?
               </div>
             </div>
           </div>
-          <ChevronRight size={20} className="text-slate-500 group-hover:text-slate-300 transition-colors" />
+          <div className="flex items-center gap-3">
+            {health && (
+              <div className="text-right">
+                <div className="text-[9px] text-slate-500 uppercase">HEALTH</div>
+                <div className={`text-sm font-bold ${healthStyle?.text || 'text-slate-400'}`}>{health.healthScore}%</div>
+              </div>
+            )}
+            <ChevronRight size={20} className="text-slate-500 group-hover:text-slate-300 transition-colors" />
+          </div>
         </div>
       </button>
     );
@@ -211,6 +267,10 @@ export function AgentAnatomyCard({ defaultExpanded = false }: { defaultExpanded?
     return () => clearInterval(interval);
   }, [lastUpdated]);
 
+  // Get health styling
+  const healthStyle = health ? HEALTH_STYLES[health.status] : null;
+  const memoryStyle = health ? MEMORY_STYLES[health.memoryStatus] : null;
+
   return (
     <div className="rounded-xl border border-white/10 bg-slate-950/90 backdrop-blur-2xl overflow-hidden shadow-2xl transition-all duration-300">
 
@@ -224,7 +284,14 @@ export function AgentAnatomyCard({ defaultExpanded = false }: { defaultExpanded?
             <div>
               <div className="flex items-center gap-3">
                 <h3 className="font-bold text-white tracking-tight text-lg">Agent Anatomy</h3>
-                {agent && (
+                {/* Real-time health status badge */}
+                {healthStyle && (
+                  <span className={`px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider rounded-full border ${healthStyle.border} ${healthStyle.bg} ${healthStyle.text} ${healthStyle.glow}`}>
+                    {healthStyle.label}
+                  </span>
+                )}
+                {/* Legacy agent status fallback */}
+                {!health && agent && (
                   <span className={`px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider rounded-full border ${agent.status === 'healthy' ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' :
                     agent.status === 'degraded' ? 'bg-amber-500/10 text-amber-400 border-amber-500/20' :
                       'bg-rose-500/10 text-rose-400 border-rose-500/20'
@@ -234,12 +301,20 @@ export function AgentAnatomyCard({ defaultExpanded = false }: { defaultExpanded?
                 )}
               </div>
               <p className="text-xs text-slate-400 font-mono mt-0.5 flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                {agent ? `${agent.name.toUpperCase()} v${agent.version} (UP: ${agent.uptime})` : 'SYNCING...'}
+                <span className={`w-1.5 h-1.5 rounded-full ${health?.status === 'healthy' ? 'bg-emerald-500 animate-pulse' : health?.status === 'idle' ? 'bg-sky-500' : health?.status === 'degraded' ? 'bg-amber-500 animate-pulse' : 'bg-rose-500'}`} />
+                {agent ? `${agent.name.toUpperCase()} v${agent.version}` : 'SYNCING...'}
+                {health && <span className="text-slate-500">| Last: {health.lastActivityAgo}</span>}
               </p>
             </div>
           </div>
           <div className="flex items-center gap-2">
+            {/* Health Score Badge */}
+            {health && (
+              <div className={`px-3 py-1.5 rounded-lg border ${healthStyle?.border} ${healthStyle?.bg} mr-2`}>
+                <div className="text-[9px] text-slate-400 uppercase tracking-widest">HEALTH</div>
+                <div className={`text-lg font-bold ${healthStyle?.text}`}>{health.healthScore}%</div>
+              </div>
+            )}
             <div className="text-[10px] font-mono text-slate-500 mr-2">
               SYNC: <span className="text-emerald-500">{timeSinceUpdate} ago</span>
             </div>
@@ -259,8 +334,53 @@ export function AgentAnatomyCard({ defaultExpanded = false }: { defaultExpanded?
           </div>
         </div>
 
-        {/* Quick Metrics Bar */}
-        {metrics && (
+        {/* Real-time Health Metrics Bar - Derived from AgentInvoker */}
+        {health && (
+          <div className="grid grid-cols-5 gap-2 pt-2 mb-3">
+            <div className={`p-2 rounded-lg border ${memoryStyle?.bg || 'bg-slate-900/60'} border-white/5 flex flex-col justify-center`}>
+              <div className="text-[9px] text-slate-500 uppercase tracking-widest mb-0.5">ZEP MEMORY</div>
+              <div className={`text-sm font-bold flex items-center gap-2 ${memoryStyle?.text || 'text-slate-400'}`}>
+                {health.memoryStatus.toUpperCase()}
+                <Database size={10} className={memoryStyle?.icon || 'text-slate-500'} />
+              </div>
+              {health.memoryLatencyMs !== null && (
+                <div className="text-[9px] text-slate-500 mt-0.5">{health.memoryLatencyMs}ms latency</div>
+              )}
+            </div>
+            <div className="p-2 rounded-lg bg-slate-900/60 border border-white/5 flex flex-col justify-center">
+              <div className="text-[9px] text-slate-500 uppercase tracking-widest mb-0.5">CALLS</div>
+              <div className="text-sm font-bold text-white flex items-center gap-2">
+                {health.totalRecentCalls}
+                <Activity size={10} className="text-indigo-400" />
+              </div>
+            </div>
+            <div className="p-2 rounded-lg bg-slate-900/60 border border-white/5 flex flex-col justify-center">
+              <div className="text-[9px] text-slate-500 uppercase tracking-widest mb-0.5">AVG LATENCY</div>
+              <div className={`text-sm font-bold flex items-center gap-2 ${health.avgResponseLatencyMs > 2000 ? 'text-amber-400' : 'text-emerald-400'}`}>
+                {health.avgResponseLatencyMs}ms
+                <Clock size={10} />
+              </div>
+            </div>
+            <div className="p-2 rounded-lg bg-slate-900/60 border border-white/5 flex flex-col justify-center">
+              <div className="text-[9px] text-slate-500 uppercase tracking-widest mb-0.5">ERRORS</div>
+              <div className={`text-sm font-bold flex items-center gap-2 ${health.recentErrorCount > 0 ? 'text-rose-400' : 'text-slate-300'}`}>
+                {health.recentErrorCount}
+                <AlertTriangle size={10} />
+              </div>
+            </div>
+            <div className="p-2 rounded-lg bg-slate-900/60 border border-white/5 flex flex-col justify-center">
+              <div className="text-[9px] text-slate-500 uppercase tracking-widest mb-0.5">TOKEN TREND</div>
+              <div className={`text-sm font-bold flex items-center gap-2 ${health.tokenUsageTrend === 'increasing' ? 'text-amber-400' : health.tokenUsageTrend === 'decreasing' ? 'text-emerald-400' : 'text-slate-300'}`}>
+                {health.tokenUsageTrend === 'increasing' ? 'UP' : health.tokenUsageTrend === 'decreasing' ? 'DOWN' : health.tokenUsageTrend === 'stable' ? 'STABLE' : 'N/A'}
+                <Zap size={10} />
+              </div>
+              <div className="text-[9px] text-slate-500 mt-0.5">avg: {health.avgTokenUsage}</div>
+            </div>
+          </div>
+        )}
+
+        {/* Legacy Metrics Bar (fallback when health unavailable) */}
+        {!health && metrics && (
           <div className="grid grid-cols-4 gap-2 pt-2">
             {[
               { label: 'TOTAL CALLS', value: metrics.totalCalls, icon: Activity, color: 'text-indigo-400' },

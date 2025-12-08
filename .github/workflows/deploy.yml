@@ -1,0 +1,41 @@
+name: Deploy to Production
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:  # Allow manual trigger
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd ~/wrath-shield-v3
+
+            # Pull latest changes
+            git fetch origin main
+            git reset --hard origin/main
+
+            # Install dependencies
+            npm ci --production=false
+
+            # Run migrations
+            npm run db:migrate || true
+
+            # Build
+            npm run build
+
+            # Reload PM2 (zero-downtime)
+            pm2 reload ecosystem.config.js --env production
+
+            # Save PM2 state
+            pm2 save
+
+            echo "✅ Deployment complete!"

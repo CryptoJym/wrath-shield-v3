@@ -158,6 +158,7 @@ export interface Quest {
   external_url: string | null;
   is_recurring: boolean;
   recurrence_pattern: string | null;
+  standard_id?: string | null;
   created_at: number;
 }
 

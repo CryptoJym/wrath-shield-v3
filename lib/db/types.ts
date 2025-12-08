@@ -223,3 +223,62 @@ export interface PsychSignal {
   created_at?: number;
   updated_at?: number;
 }
+
+/**
+ * Cognitive Synthesis Engine - Unified Tasks
+ * Synthesized tasks from multiple event sources
+ */
+export interface UnifiedTask {
+  id: string;
+  title: string;
+  description: string | null;
+  confidence: number; // 0.0 - 1.0
+  urgency: 'critical' | 'high' | 'medium' | 'low';
+  domain: string | null; // 'finance', 'legal', 'pm', 'comms', 'health'
+  source_events_json: string | null; // JSON array of event IDs
+  proposed_action_json: string | null; // JSON object
+  status: 'synthesizing' | 'ready' | 'approved' | 'executing' | 'completed' | 'dismissed';
+  last_refined_at: number | null; // Unix timestamp
+  refinement_count: number;
+  created_at?: number;
+  updated_at?: number;
+}
+
+export type UnifiedTaskInput = Omit<UnifiedTask, 'created_at' | 'updated_at'>;
+
+/**
+ * Cognitive Synthesis Engine - Synthesis Patterns
+ * Learned patterns for event consolidation
+ */
+export interface SynthesisPattern {
+  id: string;
+  pattern_type: 'consolidation' | 'urgency' | 'action' | 'relationship';
+  description: string;
+  trigger_conditions: string | null;
+  suggested_behavior: string | null;
+  success_rate: number; // 0.0 - 1.0
+  usage_count: number;
+  created_at?: number;
+  updated_at?: number;
+}
+
+export type SynthesisPatternInput = Omit<SynthesisPattern, 'created_at' | 'updated_at'>;
+
+/**
+ * Cognitive Synthesis Engine - Working Memory Events
+ * Temporary event storage for multi-source ingestion
+ */
+export interface WorkingMemoryEvent {
+  id: string;
+  source: string; // 'gmail', 'limitless', 'calendar', 'motion', 'imessage'
+  timestamp: number; // Unix timestamp when event occurred
+  content: string;
+  content_hash: string; // SHA-256 for deduplication
+  embedding_json: string | null; // JSON array of vector embedding
+  initial_classification: string | null; // 'task', 'meeting', 'info', 'alert'
+  processed_by_synthesis: number; // 0 = not processed, 1 = processed
+  synthesis_task_id: string | null; // Reference to unified_tasks.id
+  created_at?: number;
+}
+
+export type WorkingMemoryEventInput = Omit<WorkingMemoryEvent, 'created_at'>;

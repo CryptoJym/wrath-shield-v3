@@ -2,9 +2,12 @@
  * Action Executors
  *
  * Handles execution of agentic actions (email drafts, tasks, reminders, etc.)
+ * Routes actions to appropriate systems (local_tasks, notifications, etc.)
  */
 
 import { getAgenticActionById, updateAgenticActionStatusWithMeta, listAgenticActions } from '@/lib/db/queries';
+import { createLocalTask } from '@/lib/pm/local-task-store';
+import type { TaskPriority } from '@/lib/pm/types';
 
 export interface ExecutionResult {
   success: boolean;
@@ -86,17 +89,64 @@ async function executeEmailDraft(action: any): Promise<ExecutionResult> {
 }
 
 /**
- * Execute task action
+ * Execute task action - creates a local_task from agentic action
  */
 async function executeTask(action: any): Promise<ExecutionResult> {
-  // TODO: Integrate with task management (Linear, GitHub Issues, etc.)
   console.log('[Executor] Task action:', action.title);
 
-  return {
-    success: true,
-    message: `Task "${action.title}" created`,
-    data: { task_id: action.id }
-  };
+  try {
+    // Parse metadata for additional context
+    const metadata = typeof action.metadata === 'string'
+      ? JSON.parse(action.metadata)
+      : (action.metadata || {});
+
+    // Determine priority from metadata or default to medium
+    const priorityMap: Record<string, TaskPriority> = {
+      'critical': 'urgent',
+      'high': 'high',
+      'medium': 'medium',
+      'low': 'low',
+    };
+    const priority: TaskPriority = priorityMap[metadata.priority] || 'medium';
+
+    // Extract labels from adjudication suggested_tags
+    const adjudication = metadata.adjudication || {};
+    const labels = adjudication.suggested_tags || [];
+
+    // Create the local task
+    const task = createLocalTask({
+      title: action.title || 'Untitled Task',
+      description: action.content || null,
+      status: 'pending',
+      priority,
+      project_name: adjudication.domain || null,
+      labels,
+      metadata: {
+        source: 'agentic_action',
+        agentic_action_id: action.id,
+        original_source: action.source,
+        target_agent: adjudication.target_agent || null,
+        reasoning: adjudication.reasoning || null,
+        created_from: 'executor',
+      },
+      user_id: action.user_id || 'default',
+    });
+
+    console.log(`[Executor] Created local_task ${task.id} from agentic action ${action.id}`);
+
+    return {
+      success: true,
+      message: `Task "${action.title}" created as local_task ${task.id}`,
+      data: { task_id: task.id, agentic_action_id: action.id }
+    };
+  } catch (error) {
+    const message = error instanceof Error ? error.message : 'Unknown error';
+    console.error('[Executor] Failed to create task:', message);
+    return {
+      success: false,
+      message: `Failed to create task: ${message}`,
+    };
+  }
 }
 
 /**
@@ -144,13 +194,14 @@ async function executeNote(action: any): Promise<ExecutionResult> {
 /**
  * Run all queued high-confidence actions
  * Used by scheduled jobs to auto-execute trusted actions
+ * Note: Uses allUsers=true to process actions from all users
  */
 export async function runActionExecutors(): Promise<{
   executed: number;
   failed: number;
   results: ExecutionResult[];
 }> {
-  const queued = listAgenticActions({ status: 'queued', limit: 100 });
+  const queued = listAgenticActions({ status: 'queued', limit: 100, allUsers: true });
   const results: ExecutionResult[] = [];
   let executed = 0;
   let failed = 0;

@@ -71,7 +71,7 @@ function buildHistoricalContext(db: BetterSqlite3.Database, vendor: string): str
           context += `- ${r.vendor}: bucket=${r.bucket}, reimbursable=${r.reimbursable}, project=${r.project || 'none'}, rationale="${r.rationale || ''}"\n`;
         }
       }
-    } catch (e) {}
+    } catch (e) { }
   }
 
   return context;
@@ -168,7 +168,7 @@ Amount: $${Math.abs(txn.amount || 0).toFixed(2)}
 Date: ${txn.date}
 Account: ${txn.account || 'unknown'}`;
 
-  const model = useOpenAI ? (process.env.OPENAI_MODEL || 'gpt-4o') : (process.env.OPENROUTER_MODEL || 'x-ai/grok-4-1-fast');
+  const model = useOpenAI ? (process.env.OPENAI_MODEL || 'gpt-5.1') : (process.env.OPENROUTER_MODEL || 'x-ai/grok-4-1-fast');
   const url = useOpenAI ? OPENAI_URL : (useOpenRouter ? OR_URL : XAI_URL);
 
   try {
@@ -339,7 +339,7 @@ export async function GET() {
   if (fs.existsSync(rulesPath)) {
     try {
       rulesCount = JSON.parse(fs.readFileSync(rulesPath, 'utf8')).length;
-    } catch (e) {}
+    } catch (e) { }
   }
 
   db.close();

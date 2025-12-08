@@ -167,7 +167,7 @@ async function searchWithOpenAI(
       'Authorization': `Bearer ${apiKey}`,
     },
     body: JSON.stringify({
-      model: process.env.OPENAI_MODEL || 'gpt-4o',
+      model: process.env.OPENAI_MODEL || 'gpt-5.1',
       messages: [
         {
           role: 'system',

@@ -310,7 +310,7 @@ Proposed by: PM Agent`;
  * Record a sync event
  */
 export async function recordSyncEvent(
-  source: 'github' | 'motion' | 'local',
+  source: 'github' | 'local',
   operation: string,
   itemsAffected: number,
   success: boolean,

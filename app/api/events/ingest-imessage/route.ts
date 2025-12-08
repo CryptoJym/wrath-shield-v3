@@ -10,6 +10,8 @@ import fs from 'fs';
 import path from 'path';
 import { upsertEvents, type EventRow } from '@/lib/events';
 import { currentUserOptional } from '@/lib/auth/user';
+import { ingestIMessage } from '@/lib/cortex/event-ingestor';
+import type { IMessageInput } from '@/lib/cortex/event-ingestor';
 
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
@@ -30,6 +32,7 @@ export async function POST(request: Request) {
     const user_id = userInfo?.userId || 'james@jamesbrady.org';
     const body = await request.json().catch(() => ({}));
     const limit = body.limit || 5000; // Default to 5000 records
+    const enableCortex = body.enableCortex ?? true; // Enable Cortex by default
 
     const dataDir = path.resolve(process.cwd(), '.data');
     const imessagePath = path.join(dataDir, 'imessage.jsonl');
@@ -46,6 +49,8 @@ export async function POST(request: Request) {
 
     const events: EventRow[] = [];
     let skipped = 0;
+    let cortexIngested = 0;
+    let cortexSkipped = 0;
 
     for (const line of lines.slice(0, limit)) {
       try {
@@ -57,6 +62,7 @@ export async function POST(request: Request) {
           continue;
         }
 
+        // Add to legacy events database
         events.push({
           id: `imessage:${record.id}`,
           user_id,
@@ -75,6 +81,35 @@ export async function POST(request: Request) {
             has_attachments: record.has_attachments,
           },
         });
+
+        // Ingest into Cortex Working Memory (if enabled)
+        if (enableCortex) {
+          try {
+            const iMessageInput: IMessageInput = {
+              contact: record.handle,
+              content: record.text,
+              timestamp: new Date(record.ts * 1000).toISOString(),
+              messageId: record.id,
+              direction: record.direction,
+              metadata: {
+                handle: record.handle,
+                service: record.service,
+                has_attachments: record.has_attachments,
+              },
+            };
+
+            const result = await ingestIMessage(iMessageInput);
+
+            if (result.duplicate) {
+              cortexSkipped++;
+            } else {
+              cortexIngested++;
+            }
+          } catch (cortexError) {
+            console.error('[iMessage Ingest] Cortex ingestion error:', cortexError);
+            // Don't fail the entire operation if Cortex ingestion fails
+          }
+        }
       } catch (e) {
         skipped++;
       }
@@ -89,6 +124,13 @@ export async function POST(request: Request) {
       ingested: events.length,
       skipped,
       total_lines: lines.length,
+      cortex: enableCortex
+        ? {
+            enabled: true,
+            ingested: cortexIngested,
+            skipped: cortexSkipped,
+          }
+        : { enabled: false },
     });
   } catch (error) {
     console.error('[iMessage Ingest] Error:', error);

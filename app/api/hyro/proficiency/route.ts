@@ -18,6 +18,7 @@ import {
   compareToBenchmark,
   getAllBenchmarks,
 } from '@/lib/hyro/forge-proficiency';
+import { getAllLearningVelocities, getAllEnhancedZPDStates } from '@/lib/hyro/forge-zpd-engine';
 import { STAT_NAMES, StatName } from '@/lib/hyro/forge-types';
 
 export async function GET(request: NextRequest) {
@@ -85,10 +86,14 @@ export async function GET(request: NextRequest) {
     const benchmarks = getAllBenchmarks();
     const calibration = getCalibrationFeedback();
 
+    // Get learning velocity and enhanced ZPD
+    const velocities = getAllLearningVelocities();
+
     return NextResponse.json({
       profile,
       benchmarks,
       calibration,
+      velocities, // Added: Predictive data
       summary: {
         overall_level: profile.overall_level,
         strongest_skill: profile.strongest_skill,

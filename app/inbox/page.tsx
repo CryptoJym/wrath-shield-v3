@@ -15,6 +15,41 @@ const fetcher = async (url: string) => {
   return res.json();
 };
 
+// Type definitions for Cortex data
+interface UnifiedTask {
+  id: string;
+  title: string;
+  description: string;
+  confidence: number;
+  urgency: 'critical' | 'high' | 'medium' | 'low' | 'background';
+  domain: string;
+  sourceEvents: string[];
+  proposedAction?: {
+    type: string;
+    targetAgentId: string;
+    payload: Record<string, unknown>;
+    rationale: string;
+    executed: boolean;
+  };
+  status: 'synthesizing' | 'ready' | 'approved' | 'executing' | 'completed' | 'dismissed';
+  createdAt: string;
+  lastRefinedAt?: string;
+  refinementCount: number;
+}
+
+interface CortexStatus {
+  ok: boolean;
+  status: 'active' | 'idle' | 'disabled';
+  lastSynthesisAt?: string;
+  nextSynthesisAt?: string;
+  eventCount: number;
+  totalEventCount: number;
+  taskCount: number;
+  eventsBySource?: Record<string, number>;
+  processedLast24h?: number;
+  config: { isRunning: boolean };
+}
+
 const JUNK_PATTERNS = [
   "unsubscribe",
   "newsletter",
@@ -79,6 +114,14 @@ export default function InboxPage() {
   const { data: healthData } = useSWR("/api/comms/health", fetcher, { refreshInterval: 30000 });
   const { data: enrichmentData } = useSWR("/api/events/enrich", fetcher, { refreshInterval: 30000 });
 
+  // Cortex - Cognitive Synthesis Engine
+  const { data: cortexStatus, mutate: mutateCortex } = useSWR<CortexStatus>("/api/cortex", fetcher, { refreshInterval: 10000 });
+  const { data: cortexTasksData, mutate: mutateTasks } = useSWR<{ ok: boolean; tasks: UnifiedTask[] }>(
+    "/api/cortex/tasks?status=ready,synthesizing,approved&sortBy=urgency&sortDirection=desc",
+    fetcher,
+    { refreshInterval: 15000 }
+  );
+
   const [query, setQuery] = useState("");
   const [eventFilter, setEventFilter] = useState("");
   const [hideJunk, setHideJunk] = useState(true);
@@ -99,6 +142,53 @@ export default function InboxPage() {
   const showToast = useCallback((message: string, type: "success" | "error" | "info" = "success") => {
     setToast({ message, type });
   }, []);
+
+  // Cortex task action handler
+  const handleCortexTaskAction = async (
+    taskId: string,
+    action: 'approve' | 'execute' | 'dismiss' | 'refine',
+    mutate: () => void
+  ) => {
+    try {
+      let endpoint = `/api/cortex/tasks/${taskId}`;
+      let method = 'PATCH';
+      let body: Record<string, unknown> = {};
+
+      switch (action) {
+        case 'approve':
+          body = { updates: { status: 'approved' } };
+          break;
+        case 'execute':
+          body = { updates: { status: 'executing' } };
+          break;
+        case 'dismiss':
+          body = { updates: { status: 'dismissed' } };
+          break;
+        case 'refine':
+          // Trigger a synthesis pass for this task
+          endpoint = '/api/cortex/synthesis';
+          method = 'POST';
+          body = { taskIds: [taskId] };
+          break;
+      }
+
+      const res = await fetch(endpoint, {
+        method,
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+
+      const data = await res.json();
+      if (data.ok) {
+        showToast(`Task ${action}d successfully`, 'success');
+        mutate();
+      } else {
+        showToast(`Failed to ${action} task`, 'error');
+      }
+    } catch {
+      showToast(`Failed to ${action} task`, 'error');
+    }
+  };
 
   // Multi-calendar selection
   const [selectedCalendars, setSelectedCalendars] = useState<Record<string, boolean>>(() =>
@@ -360,6 +450,14 @@ export default function InboxPage() {
         )}
 
         <IngestHealthPanel data={healthData} />
+
+        {/* Cortex - Cognitive Synthesis Engine */}
+        <CortexStatusPanel
+          status={cortexStatus}
+          tasks={cortexTasksData?.tasks || []}
+          onRefresh={() => { mutateCortex(); mutateTasks(); }}
+          onTaskAction={(taskId, action) => handleCortexTaskAction(taskId, action, mutateTasks)}
+        />
 
         {enrichmentData?.needs_review_count > 0 && (
           <section className="rounded-2xl border border-purple-800 bg-purple-900/20 p-4 space-y-3">
@@ -1456,6 +1554,282 @@ function IngestHealthPanel({ data }: { data: any }) {
       <div className="pt-2 border-t border-slate-800">
         <RoutingStatsBar />
       </div>
+    </section>
+  );
+}
+
+// ============================================================================
+// Cortex Status Panel - Cognitive Synthesis Engine
+// ============================================================================
+
+interface CortexStatusPanelProps {
+  status?: CortexStatus;
+  tasks: UnifiedTask[];
+  onRefresh: () => void;
+  onTaskAction: (taskId: string, action: 'approve' | 'execute' | 'dismiss' | 'refine') => void;
+}
+
+function CortexStatusPanel({ status, tasks, onRefresh, onTaskAction }: CortexStatusPanelProps) {
+  const [expanded, setExpanded] = useState(true);
+  const [controlLoading, setControlLoading] = useState<'start' | 'stop' | 'synthesis' | null>(null);
+
+  const statusColor = {
+    active: "text-emerald-400 bg-emerald-900/30 border-emerald-600/50",
+    idle: "text-sky-400 bg-sky-900/30 border-sky-600/50",
+    disabled: "text-slate-400 bg-slate-800/50 border-slate-600/50",
+  };
+
+  const urgencyColor = {
+    critical: "bg-rose-600 text-white animate-pulse",
+    high: "bg-rose-500 text-white",
+    medium: "bg-amber-600 text-white",
+    low: "bg-sky-600 text-white",
+    background: "bg-slate-600 text-slate-200",
+  };
+
+  const domainIcons: Record<string, string> = {
+    finance: "💰",
+    legal: "⚖️",
+    health: "🏥",
+    productivity: "📋",
+    comms: "💬",
+    calendar: "📅",
+    personal: "👤",
+  };
+
+  const handleControl = async (action: 'start' | 'stop' | 'synthesis') => {
+    setControlLoading(action);
+    try {
+      if (action === 'synthesis') {
+        await fetch('/api/cortex/synthesis', { method: 'POST' });
+      } else {
+        await fetch('/api/cortex', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ action }),
+        });
+      }
+      onRefresh();
+    } catch {
+      // Silent fail
+    } finally {
+      setControlLoading(null);
+    }
+  };
+
+  const formatTime = (isoString?: string) => {
+    if (!isoString) return 'Never';
+    const date = new Date(isoString);
+    const now = new Date();
+    const diff = now.getTime() - date.getTime();
+    if (diff < 60000) return 'Just now';
+    if (diff < 3600000) return `${Math.floor(diff / 60000)}m ago`;
+    if (diff < 86400000) return `${Math.floor(diff / 3600000)}h ago`;
+    return date.toLocaleDateString();
+  };
+
+  const cortexEnabled = status?.config?.isRunning ?? false;
+  const currentStatus = status?.status ?? 'disabled';
+
+  return (
+    <section className={`rounded-2xl border p-4 space-y-4 ${statusColor[currentStatus]}`}>
+      {/* Header */}
+      <div className="flex items-center justify-between gap-3 flex-wrap">
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => setExpanded(!expanded)}
+            className="text-xl hover:opacity-80 transition"
+          >
+            {expanded ? "🧠" : "🧠"}
+          </button>
+          <div>
+            <div className="text-lg font-semibold flex items-center gap-2">
+              Cognitive Synthesis
+              <span className={`text-xs px-2 py-0.5 rounded-full ${
+                currentStatus === 'active' ? 'bg-emerald-500/30 text-emerald-300' :
+                currentStatus === 'idle' ? 'bg-sky-500/30 text-sky-300' :
+                'bg-slate-700 text-slate-400'
+              }`}>
+                {currentStatus.toUpperCase()}
+              </span>
+            </div>
+            <p className="text-sm opacity-70">
+              {status?.eventCount ?? 0} events pending · {status?.taskCount ?? 0} tasks · Last: {formatTime(status?.lastSynthesisAt)}
+            </p>
+          </div>
+        </div>
+
+        {/* Control buttons */}
+        <div className="flex gap-2 text-xs">
+          {cortexEnabled ? (
+            <>
+              <button
+                onClick={() => handleControl('synthesis')}
+                disabled={controlLoading === 'synthesis'}
+                className="px-3 py-1.5 rounded-full bg-purple-600 hover:bg-purple-500 text-white font-medium transition disabled:opacity-50"
+              >
+                {controlLoading === 'synthesis' ? (
+                  <span className="flex items-center gap-1">
+                    <span className="w-3 h-3 border-2 border-white/50 border-t-white rounded-full animate-spin" />
+                    Synthesizing...
+                  </span>
+                ) : (
+                  "Run Synthesis"
+                )}
+              </button>
+              <button
+                onClick={() => handleControl('stop')}
+                disabled={controlLoading === 'stop'}
+                className="px-3 py-1.5 rounded-full bg-slate-700 hover:bg-slate-600 text-slate-200 font-medium transition disabled:opacity-50"
+              >
+                {controlLoading === 'stop' ? '...' : 'Stop'}
+              </button>
+            </>
+          ) : (
+            <button
+              onClick={() => handleControl('start')}
+              disabled={controlLoading === 'start'}
+              className="px-3 py-1.5 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-medium transition disabled:opacity-50"
+            >
+              {controlLoading === 'start' ? '...' : 'Enable Cortex'}
+            </button>
+          )}
+          <button
+            onClick={() => setExpanded(!expanded)}
+            className="px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 transition"
+          >
+            {expanded ? '▲' : '▼'}
+          </button>
+        </div>
+      </div>
+
+      {/* Events by source */}
+      {expanded && status?.eventsBySource && Object.keys(status.eventsBySource).length > 0 && (
+        <div className="flex flex-wrap gap-2 text-xs">
+          {Object.entries(status.eventsBySource).map(([source, count]) => (
+            <span key={source} className="px-2 py-1 rounded bg-slate-800/50 text-slate-300">
+              {source}: {count as number}
+            </span>
+          ))}
+        </div>
+      )}
+
+      {/* Unified Tasks */}
+      {expanded && tasks.length > 0 && (
+        <div className="space-y-3 pt-2 border-t border-slate-700/50">
+          <div className="text-sm font-semibold text-slate-300">
+            Synthesized Tasks ({tasks.length})
+          </div>
+          <div className="space-y-2 max-h-[400px] overflow-auto pr-1">
+            {tasks.map((task) => (
+              <div
+                key={task.id}
+                className="rounded-xl bg-slate-800/60 border border-slate-700/50 p-3 space-y-2"
+              >
+                {/* Task header */}
+                <div className="flex items-start justify-between gap-2">
+                  <div className="flex items-center gap-2">
+                    <span className="text-lg">{domainIcons[task.domain] || '📌'}</span>
+                    <div>
+                      <div className="font-medium text-slate-100 line-clamp-1">{task.title}</div>
+                      <div className="text-xs text-slate-400 flex items-center gap-2">
+                        <span className={`px-1.5 py-0.5 rounded text-[10px] font-medium ${urgencyColor[task.urgency]}`}>
+                          {task.urgency.toUpperCase()}
+                        </span>
+                        <span>{Math.round(task.confidence * 100)}% confidence</span>
+                        <span>·</span>
+                        <span>{task.sourceEvents.length} events</span>
+                        {task.refinementCount > 0 && (
+                          <>
+                            <span>·</span>
+                            <span className="text-purple-400">↻{task.refinementCount}</span>
+                          </>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                  <span className={`text-xs px-2 py-0.5 rounded-full ${
+                    task.status === 'ready' ? 'bg-emerald-900/50 text-emerald-300' :
+                    task.status === 'synthesizing' ? 'bg-purple-900/50 text-purple-300 animate-pulse' :
+                    task.status === 'approved' ? 'bg-sky-900/50 text-sky-300' :
+                    'bg-slate-700 text-slate-400'
+                  }`}>
+                    {task.status}
+                  </span>
+                </div>
+
+                {/* Description */}
+                <div className="text-sm text-slate-300 line-clamp-2">
+                  {task.description}
+                </div>
+
+                {/* Proposed action */}
+                {task.proposedAction && !task.proposedAction.executed && (
+                  <div className="bg-purple-900/30 border border-purple-700/50 rounded-lg p-2 text-xs">
+                    <div className="flex items-center gap-1.5 text-purple-300 font-medium mb-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse" />
+                      Proposed: {task.proposedAction.type.replace('_', ' ')}
+                    </div>
+                    <div className="text-slate-400 line-clamp-1">
+                      {task.proposedAction.rationale}
+                    </div>
+                  </div>
+                )}
+
+                {/* Action buttons */}
+                <div className="flex gap-2 pt-1">
+                  {task.status === 'ready' && (
+                    <button
+                      onClick={() => onTaskAction(task.id, 'approve')}
+                      className="px-2.5 py-1 rounded text-xs bg-emerald-600 hover:bg-emerald-500 text-white transition"
+                    >
+                      Approve
+                    </button>
+                  )}
+                  {task.status === 'approved' && task.proposedAction && (
+                    <button
+                      onClick={() => onTaskAction(task.id, 'execute')}
+                      className="px-2.5 py-1 rounded text-xs bg-sky-600 hover:bg-sky-500 text-white transition"
+                    >
+                      Execute
+                    </button>
+                  )}
+                  <button
+                    onClick={() => onTaskAction(task.id, 'refine')}
+                    className="px-2.5 py-1 rounded text-xs bg-purple-700 hover:bg-purple-600 text-white transition"
+                  >
+                    Refine
+                  </button>
+                  <button
+                    onClick={() => onTaskAction(task.id, 'dismiss')}
+                    className="px-2.5 py-1 rounded text-xs bg-slate-700 hover:bg-slate-600 text-slate-200 transition"
+                  >
+                    Dismiss
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Empty state */}
+      {expanded && tasks.length === 0 && cortexEnabled && (
+        <div className="text-center py-6 text-slate-500">
+          <p className="text-lg mb-1">🧠</p>
+          <p className="text-sm">No synthesized tasks yet</p>
+          <p className="text-xs mt-1">Tasks will appear as the Cortex processes incoming events</p>
+        </div>
+      )}
+
+      {/* Disabled state */}
+      {expanded && !cortexEnabled && (
+        <div className="text-center py-6 text-slate-500">
+          <p className="text-lg mb-1">💤</p>
+          <p className="text-sm">Cognitive Synthesis is disabled</p>
+          <p className="text-xs mt-1">Enable Cortex to start synthesizing events into unified tasks</p>
+        </div>
+      )}
     </section>
   );
 }

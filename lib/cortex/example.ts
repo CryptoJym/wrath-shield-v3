@@ -1,0 +1,289 @@
+/**
+ * Working Memory Example Usage
+ *
+ * This file demonstrates how to use the Working Memory buffer system.
+ * Note: This is a server-side only module.
+ */
+
+import { getWorkingMemory } from './working-memory';
+import type { EventSource } from './types';
+
+/**
+ * Example 1: Adding events from different sources
+ */
+async function exampleAddEvents() {
+  const wm = getWorkingMemory();
+
+  console.log('=== Example 1: Adding Events ===\n');
+
+  // Add an email event
+  const emailId = await wm.addEvent({
+    source: 'email',
+    timestamp: new Date().toISOString(),
+    content: 'Email from John: Meeting tomorrow at 3pm to discuss Q4 budget',
+    contentHash: '', // Will be generated automatically
+    initialClassification: {
+      domain: 'productivity',
+      urgency: 'medium',
+      keywords: ['meeting', 'budget'],
+    },
+    processedBySynthesis: false,
+  });
+  console.log(`Added email event: ${emailId}`);
+
+  // Add an iMessage event
+  const imessageId = await wm.addEvent({
+    source: 'imessage',
+    timestamp: new Date(Date.now() + 60000).toISOString(),
+    content: 'Sarah: Can you review the PR I just opened?',
+    contentHash: '', // Will be generated automatically
+    initialClassification: {
+      domain: 'productivity',
+      urgency: 'high',
+      keywords: ['review', 'PR'],
+    },
+    processedBySynthesis: false,
+  });
+  console.log(`Added iMessage event: ${imessageId}`);
+
+  // Add a WHOOP event
+  const whoopId = await wm.addEvent({
+    source: 'whoop',
+    timestamp: new Date(Date.now() + 120000).toISOString(),
+    content: JSON.stringify({
+      recovery_score: 67,
+      hrv: 45,
+      rhr: 52,
+      strain: 12.4,
+    }),
+    contentHash: '', // Will be generated automatically
+    initialClassification: {
+      domain: 'health',
+      urgency: 'background',
+      keywords: ['recovery', 'hrv'],
+    },
+    processedBySynthesis: false,
+    metadata: { type: 'health_metric', provider: 'whoop' },
+  });
+  console.log(`Added WHOOP event: ${whoopId}`);
+
+  // Try to add a duplicate
+  const duplicateId = await wm.addEvent({
+    source: 'email',
+    timestamp: new Date(Date.now() + 180000).toISOString(),
+    content: 'Email from John: Meeting tomorrow at 3pm to discuss Q4 budget', // Same content
+    contentHash: '', // Will be generated automatically
+    processedBySynthesis: false,
+  });
+  console.log(`Duplicate event result: ${duplicateId || 'REJECTED (duplicate)'}\n`);
+}
+
+/**
+ * Example 2: Retrieving unprocessed events
+ */
+async function exampleGetUnprocessed() {
+  const wm = getWorkingMemory();
+
+  console.log('=== Example 2: Retrieving Unprocessed Events ===\n');
+
+  const events = await wm.getUnprocessed(10);
+  console.log(`Found ${events.length} unprocessed events:\n`);
+
+  for (const event of events) {
+    const contentPreview =
+      event.content.length > 60 ? event.content.slice(0, 60) + '...' : event.content;
+    console.log(`[${event.source.toUpperCase()}] ${contentPreview}`);
+    console.log(`  ID: ${event.id}`);
+    console.log(`  Timestamp: ${event.timestamp}`);
+    console.log(
+      `  Classification: ${event.initialClassification?.domain || 'none'} (${event.initialClassification?.urgency || 'none'})`
+    );
+    console.log('');
+  }
+}
+
+/**
+ * Example 3: Getting recent events
+ */
+async function exampleGetRecent() {
+  const wm = getWorkingMemory();
+
+  console.log('=== Example 3: Getting Recent Events (Last 24 Hours) ===\n');
+
+  const recentEvents = await wm.getRecent(24);
+  console.log(`${recentEvents.length} events in the last 24 hours\n`);
+
+  // Group by source
+  const bySource: Record<string, number> = {};
+  for (const event of recentEvents) {
+    bySource[event.source] = (bySource[event.source] || 0) + 1;
+  }
+
+  console.log('Breakdown by source:');
+  for (const [source, count] of Object.entries(bySource)) {
+    console.log(`  ${source}: ${count} events`);
+  }
+  console.log('');
+}
+
+/**
+ * Example 4: Processing events (synthesis simulation)
+ */
+async function exampleProcessEvents() {
+  const wm = getWorkingMemory();
+
+  console.log('=== Example 4: Processing Events (Synthesis Simulation) ===\n');
+
+  // Get unprocessed events
+  const events = await wm.getUnprocessed(5);
+  console.log(`Retrieved ${events.length} events for synthesis`);
+
+  if (events.length === 0) {
+    console.log('No events to process\n');
+    return;
+  }
+
+  // Simulate synthesis task
+  const synthesisTaskId = `synth-${Date.now()}`;
+  console.log(`Synthesis task ID: ${synthesisTaskId}`);
+
+  // Extract event IDs
+  const eventIds = events.map((e) => e.id);
+
+  // Simulate processing (in real system, this would call LLM for synthesis)
+  console.log('Simulating synthesis...');
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+
+  // Mark as processed
+  await wm.markProcessed(eventIds, synthesisTaskId);
+  console.log(`✓ Marked ${eventIds.length} events as processed\n`);
+
+  // Verify they're no longer in unprocessed list
+  const remaining = await wm.getUnprocessed(5);
+  console.log(`Remaining unprocessed events: ${remaining.length}\n`);
+}
+
+/**
+ * Example 5: Getting specific events by ID
+ */
+async function exampleGetByIds() {
+  const wm = getWorkingMemory();
+
+  console.log('=== Example 5: Retrieving Specific Events by ID ===\n');
+
+  // Get a few events first
+  const allEvents = await wm.getUnprocessed(3);
+  if (allEvents.length === 0) {
+    console.log('No events available\n');
+    return;
+  }
+
+  const ids = allEvents.map((e) => e.id);
+  console.log(`Looking up ${ids.length} specific event IDs...`);
+
+  // Retrieve them
+  const specificEvents = await wm.getByIds(ids);
+  console.log(`Retrieved ${specificEvents.length} events:\n`);
+
+  for (const event of specificEvents) {
+    console.log(`ID: ${event.id}`);
+    console.log(`Source: ${event.source}`);
+    console.log(`Content: ${event.content.slice(0, 50)}...`);
+    console.log('');
+  }
+}
+
+/**
+ * Example 6: Pruning old events
+ */
+async function examplePruning() {
+  const wm = getWorkingMemory();
+
+  console.log('=== Example 6: Pruning Old Processed Events ===\n');
+
+  // Check stats before pruning
+  const statsBefore = await wm.getStats();
+  console.log(`Total events before pruning: ${statsBefore.totalEvents}`);
+  console.log(`Processed events: ${statsBefore.totalEvents - statsBefore.unprocessedEvents}`);
+
+  // Prune events older than 7 days (168 hours)
+  const pruned = await wm.prune(168);
+  console.log(`\nPruned ${pruned} events older than 7 days`);
+
+  // Check stats after pruning
+  const statsAfter = await wm.getStats();
+  console.log(`Total events after pruning: ${statsAfter.totalEvents}\n`);
+}
+
+/**
+ * Example 7: Getting statistics
+ */
+async function exampleStats() {
+  const wm = getWorkingMemory();
+
+  console.log('=== Example 7: Working Memory Statistics ===\n');
+
+  const stats = await wm.getStats();
+
+  console.log('Overall Statistics:');
+  console.log(`  Total events: ${stats.totalEvents}`);
+  console.log(`  Unprocessed: ${stats.unprocessedEvents}`);
+  console.log(`  Processed in last 24h: ${stats.processedLast24h}`);
+
+  if (stats.oldestEventTimestamp) {
+    const oldest = new Date(stats.oldestEventTimestamp * 1000);
+    console.log(`  Oldest event: ${oldest.toISOString()}`);
+  }
+
+  if (stats.newestEventTimestamp) {
+    const newest = new Date(stats.newestEventTimestamp * 1000);
+    console.log(`  Newest event: ${newest.toISOString()}`);
+  }
+
+  console.log('\nEvents by Source:');
+  for (const [source, count] of Object.entries(stats.eventsBySource)) {
+    console.log(`  ${source}: ${count}`);
+  }
+  console.log('');
+}
+
+/**
+ * Run all examples
+ */
+async function runAllExamples() {
+  console.log('\n╔════════════════════════════════════════════════════════╗');
+  console.log('║      Working Memory System - Usage Examples           ║');
+  console.log('╚════════════════════════════════════════════════════════╝\n');
+
+  try {
+    await exampleAddEvents();
+    await exampleGetUnprocessed();
+    await exampleGetRecent();
+    await exampleProcessEvents();
+    await exampleGetByIds();
+    await examplePruning();
+    await exampleStats();
+
+    console.log('✓ All examples completed successfully!\n');
+  } catch (error) {
+    console.error('Error running examples:', error);
+  }
+}
+
+// Run examples if this file is executed directly
+if (require.main === module) {
+  runAllExamples().then(() => {
+    console.log('Examples finished. Database connection will close on exit.');
+  });
+}
+
+export {
+  exampleAddEvents,
+  exampleGetUnprocessed,
+  exampleGetRecent,
+  exampleProcessEvents,
+  exampleGetByIds,
+  examplePruning,
+  exampleStats,
+  runAllExamples,
+};

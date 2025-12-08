@@ -448,7 +448,7 @@ export async function deleteTask(taskId: string): Promise<boolean> {
     return deleteLocalTask(localTaskId);
   }
 
-  // GitHub and Motion don't support delete through our interface
+  // GitHub doesn't support delete through our interface (only close)
   console.warn('[PM Integration] Delete not supported for source:', source);
   return false;
 }

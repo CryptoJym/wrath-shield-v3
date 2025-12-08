@@ -32,6 +32,12 @@ import type {
   PsychSignal,
   AgenticAction,
   AgenticActionInput,
+  UnifiedTask,
+  UnifiedTaskInput,
+  SynthesisPattern,
+  SynthesisPatternInput,
+  WorkingMemoryEvent,
+  WorkingMemoryEventInput,
 } from './types';
 
 // Ensure this module is only used server-side
@@ -1106,12 +1112,12 @@ export function insertAgenticActions(actions: AgenticActionInput[]): void {
   })();
 }
 
-export function listAgenticActions(opts: { status?: AgenticAction['status']; limit?: number; userId?: string } = {}): AgenticAction[] {
+export function listAgenticActions(opts: { status?: AgenticAction['status']; limit?: number; userId?: string; allUsers?: boolean } = {}): AgenticAction[] {
   if (!hasAgenticTable()) return [];
   const db = getDatabase().getRawDb() as any;
-  const { status, limit = 50 } = opts;
+  const { status, limit = 50, allUsers = false } = opts;
   const uid = resolveUserId(opts.userId);
-  const scoped = hasUserIdColumn('agentic_actions');
+  const scoped = hasUserIdColumn('agentic_actions') && !allUsers;
   if (status) {
     const query = scoped
       ? db.prepare(`SELECT * FROM agentic_actions WHERE status = ? AND user_id = ? ORDER BY created_at DESC LIMIT ?`)
@@ -1150,4 +1156,326 @@ export function updateAgenticActionStatusWithMeta(
     `UPDATE agentic_actions SET status = ?, metadata = COALESCE(?, metadata), updated_at = strftime('%s','now') WHERE id = ?`
   );
   stmt.run(status, metaJson, id);
+}
+
+// ---------------------------------------------------------------------------
+// Cognitive Synthesis Engine
+// ---------------------------------------------------------------------------
+
+function hasSynthesisTable(tableName: string): boolean {
+  try {
+    const db = getDatabase().getRawDb() as any;
+    const row = db.prepare(`SELECT name FROM sqlite_master WHERE type='table' AND name=?`).get(tableName);
+    return !!row;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Working Memory Events - Insert new event
+ */
+export function insertWorkingMemoryEvent(event: WorkingMemoryEventInput): void {
+  if (!hasSynthesisTable('working_memory_events')) return;
+  const db = getDatabase().getRawDb() as any;
+  const stmt = db.prepare(`
+    INSERT INTO working_memory_events (
+      id, source, timestamp, content, content_hash, embedding_json,
+      initial_classification, processed_by_synthesis, synthesis_task_id
+    )
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+    ON CONFLICT(id) DO UPDATE SET
+      source = excluded.source,
+      timestamp = excluded.timestamp,
+      content = excluded.content,
+      content_hash = excluded.content_hash,
+      embedding_json = excluded.embedding_json,
+      initial_classification = excluded.initial_classification,
+      processed_by_synthesis = excluded.processed_by_synthesis,
+      synthesis_task_id = excluded.synthesis_task_id
+  `);
+  stmt.run(
+    event.id,
+    event.source,
+    event.timestamp,
+    event.content,
+    event.content_hash,
+    event.embedding_json ?? null,
+    event.initial_classification ?? null,
+    event.processed_by_synthesis,
+    event.synthesis_task_id ?? null
+  );
+}
+
+/**
+ * Working Memory Events - Batch insert
+ */
+export function insertWorkingMemoryEvents(events: WorkingMemoryEventInput[]): void {
+  if (events.length === 0 || !hasSynthesisTable('working_memory_events')) return;
+  const db = getDatabase().getRawDb() as any;
+  db.transaction(() => {
+    for (const event of events) {
+      insertWorkingMemoryEvent(event);
+    }
+  })();
+}
+
+/**
+ * Working Memory Events - Get unprocessed events
+ */
+export function getUnprocessedEvents(limit: number = 100): WorkingMemoryEvent[] {
+  if (!hasSynthesisTable('working_memory_events')) return [];
+  const db = getDatabase().getRawDb() as any;
+  const stmt = db.prepare(`
+    SELECT * FROM working_memory_events
+    WHERE processed_by_synthesis = 0
+    ORDER BY timestamp DESC
+    LIMIT ?
+  `);
+  return stmt.all(limit);
+}
+
+/**
+ * Working Memory Events - Get events by source
+ */
+export function getEventsBySource(source: string, limit: number = 50): WorkingMemoryEvent[] {
+  if (!hasSynthesisTable('working_memory_events')) return [];
+  const db = getDatabase().getRawDb() as any;
+  const stmt = db.prepare(`
+    SELECT * FROM working_memory_events
+    WHERE source = ?
+    ORDER BY timestamp DESC
+    LIMIT ?
+  `);
+  return stmt.all(source, limit);
+}
+
+/**
+ * Working Memory Events - Mark as processed
+ */
+export function markEventProcessed(eventId: string, taskId?: string): void {
+  if (!hasSynthesisTable('working_memory_events')) return;
+  const db = getDatabase().getRawDb() as any;
+  const stmt = db.prepare(`
+    UPDATE working_memory_events
+    SET processed_by_synthesis = 1, synthesis_task_id = ?
+    WHERE id = ?
+  `);
+  stmt.run(taskId ?? null, eventId);
+}
+
+/**
+ * Working Memory Events - Check for duplicate by hash
+ */
+export function findEventByHash(contentHash: string): WorkingMemoryEvent | null {
+  if (!hasSynthesisTable('working_memory_events')) return null;
+  const db = getDatabase().getRawDb() as any;
+  const stmt = db.prepare(`
+    SELECT * FROM working_memory_events
+    WHERE content_hash = ?
+    LIMIT 1
+  `);
+  return stmt.get(contentHash) || null;
+}
+
+/**
+ * Unified Tasks - Insert new task
+ */
+export function insertUnifiedTask(task: UnifiedTaskInput): void {
+  if (!hasSynthesisTable('unified_tasks')) return;
+  const db = getDatabase().getRawDb() as any;
+  const stmt = db.prepare(`
+    INSERT INTO unified_tasks (
+      id, title, description, confidence, urgency, domain,
+      source_events_json, proposed_action_json, status,
+      last_refined_at, refinement_count
+    )
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    ON CONFLICT(id) DO UPDATE SET
+      title = excluded.title,
+      description = excluded.description,
+      confidence = excluded.confidence,
+      urgency = excluded.urgency,
+      domain = excluded.domain,
+      source_events_json = excluded.source_events_json,
+      proposed_action_json = excluded.proposed_action_json,
+      status = excluded.status,
+      last_refined_at = excluded.last_refined_at,
+      refinement_count = excluded.refinement_count,
+      updated_at = strftime('%s', 'now')
+  `);
+  stmt.run(
+    task.id,
+    task.title,
+    task.description ?? null,
+    task.confidence,
+    task.urgency,
+    task.domain ?? null,
+    task.source_events_json ?? null,
+    task.proposed_action_json ?? null,
+    task.status,
+    task.last_refined_at ?? null,
+    task.refinement_count
+  );
+}
+
+/**
+ * Unified Tasks - Get by status
+ */
+export function getUnifiedTasksByStatus(
+  status: UnifiedTask['status'],
+  limit: number = 50
+): UnifiedTask[] {
+  if (!hasSynthesisTable('unified_tasks')) return [];
+  const db = getDatabase().getRawDb() as any;
+  const stmt = db.prepare(`
+    SELECT * FROM unified_tasks
+    WHERE status = ?
+    ORDER BY urgency, confidence DESC, created_at DESC
+    LIMIT ?
+  `);
+  return stmt.all(status, limit);
+}
+
+/**
+ * Unified Tasks - Get by domain
+ */
+export function getUnifiedTasksByDomain(domain: string, limit: number = 50): UnifiedTask[] {
+  if (!hasSynthesisTable('unified_tasks')) return [];
+  const db = getDatabase().getRawDb() as any;
+  const stmt = db.prepare(`
+    SELECT * FROM unified_tasks
+    WHERE domain = ?
+    ORDER BY status, urgency, confidence DESC
+    LIMIT ?
+  `);
+  return stmt.all(domain, limit);
+}
+
+/**
+ * Unified Tasks - Update status
+ */
+export function updateUnifiedTaskStatus(id: string, status: UnifiedTask['status']): void {
+  if (!hasSynthesisTable('unified_tasks')) return;
+  const db = getDatabase().getRawDb() as any;
+  const stmt = db.prepare(`
+    UPDATE unified_tasks
+    SET status = ?, updated_at = strftime('%s', 'now')
+    WHERE id = ?
+  `);
+  stmt.run(status, id);
+}
+
+/**
+ * Unified Tasks - Increment refinement count
+ */
+export function refineUnifiedTask(id: string, newConfidence?: number): void {
+  if (!hasSynthesisTable('unified_tasks')) return;
+  const db = getDatabase().getRawDb() as any;
+  const stmt = db.prepare(`
+    UPDATE unified_tasks
+    SET refinement_count = refinement_count + 1,
+        last_refined_at = strftime('%s', 'now'),
+        confidence = COALESCE(?, confidence),
+        updated_at = strftime('%s', 'now')
+    WHERE id = ?
+  `);
+  stmt.run(newConfidence ?? null, id);
+}
+
+/**
+ * Unified Tasks - Get task by ID
+ */
+export function getUnifiedTaskById(id: string): UnifiedTask | null {
+  if (!hasSynthesisTable('unified_tasks')) return null;
+  const db = getDatabase().getRawDb() as any;
+  const stmt = db.prepare(`SELECT * FROM unified_tasks WHERE id = ?`);
+  return stmt.get(id) || null;
+}
+
+/**
+ * Synthesis Patterns - Insert new pattern
+ */
+export function insertSynthesisPattern(pattern: SynthesisPatternInput): void {
+  if (!hasSynthesisTable('synthesis_patterns')) return;
+  const db = getDatabase().getRawDb() as any;
+  const stmt = db.prepare(`
+    INSERT INTO synthesis_patterns (
+      id, pattern_type, description, trigger_conditions,
+      suggested_behavior, success_rate, usage_count
+    )
+    VALUES (?, ?, ?, ?, ?, ?, ?)
+    ON CONFLICT(id) DO UPDATE SET
+      pattern_type = excluded.pattern_type,
+      description = excluded.description,
+      trigger_conditions = excluded.trigger_conditions,
+      suggested_behavior = excluded.suggested_behavior,
+      success_rate = excluded.success_rate,
+      usage_count = excluded.usage_count,
+      updated_at = strftime('%s', 'now')
+  `);
+  stmt.run(
+    pattern.id,
+    pattern.pattern_type,
+    pattern.description,
+    pattern.trigger_conditions ?? null,
+    pattern.suggested_behavior ?? null,
+    pattern.success_rate,
+    pattern.usage_count
+  );
+}
+
+/**
+ * Synthesis Patterns - Get by type
+ */
+export function getSynthesisPatternsByType(
+  patternType: SynthesisPattern['pattern_type']
+): SynthesisPattern[] {
+  if (!hasSynthesisTable('synthesis_patterns')) return [];
+  const db = getDatabase().getRawDb() as any;
+  const stmt = db.prepare(`
+    SELECT * FROM synthesis_patterns
+    WHERE pattern_type = ?
+    ORDER BY success_rate DESC, usage_count DESC
+  `);
+  return stmt.all(patternType);
+}
+
+/**
+ * Synthesis Patterns - Increment usage and update success rate
+ */
+export function updatePatternMetrics(id: string, success: boolean): void {
+  if (!hasSynthesisTable('synthesis_patterns')) return;
+  const db = getDatabase().getRawDb() as any;
+
+  // Get current metrics
+  const current = db.prepare(`SELECT usage_count, success_rate FROM synthesis_patterns WHERE id = ?`).get(id) as { usage_count: number; success_rate: number } | undefined;
+
+  if (!current) return;
+
+  // Calculate new success rate using running average
+  const newUsageCount = current.usage_count + 1;
+  const newSuccessRate = ((current.success_rate * current.usage_count) + (success ? 1 : 0)) / newUsageCount;
+
+  const stmt = db.prepare(`
+    UPDATE synthesis_patterns
+    SET usage_count = ?,
+        success_rate = ?,
+        updated_at = strftime('%s', 'now')
+    WHERE id = ?
+  `);
+  stmt.run(newUsageCount, newSuccessRate, id);
+}
+
+/**
+ * Synthesis Patterns - Get all patterns
+ */
+export function getAllSynthesisPatterns(): SynthesisPattern[] {
+  if (!hasSynthesisTable('synthesis_patterns')) return [];
+  const db = getDatabase().getRawDb() as any;
+  const stmt = db.prepare(`
+    SELECT * FROM synthesis_patterns
+    ORDER BY success_rate DESC, usage_count DESC
+  `);
+  return stmt.all();
 }

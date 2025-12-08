@@ -113,5 +113,5 @@ export const AGENT_PROVIDER_MAP: Record<string, { provider: LLMProvider; model: 
   'agent.health': { provider: 'openai', model: 'gpt-5.1' },
 
   // Default fallback - Grok for speed
-  'default': { provider: 'xai', model: 'grok-4-1-fast' },
+  'default': { provider: 'xai', model: 'openai/gpt-5.1' },
 };

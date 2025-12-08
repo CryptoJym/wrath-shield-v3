@@ -96,7 +96,7 @@ export default function ForgeDashboard() {
       const res = await fetch('/api/hyro/quests', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'generate', count: 3 }),
+        body: JSON.stringify({ action: 'generate-daily' }),
       });
       const json = await res.json();
       if (json.success && data) {

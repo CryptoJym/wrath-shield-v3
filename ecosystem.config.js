@@ -20,9 +20,6 @@ module.exports = {
       args: 'run start',
       cwd: __dirname,
 
-      // Node.js version constraint
-      node_args: '--version', // PM2 will verify Node 20+ via package.json engines field
-
       // Instance management
       instances: 1,
       exec_mode: 'fork', // Use 'cluster' for multiple instances
@@ -215,6 +212,22 @@ module.exports = {
       },
       error_file: './logs/proactive-tick-error.log',
       out_file: './logs/proactive-tick-out.log',
+      log_date_format: 'YYYY-MM-DD HH:mm:ss Z',
+      merge_logs: true,
+    },
+    {
+      name: 'agentic-executor',
+      script: 'bash',
+      args: "-lc 'cd " + __dirname + " && npx tsx scripts/run-executors.ts'",
+      cwd: __dirname,
+      instances: 1,
+      exec_mode: 'fork',
+      autorestart: false,
+      watch: false,
+      cron_restart: '*/10 * * * *', // every 10 minutes
+      env: { NODE_ENV: 'production' },
+      error_file: './logs/agentic-executor-error.log',
+      out_file: './logs/agentic-executor-out.log',
       log_date_format: 'YYYY-MM-DD HH:mm:ss Z',
       merge_logs: true,
     },

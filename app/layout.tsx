@@ -35,7 +35,6 @@ export default function RootLayout({
             <a href="/inbox" style={{ color: 'var(--color-text-secondary)' }}>Inbox</a>
             <a href="/pm" style={{ color: 'var(--color-text-secondary)' }}>PM</a>
             <a href="/finance" style={{ color: 'var(--color-text-secondary)' }}>Finance</a>
-            <a href="/comms" style={{ color: 'var(--color-text-secondary)' }}>Comms</a>
             <a href="/hyro" style={{ color: 'var(--color-text-secondary)' }}>Education</a>
             <a href="/eeg" style={{ color: 'var(--color-text-secondary)' }}>EEG</a>
             <a href="/feed" style={{ color: 'var(--color-text-secondary)' }}>Feed</a>

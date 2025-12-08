@@ -5,7 +5,7 @@
  * - life_charter.json - Global principles and escalation rules
  * - domains.json - Life domains (Family, Utlyze, Vuplicity, etc.)
  * - agents.json - Agent definitions with system prompts
- * - mappings.json - Motion/GitHub project mappings
+ * - mappings.json - GitHub project mappings (Motion deprecated 2024-12)
  */
 
 import * as fs from 'fs';
@@ -57,7 +57,6 @@ export interface Domain {
   default_agent: string;
   priority_weight: number;
   sensitivity_level?: string;
-  motion_workspace?: string;
   github_orgs?: string[];
 }
 
@@ -85,12 +84,6 @@ export interface AgentsConfig {
   agents: AgentDefinition[];
 }
 
-export interface MotionWorkspace {
-  id: string;
-  name: string;
-  description: string;
-}
-
 export interface GitHubOrg {
   id: string;
   name: string;
@@ -106,43 +99,31 @@ export interface GitHubRepo {
   sensitivity?: string;
 }
 
-export interface ProjectMapping {
+export interface DomainMapping {
   id: string;
   domains: string[];
-  motion_workspace_id: string;
-  motion_projects: string[];
   github_repos: string[];
-  direction: 'bidirectional' | 'motion_primary' | 'github_primary' | 'motion_only' | 'github_only' | 'none';
   auto_create_issue: boolean;
-  auto_create_task: boolean;
-  sync_status: boolean;
   sync_labels: boolean;
   sensitivity_level?: string;
   require_approval_for?: string[];
+  notes?: string;
 }
 
 export interface SyncRules {
   default_sync_interval_minutes: number;
-  status_mapping: {
-    motion_to_github: Record<string, string>;
-    github_to_motion: Record<string, string>;
-  };
-  priority_mapping: {
-    motion_to_github: Record<string, string[]>;
-  };
-  conflict_resolution: string;
+  github_status_mapping: Record<string, string>;
+  github_priority_labels: Record<string, string[]>;
 }
 
 export interface MappingsConfig {
   version: number;
-  motion: {
-    workspaces: MotionWorkspace[];
-  };
+  _note?: string;
   github: {
     organizations: GitHubOrg[];
     repos: GitHubRepo[];
   };
-  project_mappings: ProjectMapping[];
+  domain_mappings: DomainMapping[];
   sync_rules: SyncRules;
 }
 
@@ -258,17 +239,9 @@ export function getAgentsForDomain(domainId: string): AgentDefinition[] {
 /**
  * Get mapping for a domain
  */
-export function getMappingForDomain(domainId: string): ProjectMapping | null {
+export function getMappingForDomain(domainId: string): DomainMapping | null {
   const mappings = getMappings();
-  return mappings.project_mappings.find(m => m.domains.includes(domainId)) || null;
-}
-
-/**
- * Get Motion workspace by ID
- */
-export function getMotionWorkspace(workspaceId: string): MotionWorkspace | null {
-  const mappings = getMappings();
-  return mappings.motion.workspaces.find(w => w.id === workspaceId) || null;
+  return mappings.domain_mappings.find(m => m.domains.includes(domainId)) || null;
 }
 
 /**

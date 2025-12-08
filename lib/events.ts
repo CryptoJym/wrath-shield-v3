@@ -42,7 +42,7 @@ CREATE INDEX IF NOT EXISTS idx_events_routed ON events(routed_target);
 CREATE INDEX IF NOT EXISTS idx_events_junk ON events(junk);
 `;
 
-function getDb() {
+export function getDb() {
   if (!BetterSqlite3) return null;
   ensureDir();
   let db: any;
@@ -73,6 +73,8 @@ function migrate(db: any) {
   if (!have('rsvp_status')) alters.push("ALTER TABLE events ADD COLUMN rsvp_status TEXT;");
   if (!have('flagged')) alters.push("ALTER TABLE events ADD COLUMN flagged INTEGER DEFAULT 0;");
   if (!have('snoozed_until')) alters.push("ALTER TABLE events ADD COLUMN snoozed_until INTEGER;");
+  // Contact association column
+  if (!have('contact_id')) alters.push("ALTER TABLE events ADD COLUMN contact_id TEXT;");
   if (alters.length) {
     const tx = db.transaction(() => alters.forEach((sql) => db.exec(sql)));
     tx();
@@ -84,6 +86,7 @@ function migrate(db: any) {
     db.exec("CREATE INDEX IF NOT EXISTS idx_events_rsvp ON events(rsvp_status);");
     db.exec("CREATE INDEX IF NOT EXISTS idx_events_flagged ON events(flagged);");
     db.exec("CREATE INDEX IF NOT EXISTS idx_events_snoozed ON events(snoozed_until);");
+    db.exec("CREATE INDEX IF NOT EXISTS idx_events_contact_id ON events(contact_id);");
   }
 }
 
@@ -109,6 +112,8 @@ export type EventRow = {
   rsvp_status?: string | null;
   flagged?: number;
   snoozed_until?: number | null;
+  // Contact association
+  contact_id?: string | null;
 };
 
 export function upsertEvents(rows: EventRow[], user_id?: string) {
@@ -173,6 +178,7 @@ export function listRecentEvents(limit = 200, user_id?: string): EventRow[] {
     rsvp_status: (r as any).rsvp_status ?? null,
     flagged: (r as any).flagged ?? 0,
     snoozed_until: (r as any).snoozed_until ?? null,
+    contact_id: (r as any).contact_id ?? null,
   }));
 }
 
@@ -197,6 +203,7 @@ export function listEventsNeedingReview(limit = 50, user_id?: string): EventRow[
     rsvp_status: (r as any).rsvp_status ?? null,
     flagged: (r as any).flagged ?? 0,
     snoozed_until: (r as any).snoozed_until ?? null,
+    contact_id: (r as any).contact_id ?? null,
   }));
 }
 

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { FileText, Plus, Eye, Check, ChevronDown, ChevronUp, Loader2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
@@ -43,6 +43,23 @@ export function ReportsArchive({
   const cyclesWithoutReports = cycles.filter(
     cycle => !reports.some(r => r.cycle_start === cycle.start && r.cycle_end === cycle.end)
   );
+
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setShowCreateDropdown(false);
+      }
+    }
+
+    if (showCreateDropdown) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showCreateDropdown]);
 
   const handleCreate = async (cycle: CycleOption) => {
     setShowCreateDropdown(false);
@@ -90,7 +107,7 @@ export function ReportsArchive({
           </div>
         </div>
         <div className="flex items-center gap-3">
-          <div className="relative">
+          <div className="relative" ref={dropdownRef}>
             <button
               onClick={(e) => {
                 e.stopPropagation();

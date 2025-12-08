@@ -1,0 +1,145 @@
+[
+    {
+        "id": "6.RL.1",
+        "category": "Reading",
+        "domain": "Literature",
+        "description": "Cite textual evidence to support analysis of what the text says explicitly as well as inferences drawn from the text.",
+        "prerequisites": [],
+        "cluster": "Key Ideas and Details"
+    },
+    {
+        "id": "6.RL.2",
+        "category": "Reading",
+        "domain": "Literature",
+        "description": "Determine a theme or central idea of a text and how it is conveyed through particular details; provide a summary of the text distinct from personal opinions or judgments.",
+        "prerequisites": [
+            "6.RL.1"
+        ],
+        "cluster": "Key Ideas and Details"
+    },
+    {
+        "id": "6.RL.3",
+        "category": "Reading",
+        "domain": "Literature",
+        "description": "Describe how a particular story's or drama's plot unfolds in a series of episodes as well as how the characters respond or change as the plot moves toward a resolution.",
+        "prerequisites": [
+            "6.RL.1"
+        ],
+        "cluster": "Key Ideas and Details"
+    },
+    {
+        "id": "6.RL.4",
+        "category": "Reading",
+        "domain": "Literature",
+        "description": "Determine the meaning of words and phrases as they are used in a text, including figurative and connotative meanings; analyze the impact of a specific word choice on meaning and tone.",
+        "prerequisites": [],
+        "cluster": "Craft and Structure"
+    },
+    {
+        "id": "6.RL.5",
+        "category": "Reading",
+        "domain": "Literature",
+        "description": "Analyze how a particular sentence, chapter, scene, or stanza fits into the overall structure of a text and contributes to the development of the theme, setting, or plot.",
+        "prerequisites": [
+            "6.RL.2"
+        ],
+        "cluster": "Craft and Structure"
+    },
+    {
+        "id": "6.RL.6",
+        "category": "Reading",
+        "domain": "Literature",
+        "description": "Explain how an author develops the point of view of the narrator or speaker in a text.",
+        "prerequisites": [
+            "6.RL.1"
+        ],
+        "cluster": "Craft and Structure"
+    },
+    {
+        "id": "6.RI.1",
+        "category": "Reading",
+        "domain": "Informational Text",
+        "description": "Cite textual evidence to support analysis of what the text says explicitly as well as inferences drawn from the text.",
+        "prerequisites": [],
+        "cluster": "Key Ideas and Details"
+    },
+    {
+        "id": "6.RI.2",
+        "category": "Reading",
+        "domain": "Informational Text",
+        "description": "Determine a central idea of a text and how it is conveyed through particular details; provide a summary of the text distinct from personal opinions or judgments.",
+        "prerequisites": [
+            "6.RI.1"
+        ],
+        "cluster": "Key Ideas and Details"
+    },
+    {
+        "id": "6.RI.3",
+        "category": "Reading",
+        "domain": "Informational Text",
+        "description": "Analyze in detail how a key individual, event, or idea is introduced, illustrated, and elaborated in a text (e.g., through examples or anecdotes).",
+        "prerequisites": [
+            "6.RI.1"
+        ],
+        "cluster": "Key Ideas and Details"
+    },
+    {
+        "id": "6.RI.4",
+        "category": "Reading",
+        "domain": "Informational Text",
+        "description": "Determine the meaning of words and phrases as they are used in a text, including figurative, connotative, and technical meanings.",
+        "prerequisites": [],
+        "cluster": "Craft and Structure"
+    },
+    {
+        "id": "6.RI.5",
+        "category": "Reading",
+        "domain": "Informational Text",
+        "description": "Analyze how a particular sentence, paragraph, chapter, or section fits into the overall structure of a text and contributes to the development of the ideas.",
+        "prerequisites": [
+            "6.RI.2"
+        ],
+        "cluster": "Craft and Structure"
+    },
+    {
+        "id": "6.RI.6",
+        "category": "Reading",
+        "domain": "Informational Text",
+        "description": "Determine an author's point of view or purpose in a text and explain how it is conveyed in the text.",
+        "prerequisites": [
+            "6.RI.1"
+        ],
+        "cluster": "Craft and Structure"
+    },
+    {
+        "id": "6.RI.7",
+        "category": "Reading",
+        "domain": "Informational Text",
+        "description": "Integrate information presented in different media or formats (e.g., visually, quantitatively) as well as in words to develop a coherent understanding of a topic or issue.",
+        "prerequisites": [
+            "6.RI.1"
+        ],
+        "cluster": "Integration of Knowledge and Ideas"
+    },
+    {
+        "id": "6.RI.8",
+        "category": "Reading",
+        "domain": "Informational Text",
+        "description": "Trace and evaluate the argument and specific claims in a text, distinguishing claims that are supported by reasons and evidence from claims that are not.",
+        "prerequisites": [
+            "6.RI.1",
+            "6.RI.2"
+        ],
+        "cluster": "Integration of Knowledge and Ideas"
+    },
+    {
+        "id": "6.RI.9",
+        "category": "Reading",
+        "domain": "Informational Text",
+        "description": "Compare and contrast one author's presentation of events with that of another (e.g., a memoir written by and a biography on the same person).",
+        "prerequisites": [
+            "6.RI.6"
+        ],
+        "cluster": "Integration of Knowledge and Ideas"
+    }
+]

@@ -192,6 +192,18 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { action } = body;
 
+    // Generate daily quests (standards-based)
+    if (action === 'generate-daily') {
+      const { generateDailyStandardsQuests } = await import('@/lib/hyro/forge-quest-generator');
+      const quests = await generateDailyStandardsQuests(studentId);
+
+      return NextResponse.json({
+        success: true,
+        quests,
+        message: `Generated ${quests.length} daily quests`
+      });
+    }
+
     // Generate quest from single assignment
     if (action === 'generate') {
       const { assignment } = body as { assignment: AssignmentInput };

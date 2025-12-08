@@ -1,54 +1,6 @@
 {
-  "version": 1,
-  "motion": {
-    "workspaces": [
-      {
-        "id": "ws_private",
-        "name": "my_tasks_private",
-        "description": "James Private - deep research, private experiments, personal projects."
-      },
-      {
-        "id": "ws_my_team",
-        "name": "my_team",
-        "description": "Main team workspace for operations and cross-domain work."
-      },
-      {
-        "id": "ws_utlyze",
-        "name": "utlyze",
-        "description": "Utlyze core and its ventures, including Vuplicity and Reward."
-      },
-      {
-        "id": "ws_reward",
-        "name": "new_reward",
-        "description": "New Reward AI-first lead-gen & marketing."
-      },
-      {
-        "id": "ws_hyro",
-        "name": "hyro_education_development",
-        "description": "Hyro's education & development tracking."
-      },
-      {
-        "id": "ws_lisa",
-        "name": "lisa_wife",
-        "description": "Lisa/family-related tasks and home logistics."
-      },
-      {
-        "id": "ws_vuplicity",
-        "name": "vuplicity",
-        "description": "Vuplicity ops & product - FCRA compliance."
-      },
-      {
-        "id": "ws_solutionstream",
-        "name": "solutionstream",
-        "description": "SolutionStream client work and initiatives."
-      },
-      {
-        "id": "ws_kahoa",
-        "name": "kahoa",
-        "description": "Kahoa AI training and infrastructure."
-      }
-    ]
-  },
+  "version": 2,
+  "_note": "Motion integration deprecated as of 2024-12. All task management now uses GitHub.",
   "github": {
     "organizations": [
       {
@@ -144,141 +96,52 @@
       }
     ]
   },
-  "project_mappings": [
+  "domain_mappings": [
     {
       "id": "mapping_utlyze_core",
       "domains": ["utlyze_core"],
-      "motion_workspace_id": "ws_utlyze",
-      "motion_projects": ["Utlyze Core", "Of One Ecosystem"],
       "github_repos": ["repo_wrath_shield", "repo_ceoofone", "repo_vcofone", "repo_lawyerofone", "repo_cro_compass"],
-      "direction": "bidirectional",
       "auto_create_issue": true,
-      "auto_create_task": true,
-      "sync_status": true,
-      "sync_labels": true
+      "sync_labels": true,
+      "notes": "Primary development repos for Utlyze and Of One ecosystem"
     },
     {
       "id": "mapping_vuplicity",
       "domains": ["vuplicity"],
-      "motion_workspace_id": "ws_vuplicity",
-      "motion_projects": ["Vuplicity Platform", "Vuplicity HR Portal", "Vuplicity Employee Portal"],
       "github_repos": ["repo_fcra_matrix", "repo_vuplicity_api", "repo_vuplicity_hr", "repo_vuplicity_employee"],
-      "direction": "bidirectional",
       "auto_create_issue": true,
-      "auto_create_task": true,
-      "sync_status": true,
       "sync_labels": true,
       "sensitivity_level": "high_compliance",
-      "require_approval_for": ["delete", "close_milestone", "change_assignee"]
+      "require_approval_for": ["delete", "close_milestone", "change_assignee"],
+      "notes": "High-compliance domain - FCRA regulated"
     },
     {
       "id": "mapping_solutionstream",
       "domains": ["solutionstream"],
-      "motion_workspace_id": "ws_solutionstream",
-      "motion_projects": ["SolutionStream Initiatives", "Client Projects"],
       "github_repos": ["repo_solutionstream_site"],
-      "direction": "motion_primary",
-      "auto_create_issue": false,
-      "auto_create_task": true,
-      "sync_status": true,
-      "sync_labels": false
+      "auto_create_issue": true,
+      "sync_labels": false,
+      "notes": "Client work and initiatives"
     },
     {
       "id": "mapping_kahoa",
       "domains": ["kahoa"],
-      "motion_workspace_id": "ws_kahoa",
-      "motion_projects": ["Kahoa Training Programs", "AI Infrastructure"],
       "github_repos": ["repo_kahoa_roadmap"],
-      "direction": "motion_primary",
-      "auto_create_issue": false,
-      "auto_create_task": true,
-      "sync_status": true,
-      "sync_labels": false
-    },
-    {
-      "id": "mapping_reward",
-      "domains": ["reward"],
-      "motion_workspace_id": "ws_reward",
-      "motion_projects": ["New Reward Platform"],
-      "github_repos": [],
-      "direction": "motion_only",
-      "auto_create_issue": false,
-      "auto_create_task": true,
-      "sync_status": false,
-      "sync_labels": false
-    },
-    {
-      "id": "mapping_family",
-      "domains": ["family"],
-      "motion_workspace_id": "ws_lisa",
-      "motion_projects": ["Family & Home", "Shared Goals"],
-      "github_repos": [],
-      "direction": "motion_only",
-      "auto_create_issue": false,
-      "auto_create_task": true,
-      "sync_status": false,
-      "sync_labels": false
-    },
-    {
-      "id": "mapping_hyro",
-      "domains": ["hyro_education"],
-      "motion_workspace_id": "ws_hyro",
-      "motion_projects": ["Hyro Development", "Learning Milestones"],
-      "github_repos": [],
-      "direction": "motion_only",
-      "auto_create_issue": false,
-      "auto_create_task": true,
-      "sync_status": false,
-      "sync_labels": false
-    },
-    {
-      "id": "mapping_private",
-      "domains": ["personal_private"],
-      "motion_workspace_id": "ws_private",
-      "motion_projects": ["Deep Work", "Experiments"],
-      "github_repos": [],
-      "direction": "motion_only",
-      "auto_create_issue": false,
-      "auto_create_task": true,
-      "sync_status": false,
-      "sync_labels": false
-    },
-    {
-      "id": "mapping_my_team",
-      "domains": ["utlyze_core", "personal_private"],
-      "motion_workspace_id": "ws_my_team",
-      "motion_projects": ["Guardian - Amalg - Cybersecurity of One Firm", "CRO of One", "Creator of One"],
-      "github_repos": ["repo_fcra_matrix", "repo_cro_compass"],
-      "direction": "bidirectional",
       "auto_create_issue": true,
-      "auto_create_task": true,
-      "sync_status": true,
-      "sync_labels": true
+      "sync_labels": false,
+      "notes": "Kahoa training programs and AI infrastructure"
     }
   ],
   "sync_rules": {
     "default_sync_interval_minutes": 30,
-    "status_mapping": {
-      "motion_to_github": {
-        "COMPLETED": "closed",
-        "IN_PROGRESS": "open",
-        "TODO": "open",
-        "BACKLOG": "open"
-      },
-      "github_to_motion": {
-        "closed": "COMPLETED",
-        "open": "TODO"
-      }
+    "github_status_mapping": {
+      "closed": "done",
+      "open": "in_progress"
     },
-    "priority_mapping": {
-      "motion_to_github": {
-        "URGENT": ["urgent", "critical"],
-        "HIGH": ["high", "priority"],
-        "MEDIUM": [],
-        "LOW": ["low"],
-        "NONE": []
-      }
-    },
-    "conflict_resolution": "last_write_wins_motion_priority"
+    "github_priority_labels": {
+      "urgent": ["urgent", "critical"],
+      "high": ["high", "priority"],
+      "low": ["low"]
+    }
   }
 }

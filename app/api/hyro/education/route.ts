@@ -302,6 +302,20 @@ export async function GET(request: NextRequest) {
         });
       }
 
+      case 'standards': {
+        const { getAllStandards, getAllStandardMastery } = await import('@/lib/hyro/education-store');
+        const standards = getAllStandards();
+        const mastery = getAllStandardMastery(studentId);
+
+        return NextResponse.json({
+          action: 'standards',
+          studentId,
+          standards,
+          mastery,
+          timestamp: new Date().toISOString(),
+        });
+      }
+
       default:
         return NextResponse.json({ error: `Unknown action: ${action}` }, { status: 400 });
     }
@@ -513,9 +527,9 @@ export async function POST(request: NextRequest) {
         // Also update the lesson plan
         updateLessonPlan(lessonPlanId, {
           effectiveness_rating: effectiveness === 'very_effective' ? 5 :
-                               effectiveness === 'effective' ? 4 :
-                               effectiveness === 'neutral' ? 3 :
-                               effectiveness === 'ineffective' ? 2 : 1,
+            effectiveness === 'effective' ? 4 :
+              effectiveness === 'neutral' ? 3 :
+                effectiveness === 'ineffective' ? 2 : 1,
           feedback,
           status: 'completed',
         });
@@ -610,6 +624,58 @@ export async function POST(request: NextRequest) {
             totalUpdatedAssignments: totalUpdated,
             totalAssignmentsFound: totalFound,
           },
+          timestamp: new Date().toISOString(),
+        });
+      }
+
+      case 'init-standards': {
+        const { initializeStandards } = await import('@/lib/hyro/forge-proficiency');
+        const result = await initializeStandards();
+        return NextResponse.json({
+          action: 'init-standards',
+          result,
+          timestamp: new Date().toISOString(),
+        });
+      }
+
+      case 'assess-init': {
+        const { standardId, previousQuestions } = body;
+        const { generateInterviewQuestion } = await import('@/lib/hyro/forge-ai-tutor');
+        const questionData = await generateInterviewQuestion(standardId, previousQuestions || []);
+
+        return NextResponse.json({
+          action: 'assess-init',
+          standardId,
+          ...questionData,
+          timestamp: new Date().toISOString(),
+        });
+      }
+
+      case 'assess-evaluate': {
+        const { standardId, question, studentResponse } = body;
+        const { evaluateResponse } = await import('@/lib/hyro/forge-ai-tutor');
+        const result = await evaluateResponse(standardId, question, studentResponse);
+
+        // If high score, update mastery!
+        if (result.score >= 90) {
+          const { updateStandardMastery, getStandardMastery } = await import('@/lib/hyro/education-store');
+          const current = getStandardMastery(studentId, standardId);
+          updateStandardMastery({
+            student_id: studentId,
+            standard_id: standardId,
+            mastery_level: Math.max(result.score, current?.mastery_level || 0),
+            evidence_count: (current?.evidence_count || 0) + 1,
+            status: 'mastered',
+            confidence_score: 95,
+            last_practiced_at: Date.now()
+          });
+          result.feedback += " (Mastery Recorded!)";
+        }
+
+        return NextResponse.json({
+          action: 'assess-evaluate',
+          standardId,
+          result,
           timestamp: new Date().toISOString(),
         });
       }

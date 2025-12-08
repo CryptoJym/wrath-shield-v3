@@ -24,6 +24,8 @@ type Transaction = {
   amount: number;
   project?: string;
   bucket?: string;
+  reimbursable?: number;
+  usage_note?: string; // Narrative field
   meta?: { note?: string; rationale?: string };
 };
 
@@ -50,6 +52,7 @@ export default function ReportViewerPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [savingTxnId, setSavingTxnId] = useState<string | null>(null);
 
   const reportId = params.id as string;
 
@@ -77,23 +80,64 @@ export default function ReportViewerPage() {
   };
 
   const handleExportCSV = () => {
-    if (!transactions.length) return;
+    if (!transactions.length || !report) return;
 
-    const headers = ['Date', 'Description', 'Amount', 'Notes'];
-    const rows = transactions.map(txn => [
+    const csvDate = (d: string) => new Date(d).toLocaleDateString('en-US');
+
+    // Filter for CSV: Only reimbursable items
+    const reimbursableTxns = transactions.filter(t => t.reimbursable);
+
+    // 1. Metadata Section
+    const metadata = [
+      [`REIMBURSEMENT FOR UTLYZE - ${report.label.toUpperCase()}`],
+      [],
+      ['Report Type', 'Reimbursement for Utlyze'],
+      ['Date Range', report.label],
+      ['Employee', report.employee],
+      ['Purpose', report.purpose || ''],
+      ['Status', report.status.toUpperCase()],
+      ['Generated', report.generated_at ? csvDate(report.generated_at) : ''],
+      [],
+      ['SUMMARY'],
+      ['Total Reimbursable', report.total_reimbursable.toFixed(2)],
+      // 'Total Spent' removed as requested
+      ['Transaction Count', reimbursableTxns.length.toString()],
+      []
+    ];
+
+    // 2. Transactions Header
+    const headers = ['Date', 'Vendor/Description', 'Category', 'Project', 'Amount', 'Reimbursable', 'Rationale/Notes'];
+
+    // 3. Transaction Data
+    const rows = reimbursableTxns.map(txn => [
       txn.date,
-      txn.vendor || txn.raw_desc || '',
+      (txn.vendor || txn.raw_desc || '').replace(/"/g, '""'),
+      txn.bucket || '',
+      txn.project || '',
       Math.abs(txn.amount).toFixed(2),
-      txn.meta?.note || '',
+      'Yes',
+      (txn.usage_note || txn.meta?.note || '').replace(/"/g, '""')
     ]);
 
-    const csv = [headers, ...rows].map(row => row.map(cell => `"${cell}"`).join(',')).join('\n');
-    const blob = new Blob([csv], { type: 'text/csv' });
+    // Combine all
+    const csvContent = [
+      ...metadata.map(row => row.map(cell => `"${cell}"`).join(',')),
+      headers.map(h => `"${h}"`).join(','),
+      ...rows.map(row => row.map(cell => `"${cell}"`).join(','))
+    ].join('\n');
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `expense_report_${report?.cycle_start}_${report?.cycle_end}.csv`;
+    // Use raw dates for robust filename: "Reimbursement_for_Utlyze_2025-10-08_to_2025-11-08.csv"
+    const filename = `Reimbursement_for_Utlyze_${report.cycle_start}_to_${report.cycle_end}.csv`;
+
+    // DEBUG: Alert removed
+    a.download = filename;
+    document.body.appendChild(a); // Required for Firefox and some other browsers
     a.click();
+    document.body.removeChild(a);
     URL.revokeObjectURL(url);
   };
 
@@ -113,6 +157,26 @@ export default function ReportViewerPage() {
       setError(err.message);
     } finally {
       setIsSubmitting(false);
+    }
+  };
+
+  const handleUpdateNote = async (txnId: string, note: string) => {
+    setTransactions(prev => prev.map(t =>
+      t.id === txnId ? { ...t, usage_note: note } : t
+    ));
+
+    setSavingTxnId(txnId);
+    try {
+      const res = await fetch(`/api/finance/transactions/${txnId}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ usage_note: note }),
+      });
+      if (!res.ok) throw new Error('Failed to save note');
+    } catch (err) {
+      console.error('Failed to save note:', err);
+    } finally {
+      setTimeout(() => setSavingTxnId(null), 500);
     }
   };
 
@@ -159,6 +223,7 @@ export default function ReportViewerPage() {
           </Link>
           <div className="flex items-center gap-3">
             <button
+              type="button"
               onClick={handlePrint}
               className="flex items-center gap-2 px-4 py-2 text-sm font-medium bg-slate-800 text-slate-300 rounded-lg hover:bg-slate-700 transition-colors"
             >
@@ -166,6 +231,7 @@ export default function ReportViewerPage() {
               Print / PDF
             </button>
             <button
+              type="button"
               onClick={handleExportCSV}
               className="flex items-center gap-2 px-4 py-2 text-sm font-medium bg-slate-800 text-slate-300 rounded-lg hover:bg-slate-700 transition-colors"
             >
@@ -221,7 +287,7 @@ export default function ReportViewerPage() {
           </div>
 
           {/* Meta Info */}
-          <div className="grid grid-cols-3 gap-6 p-6 bg-slate-50 border-b print:bg-white">
+          <div className="grid grid-cols-2 gap-6 p-6 bg-slate-50 border-b print:bg-white">
             <div className="flex items-center gap-3">
               <div className="p-2 bg-blue-100 rounded-lg print:bg-blue-50">
                 <User className="w-5 h-5 text-blue-600" />
@@ -240,93 +306,111 @@ export default function ReportViewerPage() {
                 <p className="font-semibold text-slate-900">{report.label}</p>
               </div>
             </div>
-            <div className="flex items-center gap-3">
-              <div className="p-2 bg-emerald-100 rounded-lg print:bg-emerald-50">
-                <DollarSign className="w-5 h-5 text-emerald-600" />
-              </div>
-              <div>
-                <p className="text-xs text-slate-500 uppercase tracking-wider">Total Reimbursable</p>
-                <p className="font-bold text-emerald-600 text-lg">
-                  ${report.total_reimbursable.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                </p>
-              </div>
-            </div>
           </div>
 
           {/* Transactions Table */}
           <div className="p-6">
-            <h2 className="text-lg font-semibold text-slate-800 mb-4">Expense Details</h2>
+            <h2 className="text-lg font-semibold text-slate-800 mb-4">Reimbursable Expenses</h2>
             <div className="overflow-x-auto">
-              <table className="w-full">
+              <table className="w-full table-fixed">
                 <thead>
                   <tr className="border-b-2 border-slate-200">
-                    <th className="text-left py-3 px-4 text-xs font-semibold text-slate-600 uppercase tracking-wider">
+                    <th className="w-24 text-left py-3 px-2 text-xs font-semibold text-slate-600 uppercase tracking-wider print:w-20">
                       Date
                     </th>
-                    <th className="text-left py-3 px-4 text-xs font-semibold text-slate-600 uppercase tracking-wider">
+                    <th className="w-48 text-left py-3 px-2 text-xs font-semibold text-slate-600 uppercase tracking-wider print:w-40">
                       Description
                     </th>
-                    <th className="text-right py-3 px-4 text-xs font-semibold text-slate-600 uppercase tracking-wider">
+                    <th className="w-28 text-right py-3 px-2 text-xs font-semibold text-slate-600 uppercase tracking-wider print:w-24">
                       Amount
                     </th>
-                    <th className="text-left py-3 px-4 text-xs font-semibold text-slate-600 uppercase tracking-wider">
+                    <th className="text-left py-3 px-2 text-xs font-semibold text-slate-600 uppercase tracking-wider">
                       Notes
                     </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100">
-                  {transactions.map((txn, idx) => (
+                  {transactions.filter(t => t.reimbursable).map((txn, idx) => (
                     <tr
                       key={txn.id}
                       className={idx % 2 === 0 ? 'bg-white' : 'bg-slate-50/50'}
                     >
-                      <td className="py-3 px-4 text-sm text-slate-600 font-mono">
+                      <td className="py-2 px-2 text-sm text-slate-600 font-mono align-top">
                         {formatDate(txn.date)}
                       </td>
-                      <td className="py-3 px-4">
-                        <span className="font-medium text-slate-900">
+                      <td className="py-2 px-2 align-top">
+                        <span className="font-medium text-slate-900 block break-words text-sm">
                           {txn.vendor || txn.raw_desc || 'Unknown'}
                         </span>
                       </td>
-                      <td className="py-3 px-4 text-right">
-                        <span className="font-semibold text-slate-900">
+                      <td className="py-2 px-2 text-right align-top">
+                        <span className="font-semibold text-slate-900 text-sm">
                           ${Math.abs(txn.amount).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                         </span>
                       </td>
-                      <td className="py-3 px-4 text-sm text-slate-500">
-                        {txn.meta?.note || txn.project || '-'}
+                      <td className="py-2 px-2 text-sm text-slate-500 align-top">
+                        {report?.status === 'draft' ? (
+                          <>
+                            {/* Screen View: Editable Textarea */}
+                            <div className="relative print:hidden">
+                              <textarea
+                                defaultValue={txn.usage_note || txn.meta?.note || ''}
+                                onBlur={(e) => {
+                                  const val = e.target.value;
+                                  if (val !== (txn.usage_note || txn.meta?.note)) {
+                                    handleUpdateNote(txn.id, val);
+                                  }
+                                }}
+                                placeholder="Add rationale..."
+                                rows={1}
+                                className="w-full bg-transparent border-b border-transparent hover:border-slate-300 focus:border-purple-500 focus:outline-none px-1 py-0.5 transition-colors placeholder:text-slate-300 resize-y whitespace-pre-wrap"
+                                style={{ minHeight: '1.5em' }}
+                              />
+                              {savingTxnId === txn.id && (
+                                <div className="absolute right-0 top-0">
+                                  <Loader2 className="w-3 h-3 text-emerald-500 animate-spin" />
+                                </div>
+                              )}
+                            </div>
+                            {/* Print View: Full Text Display */}
+                            <div className="hidden print:block break-words whitespace-pre-wrap text-sm">
+                              {txn.usage_note || txn.meta?.note || ''}
+                            </div>
+                          </>
+                        ) : (
+                          <span className="block break-words whitespace-pre-wrap max-w-full">
+                            {txn.usage_note || txn.meta?.note || txn.project || '-'}
+                          </span>
+                        )}
                       </td>
                     </tr>
                   ))}
                 </tbody>
-                <tfoot>
-                  <tr className="border-t-2 border-slate-300 bg-slate-100">
-                    <td colSpan={2} className="py-4 px-4 text-right font-bold text-slate-700 uppercase">
-                      Total
-                    </td>
-                    <td className="py-4 px-4 text-right">
-                      <span className="text-xl font-bold text-emerald-600">
-                        ${report.total_reimbursable.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                      </span>
-                    </td>
-                    <td className="py-4 px-4 text-sm text-slate-500">
-                      {transactions.length} items
-                    </td>
-                  </tr>
-                </tfoot>
               </table>
+              {/* Totals Section outside of table for print positioning */}
+              <div className="border-t-2 border-slate-300 bg-slate-100 p-4 flex justify-end items-center gap-8 mt-4 print:mt-8 print:break-inside-avoid">
+                <div className="text-sm text-slate-500">
+                  {transactions.filter(t => t.reimbursable).length} items
+                </div>
+                <div className="flex items-center gap-4">
+                  <span className="font-bold text-slate-700 uppercase">Total Reimbursable</span>
+                  <span className="text-xl font-bold text-emerald-600">
+                    ${report?.total_reimbursable.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
 
           {/* Footer */}
           <div className="p-6 bg-slate-50 border-t text-center print:bg-white">
             <p className="text-sm text-slate-500">
-              Generated on {new Date(report.generated_at || '').toLocaleDateString('en-US', {
+              Generated on {report?.generated_at ? new Date(report.generated_at).toLocaleDateString('en-US', {
                 year: 'numeric',
                 month: 'long',
                 day: 'numeric',
-              })}
-              {report.submitted_at && (
+              }) : ''}
+              {report?.submitted_at && (
                 <span>
                   {' '}| Submitted on {new Date(report.submitted_at).toLocaleDateString('en-US', {
                     year: 'numeric',
@@ -345,6 +429,9 @@ export default function ReportViewerPage() {
         @media print {
           body {
             background: white !important;
+          }
+          header {
+            display: none !important;
           }
           .print\\:hidden {
             display: none !important;

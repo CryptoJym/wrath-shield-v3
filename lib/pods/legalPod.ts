@@ -31,7 +31,7 @@ export async function runLegalPod(input: PodInput): Promise<PodOutput> {
     `LegalPod stub: ${legalEvents.length}/${input.events.length} events tagged legal.`,
     `Jurisdiction: ${JURISDICTION}`,
     `Pending legal context requests: ${pending.length}`,
-    'TODO: add Zep timeline collection per matter; extract filings/deadlines; propose filings/tasks; map to Motion project.',
+    'TODO: add Zep timeline collection per matter; extract filings/deadlines; propose filings/tasks; map to GitHub milestones.',
   ];
 
   // No side-effect actions yet; we just surface notes for now.

@@ -561,7 +561,7 @@ function analyzeAndRoute(payload: ContextRequest['event_payload']): AgentId[] {
   }
 
   // PM keywords (task management)
-  if (/project|task|deadline|milestone|sprint|roadmap|timeline|delivery|launch|release|github|motion/i.test(text)) {
+  if (/project|task|deadline|milestone|sprint|roadmap|timeline|delivery|launch|release|github/i.test(text)) {
     if (!agents.includes('pm-agent')) {
       agents.push('pm-agent');
     }

@@ -6,12 +6,17 @@ import fs from 'fs';
 import path from 'path';
 import http from 'http';
 import { URL } from 'url';
+import dotenv from 'dotenv';
 
 const ENV_PATH = path.resolve(process.cwd(), '.env.local');
 const ACCOUNTS_PATH = path.resolve(process.cwd(), '.data', 'gmail', 'accounts.json');
 
-const CLIENT_ID = process.env.GMAIL_CLIENT_ID || '';
-const CLIENT_SECRET = process.env.GMAIL_CLIENT_SECRET || '';
+// Load environment variables from .env.local
+dotenv.config({ path: ENV_PATH });
+
+// Use SHARED credentials as they're the ones configured for these accounts
+const CLIENT_ID = process.env.GMAIL_CLIENT_ID_SHARED || process.env.GMAIL_CLIENT_ID || '';
+const CLIENT_SECRET = process.env.GMAIL_CLIENT_SECRET_SHARED || process.env.GMAIL_CLIENT_SECRET || '';
 const REDIRECT_URI = 'http://localhost:3847/oauth2callback';
 
 if (!CLIENT_ID || !CLIENT_SECRET) {

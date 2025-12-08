@@ -52,7 +52,7 @@ describe('AGENT_PROVIDER_MAP', () => {
       Object.entries(AGENT_PROVIDER_MAP).forEach(([agentId, config]) => {
         expect(config.model).not.toBe('gpt-4.1');
         expect(config.model).not.toBe('gpt-4');
-        expect(config.model).not.toBe('gpt-4o');
+        expect(config.model).not.toBe('gpt-5.1');
       });
     });
   });

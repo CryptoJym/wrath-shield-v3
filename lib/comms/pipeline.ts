@@ -223,7 +223,7 @@ export function classifyEvent(event: EventRow): ClassificationResult {
 
     // PM patterns
     const pmPatterns = [
-      /project|task|deadline|milestone|sprint|roadmap|timeline|delivery|launch|release|github|gitlab|jira|trello|asana|motion/i,
+      /project|task|deadline|milestone|sprint|roadmap|timeline|delivery|launch|release|github|gitlab|jira|trello|asana/i,
     ];
     const pmScore = countMatches(text, pmPatterns);
 
@@ -492,7 +492,7 @@ export function generateActions(
         break;
 
       case 'pm':
-        suggestions.push('Create task in Motion');
+        suggestions.push('Create GitHub issue');
         suggestions.push('Assign to project');
         suggestions.push('Set deadline');
         priority = 'medium';

@@ -1,0 +1,24 @@
+{
+    "id": "concept_archetypal_resonance",
+    "name": "Archetypal Resonance",
+    "definition": "Stories are not isolated inventions but iterations of fundamental human psychological patterns (Archetypes). The 'Author' is less a creator and more a channel for the Zeitgeist and Collective Unconscious. To understand a story is to recognize which ancient pattern is playing out.",
+    "discipline": "literature",
+    "layer": "fundamental",
+    "mappings": [
+        {
+            "standard_id": "6.RL.2",
+            "authenticity_layer": "surface_analysis",
+            "notes": "Teaches 'Theme' as if it is a hidden message in the text. TRUTH: 'Theme' is the resonance of the story with a universal human question. The standard asks 'What is the theme?'; the Esoteric view asks 'Which Archetype is speaking?'"
+        },
+        {
+            "standard_id": "6.RL.3",
+            "authenticity_layer": "structural_approximation",
+            "notes": "Teaches 'Plot' as a sequence of events. TRUTH: Plot is the ritual enactment of transformation. See Campbell's Monomyth. The standard views plot as 'mechanics'; the superior view sees it as 'ritual'."
+        },
+        {
+            "standard_id": "6.RL.6",
+            "authenticity_layer": "perspective_filter",
+            "notes": "Teaches 'Point of View' (Narrator). TRUTH: Every narrator is an 'Unreliable Narrator' because they are trapped in a subjective reality tunnel. The Author is also trapped. Teach the child to question the 'God's Eye View' of the 3rd person narrator."
+        }
+    ]
+}
