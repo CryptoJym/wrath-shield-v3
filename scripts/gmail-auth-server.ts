@@ -6,12 +6,17 @@ import fs from 'fs';
 import path from 'path';
 import http from 'http';
 import { URL } from 'url';
+import dotenv from 'dotenv';
 
 const ENV_PATH = path.resolve(process.cwd(), '.env.local');
 const ACCOUNTS_PATH = path.resolve(process.cwd(), '.data', 'gmail', 'accounts.json');
 
-const CLIENT_ID = process.env.GMAIL_CLIENT_ID || '';
-const CLIENT_SECRET = process.env.GMAIL_CLIENT_SECRET || '';
+// Load environment variables from .env.local
+dotenv.config({ path: ENV_PATH });
+
+// Use the james_jamesbrady_org client ID as the main Web App client
+const CLIENT_ID = process.env.GMAIL_CLIENT_ID || process.env.GMAIL_CLIENT_ID_james_jamesbrady_org || '';
+const CLIENT_SECRET = process.env.GMAIL_CLIENT_SECRET || process.env.GMAIL_CLIENT_SECRET_james_jamesbrady_org || '';
 const PORT = 8085;
 const REDIRECT_URI = `http://localhost:${PORT}`;
 

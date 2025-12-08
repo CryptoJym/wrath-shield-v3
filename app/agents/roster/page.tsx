@@ -34,18 +34,23 @@ const IconMap: Record<string, React.ElementType> = {
     "activity": Activity
 };
 
-// RPG Bar Component
+// RPG Bar Component - Nano Banana Style
 const RpgBar = ({ label, value, colorClass, icon: Icon }: { label: string, value: number, colorClass: string, icon: any }) => (
-    <div className="flex items-center gap-2 text-xs mb-1">
-        <div className="w-6 font-bold text-muted-foreground flex justify-center">
+    <div className="flex items-center gap-2 text-xs mb-1 group/bar">
+        <div className="w-6 font-bold text-nano-green flex justify-center transition-transform group-hover/bar:scale-110">
             <Icon size={12} />
         </div>
-        <div className="flex-1 h-3 bg-secondary rounded-full overflow-hidden relative border border-white/5">
+        <div className="flex-1 h-4 bg-slate-900/80 rounded-sm overflow-hidden relative border border-nano-green/20 shadow-[inset_0_1px_3px_rgba(0,0,0,0.5)]">
+            {/* Grid overlay for data-punk aesthetic */}
+            <div className="absolute inset-0 bg-[linear-gradient(90deg,transparent_0%,transparent_49%,rgba(57,255,20,0.05)_50%,transparent_51%,transparent_100%)] bg-[length:8px_100%]" />
             <div
-                className={`h-full ${colorClass} transition-all duration-500 ease-out`}
+                className={`h-full ${colorClass} transition-all duration-500 ease-out relative overflow-hidden`}
                 style={{ width: `${value}%` }}
-            />
-            <span className="absolute inset-0 flex items-center justify-center text-[9px] font-bold text-white drop-shadow-md">
+            >
+                {/* Scan line effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-data-scan" />
+            </div>
+            <span className="absolute inset-0 flex items-center justify-center text-[10px] font-mono font-bold text-white drop-shadow-[0_0_4px_rgba(0,0,0,0.8)]">
                 {value}/100
             </span>
         </div>
@@ -83,20 +88,21 @@ export default function AgentsRosterPage() {
         ? agents
         : agents.filter(a => a.status === filter);
 
+    // Nano Banana status colors - high vibrancy with glow effects
     const getStatusColor = (status: AgentStatus) => {
         switch (status) {
-            case 'green': return 'text-green-500 border-green-500/30 bg-green-500/10';
-            case 'yellow': return 'text-yellow-500 border-yellow-500/30 bg-yellow-500/10';
-            case 'red': return 'text-red-500 border-red-500/30 bg-red-500/10';
+            case 'green': return 'text-nano-green border-nano-green/40 bg-nano-green/10 shadow-[0_0_15px_rgba(57,255,20,0.15)]';
+            case 'yellow': return 'text-banana-400 border-banana-400/40 bg-banana-400/10 shadow-[0_0_15px_rgba(250,204,21,0.15)]';
+            case 'red': return 'text-brutalist-accent border-brutalist-accent/40 bg-brutalist-accent/10 shadow-[0_0_15px_rgba(255,51,102,0.15)]';
             default: return 'text-gray-500';
         }
     };
 
     const getStatusBadge = (status: AgentStatus) => {
         switch (status) {
-            case 'green': return 'bg-green-500';
-            case 'yellow': return 'bg-yellow-500';
-            case 'red': return 'bg-red-500';
+            case 'green': return 'bg-nano-green shadow-[0_0_8px_rgba(57,255,20,0.6)]';
+            case 'yellow': return 'bg-banana-400 shadow-[0_0_8px_rgba(250,204,21,0.6)]';
+            case 'red': return 'bg-brutalist-accent shadow-[0_0_8px_rgba(255,51,102,0.6)]';
             default: return 'bg-gray-500';
         }
     };
@@ -113,56 +119,72 @@ export default function AgentsRosterPage() {
     };
 
     return (
-        <div className="min-h-screen bg-background text-foreground p-8 font-sans">
-            <div className="max-w-6xl mx-auto space-y-8">
+        <div className="min-h-screen bg-slate-950 text-foreground p-8 font-sans relative overflow-hidden">
+            {/* Subtle grid background for data-punk aesthetic */}
+            <div className="absolute inset-0 bg-[linear-gradient(rgba(57,255,20,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(57,255,20,0.02)_1px,transparent_1px)] bg-[size:50px_50px] pointer-events-none" />
+            {/* Radial glow from top */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-radial from-nano-green/5 via-transparent to-transparent pointer-events-none" />
 
-                {/* Header & Toolbar */}
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-border pb-6">
+            <div className="max-w-6xl mx-auto space-y-8 relative z-10">
+
+                {/* Header & Toolbar - Neo-brutalist style */}
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b-2 border-nano-green/20 pb-6">
                     <div>
-                        <h1 className="text-4xl font-bold tracking-tight mb-2 bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
-                            Agents Roster
+                        <h1 className="text-4xl font-black tracking-tight mb-2 bg-gradient-to-r from-nano-green via-banana-300 to-nano-cyan bg-clip-text text-transparent animate-banana-glow">
+                            AGENTS ROSTER
                         </h1>
-                        <p className="text-muted-foreground">
-                            Manage and monitor your autonomous agent squad.
+                        <p className="text-nano-green/60 font-mono text-sm tracking-wide">
+                            // autonomous_squad.monitor()
                         </p>
                     </div>
 
                     <div className="flex items-center gap-3">
                         <button
                             onClick={() => setShowHUD(!showHUD)}
-                            className={`flex items-center gap-2 px-3 py-2 rounded-lg border transition-colors ${showHUD ? 'bg-primary/20 border-primary text-primary' : 'bg-secondary/50 border-border text-muted-foreground hover:text-foreground'}`}
+                            className={`flex items-center gap-2 px-4 py-2 rounded-sm border-2 transition-all font-mono text-sm uppercase tracking-wider ${showHUD
+                                ? 'bg-nano-green/20 border-nano-green text-nano-green shadow-[0_0_15px_rgba(57,255,20,0.3)]'
+                                : 'bg-slate-900/50 border-slate-700 text-slate-400 hover:text-nano-green hover:border-nano-green/50 hover:shadow-[0_0_10px_rgba(57,255,20,0.2)]'}`}
                         >
                             <Activity size={16} />
                             {showHUD ? 'Hide HUD' : 'Squad Health'}
                         </button>
 
-                        <Link href="/agents/graph" className="flex items-center gap-2 px-3 py-2 rounded-lg border transition-colors bg-secondary/50 border-border text-muted-foreground hover:text-foreground hover:border-primary/50">
+                        <Link href="/agents/graph" className="flex items-center gap-2 px-4 py-2 rounded-sm border-2 transition-all font-mono text-sm uppercase tracking-wider bg-slate-900/50 border-slate-700 text-slate-400 hover:text-nano-cyan hover:border-nano-cyan/50 hover:shadow-[0_0_10px_rgba(34,211,238,0.2)]">
                             <Share2 size={16} />
                             Network Graph
                         </Link>
 
-                        <div className="flex items-center bg-secondary/50 rounded-lg p-1 border border-border">
-                            {(['all', 'green', 'yellow', 'red'] as const).map((f) => (
-                                <button
-                                    key={f}
-                                    onClick={() => setFilter(f)}
-                                    className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors capitalize ${filter === f
-                                        ? 'bg-primary text-primary-foreground shadow-sm'
-                                        : 'text-muted-foreground hover:text-foreground hover:bg-secondary'
-                                        }`}
-                                >
-                                    {f}
-                                </button>
-                            ))}
+                        {/* Status filter - Neo-brutalist segmented control */}
+                        <div className="flex items-center bg-slate-900/80 rounded-sm p-1 border-2 border-slate-700">
+                            {(['all', 'green', 'yellow', 'red'] as const).map((f) => {
+                                const filterColors = {
+                                    all: 'bg-slate-700 text-white',
+                                    green: 'bg-nano-green text-slate-900 shadow-[0_0_10px_rgba(57,255,20,0.4)]',
+                                    yellow: 'bg-banana-400 text-slate-900 shadow-[0_0_10px_rgba(250,204,21,0.4)]',
+                                    red: 'bg-brutalist-accent text-white shadow-[0_0_10px_rgba(255,51,102,0.4)]'
+                                };
+                                return (
+                                    <button
+                                        key={f}
+                                        onClick={() => setFilter(f)}
+                                        className={`px-3 py-1.5 rounded-sm text-xs font-mono font-bold uppercase tracking-wider transition-all ${filter === f
+                                            ? filterColors[f]
+                                            : 'text-slate-500 hover:text-slate-300 hover:bg-slate-800'
+                                            }`}
+                                    >
+                                        {f}
+                                    </button>
+                                );
+                            })}
                         </div>
 
                         <button
                             onClick={fetchAgents}
                             disabled={isRefreshing}
-                            className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors disabled:opacity-50 font-medium shadow-sm"
+                            className="flex items-center gap-2 px-4 py-2 bg-nano-green text-slate-900 rounded-sm font-mono font-bold text-sm uppercase tracking-wider hover:shadow-[0_0_20px_rgba(57,255,20,0.4)] transition-all disabled:opacity-50 border-2 border-nano-green"
                         >
                             <RefreshCw size={16} className={isRefreshing ? "animate-spin" : ""} />
-                            Refresh
+                            Sync
                         </button>
                     </div>
                 </div>
@@ -179,10 +201,15 @@ export default function AgentsRosterPage() {
                     <PMStatusCard />
                 </div>
 
-                {/* Grid */}
+                {/* Grid - Agent Cards */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {loading ? (
-                        <div className="col-span-full text-center py-12 text-muted-foreground">Loading agents...</div>
+                        <div className="col-span-full text-center py-12 text-nano-green/60 font-mono">
+                            <div className="inline-flex items-center gap-2">
+                                <RefreshCw size={16} className="animate-spin" />
+                                LOADING_AGENTS...
+                            </div>
+                        </div>
                     ) : filteredAgents.map((agent) => {
                         const Icon = IconMap[agent.icon] || Activity;
                         const statusStyle = getStatusColor(agent.status);
@@ -190,19 +217,21 @@ export default function AgentsRosterPage() {
                         return (
                             <div
                                 key={agent.id}
-                                className="group relative bg-card border border-border rounded-xl overflow-hidden hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 flex flex-col"
+                                className="group relative bg-slate-900/80 border-2 border-slate-700/50 rounded-sm overflow-hidden hover:border-nano-green/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(57,255,20,0.1)] flex flex-col backdrop-blur-sm"
                             >
-                                {/* Status Stripe */}
-                                <div className={`absolute top-0 left-0 w-1 h-full ${getStatusBadge(agent.status)}`} />
+                                {/* Status Stripe - Glowing */}
+                                <div className={`absolute top-0 left-0 w-1.5 h-full ${getStatusBadge(agent.status)}`} />
+                                {/* Corner accent - Neo-brutalist */}
+                                <div className="absolute top-0 right-0 w-8 h-8 border-b-2 border-l-2 border-nano-green/20 bg-gradient-to-br from-nano-green/5 to-transparent" />
 
                                 <div className="p-6 flex-1 flex flex-col">
-                                    {/* Card Header */}
+                                    {/* Card Header - Nano Banana style */}
                                     <div className="flex items-start justify-between mb-6">
                                         <div className="flex items-center gap-4">
-                                            <div className={`relative w-16 h-16 rounded-lg ${statusStyle} bg-opacity-10 flex items-center justify-center overflow-hidden border border-white/5`}>
+                                            <div className={`relative w-16 h-16 rounded-sm ${statusStyle} flex items-center justify-center overflow-hidden border-2 group-hover:animate-nano-pulse transition-all`}>
                                                 {/* Use Icon as fallback if avatar fails or is placeholder */}
-                                                <div className="absolute inset-0 flex items-center justify-center bg-secondary/20">
-                                                    <Icon size={32} className="opacity-50" />
+                                                <div className="absolute inset-0 flex items-center justify-center bg-slate-800/50">
+                                                    <Icon size={32} className="opacity-60 text-nano-green" />
                                                 </div>
                                                 <Image
                                                     src={agent.avatar}
@@ -217,63 +246,63 @@ export default function AgentsRosterPage() {
                                                 />
                                             </div>
                                             <div>
-                                                <h3 className="font-bold text-lg leading-tight">{agent.name}</h3>
-                                                <div className="flex items-center gap-1.5 text-xs text-muted-foreground mt-1">
-                                                    <span className={`inline-block w-2 h-2 rounded-full ${getStatusBadge(agent.status)}`} />
-                                                    <span className="capitalize">{agent.status}</span>
+                                                <h3 className="font-bold text-lg leading-tight text-white group-hover:text-nano-green transition-colors">{agent.name}</h3>
+                                                <div className="flex items-center gap-1.5 text-xs font-mono mt-1">
+                                                    <span className={`inline-block w-2 h-2 rounded-full ${getStatusBadge(agent.status)} animate-pulse`} />
+                                                    <span className="uppercase tracking-wider text-slate-400">{agent.status}</span>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="text-xs font-mono text-muted-foreground bg-secondary/50 px-2 py-1 rounded border border-white/5">
-                                            Lvl {Math.floor((agent.hp + agent.mp) / 20)}
+                                        <div className="text-xs font-mono text-banana-400 bg-banana-400/10 px-2 py-1 rounded-sm border border-banana-400/30">
+                                            LVL {Math.floor((agent.hp + agent.mp) / 20)}
                                         </div>
                                     </div>
 
-                                    {/* RPG Stats */}
-                                    <div className="space-y-2 mb-6 bg-secondary/20 p-3 rounded-lg border border-white/5">
-                                        <RpgBar label="HP" value={agent.hp} colorClass="bg-red-500" icon={Activity} />
-                                        <RpgBar label="MP" value={agent.mp} colorClass="bg-blue-500" icon={Zap} />
+                                    {/* RPG Stats - Data-punk style */}
+                                    <div className="space-y-2 mb-6 bg-slate-800/50 p-3 rounded-sm border-2 border-slate-700/50">
+                                        <RpgBar label="HP" value={agent.hp} colorClass="bg-gradient-to-r from-brutalist-accent to-red-400" icon={Activity} />
+                                        <RpgBar label="MP" value={agent.mp} colorClass="bg-gradient-to-r from-nano-cyan to-blue-400" icon={Zap} />
                                     </div>
 
-                                    {/* Capabilities */}
+                                    {/* Capabilities - Neo-brutalist list */}
                                     <div className="mb-6 flex-1">
-                                        <h4 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3 flex items-center gap-1.5">
-                                            <Shield size={12} /> Capabilities
+                                        <h4 className="text-xs font-mono font-bold text-nano-green uppercase tracking-widest mb-3 flex items-center gap-1.5">
+                                            <Shield size={12} className="text-nano-green" /> CAPABILITIES
                                         </h4>
                                         <ul className="space-y-1.5">
                                             {agent.capabilities.slice(0, 3).map((cap: string, i: number) => (
-                                                <li key={i} className="text-sm text-gray-300 flex items-start gap-2">
-                                                    <span className="text-primary mt-1">•</span>
+                                                <li key={i} className="text-sm text-slate-300 flex items-start gap-2 font-mono">
+                                                    <span className="text-nano-green mt-0.5">&gt;</span>
                                                     {cap}
                                                 </li>
                                             ))}
                                             {agent.capabilities.length > 3 && (
-                                                <li className="text-xs text-muted-foreground pl-3 italic">
+                                                <li className="text-xs text-nano-green/50 pl-4 font-mono">
                                                     +{agent.capabilities.length - 3} more...
                                                 </li>
                                             )}
                                         </ul>
                                     </div>
 
-                                    {/* Footer */}
-                                    <div className="pt-4 border-t border-border flex items-center justify-between mt-auto">
-                                        <div className="flex items-center gap-1.5 text-xs text-muted-foreground" title={`Last sync: ${agent.last_sync}`}>
-                                            <Clock size={12} />
+                                    {/* Footer - Data-punk style */}
+                                    <div className="pt-4 border-t-2 border-slate-700/50 flex items-center justify-between mt-auto">
+                                        <div className="flex items-center gap-1.5 text-xs font-mono text-slate-500" title={`Last sync: ${agent.last_sync}`}>
+                                            <Clock size={12} className="text-nano-cyan" />
                                             {getRelativeTime(agent.last_sync)}
                                         </div>
 
                                         <div className="flex items-center gap-3">
                                             {agent.open_items > 0 && (
-                                                <span className="text-xs font-medium text-yellow-500 bg-yellow-500/10 px-2 py-0.5 rounded-full border border-yellow-500/20">
-                                                    {agent.open_items} open
+                                                <span className="text-xs font-mono font-bold text-banana-400 bg-banana-400/10 px-2 py-0.5 rounded-sm border border-banana-400/30 shadow-[0_0_8px_rgba(250,204,21,0.2)]">
+                                                    {agent.open_items} OPEN
                                                 </span>
                                             )}
 
                                             <Link
                                                 href={`/pm?anatomy_focus=${agent.id}`}
-                                                className="flex items-center gap-1.5 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+                                                className="flex items-center gap-1.5 text-sm font-mono font-bold text-nano-green hover:text-nano-cyan transition-colors hover:shadow-[0_0_10px_rgba(57,255,20,0.3)]"
                                             >
-                                                View Anatomy <ExternalLink size={14} />
+                                                ANATOMY <ExternalLink size={14} />
                                             </Link>
                                         </div>
                                     </div>
@@ -281,6 +310,16 @@ export default function AgentsRosterPage() {
                             </div>
                         );
                     })}
+                </div>
+
+                {/* Footer stats bar */}
+                <div className="border-t-2 border-nano-green/20 pt-6 mt-8">
+                    <div className="flex items-center justify-between text-xs font-mono text-slate-500">
+                        <span>TOTAL_AGENTS: {agents.length}</span>
+                        <span>ACTIVE: {agents.filter(a => a.status === 'green').length}</span>
+                        <span>WARNINGS: {agents.filter(a => a.status === 'yellow').length}</span>
+                        <span>CRITICAL: {agents.filter(a => a.status === 'red').length}</span>
+                    </div>
                 </div>
             </div>
         </div>

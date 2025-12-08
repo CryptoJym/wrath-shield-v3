@@ -12,6 +12,7 @@
  */
 
 import { useState, useEffect, useCallback } from 'react';
+import { useSearchParams } from 'next/navigation';
 import useSWR from 'swr';
 import {
   CheckCircle,
@@ -50,6 +51,9 @@ import { CouncilActivityPanel, type AutoAction } from '@/components/pm/CouncilAc
 import { SuggestionsPanel, type Suggestion } from '@/components/pm/SuggestionsPanel';
 import { RepoMindMap } from '@/components/pm/RepoMindMap';
 import { AITriageDashboard } from '@/components/pm/AITriageDashboard';
+import { UnifiedActionLane } from '@/components/pm/UnifiedActionLane';
+import { CommsDashboard } from '@/components/comms/CommsDashboard';
+import { ProjectNetworkGraph } from '@/components/pm/ProjectNetworkGraph';
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
@@ -219,7 +223,7 @@ interface ProgressReport {
     by_impact: Record<string, number>;
     ambiguities_count: number;
   };
-  bullet_statements: string[];
+  bullet_statements: { text: string; project: string; repo: string }[];
   top_contributors: { author: string; commits: number }[];
   needs_attention: string[];
 }
@@ -292,8 +296,15 @@ function Toast({ message, type, onClose }: {
 }
 
 export default function PMPage() {
+  const searchParams = useSearchParams();
+  const tabParam = searchParams.get('tab');
+
   const [userTimezone, setUserTimezone] = useState<string>('UTC');
   const [dismissedSuggestionIds, setDismissedSuggestionIds] = useState<Set<string>>(new Set());
+
+  // Set initial tab from URL param
+  const validTabs = ['actions', 'tasks', 'repos', 'progress', 'ai', 'pipeline'] as const;
+  const initialTab = validTabs.includes(tabParam as any) ? tabParam as typeof validTabs[number] : 'actions';
 
   useEffect(() => {
     setUserTimezone(Intl.DateTimeFormat().resolvedOptions().timeZone);
@@ -346,8 +357,9 @@ export default function PMPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState<'updated' | 'created' | 'priority' | 'due'>('updated');
   const [actioningId, setActioningId] = useState<string | null>(null);
-  const [activeTab, setActiveTab] = useState<'tasks' | 'repos' | 'progress' | 'ai'>('tasks');
+  const [activeTab, setActiveTab] = useState<'actions' | 'tasks' | 'repos' | 'progress' | 'ai' | 'pipeline'>(initialTab);
   const [autoOrganizing, setAutoOrganizing] = useState(false);
+  const [repoViewMode, setRepoViewMode] = useState<'tree' | 'network'>('tree');
   const [applyingRepo, setApplyingRepo] = useState<string | null>(null);
   const [analyzingCommits, setAnalyzingCommits] = useState(false);
 
@@ -761,6 +773,16 @@ export default function PMPage() {
               </p>
               <div className="flex gap-3 mt-3">
                 <button
+                  onClick={() => setActiveTab('actions')}
+                  className={`flex items-center gap-2 px-3 py-1.5 text-sm rounded-lg transition ${activeTab === 'actions'
+                    ? 'bg-gradient-to-r from-orange-600 to-amber-600 text-white'
+                    : 'bg-orange-900/30 text-orange-300 border border-orange-500/30 hover:bg-orange-900/50'
+                    }`}
+                >
+                  <Zap size={16} />
+                  Action Lane
+                </button>
+                <button
                   onClick={() => setActiveTab('tasks')}
                   className={`flex items-center gap-2 px-3 py-1.5 text-sm rounded-lg transition ${activeTab === 'tasks'
                     ? 'bg-sky-600 text-white'
@@ -810,6 +832,16 @@ export default function PMPage() {
                   <Brain size={16} />
                   AI Intelligence
                 </button>
+                <button
+                  onClick={() => setActiveTab('pipeline')}
+                  className={`flex items-center gap-2 px-3 py-1.5 text-sm rounded-lg transition ${activeTab === 'pipeline'
+                    ? 'bg-cyan-600 text-white'
+                    : 'bg-cyan-900/30 text-cyan-300 border border-cyan-500/30 hover:bg-cyan-900/50'
+                    }`}
+                >
+                  <Activity size={16} />
+                  Pipeline
+                </button>
                 <a
                   href="/pm/github"
                   className="flex items-center gap-2 px-3 py-1.5 text-sm rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 transition"
@@ -849,6 +881,11 @@ export default function PMPage() {
               Integration → GitHub: {dashboard?.integrations?.github?.configured ? '✓ Connected' : '✗ Not configured'}
             </div>
           </div>
+        )}
+
+        {/* Actions Tab Content - Unified Action Lane */}
+        {activeTab === 'actions' && (
+          <UnifiedActionLane />
         )}
 
         {/* Tasks Tab Content */}
@@ -1195,9 +1232,41 @@ export default function PMPage() {
               )}
             </div>
 
-            {/* Repo Mind Map Visualization */}
+            {/* View Toggle & Visualizations */}
             <div className="space-y-4">
-              <RepoMindMap />
+              {/* View Mode Toggle */}
+              <div className="flex items-center gap-2">
+                <span className="text-sm text-slate-400">View:</span>
+                <div className="flex rounded-lg border border-slate-700 overflow-hidden">
+                  <button
+                    onClick={() => setRepoViewMode('tree')}
+                    className={`px-3 py-1.5 text-sm transition ${
+                      repoViewMode === 'tree'
+                        ? 'bg-purple-600 text-white'
+                        : 'bg-slate-800 text-slate-400 hover:text-white'
+                    }`}
+                  >
+                    Tree
+                  </button>
+                  <button
+                    onClick={() => setRepoViewMode('network')}
+                    className={`px-3 py-1.5 text-sm transition ${
+                      repoViewMode === 'network'
+                        ? 'bg-purple-600 text-white'
+                        : 'bg-slate-800 text-slate-400 hover:text-white'
+                    }`}
+                  >
+                    Network
+                  </button>
+                </div>
+              </div>
+
+              {/* Conditional Visualization */}
+              {repoViewMode === 'tree' ? (
+                <RepoMindMap />
+              ) : (
+                <ProjectNetworkGraph />
+              )}
             </div>
           </section>
         )}
@@ -1351,13 +1420,18 @@ export default function PMPage() {
                   <div className="rounded-xl border border-slate-700 bg-slate-800/30 p-6">
                     <h3 className="text-lg font-semibold text-slate-100 mb-4 flex items-center gap-2">
                       <TrendingUp size={20} className="text-emerald-400" />
-                      Progress Bullets (Tongue & Quill Style)
+                      Recent Progress
                     </h3>
                     <ul className="space-y-3">
                       {progressReport.bullet_statements.map((bullet, idx) => (
                         <li key={idx} className="flex items-start gap-3">
-                          <span className="text-emerald-400 mt-1">•</span>
-                          <span className="text-slate-300 text-sm">{bullet}</span>
+                          <span className="text-emerald-400 mt-1.5">•</span>
+                          <div className="flex-1">
+                            <span className="text-slate-300 text-sm">{bullet.text}</span>
+                            <div className="text-xs text-slate-500 mt-0.5">
+                              {bullet.project}
+                            </div>
+                          </div>
                         </li>
                       ))}
                     </ul>
@@ -1466,6 +1540,13 @@ export default function PMPage() {
         {activeTab === 'ai' && (
           <section className="space-y-6">
             <AITriageDashboard />
+          </section>
+        )}
+
+        {/* Pipeline Tab Content */}
+        {activeTab === 'pipeline' && (
+          <section className="space-y-6">
+            <CommsDashboard />
           </section>
         )}
       </div>

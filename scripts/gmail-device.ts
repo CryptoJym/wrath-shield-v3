@@ -14,6 +14,10 @@
 import fs from 'fs';
 import path from 'path';
 import readline from 'readline';
+import dotenv from 'dotenv';
+
+// Load environment variables from .env.local
+dotenv.config({ path: path.resolve(process.cwd(), '.env.local') });
 
 const ENV_PATH = path.resolve(process.cwd(), '.env.local');
 const SCOPES = [

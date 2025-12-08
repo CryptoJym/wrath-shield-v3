@@ -1,6 +1,7 @@
 import { ensureServerOnly } from '@/lib/server-only-guard';
 import { agentInvoker, type AgentResponse } from '@/lib/agents/AgentInvoker';
 import { searchPMMemories, addPMMemory } from '@/lib/pm/pm-memory';
+import { loadPreferences, computeUrgency, type UrgencyScore, type Domain } from './preference-model';
 
 ensureServerOnly('lib/ea/adjudicator');
 
@@ -26,7 +27,39 @@ export async function adjudicateItem(
     hint?: string
 ): Promise<AdjudicationResult> {
 
-    // 1. Fetch Memory Context (Patterns)
+    // 1. Compute Urgency Using Learned Preferences (THE CRITICAL FIX)
+    let urgencyScore: UrgencyScore | null = null;
+    let preferenceContext = '';
+    try {
+        const preferences = await loadPreferences();
+        urgencyScore = await computeUrgency(
+            {
+                id: `adjudicate_${Date.now()}`,
+                content: content,
+                sender: undefined, // Could be extracted from content if available
+                subject: content.substring(0, 100),
+                domain: hint?.toLowerCase() as Domain | undefined,
+            },
+            preferences
+        );
+
+        // Build context from learned preferences
+        preferenceContext = `
+LEARNED PREFERENCE ANALYSIS:
+- Computed Urgency: ${urgencyScore.level} (confidence: ${(urgencyScore.score * 100).toFixed(0)}%)
+- Suggested Action: ${urgencyScore.suggestedAction}
+- Factors: ${urgencyScore.factors.map(f => f.description).join('; ') || 'None detected'}
+- Reasoning: ${urgencyScore.reasoning}
+${preferences.priority_contacts.length > 0 ? `- Known Priority Contacts: ${preferences.priority_contacts.slice(0, 5).map(c => c.identifier).join(', ')}` : ''}
+${preferences.current_focus_domain ? `- James's Current Focus: ${preferences.current_focus_domain}` : ''}
+- Corrections Learned: ${preferences.corrections_count} past corrections have trained this model
+`;
+        console.log(`[Adjudicator] Pre-classification via preference model: ${urgencyScore.level} (${(urgencyScore.score * 100).toFixed(0)}%)`);
+    } catch (e) {
+        console.warn('[Adjudicator] Preference model unavailable, using LLM only:', e);
+    }
+
+    // 2. Fetch Memory Context (Past Decisions)
     let memoryContext = '';
     try {
         // Search for relevant routing rules or past decisions
@@ -38,7 +71,7 @@ export async function adjudicateItem(
         console.warn('Failed to fetch Zep context for adjudication', e);
     }
 
-    // 2. Build Prompt
+    // 3. Build Prompt with Preference Context
     const prompt = `
     You are the Adjudicator for the Executive Assistant (EA) System.
     Your job is to route incoming information to the correct domain agent or disposition it.
@@ -51,8 +84,11 @@ export async function adjudicateItem(
 
     MEMORY/RULES CONTEXT:
     ${memoryContext || 'No specific past rules found.'}
+    ${preferenceContext}
 
     INSTRUCTIONS:
+    IMPORTANT: If the preference model has pre-classified this item, strongly weight that analysis.
+    The preference model has been trained on James's past corrections and reflects his actual preferences.
     1. Determine the relevant LifeOS Domain (Finance, Legal, Health, etc).
     2. Assess Priority based on urgency/importance.
     3. Choose Action: route (send to agent), archive (junk/done), reply (needs draft), flag (needs human).

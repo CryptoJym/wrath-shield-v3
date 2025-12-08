@@ -1,9 +1,74 @@
 "use client";
 
 import useSWR from "swr";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useCallback } from "react";
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json());
+
+// Types for cron API responses
+interface IngestResult {
+  success: boolean;
+  summary: {
+    totalMessages: number;
+    totalEvents: number;
+    gmail: Array<{ mailbox: string; fetched: number }>;
+    outlook: Array<{ mailbox: string; fetched: number }>;
+  };
+  pipeline?: {
+    processed: number;
+    byCategory: Record<string, number>;
+    needsReview: number;
+    junk: number;
+    routed: number;
+  };
+  errors: string[];
+  duration_ms: number;
+}
+
+interface ProcessResult {
+  ok: boolean;
+  queue: {
+    processed: number;
+    succeeded: number;
+    failed: number;
+    deferred: number;
+  } | null;
+  jobs: {
+    executed: number;
+    completed: number;
+    failed: number;
+  } | null;
+  errors: string[];
+  duration_ms: number;
+}
+
+interface CronStatus {
+  ok: boolean;
+  timestamp: string;
+  queue: {
+    depth: number;
+    pending: number;
+    processing: number;
+    completed: number;
+    failed: number;
+    deferred: number;
+  };
+  jobs: {
+    total: number;
+    enabled: number;
+    due: number;
+  };
+  health: {
+    status: "healthy" | "degraded" | "unhealthy";
+    issues: string[];
+  };
+}
+
+interface ActivationResult {
+  ingest: IngestResult | null;
+  process: ProcessResult | null;
+  totalDuration: number;
+}
 
 function Pill({ label, value, tone }: { label: string; value: number; tone: "green" | "amber" | "red" | "blue" }) {
   const toneMap = {
@@ -21,10 +86,54 @@ function Pill({ label, value, tone }: { label: string; value: number; tone: "gre
 
 export default function EAStatusPage() {
   const { data, isLoading, mutate } = useSWR("/api/agentic/status", fetcher, { refreshInterval: 5000 });
+  const { data: cronStatus, mutate: mutateCronStatus } = useSWR<CronStatus>("/api/cron/status", fetcher, { refreshInterval: 10000 });
   const [busy, setBusy] = useState(false);
+  const [activating, setActivating] = useState(false);
+  const [activationResult, setActivationResult] = useState<ActivationResult | null>(null);
+  const [activationError, setActivationError] = useState<string | null>(null);
 
   const samples = useMemo(() => data?.samples || {}, [data]);
   const counts = useMemo(() => data?.counts || {}, [data]);
+
+  // Activation handler - calls both ingest and process endpoints
+  const handleActivate = useCallback(async () => {
+    setActivating(true);
+    setActivationError(null);
+    setActivationResult(null);
+    const startTime = Date.now();
+
+    try {
+      // Get CRON_SECRET from environment or use a placeholder for dev
+      const headers = {
+        "Content-Type": "application/json",
+        "x-cron-secret": process.env.NEXT_PUBLIC_CRON_SECRET || "",
+      };
+
+      // Call both endpoints in parallel
+      const [ingestRes, processRes] = await Promise.all([
+        fetch("/api/cron/ingest", { method: "POST", headers }),
+        fetch("/api/cron/process", { method: "POST", headers }),
+      ]);
+
+      const ingestData: IngestResult = await ingestRes.json();
+      const processData: ProcessResult = await processRes.json();
+
+      const totalDuration = Date.now() - startTime;
+
+      setActivationResult({
+        ingest: ingestData,
+        process: processData,
+        totalDuration,
+      });
+
+      // Refresh all data
+      await Promise.all([mutate(), mutateCronStatus()]);
+    } catch (err: any) {
+      setActivationError(err?.message || "Failed to activate system");
+    } finally {
+      setActivating(false);
+    }
+  }, [mutate, mutateCronStatus]);
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-50">
@@ -66,6 +175,205 @@ export default function EAStatusPage() {
           </div>
         </header>
 
+        {/* Activation Control Panel */}
+        <section className="bg-slate-900/70 border border-slate-700 rounded-xl p-5">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            {/* Status Indicator */}
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2">
+                <span className={`w-2.5 h-2.5 rounded-full ${
+                  cronStatus?.health?.status === 'healthy' ? 'bg-emerald-400 animate-pulse' :
+                  cronStatus?.health?.status === 'degraded' ? 'bg-amber-400 animate-pulse' :
+                  cronStatus?.health?.status === 'unhealthy' ? 'bg-rose-400' :
+                  'bg-slate-500'
+                }`} />
+                <span className={`text-sm font-medium ${
+                  cronStatus?.health?.status === 'healthy' ? 'text-emerald-400' :
+                  cronStatus?.health?.status === 'degraded' ? 'text-amber-400' :
+                  cronStatus?.health?.status === 'unhealthy' ? 'text-rose-400' :
+                  'text-slate-400'
+                }`}>
+                  {cronStatus?.health?.status ? cronStatus.health.status.charAt(0).toUpperCase() + cronStatus.health.status.slice(1) : 'Loading...'}
+                </span>
+              </div>
+              <div className="hidden md:flex items-center gap-3 text-xs text-slate-400 border-l border-slate-700 pl-4">
+                <span>Queue: {cronStatus?.queue?.pending ?? 0} pending</span>
+                <span className="text-slate-600">|</span>
+                <span>Jobs: {cronStatus?.jobs?.due ?? 0} due</span>
+              </div>
+            </div>
+
+            {/* Activation Button */}
+            <button
+              onClick={handleActivate}
+              disabled={activating}
+              className={`flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-sm transition-all ${
+                activating
+                  ? 'bg-slate-700 text-slate-400 cursor-wait'
+                  : 'bg-cyan-600 hover:bg-cyan-500 text-white shadow-lg shadow-cyan-900/30 hover:shadow-cyan-800/40'
+              }`}
+            >
+              {activating ? (
+                <>
+                  <div className="w-4 h-4 border-2 border-slate-400 border-t-transparent rounded-full animate-spin" />
+                  Activating...
+                </>
+              ) : (
+                <>
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                  Activate System
+                </>
+              )}
+            </button>
+          </div>
+
+          {/* Health Issues */}
+          {cronStatus?.health?.issues && cronStatus.health.issues.length > 0 && (
+            <div className="mt-3 pt-3 border-t border-slate-700/50">
+              <div className="text-xs text-amber-400 space-y-1">
+                {cronStatus.health.issues.map((issue, idx) => (
+                  <div key={idx} className="flex items-start gap-2">
+                    <span className="text-amber-500">!</span>
+                    <span>{issue}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Activation Error */}
+          {activationError && (
+            <div className="mt-3 pt-3 border-t border-slate-700/50">
+              <div className="flex items-start gap-2 text-sm text-rose-400 bg-rose-900/20 px-3 py-2 rounded-lg">
+                <svg className="w-4 h-4 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span>{activationError}</span>
+                <button
+                  onClick={() => setActivationError(null)}
+                  className="ml-auto text-rose-400 hover:text-rose-300"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Activation Results */}
+          {activationResult && (
+            <div className="mt-3 pt-3 border-t border-slate-700/50">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-sm font-medium text-emerald-400 flex items-center gap-2">
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  Activation Complete
+                </span>
+                <span className="text-xs text-slate-500">{activationResult.totalDuration}ms</span>
+              </div>
+              <div className="grid grid-cols-2 gap-3 text-xs">
+                {/* Ingest Results */}
+                <div className="bg-slate-800/50 rounded-lg p-3 space-y-1">
+                  <div className="font-semibold text-slate-300 mb-2">Inbox Ingest</div>
+                  {activationResult.ingest ? (
+                    activationResult.ingest.success ? (
+                      <>
+                        <div className="flex justify-between text-slate-400">
+                          <span>Messages fetched</span>
+                          <span className="text-slate-200">{activationResult.ingest.summary?.totalMessages ?? 0}</span>
+                        </div>
+                        <div className="flex justify-between text-slate-400">
+                          <span>Events created</span>
+                          <span className="text-slate-200">{activationResult.ingest.summary?.totalEvents ?? 0}</span>
+                        </div>
+                        {activationResult.ingest.pipeline && (
+                          <>
+                            <div className="flex justify-between text-slate-400">
+                              <span>Pipeline processed</span>
+                              <span className="text-slate-200">{activationResult.ingest.pipeline.processed}</span>
+                            </div>
+                            <div className="flex justify-between text-slate-400">
+                              <span>Routed</span>
+                              <span className="text-emerald-400">{activationResult.ingest.pipeline.routed}</span>
+                            </div>
+                          </>
+                        )}
+                      </>
+                    ) : (
+                      <div className="text-rose-400">Failed</div>
+                    )
+                  ) : (
+                    <div className="text-slate-500">No data</div>
+                  )}
+                </div>
+
+                {/* Process Results */}
+                <div className="bg-slate-800/50 rounded-lg p-3 space-y-1">
+                  <div className="font-semibold text-slate-300 mb-2">Task Processor</div>
+                  {activationResult.process ? (
+                    activationResult.process.ok ? (
+                      <>
+                        {activationResult.process.queue && (
+                          <>
+                            <div className="flex justify-between text-slate-400">
+                              <span>Queue processed</span>
+                              <span className="text-slate-200">{activationResult.process.queue.processed}</span>
+                            </div>
+                            <div className="flex justify-between text-slate-400">
+                              <span>Succeeded</span>
+                              <span className="text-emerald-400">{activationResult.process.queue.succeeded}</span>
+                            </div>
+                            {activationResult.process.queue.failed > 0 && (
+                              <div className="flex justify-between text-slate-400">
+                                <span>Failed</span>
+                                <span className="text-rose-400">{activationResult.process.queue.failed}</span>
+                              </div>
+                            )}
+                          </>
+                        )}
+                        {activationResult.process.jobs && (
+                          <div className="flex justify-between text-slate-400">
+                            <span>Jobs executed</span>
+                            <span className="text-slate-200">{activationResult.process.jobs.executed}</span>
+                          </div>
+                        )}
+                      </>
+                    ) : (
+                      <div className="text-rose-400">Failed</div>
+                    )
+                  ) : (
+                    <div className="text-slate-500">No data</div>
+                  )}
+                </div>
+              </div>
+
+              {/* Errors from activation */}
+              {((activationResult.ingest?.errors?.length ?? 0) > 0 || (activationResult.process?.errors?.length ?? 0) > 0) && (
+                <div className="mt-2 text-xs text-amber-400 space-y-1">
+                  {activationResult.ingest?.errors?.slice(0, 3).map((err, idx) => (
+                    <div key={`ingest-${idx}`} className="truncate">Ingest: {err}</div>
+                  ))}
+                  {activationResult.process?.errors?.slice(0, 3).map((err, idx) => (
+                    <div key={`process-${idx}`} className="truncate">Process: {err}</div>
+                  ))}
+                </div>
+              )}
+
+              {/* Dismiss button */}
+              <button
+                onClick={() => setActivationResult(null)}
+                className="mt-2 text-xs text-slate-500 hover:text-slate-400 transition-colors"
+              >
+                Dismiss
+              </button>
+            </div>
+          )}
+        </section>
+
         <section className="flex flex-wrap gap-3">
           <Pill label="Proposed" value={counts?.proposed ?? 0} tone="blue" />
           <Pill label="Queued" value={counts?.queued ?? 0} tone="amber" />
@@ -85,7 +393,12 @@ export default function EAStatusPage() {
           outreach.
         </footer>
       </div>
-      {(isLoading || busy) && <div className="fixed bottom-4 right-4 text-xs text-slate-400">Syncing…</div>}
+      {(isLoading || busy || activating) && (
+        <div className="fixed bottom-4 right-4 text-xs text-slate-400 flex items-center gap-2">
+          <div className="w-3 h-3 border-2 border-slate-400 border-t-transparent rounded-full animate-spin" />
+          {activating ? 'Activating...' : 'Syncing...'}
+        </div>
+      )}
     </div>
   );
 }

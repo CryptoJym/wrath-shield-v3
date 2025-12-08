@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import useSWR from "swr";
 
@@ -10,7 +11,7 @@ function sumBuckets(b: Record<string, number> | undefined) {
   return Object.values(b).reduce((a, v) => a + (v || 0), 0);
 }
 
-export default function PrintPage() {
+function PrintPageContent() {
   const params = useSearchParams();
   const start = params?.get("start") || "";
   const end = params?.get("end") || "";
@@ -126,5 +127,13 @@ export default function PrintPage() {
       </section>
     </div>
     </>
+  );
+}
+
+export default function PrintPage() {
+  return (
+    <Suspense fallback={<div className="p-8 text-center">Loading report...</div>}>
+      <PrintPageContent />
+    </Suspense>
   );
 }

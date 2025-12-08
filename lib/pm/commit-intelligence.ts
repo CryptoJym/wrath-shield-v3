@@ -443,7 +443,7 @@ export function generateProgressReport(options: {
     by_impact: Record<ImpactLevel, number>;
     ambiguities_count: number;
   };
-  bullet_statements: string[];
+  bullet_statements: { text: string; project: string; repo: string }[];
   top_contributors: { author: string; commits: number }[];
   needs_attention: string[];
 } {
@@ -479,7 +479,7 @@ export function generateProgressReport(options: {
   const byCategory: Record<string, number> = {};
   const byImpact: Record<string, number> = {};
   const authorCounts: Record<string, number> = {};
-  const bulletStatements: string[] = [];
+  const bulletStatements: { text: string; project: string; repo: string }[] = [];
   const needsAttention: string[] = [];
   let ambiguitiesCount = 0;
 
@@ -488,9 +488,14 @@ export function generateProgressReport(options: {
     byImpact[analysis.impact_level] = (byImpact[analysis.impact_level] || 0) + 1;
     authorCounts[analysis.author] = (authorCounts[analysis.author] || 0) + 1;
 
-    // Only include high-impact bullet statements
+    // Only include high-impact bullet statements with project context
     if (['critical', 'high', 'medium'].includes(analysis.impact_level)) {
-      bulletStatements.push(analysis.bullet_statement);
+      const repoParts = analysis.repo_full_name.split('/');
+      bulletStatements.push({
+        text: analysis.bullet_statement,
+        project: repoParts[1] || analysis.repo_full_name,
+        repo: analysis.repo_full_name,
+      });
     }
 
     if (analysis.ambiguities.length > 0) {

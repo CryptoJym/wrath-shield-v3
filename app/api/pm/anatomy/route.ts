@@ -6,10 +6,12 @@
  * - Connections between modules
  * - Recent activity logs
  * - Data flow metrics
+ * - Real-time health status from AgentInvoker activity
  */
 
 import { NextRequest, NextResponse } from 'next/server';
 import githubClient from '@/lib/integrations/GitHubClient';
+import { getAgentHealth, type HealthStatus } from '@/lib/agents/health';
 
 export const dynamic = 'force-dynamic';
 
@@ -63,6 +65,19 @@ interface AgentAnatomy {
     avgResponseTime: number;
     errorRate: number;
     activeConnections: number;
+  };
+  // Real-time health data from AgentInvoker
+  health?: {
+    status: HealthStatus;
+    lastActivityAgo: string;
+    memoryStatus: 'connected' | 'latent' | 'unavailable';
+    memoryLatencyMs: number | null;
+    recentErrorCount: number;
+    totalRecentCalls: number;
+    avgTokenUsage: number;
+    avgResponseLatencyMs: number;
+    healthScore: number;
+    tokenUsageTrend: 'increasing' | 'stable' | 'decreasing' | 'unknown';
   };
 }
 
@@ -411,23 +426,50 @@ export async function GET(req: NextRequest) {
     const avgLatency = modules.reduce((sum, m) => sum + (m.metrics?.avgLatency || 0), 0) / modules.length;
     const avgErrorRate = modules.reduce((sum, m) => sum + (m.metrics?.errorRate || 0), 0) / modules.length;
 
+    // Fetch real health data from AgentInvoker
+    let healthData: AgentAnatomy['health'] = undefined;
+    try {
+      const realHealth = await getAgentHealth('agent.pm');
+      healthData = {
+        status: realHealth.status,
+        lastActivityAgo: realHealth.lastActivityAgo,
+        memoryStatus: realHealth.memoryStatus,
+        memoryLatencyMs: realHealth.memoryLatencyMs,
+        recentErrorCount: realHealth.recentErrorCount,
+        totalRecentCalls: realHealth.totalRecentCalls,
+        avgTokenUsage: realHealth.avgTokenUsage,
+        avgResponseLatencyMs: realHealth.avgResponseLatencyMs,
+        healthScore: realHealth.healthScore,
+        tokenUsageTrend: realHealth.tokenUsageTrend,
+      };
+    } catch (healthError) {
+      console.warn('[PM Anatomy API] Failed to fetch real health data:', healthError);
+    }
+
+    // Determine agent status based on real health data or fallback
+    const agentStatus: 'healthy' | 'degraded' | 'error' =
+      healthData?.status === 'offline' ? 'error' :
+      healthData?.status === 'degraded' ? 'degraded' :
+      githubStatus === 'error' ? 'degraded' : 'healthy';
+
     const anatomy: AgentAnatomy = {
       agent: {
         id: 'pm',
         name: 'PM Agent',
         version: '2.0.0-github-native',
-        status: githubStatus === 'error' ? 'degraded' : 'healthy',
+        status: agentStatus,
         uptime: '99.9%',
       },
       modules,
       connections,
       recentActivity,
       metrics: {
-        totalCalls: callCount,
-        avgResponseTime: Math.round(avgLatency),
-        errorRate: Math.round(avgErrorRate * 100) / 100,
+        totalCalls: healthData?.totalRecentCalls || callCount,
+        avgResponseTime: healthData?.avgResponseLatencyMs || Math.round(avgLatency),
+        errorRate: healthData ? healthData.recentErrorCount / Math.max(1, healthData.totalRecentCalls) : Math.round(avgErrorRate * 100) / 100,
         activeConnections,
       },
+      health: healthData,
     };
 
     // Update activity log with success
