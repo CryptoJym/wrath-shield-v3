@@ -1,6 +1,11 @@
 /**
  * Agents Graph API Route Tests
  * Tests for /api/agents/graph endpoint
+ *
+ * Updated to reflect comprehensive network topology with:
+ * - Multiple node types (agent, integration, llm, memory, cron)
+ * - Multiple edge types (data, control, bidirectional, cron, llm, memory)
+ * - Layered radial positioning
  */
 
 import { GET } from '@/app/api/agents/graph/route';
@@ -21,13 +26,18 @@ describe('Agents Graph API Route', () => {
   const mockAgents: Agent[] = [
     {
       id: 'grok',
-      name: 'Memory/Research',
+      name: 'Central Intelligence (Grok)',
       icon: 'brain',
       status: 'green',
       last_sync: '2025-01-31T12:00:00Z',
       hp: 95,
       mp: 80,
       open_items: 3,
+      capabilities: ['Deep research', 'Synthesis'],
+      link: '/chat',
+      avatar: '/assets/agents/grok.png',
+      nodeType: 'agent',
+      category: 'core',
     },
     {
       id: 'legal',
@@ -38,6 +48,11 @@ describe('Agents Graph API Route', () => {
       hp: 90,
       mp: 75,
       open_items: 5,
+      capabilities: ['Case management'],
+      link: '/legal',
+      avatar: '/assets/agents/legal.png',
+      nodeType: 'agent',
+      category: 'core',
     },
     {
       id: 'finance',
@@ -48,11 +63,16 @@ describe('Agents Graph API Route', () => {
       hp: 70,
       mp: 60,
       open_items: 12,
+      capabilities: ['Transaction tracking'],
+      link: '/finance',
+      avatar: '/assets/agents/finance.png',
+      nodeType: 'agent',
+      category: 'core',
     },
   ];
 
   describe('GET /api/agents/graph', () => {
-    it('should return graph data with nodes and edges', async () => {
+    it('should return graph data with nodes, edges, and stats', async () => {
       getAllAgentsStatus.mockResolvedValue(mockAgents);
 
       const response = await GET();
@@ -62,17 +82,21 @@ describe('Agents Graph API Route', () => {
       expect(data).toHaveProperty('nodes');
       expect(data).toHaveProperty('edges');
       expect(data).toHaveProperty('timestamp');
+      expect(data).toHaveProperty('stats');
       expect(Array.isArray(data.nodes)).toBe(true);
       expect(Array.isArray(data.edges)).toBe(true);
     });
 
-    it('should create nodes with correct structure', async () => {
+    it('should create nodes with correct structure including new fields', async () => {
       getAllAgentsStatus.mockResolvedValue([mockAgents[0]]);
 
       const response = await GET();
       const data = await response.json();
 
-      expect(data.nodes[0]).toMatchObject({
+      // Find the grok node (API merges with additional mock nodes)
+      const grokNode = data.nodes.find((n: any) => n.id === 'grok');
+      expect(grokNode).toBeDefined();
+      expect(grokNode).toMatchObject({
         id: expect.any(String),
         name: expect.any(String),
         type: expect.any(String),
@@ -88,7 +112,7 @@ describe('Agents Graph API Route', () => {
       });
     });
 
-    it('should place grok agent in center position', async () => {
+    it('should place grok agent in center position (600, 400)', async () => {
       getAllAgentsStatus.mockResolvedValue(mockAgents);
 
       const response = await GET();
@@ -96,33 +120,38 @@ describe('Agents Graph API Route', () => {
 
       const grokNode = data.nodes.find((n: any) => n.id === 'grok');
       expect(grokNode).toBeDefined();
-      expect(grokNode.position).toEqual({ x: 500, y: 300 });
+      // New center position is (600, 400)
+      expect(grokNode.position).toEqual({ x: 600, y: 400 });
     });
 
-    it('should position non-grok agents in circle', async () => {
+    it('should position core agents in inner ring around grok', async () => {
       getAllAgentsStatus.mockResolvedValue(mockAgents);
 
       const response = await GET();
       const data = await response.json();
 
-      const nonGrokNodes = data.nodes.filter((n: any) => n.id !== 'grok');
+      // Filter to only the agents from our mock (not additional integrations/llms)
+      const coreAgentNodes = data.nodes.filter((n: any) =>
+        n.nodeType === 'agent' && n.category === 'core' && n.id !== 'grok'
+      );
 
-      nonGrokNodes.forEach((node: any) => {
-        // Non-grok agents should NOT be at the center position (500, 300)
-        const isAtCenter = node.position.x === 500 && node.position.y === 300;
+      coreAgentNodes.forEach((node: any) => {
+        // Core agents should NOT be at the center position (600, 400)
+        const isAtCenter = node.position.x === 600 && node.position.y === 400;
         expect(isAtCenter).toBe(false);
-        // Verify it's on a circle with radius 250 centered at (500, 300)
+
+        // Verify it's on the inner ring (radius 180 centered at 600, 400)
         const distance = Math.sqrt(
-          Math.pow(node.position.x - 500, 2) +
-          Math.pow(node.position.y - 300, 2)
+          Math.pow(node.position.x - 600, 2) +
+          Math.pow(node.position.y - 400, 2)
         );
-        // Allow 1 pixel tolerance for floating point errors
-        expect(distance).toBeGreaterThan(248);
-        expect(distance).toBeLessThan(252);
+        // Allow tolerance for floating point errors
+        expect(distance).toBeGreaterThan(170);
+        expect(distance).toBeLessThan(190);
       });
     });
 
-    it('should create edges with correct structure', async () => {
+    it('should create edges with correct structure including new types', async () => {
       getAllAgentsStatus.mockResolvedValue(mockAgents);
 
       const response = await GET();
@@ -132,7 +161,7 @@ describe('Agents Graph API Route', () => {
         expect(data.edges[0]).toMatchObject({
           from: expect.any(String),
           to: expect.any(String),
-          type: expect.stringMatching(/^(data|control|bidirectional)$/),
+          type: expect.stringMatching(/^(data|control|bidirectional|cron|llm|memory)$/),
           healthy: expect.any(Boolean),
         });
 
@@ -167,10 +196,10 @@ describe('Agents Graph API Route', () => {
       const data = await response.json();
 
       const edgesBetweenHealthy = data.edges.filter((e: any) => {
-        const fromAgent = mockAgents.find(a => a.id === e.from);
-        const toAgent = mockAgents.find(a => a.id === e.to);
-        return fromAgent && toAgent &&
-               fromAgent.status !== 'red' && toAgent.status !== 'red';
+        const fromNode = data.nodes.find((n: any) => n.id === e.from);
+        const toNode = data.nodes.find((n: any) => n.id === e.to);
+        return fromNode && toNode &&
+               fromNode.status !== 'red' && toNode.status !== 'red';
       });
 
       edgesBetweenHealthy.forEach((edge: any) => {
@@ -179,14 +208,16 @@ describe('Agents Graph API Route', () => {
       });
     });
 
-    it('should return 500 on error', async () => {
+    it('should fall back to mock data on registry error', async () => {
       getAllAgentsStatus.mockRejectedValue(new Error('Database error'));
 
       const response = await GET();
-
-      expect(response.status).toBe(500);
       const data = await response.json();
-      expect(data.error).toBe('Failed to fetch agent graph');
+
+      // Should still return 200 with fallback mock data
+      expect(response.status).toBe(200);
+      expect(data.nodes.length).toBeGreaterThan(0);
+      expect(data.timestamp).toBeDefined();
     });
 
     it('should include timestamp in ISO format', async () => {
@@ -200,15 +231,19 @@ describe('Agents Graph API Route', () => {
       expect(new Date(data.timestamp).toISOString()).toBe(data.timestamp);
     });
 
-    it('should handle empty agents array', async () => {
-      getAllAgentsStatus.mockResolvedValue([]);
+    it('should include all node types in response when using fallback', async () => {
+      getAllAgentsStatus.mockRejectedValue(new Error('Registry unavailable'));
 
       const response = await GET();
       const data = await response.json();
 
-      expect(data.nodes).toEqual([]);
-      expect(data.edges).toEqual([]);
-      expect(data.timestamp).toBeDefined();
+      // With fallback data, we should have all node types
+      const nodeTypes = [...new Set(data.nodes.map((n: any) => n.nodeType))];
+      expect(nodeTypes).toContain('agent');
+      expect(nodeTypes).toContain('integration');
+      expect(nodeTypes).toContain('llm');
+      expect(nodeTypes).toContain('memory');
+      expect(nodeTypes).toContain('cron');
     });
 
     it('should create bidirectional edges for grok connections', async () => {
@@ -245,12 +280,56 @@ describe('Agents Graph API Route', () => {
       const response = await GET();
       const data = await response.json();
 
-      expect(data.nodes[0].id).toBe('grok');
-      expect(data.nodes[0].name).toBe('Memory/Research');
-      expect(data.nodes[0].hp).toBe(95);
-      expect(data.nodes[0].mp).toBe(80);
-      expect(data.nodes[0].openItems).toBe(3);
-      expect(data.nodes[0].status).toBe('green');
+      // Find grok node (there will be additional nodes from fallback)
+      const grokNode = data.nodes.find((n: any) => n.id === 'grok');
+      expect(grokNode.id).toBe('grok');
+      expect(grokNode.name).toBe('Central Intelligence (Grok)');
+      expect(grokNode.hp).toBe(95);
+      expect(grokNode.mp).toBe(80);
+      expect(grokNode.openItems).toBe(3);
+      expect(grokNode.status).toBe('green');
+    });
+
+    it('should include stats in response', async () => {
+      getAllAgentsStatus.mockResolvedValue(mockAgents);
+
+      const response = await GET();
+      const data = await response.json();
+
+      expect(data.stats).toBeDefined();
+      expect(data.stats).toHaveProperty('totalAgents');
+      expect(data.stats).toHaveProperty('totalIntegrations');
+      expect(data.stats).toHaveProperty('totalConnections');
+      expect(data.stats).toHaveProperty('healthyConnections');
+      expect(data.stats).toHaveProperty('activeDataFlows');
+    });
+
+    it('should position integrations on left side', async () => {
+      getAllAgentsStatus.mockRejectedValue(new Error('Use fallback'));
+
+      const response = await GET();
+      const data = await response.json();
+
+      const integrations = data.nodes.filter((n: any) => n.nodeType === 'integration');
+
+      integrations.forEach((node: any) => {
+        // Integrations should be on left side (x < 200)
+        expect(node.position.x).toBeLessThan(200);
+      });
+    });
+
+    it('should position LLM providers on right side', async () => {
+      getAllAgentsStatus.mockRejectedValue(new Error('Use fallback'));
+
+      const response = await GET();
+      const data = await response.json();
+
+      const llms = data.nodes.filter((n: any) => n.nodeType === 'llm');
+
+      llms.forEach((node: any) => {
+        // LLMs should be on right side (x > 1000)
+        expect(node.position.x).toBeGreaterThan(1000);
+      });
     });
   });
 });

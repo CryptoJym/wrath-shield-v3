@@ -9,6 +9,8 @@ import { AgentDetailPanel } from '@/components/agents/AgentDetailPanel';
 import { GraphFilters } from '@/components/agents/GraphFilters';
 import { Agent } from '@/app/agents/agents.mock';
 
+type NodeType = 'agent' | 'integration' | 'llm' | 'memory' | 'cron';
+
 interface GraphNode {
   id: string;
   name: string;
@@ -21,12 +23,14 @@ interface GraphNode {
   position?: { x: number; y: number };
   capabilities?: string[];
   link?: string;
+  nodeType?: NodeType;
+  category?: string;
 }
 
 interface GraphEdge {
   from: string;
   to: string;
-  type: 'data' | 'control' | 'bidirectional';
+  type: 'data' | 'control' | 'bidirectional' | 'cron' | 'llm' | 'memory';
   healthy: boolean;
   label?: string;
   lastRun?: string;
@@ -39,6 +43,13 @@ interface AgentGraphData {
   nodes: GraphNode[];
   edges: GraphEdge[];
   timestamp: string;
+  stats?: {
+    totalAgents: number;
+    totalIntegrations: number;
+    totalConnections: number;
+    healthyConnections: number;
+    activeDataFlows: number;
+  };
 }
 
 interface EdgeAudit {
@@ -84,13 +95,32 @@ const statusColor = {
 const edgeColor = (healthy: boolean) => (healthy ? '#6ee7b7' : '#f87171');
 const edgeOpacity = (healthy: boolean) => (healthy ? 0.9 : 0.5);
 
-// SVG viewBox dimensions - larger for more spacing
-const SVG_WIDTH = 1800;
-const SVG_HEIGHT = 1200;
+// SVG viewBox dimensions - expanded for comprehensive network view
+const SVG_WIDTH = 1400;
+const SVG_HEIGHT = 800;
 const NODE_RADIUS = 45;
-const CENTER_X = SVG_WIDTH / 2;
-const CENTER_Y = SVG_HEIGHT / 2;
-const ORBIT_RADIUS = 420; // Distance from center for satellite nodes - increased for legibility
+const CENTER_X = 600;
+const CENTER_Y = 400;
+const ORBIT_RADIUS = 420;
+
+// Node type visual styling
+const nodeTypeStyles: Record<NodeType, { bg: string; border: string; glow: string; icon: string }> = {
+  agent: { bg: 'bg-slate-900/80', border: 'border-violet-500/50', glow: 'shadow-violet-500/20', icon: '🤖' },
+  integration: { bg: 'bg-blue-950/80', border: 'border-blue-500/50', glow: 'shadow-blue-500/20', icon: '🔌' },
+  llm: { bg: 'bg-amber-950/80', border: 'border-amber-500/50', glow: 'shadow-amber-500/20', icon: '🧠' },
+  memory: { bg: 'bg-emerald-950/80', border: 'border-emerald-500/50', glow: 'shadow-emerald-500/20', icon: '💾' },
+  cron: { bg: 'bg-cyan-950/80', border: 'border-cyan-500/50', glow: 'shadow-cyan-500/20', icon: '⏰' },
+};
+
+// Edge type colors
+const edgeTypeColors: Record<GraphEdge['type'], string> = {
+  data: '#3b82f6',      // blue
+  control: '#a855f7',   // purple
+  bidirectional: '#6366f1', // indigo
+  cron: '#06b6d4',      // cyan
+  llm: '#f59e0b',       // amber
+  memory: '#10b981',    // emerald
+};
 
 export default function AgentGraphPage() {
   const [data, setData] = useState<AgentGraphData>(fallbackGraphData);
@@ -162,19 +192,23 @@ export default function AgentGraphPage() {
     return Array.from(new Set(data.nodes.map(n => n.type)));
   }, [data.nodes]);
 
-  // Calculate node positions with proper spacing
-  // Grok (research hub) in center, others in orbit around it
+  // Use server-provided positions or fallback to calculated positions
   const { nodesNorm, edges } = useMemo(() => {
     const nodes = filteredData.nodes;
-    const grokNode = nodes.find(n => n.id === 'grok');
-    const otherNodes = nodes.filter(n => n.id !== 'grok');
 
     const positioned = nodes.map((n, idx) => {
+      // Use server-provided position if available
+      if (n.position && n.position.x !== 0 && n.position.y !== 0) {
+        return { ...n, sx: n.position.x, sy: n.position.y };
+      }
+
+      // Fallback positioning if server didn't provide
       if (n.id === 'grok') {
-        // Center position for research hub
         return { ...n, sx: CENTER_X, sy: CENTER_Y };
       }
-      // Distribute other nodes evenly in a circle
+
+      // Calculate fallback positions based on node type
+      const otherNodes = nodes.filter(on => on.id !== 'grok');
       const otherIdx = otherNodes.findIndex(on => on.id === n.id);
       const angle = (otherIdx / Math.max(1, otherNodes.length)) * Math.PI * 2 - Math.PI / 2;
       return {
@@ -312,16 +346,24 @@ export default function AgentGraphPage() {
           </div>
 
           <div className="flex items-center gap-4">
-            <div className="flex gap-2">
+            <div className="flex gap-2 flex-wrap">
               <div className="px-4 py-2 rounded-lg bg-slate-900/50 border border-white/10 backdrop-blur-sm">
-                <div className="text-xs text-slate-500 uppercase tracking-wider font-semibold">Active Nodes</div>
-                <div className="text-xl font-bold text-white">{nodesNorm.length}</div>
+                <div className="text-xs text-slate-500 uppercase tracking-wider font-semibold">Agents</div>
+                <div className="text-xl font-bold text-violet-400">{data.stats?.totalAgents || nodesNorm.filter(n => n.nodeType === 'agent').length}</div>
               </div>
               <div className="px-4 py-2 rounded-lg bg-slate-900/50 border border-white/10 backdrop-blur-sm">
-                <div className="text-xs text-slate-500 uppercase tracking-wider font-semibold">Signal Flow</div>
+                <div className="text-xs text-slate-500 uppercase tracking-wider font-semibold">Integrations</div>
+                <div className="text-xl font-bold text-blue-400">{data.stats?.totalIntegrations || nodesNorm.filter(n => n.nodeType === 'integration').length}</div>
+              </div>
+              <div className="px-4 py-2 rounded-lg bg-slate-900/50 border border-white/10 backdrop-blur-sm">
+                <div className="text-xs text-slate-500 uppercase tracking-wider font-semibold">Connections</div>
                 <div className="text-xl font-bold text-emerald-400">
-                  {edges.filter(e => e.healthy).length}<span className="text-slate-600 text-sm font-normal">/{edges.length}</span>
+                  {data.stats?.healthyConnections || edges.filter(e => e.healthy).length}<span className="text-slate-600 text-sm font-normal">/{data.stats?.totalConnections || edges.length}</span>
                 </div>
+              </div>
+              <div className="px-4 py-2 rounded-lg bg-slate-900/50 border border-white/10 backdrop-blur-sm">
+                <div className="text-xs text-slate-500 uppercase tracking-wider font-semibold">Data Flows</div>
+                <div className="text-xl font-bold text-cyan-400">{data.stats?.activeDataFlows || edges.filter(e => e.type === 'data').length}</div>
               </div>
             </div>
           </div>
@@ -352,25 +394,55 @@ export default function AgentGraphPage() {
 
           {/* Legend Overlay */}
           <div className="absolute bottom-4 left-4 z-20">
-            <div className="bg-slate-900/80 backdrop-blur-md border border-white/10 rounded-xl p-4 shadow-xl max-w-xs">
-              <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">System Status</h3>
-              <div className="space-y-2">
+            <div className="bg-slate-900/80 backdrop-blur-md border border-white/10 rounded-xl p-4 shadow-xl max-w-sm">
+              <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Node Types</h3>
+              <div className="grid grid-cols-2 gap-2 mb-3">
                 <div className="flex items-center gap-2 text-xs text-slate-300">
-                  <span className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]"></span>
-                  <span>Operational</span>
+                  <span>🤖</span><span className="text-violet-400">Agents</span>
                 </div>
                 <div className="flex items-center gap-2 text-xs text-slate-300">
-                  <span className="w-2 h-2 rounded-full bg-amber-500 shadow-[0_0_8px_rgba(245,158,11,0.5)]"></span>
-                  <span>Degraded / Warning</span>
+                  <span>🔌</span><span className="text-blue-400">Integrations</span>
                 </div>
                 <div className="flex items-center gap-2 text-xs text-slate-300">
-                  <span className="w-2 h-2 rounded-full bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.5)]"></span>
-                  <span>Critical Error</span>
+                  <span>🧠</span><span className="text-amber-400">LLM Providers</span>
                 </div>
-                <div className="h-px bg-white/10 my-2"></div>
                 <div className="flex items-center gap-2 text-xs text-slate-300">
-                  <div className="w-8 h-0.5 bg-gradient-to-r from-cyan-500 to-blue-500"></div>
-                  <span>Active Data Flow</span>
+                  <span>💾</span><span className="text-emerald-400">Memory</span>
+                </div>
+                <div className="flex items-center gap-2 text-xs text-slate-300">
+                  <span>⏰</span><span className="text-cyan-400">Cron Jobs</span>
+                </div>
+              </div>
+              <div className="h-px bg-white/10 my-2"></div>
+              <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Connection Types</h3>
+              <div className="space-y-1.5">
+                <div className="flex items-center gap-2 text-xs text-slate-300">
+                  <div className="w-6 h-0.5 bg-blue-500"></div><span>Data Flow</span>
+                </div>
+                <div className="flex items-center gap-2 text-xs text-slate-300">
+                  <div className="w-6 h-0.5 bg-indigo-500" style={{backgroundImage: 'repeating-linear-gradient(90deg, #6366f1 0, #6366f1 4px, transparent 4px, transparent 8px)'}}></div><span>Bidirectional</span>
+                </div>
+                <div className="flex items-center gap-2 text-xs text-slate-300">
+                  <div className="w-6 h-0.5 bg-amber-500"></div><span>LLM Inference</span>
+                </div>
+                <div className="flex items-center gap-2 text-xs text-slate-300">
+                  <div className="w-6 h-0.5 bg-emerald-500"></div><span>Memory Persist</span>
+                </div>
+                <div className="flex items-center gap-2 text-xs text-slate-300">
+                  <div className="w-6 h-0.5 bg-cyan-500" style={{backgroundImage: 'repeating-linear-gradient(90deg, #06b6d4 0, #06b6d4 6px, transparent 6px, transparent 10px)'}}></div><span>Cron Trigger</span>
+                </div>
+              </div>
+              <div className="h-px bg-white/10 my-2"></div>
+              <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Status</h3>
+              <div className="flex gap-3">
+                <div className="flex items-center gap-1 text-xs text-slate-300">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500"></span><span>OK</span>
+                </div>
+                <div className="flex items-center gap-1 text-xs text-slate-300">
+                  <span className="w-2 h-2 rounded-full bg-amber-500"></span><span>Warn</span>
+                </div>
+                <div className="flex items-center gap-1 text-xs text-slate-300">
+                  <span className="w-2 h-2 rounded-full bg-red-500"></span><span>Error</span>
                 </div>
               </div>
             </div>
@@ -414,13 +486,23 @@ export default function AgentGraphPage() {
               const to = nodesNorm.find(n => n.id === e.to);
               if (!from || !to) return null;
 
-              // Calculate Bezier curve
+              // Calculate Bezier curve with slight offset for overlapping edges
               const midX = (from.sx + to.sx) / 2;
               const midY = (from.sy + to.sy) / 2;
-              // Add curvature based on index to avoid overlap if multiple edges
-              const curvature = 0;
 
               const pathD = `M ${from.sx} ${from.sy} Q ${midX} ${midY} ${to.sx} ${to.sy}`;
+
+              // Get edge color based on type
+              const edgeStrokeColor = e.healthy
+                ? edgeTypeColors[e.type] || edgeTypeColors.data
+                : '#ef4444';
+
+              // Different dash patterns for different edge types
+              const dashArray =
+                e.type === 'cron' ? '8 4' :
+                e.type === 'control' ? '4 4' :
+                e.type === 'llm' ? '2 2' :
+                'none';
 
               return (
                 <g key={`${e.from}-${e.to}-${idx}`} className="group" onClick={() => setSelectedEdge(edgeAuditFor(e))}>
@@ -430,16 +512,16 @@ export default function AgentGraphPage() {
                   {/* Base Line */}
                   <path
                     d={pathD}
-                    stroke={e.healthy ? "url(#edge-gradient)" : "#ef4444"}
+                    stroke={edgeStrokeColor}
                     strokeWidth="2"
-                    strokeOpacity="0.3"
+                    strokeOpacity={e.healthy ? 0.6 : 0.3}
                     fill="none"
-                    strokeDasharray={e.type === 'control' ? "4 4" : "none"}
+                    strokeDasharray={dashArray}
                   />
 
                   {/* Animated Pulse (Data Packet) */}
                   {e.healthy && (
-                    <circle r="3" fill="#fff">
+                    <circle r="3" fill={edgeStrokeColor}>
                       <animateMotion dur={`${Math.max(1, 4 - (e.bandwidth || 0) / 1000)}s`} repeatCount="indefinite" path={pathD}>
                       </animateMotion>
                     </circle>
@@ -462,8 +544,15 @@ export default function AgentGraphPage() {
             {/* Nodes */}
             {nodesNorm.map((n) => {
               const isGrok = n.id === 'grok';
-              const size = isGrok ? 160 : 120; // Larger size for foreignObject container
+              const nodeType = n.nodeType || 'agent';
+              const style = nodeTypeStyles[nodeType];
+
+              // Size based on node type
+              const size = isGrok ? 160 : nodeType === 'agent' ? 110 : 90;
               const offset = size / 2;
+
+              // Shape based on node type (agents circular, integrations hexagonal, etc.)
+              const isCircular = nodeType === 'agent' || nodeType === 'llm';
 
               return (
                 <foreignObject
@@ -478,49 +567,47 @@ export default function AgentGraphPage() {
                     className="w-full h-full flex items-center justify-center cursor-pointer group"
                     onClick={(e) => { e.stopPropagation(); setSelectedNode(n); }}
                   >
-                    {/* Outer Ring (Rotating) */}
-                    <div className={`absolute inset-0 rounded-full border border-dashed border-white/20 ${n.status === 'green' ? 'animate-[spin_10s_linear_infinite]' : ''}`} />
+                    {/* Outer Ring (Rotating for agents) */}
+                    <div className={`absolute inset-0 ${isCircular ? 'rounded-full' : 'rounded-lg'} border border-dashed ${style.border} ${n.status === 'green' && nodeType === 'agent' ? 'animate-[spin_10s_linear_infinite]' : ''}`} />
 
                     {/* Inner Glow Ring */}
-                    <div className={`absolute inset-2 rounded-full border border-white/10 bg-slate-900/60 backdrop-blur-xl shadow-[0_0_30px_rgba(0,0,0,0.5)] transition-all duration-300 group-hover:scale-105 group-hover:border-white/30 ${n.status === 'green' ? 'shadow-[0_0_20px_rgba(16,185,129,0.2)]' :
-                      n.status === 'yellow' ? 'shadow-[0_0_20px_rgba(245,158,11,0.2)]' :
-                        'shadow-[0_0_20px_rgba(239,68,68,0.2)]'
-                      }`}></div>
+                    <div className={`absolute inset-2 ${isCircular ? 'rounded-full' : 'rounded-md'} border ${style.border} ${style.bg} backdrop-blur-xl shadow-[0_0_30px_rgba(0,0,0,0.5)] transition-all duration-300 group-hover:scale-105 group-hover:border-white/30 ${style.glow}`}></div>
 
                     {/* Content Container */}
-                    <div className="relative z-10 flex flex-col items-center justify-center text-center">
-                      {/* Icon */}
-                      <div className={`mb-1 ${n.status === 'green' ? 'text-emerald-400' :
+                    <div className="relative z-10 flex flex-col items-center justify-center text-center px-1">
+                      {/* Icon/Type Indicator */}
+                      <div className={`mb-0.5 ${n.status === 'green' ? 'text-emerald-400' :
                         n.status === 'yellow' ? 'text-amber-400' :
                           'text-red-400'
                         }`}>
-                        {/* We can't easily render Lucide icons dynamically in foreignObject without mapping, 
-                             so we'll use a generic icon or map them if available in scope. 
-                             For now, let's use a generic 'Box' or specific if we can map. 
-                             Actually, we can just render the icon component if we map it. 
-                         */}
-                        <div className="p-2 rounded-lg bg-white/5 border border-white/5">
-                          {/* Placeholder for icon - in real implementation we'd map n.type to icon */}
-                          <div className="font-bold text-lg font-mono">{n.name.substring(0, 2).toUpperCase()}</div>
+                        <div className="text-lg">
+                          {style.icon}
                         </div>
                       </div>
 
                       {/* Name */}
-                      <div className="text-xs font-bold text-white tracking-wide shadow-black drop-shadow-md">{n.name}</div>
+                      <div className="text-[10px] font-bold text-white tracking-wide shadow-black drop-shadow-md leading-tight max-w-[80px] truncate">{n.name}</div>
 
-                      {/* Stats (HP/MP) */}
-                      <div className="flex gap-1 mt-1">
-                        <div className="w-8 h-1 bg-slate-700 rounded-full overflow-hidden">
-                          <div className="h-full bg-emerald-500" style={{ width: `${n.hp}%` }} />
+                      {/* Category Badge for non-agents */}
+                      {nodeType !== 'agent' && (
+                        <div className="text-[8px] text-slate-400 uppercase tracking-wider mt-0.5">{nodeType}</div>
+                      )}
+
+                      {/* Stats (HP/MP) - only for agents */}
+                      {nodeType === 'agent' && (
+                        <div className="flex gap-1 mt-1">
+                          <div className="w-6 h-1 bg-slate-700 rounded-full overflow-hidden" title={`HP: ${n.hp}%`}>
+                            <div className="h-full bg-emerald-500" style={{ width: `${n.hp}%` }} />
+                          </div>
+                          <div className="w-6 h-1 bg-slate-700 rounded-full overflow-hidden" title={`MP: ${n.mp}%`}>
+                            <div className="h-full bg-blue-500" style={{ width: `${n.mp}%` }} />
+                          </div>
                         </div>
-                        <div className="w-8 h-1 bg-slate-700 rounded-full overflow-hidden">
-                          <div className="h-full bg-blue-500" style={{ width: `${n.mp}%` }} />
-                        </div>
-                      </div>
+                      )}
                     </div>
 
                     {/* Status Dot */}
-                    <div className={`absolute top-2 right-2 w-3 h-3 rounded-full border-2 border-slate-900 ${n.status === 'green' ? 'bg-emerald-500 animate-pulse' :
+                    <div className={`absolute top-1 right-1 w-2.5 h-2.5 rounded-full border-2 border-slate-900 ${n.status === 'green' ? 'bg-emerald-500 animate-pulse' :
                       n.status === 'yellow' ? 'bg-amber-500' :
                         'bg-red-500'
                       }`}></div>

@@ -1,6 +1,16 @@
 import { NextResponse } from 'next/server';
 import { getAllAgentsStatus } from '@/lib/agents/registry';
-import { Agent, AgentStatus } from '@/app/agents/agents.mock';
+import {
+    Agent,
+    AgentStatus,
+    NodeType,
+    AGENTS_MOCK,
+    INTEGRATIONS_MOCK,
+    LLM_PROVIDERS_MOCK,
+    MEMORY_SYSTEMS_MOCK,
+    CRON_JOBS_MOCK,
+    ALL_NODES_MOCK
+} from '@/app/agents/agents.mock';
 
 export const revalidate = 30; // Cache for 30 seconds
 
@@ -16,12 +26,14 @@ export interface GraphNode {
     position: { x: number; y: number };
     capabilities?: string[];
     link?: string;
+    nodeType?: NodeType;
+    category?: string;
 }
 
 export interface GraphEdge {
     from: string;
     to: string;
-    type: 'data' | 'control' | 'bidirectional';
+    type: 'data' | 'control' | 'bidirectional' | 'cron' | 'llm' | 'memory';
     healthy: boolean;
     label?: string;
     lastRun?: string;
@@ -34,70 +46,250 @@ export interface AgentGraphData {
     nodes: GraphNode[];
     edges: GraphEdge[];
     timestamp: string;
+    stats: {
+        totalAgents: number;
+        totalIntegrations: number;
+        totalConnections: number;
+        healthyConnections: number;
+        activeDataFlows: number;
+    };
 }
 
 /**
- * Define the agent network topology
- * This maps the data flows and API connections between agents
+ * Complete system topology - maps ALL data flows between:
+ * - Core agents (inter-agent communication)
+ * - Integrations → Agents (data ingestion)
+ * - Agents → LLMs (inference requests)
+ * - Agents → Memory (persistence)
+ * - Crons → Integrations (scheduled syncs)
  */
-const AGENT_TOPOLOGY: Record<string, { connections: string[], bidirectional?: boolean }> = {
-    // Memory agent - central hub for all agents
+const AGENT_TOPOLOGY: Record<string, { connections: string[], type?: GraphEdge['type'], bidirectional?: boolean }> = {
+    // ===== CORE AGENT CONNECTIONS =====
+    // Central Intelligence (Grok) - orchestrates all agents
     'grok': {
-        connections: ['legal', 'finance', 'pm', 'comms', 'ea', 'relationships', 'eeg'],
+        connections: ['legal', 'finance', 'pm', 'comms', 'ea', 'relationships', 'eeg', 'hyro', 'family', 'architect', 'inbox', 'personalization'],
         bidirectional: true
     },
-    // PM agent coordinates with most agents
+    // PM agent coordinates projects across agents
     'pm': {
-        connections: ['legal', 'finance', 'comms', 'ea', 'grok']
+        connections: ['legal', 'finance', 'comms', 'ea', 'architect']
     },
-    // Legal agent communicates with PM and Comms
+    // Legal agent for case management
     'legal': {
         connections: ['comms', 'pm']
     },
-    // Finance agent reports to PM
+    // Finance agent for transaction processing
     'finance': {
         connections: ['pm', 'comms']
     },
-    // EA coordinates calendar and communications
+    // EA coordinates calendar and scheduling
     'ea': {
-        connections: ['comms', 'pm', 'relationships']
+        connections: ['comms', 'pm', 'relationships', 'family']
     },
-    // Comms receives from many agents
+    // Comms handles all messaging
     'comms': {
-        connections: ['relationships']
+        connections: ['relationships', 'inbox']
     },
-    // Relationships agent works with EA and Comms
+    // Relationships manages contacts
     'relationships': {
         connections: ['ea', 'comms']
     },
-    // EEG feeds data to memory/research agent
+    // EEG/Bio-data analysis
     'eeg': {
         connections: ['grok']
+    },
+    // Hyro - parenting co-pilot
+    'hyro': {
+        connections: ['family', 'ea', 'grok']
+    },
+    // Family hub
+    'family': {
+        connections: ['hyro', 'ea', 'grok']
+    },
+    // Architect - code generation
+    'architect': {
+        connections: ['pm', 'grok']
+    },
+    // Inbox zero
+    'inbox': {
+        connections: ['comms', 'grok']
+    },
+    // Personalization engine
+    'personalization': {
+        connections: ['grok']
+    },
+
+    // ===== INTEGRATION → AGENT DATA FLOWS =====
+    // Health data flows
+    'whoop': {
+        connections: ['eeg'],
+        type: 'data'
+    },
+    'limitless': {
+        connections: ['eeg', 'comms'],
+        type: 'data'
+    },
+    // Finance data flows
+    'plaid': {
+        connections: ['finance'],
+        type: 'data'
+    },
+    // Development data flows
+    'github': {
+        connections: ['pm', 'architect'],
+        type: 'data'
+    },
+    // Communication data flows
+    'gmail': {
+        connections: ['comms', 'inbox', 'legal'],
+        type: 'data'
+    },
+    'outlook': {
+        connections: ['comms', 'inbox'],
+        type: 'data'
+    },
+    // Calendar data flows
+    'google-calendar': {
+        connections: ['ea', 'family'],
+        type: 'data'
+    },
+    // Legal data flows
+    'mycase': {
+        connections: ['legal'],
+        type: 'data'
+    },
+    // Education data flows
+    'zearn': {
+        connections: ['hyro'],
+        type: 'data'
+    },
+    // Messaging data flows
+    'twilio': {
+        connections: ['comms', 'legal'],
+        type: 'data'
+    },
+
+    // ===== LLM PROVIDER CONNECTIONS =====
+    'openrouter': {
+        connections: ['grok', 'legal', 'finance', 'pm', 'architect', 'personalization'],
+        type: 'llm'
+    },
+    'ollama': {
+        connections: ['grok', 'architect'],
+        type: 'llm'
+    },
+    'openai': {
+        connections: ['grok', 'personalization'],
+        type: 'llm'
+    },
+
+    // ===== MEMORY SYSTEM CONNECTIONS =====
+    'zep': {
+        connections: ['grok', 'legal', 'relationships', 'personalization'],
+        type: 'memory',
+        bidirectional: true
+    },
+    'sqlite': {
+        connections: ['finance', 'eeg', 'comms', 'pm'],
+        type: 'memory',
+        bidirectional: true
+    },
+
+    // ===== CRON JOB TRIGGERS =====
+    'cron-whoop': {
+        connections: ['whoop'],
+        type: 'cron'
+    },
+    'cron-plaid': {
+        connections: ['plaid'],
+        type: 'cron'
+    },
+    'cron-limitless': {
+        connections: ['limitless'],
+        type: 'cron'
+    },
+    'cron-zearn': {
+        connections: ['zearn'],
+        type: 'cron'
     }
 };
 
 /**
- * Calculate node positions in a circular layout
+ * Calculate node positions in a layered radial layout
+ * Organized by node type: Core at center, agents in inner ring,
+ * integrations in outer ring, LLMs/Memory/Crons at edges
  */
 function calculateNodePositions(agents: Agent[]): Record<string, { x: number; y: number }> {
     const positions: Record<string, { x: number; y: number }> = {};
+    const centerX = 600;
+    const centerY = 400;
 
-    // Put Grok (Memory/Research) in the center
-    const centerAgent = agents.find(a => a.id === 'grok');
-    if (centerAgent) {
-        positions['grok'] = { x: 500, y: 300 };
-    }
+    // Layer 0: Central Intelligence (Grok) at center
+    positions['grok'] = { x: centerX, y: centerY };
 
-    // Arrange other agents in a circle around Grok
-    const otherAgents = agents.filter(a => a.id !== 'grok');
-    const radius = 250;
-    const angleStep = (2 * Math.PI) / otherAgents.length;
-
-    otherAgents.forEach((agent, index) => {
-        const angle = index * angleStep - Math.PI / 2; // Start from top
+    // Layer 1: Core agents in inner ring (radius 180)
+    const coreAgents = agents.filter(a =>
+        a.nodeType === 'agent' && a.category === 'core' && a.id !== 'grok'
+    );
+    const coreRadius = 180;
+    coreAgents.forEach((agent, index) => {
+        const angle = (index / coreAgents.length) * 2 * Math.PI - Math.PI / 2;
         positions[agent.id] = {
-            x: 500 + radius * Math.cos(angle),
-            y: 300 + radius * Math.sin(angle)
+            x: centerX + coreRadius * Math.cos(angle),
+            y: centerY + coreRadius * Math.sin(angle)
+        };
+    });
+
+    // Layer 2: Specialized agents in second ring (radius 300)
+    const specializedAgents = agents.filter(a =>
+        a.nodeType === 'agent' && a.category === 'specialized'
+    );
+    const specRadius = 300;
+    specializedAgents.forEach((agent, index) => {
+        const angle = (index / specializedAgents.length) * 2 * Math.PI - Math.PI / 4;
+        positions[agent.id] = {
+            x: centerX + specRadius * Math.cos(angle),
+            y: centerY + specRadius * Math.sin(angle)
+        };
+    });
+
+    // Layer 3: Integrations on left side (x: 50-150)
+    const integrations = agents.filter(a => a.nodeType === 'integration');
+    const intStartY = 80;
+    const intSpacing = 70;
+    integrations.forEach((agent, index) => {
+        positions[agent.id] = {
+            x: 80 + (index % 2) * 80,
+            y: intStartY + Math.floor(index / 2) * intSpacing
+        };
+    });
+
+    // Layer 4: LLM providers on right side (x: 1050-1150)
+    const llms = agents.filter(a => a.nodeType === 'llm');
+    llms.forEach((agent, index) => {
+        positions[agent.id] = {
+            x: 1100,
+            y: 150 + index * 120
+        };
+    });
+
+    // Layer 5: Memory systems on bottom right
+    const memory = agents.filter(a => a.nodeType === 'memory');
+    memory.forEach((agent, index) => {
+        positions[agent.id] = {
+            x: 1000 + index * 120,
+            y: 650
+        };
+    });
+
+    // Layer 6: Cron jobs on top
+    const crons = agents.filter(a => a.nodeType === 'cron');
+    const cronStartX = 300;
+    const cronSpacing = 150;
+    crons.forEach((agent, index) => {
+        positions[agent.id] = {
+            x: cronStartX + index * cronSpacing,
+            y: 50
         };
     });
 
@@ -143,12 +335,32 @@ function buildEdges(agents: Agent[]): GraphEdge[] {
             const bandwidth = Math.floor(Math.random() * 1000 + 100); // Mock data: 100-1100 KB/s
             const volume = (fromAgent.open_items + toAgent.open_items) * 10; // Items * 10 = approx volume
 
+            // Determine edge type based on topology config or node types
+            let edgeType: GraphEdge['type'] = config.type || 'data';
+            if (!config.type) {
+                if (config.bidirectional) {
+                    edgeType = 'bidirectional';
+                }
+            }
+
+            // Generate contextual labels
+            let label: string | undefined;
+            if (config.bidirectional) {
+                label = 'sync';
+            } else if (config.type === 'cron') {
+                label = 'trigger';
+            } else if (config.type === 'llm') {
+                label = 'inference';
+            } else if (config.type === 'memory') {
+                label = 'persist';
+            }
+
             edges.push({
                 from: fromId,
                 to: toId,
-                type: config.bidirectional ? 'bidirectional' : 'data',
+                type: edgeType,
                 healthy,
-                label: config.bidirectional ? 'sync' : undefined,
+                label,
                 lastRun,
                 errorLog,
                 bandwidth,
@@ -162,7 +374,19 @@ function buildEdges(agents: Agent[]): GraphEdge[] {
 
 export async function GET() {
     try {
-        const agents = await getAllAgentsStatus();
+        // Get live agent status from registry, fall back to mock data
+        let agents: Agent[];
+        try {
+            agents = await getAllAgentsStatus();
+            // Merge with full node list to include integrations, LLMs, memory, crons
+            const liveAgentIds = new Set(agents.map(a => a.id));
+            const additionalNodes = ALL_NODES_MOCK.filter(n => !liveAgentIds.has(n.id));
+            agents = [...agents, ...additionalNodes];
+        } catch {
+            // Use complete mock data if registry fails
+            agents = ALL_NODES_MOCK;
+        }
+
         const positions = calculateNodePositions(agents);
 
         const nodes: GraphNode[] = agents.map(agent => ({
@@ -176,15 +400,28 @@ export async function GET() {
             openItems: agent.open_items,
             position: positions[agent.id] || { x: 0, y: 0 },
             capabilities: agent.capabilities,
-            link: agent.link
+            link: agent.link,
+            nodeType: agent.nodeType,
+            category: agent.category
         }));
 
         const edges = buildEdges(agents);
 
+        // Calculate stats
+        const healthyEdges = edges.filter(e => e.healthy);
+        const stats = {
+            totalAgents: agents.filter(a => a.nodeType === 'agent').length,
+            totalIntegrations: agents.filter(a => a.nodeType === 'integration').length,
+            totalConnections: edges.length,
+            healthyConnections: healthyEdges.length,
+            activeDataFlows: edges.filter(e => e.type === 'data' && e.healthy).length
+        };
+
         const graphData: AgentGraphData = {
             nodes,
             edges,
-            timestamp: new Date().toISOString()
+            timestamp: new Date().toISOString(),
+            stats
         };
 
         return NextResponse.json(graphData);
