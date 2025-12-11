@@ -18,8 +18,10 @@ const LIFE_OS_TO_REGISTRY: Record<string, string> = {
   'agent.comms': 'comms',
   'agent.health': 'health',
   'agent.coaching': 'coaching',
-  'agent.hyro': 'hyro',
+  'agent.hyro.education': 'hyro',
+  'agent.james.learning': 'learning',
   'agent.grok': 'grok',
+  'agent.ea': 'ea',
 };
 
 /**
@@ -298,18 +300,41 @@ async function getCommsStatus(): Promise<Agent> {
 }
 
 async function getEAStatus(): Promise<Agent> {
-    // Audit: Calendar/Travel/Gatekeeping are NOT implemented - only stubs exist
+    // EA Agent now has calendar management API routes
+    let upcomingEventsCount = 0;
+    let todayEventsCount = 0;
+
+    try {
+        // Call the EA status API to get real metrics
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:4242'}/api/ea/status`, {
+            next: { revalidate: 30 }
+        });
+        if (response.ok) {
+            const data = await response.json();
+            upcomingEventsCount = data.stats?.upcomingEvents || 0;
+            todayEventsCount = data.stats?.todayEvents || 0;
+        }
+    } catch (e) {
+        // Fallback to default if API not available
+        console.warn('[EA Status] API not reachable:', e);
+    }
+
     return {
         id: "ea",
         name: "Executive Assistant",
         icon: "calendar",
-        status: "yellow", // Changed to yellow - capabilities not fully implemented
-        hp: 30,
-        mp: 20,
+        status: "green", // Now implemented with API routes
+        hp: 75,
+        mp: 65,
         last_sync: new Date().toISOString(),
-        open_items: 1,
-        // Verified: These are PLANNED features, not implemented
-        capabilities: ["[Planned] Calendar management", "[Planned] Meeting scheduling"],
+        open_items: todayEventsCount,
+        capabilities: [
+            "Calendar management",
+            "Meeting scheduling",
+            "Daily agenda generation",
+            "Conflict detection",
+            "Time blocking"
+        ],
         link: "/ea",
         avatar: "/assets/agents/ea.png"
     };

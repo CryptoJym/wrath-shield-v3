@@ -57,7 +57,8 @@ export async function webSearch(
   const { maxResults = 5 } = options;
 
   // Check for xAI API key (Grok has web search capabilities)
-  const xaiKey = process.env.XAI_API_KEY;
+  // Support both XAI_API_KEY and XAI_API_KEY_DIRECT
+  const xaiKey = process.env.XAI_API_KEY || process.env.XAI_API_KEY_DIRECT;
   const openaiKey = process.env.OPENAI_API_KEY;
   const openrouterKey = process.env.OPENROUTER_API_KEY;
 
@@ -302,8 +303,9 @@ export async function synthesizeResearch(
     };
   }
 
-  // Use available LLM for synthesis
-  const apiKey = process.env.XAI_API_KEY || process.env.OPENAI_API_KEY || process.env.OPENROUTER_API_KEY;
+  // Use available LLM for synthesis (support both XAI_API_KEY and XAI_API_KEY_DIRECT)
+  const xaiKey = process.env.XAI_API_KEY || process.env.XAI_API_KEY_DIRECT;
+  const apiKey = xaiKey || process.env.OPENAI_API_KEY || process.env.OPENROUTER_API_KEY;
 
   if (!apiKey) {
     return {
@@ -322,7 +324,7 @@ export async function synthesizeResearch(
 
   try {
     const response = await fetch(
-      process.env.XAI_API_KEY ? 'https://api.x.ai/v1/chat/completions' :
+      xaiKey ? 'https://api.x.ai/v1/chat/completions' :
         process.env.OPENAI_API_KEY ? 'https://api.openai.com/v1/chat/completions' :
           'https://openrouter.ai/api/v1/chat/completions',
       {
@@ -330,12 +332,12 @@ export async function synthesizeResearch(
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${apiKey}`,
-          ...(process.env.OPENROUTER_API_KEY && !process.env.XAI_API_KEY && !process.env.OPENAI_API_KEY
+          ...(process.env.OPENROUTER_API_KEY && !xaiKey && !process.env.OPENAI_API_KEY
             ? { 'HTTP-Referer': 'wrath-shield-v3', 'X-Title': 'orchestrator-research' }
             : {}),
         },
         body: JSON.stringify({
-          model: process.env.XAI_API_KEY ? 'grok-2-latest' :
+          model: xaiKey ? 'grok-2-latest' :
             process.env.OPENAI_API_KEY ? 'gpt-4o' : 'anthropic/claude-3.5-sonnet',
           messages: [
             {
@@ -416,7 +418,9 @@ export async function factCheck(
     };
   }
 
-  const apiKey = process.env.XAI_API_KEY || process.env.OPENAI_API_KEY || process.env.OPENROUTER_API_KEY;
+  // Support both XAI_API_KEY and XAI_API_KEY_DIRECT
+  const xaiKey = process.env.XAI_API_KEY || process.env.XAI_API_KEY_DIRECT;
+  const apiKey = xaiKey || process.env.OPENAI_API_KEY || process.env.OPENROUTER_API_KEY;
 
   if (!apiKey) {
     return {
@@ -433,7 +437,7 @@ export async function factCheck(
 
   try {
     const response = await fetch(
-      process.env.XAI_API_KEY ? 'https://api.x.ai/v1/chat/completions' :
+      xaiKey ? 'https://api.x.ai/v1/chat/completions' :
         process.env.OPENAI_API_KEY ? 'https://api.openai.com/v1/chat/completions' :
           'https://openrouter.ai/api/v1/chat/completions',
       {
@@ -443,7 +447,7 @@ export async function factCheck(
           'Authorization': `Bearer ${apiKey}`,
         },
         body: JSON.stringify({
-          model: process.env.XAI_API_KEY ? 'grok-2-latest' :
+          model: xaiKey ? 'grok-2-latest' :
             process.env.OPENAI_API_KEY ? 'gpt-4o' : 'anthropic/claude-3.5-sonnet',
           messages: [
             {

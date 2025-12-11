@@ -6,7 +6,7 @@
 
 export type EscalationLevel = 'CRITICAL' | 'PROPOSE' | 'AUTO_EXECUTE';
 
-export type LLMProvider = 'openai' | 'xai';
+export type LLMProvider = 'openai' | 'xai' | 'ollama';
 
 export interface AgentInvocation {
   /** Agent ID from Life OS config (e.g., 'agent.finance', 'agent.legal') */
@@ -23,6 +23,13 @@ export interface AgentInvocation {
     metadata?: Record<string, any>;
     /** Skip Zep memory retrieval and persistence for this invocation */
     skipMemory?: boolean;
+    /**
+     * Enable Anthropic prompt caching for Claude models via OpenRouter.
+     * Caches system prompts for up to 5 minutes, reducing latency by up to 85%.
+     * @default true (enabled by default for cost/latency optimization)
+     * @see https://openrouter.ai/docs/guides/best-practices/prompt-caching
+     */
+    enablePromptCaching?: boolean;
   };
 
   /** Skip escalation check and force execution */
@@ -93,25 +100,36 @@ export interface AgentActivity {
  * APPROVED MODELS ONLY:
  * - OpenAI: gpt-5.1 (for structured analysis, finance, complex reasoning)
  * - xAI: grok-4-1-fast (for fast iteration, research, legal advocacy)
+ * - Ollama: deepseek-r1:32b (for local classification tasks with xAI fallback)
  */
-export const AGENT_PROVIDER_MAP: Record<string, { provider: LLMProvider; model: string }> = {
+export const AGENT_PROVIDER_MAP: Record<string, { provider: LLMProvider; model: string; fallback?: { provider: LLMProvider; model: string } }> = {
+  // === Local (Ollama) for classification tasks ===
+  'agent.comms': {
+    provider: 'ollama',
+    model: 'deepseek-r1:32b',
+    fallback: { provider: 'xai', model: 'grok-4-1-fast' }
+  },
+  'agent.relationships': {
+    provider: 'ollama',
+    model: 'deepseek-r1:32b',
+    fallback: { provider: 'xai', model: 'grok-4-1-fast' }
+  },
+
   // === xAI Grok 4.1 Fast ===
-  // Fast iteration, research, advocacy, real-time tasks
   'agent.orchestrator': { provider: 'xai', model: 'grok-4-1-fast' },
   'agent.legal': { provider: 'xai', model: 'grok-4-1-fast' },
   'agent.grok': { provider: 'xai', model: 'grok-4-1-fast' },
   'agent.research': { provider: 'xai', model: 'grok-4-1-fast' },
-  'agent.comms': { provider: 'xai', model: 'grok-4-1-fast' },
   'agent.pm': { provider: 'xai', model: 'grok-4-1-fast' },
-  'agent.hyro': { provider: 'xai', model: 'grok-4-1-fast' },
+  'agent.hyro.education': { provider: 'xai', model: 'grok-4-1-fast' },
+  'agent.james.learning': { provider: 'xai', model: 'grok-4-1-fast' },
 
   // === OpenAI GPT-5.1 ===
-  // Structured analysis, complex reasoning, financial work
   'agent.finance': { provider: 'openai', model: 'gpt-5.1' },
   'agent.coaching': { provider: 'openai', model: 'gpt-5.1' },
   'agent.ea': { provider: 'openai', model: 'gpt-5.1' },
   'agent.health': { provider: 'openai', model: 'gpt-5.1' },
 
-  // Default fallback - Grok for speed
-  'default': { provider: 'xai', model: 'openai/gpt-5.1' },
+  // Default fallback
+  'default': { provider: 'xai', model: 'grok-4-1-fast' },
 };

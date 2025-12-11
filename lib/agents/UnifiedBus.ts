@@ -50,7 +50,8 @@ export type LifeOSAgentId =
   | 'agent.comms'
   | 'agent.health'
   | 'agent.coaching'
-  | 'agent.hyro'
+  | 'agent.hyro.education'
+  | 'agent.james.learning'
   | 'agent.grok'
   | 'agent.family'
   | 'agent.utlyze'
@@ -137,7 +138,8 @@ const LIFE_OS_TO_ZEP: Record<LifeOSAgentId, ZepAgentId> = {
   'agent.comms': 'comms-agent',
   'agent.health': 'health-agent',
   'agent.coaching': 'coaching-agent',
-  'agent.hyro': 'hyro-agent',
+  'agent.hyro.education': 'hyro-agent',
+  'agent.james.learning': 'learning-agent',
   'agent.grok': 'grok-agent',
   'agent.family': 'orchestrator-agent', // Uses orchestrator graph
   'agent.utlyze': 'orchestrator-agent', // Uses orchestrator graph
@@ -155,7 +157,8 @@ const AGENT_NAMES: Record<LifeOSAgentId, string> = {
   'agent.comms': 'Comms Scout',
   'agent.health': 'Health Monitor',
   'agent.coaching': 'Life Coach',
-  'agent.hyro': 'Hyro Education',
+  'agent.hyro.education': 'Hyro Education',
+  'agent.james.learning': 'Learning Agent',
   'agent.grok': 'Research Agent',
   'agent.family': 'Family Steward',
   'agent.utlyze': 'Utlyze Org Agent',
@@ -177,8 +180,9 @@ const AGENT_ALIASES: Record<string, LifeOSAgentId> = {
   'health': 'agent.health',
   'coaching': 'agent.coaching',
   'coach': 'agent.coaching',
-  'hyro': 'agent.hyro',
-  'education': 'agent.hyro',
+  'hyro': 'agent.hyro.education',
+  'education': 'agent.hyro.education',
+  'learning': 'agent.james.learning',
   'grok': 'agent.grok',
   'research': 'agent.grok',
   'family': 'agent.family',
@@ -581,7 +585,8 @@ class UnifiedBusImpl {
             'pm-agent': 'agent.pm',
             'comms-agent': 'agent.comms',
             'health-agent': 'agent.health',
-            'hyro-agent': 'agent.hyro',
+            'hyro-agent': 'agent.hyro.education',
+            'learning-agent': 'agent.james.learning',
           };
           const agentId = mapping[busAgents[0]] || 'agent.orchestrator';
           const response = await this.invokeAgent({ agentId, message, context });

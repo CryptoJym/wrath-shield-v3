@@ -55,7 +55,8 @@ const LIFE_OS_TO_ZEP_ID: Record<string, ZepAgentId> = {
   'agent.comms': 'comms-agent',
   'agent.health': 'health-agent',
   'agent.coaching': 'coaching-agent',
-  'agent.hyro': 'hyro-agent',
+  'agent.hyro.education': 'hyro-agent',
+  'agent.james.learning': 'learning-agent',
   'agent.grok': 'orchestrator-agent', // Legacy - redirects to orchestrator
   'agent.sherlock': 'sherlock-agent',
   'agent.ea': 'ea-agent',
@@ -279,11 +280,27 @@ async function callOpenRouter(
 }
 
 /**
+ * Call Ollama API locally
+ */
+async function callOllama(
+  prompt: ConstructedPrompt,
+  model: string
+): Promise<{ content: string; model: string; usage: { prompt: number; completion: number; total: number } }> {
+  const result = await DirectLLMClients.ollamaChat(prompt, model);
+  return {
+    content: result.content,
+    model: result.model,
+    usage: { prompt: 0, completion: 0, total: 0 }, // DirectLLM doesn't return usage
+  };
+}
+
+/**
  * Route to the appropriate LLM provider
  *
  * APPROVED PROVIDERS:
  * - openai: GPT-5.1 for structured analysis, finance, complex reasoning
  * - xai: Grok 4.1 Fast for fast iteration, research, real-time tasks
+ * - ollama: Local inference for classification tasks (with automatic fallback)
  */
 async function routeToLLM(
   prompt: ConstructedPrompt,
@@ -295,6 +312,8 @@ async function routeToLLM(
       return callOpenAI(prompt, model);
     case 'xai':
       return callXAI(prompt, model);
+    case 'ollama':
+      return callOllama(prompt, model);
     default:
       // Default to xAI Grok 4.1 Fast for speed
       console.warn(`[AgentInvoker] Unknown provider "${provider}", falling back to xAI`);
@@ -382,6 +401,10 @@ export class AgentInvoker {
       ],
       temperature: 0.7,
       max_tokens: 2048,
+      // Enable prompt caching for Claude models via OpenRouter
+      // System prompts with Life OS context are large and stable - ideal for caching
+      // This reduces latency by up to 85% and costs for repeated calls
+      enablePromptCaching: params.context?.enablePromptCaching ?? true,
       metadata: {
         date: new Date().toISOString().split('T')[0],
         has_whoop_data: false,
@@ -399,8 +422,9 @@ export class AgentInvoker {
 
     const provider = providerConfig.provider;
     const model = params.modelOverride || providerConfig.model;
+    const fallbackConfig = providerConfig.fallback;
 
-    // 7. Call the LLM
+    // 7. Call the LLM with fallback logic
     let content: string;
     let actualModel: string;
     let tokensUsed = { prompt: 0, completion: 0, total: 0 };
@@ -411,12 +435,33 @@ export class AgentInvoker {
       actualModel = result.model;
       tokensUsed = result.usage;
     } catch (error) {
-      // Fallback to OpenRouter on failure
-      console.warn(`[AgentInvoker] ${provider} failed, falling back to OpenRouter:`, error);
-      const fallbackResult = await callOpenRouter(prompt, AGENT_PROVIDER_MAP.default.model);
-      content = fallbackResult.content;
-      actualModel = fallbackResult.model;
-      tokensUsed = fallbackResult.usage;
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      console.warn(`[AgentInvoker] ${provider} failed: ${errorMessage}`);
+
+      // Use agent-specific fallback if configured, otherwise use default
+      if (fallbackConfig) {
+        console.log(`[AgentInvoker] Falling back to configured ${fallbackConfig.provider} (${fallbackConfig.model})`);
+        try {
+          const fallbackResult = await routeToLLM(prompt, fallbackConfig.provider, fallbackConfig.model);
+          content = fallbackResult.content;
+          actualModel = `${fallbackResult.model} (fallback from ${provider})`;
+          tokensUsed = fallbackResult.usage;
+        } catch (fallbackError) {
+          // If fallback also fails, use OpenRouter as last resort
+          console.error(`[AgentInvoker] Fallback ${fallbackConfig.provider} also failed, using OpenRouter as last resort`);
+          const lastResortResult = await callOpenRouter(prompt, AGENT_PROVIDER_MAP.default.model);
+          content = lastResortResult.content;
+          actualModel = `${lastResortResult.model} (last resort)`;
+          tokensUsed = lastResortResult.usage;
+        }
+      } else {
+        // No agent-specific fallback, use default OpenRouter
+        console.log(`[AgentInvoker] Falling back to default OpenRouter`);
+        const fallbackResult = await callOpenRouter(prompt, AGENT_PROVIDER_MAP.default.model);
+        content = fallbackResult.content;
+        actualModel = `${fallbackResult.model} (fallback from ${provider})`;
+        tokensUsed = fallbackResult.usage;
+      }
     }
 
     const latencyMs = Date.now() - startTime;
