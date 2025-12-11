@@ -481,19 +481,14 @@ export class ProactiveExecutor {
       const task = result.unified_tasks.find(t => (t as any).id === taskId);
       if (task) {
         // Construct a minimal UnifiedTask from the partial result
+        // Spread task first so explicit properties can override
         return {
+          ...task,
           id: taskId,
-          title: task.title,
-          description: task.description,
-          confidence: task.confidence,
-          urgency: task.urgency,
-          domain: task.domain,
-          sourceEvents: task.sourceEvents,
           status: 'ready',
           createdAt: new Date().toISOString(),
           refinementCount: 0,
           proposedAction: action,
-          ...task,
         } as UnifiedTask;
       }
     }
@@ -502,19 +497,14 @@ export class ProactiveExecutor {
     // (This assumes actions are related to the first task in the synthesis)
     if (result.unified_tasks.length > 0) {
       const firstTask = result.unified_tasks[0];
+      // Spread firstTask first so explicit properties can override
       return {
+        ...firstTask,
         id: `task_${Date.now()}`,
-        title: firstTask.title,
-        description: firstTask.description,
-        confidence: firstTask.confidence,
-        urgency: firstTask.urgency,
-        domain: firstTask.domain,
-        sourceEvents: firstTask.sourceEvents,
         status: 'ready',
         createdAt: new Date().toISOString(),
         refinementCount: 0,
         proposedAction: action,
-        ...firstTask,
       } as UnifiedTask;
     }
 

@@ -207,7 +207,7 @@ export class TaskStore {
       throw new Error('No valid update fields provided');
     }
 
-    fields.push('updated_at = strftime("%s", "now")');
+    fields.push("updated_at = strftime('%s', 'now')");
     values.push(id);
 
     const sql = `UPDATE unified_tasks SET ${fields.join(', ')} WHERE id = ?`;

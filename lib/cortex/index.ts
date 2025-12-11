@@ -24,21 +24,22 @@ ensureServerOnly('lib/cortex');
 
 export type {
   WorkingMemoryEvent,
-  WorkingMemoryEventSource,
-  InitialClassification,
+  EventSource,
   UnifiedTask,
   UnifiedTaskStatus,
+  UrgencyLevel,
   ProactiveAction,
   ProactiveActionType,
   SynthesisPattern,
-  PatternType,
+  SynthesisPatternType,
   SynthesisResult,
   TaskUpdate,
   SynthesisLoopConfig,
-  SynthesisLoopStatus,
+  ConfidenceThresholds,
   TaskQuery,
   EventBufferQuery,
   SynthesisMetrics,
+  UnifiedTaskPartial,
 } from './types';
 
 export {
@@ -57,7 +58,13 @@ export {
 // Working Memory Buffer
 // ============================================================================
 
-export { WorkingMemory, workingMemory } from './working-memory';
+export {
+  WorkingMemory,
+  getWorkingMemory,
+  resetWorkingMemory,
+  type WorkingMemoryConfig,
+  type WorkingMemoryStats,
+} from './working-memory';
 
 // ============================================================================
 // Event Ingestion
@@ -82,8 +89,9 @@ export {
 export {
   SynthesisLoop,
   getSynthesisLoop,
+  resetSynthesisLoop,
   synthesisLoop,
-  type SynthesisLoopOptions,
+  type SynthesisLoopStatus,
 } from './synthesis-loop';
 
 export {
@@ -131,13 +139,15 @@ export {
 export {
   PatternLearner,
   MetaImprover,
-  patternLearner,
   learnFromSynthesis,
   learnFromCorrection,
   getRelevantPatterns,
   updatePatternSuccess,
   prunePatterns,
 } from './pattern-learner';
+
+// Default export re-exported as named
+export { default as patternLearner } from './pattern-learner';
 
 // ============================================================================
 // Initialization
@@ -146,11 +156,11 @@ export {
 export {
   initializeCortex,
   getCortexHealth,
-  startSynthesisLoop,
   stopSynthesisLoop,
+  resetCortex,
   isCortexInitialized,
-  type CortexConfig,
-  type CortexHealth,
+  isSynthesisLoopRunning,
+  type CortexInitConfig,
 } from './init';
 
 // ============================================================================
@@ -172,10 +182,11 @@ export async function runSynthesis(): Promise<import('./types').SynthesisResult 
 export async function getCortexStatus() {
   const { getCortexHealth } = await import('./init');
   const { synthesisLoop } = await import('./synthesis-loop');
-  const { workingMemory } = await import('./working-memory');
+  const { getWorkingMemory } = await import('./working-memory');
 
-  const health = getCortexHealth();
+  const health = await getCortexHealth();
   const loopStatus = synthesisLoop.getStatus();
+  const workingMemory = getWorkingMemory();
   const memoryStats = await workingMemory.getStats();
 
   return {
@@ -183,7 +194,7 @@ export async function getCortexStatus() {
     synthesisLoop: loopStatus,
     workingMemory: memoryStats,
     health: health.status,
-    lastError: health.lastError,
+    lastError: 'error' in health ? health.error : undefined,
   };
 }
 

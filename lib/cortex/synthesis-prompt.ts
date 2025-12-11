@@ -471,8 +471,4 @@ export function buildSynthesisPrompt(
   return promptSections.join('\n');
 }
 
-// ============================================================================
-// Exports
-// ============================================================================
-
-export type { SynthesisContext };
+// Note: SynthesisContext is exported with its interface definition above

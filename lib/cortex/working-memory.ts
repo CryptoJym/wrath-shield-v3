@@ -13,6 +13,13 @@ import { Database as SqliteDatabase } from 'better-sqlite3';
 import { ensureServerOnly } from '../server-only-guard';
 import { getDatabase } from '../db/Database';
 import type { WorkingMemoryEvent, EventSource } from './types';
+import { extractEntities } from './entity-extractor';
+import {
+  TemporalSearchPreprocessor,
+  createTemporalSearchPreprocessor,
+  type TemporalSearchOptions,
+  type ParsedTemporalExpression,
+} from './temporal-search';
 
 // Ensure this module is only used server-side
 ensureServerOnly('lib/cortex/working-memory');
@@ -29,6 +36,12 @@ export interface WorkingMemoryConfig {
 
   /** Age in hours after which processed events are pruned (default: 168 = 1 week) */
   pruneAfterHours: number;
+
+  /** Whether to automatically extract entities on event ingestion (default: true) */
+  enableEntityExtraction: boolean;
+
+  /** Use LLM for entity extraction (default: false for fast regex-only) */
+  useLLMForEntities: boolean;
 }
 
 /**
@@ -61,6 +74,8 @@ const DEFAULT_CONFIG: WorkingMemoryConfig = {
   maxBufferSize: 500,
   dedupeWindowHours: 1,
   pruneAfterHours: 168, // 1 week
+  enableEntityExtraction: true, // Auto-extract entities on ingestion
+  useLLMForEntities: false, // Use fast regex extraction by default
 };
 
 /**
@@ -71,6 +86,7 @@ const DEFAULT_CONFIG: WorkingMemoryConfig = {
 export class WorkingMemory {
   private db: SqliteDatabase;
   private config: WorkingMemoryConfig;
+  private temporalPreprocessor: TemporalSearchPreprocessor | null = null;
 
   /**
    * Initialize Working Memory with optional configuration
@@ -79,6 +95,16 @@ export class WorkingMemory {
     this.config = { ...DEFAULT_CONFIG, ...config };
     this.db = getDatabase().getRawDb();
     this.ensureTable();
+  }
+
+  /**
+   * Get the temporal search preprocessor (lazy initialization)
+   */
+  public getTemporalPreprocessor(): TemporalSearchPreprocessor {
+    if (!this.temporalPreprocessor) {
+      this.temporalPreprocessor = createTemporalSearchPreprocessor(this);
+    }
+    return this.temporalPreprocessor;
   }
 
   /**
@@ -193,7 +219,31 @@ export class WorkingMemory {
       );
 
     console.log(`[WorkingMemory] Added event ${id} from source: ${event.source}`);
+
+    // Trigger entity extraction in background if enabled
+    if (this.config.enableEntityExtraction) {
+      this.extractEntitiesForEvent(id, event.content).catch((err) => {
+        console.error(`[WorkingMemory] Entity extraction failed for event ${id}:`, err);
+      });
+    }
+
     return id;
+  }
+
+  /**
+   * Extract entities from event content (internal helper)
+   * Runs asynchronously to not block event ingestion
+   */
+  private async extractEntitiesForEvent(eventId: string, content: string): Promise<void> {
+    try {
+      const result = await extractEntities(content, eventId);
+      console.log(
+        `[WorkingMemory] Extracted ${result.entities.length} entities for event ${eventId}`
+      );
+    } catch (error) {
+      // Log but don't throw - entity extraction is non-critical
+      console.warn(`[WorkingMemory] Entity extraction warning for ${eventId}:`, error);
+    }
   }
 
   /**
@@ -376,6 +426,56 @@ export class WorkingMemory {
       synthesisTaskId: row.synthesis_task_id || undefined,
       metadata: row.metadata_json ? JSON.parse(row.metadata_json) : undefined,
     };
+  }
+
+  /**
+   * Search events with natural language temporal queries
+   *
+   * Supports queries like:
+   * - "what did I discuss last week"
+   * - "meetings from yesterday"
+   * - "tasks mentioned 3 days ago"
+   *
+   * @param query - Natural language query (may include temporal expressions)
+   * @param options - Optional temporal search options
+   * @returns Array of matching events with temporal relevance scoring
+   */
+  public async searchTemporal(
+    query: string,
+    options?: TemporalSearchOptions
+  ): Promise<WorkingMemoryEvent[]> {
+    const preprocessor = this.getTemporalPreprocessor();
+    return preprocessor.search(query, options);
+  }
+
+  /**
+   * Extract temporal context from a query without searching
+   *
+   * @param query - Natural language query
+   * @returns Cleaned query (temporal parts removed) and temporal specification
+   */
+  public extractTemporalFromQuery(query: string): {
+    cleanedQuery: string;
+    temporal: ParsedTemporalExpression | null;
+  } {
+    const preprocessor = this.getTemporalPreprocessor();
+    const { cleanedQuery, temporal } = preprocessor.extractTemporalContext(query);
+
+    // Also parse the expression for more detail
+    const parsed = temporal ? preprocessor.parseExpression(query) : null;
+
+    return { cleanedQuery, temporal: parsed };
+  }
+
+  /**
+   * Find all overdue items in working memory
+   *
+   * @param referenceDate - Optional reference date (default: now)
+   * @returns Array of events with past deadlines
+   */
+  public async findOverdue(referenceDate?: Date): Promise<WorkingMemoryEvent[]> {
+    const preprocessor = this.getTemporalPreprocessor();
+    return preprocessor.findOverdue(referenceDate);
   }
 
   /**

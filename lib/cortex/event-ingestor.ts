@@ -17,7 +17,7 @@
 import { ensureServerOnly } from '../server-only-guard';
 import { getWorkingMemory } from './working-memory';
 import type { EventSource, WorkingMemoryEvent } from './types';
-import type { Domain } from '../life-os-config';
+import type { Domain } from '../ea/preference-model';
 
 // Prevent client-side imports
 ensureServerOnly('lib/cortex/event-ingestor');
@@ -94,7 +94,7 @@ export interface CalendarInput {
  * Initial classification result
  */
 export interface InitialClassification {
-  domain?: Domain['id'];
+  domain?: Domain;
   urgency: 'critical' | 'high' | 'medium' | 'low' | 'background';
   keywords?: string[];
   isCritical: boolean; // Fast-path flag
@@ -131,13 +131,13 @@ function classifyEmailUrgency(email: EmailInput): InitialClassification {
   const isCritical = criticalPatterns.some((pattern) => pattern.test(combinedText));
 
   // Domain detection (basic heuristic - can be enhanced with LLM)
-  let domain: string | undefined;
+  let domain: Domain | undefined;
   if (/court|legal|case|lawsuit/i.test(combinedText)) {
     domain = 'legal';
   } else if (/utlyze|client|project/i.test(combinedText)) {
-    domain = 'utlyze';
+    domain = 'business'; // Map utlyze/project to business domain
   } else if (/family|home/i.test(combinedText)) {
-    domain = 'family';
+    domain = 'personal'; // Map family/home to personal domain
   }
 
   // Extract keywords
@@ -299,7 +299,7 @@ export async function ingestEmail(email: EmailInput): Promise<IngestionResult> {
       timestamp: email.timestamp,
       content,
       initialClassification: {
-        domain: classification.domain as Domain['id'] | undefined,
+        domain: classification.domain as Domain | undefined,
         urgency: classification.urgency,
         keywords: classification.keywords,
       },
