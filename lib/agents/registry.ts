@@ -63,6 +63,15 @@ export async function getAllAgentsStatus(): Promise<Agent[]> {
       const avgTokens = agentActivity.length > 0 ? totalTokens / agentActivity.length : 0;
       const mp = Math.max(0, 100 - Math.round(avgTokens / 50)); // Lower tokens = higher MP
 
+      // Validate timestamp before converting
+      let lastSyncTime = new Date().toISOString();
+      if (lastActivity?.timestamp) {
+        const timestampDate = new Date(lastActivity.timestamp);
+        if (!isNaN(timestampDate.getTime())) {
+          lastSyncTime = timestampDate.toISOString();
+        }
+      }
+
       agents.push({
         id: registryId,
         name: agentDef.name,
@@ -70,7 +79,7 @@ export async function getAllAgentsStatus(): Promise<Agent[]> {
         status: calculateAgentStatus(agentActivity),
         hp,
         mp,
-        last_sync: lastActivity ? new Date(lastActivity.timestamp).toISOString() : new Date().toISOString(),
+        last_sync: lastSyncTime,
         open_items: agentActivity.filter(a => !a.wasExecuted).length,
         capabilities: extractCapabilities(agentDef),
         link: `/${registryId}`,

@@ -230,10 +230,12 @@ export async function suggestProjectForRepo(
     const projectName = memory.memory.metadata?.project_name || memory.memory.metadata?.target_project;
     if (projectName && !seenProjects.has(projectName)) {
       seenProjects.add(projectName);
+      const text = memory.memory?.text || '';
+      const preview = text ? text.split('\n')[0].substring(0, 100) : 'No description available';
       suggestions.push({
         project: projectName,
         confidence: memory.score || 0.5,
-        rationale: `Similar to: ${memory.memory.text.split('\n')[0].substring(0, 100)}`,
+        rationale: `Similar to: ${preview}`,
       });
     }
   }

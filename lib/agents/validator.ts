@@ -31,27 +31,29 @@ export function validateAgentConfig(): ValidationResult {
     const seenIds = new Set<string>();
 
     for (const agent of agents) {
-      // Check for duplicate IDs
-      if (seenIds.has(agent.id)) {
-        errors.push({
-          type: 'duplicate_id',
-          agentId: agent.id,
-          message: `Duplicate agent ID: ${agent.id}`
-        });
-      }
-      seenIds.add(agent.id);
-
-      // Check required fields
+      // Check required fields first (including id)
       const requiredFields = ['id', 'name', 'role', 'type', 'system_prompt'] as const;
       for (const field of requiredFields) {
         if (!(agent as any)[field]) {
           errors.push({
             type: 'missing_field',
-            agentId: agent.id,
+            agentId: agent.id || 'unknown',
             field: String(field),
-            message: `Agent ${agent.id} missing required field: ${field}`
+            message: `Agent ${agent.id || 'unknown'} missing required field: ${field}`
           });
         }
+      }
+
+      // Check for duplicate IDs (only if id exists)
+      if (agent.id) {
+        if (seenIds.has(agent.id)) {
+          errors.push({
+            type: 'duplicate_id',
+            agentId: agent.id,
+            message: `Duplicate agent ID: ${agent.id}`
+          });
+        }
+        seenIds.add(agent.id);
       }
 
       // Validate ID format
