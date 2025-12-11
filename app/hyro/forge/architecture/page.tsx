@@ -280,60 +280,240 @@ const STATS_DATA = [
 // ============================================================================
 
 const CORE_SYSTEMS = [
+  // Orchestration Layer
   {
     name: 'Forge Orchestrator',
-    files: ['forge-orchestrator.ts', 'forge-session-orchestrator.ts'],
+    files: ['forge-orchestrator.ts (90KB)', 'forge-session-orchestrator.ts'],
     desc: 'Multi-agent coordination with IRT-based assessment',
     status: 'built',
+    category: 'orchestration',
   },
+  {
+    name: 'Domain Agents',
+    files: ['forge-domain-agents.ts', 'hyro-agents.ts'],
+    desc: 'Specialized AI agents for tutoring workflows',
+    status: 'built',
+    category: 'orchestration',
+  },
+  // Learning Engine Layer
   {
     name: 'ZPD Engine',
     files: ['forge-zpd-engine.ts'],
     desc: 'Zone of Proximal Development challenge calibration',
     status: 'built',
+    category: 'engine',
   },
   {
     name: 'Proficiency System',
-    files: ['forge-proficiency.ts', 'forge-proficiency-types.ts'],
+    files: ['forge-proficiency.ts', 'forge-stats.ts'],
     desc: 'Stat tracking and competency estimation',
     status: 'built',
+    category: 'engine',
   },
   {
     name: 'AI Tutor (Sage)',
     files: ['forge-ai-tutor.ts'],
     desc: 'Socratic tutoring with Zep memory integration',
     status: 'built',
+    category: 'engine',
   },
   {
     name: 'Diagnostics',
     files: ['forge-diagnostics.ts', 'forge-ai-evaluator.ts'],
     desc: 'Adaptive assessment with convergence detection',
     status: 'built',
+    category: 'engine',
   },
   {
     name: 'Generative Engine',
-    files: ['forge-generative-engine.ts'],
+    files: ['forge-generative-engine.ts', 'forge-quest-generator.ts'],
     desc: 'Dynamic content and quest generation',
     status: 'built',
+    category: 'engine',
   },
+  // Meta-Learning Layer
+  {
+    name: 'Meta-Learner',
+    files: ['forge-meta-learner.ts'],
+    desc: '"Ultimate Level Up Machine" - Trajectory pattern learning',
+    status: 'built',
+    category: 'meta',
+  },
+  {
+    name: 'Meta-Dimensions',
+    files: ['forge-meta-dimensions.ts'],
+    desc: 'Higher-order learning capabilities tracking',
+    status: 'built',
+    category: 'meta',
+  },
+  {
+    name: 'Metacognition Scoring',
+    files: ['forge-metacognition-scoring.ts', 'forge-metacognition-prompts.ts'],
+    desc: '4 dimensions: planning, monitoring, evaluation, regulation',
+    status: 'built',
+    category: 'meta',
+  },
+  {
+    name: 'HGM Optimizer',
+    files: ['forge-hgm-optimizer.ts'],
+    desc: 'Parameter safety checks for meta-learning',
+    status: 'built',
+    category: 'meta',
+  },
+  // Curriculum Layer
+  {
+    name: 'Standards Taxonomy',
+    files: ['forge-standards-taxonomy.ts (83KB)', 'forge-standards-mapping.ts'],
+    desc: 'Complete CCSS/NGSS standards with C/E/G mapping',
+    status: 'built',
+    category: 'curriculum',
+  },
+  {
+    name: 'Grade Benchmarks',
+    files: ['forge-grade-benchmarks.ts'],
+    desc: 'Grade-level expectations and progressions',
+    status: 'built',
+    category: 'curriculum',
+  },
+  {
+    name: 'Curriculum Planner',
+    files: ['forge-curriculum-planner.ts'],
+    desc: 'Personalized learning path generation',
+    status: 'built',
+    category: 'curriculum',
+  },
+  // Memory & State Layer
   {
     name: 'Memory Architecture',
-    files: ['forge-memory-architecture.ts'],
-    desc: 'Long-term learning state persistence',
+    files: ['forge-memory-architecture.ts', 'forge-memory-client.ts', 'forge-memory-integration.ts'],
+    desc: 'Long-term learning state with Zep integration',
     status: 'built',
+    category: 'memory',
   },
   {
-    name: 'Analytics',
-    files: ['forge-analytics.ts'],
-    desc: 'Learning analytics and parent reporting',
+    name: 'Learner State',
+    files: ['forge-learner-state.ts', 'forge-student-profile.ts'],
+    desc: 'Student profile and current learning state',
     status: 'built',
+    category: 'memory',
   },
   {
-    name: 'Sphere Grid',
-    files: ['app/hyro/forge/sphere-grid/page.tsx'],
-    desc: 'FFX-style competency visualization',
-    status: 'ui-only',
-    note: 'UI built, uses demo data',
+    name: 'Knowledge Graph',
+    files: ['forge-knowledge-graph-schema.ts', 'forge-graph-queries.ts'],
+    desc: 'Neo4j-based knowledge graph for concept relationships',
+    status: 'built',
+    category: 'memory',
+  },
+  // Event & Realtime Layer
+  {
+    name: 'Event System',
+    files: ['forge-event-bus.ts', 'forge-event-schemas.ts'],
+    desc: 'Real-time learning event processing',
+    status: 'built',
+    category: 'realtime',
+  },
+  {
+    name: 'Update Equations',
+    files: ['forge-update-equations.ts'],
+    desc: 'Mathematical models for C/E/G state updates',
+    status: 'built',
+    category: 'realtime',
+  },
+  {
+    name: 'Realtime Sync',
+    files: ['forge-ws-manager.ts', 'forge-sse-client.ts', 'use-hyro-realtime.ts'],
+    desc: 'WebSocket/SSE for live updates',
+    status: 'built',
+    category: 'realtime',
+  },
+  // Visualization Layer
+  {
+    name: 'Sphere Grid System',
+    files: ['sphere-grid-taxonomy.ts', 'sphere-grid-generator.ts', 'sphere-grid-integration.ts', 'sphere-grid-types.ts'],
+    desc: 'FFX-style competency grid with full taxonomy',
+    status: 'built',
+    category: 'viz',
+  },
+  {
+    name: 'Chart Space',
+    files: ['forge-chart-space.ts'],
+    desc: 'Learning analytics visualizations',
+    status: 'built',
+    category: 'viz',
+  },
+  {
+    name: 'Visual Assessment',
+    files: ['forge-visual-assessment.ts'],
+    desc: 'Visual diagnostic tools',
+    status: 'built',
+    category: 'viz',
+  },
+  // Content Layer
+  {
+    name: 'Reading System',
+    files: ['forge-reading.ts', 'forge-comprehension.ts'],
+    desc: 'Reading tracking with comprehension assessment',
+    status: 'built',
+    category: 'content',
+  },
+  {
+    name: 'SRS System',
+    files: ['forge-srs.ts'],
+    desc: 'Spaced repetition flashcard system',
+    status: 'built',
+    category: 'content',
+  },
+  {
+    name: 'Reflections',
+    files: ['forge-reflections.ts'],
+    desc: 'Metacognitive reflection prompts',
+    status: 'built',
+    category: 'content',
+  },
+  {
+    name: 'Intel System',
+    files: ['forge-intel.ts'],
+    desc: 'Daily learning intelligence feed',
+    status: 'built',
+    category: 'content',
+  },
+  // Support Layer
+  {
+    name: 'Analytics & Reporting',
+    files: ['forge-analytics.ts', 'forge-parent-dashboard.ts'],
+    desc: 'Learning analytics and parent reports',
+    status: 'built',
+    category: 'support',
+  },
+  {
+    name: 'Alerts & Email',
+    files: ['forge-alerts.ts', 'forge-email-templates.ts'],
+    desc: 'Notifications and email communication',
+    status: 'built',
+    category: 'support',
+  },
+  {
+    name: 'XP & Gamification',
+    files: ['forge-xp.ts', 'forge-blueprints.ts'],
+    desc: 'Experience points and achievement system',
+    status: 'built',
+    category: 'support',
+  },
+  // Organization Layer
+  {
+    name: 'Organization Management',
+    files: ['organization-management.ts', 'organization-types.ts', 'organization-integration.ts'],
+    desc: 'Multi-tenant support for families/schools/districts',
+    status: 'built',
+    category: 'org',
+  },
+  // External Connectors
+  {
+    name: 'LMS Connectors',
+    files: ['connectors/zearn.ts', 'connectors/manual.ts', 'canyon-grove-scraper.ts'],
+    desc: 'Integration with Zearn, Canyon Grove, etc.',
+    status: 'built',
+    category: 'connectors',
   },
 ];
 
@@ -360,10 +540,13 @@ export default function ForgeArchitecturePage() {
           </div>
           <div className="flex items-center gap-2">
             <span className="text-xs text-indigo-300/60 bg-indigo-500/20 px-2 py-1 rounded">
-              54 Core Files
+              89 Library Files
+            </span>
+            <span className="text-xs text-purple-300/60 bg-purple-500/20 px-2 py-1 rounded">
+              5 Curricula
             </span>
             <span className="text-xs text-green-300/60 bg-green-500/20 px-2 py-1 rounded">
-              17+ Pages Built
+              18+ Pages Built
             </span>
           </div>
         </div>
