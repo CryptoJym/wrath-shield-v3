@@ -68,6 +68,65 @@ const jobs: ScheduledJob[] = [
     },
     enabled: true,
   },
+  // =============================================================================
+  // CORTEX SYNTHESIS - LLM Processing of Events
+  // =============================================================================
+  {
+    name: 'cortex-synthesis',
+    schedule: '*/5 * * * *', // every 5 minutes
+    handler: async () => {
+      const { getSynthesisLoop } = await import('../cortex/synthesis-loop');
+      const synthesisLoop = getSynthesisLoop();
+      const result = await synthesisLoop.runSynthesisPass();
+      if (result) {
+        console.log(`[Cortex] Synthesized ${result.unified_tasks.length} tasks, ${result.task_updates.length} updates`);
+      }
+    },
+    enabled: true,
+  },
+  // =============================================================================
+  // DECISION QUEUE MAINTENANCE - Auto-expire stale decisions
+  // =============================================================================
+  {
+    name: 'decision-queue-maintenance',
+    schedule: '0 3 * * *', // 3am daily
+    handler: async () => {
+      const { getDecisionQueue } = await import('../cortex/decision-queue');
+      const queue = getDecisionQueue();
+      const expired = await queue.autoResolveStale(7); // 7 days
+      if (expired > 0) {
+        console.log(`[DecisionQueue] Auto-expired ${expired} stale decisions`);
+      }
+    },
+    enabled: true,
+  },
+  // =============================================================================
+  // IMESSAGE SYNC - Process new messages
+  // =============================================================================
+  {
+    name: 'imessage-sync',
+    schedule: '*/15 * * * *', // every 15 minutes
+    handler: async () => {
+      const { syncIMessages } = await import('../integrations/imessage');
+      await syncIMessages();
+    },
+    enabled: true,
+  },
+  // =============================================================================
+  // SEMANTIC LEARNING - Cross-system pattern/preference learning
+  // =============================================================================
+  {
+    name: 'semantic-learning',
+    schedule: '30 */2 * * *', // every 2 hours at :30
+    handler: async () => {
+      const { triggerLearningCycle } = await import('../learning/semantic-learning-bridge');
+      const insights = await triggerLearningCycle();
+      if (insights.length > 0) {
+        console.log(`[SemanticLearning] Generated ${insights.length} learning insights`);
+      }
+    },
+    enabled: true,
+  },
 ];
 
 let initialized = false;

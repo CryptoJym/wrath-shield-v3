@@ -30,6 +30,8 @@ const config = {
     // React component tests require jsdom - run with jest.config.react.js
     '/__tests__/components/',
     '/__tests__/integration/',
+    // Archived cleanup files
+    '/_archived/',
   ],
   collectCoverageFrom: [
     'lib/hyro/**/*.ts',

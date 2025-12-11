@@ -101,6 +101,44 @@ export interface AgentMemoryOverview {
 }
 
 // =============================================================================
+// Relationship Extraction Types (Zep/Graphiti-style)
+// =============================================================================
+
+export interface ExtractedEntity {
+  id: string;
+  name: string;
+  type: 'person' | 'organization' | 'location' | 'date' | 'amount' | 'agreement' | 'task' | 'deadline' | 'other';
+  confidence: number;
+  mentions: number;
+  firstSeen: string;
+  lastSeen: string;
+  metadata?: Record<string, any>;
+}
+
+export interface ExtractedRelationship {
+  id: string;
+  sourceEntityId: string;
+  targetEntityId: string;
+  type: string; // e.g., 'works_for', 'owes_money_to', 'deadline_for', 'related_to'
+  confidence: number;
+  context: string; // The text that established this relationship
+  timestamp: string;
+  metadata?: Record<string, any>;
+}
+
+export interface RelationshipGraph {
+  entities: ExtractedEntity[];
+  relationships: ExtractedRelationship[];
+  lastUpdated: string;
+}
+
+export interface EntitySearchResult {
+  entity: ExtractedEntity;
+  relationships: ExtractedRelationship[];
+  relatedEntities: ExtractedEntity[];
+}
+
+// =============================================================================
 // Graph ID Construction
 // =============================================================================
 
@@ -544,14 +582,14 @@ class ExtendedMemorySystem {
     const temporalBreakdown: Record<TemporalBucket, number> = { hot: 0, warm: 0, cold: 0 };
 
     // Get stats from registry for this agent
-    for (const [graphId, stats] of this.graphRegistry.entries()) {
+    this.graphRegistry.forEach((stats, graphId) => {
       if (graphId.includes(agentId)) {
         graphs.push(stats);
         if (stats.domain) {
           domainBreakdown[stats.domain] = (domainBreakdown[stats.domain] || 0) + stats.memoryCount;
         }
       }
-    }
+    });
 
     // Try to get actual counts from Zep
     try {
@@ -612,6 +650,301 @@ class ExtendedMemorySystem {
     }
 
     return Array.from(matters);
+  }
+
+  // ===========================================================================
+  // Relationship Extraction (Zep/Graphiti-style Knowledge Graph)
+  // ===========================================================================
+
+  /**
+   * Extract entities and relationships from text using Zep's graph capabilities
+   * Leverages Zep v3 SDK's automatic entity extraction when adding to graph
+   */
+  async writeWithRelationshipExtraction(
+    agentId: AgentId,
+    text: string,
+    metadata: Record<string, any> = {},
+    options: MemoryWriteOptions = {}
+  ): Promise<{ success: boolean; extractedEntities?: string[] }> {
+    await this.initialize();
+
+    const { domain, matterId } = options;
+
+    try {
+      const { addAgentMemory } = await import('./zep');
+
+      // Zep v3 automatically extracts entities and relationships when adding text
+      // The graph API builds a knowledge graph from the text content
+      await addAgentMemory(agentId, text, {
+        ...metadata,
+        domain,
+        matter_id: matterId,
+        timestamp: new Date().toISOString(),
+        // Signal to enable relationship extraction in metadata
+        extract_entities: true,
+        extract_relationships: true,
+      });
+
+      // Zep extracts entities automatically - we note common patterns found
+      const entityPatterns = this.quickEntityExtract(text);
+
+      console.log(`[ExtendedMemory] Added memory with relationship extraction: ${entityPatterns.length} potential entities`);
+      return { success: true, extractedEntities: entityPatterns };
+    } catch (error) {
+      console.error('[ExtendedMemory] Write with relationship extraction failed:', error);
+      return { success: false };
+    }
+  }
+
+  /**
+   * Quick local entity extraction for immediate feedback
+   * (Zep does deeper extraction server-side)
+   */
+  private quickEntityExtract(text: string): string[] {
+    const entities: string[] = [];
+
+    // Person names (capitalized words)
+    const namePattern = /\b[A-Z][a-z]+(?:\s+[A-Z][a-z]+)+\b/g;
+    const names = text.match(namePattern) || [];
+    entities.push(...names.map(n => `person:${n}`));
+
+    // Money amounts
+    const moneyPattern = /\$[\d,]+(?:\.\d{2})?|\b\d+(?:,\d{3})*(?:\.\d{2})?\s*(?:dollars?|USD)\b/gi;
+    const amounts = text.match(moneyPattern) || [];
+    entities.push(...amounts.map(a => `amount:${a}`));
+
+    // Dates
+    const datePattern = /\b(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2}(?:,?\s+\d{4})?\b|\b\d{1,2}\/\d{1,2}\/\d{2,4}\b/gi;
+    const dates = text.match(datePattern) || [];
+    entities.push(...dates.map(d => `date:${d}`));
+
+    // Organizations (LLC, Inc, Corp patterns)
+    const orgPattern = /\b[A-Z][A-Za-z\s&]+(?:LLC|Inc\.?|Corp\.?|Company|Co\.?|Ltd\.?|Foundation|Association)\b/g;
+    const orgs = text.match(orgPattern) || [];
+    entities.push(...orgs.map(o => `org:${o}`));
+
+    return Array.from(new Set(entities)).slice(0, 20); // Dedupe and limit
+  }
+
+  /**
+   * Search for entities across the knowledge graph
+   */
+  async searchEntities(
+    agentId: AgentId,
+    entityQuery: string,
+    options: { type?: ExtractedEntity['type']; limit?: number } = {}
+  ): Promise<EntitySearchResult[]> {
+    await this.initialize();
+
+    const { type, limit = 10 } = options;
+
+    try {
+      const { searchAgentMemory } = await import('./zep');
+
+      // Search Zep graph - it returns nodes/edges which include entity information
+      const results = await searchAgentMemory(agentId, entityQuery, limit * 2);
+
+      const entityResults: EntitySearchResult[] = [];
+      const seenEntities = new Set<string>();
+
+      for (const r of results) {
+        // Extract entity info from Zep result metadata
+        const entityName = r.memory.metadata?.entity_name || this.extractEntityFromText(r.memory.text);
+        const entityType = r.memory.metadata?.entity_type || 'other';
+
+        if (!entityName || seenEntities.has(entityName)) continue;
+        seenEntities.add(entityName);
+
+        // Filter by type if specified
+        if (type && entityType !== type) continue;
+
+        const entity: ExtractedEntity = {
+          id: r.memory.id,
+          name: entityName,
+          type: entityType as ExtractedEntity['type'],
+          confidence: r.score || 0.5,
+          mentions: 1,
+          firstSeen: r.memory.createdAt || new Date().toISOString(),
+          lastSeen: r.memory.createdAt || new Date().toISOString(),
+          metadata: r.memory.metadata,
+        };
+
+        entityResults.push({
+          entity,
+          relationships: [], // Would be populated from Zep edge data
+          relatedEntities: [],
+        });
+      }
+
+      return entityResults.slice(0, limit);
+    } catch (error) {
+      console.error('[ExtendedMemory] Entity search failed:', error);
+      return [];
+    }
+  }
+
+  /**
+   * Extract primary entity name from text
+   */
+  private extractEntityFromText(text: string): string | null {
+    // Try to find the first capitalized proper noun
+    const match = text.match(/\b[A-Z][a-z]+(?:\s+[A-Z][a-z]+)*\b/);
+    return match ? match[0] : null;
+  }
+
+  /**
+   * Get relationship graph for an entity
+   */
+  async getEntityGraph(
+    agentId: AgentId,
+    entityName: string,
+    depth: number = 1
+  ): Promise<RelationshipGraph> {
+    await this.initialize();
+
+    const entities: ExtractedEntity[] = [];
+    const relationships: ExtractedRelationship[] = [];
+    const processedIds = new Set<string>();
+
+    try {
+      const { searchAgentMemory } = await import('./zep');
+
+      // Search for memories mentioning this entity
+      const results = await searchAgentMemory(agentId, entityName, 50);
+
+      for (const r of results) {
+        if (processedIds.has(r.memory.id)) continue;
+        processedIds.add(r.memory.id);
+
+        // Extract entities mentioned in this memory
+        const localEntities = this.quickEntityExtract(r.memory.text);
+
+        for (const entityStr of localEntities) {
+          const [type, name] = entityStr.split(':');
+          if (!name) continue;
+
+          const entityId = `${type}_${name.replace(/\s+/g, '_').toLowerCase()}`;
+
+          if (!entities.find(e => e.id === entityId)) {
+            entities.push({
+              id: entityId,
+              name,
+              type: type as ExtractedEntity['type'],
+              confidence: r.score || 0.5,
+              mentions: 1,
+              firstSeen: r.memory.createdAt || new Date().toISOString(),
+              lastSeen: r.memory.createdAt || new Date().toISOString(),
+            });
+          }
+
+          // Create relationship if this isn't the source entity
+          if (name.toLowerCase() !== entityName.toLowerCase()) {
+            const sourceId = `search_${entityName.replace(/\s+/g, '_').toLowerCase()}`;
+            relationships.push({
+              id: `rel_${Date.now()}_${Math.random().toString(36).substr(2, 5)}`,
+              sourceEntityId: sourceId,
+              targetEntityId: entityId,
+              type: 'mentioned_with',
+              confidence: r.score || 0.5,
+              context: r.memory.text.substring(0, 200),
+              timestamp: r.memory.createdAt || new Date().toISOString(),
+            });
+          }
+        }
+      }
+
+      return {
+        entities,
+        relationships,
+        lastUpdated: new Date().toISOString(),
+      };
+    } catch (error) {
+      console.error('[ExtendedMemory] Get entity graph failed:', error);
+      return { entities: [], relationships: [], lastUpdated: new Date().toISOString() };
+    }
+  }
+
+  /**
+   * Find connections between two entities
+   */
+  async findEntityConnections(
+    agentId: AgentId,
+    entity1: string,
+    entity2: string
+  ): Promise<{ connected: boolean; path: string[]; evidence: string[] }> {
+    await this.initialize();
+
+    try {
+      const { searchAgentMemory } = await import('./zep');
+
+      // Search for memories mentioning both entities
+      const combinedQuery = `${entity1} ${entity2}`;
+      const results = await searchAgentMemory(agentId, combinedQuery, 20);
+
+      const evidence: string[] = [];
+      let connected = false;
+
+      for (const r of results) {
+        const text = r.memory.text.toLowerCase();
+        if (text.includes(entity1.toLowerCase()) && text.includes(entity2.toLowerCase())) {
+          connected = true;
+          evidence.push(r.memory.text.substring(0, 300));
+        }
+      }
+
+      return {
+        connected,
+        path: connected ? [entity1, entity2] : [],
+        evidence: evidence.slice(0, 5),
+      };
+    } catch (error) {
+      console.error('[ExtendedMemory] Find entity connections failed:', error);
+      return { connected: false, path: [], evidence: [] };
+    }
+  }
+
+  /**
+   * Get temporal view of entity mentions
+   */
+  async getEntityTimeline(
+    agentId: AgentId,
+    entityName: string,
+    days: number = 30
+  ): Promise<{ date: string; mentions: number; context: string }[]> {
+    await this.initialize();
+
+    const timeline: Map<string, { count: number; contexts: string[] }> = new Map();
+    const cutoff = new Date();
+    cutoff.setDate(cutoff.getDate() - days);
+
+    try {
+      const { searchAgentMemory } = await import('./zep');
+      const results = await searchAgentMemory(agentId, entityName, 100);
+
+      for (const r of results) {
+        const createdAt = r.memory.createdAt ? new Date(r.memory.createdAt) : new Date();
+        if (createdAt < cutoff) continue;
+
+        const dateKey = createdAt.toISOString().split('T')[0];
+        const existing = timeline.get(dateKey) || { count: 0, contexts: [] };
+        existing.count++;
+        if (existing.contexts.length < 3) {
+          existing.contexts.push(r.memory.text.substring(0, 100));
+        }
+        timeline.set(dateKey, existing);
+      }
+
+      return Array.from(timeline.entries())
+        .map(([date, data]) => ({
+          date,
+          mentions: data.count,
+          context: data.contexts.join(' | '),
+        }))
+        .sort((a, b) => a.date.localeCompare(b.date));
+    } catch (error) {
+      console.error('[ExtendedMemory] Get entity timeline failed:', error);
+      return [];
+    }
   }
 }
 
