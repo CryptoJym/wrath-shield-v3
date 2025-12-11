@@ -8,6 +8,10 @@
 import { getAgenticActionById, updateAgenticActionStatusWithMeta, listAgenticActions } from '@/lib/db/queries';
 import { createLocalTask } from '@/lib/pm/local-task-store';
 import type { TaskPriority } from '@/lib/pm/types';
+import { sendEmail } from '@/lib/integrations/EmailClient';
+import { getGoogleCalendarClient } from '@/lib/integrations/GoogleCalendarClient';
+import { sendNotification } from '@/lib/integrations/NotificationClient';
+import { createNote } from '@/lib/integrations/NotesClient';
 
 export interface ExecutionResult {
   success: boolean;
@@ -77,15 +81,64 @@ export async function executeSingleAction(actionId: string): Promise<ExecutionRe
  * Execute email draft action
  */
 async function executeEmailDraft(action: any): Promise<ExecutionResult> {
-  // TODO: Integrate with email sending service (Gmail API, SMTP, etc.)
   console.log('[Executor] Email draft action:', action.title);
 
-  // For now, mark as executed (stub)
-  return {
-    success: true,
-    message: `Email draft "${action.title}" ready for sending`,
-    data: { draft_id: action.id }
-  };
+  try {
+    // Parse metadata for email details
+    const metadata = typeof action.metadata === 'string'
+      ? JSON.parse(action.metadata)
+      : (action.metadata || {});
+
+    const emailData = metadata.email || {};
+
+    // Validate required fields
+    if (!emailData.to) {
+      console.warn('[Executor] Email draft missing recipient, skipping send');
+      return {
+        success: true,
+        message: `Email draft "${action.title}" created (no recipient specified)`,
+        data: { draft_id: action.id }
+      };
+    }
+
+    // Attempt to send email
+    const result = await sendEmail({
+      to: emailData.to,
+      subject: emailData.subject || action.title,
+      text: emailData.text || action.content || '',
+      html: emailData.html,
+      cc: emailData.cc,
+      bcc: emailData.bcc,
+      attachments: emailData.attachments,
+      profile: emailData.profile, // Optional SMTP profile selection
+    });
+
+    if (result.success) {
+      return {
+        success: true,
+        message: `Email "${action.title}" sent to ${emailData.to}`,
+        data: {
+          draft_id: action.id,
+          message_id: result.messageId,
+          profile: result.profile
+        }
+      };
+    } else {
+      // Email service not configured, treat as draft
+      return {
+        success: true,
+        message: `Email draft "${action.title}" created (email service not configured)`,
+        data: { draft_id: action.id, error: result.error }
+      };
+    }
+  } catch (error) {
+    const message = error instanceof Error ? error.message : 'Unknown error';
+    console.error('[Executor] Email draft error:', message);
+    return {
+      success: false,
+      message: `Failed to process email: ${message}`,
+    };
+  }
 }
 
 /**
@@ -153,14 +206,59 @@ async function executeTask(action: any): Promise<ExecutionResult> {
  * Execute reminder action
  */
 async function executeReminder(action: any): Promise<ExecutionResult> {
-  // TODO: Integrate with notification service (push notifications, email, etc.)
   console.log('[Executor] Reminder action:', action.title);
 
-  return {
-    success: true,
-    message: `Reminder "${action.title}" scheduled`,
-    data: { reminder_id: action.id }
-  };
+  try {
+    // Parse metadata for reminder details
+    const metadata = typeof action.metadata === 'string'
+      ? JSON.parse(action.metadata)
+      : (action.metadata || {});
+
+    const reminderData = metadata.reminder || {};
+    const scheduledTime = reminderData.scheduledTime
+      ? new Date(reminderData.scheduledTime)
+      : null;
+
+    // Send notification
+    const result = await sendNotification({
+      title: action.title,
+      message: action.content || '',
+      priority: reminderData.priority || 'normal',
+      scheduledTime,
+      metadata: {
+        action_id: action.id,
+        type: 'reminder',
+        source: action.source
+      }
+    });
+
+    if (result.success) {
+      return {
+        success: true,
+        message: scheduledTime
+          ? `Reminder "${action.title}" scheduled for ${scheduledTime.toLocaleString()}`
+          : `Reminder "${action.title}" sent`,
+        data: {
+          reminder_id: action.id,
+          notification_id: result.notificationId,
+          scheduled_time: scheduledTime?.toISOString()
+        }
+      };
+    } else {
+      return {
+        success: true,
+        message: `Reminder "${action.title}" logged (notification service not configured)`,
+        data: { reminder_id: action.id }
+      };
+    }
+  } catch (error) {
+    const message = error instanceof Error ? error.message : 'Unknown error';
+    console.error('[Executor] Reminder error:', message);
+    return {
+      success: false,
+      message: `Failed to create reminder: ${message}`,
+    };
+  }
 }
 
 /**
