@@ -26,8 +26,11 @@ export type AgentId =
   | 'legal-agent'
   | 'finance-agent'
   | 'comms-agent'
+  | 'ea-agent'
   | 'health-agent'
   | 'hyro-agent'
+  | 'learning-agent'
+  | 'relationships-agent'
   | 'orchestrator'
   | 'user';
 
@@ -659,8 +662,11 @@ function agentIdToBusId(lifeOsAgentId: string): AgentId {
     'agent.finance': 'finance-agent',
     'agent.pm': 'pm-agent',
     'agent.comms': 'comms-agent',
+    'agent.ea': 'ea-agent',
     'agent.health': 'health-agent',
-    'agent.hyro': 'hyro-agent',
+    'agent.hyro.education': 'hyro-agent',
+    'agent.james.learning': 'learning-agent',
+    'agent.relationships': 'relationships-agent',
   };
   return mapping[lifeOsAgentId] || 'pm-agent';
 }
@@ -780,8 +786,11 @@ function busIdToAgentId(busId: AgentId): string {
     'finance-agent': 'agent.finance',
     'pm-agent': 'agent.pm',
     'comms-agent': 'agent.comms',
+    'ea-agent': 'agent.ea',
     'health-agent': 'agent.health',
-    'hyro-agent': 'agent.hyro',
+    'hyro-agent': 'agent.hyro.education',
+    'learning-agent': 'agent.james.learning',
+    'relationships-agent': 'agent.relationships',
     'user': 'agent.orchestrator', // User messages go to orchestrator
   };
   return mapping[busId] || 'agent.orchestrator';

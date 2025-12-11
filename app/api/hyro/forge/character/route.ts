@@ -11,6 +11,11 @@ import { getStudentIdFromRequest } from '@/lib/hyro/student-auth';
 export async function GET() {
   try {
     const studentId = await getStudentIdFromRequest();
+
+    if (!studentId) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
     const characterSheet = getCharacterSheet(studentId);
 
     if (!characterSheet) {

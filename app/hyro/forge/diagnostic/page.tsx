@@ -1,8 +1,8 @@
 'use client';
 
 /**
- * HYRO FORGE: Diagnostic Assessment Page
- * Take initial assessments to establish baseline and identify skill gaps
+ * HYRO FORGE: Diagnostic Assessment Page (v2)
+ * Manifold-Integrated Assessment with Meta Probes and State Vectors
  */
 
 import React, { useEffect, useState, useCallback } from 'react';
@@ -20,7 +20,28 @@ import {
   AlertTriangle,
   Trophy,
   TrendingUp,
+  Sparkles,
+  Zap,
+  Activity
 } from 'lucide-react';
+import {
+  Radar,
+  RadarChart,
+  PolarGrid,
+  PolarAngleAxis,
+  PolarRadiusAxis,
+  ResponsiveContainer,
+  Tooltip,
+  Area,
+  AreaChart,
+  XAxis,
+  YAxis,
+  CartesianGrid
+} from 'recharts';
+
+// ============================================================================
+// Types (v2)
+// ============================================================================
 
 type StatName = 'math' | 'reading' | 'science' | 'coding' | 'study_skills' | 'critical_thinking' | 'technology' | 'problem_solving';
 
@@ -33,35 +54,82 @@ interface StatOverview {
   last_assessed: number | null;
 }
 
-interface Question {
+interface DiagnosticItem {
   id: string;
-  question_text: string;
-  question_type: 'multiple_choice' | 'short_answer' | 'true_false' | 'fill_blank';
-  options: string[] | null;
-  difficulty_level: number;
-  topic: string | null;
-  hints: string[] | null;
+  stat_name: StatName;
+  item_type: 'multiple_choice' | 'short_answer' | 'true_false' | 'fill_blank' | 'meta_probe';
+  prompt_text: string;
+  options_json: string | null; // JSON string of options
+  difficulty: number;
+  constructs_measured: string | null;
+}
+
+interface MetaProbe extends DiagnosticItem {
+  probe_type: 'frame_shift' | 'entropy_compression' | 'non_dual_synthesis';
+  target_dimensions: string; // JSON string
 }
 
 interface Session {
   id: string;
-  stat_name: StatName;
-  questions_answered: number;
-  questions_total: number;
-  current_difficulty: number;
+  focus_stat: StatName | null;
+  status: 'active' | 'completed';
+  target_items: number;
 }
 
-interface DiagnosticResult {
-  estimated_level: number;
-  confidence_low: number | null;
-  confidence_high: number | null;
-  raw_score: number;
-  total_questions: number;
-  percentage_score: number;
-  identified_gaps: Array<{ topic: string; gap_severity: string }>;
-  strong_areas: string[];
-  recommended_focus: string[];
-  topic_breakdown: Record<string, { correct: number; total: number; level: number }>;
+interface Progress {
+  completed: number;
+  target: number;
+  domain_items: number;
+  meta_probes: number;
+  current_difficulty?: number;
+}
+
+interface EvaluationResult {
+  scores: {
+    validity: number;
+    coherence: number;
+    transfer: number;
+    utility: number;
+    efficiency: number;
+  };
+  meta?: {
+    manifold_fluidity?: number;
+    multi_model_coherence?: number;
+    identity_elasticity?: number;
+    gradient_awareness?: number;
+    entropy_intuition?: number;
+    non_dual_resolution?: number;
+    cooperative_generativity?: number;
+  };
+  flags?: {
+    overconfident: boolean;
+    handwavy: boolean;
+  };
+  evidence?: {
+    quotes: string[];
+    observations: string[];
+  };
+}
+
+interface StateVector {
+  coherence: number;
+  entropy: number;
+  generativity: number;
+  ci_low: number;
+  ci_high: number;
+}
+
+interface DiagnosticResultV2 {
+  updated_stats: string[];
+  state_vectors: Array<{
+    stat_name: string;
+    coherence: number;
+    entropy: number;
+    generativity: number;
+    ci_low: number;
+    ci_high: number;
+  }>;
+  total_responses: number;
 }
 
 const STAT_DISPLAY_NAMES: Record<StatName, string> = {
@@ -86,25 +154,58 @@ const STAT_ICONS: Record<StatName, string> = {
   problem_solving: 'p',
 };
 
+// ============================================================================
+// Component
+// ============================================================================
+
 export default function DiagnosticPage() {
+  // State
   const [overview, setOverview] = useState<StatOverview[]>([]);
   const [selectedStat, setSelectedStat] = useState<StatName | null>(null);
   const [session, setSession] = useState<Session | null>(null);
-  const [currentQuestion, setCurrentQuestion] = useState<Question | null>(null);
-  const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
-  const [feedback, setFeedback] = useState<{ correct: boolean; explanation: string | null } | null>(null);
-  const [result, setResult] = useState<DiagnosticResult | null>(null);
+  const [currentItem, setCurrentItem] = useState<DiagnosticItem | null>(null);
+  const [isMetaProbe, setIsMetaProbe] = useState(false);
+  const [targetStrand, setTargetStrand] = useState<string | null>(null);
+  const [targetTier, setTargetTier] = useState<string | null>(null);
+  const [targetManifold, setTargetManifold] = useState<string | null>(null);
+  const [progress, setProgress] = useState<Progress | null>(null);
+
+  // Interaction State
+  const [answerText, setAnswerText] = useState('');
+  const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  const [confidence, setConfidence] = useState<number>(3); // 1-5
+  const [startTime, setStartTime] = useState<number>(0);
+
+  // Feedback/Result State
+  const [evaluation, setEvaluation] = useState<EvaluationResult | null>(null);
+  const [finalResult, setFinalResult] = useState<DiagnosticResultV2 | null>(null);
+
+  // UI State
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
-  const [startTime, setStartTime] = useState<number | null>(null);
   const [view, setView] = useState<'overview' | 'test' | 'result'>('overview');
 
+  // Load Overview
   const loadOverview = useCallback(async () => {
     try {
-      const res = await fetch('/api/hyro/diagnostic?action=overview');
+      const res = await fetch('/api/hyro/forge/diagnostic?action=overview'); // Using v2 API default action
       const json = await res.json();
-      if (json.success) {
-        setOverview(json.data.overview);
+      if (json.stats_summary) {
+        // Map v2 summary to overview format
+        // Note: v2 summary structure is different, adapting here for now
+        // Ideally we'd update the overview interface to match v2 fully
+        const mappedOverview: StatOverview[] = (Object.keys(STAT_DISPLAY_NAMES) as StatName[]).map(stat => {
+          const summary = json.stats_summary.find((s: any) => s.stat_name === stat);
+          return {
+            stat_name: stat,
+            has_diagnostic: !!summary,
+            latest_level: summary ? Math.round(summary.avg_validity * 100) : null, // Proxy for level
+            confidence_interval: null,
+            gaps_count: 0, // v2 doesn't explicitly count gaps in summary yet
+            last_assessed: null // v2 summary doesn't return date yet
+          };
+        });
+        setOverview(mappedOverview);
       }
     } catch (err) {
       console.error('Failed to load overview:', err);
@@ -117,24 +218,36 @@ export default function DiagnosticPage() {
     loadOverview();
   }, [loadOverview]);
 
+  // Start Session
   const startDiagnostic = async (statName: StatName) => {
     setLoading(true);
     setSelectedStat(statName);
-    setResult(null);
-    setFeedback(null);
+    setFinalResult(null);
+    setEvaluation(null);
 
     try {
-      const res = await fetch('/api/hyro/diagnostic', {
+      const res = await fetch('/api/hyro/forge/diagnostic', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'start', stat_name: statName }),
+        body: JSON.stringify({
+          action: 'start',
+          focus_stat: statName,
+          target_items: 30
+        }),
       });
 
       const json = await res.json();
-      if (json.success) {
-        setSession(json.data.session);
-        setCurrentQuestion(json.data.question);
+      if (json.session) {
+        setSession(json.session);
+        setCurrentItem(json.first_item);
+        setIsMetaProbe(false); // First item is usually domain
         setStartTime(Date.now());
+        setProgress({
+          completed: 0,
+          target: 30,
+          domain_items: 0,
+          meta_probes: 0
+        });
         setView('test');
       }
     } catch (err) {
@@ -144,51 +257,51 @@ export default function DiagnosticPage() {
     }
   };
 
+  // Submit Answer
   const submitAnswer = async () => {
-    if (!session || !currentQuestion || selectedAnswer === null) return;
+    if (!session || !currentItem) return;
 
     setSubmitting(true);
-    const timeSpent = startTime ? Math.floor((Date.now() - startTime) / 1000) : 0;
+    const timeSpent = Date.now() - startTime;
 
     try {
-      const res = await fetch('/api/hyro/diagnostic', {
+      const res = await fetch('/api/hyro/forge/diagnostic', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          action: 'answer',
+          action: 'submit',
           session_id: session.id,
-          question_id: currentQuestion.id,
-          user_answer: selectedAnswer,
-          time_spent_seconds: timeSpent,
+          item_id: currentItem.id,
+          response_text: isMetaProbe || currentItem.item_type === 'short_answer' ? answerText : selectedOption,
+          response_json: currentItem.item_type === 'multiple_choice' ? { selected: selectedOption } : null,
+          time_spent_ms: timeSpent,
+          confidence_before: confidence
         }),
       });
 
       const json = await res.json();
-      if (json.success) {
-        setFeedback({
-          correct: json.data.is_correct,
-          explanation: json.data.explanation,
-        });
 
-        // Update session progress
-        setSession(prev => prev ? {
-          ...prev,
-          questions_answered: prev.questions_answered + 1,
-          current_difficulty: json.data.new_difficulty,
-        } : null);
+      if (json.evaluation) {
+        setEvaluation(json.evaluation);
+      }
 
-        // After showing feedback, move to next question
+      if (json.session_complete) {
+        // Session is done, fetch final results
+        await completeDiagnostic(session.id);
+      } else if (json.next_item) {
+        // Wait a moment to show feedback if available, then move on
         setTimeout(() => {
-          if (json.data.questions_remaining > 0 && json.data.next_question) {
-            setCurrentQuestion(json.data.next_question);
-            setSelectedAnswer(null);
-            setFeedback(null);
-            setStartTime(Date.now());
-          } else {
-            // Complete the diagnostic
-            completeDiagnostic();
-          }
-        }, 2000);
+          setCurrentItem(json.next_item);
+          setIsMetaProbe(json.is_meta_probe);
+          setTargetStrand(json.target_strand || null);
+          setTargetTier(json.target_tier || null);
+          setTargetManifold(json.target_manifold || null);
+          setProgress(json.progress);
+          setAnswerText('');
+          setSelectedOption(null);
+          setEvaluation(null);
+          setStartTime(Date.now());
+        }, json.evaluation ? 3000 : 500); // Longer delay if showing evaluation
       }
     } catch (err) {
       console.error('Failed to submit answer:', err);
@@ -197,22 +310,21 @@ export default function DiagnosticPage() {
     }
   };
 
-  const completeDiagnostic = async () => {
-    if (!session) return;
-
+  // Complete Session
+  const completeDiagnostic = async (sessionId: string) => {
     setLoading(true);
     try {
-      const res = await fetch('/api/hyro/diagnostic', {
+      const res = await fetch('/api/hyro/forge/diagnostic', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'complete', session_id: session.id }),
+        body: JSON.stringify({ action: 'complete', session_id: sessionId }),
       });
 
       const json = await res.json();
-      if (json.success) {
-        setResult(json.data);
+      if (json.state_vectors) {
+        setFinalResult(json);
         setView('result');
-        loadOverview(); // Refresh overview
+        loadOverview();
       }
     } catch (err) {
       console.error('Failed to complete diagnostic:', err);
@@ -221,202 +333,278 @@ export default function DiagnosticPage() {
     }
   };
 
-  const getDifficultyColor = (level: number) => {
-    if (level < 0.3) return 'text-green-400';
-    if (level < 0.6) return 'text-yellow-400';
-    if (level < 0.8) return 'text-orange-400';
-    return 'text-red-400';
-  };
-
-  const getLevelColor = (level: number | null) => {
-    if (level === null) return 'text-gray-400';
-    if (level >= 75) return 'text-green-400';
-    if (level >= 50) return 'text-yellow-400';
-    if (level >= 25) return 'text-orange-400';
-    return 'text-red-400';
-  };
-
-  const getSeverityColor = (severity: string) => {
-    switch (severity) {
-      case 'critical': return 'text-red-400 bg-red-900/30';
-      case 'significant': return 'text-orange-400 bg-orange-900/30';
-      case 'moderate': return 'text-yellow-400 bg-yellow-900/30';
-      default: return 'text-blue-400 bg-blue-900/30';
+  // Helper: Parse options
+  const getOptions = (item: DiagnosticItem): string[] => {
+    if (!item.options_json) return [];
+    try {
+      const parsed = JSON.parse(item.options_json);
+      if (Array.isArray(parsed)) {
+        return parsed;
+      } else if (typeof parsed === 'object' && parsed !== null) {
+        // Handle {"a": "Option A", "b": "Option B"} format
+        return Object.values(parsed);
+      }
+      return [];
+    } catch {
+      return [];
     }
   };
 
+  // Helper: Render State Vector Chart
+  const renderStateVectorChart = (sv: StateVector) => {
+    const data = [
+      { subject: 'Coherence', A: sv.coherence, fullMark: 100 },
+      { subject: 'Entropy', A: sv.entropy, fullMark: 100 },
+      { subject: 'Generativity', A: sv.generativity, fullMark: 100 },
+    ];
+
+    return (
+      <div className="h-64 w-full">
+        <ResponsiveContainer width="100%" height="100%">
+          <RadarChart cx="50%" cy="50%" outerRadius="80%" data={data}>
+            <PolarGrid stroke="#374151" />
+            <PolarAngleAxis dataKey="subject" tick={{ fill: '#9CA3AF', fontSize: 12 }} />
+            <PolarRadiusAxis angle={30} domain={[0, 100]} tick={false} axisLine={false} />
+            <Radar
+              name="State Vector"
+              dataKey="A"
+              stroke="#8B5CF6"
+              strokeWidth={2}
+              fill="#8B5CF6"
+              fillOpacity={0.3}
+            />
+            <Tooltip
+              contentStyle={{ backgroundColor: '#1F2937', borderColor: '#374151', color: '#F3F4F6' }}
+              itemStyle={{ color: '#A78BFA' }}
+            />
+          </RadarChart>
+        </ResponsiveContainer>
+      </div>
+    );
+  };
+
+  // LOADING VIEW
   if (loading && view === 'overview') {
     return (
-      <div className="min-h-screen bg-gray-900 flex items-center justify-center">
+      <div className="min-h-screen bg-zinc-950 flex items-center justify-center">
         <div className="text-center">
           <Loader2 className="h-12 w-12 animate-spin text-blue-500 mx-auto mb-4" />
-          <p className="text-gray-400">Loading Diagnostics...</p>
+          <p className="text-zinc-400">Loading Manifold Diagnostics...</p>
         </div>
       </div>
     );
   }
 
   // TEST VIEW
-  if (view === 'test' && session && currentQuestion) {
-    const progress = (session.questions_answered / session.questions_total) * 100;
+  if (view === 'test' && session && currentItem) {
+    const progressPercent = progress ? (progress.completed / progress.target) * 100 : 0;
 
     return (
-      <div className="min-h-screen bg-gray-900 text-white">
+      <div className="min-h-screen bg-zinc-950 text-white">
         {/* Header */}
-        <header className="bg-gradient-to-r from-blue-900/50 to-gray-900 border-b border-gray-700 px-6 py-4">
+        <header className="bg-zinc-900/50 border-b border-zinc-800 px-6 py-4 backdrop-blur-md sticky top-0 z-10">
           <div className="max-w-4xl mx-auto flex items-center justify-between">
             <div className="flex items-center gap-4">
               <button
                 onClick={() => setView('overview')}
-                className="p-2 hover:bg-gray-700 rounded-lg transition-colors"
+                className="p-2 hover:bg-zinc-800 rounded-lg transition-colors"
               >
-                <ArrowLeft className="h-5 w-5" />
+                <ArrowLeft className="h-5 w-5 text-zinc-400" />
               </button>
               <div>
-                <h1 className="text-xl font-bold text-white">
-                  {STAT_DISPLAY_NAMES[selectedStat!]} Assessment
+                <h1 className="text-lg font-bold text-white flex items-center gap-2">
+                  {isMetaProbe ? (
+                    <span className="text-purple-400 flex items-center gap-2">
+                      <Sparkles className="h-4 w-4" /> Meta Probe
+                    </span>
+                  ) : (
+                    <span>{STAT_DISPLAY_NAMES[selectedStat!] || 'Diagnostic'} Assessment</span>
+                  )}
                 </h1>
-                <p className="text-sm text-gray-400">
-                  Question {session.questions_answered + 1} of {session.questions_total}
-                </p>
+                <div className="flex items-center gap-2 text-xs text-zinc-500 flex-wrap">
+                  <span>Item {progress?.completed ? progress.completed + 1 : 1} of {progress?.target || 30}</span>
+                  {isMetaProbe && <span className="px-1.5 py-0.5 bg-purple-900/30 text-purple-400 rounded">Deep Concept</span>}
+                  {!isMetaProbe && targetStrand && <span className="px-1.5 py-0.5 bg-blue-900/30 text-blue-400 rounded">{targetStrand}</span>}
+                  {!isMetaProbe && targetTier && <span className="px-1.5 py-0.5 bg-emerald-900/30 text-emerald-400 rounded border border-emerald-800/50">{targetTier}</span>}
+                  {!isMetaProbe && targetManifold && <span className="px-1.5 py-0.5 bg-amber-900/30 text-amber-400 rounded border border-amber-800/50 uppercase tracking-wider text-[10px]">{targetManifold.replace(/_/g, ' ')}</span>}
+                </div>
               </div>
             </div>
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2 px-3 py-1.5 bg-gray-800 rounded-lg">
-                <Target className="h-4 w-4 text-blue-400" />
-                <span className={`text-sm ${getDifficultyColor(session.current_difficulty)}`}>
-                  Difficulty: {Math.round(session.current_difficulty * 100)}%
-                </span>
+
+            {/* Difficulty Indicator (only for domain items) */}
+            {!isMetaProbe && progress?.current_difficulty && (
+              <div className="flex items-center gap-2 px-3 py-1.5 bg-zinc-900 rounded-full border border-zinc-800">
+                <Activity className="h-3 w-3 text-blue-400" />
+                <div className="flex gap-0.5 h-1.5">
+                  {[0.2, 0.4, 0.6, 0.8].map((threshold) => (
+                    <div
+                      key={threshold}
+                      className={`w-3 rounded-full ${progress.current_difficulty! >= threshold ? 'bg-blue-500' : 'bg-zinc-700'
+                        }`}
+                    />
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </header>
 
         {/* Progress Bar */}
-        <div className="bg-gray-800 h-2">
+        <div className="h-1 bg-zinc-900">
           <div
-            className="bg-blue-500 h-full transition-all duration-300"
-            style={{ width: `${progress}%` }}
+            className={`h-full transition-all duration-500 ${isMetaProbe ? 'bg-purple-500' : 'bg-blue-500'}`}
+            style={{ width: `${progressPercent}%` }}
           />
         </div>
 
         <main className="max-w-3xl mx-auto p-6">
           {/* Question Card */}
-          <div className="bg-gray-800 rounded-lg p-6 mb-6">
-            {currentQuestion.topic && (
-              <span className="inline-block px-2 py-1 bg-gray-700 rounded text-xs text-gray-400 mb-4">
-                {currentQuestion.topic}
-              </span>
+          <div className={`rounded-2xl p-8 mb-6 border transition-all ${isMetaProbe
+            ? 'bg-gradient-to-b from-purple-900/10 to-zinc-900 border-purple-500/30 shadow-lg shadow-purple-900/10'
+            : 'bg-zinc-900 border-zinc-800'
+            }`}>
+            {isMetaProbe && (
+              <div className="mb-6 flex items-center gap-2 text-purple-300 text-sm font-medium">
+                <Brain className="h-4 w-4" />
+                <span>Think deeply. There is no single right answer.</span>
+              </div>
             )}
-            <h2 className="text-xl font-medium text-white mb-6">
-              {currentQuestion.question_text}
+
+            <h2 className="text-xl md:text-2xl font-medium text-white mb-8 leading-relaxed">
+              {currentItem.prompt_text}
             </h2>
 
-            {/* Multiple Choice Options */}
-            {currentQuestion.question_type === 'multiple_choice' && currentQuestion.options && (
-              <div className="space-y-3">
-                {currentQuestion.options.map((option, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => !feedback && setSelectedAnswer(option)}
-                    disabled={!!feedback}
-                    className={`w-full p-4 rounded-lg text-left transition-all ${
-                      feedback
-                        ? option === selectedAnswer
-                          ? feedback.correct
-                            ? 'bg-green-900/50 border-green-500'
-                            : 'bg-red-900/50 border-red-500'
-                          : 'bg-gray-700 opacity-50'
-                        : selectedAnswer === option
-                        ? 'bg-blue-900/50 border-blue-500'
-                        : 'bg-gray-700 hover:bg-gray-600'
-                    } border-2 ${
-                      selectedAnswer === option ? 'border-blue-500' : 'border-transparent'
-                    }`}
-                  >
-                    <div className="flex items-center gap-3">
-                      <span className="flex-shrink-0 w-8 h-8 rounded-full bg-gray-600 flex items-center justify-center text-sm font-medium">
-                        {String.fromCharCode(65 + idx)}
-                      </span>
-                      <span>{option}</span>
-                      {feedback && option === selectedAnswer && (
-                        feedback.correct
-                          ? <CheckCircle className="ml-auto h-5 w-5 text-green-400" />
-                          : <XCircle className="ml-auto h-5 w-5 text-red-400" />
-                      )}
+            {/* Input Area */}
+            <div className="space-y-6">
+              {/* Multiple Choice */}
+              {currentItem.item_type === 'multiple_choice' && (
+                <div className="grid gap-3">
+                  {getOptions(currentItem).map((option, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => !evaluation && setSelectedOption(option)}
+                      disabled={!!evaluation}
+                      className={`w-full p-4 rounded-xl text-left transition-all border-2 ${selectedOption === option
+                        ? 'bg-blue-600/20 border-blue-500 text-white'
+                        : 'bg-zinc-800/50 border-transparent hover:bg-zinc-800 text-zinc-300'
+                        }`}
+                    >
+                      <div className="flex items-center gap-4">
+                        <span className={`flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold ${selectedOption === option ? 'bg-blue-500 text-white' : 'bg-zinc-700 text-zinc-400'
+                          }`}>
+                          {String.fromCharCode(65 + idx)}
+                        </span>
+                        <span>{option}</span>
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              )}
+
+              {/* Text Input (Short Answer or Meta Probe) */}
+              {(currentItem.item_type === 'short_answer' || isMetaProbe) && (
+                <div className="relative">
+                  <textarea
+                    value={answerText}
+                    onChange={(e) => !evaluation && setAnswerText(e.target.value)}
+                    disabled={!!evaluation}
+                    placeholder={isMetaProbe ? "Express your thoughts freely..." : "Type your answer..."}
+                    className={`w-full p-4 bg-zinc-950/50 rounded-xl border-2 text-white placeholder-zinc-600 focus:outline-none focus:ring-0 resize-none transition-all ${isMetaProbe
+                      ? 'border-purple-500/30 focus:border-purple-500 min-h-[200px]'
+                      : 'border-zinc-800 focus:border-blue-500 min-h-[100px]'
+                      }`}
+                  />
+                  {isMetaProbe && (
+                    <div className="absolute bottom-4 right-4 text-xs text-zinc-500">
+                      {answerText.length} chars
                     </div>
-                  </button>
-                ))}
-              </div>
-            )}
-
-            {/* Short Answer */}
-            {currentQuestion.question_type === 'short_answer' && (
-              <input
-                type="text"
-                value={selectedAnswer || ''}
-                onChange={(e) => !feedback && setSelectedAnswer(e.target.value)}
-                disabled={!!feedback}
-                placeholder="Type your answer..."
-                className="w-full p-4 bg-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            )}
-
-            {/* True/False */}
-            {currentQuestion.question_type === 'true_false' && (
-              <div className="flex gap-4">
-                {['True', 'False'].map((option) => (
-                  <button
-                    key={option}
-                    onClick={() => !feedback && setSelectedAnswer(option)}
-                    disabled={!!feedback}
-                    className={`flex-1 p-4 rounded-lg text-center transition-all ${
-                      selectedAnswer === option
-                        ? 'bg-blue-900/50 border-blue-500'
-                        : 'bg-gray-700 hover:bg-gray-600'
-                    } border-2 ${
-                      selectedAnswer === option ? 'border-blue-500' : 'border-transparent'
-                    }`}
-                  >
-                    {option}
-                  </button>
-                ))}
-              </div>
-            )}
+                  )}
+                </div>
+              )}
+            </div>
           </div>
 
-          {/* Feedback */}
-          {feedback && (
-            <div className={`rounded-lg p-4 mb-6 ${
-              feedback.correct ? 'bg-green-900/30 border border-green-700' : 'bg-red-900/30 border border-red-700'
-            }`}>
-              <div className="flex items-center gap-2 mb-2">
-                {feedback.correct
-                  ? <CheckCircle className="h-5 w-5 text-green-400" />
-                  : <XCircle className="h-5 w-5 text-red-400" />
-                }
-                <span className={`font-semibold ${feedback.correct ? 'text-green-400' : 'text-red-400'}`}>
-                  {feedback.correct ? 'Correct!' : 'Incorrect'}
-                </span>
+          {/* Confidence Self-Report (Optional) */}
+          {!evaluation && (
+            <div className="mb-8 flex items-center justify-center gap-4 text-sm text-zinc-500">
+              <span>Confidence:</span>
+              <div className="flex gap-1">
+                {[1, 2, 3, 4, 5].map((level) => (
+                  <button
+                    key={level}
+                    onClick={() => setConfidence(level)}
+                    className={`w-8 h-8 rounded-full transition-all ${confidence === level
+                      ? 'bg-zinc-700 text-white scale-110'
+                      : 'bg-zinc-900 text-zinc-600 hover:bg-zinc-800'
+                      }`}
+                  >
+                    {level}
+                  </button>
+                ))}
               </div>
-              {feedback.explanation && (
-                <p className="text-gray-300 text-sm">{feedback.explanation}</p>
-              )}
+            </div>
+          )}
+
+          {/* AI Evaluation Feedback */}
+          {evaluation && (
+            <div className="mb-6 animate-fade-in">
+              <div className={`rounded-xl p-6 border ${evaluation.scores.validity > 0.7
+                ? 'bg-green-900/10 border-green-500/30'
+                : 'bg-orange-900/10 border-orange-500/30'
+                }`}>
+                <div className="flex items-center gap-3 mb-4">
+                  {evaluation.scores.validity > 0.7
+                    ? <CheckCircle className="h-6 w-6 text-green-400" />
+                    : <AlertTriangle className="h-6 w-6 text-orange-400" />
+                  }
+                  <h3 className="font-semibold text-white">
+                    {evaluation.scores.validity > 0.7 ? 'Solid Reasoning' : 'Needs Improvement'}
+                  </h3>
+                </div>
+
+                {/* Evidence/Quotes */}
+                {evaluation.evidence?.observations && (
+                  <div className="space-y-2 mb-4">
+                    {evaluation.evidence.observations.map((obs, i) => (
+                      <p key={i} className="text-zinc-300 text-sm flex gap-2">
+                        <span className="text-blue-500">•</span> {obs}
+                      </p>
+                    ))}
+                  </div>
+                )}
+
+                {/* Meta Dimension Impact (if any) */}
+                {evaluation.meta && Object.keys(evaluation.meta).length > 0 && (
+                  <div className="mt-4 pt-4 border-t border-white/5">
+                    <p className="text-xs text-zinc-500 uppercase tracking-wider mb-2">Manifold Impact</p>
+                    <div className="flex flex-wrap gap-2">
+                      {Object.entries(evaluation.meta).map(([key, val]) => (
+                        <span key={key} className="px-2 py-1 bg-purple-500/10 text-purple-300 rounded text-xs border border-purple-500/20">
+                          {key.replace(/_/g, ' ')}: +{Math.round(val * 100)}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           )}
 
           {/* Submit Button */}
-          {!feedback && (
+          {!evaluation && (
             <button
               onClick={submitAnswer}
-              disabled={selectedAnswer === null || submitting}
-              className="w-full py-4 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg font-semibold transition-colors flex items-center justify-center gap-2"
+              disabled={submitting || (!answerText && !selectedOption)}
+              className={`w-full py-4 rounded-xl font-bold text-white transition-all transform active:scale-[0.99] flex items-center justify-center gap-2 ${isMetaProbe
+                ? 'bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 shadow-lg shadow-purple-900/20'
+                : 'bg-blue-600 hover:bg-blue-500 shadow-lg shadow-blue-900/20'
+                } disabled:opacity-50 disabled:cursor-not-allowed`}
             >
               {submitting ? (
                 <Loader2 className="h-5 w-5 animate-spin" />
               ) : (
                 <>
-                  Submit Answer
+                  {isMetaProbe ? 'Submit Reflection' : 'Submit Answer'}
                   <ChevronRight className="h-5 w-5" />
                 </>
               )}
@@ -428,179 +616,106 @@ export default function DiagnosticPage() {
   }
 
   // RESULT VIEW
-  if (view === 'result' && result) {
+  if (view === 'result' && finalResult) {
+    // Find the state vector for the focused stat
+    const sv = finalResult.state_vectors.find(s => s.stat_name === selectedStat);
+
     return (
-      <div className="min-h-screen bg-gray-900 text-white">
-        {/* Header */}
-        <header className="bg-gradient-to-r from-green-900/50 to-gray-900 border-b border-gray-700 px-6 py-4">
+      <div className="min-h-screen bg-zinc-950 text-white">
+        <header className="bg-zinc-900/50 border-b border-zinc-800 px-6 py-4">
           <div className="max-w-4xl mx-auto flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <Link
-                href="/hyro/forge"
-                className="p-2 hover:bg-gray-700 rounded-lg transition-colors"
-              >
-                <ArrowLeft className="h-5 w-5" />
-              </Link>
-              <div>
-                <h1 className="text-2xl font-bold text-white">
-                  Assessment Complete!
-                </h1>
-                <p className="text-sm text-gray-400">
-                  {STAT_DISPLAY_NAMES[selectedStat!]} Diagnostic Results
-                </p>
-              </div>
-            </div>
-            <div className="flex items-center gap-2 px-4 py-2 bg-green-600/20 border border-green-600/50 rounded-lg">
-              <Trophy className="h-5 w-5 text-green-400" />
-              <span className="text-green-300">+50 XP</span>
+            <Link
+              href="/hyro/forge"
+              className="p-2 hover:bg-zinc-800 rounded-lg transition-colors"
+            >
+              <ArrowLeft className="h-5 w-5 text-zinc-400" />
+            </Link>
+            <h1 className="text-xl font-bold text-white">Manifold Analysis Complete</h1>
+            <div className="flex items-center gap-2 px-3 py-1 bg-green-900/20 border border-green-900/50 rounded-lg">
+              <Trophy className="h-4 w-4 text-green-400" />
+              <span className="text-green-400 font-medium">+100 XP</span>
             </div>
           </div>
         </header>
 
         <main className="max-w-4xl mx-auto p-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {/* Main Score Card */}
-            <div className="bg-gray-800 rounded-lg p-6">
-              <h3 className="text-lg font-semibold text-white mb-4">Your Level</h3>
-              <div className="text-center mb-6">
-                <div className={`text-6xl font-bold ${getLevelColor(result.estimated_level)}`}>
-                  {result.estimated_level}
-                </div>
-                <div className="text-gray-400 mt-2">
-                  Estimated Proficiency Level
-                </div>
-                {result.confidence_low !== null && result.confidence_high !== null && (
-                  <div className="text-sm text-gray-500 mt-1">
-                    95% CI: {result.confidence_low} - {result.confidence_high}
-                  </div>
-                )}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* State Vector Visualization */}
+            <div className="bg-zinc-900 rounded-2xl p-6 border border-zinc-800">
+              <div className="flex items-center gap-3 mb-6">
+                <Radar className="h-5 w-5 text-purple-400" />
+                <h2 className="text-lg font-bold text-white">Cognitive State Vector</h2>
               </div>
-              <div className="grid grid-cols-2 gap-4 text-center">
-                <div className="bg-gray-700/50 rounded-lg p-3">
-                  <div className="text-2xl font-bold text-white">
-                    {result.raw_score}/{result.total_questions}
-                  </div>
-                  <div className="text-xs text-gray-400">Correct Answers</div>
+
+              {sv ? renderStateVectorChart(sv) : (
+                <div className="h-64 flex items-center justify-center text-zinc-500">
+                  No state vector data available
                 </div>
-                <div className="bg-gray-700/50 rounded-lg p-3">
-                  <div className="text-2xl font-bold text-white">
-                    {Math.round(result.percentage_score)}%
-                  </div>
-                  <div className="text-xs text-gray-400">Accuracy</div>
+              )}
+
+              <div className="grid grid-cols-3 gap-4 mt-6">
+                <div className="text-center p-3 bg-zinc-950 rounded-xl border border-zinc-800">
+                  <div className="text-xs text-zinc-500 mb-1">Coherence</div>
+                  <div className="text-xl font-bold text-purple-400">{sv?.coherence ? Math.round(sv.coherence) : '-'}</div>
+                </div>
+                <div className="text-center p-3 bg-zinc-950 rounded-xl border border-zinc-800">
+                  <div className="text-xs text-zinc-500 mb-1">Entropy</div>
+                  <div className="text-xl font-bold text-blue-400">{sv?.entropy ? Math.round(sv.entropy) : '-'}</div>
+                </div>
+                <div className="text-center p-3 bg-zinc-950 rounded-xl border border-zinc-800">
+                  <div className="text-xs text-zinc-500 mb-1">Generativity</div>
+                  <div className="text-xl font-bold text-green-400">{sv?.generativity ? Math.round(sv.generativity) : '-'}</div>
                 </div>
               </div>
             </div>
 
-            {/* Topic Breakdown */}
-            <div className="bg-gray-800 rounded-lg p-6">
-              <h3 className="text-lg font-semibold text-white mb-4">Topic Breakdown</h3>
-              <div className="space-y-3">
-                {Object.entries(result.topic_breakdown).map(([topic, data]) => (
-                  <div key={topic}>
-                    <div className="flex items-center justify-between mb-1">
-                      <span className="text-sm text-gray-300 capitalize">{topic.replace(/_/g, ' ')}</span>
-                      <span className={`text-sm ${getLevelColor(data.level)}`}>
-                        {data.correct}/{data.total} ({data.level}%)
-                      </span>
-                    </div>
-                    <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
-                      <div
-                        className={`h-full transition-all ${
-                          data.level >= 75 ? 'bg-green-500' :
-                          data.level >= 50 ? 'bg-yellow-500' :
-                          data.level >= 25 ? 'bg-orange-500' : 'bg-red-500'
-                        }`}
-                        style={{ width: `${data.level}%` }}
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
+            {/* Recommendations / Next Steps */}
+            <div className="space-y-6">
+              <div className="bg-gradient-to-br from-blue-900/20 to-purple-900/20 rounded-2xl p-6 border border-blue-500/20">
+                <h2 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                  <Zap className="h-5 w-5 text-yellow-400" />
+                  Next Steps
+                </h2>
+                <p className="text-zinc-300 mb-6">
+                  Based on your state vector, we've calibrated your learning path.
+                  Your high entropy score suggests you're ready for more open-ended challenges.
+                </p>
 
-            {/* Identified Gaps */}
-            {result.identified_gaps.length > 0 && (
-              <div className="bg-gray-800 rounded-lg p-6">
-                <div className="flex items-center gap-2 mb-4">
-                  <AlertTriangle className="h-5 w-5 text-orange-400" />
-                  <h3 className="text-lg font-semibold text-white">Areas to Improve</h3>
-                </div>
-                <div className="space-y-2">
-                  {result.identified_gaps.map((gap, idx) => (
-                    <div
-                      key={idx}
-                      className={`px-3 py-2 rounded-lg ${getSeverityColor(gap.gap_severity)}`}
-                    >
-                      <span className="capitalize">{gap.topic.replace(/_/g, ' ')}</span>
-                      <span className="ml-2 text-xs opacity-75 uppercase">
-                        {gap.gap_severity}
-                      </span>
+                <div className="space-y-3">
+                  <button className="w-full p-4 bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 hover:border-zinc-600 rounded-xl text-left transition-all group">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <div className="font-medium text-white group-hover:text-blue-400 transition-colors">Start Recommended Quest</div>
+                        <div className="text-xs text-zinc-500">Targeting Coherence Gap</div>
+                      </div>
+                      <ChevronRight className="h-5 w-5 text-zinc-600 group-hover:text-blue-400" />
                     </div>
-                  ))}
-                </div>
-              </div>
-            )}
+                  </button>
 
-            {/* Strengths */}
-            {result.strong_areas.length > 0 && (
-              <div className="bg-gray-800 rounded-lg p-6">
-                <div className="flex items-center gap-2 mb-4">
-                  <TrendingUp className="h-5 w-5 text-green-400" />
-                  <h3 className="text-lg font-semibold text-white">Strengths</h3>
+                  <button className="w-full p-4 bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 hover:border-zinc-600 rounded-xl text-left transition-all group">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <div className="font-medium text-white group-hover:text-purple-400 transition-colors">Explore Meta Concepts</div>
+                        <div className="text-xs text-zinc-500">Boost Generativity</div>
+                      </div>
+                      <ChevronRight className="h-5 w-5 text-zinc-600 group-hover:text-purple-400" />
+                    </div>
+                  </button>
                 </div>
-                <div className="flex flex-wrap gap-2">
-                  {result.strong_areas.map((area, idx) => (
-                    <span
-                      key={idx}
-                      className="px-3 py-1.5 bg-green-900/30 text-green-400 rounded-lg capitalize"
-                    >
-                      {area.replace(/_/g, ' ')}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Recommended Focus */}
-            <div className="lg:col-span-2 bg-gradient-to-r from-blue-900/30 to-purple-900/30 border border-blue-700/50 rounded-lg p-6">
-              <div className="flex items-center gap-2 mb-4">
-                <Brain className="h-5 w-5 text-blue-400" />
-                <h3 className="text-lg font-semibold text-white">Recommended Focus Areas</h3>
-              </div>
-              <p className="text-gray-300 mb-4">
-                Based on your assessment, here are the topics to prioritize:
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {result.recommended_focus.map((topic, idx) => (
-                  <span
-                    key={idx}
-                    className="px-4 py-2 bg-blue-900/50 text-blue-300 rounded-lg capitalize border border-blue-700/50"
-                  >
-                    {idx + 1}. {topic.replace(/_/g, ' ')}
-                  </span>
-                ))}
               </div>
             </div>
           </div>
 
-          {/* Actions */}
-          <div className="flex gap-4 mt-6">
-            <Link
-              href="/hyro/forge"
-              className="flex-1 py-4 bg-gray-700 hover:bg-gray-600 rounded-lg font-semibold text-center transition-colors"
-            >
-              Return to Dashboard
-            </Link>
+          <div className="mt-8 flex justify-center">
             <button
               onClick={() => {
                 setView('overview');
-                setResult(null);
+                setFinalResult(null);
                 setSession(null);
-                setSelectedStat(null);
               }}
-              className="flex-1 py-4 bg-blue-600 hover:bg-blue-700 rounded-lg font-semibold transition-colors"
+              className="px-8 py-3 bg-zinc-800 hover:bg-zinc-700 text-white rounded-xl font-medium transition-colors"
             >
-              Take Another Assessment
+              Return to Dashboard
             </button>
           </div>
         </main>
@@ -610,22 +725,22 @@ export default function DiagnosticPage() {
 
   // OVERVIEW VIEW
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
+    <div className="min-h-screen bg-zinc-950 text-white">
       {/* Header */}
-      <header className="bg-gradient-to-r from-blue-900/50 to-gray-900 border-b border-gray-700 px-6 py-4">
+      <header className="bg-zinc-900/50 border-b border-zinc-800 px-6 py-4 backdrop-blur-md">
         <div className="max-w-4xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-4">
             <Link
               href="/hyro/forge"
-              className="p-2 hover:bg-gray-700 rounded-lg transition-colors"
+              className="p-2 hover:bg-zinc-800 rounded-lg transition-colors"
             >
-              <ArrowLeft className="h-5 w-5" />
+              <ArrowLeft className="h-5 w-5 text-zinc-400" />
             </Link>
             <div>
               <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
-                Diagnostic Assessments
+                Manifold Diagnostics
               </h1>
-              <p className="text-sm text-gray-400">Establish your baseline and identify skill gaps</p>
+              <p className="text-sm text-zinc-400">Calibrate your cognitive state vector</p>
             </div>
           </div>
         </div>
@@ -633,15 +748,17 @@ export default function DiagnosticPage() {
 
       <main className="max-w-4xl mx-auto p-6">
         {/* Info Banner */}
-        <div className="bg-blue-900/30 border border-blue-700/50 rounded-lg p-4 mb-6">
-          <div className="flex items-start gap-3">
-            <Brain className="h-6 w-6 text-blue-400 flex-shrink-0 mt-0.5" />
+        <div className="bg-blue-900/10 border border-blue-500/20 rounded-2xl p-6 mb-8 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+          <div className="relative z-10 flex items-start gap-4">
+            <div className="p-3 bg-blue-500/20 rounded-xl">
+              <Radar className="h-6 w-6 text-blue-400" />
+            </div>
             <div>
-              <h3 className="font-semibold text-blue-300 mb-1">Why Take Diagnostics?</h3>
-              <p className="text-sm text-gray-300">
-                Diagnostic assessments help establish your current skill levels. The system will then
-                adapt content difficulty to match your zone of proximal development - challenging enough
-                to grow, but not so hard you get frustrated.
+              <h3 className="font-bold text-blue-100 mb-2">Beyond Standard Testing</h3>
+              <p className="text-sm text-blue-200/70 leading-relaxed max-w-2xl">
+                The Manifold doesn't just measure what you know. It measures <strong>Coherence</strong> (how well you connect ideas),
+                <strong>Entropy</strong> (how you handle uncertainty), and <strong>Generativity</strong> (your ability to create new value).
               </p>
             </div>
           </div>
@@ -652,57 +769,43 @@ export default function DiagnosticPage() {
           {overview.map((stat) => (
             <div
               key={stat.stat_name}
-              className="bg-gray-800 rounded-lg p-5 hover:bg-gray-750 transition-colors"
+              className="group bg-zinc-900 rounded-2xl p-5 border border-zinc-800 hover:border-zinc-700 transition-all hover:shadow-lg hover:shadow-black/50"
             >
-              <div className="flex items-start justify-between mb-3">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-gray-700 flex items-center justify-center text-lg font-mono">
+              <div className="flex items-start justify-between mb-6">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-xl bg-zinc-800 flex items-center justify-center text-xl font-mono group-hover:bg-zinc-700 transition-colors">
                     {STAT_ICONS[stat.stat_name]}
                   </div>
                   <div>
-                    <h3 className="font-semibold text-white">
+                    <h3 className="font-bold text-white text-lg">
                       {STAT_DISPLAY_NAMES[stat.stat_name]}
                     </h3>
                     {stat.has_diagnostic ? (
-                      <p className="text-xs text-gray-400">
-                        Assessed {stat.last_assessed
-                          ? new Date(stat.last_assessed * 1000).toLocaleDateString()
-                          : 'recently'
-                        }
-                      </p>
+                      <div className="flex items-center gap-2 mt-1">
+                        <span className="w-2 h-2 rounded-full bg-green-500" />
+                        <span className="text-xs text-zinc-400">Calibrated</span>
+                      </div>
                     ) : (
-                      <p className="text-xs text-yellow-400">Not yet assessed</p>
+                      <div className="flex items-center gap-2 mt-1">
+                        <span className="w-2 h-2 rounded-full bg-yellow-500" />
+                        <span className="text-xs text-zinc-400">Needs Calibration</span>
+                      </div>
                     )}
                   </div>
                 </div>
-                {stat.has_diagnostic && (
-                  <div className="text-right">
-                    <div className={`text-2xl font-bold ${getLevelColor(stat.latest_level)}`}>
-                      {stat.latest_level}
-                    </div>
-                    <div className="text-xs text-gray-400">Level</div>
-                  </div>
-                )}
               </div>
-
-              {stat.has_diagnostic && stat.gaps_count > 0 && (
-                <div className="mb-3 px-2 py-1 bg-orange-900/30 rounded text-xs text-orange-400">
-                  {stat.gaps_count} skill gap{stat.gaps_count > 1 ? 's' : ''} identified
-                </div>
-              )}
 
               <button
                 onClick={() => startDiagnostic(stat.stat_name)}
-                className={`w-full py-2.5 rounded-lg font-medium transition-colors flex items-center justify-center gap-2 ${
-                  stat.has_diagnostic
-                    ? 'bg-gray-700 hover:bg-gray-600 text-gray-300'
-                    : 'bg-blue-600 hover:bg-blue-700 text-white'
-                }`}
+                className={`w-full py-3 rounded-xl font-medium transition-all flex items-center justify-center gap-2 ${stat.has_diagnostic
+                  ? 'bg-zinc-800 hover:bg-zinc-700 text-zinc-300'
+                  : 'bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-900/20'
+                  }`}
               >
                 {stat.has_diagnostic ? (
                   <>
-                    <Clock className="h-4 w-4" />
-                    Retake Assessment
+                    <Activity className="h-4 w-4" />
+                    Recalibrate
                   </>
                 ) : (
                   <>

@@ -2,6 +2,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { X, MessageSquare, Check, AlertCircle, RefreshCw } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
+import { FrameShiftProbe } from './probes/FrameShiftProbe';
+import { EntropyProbe } from './probes/EntropyProbe';
+import { SynthesisProbe } from './probes/SynthesisProbe';
 
 interface AssessmentModalProps {
     isOpen: boolean;
@@ -10,10 +13,11 @@ interface AssessmentModalProps {
     standardDescription: string;
 }
 
-export function AssessmentModal({ isOpen, onClose, standardId, standardDescription }: AssessmentModalProps) {
+export default function AssessmentModal({ isOpen, onClose, standardId, standardDescription }: AssessmentModalProps) {
     const [step, setStep] = useState<'init' | 'question' | 'evaluating' | 'result'>('init');
     const [question, setQuestion] = useState<string>('');
     const [context, setContext] = useState<string>('');
+    const [metaProbeType, setMetaProbeType] = useState<string | null>(null);
     const [studentResponse, setStudentResponse] = useState<string>('');
     const [result, setResult] = useState<any>(null);
     const [loading, setLoading] = useState(false);
@@ -40,6 +44,7 @@ export function AssessmentModal({ isOpen, onClose, standardId, standardDescripti
             const data = await res.json();
             setQuestion(data.question);
             setContext(data.context);
+            setMetaProbeType(data.meta_probe_type || null);
             setStep('question');
         } catch (e) {
             console.error(e);
@@ -113,23 +118,49 @@ export function AssessmentModal({ isOpen, onClose, standardId, standardDescripti
                                 </div>
                             )}
 
-                            <div className="space-y-2">
-                                <span className="text-xs font-bold text-indigo-400 tracking-wider">QUESTION</span>
-                                <div className="text-xl text-white font-serif leading-relaxed">
-                                    <ReactMarkdown>{question}</ReactMarkdown>
-                                </div>
-                            </div>
-
-                            <div className="space-y-2 pt-4">
-                                <span className="text-xs font-bold text-zinc-500 tracking-wider">YOUR ANSWER</span>
-                                <textarea
-                                    value={studentResponse}
-                                    onChange={e => setStudentResponse(e.target.value)}
-                                    className="w-full h-32 bg-zinc-950 border border-zinc-800 rounded-xl p-4 text-white placeholder-zinc-600 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 resize-none"
-                                    placeholder="Type your explanation here..."
-                                    autoFocus
+                            {/* Dynamic Probe Rendering */}
+                            {metaProbeType === 'frame_shift' ? (
+                                <FrameShiftProbe
+                                    domainA="Domain A" // In real app, parse from question metadata
+                                    domainB="Domain B"
+                                    prompt={question}
+                                    onResponse={setStudentResponse}
                                 />
-                            </div>
+                            ) : metaProbeType === 'entropy_compression' ? (
+                                <EntropyProbe
+                                    sequence="2, 3, 5, 9, 17..." // In real app, parse from question metadata
+                                    prompt={question}
+                                    onResponse={setStudentResponse}
+                                />
+                            ) : metaProbeType === 'non_dual_synthesis' ? (
+                                <SynthesisProbe
+                                    thesis="Thesis Statement" // In real app, parse from question metadata
+                                    antithesis="Antithesis Statement"
+                                    prompt={question}
+                                    onResponse={setStudentResponse}
+                                />
+                            ) : (
+                                // Default Text Interface
+                                <>
+                                    <div className="space-y-2">
+                                        <span className="text-xs font-bold text-indigo-400 tracking-wider">QUESTION</span>
+                                        <div className="text-xl text-white font-serif leading-relaxed">
+                                            <ReactMarkdown>{question}</ReactMarkdown>
+                                        </div>
+                                    </div>
+
+                                    <div className="space-y-2 pt-4">
+                                        <span className="text-xs font-bold text-zinc-500 tracking-wider">YOUR ANSWER</span>
+                                        <textarea
+                                            value={studentResponse}
+                                            onChange={e => setStudentResponse(e.target.value)}
+                                            className="w-full h-32 bg-zinc-950 border border-zinc-800 rounded-xl p-4 text-white placeholder-zinc-600 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 resize-none"
+                                            placeholder="Type your explanation here..."
+                                            autoFocus
+                                        />
+                                    </div>
+                                </>
+                            )}
 
                             <div className="flex justify-end pt-2">
                                 <button

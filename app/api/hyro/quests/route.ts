@@ -54,7 +54,7 @@ export async function GET(request: NextRequest) {
       const quests = db.prepare(`
         SELECT * FROM hyro_quests
         WHERE student_id = ? AND status IN ('available', 'in_progress')
-        ORDER BY priority DESC, due_date ASC
+        ORDER BY due_at ASC
       `).all(studentId);
       return NextResponse.json({ quests, count: quests.length });
     }
@@ -68,8 +68,8 @@ export async function GET(request: NextRequest) {
       const quests = db.prepare(`
         SELECT * FROM hyro_quests
         WHERE student_id = ? AND status != 'completed'
-        AND due_date >= ? AND due_date < ?
-        ORDER BY due_date ASC
+        AND due_at >= ? AND due_at < ?
+        ORDER BY due_at ASC
       `).all(studentId, startOfDay, endOfDay);
       return NextResponse.json({ quests, count: quests.length });
     }
@@ -80,8 +80,8 @@ export async function GET(request: NextRequest) {
       const now = Math.floor(Date.now() / 1000);
       const quests = db.prepare(`
         SELECT * FROM hyro_quests
-        WHERE student_id = ? AND status != 'completed' AND due_date < ?
-        ORDER BY due_date ASC
+        WHERE student_id = ? AND status != 'completed' AND due_at IS NOT NULL AND due_at < ?
+        ORDER BY due_at ASC
       `).all(studentId, now);
       return NextResponse.json({ quests, count: quests.length });
     }
@@ -95,7 +95,7 @@ export async function GET(request: NextRequest) {
         query += ` AND status = ?`;
         params.push(status);
       }
-      query += ` ORDER BY due_date ASC`;
+      query += ` ORDER BY due_at ASC`;
       const quests = db.prepare(query).all(...params);
       return NextResponse.json({ quests, platform, count: quests.length });
     }
@@ -147,7 +147,7 @@ export async function GET(request: NextRequest) {
     const quests = db.prepare(`
       SELECT * FROM hyro_quests
       WHERE student_id = ? AND status IN ('available', 'in_progress')
-      ORDER BY priority DESC, due_date ASC
+      ORDER BY due_at ASC
     `).all(studentId);
 
     const today = new Date();
@@ -156,15 +156,15 @@ export async function GET(request: NextRequest) {
     const dueToday = db.prepare(`
       SELECT * FROM hyro_quests
       WHERE student_id = ? AND status != 'completed'
-      AND due_date >= ? AND due_date < ?
-      ORDER BY due_date ASC
+      AND due_at >= ? AND due_at < ?
+      ORDER BY due_at ASC
     `).all(studentId, startOfDay, endOfDay);
 
     const now = Math.floor(Date.now() / 1000);
     const overdue = db.prepare(`
       SELECT * FROM hyro_quests
-      WHERE student_id = ? AND status != 'completed' AND due_date < ?
-      ORDER BY due_date ASC
+      WHERE student_id = ? AND status != 'completed' AND due_at IS NOT NULL AND due_at < ?
+      ORDER BY due_at ASC
     `).all(studentId, now);
 
     return NextResponse.json({

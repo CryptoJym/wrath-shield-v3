@@ -9,6 +9,8 @@ const isPublic = createRouteMatcher([
   '/privacy(.*)',
   '/api/health(.*)',
   '/api/system/status(.*)',
+  '/api/hyro(.*)',      // HYRO Forge APIs (uses fallback auth internally)
+  '/hyro(.*)',          // HYRO Forge pages
   '/sign-in(.*)',
   '/sign-up(.*)',
 ]);

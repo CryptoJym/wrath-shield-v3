@@ -231,33 +231,26 @@ export default function TutorPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-900 text-white flex flex-col">
-      {/* Header */}
-      <header className="border-b border-slate-700 bg-slate-800/50 backdrop-blur-sm sticky top-0 z-10">
+    <div className="min-h-screen bg-zinc-950 text-white flex flex-col">
+      {/* Page Header - Below ForgeNav from layout */}
+      <header className="border-b border-white/5 bg-zinc-900/50 backdrop-blur-sm">
         <div className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <Link href="/hyro/forge" className="text-slate-400 hover:text-white transition-colors">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-            </Link>
-            <div className="flex items-center gap-2">
-              <span className="text-2xl">&#x1F9D9;</span>
-              <div>
-                <h1 className="font-bold text-lg">Sage</h1>
-                <p className="text-xs text-slate-400">AI Learning Companion</p>
-              </div>
+            <span className="text-3xl">🧙</span>
+            <div>
+              <h1 className="font-bold text-lg bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent">Sage AI</h1>
+              <p className="text-xs text-zinc-400">Your Learning Companion</p>
             </div>
           </div>
           <div className="flex items-center gap-3">
             {totalXp > 0 && (
-              <div className="bg-yellow-600/20 text-yellow-400 px-3 py-1 rounded-full text-sm font-medium">
-                +{totalXp} XP
+              <div className="bg-yellow-600/20 text-yellow-400 px-3 py-1 rounded-full text-sm font-medium flex items-center gap-1">
+                <span>✨</span> +{totalXp} XP
               </div>
             )}
             <button
               onClick={() => setShowContext(!showContext)}
-              className="p-2 rounded-lg hover:bg-slate-700/50 transition-colors text-slate-400 hover:text-white"
+              className="p-2 rounded-lg hover:bg-white/5 transition-colors text-zinc-400 hover:text-white"
               title="Show learning context"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -266,7 +259,7 @@ export default function TutorPage() {
             </button>
             <button
               onClick={startNewConversation}
-              className="p-2 rounded-lg hover:bg-slate-700/50 transition-colors text-slate-400 hover:text-white"
+              className="p-2 rounded-lg hover:bg-white/5 transition-colors text-zinc-400 hover:text-white"
               title="New conversation"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -278,7 +271,7 @@ export default function TutorPage() {
 
         {/* Context Panel */}
         {showContext && context && (
-          <div className="border-t border-slate-700 bg-slate-800/80 px-4 py-3">
+          <div className="border-t border-white/5 bg-zinc-900/80 px-4 py-3">
             <div className="max-w-4xl mx-auto">
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm">
                 <div>
@@ -379,10 +372,10 @@ export default function TutorPage() {
                     )}
                     {msg.metadata?.quest_generated && (
                       <Link
-                        href="/hyro/forge"
+                        href={msg.metadata.quest_generated.id ? `/hyro/forge/quests?id=${msg.metadata.quest_generated.id}` : '/hyro/forge/quests'}
                         className="mt-2 inline-block text-xs text-purple-400 hover:text-purple-300"
                       >
-                        View in Quests
+                        View in Quests →
                       </Link>
                     )}
                   </div>

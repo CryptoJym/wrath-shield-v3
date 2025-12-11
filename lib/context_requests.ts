@@ -610,12 +610,14 @@ function agentIdToBusId(lifeOsAgentId: string): AgentId | null {
     'agent.vuplicity': 'legal-agent', // Route to legal due to compliance
     'agent.solutionstream': 'pm-agent',
     'agent.kahoa': 'pm-agent',
-    'agent.hiro': 'hyro-agent', // Legacy alias for agent.hyro
+    'agent.hiro': 'hyro-agent', // Legacy alias for agent.hyro.education
     'agent.family': 'pm-agent',
-    'agent.hyro': 'hyro-agent',
+    'agent.hyro.education': 'hyro-agent',
+    'agent.james.learning': 'learning-agent',
     'agent.grok': 'hyro-agent', // Research agent routes through hyro
     'agent.relationships': 'comms-agent',
     'agent.architect': 'orchestrator',
+    'agent.ea': 'ea-agent',
   };
   return mapping[lifeOsAgentId] || null;
 }

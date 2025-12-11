@@ -487,6 +487,49 @@ class ZepClient {
   async getSessions(userId: AgentId): Promise<string[]> {
     return this.getGraphs();
   }
+
+  /**
+   * Get memory timeline for an agent (density map)
+   */
+  async getMemoryTimeline(agentId: AgentId, days: number = 30): Promise<Record<string, number>> {
+    const client = await this.getClient();
+    const graphId = await this.ensureAgentGraph(agentId);
+
+    try {
+      // Search for everything sorted by creation date
+      // Note: Zep v3 search doesn't support sorting by date directly in all SDK versions,
+      // so we fetch recent memories and aggregate.
+      // Ideally we'd use a specific "list" endpoint if available, but search with empty query works.
+      const results = await client.graph.search({
+        graphId,
+        query: "",
+        limit: 100
+      });
+
+      const edges = results?.edges || results?.nodes || [];
+      const timeline: Record<string, number> = {};
+
+      const now = new Date();
+      const cutoff = new Date();
+      cutoff.setDate(cutoff.getDate() - days);
+
+      edges.forEach((edge: any) => {
+        const dateStr = edge.created_at || edge.createdAt;
+        if (!dateStr) return;
+
+        const date = new Date(dateStr);
+        if (date < cutoff) return;
+
+        const dayKey = date.toISOString().split('T')[0];
+        timeline[dayKey] = (timeline[dayKey] || 0) + 1;
+      });
+
+      return timeline;
+    } catch (error) {
+      console.error(`[ZepClient] Failed to get timeline:`, error);
+      return {};
+    }
+  }
 }
 
 /**
@@ -551,3 +594,4 @@ export const getRecentZepMemories = (userId: AgentId, limit?: number, sessionId?
 export const deleteZepMemory = (sessionId: string, memoryId: string) =>
   zepClient.deleteMemory(sessionId, memoryId);
 export const getZepSessions = (userId: AgentId) => zepClient.getSessions(userId);
+export const getMemoryTimeline = (agentId: AgentId, days?: number) => zepClient.getMemoryTimeline(agentId, days);

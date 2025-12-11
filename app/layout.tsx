@@ -8,6 +8,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import '../styles/power.css';
 import { ClerkProvider, UserButton } from '@clerk/nextjs';
+import { Navigation } from '@/components/Navigation';
 
 export const metadata: Metadata = {
   title: 'Wrath Shield v3',
@@ -20,36 +21,23 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const hasClerk = !!process.env.CLERK_PUBLISHABLE_KEY;
+
   const Shell = (
-    <body style={{ overflowX: 'hidden' }}>
-      <header style={{
-        position: 'sticky', top: 0, zIndex: 50,
-        background: 'var(--color-bg)', borderBottom: '1px solid var(--color-border)',
-        padding: '0.75rem 1rem'
-      }}>
-        <nav style={{ display: 'flex', gap: '1rem', alignItems: 'center', justifyContent: 'space-between' }}>
-          <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-            <a href="/" style={{ fontWeight: 600 }}>Wrath Shield v3</a>
-            <a href="/chat" style={{ color: 'var(--color-text-secondary)' }}>Orchestrator</a>
-            <a href="/agents/roster" style={{ color: 'var(--color-text-secondary)' }}>Team Roster</a>
-            <a href="/inbox" style={{ color: 'var(--color-text-secondary)' }}>Inbox</a>
-            <a href="/pm" style={{ color: 'var(--color-text-secondary)' }}>PM</a>
-            <a href="/finance" style={{ color: 'var(--color-text-secondary)' }}>Finance</a>
-            <a href="/hyro" style={{ color: 'var(--color-text-secondary)' }}>Education</a>
-            <a href="/eeg" style={{ color: 'var(--color-text-secondary)' }}>EEG</a>
-            <a href="/feed" style={{ color: 'var(--color-text-secondary)' }}>Feed</a>
-            <a href="/tasks" style={{ color: 'var(--color-text-secondary)' }}>Tasks</a>
-            <a href="/legal" style={{ color: 'var(--color-text-secondary)' }}>Legal Advisor</a>
-            <a href="/privacy" style={{ color: 'var(--color-text-secondary)' }}>Privacy</a>
+    <body className="overflow-x-hidden min-h-screen bg-[var(--color-bg)] text-[var(--color-text)]">
+      {/* Navigation with optional Clerk UserButton */}
+      <div className="relative">
+        <Navigation />
+        {hasClerk && (
+          <div className="absolute top-3 right-4 z-50">
+            <UserButton afterSignOutUrl="/sign-in" />
           </div>
-          {hasClerk ? (
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <UserButton afterSignOutUrl="/sign-in" />
-            </div>
-          ) : null}
-        </nav>
-      </header>
-      <main style={{ padding: '1rem' }}>{children}</main>
+        )}
+      </div>
+
+      {/* Main Content */}
+      <main className="px-4 py-6 max-w-7xl mx-auto">
+        {children}
+      </main>
     </body>
   );
 

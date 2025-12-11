@@ -247,28 +247,26 @@ export default function ForgeDashboard() {
         <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-purple-500/5 rounded-full blur-[100px]" />
       </div>
 
-      {/* Header */}
-      <header className="sticky top-0 z-50 bg-zinc-950/80 backdrop-blur-md border-b border-white/5 px-6 py-4">
+      {/* Welcome Banner - integrates with ForgeNav from layout */}
+      <div className="bg-gradient-to-r from-blue-600/10 via-purple-600/10 to-cyan-600/10 border-b border-white/5 px-6 py-4">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div>
-            <h1 className="text-2xl font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400">
-              HYRO FORGE
-            </h1>
-            <p className="text-xs font-medium text-zinc-500 uppercase tracking-widest">Ultra-Edge Education System</p>
+          <div className="flex items-center gap-4">
+            <span className="text-4xl">👋</span>
+            <div>
+              <h2 className="text-lg font-bold text-white">
+                Welcome back, <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">{user.firstName || user.username || 'Hero'}</span>!
+              </h2>
+              <p className="text-sm text-zinc-400">Ready for your next adventure?</p>
+            </div>
           </div>
-          <div className="flex items-center gap-6">
-            <span className="text-sm font-medium text-zinc-400">
-              Welcome, <span className="text-white">{user.firstName || user.username || 'Student'}</span>
-            </span>
-            <Link
-              href="/hyro/forge/reading"
-              className="px-5 py-2 bg-blue-600 hover:bg-blue-500 text-white text-sm font-bold rounded-lg transition-all shadow-lg shadow-blue-900/20 hover:shadow-blue-600/40"
-            >
-              Start Session
-            </Link>
-          </div>
+          <Link
+            href="/hyro/forge/session"
+            className="px-5 py-2.5 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white text-sm font-bold rounded-xl transition-all shadow-lg shadow-purple-900/30 hover:shadow-purple-600/40 flex items-center gap-2"
+          >
+            <span>🚀</span> Start Session
+          </Link>
         </div>
-      </header>
+      </div>
 
       <main className="max-w-7xl mx-auto p-6 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -358,17 +356,18 @@ export default function ForgeDashboard() {
             <div className="bg-zinc-900/50 backdrop-blur-md rounded-2xl p-6 border border-white/10">
               <div className="flex items-center justify-between mb-6">
                 <h3 className="text-sm font-bold text-zinc-400 uppercase tracking-widest">Active Quests</h3>
-                <button className="text-xs font-medium text-blue-400 hover:text-blue-300 transition-colors">
+                <Link href="/hyro/forge/quests" className="text-xs font-medium text-blue-400 hover:text-blue-300 transition-colors">
                   View All
-                </button>
+                </Link>
               </div>
 
               {data.active_quests.length > 0 ? (
                 <div className="space-y-3">
                   {data.active_quests.map((quest) => (
-                    <div
+                    <Link
                       key={quest.id}
-                      className="group relative overflow-hidden flex items-center justify-between p-4 bg-zinc-800/40 rounded-xl border border-white/5 hover:border-blue-500/30 transition-all cursor-pointer"
+                      href={`/hyro/forge/quests?id=${quest.id}`}
+                      className="group relative overflow-hidden flex items-center justify-between p-4 bg-zinc-800/40 rounded-xl border border-white/5 hover:border-blue-500/30 transition-all cursor-pointer block"
                     >
                       <div className="absolute inset-0 bg-gradient-to-r from-blue-500/0 via-blue-500/0 to-blue-500/0 group-hover:from-blue-500/5 group-hover:via-blue-500/10 group-hover:to-blue-500/5 transition-all duration-500" />
 
@@ -384,7 +383,7 @@ export default function ForgeDashboard() {
                         </div>
                       </div>
                       <div className="relative text-sm font-mono font-bold text-emerald-400">+{quest.xp_reward} XP</div>
-                    </div>
+                    </Link>
                   ))}
                 </div>
               ) : (
@@ -449,8 +448,45 @@ export default function ForgeDashboard() {
                 </Link>
               </div>
 
+              {/* AI Tutor - Prominent Placement */}
+              <Link
+                href="/hyro/forge/tutor"
+                className="group block w-full p-4 mt-4 bg-gradient-to-r from-emerald-600/20 to-teal-600/20 hover:from-emerald-600/30 hover:to-teal-600/30 border border-emerald-500/30 hover:border-emerald-500/50 rounded-xl transition-all relative overflow-hidden"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+                <div className="flex items-center justify-center gap-3 relative z-10">
+                  <span className="text-3xl filter drop-shadow-lg">🧙‍♂️</span>
+                  <div>
+                    <span className="text-base font-bold text-emerald-100 block">Ask Sage (AI Tutor)</span>
+                    <span className="text-xs font-medium text-emerald-300/70 block">Personalized guidance</span>
+                  </div>
+                </div>
+              </Link>
+
+              {/* Sphere Grid - Progress Map */}
+              <Link
+                href="/hyro/forge/sphere-grid"
+                className="group block w-full p-4 mt-4 bg-gradient-to-r from-purple-600/20 to-cyan-600/20 hover:from-purple-600/30 hover:to-cyan-600/30 border border-purple-500/30 hover:border-cyan-500/50 rounded-xl transition-all relative overflow-hidden"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+                <div className="flex items-center justify-center gap-3 relative z-10">
+                  <span className="text-3xl filter drop-shadow-lg">🔮</span>
+                  <div>
+                    <span className="text-base font-bold text-purple-100 block">Sphere Grid</span>
+                    <span className="text-xs font-medium text-cyan-300/70 block">FFX-style progress map</span>
+                  </div>
+                </div>
+              </Link>
+
               {/* Secondary Actions Row */}
               <div className="grid grid-cols-3 gap-3 mt-3">
+                <Link
+                  href="/hyro/forge/comprehension"
+                  className="p-3 bg-zinc-800/30 hover:bg-teal-900/10 border border-white/5 hover:border-teal-500/20 rounded-xl transition-all text-center group"
+                >
+                  <span className="text-xl block mb-1 group-hover:scale-110 transition-transform">📖</span>
+                  <span className="text-xs font-medium text-zinc-400 group-hover:text-teal-300">Comprehension</span>
+                </Link>
                 <Link
                   href="/hyro/forge/diagnostic"
                   className="p-3 bg-zinc-800/30 hover:bg-red-900/10 border border-white/5 hover:border-red-500/20 rounded-xl transition-all text-center group"
@@ -465,12 +501,30 @@ export default function ForgeDashboard() {
                   <span className="text-xl block mb-1 group-hover:scale-110 transition-transform">📊</span>
                   <span className="text-xs font-medium text-zinc-400 group-hover:text-cyan-300">Analytics</span>
                 </Link>
+              </div>
+
+              {/* Tertiary Actions Row */}
+              <div className="grid grid-cols-3 gap-3 mt-3">
                 <Link
                   href="/hyro/forge/proficiency"
                   className="p-3 bg-zinc-800/30 hover:bg-orange-900/10 border border-white/5 hover:border-orange-500/20 rounded-xl transition-all text-center group"
                 >
                   <span className="text-xl block mb-1 group-hover:scale-110 transition-transform">🎯</span>
                   <span className="text-xs font-medium text-zinc-400 group-hover:text-orange-300">Proficiency</span>
+                </Link>
+                <Link
+                  href="/hyro/forge/skills"
+                  className="p-3 bg-zinc-800/30 hover:bg-indigo-900/10 border border-white/5 hover:border-indigo-500/20 rounded-xl transition-all text-center group"
+                >
+                  <span className="text-xl block mb-1 group-hover:scale-110 transition-transform">⚡</span>
+                  <span className="text-xs font-medium text-zinc-400 group-hover:text-indigo-300">Skills</span>
+                </Link>
+                <Link
+                  href="/hyro/forge/quests"
+                  className="p-3 bg-zinc-800/30 hover:bg-yellow-900/10 border border-white/5 hover:border-yellow-500/20 rounded-xl transition-all text-center group"
+                >
+                  <span className="text-xl block mb-1 group-hover:scale-110 transition-transform">🗡️</span>
+                  <span className="text-xs font-medium text-zinc-400 group-hover:text-yellow-300">Quests</span>
                 </Link>
               </div>
 
@@ -491,6 +545,26 @@ export default function ForgeDashboard() {
                   <span className="text-xl block mb-1 group-hover:scale-110 transition-transform">👨‍👩‍👧‍👦</span>
                   <span className="text-xs font-bold text-blue-300">Parent</span>
                   <span className="text-[9px] block text-zinc-500 mt-0.5 uppercase tracking-wide">Dashboard</span>
+                </Link>
+              </div>
+
+              {/* Architecture & About Links */}
+              <div className="grid grid-cols-2 gap-3 mt-3">
+                <Link
+                  href="/hyro/forge/architecture"
+                  className="block p-3 bg-gradient-to-r from-indigo-900/20 to-purple-900/20 hover:from-indigo-900/30 hover:to-purple-900/30 border border-indigo-500/20 hover:border-indigo-500/40 rounded-xl transition-all text-center group"
+                >
+                  <span className="text-xl block mb-1 group-hover:scale-110 transition-transform">🏗️</span>
+                  <span className="text-xs font-bold text-indigo-300">Architecture</span>
+                  <span className="text-[9px] block text-zinc-500 mt-0.5 uppercase tracking-wide">System Design</span>
+                </Link>
+                <Link
+                  href="/hyro/forge/about"
+                  className="block p-3 bg-gradient-to-r from-slate-900/20 to-zinc-900/20 hover:from-slate-900/30 hover:to-zinc-900/30 border border-slate-500/20 hover:border-slate-500/40 rounded-xl transition-all text-center group"
+                >
+                  <span className="text-xl block mb-1 group-hover:scale-110 transition-transform">ℹ️</span>
+                  <span className="text-xs font-bold text-slate-300">About</span>
+                  <span className="text-[9px] block text-zinc-500 mt-0.5 uppercase tracking-wide">For Parents</span>
                 </Link>
               </div>
             </div>

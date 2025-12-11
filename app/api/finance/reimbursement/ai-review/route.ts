@@ -44,10 +44,10 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'cycleStart and cycleEnd are required' }, { status: 400 });
     }
 
-    // Get API key
+    // Get API key (support both XAI_API_KEY and XAI_API_KEY_DIRECT)
     const openaiKey = process.env.OPENAI_API_KEY;
     const orKey = process.env.OPENROUTER_API_KEY;
-    const xaiKey = process.env.XAI_API_KEY;
+    const xaiKey = process.env.XAI_API_KEY || process.env.XAI_API_KEY_DIRECT;
     const apiKey = openaiKey || orKey || xaiKey;
 
     if (!apiKey) {

@@ -9,6 +9,7 @@
  * - Pending by target (finance/legal/pm/ea)
  * - Junk counts
  * - Pipeline metrics (classifications, routing accuracy)
+ * - Temporal map (memory density)
  */
 
 import { NextResponse } from 'next/server';
@@ -16,6 +17,7 @@ import { currentUserOrThrow } from '@/lib/auth/user';
 import { listRecentEvents } from '@/lib/events';
 import { getPipelineMetrics, getPipelineLogs } from '@/lib/comms/pipeline';
 import { getAllContextRequests, getPendingCountByTarget } from '@/lib/context_requests';
+import { getMemoryTimeline } from '@/lib/memory/zep';
 
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
@@ -98,6 +100,10 @@ export async function GET() {
     // Get recent pipeline logs
     const recentLogs = getPipelineLogs(20);
 
+    // Get temporal map from Zep (comms-agent)
+    // We use 'comms-agent' as the source of truth for communication memory density
+    const temporalMap = await getMemoryTimeline('comms-agent', 30);
+
     // Calculate classification accuracy (events with high confidence)
     const classifiedEvents = recentEvents.filter((e) => e.classification);
     const highConfidenceCount = classifiedEvents.filter((e) => (e.confidence || 0) >= 0.7).length;
@@ -146,6 +152,7 @@ export async function GET() {
         success: log.success,
         details: log.details,
       })),
+      temporal_map: temporalMap,
     };
 
     return NextResponse.json(response);

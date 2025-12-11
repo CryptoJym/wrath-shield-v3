@@ -61,6 +61,21 @@
       ],
       "response_time": "immediate"
     },
+    "NEEDS_DECISION": {
+      "description": "LLM cannot determine action - queued for human input",
+      "triggers": [
+        "Ambiguous intent requiring clarification",
+        "Conflicting priorities between domains",
+        "Missing context to make informed decision",
+        "Multiple valid options with tradeoffs",
+        "External party expectations unclear",
+        "First-time scenarios without precedent",
+        "Action would have irreversible consequences"
+      ],
+      "response_time": "within_24h",
+      "queue_behavior": "accumulate_with_context",
+      "presentation": "batched_daily_digest"
+    },
     "PROPOSE": {
       "description": "Agent proposes action, awaits James approval",
       "triggers": [

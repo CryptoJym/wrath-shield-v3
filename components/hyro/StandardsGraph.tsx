@@ -13,14 +13,17 @@ const ForceGraph2D = dynamic(() => import('react-force-graph-2d'), {
 interface StandardsGraphProps {
     standards: any[];
     mastery: any[];
+    viewMode?: 'standard' | 'truth' | 'synapse';
     onNodeClick?: (node: any) => void;
 }
 
-export default function StandardsGraph({ standards, mastery, onNodeClick }: StandardsGraphProps) {
+export default function StandardsGraph({ standards, mastery, viewMode: propViewMode, onNodeClick }: StandardsGraphProps) {
     const fgRef = useRef<any>();
     const containerRef = useRef<HTMLDivElement>(null);
     const [dimensions, setDimensions] = useState({ width: 800, height: 500 });
-    const [viewMode, setViewMode] = useState<'standard' | 'truth' | 'synapse'>('standard');
+    const [internalViewMode, setInternalViewMode] = useState<'standard' | 'truth' | 'synapse'>('standard');
+
+    const viewMode = propViewMode || internalViewMode;
 
     useEffect(() => {
         if (!containerRef.current) return;
@@ -78,7 +81,7 @@ export default function StandardsGraph({ standards, mastery, onNodeClick }: Stan
         // 2. Standard Links
         standards.forEach(std => {
             if (std.prerequisites && Array.isArray(std.prerequisites)) {
-                std.prerequisites.forEach(preId => {
+                std.prerequisites.forEach((preId: string) => {
                     if (standards.find(s => s.id === preId)) {
                         links.push({
                             source: preId,
@@ -177,24 +180,7 @@ export default function StandardsGraph({ standards, mastery, onNodeClick }: Stan
     return (
         <div ref={containerRef} className="border border-white/10 rounded-xl overflow-hidden bg-zinc-950 w-full h-full min-h-[500px] relative">
             <div className="absolute top-4 left-4 z-10 flex gap-2">
-                <button
-                    onClick={() => setViewMode('standard')}
-                    className={`px-3 py-1 text-xs font-bold rounded-lg border transition-all ${viewMode === 'standard' ? 'bg-blue-600 border-blue-400 text-white' : 'bg-zinc-900/80 border-white/10 text-zinc-400 hover:text-white'}`}
-                >
-                    Standard View
-                </button>
-                <button
-                    onClick={() => setViewMode('truth')}
-                    className={`px-3 py-1 text-xs font-bold rounded-lg border transition-all ${viewMode === 'truth' ? 'bg-fuchsia-600 border-fuchsia-400 text-white shadow-[0_0_15px_rgba(217,70,239,0.5)]' : 'bg-zinc-900/80 border-white/10 text-zinc-400 hover:text-white'}`}
-                >
-                    👁️ Truth View
-                </button>
-                <button
-                    onClick={() => setViewMode('synapse')}
-                    className={`px-3 py-1 text-xs font-bold rounded-lg border transition-all ${viewMode === 'synapse' ? 'bg-purple-600 border-purple-400 text-white shadow-[0_0_15px_rgba(168,85,247,0.5)]' : 'bg-zinc-900/80 border-white/10 text-zinc-400 hover:text-white'}`}
-                >
-                    🧠 Synapse View
-                </button>
+                {/* Controls handled by parent */}
             </div>
 
             <ForceGraph2D
@@ -215,6 +201,6 @@ export default function StandardsGraph({ standards, mastery, onNodeClick }: Stan
                 d3VelocityDecay={0.3}
                 cooldownTicks={100}
             />
-        </div>
+        </div >
     );
 }

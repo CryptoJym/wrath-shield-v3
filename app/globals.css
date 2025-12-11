@@ -24,13 +24,15 @@
   --input: 240 4% 20%;
   --ring: 240 5% 65%;
 
-  /* Color Palette */
+  /* Dark-Steel Color Palette (consolidated) */
+  --color-bg: #0c0f12;
   --color-bg-primary: #0a0a0a;
   --color-bg-secondary: #1a1a1a;
   --color-bg-card: #202020;
-  --color-border: #333333;
+  --color-border: #2d3340;
+  --color-text: #e6eaf0;
   --color-text-primary: #ffffff;
-  --color-text-secondary: #a0a0a0;
+  --color-text-secondary: #a0a8b8;
   --color-text-muted: #666666;
 
   /* Status Colors */
@@ -38,12 +40,7 @@
   --color-warning: #f59e0b;
   --color-danger: #ef4444;
   --color-info: #3b82f6;
-
-  /* Legacy variable aliases used in inline styles */
-  --color-bg: #0c0f12;
-  --color-border: #2d3340;
-  --color-text-secondary: #a0a8b8;
-  --color-text: #e6eaf0;
+  --color-primary: #20c37a;
 
   /* Spacing */
   --spacing-xs: 0.5rem;
@@ -56,6 +53,11 @@
   --radius-sm: 0.375rem;
   --radius-md: 0.5rem;
   --radius-lg: 0.75rem;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
 }
 
 body {
@@ -64,47 +66,13 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: var(--color-bg-primary);
-  color: var(--color-text-primary);
+  background-color: var(--color-bg);
+  color: var(--color-text);
   line-height: 1.6;
-}
-
-main {
   min-height: 100vh;
-  padding: var(--spacing-lg);
 }
 
-h1 {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: var(--spacing-md);
-  color: var(--color-text-primary);
-}
-
-h2 {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: var(--spacing-sm);
-  color: var(--color-text-primary);
-}
-
-h3 {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-bottom: var(--spacing-sm);
-  color: var(--color-text-secondary);
-}
-
-a {
-  color: var(--color-info);
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-/* Loading State */
+/* Loading State - custom component styles */
 .loading {
   display: flex;
   align-items: center;
@@ -114,7 +82,7 @@ a:hover {
   font-size: 1.125rem;
 }
 
-/* Error State */
+/* Error State - custom component styles */
 .error {
   padding: var(--spacing-md);
   background-color: rgba(239, 68, 68, 0.1);
@@ -124,188 +92,12 @@ a:hover {
   margin-bottom: var(--spacing-md);
 }
 
-/* Card Component */
-.card {
-  background-color: var(--color-bg-card);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  padding: var(--spacing-md);
-}
-
-/* Text Utilities */
-.text-green {
-  color: var(--color-success);
-}
-
-.text-secondary {
-  color: var(--color-text-secondary);
-}
-
-.text-muted {
-  color: var(--color-text-muted);
-}
-
-.text-success {
-  color: var(--color-success);
-}
-
-/* Layout Utilities */
-.grid {
-  display: grid;
-}
-
-.grid-cols-1 {
-  grid-template-columns: repeat(1, minmax(0, 1fr));
-}
-
-@media (min-width: 768px) {
-  .md\:grid-cols-3 {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}
-
-.gap-4 {
-  gap: 1rem;
-}
-
-.space-y-4 > * + * {
-  margin-top: 1rem;
-}
-
-.mb-2 {
-  margin-bottom: 0.5rem;
-}
-
-.mb-4 {
-  margin-bottom: 1rem;
-}
-
-.mb-8 {
-  margin-bottom: 2rem;
-}
-
-.mt-1 {
-  margin-top: 0.25rem;
-}
-
-.mt-2 {
-  margin-top: 0.5rem;
-}
-
-.mr-2 {
-  margin-right: 0.5rem;
-}
-
-.mr-4 {
-  margin-right: 1rem;
-}
-
-.ml-4 {
-  margin-left: 1rem;
-}
-
-/* Flexbox Utilities */
-.flex {
-  display: flex;
-}
-
-.flex-1 {
-  flex: 1 1 0%;
-}
-
-.items-start {
-  align-items: flex-start;
-}
-
 /* shadcn/Tailwind integration helper */
 .lab-bg::before {
   overflow: hidden;
   max-width: 100vw;
   max-height: 100vh;
   box-sizing: border-box;
-}
-
-.items-center {
-  align-items: center;
-}
-
-.justify-between {
-  justify-content: space-between;
-}
-
-/* Text Utilities */
-.text-4xl {
-  font-size: 2.25rem;
-  line-height: 2.5rem;
-}
-
-.text-sm {
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-}
-
-.font-bold {
-  font-weight: 700;
-}
-
-.rounded {
-  border-radius: var(--radius-sm);
-}
-
-/* Sizing */
-.w-5 {
-  width: 1.25rem;
-}
-
-.h-5 {
-  height: 1.25rem;
-}
-
-/* Cursor */
-.cursor-pointer {
-  cursor: pointer;
-}
-
-/* Padding */
-.p-8 {
-  padding: 2rem;
-}
-
-.px-4 {
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-
-.py-2 {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-}
-
-/* Container */
-.min-h-screen {
-  min-height: 100vh;
-}
-
-.max-w-5xl {
-  max-width: 64rem;
-}
-
-.max-w-6xl {
-  max-width: 72rem;
-}
-
-.mx-auto {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* List Utilities */
-.list-disc {
-  list-style-type: disc;
-}
-
-.list-inside {
-  list-style-position: inside;
 }
 html {
   /* Prevent horizontal layout shift when scrollbars appear */
@@ -371,34 +163,62 @@ html {
   animation: pulse-ring 1.5s ease-out infinite;
 }
 
-
-/* Base styling overrides to ensure dark theme */
-body {
-  background: var(--color-bg);
-  color: var(--color-text);
-  font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
-  min-height: 100vh;
-}
-
-a {
-  color: var(--color-text-secondary);
-  text-decoration: none;
-}
-
-.card {
-  background: var(--color-bg-secondary, #1a1a1a);
+/* Custom component styles (non-Tailwind) */
+.ws-card {
+  background: var(--color-bg-secondary);
   border: 1px solid var(--color-border);
   border-radius: 0.75rem;
   padding: 1rem;
-  box-shadow: var(--shadow-md, 0 4px 6px -1px rgba(0,0,0,0.4));
+  box-shadow: var(--shadow-md);
 }
 
-.text-secondary { color: var(--color-text-secondary); }
-.btn {
+.ws-btn {
   display: inline-block;
-  background: var(--color-primary, #20c37a);
+  background: var(--color-primary);
   color: #0a0a0a;
   padding: 0.5rem 0.9rem;
   border-radius: 0.5rem;
   font-weight: 600;
+}
+
+/* Navigation dropdown animation */
+@keyframes dropdown-enter {
+  0% {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-dropdown {
+  animation: dropdown-enter 0.15s ease-out forwards;
+}
+
+/* Mobile menu slide animation */
+@keyframes slide-down {
+  0% {
+    opacity: 0;
+    max-height: 0;
+  }
+  100% {
+    opacity: 1;
+    max-height: 500px;
+  }
+}
+
+.animate-slide-down {
+  animation: slide-down 0.2s ease-out forwards;
+}
+
+/* Active nav indicator glow */
+.nav-active-glow {
+  box-shadow: 0 0 12px rgba(57, 255, 20, 0.3);
+}
+
+/* Keyboard shortcut styling */
+kbd {
+  font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Monaco, Consolas, monospace;
 }

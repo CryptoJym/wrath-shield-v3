@@ -9,9 +9,11 @@
  * - Recent routed items
  * - Pending by target (finance/legal/pm/ea)
  * - Classification logs and accuracy
+ * - Temporal Memory Map (Entropy Compression)
  */
 
 import { useState, useEffect, useCallback } from 'react';
+import { TemporalMap } from './TemporalMap';
 
 // ============================================================================
 // Types
@@ -70,6 +72,7 @@ interface CommsStatus {
   pending_by_target: Record<RoutingTarget, number>;
   pipeline_metrics: PipelineMetrics;
   recent_logs: PipelineLog[];
+  temporal_map?: Record<string, number>;
 }
 
 // ============================================================================
@@ -305,9 +308,8 @@ function PipelineLogsCard({ logs }: { logs: PipelineLog[] }) {
         {logs.map((log) => (
           <div
             key={log.id}
-            className={`p-2 rounded text-xs ${
-              log.success ? 'bg-slate-800/30 text-slate-400' : 'bg-red-900/20 text-red-300'
-            }`}
+            className={`p-2 rounded text-xs ${log.success ? 'bg-slate-800/30 text-slate-400' : 'bg-red-900/20 text-red-300'
+              }`}
           >
             <div className="flex items-center justify-between gap-2">
               <div className="flex items-center gap-2">
@@ -405,6 +407,11 @@ export function CommsDashboard() {
           Refresh
         </button>
       </div>
+
+      {/* Temporal Map */}
+      {status.temporal_map && (
+        <TemporalMap data={status.temporal_map} />
+      )}
 
       {/* Grid layout */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">

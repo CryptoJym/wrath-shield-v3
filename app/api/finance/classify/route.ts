@@ -23,9 +23,11 @@ export async function POST(req: Request) {
   const body = await req.json().catch(() => ({}));
   const ids: string[] = body?.ids || [];
   if (!ids.length) return NextResponse.json({ error: 'ids required' }, { status: 400 });
+  // Support both XAI_API_KEY and XAI_API_KEY_DIRECT
   const openaiKey = process.env.OPENAI_API_KEY;
-  const apiKey = openaiKey || process.env.OPENROUTER_API_KEY || process.env.XAI_API_KEY;
-  if (!apiKey) return NextResponse.json({ error: 'OPENAI_API_KEY or OPENROUTER_API_KEY or XAI_API_KEY missing' }, { status: 500 });
+  const xaiKey = process.env.XAI_API_KEY || process.env.XAI_API_KEY_DIRECT;
+  const apiKey = openaiKey || process.env.OPENROUTER_API_KEY || xaiKey;
+  if (!apiKey) return NextResponse.json({ error: 'OPENAI_API_KEY or OPENROUTER_API_KEY or XAI_API_KEY/XAI_API_KEY_DIRECT missing' }, { status: 500 });
   const useOpenAI = !!openaiKey;
   const useOpenRouter = !useOpenAI && !!process.env.OPENROUTER_API_KEY;
 

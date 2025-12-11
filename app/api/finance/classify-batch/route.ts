@@ -31,10 +31,12 @@ export async function POST(req: Request) {
   const body = await req.json().catch(() => ({}));
   const limit = Math.min(body?.limit || 50, 100); // Max 100 per batch
 
+  // Support both XAI_API_KEY and XAI_API_KEY_DIRECT
   const openaiKey = process.env.OPENAI_API_KEY;
-  const apiKey = openaiKey || process.env.OPENROUTER_API_KEY || process.env.XAI_API_KEY;
+  const xaiKey = process.env.XAI_API_KEY || process.env.XAI_API_KEY_DIRECT;
+  const apiKey = openaiKey || process.env.OPENROUTER_API_KEY || xaiKey;
   if (!apiKey) {
-    return NextResponse.json({ error: 'OPENAI_API_KEY or OPENROUTER_API_KEY or XAI_API_KEY missing' }, { status: 500 });
+    return NextResponse.json({ error: 'OPENAI_API_KEY or OPENROUTER_API_KEY or XAI_API_KEY/XAI_API_KEY_DIRECT missing' }, { status: 500 });
   }
   const useOpenAI = !!openaiKey;
   const useOpenRouter = !useOpenAI && !!process.env.OPENROUTER_API_KEY;

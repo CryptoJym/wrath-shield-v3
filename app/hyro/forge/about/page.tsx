@@ -118,8 +118,18 @@ export default function ForgeAboutPage() {
 
       {/* Footer */}
       <footer className="border-t border-purple-500/20 bg-black/20 py-6">
-        <div className="max-w-7xl mx-auto px-4 text-center text-purple-300/60 text-sm">
-          HYRO FORGE - Evidence-Based Educational Gamification Platform
+        <div className="max-w-7xl mx-auto px-4 text-center">
+          <div className="text-purple-300/60 text-sm mb-3">
+            HYRO FORGE - Evidence-Based Educational Gamification Platform
+          </div>
+          <Link
+            href="/hyro/forge/architecture"
+            className="inline-flex items-center gap-2 text-sm text-indigo-400 hover:text-indigo-300 transition"
+          >
+            <span>🏗️</span>
+            <span>View Technical Architecture & System Design</span>
+            <span>→</span>
+          </Link>
         </div>
       </footer>
     </div>

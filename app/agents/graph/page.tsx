@@ -3,7 +3,7 @@ export const dynamic = "force-dynamic";
 
 import React, { useEffect, useMemo, useState, useRef, useCallback } from 'react';
 import Link from 'next/link';
-import { RefreshCw, AlertCircle, CheckCircle, ArrowLeft, ZoomIn, ZoomOut, Crosshair, Info, Move, Activity } from 'lucide-react';
+import { RefreshCw, AlertCircle, CheckCircle, ArrowLeft, ZoomIn, ZoomOut, Crosshair, Info, Move, Activity, Gauge, TrendingUp, Clock, Zap, BarChart2, Eye, EyeOff } from 'lucide-react';
 import { GraphLegend } from '@/components/agents/GraphLegend';
 import { AgentDetailPanel } from '@/components/agents/AgentDetailPanel';
 import { GraphFilters } from '@/components/agents/GraphFilters';
@@ -37,6 +37,11 @@ interface GraphEdge {
   errorLog?: string;
   bandwidth?: number;
   volume?: number;
+  // Real-time metrics
+  latencyMs?: number;       // Current latency in milliseconds
+  throughputKBps?: number;  // Throughput in KB/s
+  errorRate?: number;       // Error rate 0-1
+  requestCount?: number;    // Requests in last minute
 }
 
 interface AgentGraphData {
@@ -49,6 +54,16 @@ interface AgentGraphData {
     totalConnections: number;
     healthyConnections: number;
     activeDataFlows: number;
+  };
+  // Real-time system metrics
+  metrics?: {
+    avgLatencyMs: number;
+    totalThroughputKBps: number;
+    systemErrorRate: number;
+    activeConnections: number;
+    requestsPerMinute: number;
+    peakLatencyMs: number;
+    uptimePercent: number;
   };
 }
 
@@ -70,20 +85,29 @@ interface EdgeAudit {
 const fallbackGraphData: AgentGraphData = {
   timestamp: new Date().toISOString(),
   nodes: [
-    { id: "inbox", name: "Inbox", type: "mail", status: "green", lastSeen: new Date().toISOString(), hp: 100, mp: 100, openItems: 3, position: { x: 0, y: 0 }, capabilities: ["Email/iMessage ingest", "Classification"], link: "/inbox" },
-    { id: "finance", name: "Finance", type: "coins", status: "green", lastSeen: new Date().toISOString(), hp: 95, mp: 90, openItems: 2, position: { x: 1, y: -1 }, capabilities: ["Transaction ingest", "Context enrichment"], link: "/finance" },
-    { id: "pm", name: "PM", type: "clipboard-list", status: "yellow", lastSeen: new Date().toISOString(), hp: 80, mp: 70, openItems: 0, position: { x: 2, y: 0 }, capabilities: ["Motion↔GitHub sync", "Project inventory"], link: "/pm" },
-    { id: "legal", name: "Legal", type: "gavel", status: "green", lastSeen: new Date().toISOString(), hp: 90, mp: 85, openItems: 1, position: { x: 1, y: 1 }, capabilities: ["MyCase ingest", "Strategic brief"], link: "/legal/actions" },
-    { id: "grok", name: "Research Hub", type: "brain", status: "green", lastSeen: new Date().toISOString(), hp: 100, mp: 100, openItems: 0, position: { x: 3, y: 0 }, capabilities: ["LLM routing", "Action proposals"], link: "/chat" },
+    { id: "inbox", name: "Inbox", type: "mail", status: "green", lastSeen: new Date().toISOString(), hp: 100, mp: 100, openItems: 3, position: { x: 0, y: 0 }, capabilities: ["Email/iMessage ingest", "Classification"], link: "/inbox", nodeType: 'agent' },
+    { id: "finance", name: "Finance", type: "coins", status: "green", lastSeen: new Date().toISOString(), hp: 95, mp: 90, openItems: 2, position: { x: 1, y: -1 }, capabilities: ["Transaction ingest", "Context enrichment"], link: "/finance", nodeType: 'agent' },
+    { id: "pm", name: "PM", type: "clipboard-list", status: "yellow", lastSeen: new Date().toISOString(), hp: 80, mp: 70, openItems: 0, position: { x: 2, y: 0 }, capabilities: ["Motion↔GitHub sync", "Project inventory"], link: "/pm", nodeType: 'agent' },
+    { id: "legal", name: "Legal", type: "gavel", status: "green", lastSeen: new Date().toISOString(), hp: 90, mp: 85, openItems: 1, position: { x: 1, y: 1 }, capabilities: ["MyCase ingest", "Strategic brief"], link: "/legal/actions", nodeType: 'agent' },
+    { id: "grok", name: "Research Hub", type: "brain", status: "green", lastSeen: new Date().toISOString(), hp: 100, mp: 100, openItems: 0, position: { x: 3, y: 0 }, capabilities: ["LLM routing", "Action proposals"], link: "/chat", nodeType: 'llm' },
   ],
   edges: [
-    { from: "inbox", to: "finance", type: "data", healthy: true, label: "txns" },
-    { from: "inbox", to: "pm", type: "data", healthy: true, label: "tasks" },
-    { from: "inbox", to: "legal", type: "data", healthy: true, label: "briefs" },
-    { from: "inbox", to: "grok", type: "control", healthy: true, label: "routing" },
-    { from: "pm", to: "grok", type: "control", healthy: true, label: "planning" },
-    { from: "finance", to: "grok", type: "control", healthy: true, label: "classify" },
+    { from: "inbox", to: "finance", type: "data", healthy: true, label: "txns", latencyMs: 45, throughputKBps: 320, errorRate: 0.001, requestCount: 156 },
+    { from: "inbox", to: "pm", type: "data", healthy: true, label: "tasks", latencyMs: 78, throughputKBps: 180, errorRate: 0.003, requestCount: 89 },
+    { from: "inbox", to: "legal", type: "data", healthy: true, label: "briefs", latencyMs: 120, throughputKBps: 95, errorRate: 0.008, requestCount: 34 },
+    { from: "inbox", to: "grok", type: "control", healthy: true, label: "routing", latencyMs: 32, throughputKBps: 512, errorRate: 0.0005, requestCount: 423 },
+    { from: "pm", to: "grok", type: "control", healthy: true, label: "planning", latencyMs: 210, throughputKBps: 145, errorRate: 0.015, requestCount: 67 },
+    { from: "finance", to: "grok", type: "control", healthy: true, label: "classify", latencyMs: 56, throughputKBps: 278, errorRate: 0.002, requestCount: 198 },
   ],
+  metrics: {
+    avgLatencyMs: 90,
+    totalThroughputKBps: 1530,
+    systemErrorRate: 0.005,
+    activeConnections: 6,
+    requestsPerMinute: 967,
+    peakLatencyMs: 210,
+    uptimePercent: 99.94,
+  },
 };
 
 const statusColor = {
@@ -130,6 +154,8 @@ export default function AgentGraphPage() {
   const [selectedNode, setSelectedNode] = useState<GraphNode | null>(null);
   const [statusFilter, setStatusFilter] = useState<'all' | 'green' | 'yellow' | 'red'>('all');
   const [typeFilter, setTypeFilter] = useState<'all' | string>('all');
+  const [showMetrics, setShowMetrics] = useState(true);
+  const [metricsMode, setMetricsMode] = useState<'throughput' | 'latency' | 'errors'>('throughput');
 
   // SVG viewBox state for proper pan/zoom
   const [viewBox, setViewBox] = useState({ x: 0, y: 0, w: SVG_WIDTH, h: SVG_HEIGHT });
@@ -379,6 +405,7 @@ export default function AgentGraphPage() {
         <div className="flex-1 relative border border-white/5 bg-slate-900/20 rounded-2xl overflow-hidden shadow-2xl backdrop-blur-sm">
           {/* Controls Overlay */}
           <div className="absolute top-4 right-4 flex flex-col gap-2 z-20">
+            {/* Zoom Controls */}
             <div className="bg-slate-900/80 backdrop-blur-md border border-white/10 rounded-lg p-1 flex flex-col gap-1 shadow-xl">
               <button onClick={zoomIn} className="p-2 hover:bg-white/10 rounded-md text-slate-400 hover:text-white transition-colors" title="Zoom In">
                 <ZoomIn size={18} />
@@ -389,8 +416,122 @@ export default function AgentGraphPage() {
               <button onClick={resetView} className="p-2 hover:bg-white/10 rounded-md text-slate-400 hover:text-white transition-colors" title="Reset View">
                 <Crosshair size={18} />
               </button>
+              <div className="h-px bg-white/10 my-1"></div>
+              <button
+                onClick={() => setShowMetrics(!showMetrics)}
+                className={`p-2 rounded-md transition-colors ${showMetrics ? 'bg-cyan-500/20 text-cyan-400' : 'text-slate-400 hover:text-white hover:bg-white/10'}`}
+                title={showMetrics ? "Hide Metrics" : "Show Metrics"}
+              >
+                {showMetrics ? <Eye size={18} /> : <EyeOff size={18} />}
+              </button>
             </div>
+
+            {/* Metrics Mode Selector */}
+            {showMetrics && (
+              <div className="bg-slate-900/80 backdrop-blur-md border border-white/10 rounded-lg p-1 flex flex-col gap-1 shadow-xl">
+                <button
+                  onClick={() => setMetricsMode('throughput')}
+                  className={`p-2 rounded-md transition-colors ${metricsMode === 'throughput' ? 'bg-emerald-500/20 text-emerald-400' : 'text-slate-400 hover:text-white hover:bg-white/10'}`}
+                  title="Throughput View"
+                >
+                  <TrendingUp size={18} />
+                </button>
+                <button
+                  onClick={() => setMetricsMode('latency')}
+                  className={`p-2 rounded-md transition-colors ${metricsMode === 'latency' ? 'bg-amber-500/20 text-amber-400' : 'text-slate-400 hover:text-white hover:bg-white/10'}`}
+                  title="Latency View"
+                >
+                  <Clock size={18} />
+                </button>
+                <button
+                  onClick={() => setMetricsMode('errors')}
+                  className={`p-2 rounded-md transition-colors ${metricsMode === 'errors' ? 'bg-red-500/20 text-red-400' : 'text-slate-400 hover:text-white hover:bg-white/10'}`}
+                  title="Error Rate View"
+                >
+                  <AlertCircle size={18} />
+                </button>
+              </div>
+            )}
           </div>
+
+          {/* Real-Time Metrics Panel (Top Left) */}
+          {showMetrics && (
+            <div className="absolute top-4 left-4 z-20">
+              <div className="bg-slate-900/90 backdrop-blur-md border border-white/10 rounded-xl p-4 shadow-xl min-w-[200px]">
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider flex items-center gap-2">
+                    <Gauge size={14} className="text-cyan-400" />
+                    Live Metrics
+                  </h3>
+                  <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
+                </div>
+
+                <div className="space-y-3">
+                  {/* Latency */}
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs text-slate-400 flex items-center gap-1.5">
+                      <Clock size={12} /> Avg Latency
+                    </span>
+                    <span className={`text-sm font-mono font-bold ${
+                      (data.metrics?.avgLatencyMs || 45) < 100 ? 'text-emerald-400' :
+                      (data.metrics?.avgLatencyMs || 45) < 500 ? 'text-amber-400' : 'text-red-400'
+                    }`}>
+                      {data.metrics?.avgLatencyMs || 45}ms
+                    </span>
+                  </div>
+
+                  {/* Throughput */}
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs text-slate-400 flex items-center gap-1.5">
+                      <TrendingUp size={12} /> Throughput
+                    </span>
+                    <span className="text-sm font-mono font-bold text-cyan-400">
+                      {((data.metrics?.totalThroughputKBps || 256) / 1000).toFixed(1)} MB/s
+                    </span>
+                  </div>
+
+                  {/* Error Rate */}
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs text-slate-400 flex items-center gap-1.5">
+                      <AlertCircle size={12} /> Error Rate
+                    </span>
+                    <span className={`text-sm font-mono font-bold ${
+                      (data.metrics?.systemErrorRate || 0.02) < 0.01 ? 'text-emerald-400' :
+                      (data.metrics?.systemErrorRate || 0.02) < 0.05 ? 'text-amber-400' : 'text-red-400'
+                    }`}>
+                      {((data.metrics?.systemErrorRate || 0.02) * 100).toFixed(2)}%
+                    </span>
+                  </div>
+
+                  {/* Requests/min */}
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs text-slate-400 flex items-center gap-1.5">
+                      <Zap size={12} /> Req/min
+                    </span>
+                    <span className="text-sm font-mono font-bold text-violet-400">
+                      {data.metrics?.requestsPerMinute || 1247}
+                    </span>
+                  </div>
+
+                  {/* Uptime */}
+                  <div className="pt-2 border-t border-white/5">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs text-slate-400">Uptime</span>
+                      <span className="text-sm font-mono font-bold text-emerald-400">
+                        {data.metrics?.uptimePercent || 99.97}%
+                      </span>
+                    </div>
+                    <div className="mt-1 h-1 bg-slate-700 rounded-full overflow-hidden">
+                      <div
+                        className="h-full bg-gradient-to-r from-emerald-500 to-cyan-500"
+                        style={{ width: `${data.metrics?.uptimePercent || 99.97}%` }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
 
           {/* Legend Overlay */}
           <div className="absolute bottom-4 left-4 z-20">
@@ -492,10 +633,36 @@ export default function AgentGraphPage() {
 
               const pathD = `M ${from.sx} ${from.sy} Q ${midX} ${midY} ${to.sx} ${to.sy}`;
 
-              // Get edge color based on type
-              const edgeStrokeColor = e.healthy
+              // Get edge color based on type and metrics mode
+              let edgeStrokeColor = e.healthy
                 ? edgeTypeColors[e.type] || edgeTypeColors.data
                 : '#ef4444';
+
+              // Adjust color based on metrics mode
+              if (showMetrics && e.healthy) {
+                if (metricsMode === 'latency') {
+                  const latency = e.latencyMs || 50;
+                  edgeStrokeColor = latency < 100 ? '#22c55e' : latency < 300 ? '#f59e0b' : '#ef4444';
+                } else if (metricsMode === 'errors') {
+                  const errorRate = e.errorRate || 0;
+                  edgeStrokeColor = errorRate < 0.01 ? '#22c55e' : errorRate < 0.05 ? '#f59e0b' : '#ef4444';
+                } else if (metricsMode === 'throughput') {
+                  const throughput = e.throughputKBps || 100;
+                  edgeStrokeColor = throughput > 500 ? '#22c55e' : throughput > 100 ? '#06b6d4' : '#6366f1';
+                }
+              }
+
+              // Calculate stroke width based on throughput (thicker = more data)
+              const baseWidth = 2;
+              const throughputWidth = showMetrics && metricsMode === 'throughput'
+                ? Math.max(1.5, Math.min(6, baseWidth + (e.throughputKBps || 100) / 200))
+                : baseWidth;
+
+              // Calculate animation speed based on latency (faster = lower latency)
+              const baseSpeed = 3;
+              const animSpeed = showMetrics && metricsMode === 'latency'
+                ? Math.max(0.5, Math.min(5, baseSpeed * (e.latencyMs || 50) / 100))
+                : Math.max(1, 4 - (e.bandwidth || 0) / 1000);
 
               // Different dash patterns for different edge types
               const dashArray =
@@ -504,31 +671,86 @@ export default function AgentGraphPage() {
                 e.type === 'llm' ? '2 2' :
                 'none';
 
+              // Particle size based on request count
+              const particleSize = showMetrics
+                ? Math.max(2, Math.min(5, 3 + (e.requestCount || 10) / 50))
+                : 3;
+
               return (
                 <g key={`${e.from}-${e.to}-${idx}`} className="group" onClick={() => setSelectedEdge(edgeAuditFor(e))}>
                   {/* Hover Hit Area */}
                   <path d={pathD} stroke="transparent" strokeWidth="20" fill="none" className="cursor-pointer" />
 
+                  {/* Glow effect for high throughput */}
+                  {showMetrics && metricsMode === 'throughput' && (e.throughputKBps || 100) > 300 && (
+                    <path
+                      d={pathD}
+                      stroke={edgeStrokeColor}
+                      strokeWidth={throughputWidth + 4}
+                      strokeOpacity={0.15}
+                      fill="none"
+                      filter="url(#glow)"
+                    />
+                  )}
+
                   {/* Base Line */}
                   <path
                     d={pathD}
                     stroke={edgeStrokeColor}
-                    strokeWidth="2"
-                    strokeOpacity={e.healthy ? 0.6 : 0.3}
+                    strokeWidth={throughputWidth}
+                    strokeOpacity={e.healthy ? 0.7 : 0.3}
                     fill="none"
                     strokeDasharray={dashArray}
+                    strokeLinecap="round"
                   />
 
                   {/* Animated Pulse (Data Packet) */}
                   {e.healthy && (
-                    <circle r="3" fill={edgeStrokeColor}>
-                      <animateMotion dur={`${Math.max(1, 4 - (e.bandwidth || 0) / 1000)}s`} repeatCount="indefinite" path={pathD}>
-                      </animateMotion>
+                    <circle r={particleSize} fill={edgeStrokeColor} filter={showMetrics ? 'url(#glow)' : undefined}>
+                      <animateMotion dur={`${animSpeed}s`} repeatCount="indefinite" path={pathD} />
                     </circle>
                   )}
 
-                  {/* Label (visible on hover or selection) */}
-                  {e.label && (
+                  {/* Second particle for high-throughput connections */}
+                  {e.healthy && showMetrics && (e.throughputKBps || 100) > 200 && (
+                    <circle r={particleSize * 0.7} fill={edgeStrokeColor} opacity={0.6}>
+                      <animateMotion dur={`${animSpeed}s`} repeatCount="indefinite" path={pathD} begin={`${animSpeed / 2}s`} />
+                    </circle>
+                  )}
+
+                  {/* Metrics badge on edge (when metrics mode is active) */}
+                  {showMetrics && (
+                    <foreignObject x={midX - 30} y={midY - 24} width={60} height={48} className="overflow-visible pointer-events-none">
+                      <div className="flex flex-col items-center gap-0.5">
+                        {metricsMode === 'latency' && (
+                          <span className={`px-1.5 py-0.5 rounded-full text-[9px] font-mono font-bold backdrop-blur-sm ${
+                            (e.latencyMs || 50) < 100 ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' :
+                            (e.latencyMs || 50) < 300 ? 'bg-amber-500/20 text-amber-400 border border-amber-500/30' :
+                            'bg-red-500/20 text-red-400 border border-red-500/30'
+                          }`}>
+                            {e.latencyMs || 50}ms
+                          </span>
+                        )}
+                        {metricsMode === 'throughput' && (
+                          <span className="px-1.5 py-0.5 rounded-full bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 text-[9px] font-mono font-bold backdrop-blur-sm">
+                            {((e.throughputKBps || 100) / 1000).toFixed(1)}MB/s
+                          </span>
+                        )}
+                        {metricsMode === 'errors' && (e.errorRate || 0) > 0 && (
+                          <span className={`px-1.5 py-0.5 rounded-full text-[9px] font-mono font-bold backdrop-blur-sm ${
+                            (e.errorRate || 0) < 0.01 ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' :
+                            (e.errorRate || 0) < 0.05 ? 'bg-amber-500/20 text-amber-400 border border-amber-500/30' :
+                            'bg-red-500/20 text-red-400 border border-red-500/30'
+                          }`}>
+                            {((e.errorRate || 0) * 100).toFixed(1)}%
+                          </span>
+                        )}
+                      </div>
+                    </foreignObject>
+                  )}
+
+                  {/* Label (visible when metrics mode is off) */}
+                  {!showMetrics && e.label && (
                     <foreignObject x={midX - 40} y={midY - 12} width={80} height={24} className="overflow-visible pointer-events-none">
                       <div className="flex justify-center">
                         <span className="px-2 py-0.5 rounded-full bg-slate-950/80 border border-white/10 text-[10px] text-slate-300 font-mono backdrop-blur-sm">

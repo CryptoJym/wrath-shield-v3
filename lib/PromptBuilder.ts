@@ -22,11 +22,56 @@ import { getAgent, getLifeCharter } from './life-os-config';
 ensureServerOnly('lib/PromptBuilder');
 
 /**
- * OpenRouter-compatible message format
+ * Cache control for Anthropic prompt caching (via OpenRouter)
+ * Limit of 4 breakpoints per request
+ */
+export interface CacheControl {
+  type: 'ephemeral';
+}
+
+/**
+ * Multipart content block for prompt caching
+ */
+export interface ContentBlock {
+  type: 'text';
+  text: string;
+  cache_control?: CacheControl;
+}
+
+/**
+ * OpenRouter-compatible message format with prompt caching support
+ *
+ * For Claude models via OpenRouter, use multipart content with cache_control
+ * breakpoints on large, stable content (system prompts, Life Charter context).
+ *
+ * @see https://openrouter.ai/docs/guides/best-practices/prompt-caching
  */
 export interface ChatMessage {
   role: 'system' | 'user' | 'assistant';
-  content: string;
+  /** Simple string content or multipart content blocks with cache control */
+  content: string | ContentBlock[];
+}
+
+/**
+ * Helper to create a cacheable message content block
+ */
+export function createCacheableContent(text: string, shouldCache: boolean = true): ContentBlock[] {
+  return [{
+    type: 'text',
+    text,
+    ...(shouldCache && { cache_control: { type: 'ephemeral' } }),
+  }];
+}
+
+/**
+ * Helper to merge multiple content blocks, optionally adding cache control to the last one
+ */
+export function mergeContentBlocks(blocks: Array<{ text: string; cache?: boolean }>): ContentBlock[] {
+  return blocks.map((block, index) => ({
+    type: 'text' as const,
+    text: block.text,
+    ...(block.cache && { cache_control: { type: 'ephemeral' as const } }),
+  }));
 }
 
 /**
@@ -36,6 +81,15 @@ export interface ConstructedPrompt {
   messages: ChatMessage[];
   temperature: number;
   max_tokens: number;
+  /**
+   * Enable Anthropic prompt caching for Claude models via OpenRouter.
+   * When enabled, system prompts with cache_control breakpoints will be cached
+   * for up to 5 minutes, reducing latency by up to 85% and costs for repeated calls.
+   *
+   * @default false - Must be explicitly enabled
+   * @see https://openrouter.ai/docs/guides/best-practices/prompt-caching
+   */
+  enablePromptCaching?: boolean;
   metadata: {
     date: string;
     has_whoop_data: boolean;

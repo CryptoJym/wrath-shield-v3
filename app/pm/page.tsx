@@ -11,7 +11,7 @@
  * - Repository organization with AI suggestions
  */
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import useSWR from 'swr';
 import {
@@ -295,7 +295,7 @@ function Toast({ message, type, onClose }: {
   );
 }
 
-export default function PMPage() {
+function PMPageContent() {
   const searchParams = useSearchParams();
   const tabParam = searchParams.get('tab');
 
@@ -2126,5 +2126,21 @@ function ProjectCard({
         )}
       </div>
     </div>
+  );
+}
+
+// Wrapper component with Suspense for useSearchParams
+export default function PMPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-slate-950 flex items-center justify-center">
+        <div className="flex items-center gap-2 text-slate-400">
+          <div className="w-6 h-6 border-2 border-slate-600 border-t-slate-400 rounded-full animate-spin" />
+          Loading PM Dashboard...
+        </div>
+      </div>
+    }>
+      <PMPageContent />
+    </Suspense>
   );
 }

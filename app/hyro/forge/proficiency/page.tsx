@@ -208,6 +208,8 @@ export default function ProficiencyPage() {
         {/* Content Views */}
         {viewMode === 'graph' || viewMode === 'synapse' ? (
           <StandardsGraph
+            standards={standards}
+            mastery={mastery}
             viewMode={viewMode === 'synapse' ? 'synapse' : 'standard'}
             onNodeClick={handleNodeClick}
           />
@@ -221,8 +223,8 @@ export default function ProficiencyPage() {
                     <p className="text-xs text-zinc-500 capitalize">{skill.stat_name.replace('_', ' ')}</p>
                   </div>
                   <div className={`px-2 py-1 rounded text-xs font-bold ${skill.proficiency_level >= 80 ? 'bg-emerald-900/30 text-emerald-400' :
-                      skill.proficiency_level >= 60 ? 'bg-amber-900/30 text-amber-400' :
-                        'bg-red-900/30 text-red-400'
+                    skill.proficiency_level >= 60 ? 'bg-amber-900/30 text-amber-400' :
+                      'bg-red-900/30 text-red-400'
                     }`}>
                     Lvl {skill.proficiency_level}
                   </div>

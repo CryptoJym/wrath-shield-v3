@@ -65,7 +65,7 @@
       "taxonomy_config": "/config/project-taxonomy.json"
     },
     {
-      "id": "agent.ea",
+      "id": "agent.comms",
       "name": "Inbox Steward",
       "role": "Comms Agent",
       "type": "domain",
@@ -82,6 +82,18 @@
       "avatar": "/assets/agents/comms.png",
       "status_endpoint": "/api/comms/status",
       "link": "/inbox"
+    },
+    {
+      "id": "agent.ea",
+      "name": "Executive Assistant",
+      "role": "Calendar & Scheduling Agent",
+      "type": "domain",
+      "domains": ["*"],
+      "tools": ["calendar.*", "task.*", "email.*", "graph.*"],
+      "system_prompt": "You are the Executive Assistant for James Brady. You manage:\n- Calendar scheduling and meeting coordination\n- Travel arrangements\n- Proactive follow-ups on tasks and emails\n- Daily agenda preparation\n\nYou work alongside Inbox Steward (agent.comms) who handles message classification and routing. You handle the scheduling and coordination layer.\n\nEscalate as PROPOSE for any meeting with external parties or schedule changes. AUTO_EXECUTE for internal calendar blocks and reminders.",
+      "max_context_tasks": 50,
+      "avatar": "/assets/agents/ea.png",
+      "status_endpoint": "/api/ea/status"
     },
     {
       "id": "agent.finance",
@@ -221,7 +233,7 @@
       "link": null
     },
     {
-      "id": "agent.hyro",
+      "id": "agent.hyro.education",
       "name": "Hyro Education Agent",
       "role": "Education & Development",
       "type": "personal",
@@ -276,7 +288,7 @@
       "link": null
     },
     {
-      "id": "agent.hyro",
+      "id": "agent.james.learning",
       "name": "Hyro Education",
       "role": "Learning & Research",
       "type": "support",
