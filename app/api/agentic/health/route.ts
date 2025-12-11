@@ -1,13 +1,14 @@
 import { NextResponse } from 'next/server';
 
 export async function GET() {
-  const base = process.env.AGENTIC_GROK_URL || 'http://localhost:8001';
-  try {
-    const r = await fetch(`${base}/api/agentic/health`, { cache: 'no-store' });
-    const data = await r.json();
-    return NextResponse.json(data);
-  } catch (e: any) {
-    return NextResponse.json({ status: 'unavailable', error: String(e) }, { status: 503 });
-  }
+  return NextResponse.json(
+    {
+      status: 'deprecated',
+      message: 'The agentic-grok service has been archived and this endpoint is no longer available.',
+      deprecated_at: '2024-11-01',
+      alternative: 'Please use /api/cortex/health for system health checks or /api/agentic/status for agentic action status.',
+    },
+    { status: 410 }
+  );
 }
 

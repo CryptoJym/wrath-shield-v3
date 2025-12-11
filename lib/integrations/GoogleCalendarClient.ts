@@ -12,6 +12,7 @@
  *    - GOOGLE_REFRESH_TOKEN (for OAuth)
  *    OR
  *    - GOOGLE_SERVICE_ACCOUNT_JSON (for service account)
+ *    - DEFAULT_TIMEZONE (optional, defaults to 'America/Los_Angeles')
  *
  * Documentation:
  * - https://developers.google.com/calendar/api/v3/reference
@@ -37,8 +38,11 @@ export interface CalendarEvent {
 export class GoogleCalendarClient {
   private calendar: calendar_v3.Calendar | null = null;
   private auth: OAuth2Client | null = null;
+  private timeZone: string;
 
-  constructor() {
+  constructor(timeZone?: string) {
+    // Fallback chain: parameter → env var → default
+    this.timeZone = timeZone || process.env.DEFAULT_TIMEZONE || 'America/Los_Angeles';
     this.initializeAuth();
   }
 
@@ -140,11 +144,11 @@ export class GoogleCalendarClient {
       location: event.location,
       start: {
         dateTime: event.start.toISOString(),
-        timeZone: 'America/Los_Angeles', // TODO: Make configurable
+        timeZone: this.timeZone,
       },
       end: {
         dateTime: event.end.toISOString(),
-        timeZone: 'America/Los_Angeles',
+        timeZone: this.timeZone,
       },
       attendees: event.attendees?.map(email => ({ email })),
       status: event.status || 'confirmed',
@@ -178,13 +182,13 @@ export class GoogleCalendarClient {
     if (updates.start) {
       googleEvent.start = {
         dateTime: updates.start.toISOString(),
-        timeZone: 'America/Los_Angeles',
+        timeZone: this.timeZone,
       };
     }
     if (updates.end) {
       googleEvent.end = {
         dateTime: updates.end.toISOString(),
-        timeZone: 'America/Los_Angeles',
+        timeZone: this.timeZone,
       };
     }
     if (updates.attendees) {
@@ -327,9 +331,9 @@ export class GoogleCalendarClient {
 // Singleton instance
 let googleCalendarClient: GoogleCalendarClient | null = null;
 
-export function getGoogleCalendarClient(): GoogleCalendarClient {
+export function getGoogleCalendarClient(timeZone?: string): GoogleCalendarClient {
   if (!googleCalendarClient) {
-    googleCalendarClient = new GoogleCalendarClient();
+    googleCalendarClient = new GoogleCalendarClient(timeZone);
   }
   return googleCalendarClient;
 }

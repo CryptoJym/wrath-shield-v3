@@ -175,12 +175,14 @@ export class SynthesisLoop {
       console.log(`[SynthesisLoop] Retrieved ${events.length} unprocessed events`);
 
       // 3. Get existing low-confidence tasks needing refinement
-      // TODO: Implement task storage and retrieval
-      const lowConfidenceTasks: UnifiedTask[] = []; // Placeholder
+      const { taskStore } = await import('./task-store');
+      const lowConfidenceTasks = await taskStore.getTasksNeedingRefinement();
+      console.log(`[SynthesisLoop] Retrieved ${lowConfidenceTasks.length} tasks needing refinement`);
 
       // 4. Get patterns from storage
-      // TODO: Implement pattern storage and retrieval
-      const patterns: SynthesisPattern[] = []; // Placeholder
+      const { getRelevantPatterns } = await import('./pattern-learner');
+      const patterns = await getRelevantPatterns(events);
+      console.log(`[SynthesisLoop] Retrieved ${patterns.length} relevant patterns`);
 
       // 5. Build synthesis prompt
       const prompt = this.buildSynthesisPrompt(events, lowConfidenceTasks, patterns);

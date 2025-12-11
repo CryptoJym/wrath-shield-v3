@@ -119,8 +119,11 @@ async function startSynthesisLoop(config: {
 
   console.log(`[Cortex] Starting Synthesis Loop (interval: ${config.intervalMs}ms, min events: ${config.minEventsForSynthesis})`);
 
-  // TODO: Implement actual synthesis loop
-  // For now, we'll just set up a timer that logs status
+  // Import synthesis loop dynamically to avoid circular dependencies
+  const { getSynthesisLoop } = await import('./synthesis-loop');
+  const { taskStore, applySynthesisResult } = await import('./task-store');
+  const { learnFromSynthesis } = await import('./pattern-learner');
+
   const runSynthesis = async () => {
     try {
       const workingMemory = getWorkingMemory();
@@ -128,9 +131,20 @@ async function startSynthesisLoop(config: {
 
       if (stats.unprocessedEvents >= config.minEventsForSynthesis) {
         console.log(`[Cortex] Synthesis triggered: ${stats.unprocessedEvents} unprocessed events`);
-        // TODO: Call synthesis engine
-        // const synthesisEngine = getSynthesisEngine();
-        // await synthesisEngine.processBatch();
+
+        // Get synthesis loop and run a synthesis pass
+        const synthesisLoop = getSynthesisLoop();
+        const result = await synthesisLoop.runSynthesisPass();
+
+        if (result) {
+          // Apply synthesis result to database
+          const summary = await applySynthesisResult(result, taskStore);
+          console.log(`[Cortex] ${summary.summary}`);
+
+          // Learn from synthesis patterns
+          await learnFromSynthesis(result);
+          console.log(`[Cortex] Learned ${result.new_patterns.length} new patterns`);
+        }
       } else {
         console.log(`[Cortex] Synthesis skipped: only ${stats.unprocessedEvents} unprocessed events (min: ${config.minEventsForSynthesis})`);
       }
