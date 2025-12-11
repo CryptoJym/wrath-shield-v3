@@ -770,9 +770,6 @@ function SystemOverviewView() {
               <div className="text-xs text-indigo-400/60 font-mono">
                 {system.files.join(', ')}
               </div>
-              {system.note && (
-                <div className="text-xs text-yellow-400/80 mt-1">Note: {system.note}</div>
-              )}
             </div>
           ))}
         </div>

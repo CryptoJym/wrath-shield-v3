@@ -294,9 +294,28 @@ describe('Agent Registry', () => {
       });
 
       it('should handle Hyro API failure gracefully', async () => {
-        (global.fetch as jest.Mock).mockImplementationOnce(() =>
-          Promise.reject(new Error('Network error'))
-        );
+        (global.fetch as jest.Mock).mockImplementation((url: string) => {
+          if (url.includes('/api/hyro/status')) {
+            return Promise.reject(new Error('Network error'));
+          }
+          if (url.includes('/api/ea/status')) {
+            return Promise.resolve({
+              ok: true,
+              json: () => Promise.resolve({
+                stats: { upcomingEvents: 5, todayEvents: 2 },
+              }),
+            });
+          }
+          if (url.includes('/api/db/status')) {
+            return Promise.resolve({
+              ok: true,
+              json: () => Promise.resolve({
+                eeg_tokens: { has_data: true, row_count: 500 },
+              }),
+            });
+          }
+          return Promise.reject(new Error('Not found'));
+        });
 
         const agents = await getAllAgentsStatus();
 
