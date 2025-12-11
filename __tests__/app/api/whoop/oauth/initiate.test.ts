@@ -18,6 +18,7 @@ jest.mock('@/lib/config', () => ({
     whoop: {
       clientId: 'test-client-id',
       clientSecret: 'test-client-secret',
+      redirectUri: 'http://localhost:3000/api/whoop/oauth/callback',
     },
   })),
 }));
@@ -61,12 +62,13 @@ describe('WHOOP OAuth Initiate Route', () => {
       expect(params.get('client_id')).toBe('test-client-id');
       expect(params.get('redirect_uri')).toBe('http://localhost:3000/api/whoop/oauth/callback');
       expect(params.get('response_type')).toBe('code');
-      expect(params.get('scope')).toBe('read:recovery read:cycles read:sleep');
+      expect(params.get('scope')).toBe('read:recovery read:cycles read:sleep offline');
       expect(params.get('state')).toBeTruthy();
       expect(params.get('state')!.length).toBeGreaterThan(20); // Base64url encoded random bytes
     });
 
-    it('should use https protocol in production', async () => {
+    it('should use configured redirect_uri regardless of request URL', async () => {
+      // The route uses config.whoop.redirectUri which is set statically
       const req = mockRequest('https://app.example.com/api/whoop/oauth/initiate', {
         'x-forwarded-proto': 'https',
         host: 'app.example.com',
@@ -76,7 +78,8 @@ describe('WHOOP OAuth Initiate Route', () => {
       const location = response.headers.get('location');
       const authUrl = new URL(location!);
 
-      expect(authUrl.searchParams.get('redirect_uri')).toBe('https://app.example.com/api/whoop/oauth/callback');
+      // Redirect URI comes from config, not request URL
+      expect(authUrl.searchParams.get('redirect_uri')).toBe('http://localhost:3000/api/whoop/oauth/callback');
     });
 
     it('should generate unique state parameter for each request', async () => {

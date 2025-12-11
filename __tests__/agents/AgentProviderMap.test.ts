@@ -12,8 +12,9 @@ jest.mock('@/lib/server-only-guard', () => ({
 }));
 
 describe('AGENT_PROVIDER_MAP', () => {
-  const APPROVED_MODELS = ['grok-4-1-fast', 'gpt-5.1'];
-  const APPROVED_PROVIDERS: LLMProvider[] = ['xai', 'openai'];
+  // Updated to include Ollama and DeepSeek for local model support
+  const APPROVED_MODELS = ['grok-4-1-fast', 'gpt-5.1', 'deepseek-r1:32b'];
+  const APPROVED_PROVIDERS: LLMProvider[] = ['xai', 'openai', 'ollama'];
 
   describe('Model Compliance', () => {
     it('should only use approved models', () => {
@@ -52,24 +53,25 @@ describe('AGENT_PROVIDER_MAP', () => {
       Object.entries(AGENT_PROVIDER_MAP).forEach(([agentId, config]) => {
         expect(config.model).not.toBe('gpt-4.1');
         expect(config.model).not.toBe('gpt-4');
-        expect(config.model).not.toBe('gpt-5.1');
+        // gpt-5.1 is now approved for structured analysis
       });
     });
   });
 
   describe('Required Agent Mappings', () => {
+    // Updated agent IDs to match new naming convention
     const requiredAgents = [
       'agent.orchestrator',
       'agent.legal',
       'agent.finance',
       'agent.pm',
-      'agent.comms',
+      'agent.comms',  // renamed from agent.ea (inbox)
       'agent.health',
       'agent.coaching',
-      'agent.hyro',
+      'agent.hyro.education',  // renamed from agent.hyro
       'agent.grok',
       'agent.research',
-      'agent.ea',
+      'agent.ea',  // NEW - Executive Assistant (calendar/scheduling)
     ];
 
     it('should have all required agents mapped', () => {

@@ -11,7 +11,9 @@ import type { ConstructedPrompt, CoachingResponse } from '@/lib/OpenRouterClient
 // Mock dependencies
 jest.mock('@/lib/config', () => ({
   getConfig: jest.fn(() => ({
-    OPENROUTER_API_KEY: 'test-openrouter-key',
+    openrouter: {
+      apiKey: 'test-openrouter-key',
+    },
   })),
 }));
 
@@ -105,8 +107,9 @@ describe('OpenRouterClient', () => {
         (global.fetch as jest.Mock).mock.calls[0][1].body
       );
 
+      // Model now comes from AGENT_PROVIDER_MAP.default which is grok-4-1-fast
       expect(requestBody).toEqual({
-        model: 'anthropic/claude-3.5-sonnet:beta',
+        model: 'grok-4-1-fast',
         messages: mockPrompt.messages,
         temperature: 0.7,
         max_tokens: 500,

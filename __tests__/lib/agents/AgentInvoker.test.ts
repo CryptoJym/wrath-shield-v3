@@ -153,28 +153,28 @@ describe('AgentInvoker', () => {
   describe('AGENT_PROVIDER_MAP', () => {
     it('should have correct provider for orchestrator', () => {
       expect(AGENT_PROVIDER_MAP['agent.orchestrator']).toEqual({
-        provider: 'openrouter',
-        model: 'anthropic/claude-3.5-sonnet:beta',
+        provider: 'xai',
+        model: 'grok-4-1-fast',
       });
     });
 
     it('should have correct provider for legal agent', () => {
       expect(AGENT_PROVIDER_MAP['agent.legal']).toEqual({
         provider: 'xai',
-        model: 'grok-3',
+        model: 'grok-4-1-fast',
       });
     });
 
     it('should have correct provider for finance agent', () => {
       expect(AGENT_PROVIDER_MAP['agent.finance']).toEqual({
         provider: 'openai',
-        model: 'gpt-4.1',
+        model: 'gpt-5.1',
       });
     });
 
     it('should have a default provider', () => {
       expect(AGENT_PROVIDER_MAP['default']).toBeDefined();
-      expect(AGENT_PROVIDER_MAP['default'].provider).toBe('openrouter');
+      expect(AGENT_PROVIDER_MAP['default'].provider).toBe('xai');
     });
   });
 

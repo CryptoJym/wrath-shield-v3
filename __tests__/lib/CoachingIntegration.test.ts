@@ -29,7 +29,9 @@ jest.mock('@/lib/MemoryWrapper', () => ({
 
 jest.mock('@/lib/config', () => ({
   getConfig: jest.fn(() => ({
-    OPENROUTER_API_KEY: 'test-openrouter-key',
+    openrouter: {
+      apiKey: 'test-openrouter-key',
+    },
   })),
 }));
 

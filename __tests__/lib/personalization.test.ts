@@ -11,6 +11,9 @@ import {
 jest.mock('@/lib/server-only-guard', () => ({ ensureServerOnly: jest.fn() }));
 jest.mock('@/lib/config', () => ({ getConfig: jest.fn(() => ({ OPENROUTER_API_KEY: 'test-openrouter-key' })) }));
 
+// Set environment variable for DirectLLMClients
+process.env.OPENROUTER_API_KEY = 'test-openrouter-key';
+
 // Mock global fetch used by OpenRouterClient
 global.fetch = jest.fn();
 

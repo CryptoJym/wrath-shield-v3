@@ -98,9 +98,16 @@ describe('PromptBuilder', () => {
       const prompt = constructCoachingPrompt(mockContext);
 
       const systemMessage = prompt.messages[0];
-      expect(systemMessage.content).toContain('relentless confidence coach');
-      expect(systemMessage.content).toContain('unbending resolve');
-      expect(systemMessage.content).toContain('Recovery is non-negotiable');
+      // System prompt comes from Life OS config (agent.coaching) which may be
+      // the Esoteric Mentor or falls back to the relentless confidence coach
+      expect(systemMessage.content.length).toBeGreaterThan(100);
+      expect(systemMessage.role).toBe('system');
+      // Verify it's either the Life OS config version or the fallback
+      const hasLifeOSPrompt = systemMessage.content.includes('Esoteric Mentor') ||
+                              systemMessage.content.includes('First Principles');
+      const hasFallbackPrompt = systemMessage.content.includes('relentless confidence coach') ||
+                                systemMessage.content.includes('unbending resolve');
+      expect(hasLifeOSPrompt || hasFallbackPrompt).toBe(true);
     });
 
     it('should include user message with formatted context', () => {

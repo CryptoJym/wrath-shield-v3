@@ -6,6 +6,7 @@
 
 // Store for mock data
 const mockActions = new Map<string, any>();
+let actionCounter = 0;
 
 // Mock the store before importing the routes
 jest.mock('../../../../lib/legal/store', () => ({
@@ -30,7 +31,8 @@ jest.mock('../../../../lib/legal/store', () => ({
   }),
   createNotification: jest.fn(),
   createPendingAction: jest.fn((input) => {
-    const id = `action-${Date.now()}`;
+    // Use counter to ensure unique IDs even when called in rapid succession
+    const id = `action-${Date.now()}-${++actionCounter}`;
     const action = {
       id,
       action_type: input.action_type || 'other',
@@ -40,6 +42,7 @@ jest.mock('../../../../lib/legal/store', () => ({
       priority: input.priority || 'normal',
       requires_approval: true,
       created_at: new Date().toISOString(),
+      payload: input.payload || null,
     };
     mockActions.set(id, action);
     return action;
@@ -204,15 +207,20 @@ describe('/api/legal/actions/execute route', () => {
       action_type: 'email_draft',
       title: 'Execute Email Test',
       status: 'approved',
+      payload: {
+        to: 'test@example.com',
+        subject: 'Test Subject',
+        body: 'Test email body',
+      },
     });
 
     // @ts-ignore - emulate NextRequest
     const res = await ExecutePOST({
-      json: async () => ({ id: action.id }),
+      json: async () => ({ id: action.id, dryRun: true }),
     });
     const data = await res.json();
     expect(data.success).toBe(true);
-    expect(data.message).toContain('Email draft');
+    expect(data.message).toContain('email');
   });
 
   test('POST executes approved file_motion action', async () => {

@@ -20,6 +20,7 @@ describe('PM Tasks API Route', () => {
     jest.clearAllMocks();
   });
 
+  // Note: Motion source was intentionally removed - only github and local sources are supported
   const mockTasks = [
     {
       id: 'task-1',
@@ -36,7 +37,7 @@ describe('PM Tasks API Route', () => {
       description: 'Code review needed',
       priority: 'medium',
       status: 'pending',
-      source: 'motion',
+      source: 'github',
       project_id: 'proj-2',
     },
     {
@@ -62,9 +63,9 @@ describe('PM Tasks API Route', () => {
       expect(data.ok).toBe(true);
       expect(data.count).toBe(3);
       expect(data.tasks).toEqual(mockTasks);
+      // Motion source removed - only github and local
       expect(data.sources).toMatchObject({
-        github: 1,
-        motion: 1,
+        github: 2,
         local: 1,
       });
     });
@@ -79,9 +80,9 @@ describe('PM Tasks API Route', () => {
       expect(data.ok).toBe(true);
       expect(data.count).toBe(0);
       expect(data.tasks).toEqual([]);
+      // Motion source removed - only github and local
       expect(data.sources).toMatchObject({
         github: 0,
-        motion: 0,
         local: 0,
       });
     });
@@ -99,10 +100,11 @@ describe('PM Tasks API Route', () => {
     });
 
     it('should count tasks by source correctly', async () => {
+      // Motion source removed - only github and local
       const tasksWithSameSources = [
         { ...mockTasks[0], source: 'github' },
         { ...mockTasks[1], source: 'github' },
-        { ...mockTasks[2], source: 'motion' },
+        { ...mockTasks[2], source: 'local' },
       ];
       getAllTasks.mockResolvedValue(tasksWithSameSources);
 
@@ -111,8 +113,7 @@ describe('PM Tasks API Route', () => {
       const data = await response.json();
 
       expect(data.sources.github).toBe(2);
-      expect(data.sources.motion).toBe(1);
-      expect(data.sources.local).toBe(0);
+      expect(data.sources.local).toBe(1);
     });
   });
 

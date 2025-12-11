@@ -191,9 +191,10 @@ describe('API Data Flow Integration', () => {
     });
 
     it('should provide tasks data with source breakdown', async () => {
+      // Note: Motion source was intentionally removed - only github and local
       mockPM.getAllTasks.mockResolvedValue([
         { id: '1', title: 'Task 1', source: 'github', status: 'pending' },
-        { id: '2', title: 'Task 2', source: 'motion', status: 'done' },
+        { id: '2', title: 'Task 2', source: 'local', status: 'done' },
       ]);
 
       const request = new NextRequest('http://localhost:3000/api/pm/tasks');
@@ -206,7 +207,6 @@ describe('API Data Flow Integration', () => {
         tasks: expect.any(Array),
         sources: {
           github: expect.any(Number),
-          motion: expect.any(Number),
           local: expect.any(Number),
         },
       });
