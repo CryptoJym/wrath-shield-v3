@@ -1,0 +1,162 @@
+[
+    {
+        "id": "K.RL.1",
+        "category": "Reading",
+        "domain": "Literature",
+        "description": "With prompting and support, ask and answer questions about key details in a text.",
+        "prerequisites": [],
+        "cluster": "Key Ideas and Details"
+    },
+    {
+        "id": "K.RL.2",
+        "category": "Reading",
+        "domain": "Literature",
+        "description": "With prompting and support, retell familiar stories, including key details.",
+        "prerequisites": ["K.RL.1"],
+        "cluster": "Key Ideas and Details"
+    },
+    {
+        "id": "K.RL.3",
+        "category": "Reading",
+        "domain": "Literature",
+        "description": "With prompting and support, identify characters, settings, and major events in a story.",
+        "prerequisites": ["K.RL.1"],
+        "cluster": "Key Ideas and Details"
+    },
+    {
+        "id": "K.RL.4",
+        "category": "Reading",
+        "domain": "Literature",
+        "description": "Ask and answer questions about unknown words in a text.",
+        "prerequisites": [],
+        "cluster": "Craft and Structure"
+    },
+    {
+        "id": "K.RL.9",
+        "category": "Reading",
+        "domain": "Literature",
+        "description": "With prompting and support, compare and contrast the adventures and experiences of characters in familiar stories.",
+        "prerequisites": ["K.RL.3"],
+        "cluster": "Integration of Knowledge and Ideas"
+    },
+    {
+        "id": "K.RI.1",
+        "category": "Reading",
+        "domain": "Informational Text",
+        "description": "With prompting and support, ask and answer questions about key details in a text.",
+        "prerequisites": [],
+        "cluster": "Key Ideas and Details"
+    },
+    {
+        "id": "K.RI.2",
+        "category": "Reading",
+        "domain": "Informational Text",
+        "description": "With prompting and support, identify the main topic and retell key details of a text.",
+        "prerequisites": ["K.RI.1"],
+        "cluster": "Key Ideas and Details"
+    },
+    {
+        "id": "K.RI.3",
+        "category": "Reading",
+        "domain": "Informational Text",
+        "description": "With prompting and support, describe the connection between two individuals, events, ideas, or pieces of information in a text.",
+        "prerequisites": ["K.RI.1"],
+        "cluster": "Key Ideas and Details"
+    },
+    {
+        "id": "K.RF.1",
+        "category": "Reading",
+        "domain": "Foundational Skills",
+        "description": "Demonstrate understanding of the organization and basic features of print.",
+        "prerequisites": [],
+        "cluster": "Print Concepts"
+    },
+    {
+        "id": "K.RF.2",
+        "category": "Reading",
+        "domain": "Foundational Skills",
+        "description": "Demonstrate understanding of spoken words, syllables, and sounds (phonemes).",
+        "prerequisites": [],
+        "cluster": "Phonological Awareness"
+    },
+    {
+        "id": "K.RF.3",
+        "category": "Reading",
+        "domain": "Foundational Skills",
+        "description": "Know and apply grade-level phonics and word analysis skills in decoding words.",
+        "prerequisites": ["K.RF.2"],
+        "cluster": "Phonics and Word Recognition"
+    },
+    {
+        "id": "K.W.1",
+        "category": "Writing",
+        "domain": "Writing",
+        "description": "Use a combination of drawing, dictating, and writing to compose opinion pieces in which they tell a reader the topic or the name of the book they are writing about and state an opinion or preference about the topic or book.",
+        "prerequisites": [],
+        "cluster": "Text Types and Purposes"
+    },
+    {
+        "id": "K.W.2",
+        "category": "Writing",
+        "domain": "Writing",
+        "description": "Use a combination of drawing, dictating, and writing to compose informative/explanatory texts in which they name what they are writing about and supply some information about the topic.",
+        "prerequisites": [],
+        "cluster": "Text Types and Purposes"
+    },
+    {
+        "id": "K.W.3",
+        "category": "Writing",
+        "domain": "Writing",
+        "description": "Use a combination of drawing, dictating, and writing to narrate a single event or several loosely linked events, tell about the events in the order in which they occurred, and provide a reaction to what happened.",
+        "prerequisites": [],
+        "cluster": "Text Types and Purposes"
+    },
+    {
+        "id": "K.SL.1",
+        "category": "Speaking & Listening",
+        "domain": "Speaking & Listening",
+        "description": "Participate in collaborative conversations with diverse partners about kindergarten topics and texts with peers and adults in small and larger groups.",
+        "prerequisites": [],
+        "cluster": "Comprehension and Collaboration"
+    },
+    {
+        "id": "K.SL.2",
+        "category": "Speaking & Listening",
+        "domain": "Speaking & Listening",
+        "description": "Confirm understanding of a text read aloud or information presented orally or through other media by asking and answering questions about key details and requesting clarification if something is not understood.",
+        "prerequisites": [],
+        "cluster": "Comprehension and Collaboration"
+    },
+    {
+        "id": "K.SL.6",
+        "category": "Speaking & Listening",
+        "domain": "Speaking & Listening",
+        "description": "Speak audibly and express thoughts, feelings, and ideas clearly.",
+        "prerequisites": [],
+        "cluster": "Presentation of Knowledge and Ideas"
+    },
+    {
+        "id": "K.L.1",
+        "category": "Language",
+        "domain": "Language",
+        "description": "Demonstrate command of the conventions of standard English grammar and usage when writing or speaking.",
+        "prerequisites": [],
+        "cluster": "Conventions of Standard English"
+    },
+    {
+        "id": "K.L.2",
+        "category": "Language",
+        "domain": "Language",
+        "description": "Demonstrate command of the conventions of standard English capitalization, punctuation, and spelling when writing.",
+        "prerequisites": [],
+        "cluster": "Conventions of Standard English"
+    },
+    {
+        "id": "K.L.5",
+        "category": "Language",
+        "domain": "Language",
+        "description": "With guidance and support from adults, explore word relationships and nuances in word meanings.",
+        "prerequisites": [],
+        "cluster": "Vocabulary Acquisition and Use"
+    }
+]

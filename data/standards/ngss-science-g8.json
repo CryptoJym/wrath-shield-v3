@@ -1,0 +1,234 @@
+{
+    "subject": "science",
+    "grade": "8",
+    "domains": [
+        {
+            "name": "Physical Science: Forces and Interactions",
+            "standards": [
+                {
+                    "id": "MS-PS2-1",
+                    "description": "Apply Newton's Third Law to design a solution to a problem involving the motion of two colliding objects.",
+                    "cluster": "Motion and Stability: Forces and Interactions",
+                    "prerequisites": ["MS-PS3-1"],
+                    "stat_mappings": ["science", "critical_thinking", "technology", "problem_solving"],
+                    "cognitive_complexity": 4,
+                    "estimated_hours": 6
+                },
+                {
+                    "id": "MS-PS2-2",
+                    "description": "Plan an investigation to provide evidence that the change in an object's motion depends on the sum of the forces on the object and the mass of the object.",
+                    "cluster": "Motion and Stability: Forces and Interactions",
+                    "prerequisites": ["3-PS2-1"],
+                    "stat_mappings": ["science", "critical_thinking", "problem_solving"],
+                    "cognitive_complexity": 4,
+                    "estimated_hours": 6
+                },
+                {
+                    "id": "MS-PS2-3",
+                    "description": "Ask questions about data to determine the factors that affect the strength of electric and magnetic forces.",
+                    "cluster": "Motion and Stability: Forces and Interactions",
+                    "prerequisites": ["3-PS2-3"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 3,
+                    "estimated_hours": 5
+                },
+                {
+                    "id": "MS-PS2-4",
+                    "description": "Construct and present arguments using evidence to support the claim that gravitational interactions are attractive and depend on the masses of interacting objects.",
+                    "cluster": "Motion and Stability: Forces and Interactions",
+                    "prerequisites": ["MS-PS2-2"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 4,
+                    "estimated_hours": 5
+                },
+                {
+                    "id": "MS-PS2-5",
+                    "description": "Conduct an investigation and evaluate the experimental design to provide evidence that fields exist between objects exerting forces on each other even though the objects are not in contact.",
+                    "cluster": "Motion and Stability: Forces and Interactions",
+                    "prerequisites": ["MS-PS2-3"],
+                    "stat_mappings": ["science", "critical_thinking", "problem_solving"],
+                    "cognitive_complexity": 4,
+                    "estimated_hours": 6
+                }
+            ]
+        },
+        {
+            "name": "Physical Science: Energy",
+            "standards": [
+                {
+                    "id": "MS-PS3-1",
+                    "description": "Construct and interpret graphical displays of data to describe the relationships of kinetic energy to the mass of an object and to the speed of an object.",
+                    "cluster": "Energy",
+                    "prerequisites": ["4-PS3-1"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 4,
+                    "estimated_hours": 6
+                },
+                {
+                    "id": "MS-PS3-2",
+                    "description": "Develop a model to describe that when the arrangement of objects interacting at a distance changes, different amounts of potential energy are stored in the system.",
+                    "cluster": "Energy",
+                    "prerequisites": ["MS-PS3-1"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 4,
+                    "estimated_hours": 6
+                },
+                {
+                    "id": "MS-PS3-5",
+                    "description": "Construct, use, and present arguments to support the claim that when the kinetic energy of an object changes, energy is transferred to or from the object.",
+                    "cluster": "Energy",
+                    "prerequisites": ["MS-PS3-1"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 4,
+                    "estimated_hours": 5
+                }
+            ]
+        },
+        {
+            "name": "Physical Science: Waves and Electromagnetic Radiation",
+            "standards": [
+                {
+                    "id": "MS-PS4-1",
+                    "description": "Use mathematical representations to describe a simple model for waves that includes how the amplitude of a wave is related to the energy in a wave.",
+                    "cluster": "Waves and Their Applications in Technologies for Information Transfer",
+                    "prerequisites": ["4-PS4-1"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 4,
+                    "estimated_hours": 6
+                },
+                {
+                    "id": "MS-PS4-2",
+                    "description": "Develop and use a model to describe that waves are reflected, absorbed, or transmitted through various materials.",
+                    "cluster": "Waves and Their Applications in Technologies for Information Transfer",
+                    "prerequisites": ["4-PS4-2"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 4,
+                    "estimated_hours": 6
+                },
+                {
+                    "id": "MS-PS4-3",
+                    "description": "Integrate qualitative scientific and technical information to support the claim that digitized signals are a more reliable way to encode and transmit information than analog signals.",
+                    "cluster": "Waves and Their Applications in Technologies for Information Transfer",
+                    "prerequisites": ["4-PS4-3"],
+                    "stat_mappings": ["science", "critical_thinking", "technology"],
+                    "cognitive_complexity": 4,
+                    "estimated_hours": 5
+                }
+            ]
+        },
+        {
+            "name": "Life Science: Growth, Development, and Reproduction",
+            "standards": [
+                {
+                    "id": "MS-LS3-1",
+                    "description": "Develop and use a model to describe why structural changes to genes (mutations) located on chromosomes may affect proteins and may result in harmful, beneficial, or neutral effects to the structure and function of the organism.",
+                    "cluster": "Heredity: Inheritance and Variation of Traits",
+                    "prerequisites": ["3-LS3-1", "3-LS3-2"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 4,
+                    "estimated_hours": 6
+                },
+                {
+                    "id": "MS-LS3-2",
+                    "description": "Develop and use a model to describe why asexual reproduction results in offspring with identical genetic information and sexual reproduction results in offspring with genetic variation.",
+                    "cluster": "Heredity: Inheritance and Variation of Traits",
+                    "prerequisites": ["3-LS3-1"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 4,
+                    "estimated_hours": 6
+                },
+                {
+                    "id": "MS-LS4-4",
+                    "description": "Construct an explanation based on evidence that describes how genetic variations of traits in a population increase some individuals' probability of surviving and reproducing in a specific environment.",
+                    "cluster": "Biological Evolution: Unity and Diversity",
+                    "prerequisites": ["MS-LS3-1", "3-LS4-2"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 4,
+                    "estimated_hours": 6
+                },
+                {
+                    "id": "MS-LS4-5",
+                    "description": "Gather and synthesize information about the technologies that have changed the way humans influence the inheritance of desired traits in organisms.",
+                    "cluster": "Biological Evolution: Unity and Diversity",
+                    "prerequisites": ["MS-LS3-1"],
+                    "stat_mappings": ["science", "critical_thinking", "technology"],
+                    "cognitive_complexity": 3,
+                    "estimated_hours": 5
+                },
+                {
+                    "id": "MS-LS4-6",
+                    "description": "Use mathematical representations to support explanations of how natural selection may lead to increases and decreases of specific traits in populations over time.",
+                    "cluster": "Biological Evolution: Unity and Diversity",
+                    "prerequisites": ["MS-LS4-4"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 4,
+                    "estimated_hours": 6
+                }
+            ]
+        },
+        {
+            "name": "Earth and Space Science: History of Earth",
+            "standards": [
+                {
+                    "id": "MS-ESS1-4",
+                    "description": "Construct a scientific explanation based on evidence from rock strata for how the geologic time scale is used to organize Earth's 4.6-billion-year-old history.",
+                    "cluster": "Earth's Place in the Universe",
+                    "prerequisites": ["4-ESS1-1"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 4,
+                    "estimated_hours": 6
+                },
+                {
+                    "id": "MS-ESS2-3",
+                    "description": "Analyze and interpret data on the distribution of fossils and rocks, continental shapes, and seafloor structures to provide evidence of the past plate motions.",
+                    "cluster": "Earth's Systems",
+                    "prerequisites": ["MS-ESS2-2"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 4,
+                    "estimated_hours": 6
+                }
+            ]
+        },
+        {
+            "name": "Engineering Design",
+            "standards": [
+                {
+                    "id": "MS-ETS1-1",
+                    "description": "Define the criteria and constraints of a design problem with sufficient precision to ensure a successful solution, taking into account relevant scientific principles and potential impacts on people and the natural environment that may limit possible solutions.",
+                    "cluster": "Engineering Design",
+                    "prerequisites": ["3-5-ETS1-1"],
+                    "stat_mappings": ["science", "critical_thinking", "technology", "problem_solving"],
+                    "cognitive_complexity": 4,
+                    "estimated_hours": 6
+                },
+                {
+                    "id": "MS-ETS1-2",
+                    "description": "Evaluate competing design solutions using a systematic process to determine how well they meet the criteria and constraints of the problem.",
+                    "cluster": "Engineering Design",
+                    "prerequisites": ["MS-ETS1-1"],
+                    "stat_mappings": ["science", "critical_thinking", "technology"],
+                    "cognitive_complexity": 4,
+                    "estimated_hours": 6
+                },
+                {
+                    "id": "MS-ETS1-3",
+                    "description": "Analyze data from tests to determine similarities and differences among several design solutions to identify the best characteristics of each that can be combined into a new solution to better meet the criteria for success.",
+                    "cluster": "Engineering Design",
+                    "prerequisites": ["MS-ETS1-2"],
+                    "stat_mappings": ["science", "critical_thinking", "technology"],
+                    "cognitive_complexity": 4,
+                    "estimated_hours": 6
+                },
+                {
+                    "id": "MS-ETS1-4",
+                    "description": "Develop a model to generate data for iterative testing and modification of a proposed object, tool, or process such that an optimal design can be achieved.",
+                    "cluster": "Engineering Design",
+                    "prerequisites": ["MS-ETS1-3"],
+                    "stat_mappings": ["science", "technology", "problem_solving"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 7
+                }
+            ]
+        }
+    ]
+}

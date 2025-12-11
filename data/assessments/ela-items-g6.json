@@ -1,0 +1,665 @@
+{
+  "grade": "6",
+  "items": [
+    {
+      "id": "ela-6-rl-1-001",
+      "standard_id": "6.RL.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Based on the passage, analyze how the author uses specific textual evidence to support the theme of perseverance. Cite at least two examples from the text and explain how each example connects to the theme.",
+      "rubric": {
+        "4": "Cites 2+ examples with clear analysis connecting to theme; sophisticated explanation of how evidence supports theme",
+        "3": "Cites 2 examples with some analysis connecting to theme",
+        "2": "Cites 1 example with analysis OR 2 examples without clear analysis",
+        "1": "Attempts response but lacks textual evidence or clear connection to theme",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 300,
+      "passage_required": true
+    },
+    {
+      "id": "ela-6-rl-1-002",
+      "standard_id": "6.RL.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "The narrator never directly states how they feel about moving to a new school. Using textual evidence, what can you infer about the narrator's feelings? Cite at least two pieces of evidence to support your inference.",
+      "rubric": {
+        "4": "Makes sophisticated inference with 2+ well-chosen textual citations; clearly explains how each supports the inference",
+        "3": "Makes reasonable inference with 2 citations and adequate explanation",
+        "2": "Makes inference with 1 citation or weak explanation of connection",
+        "1": "Attempts inference but lacks textual support",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 300,
+      "passage_required": true
+    },
+    {
+      "id": "ela-6-rl-2-001",
+      "standard_id": "6.RL.2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Determine the central theme of the story and explain how it is conveyed through specific details. Then provide an objective summary of the text (without personal opinions or judgments).",
+      "rubric": {
+        "4": "Correctly identifies theme with 2+ specific details showing development; summary is objective and complete",
+        "3": "Identifies theme with details and provides mostly objective summary",
+        "2": "Identifies theme but limited details OR summary contains opinions",
+        "1": "Attempts response but theme unclear or summary missing",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 420,
+      "passage_required": true
+    },
+    {
+      "id": "ela-6-rl-2-002",
+      "standard_id": "6.RL.2",
+      "dok_level": 3,
+      "question_type": "multi_part",
+      "question": "Part A: What is the theme of this story? Part B: Select two details from the text that help convey this theme. Part C: Write a brief summary of the story that does not include your personal opinions.",
+      "rubric": {
+        "4": "All parts answered correctly; theme accurate, details well-chosen, summary objective",
+        "3": "Theme and details correct; summary mostly objective",
+        "2": "Theme identified but weak details OR summary contains opinions",
+        "1": "Partial response with errors in multiple parts",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 420,
+      "passage_required": true
+    },
+    {
+      "id": "ela-6-rl-3-001",
+      "standard_id": "6.RL.3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Describe how the plot of the story unfolds across the key episodes. Explain how the main character responds or changes as the plot moves toward resolution. Use specific details from the text.",
+      "rubric": {
+        "4": "Thoroughly describes plot episodes and provides insightful analysis of character development toward resolution",
+        "3": "Describes plot episodes and explains character change with text support",
+        "2": "Describes some plot events but limited analysis of character change",
+        "1": "Attempts response but lacks clear plot description or character analysis",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 360,
+      "passage_required": true
+    },
+    {
+      "id": "ela-6-rl-3-002",
+      "standard_id": "6.RL.3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Analyze how the protagonist changes from the beginning to the end of the story. What events cause these changes? Use specific evidence from the text to support your analysis.",
+      "rubric": {
+        "4": "Clear analysis of character arc with 2+ events and evidence showing transformation",
+        "3": "Describes character change with events and some evidence",
+        "2": "Identifies change but limited connection to events or weak evidence",
+        "1": "Attempts analysis but unclear or unsupported",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 360,
+      "passage_required": true
+    },
+    {
+      "id": "ela-6-rl-4-001",
+      "standard_id": "6.RL.4",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "The author describes the abandoned house as having 'bones of broken beams' and 'skin of peeling paint.' Analyze the impact of these word choices on the meaning and tone of the passage. What effect do they create for the reader?",
+      "rubric": {
+        "4": "Sophisticated analysis of figurative/connotative meaning with clear explanation of impact on tone and reader experience",
+        "3": "Analyzes word choice impact on meaning and tone with adequate explanation",
+        "2": "Identifies figurative language but limited analysis of impact",
+        "1": "Attempts response but lacks analysis of effect",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 300,
+      "passage_required": true
+    },
+    {
+      "id": "ela-6-rl-4-002",
+      "standard_id": "6.RL.4",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "In paragraph 4, the author writes: 'The news fell on her like a ton of bricks.' What does this phrase suggest about how the character received the news?",
+      "options": [
+        "A. The news was confusing and hard to understand.",
+        "B. The news was shocking and had a heavy emotional impact.",
+        "C. The news made her physically fall down.",
+        "D. The news came from someone who worked in construction."
+      ],
+      "correct_answer": "B",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 90,
+      "passage_required": true
+    },
+    {
+      "id": "ela-6-rl-5-001",
+      "standard_id": "6.RL.5",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Analyze how the opening scene of the story contributes to the development of the theme. How does this particular part fit into the overall structure of the text?",
+      "rubric": {
+        "4": "Insightful analysis of how opening scene establishes and connects to theme, with clear understanding of structural purpose",
+        "3": "Explains opening scene's role in theme development and structure",
+        "2": "Addresses scene but limited connection to theme or structure",
+        "1": "Attempts response but lacks structural analysis",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 360,
+      "passage_required": true
+    },
+    {
+      "id": "ela-6-rl-5-002",
+      "standard_id": "6.RL.5",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "The author chooses to begin the story with a flashback. Analyze how this structural choice affects the development of the plot and the reader's understanding of the main character.",
+      "rubric": {
+        "4": "Sophisticated analysis of flashback's effect on plot and character understanding with specific examples",
+        "3": "Explains flashback's effect on plot and character with some examples",
+        "2": "Identifies flashback but limited analysis of effects",
+        "1": "Attempts response but lacks structural understanding",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 360,
+      "passage_required": true
+    },
+    {
+      "id": "ela-6-rl-6-001",
+      "standard_id": "6.RL.6",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Explain how the author develops the narrator's point of view throughout the story. What techniques does the author use to help readers understand how the narrator sees the world?",
+      "rubric": {
+        "4": "Identifies 2+ techniques with specific examples and sophisticated analysis of how POV is developed",
+        "3": "Identifies techniques with examples and adequate explanation of POV development",
+        "2": "Addresses POV but limited techniques or weak examples",
+        "1": "Attempts response but lacks analysis of author's techniques",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 360,
+      "passage_required": true
+    },
+    {
+      "id": "ela-6-rl-6-002",
+      "standard_id": "6.RL.6",
+      "dok_level": 3,
+      "question_type": "multi_part",
+      "question": "Part A: From whose point of view is this story told? Part B: Identify two specific techniques the author uses to develop this point of view. Part C: Explain how these techniques help the reader understand the narrator's perspective.",
+      "rubric": {
+        "4": "All parts correct with insightful analysis of techniques and their effects",
+        "3": "POV identified, techniques named, explanation adequate",
+        "2": "POV identified but techniques or explanation weak",
+        "1": "Partial response with errors",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 360,
+      "passage_required": true
+    },
+    {
+      "id": "ela-6-ri-1-001",
+      "standard_id": "6.RI.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "The author claims that ancient Rome's road system contributed to the empire's success. Cite textual evidence that supports this claim and evidence that the author uses to develop the analysis.",
+      "rubric": {
+        "4": "Cites 2+ strong pieces of evidence with clear explanation of how each supports the claim",
+        "3": "Cites 2 pieces of evidence with adequate explanation",
+        "2": "Cites 1 piece of evidence or weak connection to claim",
+        "1": "Attempts response but evidence unclear or unsupported",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 300,
+      "passage_required": true
+    },
+    {
+      "id": "ela-6-ri-1-002",
+      "standard_id": "6.RI.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Based on the article, what can you infer about why some species become endangered while others thrive? Use at least two pieces of textual evidence to support your inference.",
+      "rubric": {
+        "4": "Makes sophisticated inference with 2+ well-chosen citations and clear explanation",
+        "3": "Makes reasonable inference with 2 citations and adequate explanation",
+        "2": "Makes inference with 1 citation or weak explanation",
+        "1": "Attempts inference but lacks textual support",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 300,
+      "passage_required": true
+    },
+    {
+      "id": "ela-6-ri-2-001",
+      "standard_id": "6.RI.2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Determine the central idea of this article and explain how it is conveyed through particular details. Then write an objective summary of the text without personal opinions or judgments.",
+      "rubric": {
+        "4": "Correctly identifies central idea with 2+ supporting details; summary is complete and objective",
+        "3": "Identifies central idea with details; summary mostly objective",
+        "2": "Identifies central idea but weak details OR summary contains opinions",
+        "1": "Attempts response but central idea unclear or summary missing",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 420,
+      "passage_required": true
+    },
+    {
+      "id": "ela-6-ri-2-002",
+      "standard_id": "6.RI.2",
+      "dok_level": 3,
+      "question_type": "multi_part",
+      "question": "Part A: What is the central idea of this article? Part B: List three details from the text that support this central idea. Part C: Write a 2-3 sentence objective summary.",
+      "rubric": {
+        "4": "Central idea correct, 3 strong supporting details, objective summary",
+        "3": "Central idea and details correct; summary mostly objective",
+        "2": "Central idea correct but weak details OR opinion in summary",
+        "1": "Partial response with errors in multiple parts",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 360,
+      "passage_required": true
+    },
+    {
+      "id": "ela-6-ri-3-001",
+      "standard_id": "6.RI.3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Analyze in detail how the key individual in this biography is introduced, illustrated, and elaborated throughout the text. Use specific examples and anecdotes from the passage.",
+      "rubric": {
+        "4": "Thorough analysis of how subject is presented with multiple specific examples/anecdotes",
+        "3": "Analyzes introduction, illustration, and elaboration with some examples",
+        "2": "Addresses how subject is presented but limited examples",
+        "1": "Attempts analysis but lacks specific references",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 360,
+      "passage_required": true
+    },
+    {
+      "id": "ela-6-ri-3-002",
+      "standard_id": "6.RI.3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "The article introduces the concept of photosynthesis through a series of examples. Analyze how the author introduces, illustrates, and elaborates on this concept throughout the passage.",
+      "rubric": {
+        "4": "Sophisticated analysis showing how concept is developed progressively with specific examples",
+        "3": "Shows understanding of concept development with examples",
+        "2": "Addresses concept but limited analysis of development",
+        "1": "Attempts response but lacks clarity",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 360,
+      "passage_required": true
+    },
+    {
+      "id": "ela-6-ri-4-001",
+      "standard_id": "6.RI.4",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "In paragraph 3, the author uses the term 'ecosystem.' Based on context clues in the passage, what does this technical term mean?",
+      "options": [
+        "A. A type of forest found only in tropical regions",
+        "B. A community of living things interacting with their environment",
+        "C. A scientific method for studying animal behavior",
+        "D. A government policy for protecting natural resources"
+      ],
+      "correct_answer": "B",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 90,
+      "passage_required": true
+    },
+    {
+      "id": "ela-6-ri-4-002",
+      "standard_id": "6.RI.4",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "The author uses several technical terms related to geology in this article. Choose two terms, explain their meaning based on context, and describe how understanding these terms helps you comprehend the main ideas of the passage.",
+      "rubric": {
+        "4": "Correctly defines 2 terms with context evidence and insightful explanation of how they aid comprehension",
+        "3": "Defines 2 terms with context and adequate explanation of importance",
+        "2": "Defines terms but limited context or weak connection to comprehension",
+        "1": "Attempts response but definitions unclear",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 300,
+      "passage_required": true
+    },
+    {
+      "id": "ela-6-ri-5-001",
+      "standard_id": "6.RI.5",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Analyze how the first paragraph of this article fits into the overall structure and contributes to the development of the author's ideas. What purpose does it serve?",
+      "rubric": {
+        "4": "Insightful analysis of paragraph's structural purpose with clear connection to overall idea development",
+        "3": "Explains paragraph's role in structure and idea development",
+        "2": "Addresses paragraph but limited structural analysis",
+        "1": "Attempts response but lacks understanding of structure",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 300,
+      "passage_required": true
+    },
+    {
+      "id": "ela-6-ri-5-002",
+      "standard_id": "6.RI.5",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "The article is organized into four sections. Analyze how each section contributes to the whole text and to the development of the central idea.",
+      "rubric": {
+        "4": "Analyzes all sections' contributions with sophisticated understanding of how they build the central idea",
+        "3": "Explains how sections contribute to whole and central idea",
+        "2": "Addresses some sections but limited analysis of contribution",
+        "1": "Attempts response but weak structural understanding",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 360,
+      "passage_required": true
+    },
+    {
+      "id": "ela-6-ri-6-001",
+      "standard_id": "6.RI.6",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Determine the author's point of view or purpose in writing this article. Explain how the author's perspective is conveyed through specific word choices, examples, or other techniques.",
+      "rubric": {
+        "4": "Correctly identifies purpose/POV with 2+ techniques and sophisticated analysis of how it's conveyed",
+        "3": "Identifies purpose/POV with techniques and adequate explanation",
+        "2": "Identifies purpose/POV but limited techniques or weak explanation",
+        "1": "Attempts response but unclear purpose or lacks support",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 360,
+      "passage_required": true
+    },
+    {
+      "id": "ela-6-ri-6-002",
+      "standard_id": "6.RI.6",
+      "dok_level": 3,
+      "question_type": "multi_part",
+      "question": "Part A: What is the author's purpose in writing this article? Part B: Identify two ways the author conveys this purpose. Part C: Provide a specific example from the text for each technique you identified.",
+      "rubric": {
+        "4": "Purpose correct, 2 techniques identified, specific examples for each",
+        "3": "Purpose and techniques correct with some examples",
+        "2": "Purpose identified but weak techniques or examples",
+        "1": "Partial response with errors",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 360,
+      "passage_required": true
+    },
+    {
+      "id": "ela-6-ri-7-001",
+      "standard_id": "6.RI.7",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "The article includes both a written passage and an infographic about climate change. Explain how integrating information from both sources helps develop a more coherent understanding of the topic.",
+      "rubric": {
+        "4": "Insightfully explains how both sources complement each other with specific examples from each",
+        "3": "Explains integration of sources with some examples",
+        "2": "Addresses both sources but limited explanation of integration",
+        "1": "Focuses on one source or lacks integration analysis",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 360,
+      "passage_required": true
+    },
+    {
+      "id": "ela-6-ri-7-002",
+      "standard_id": "6.RI.7",
+      "dok_level": 3,
+      "question_type": "multi_part",
+      "question": "Part A: What information does the chart provide that is not in the written article? Part B: What information does the written article provide that is not in the chart? Part C: How does using both together help you better understand the topic?",
+      "rubric": {
+        "4": "Accurately identifies unique information in each source and insightfully explains combined value",
+        "3": "Identifies unique information and explains combination value",
+        "2": "Addresses sources but incomplete comparison or weak explanation",
+        "1": "Partial response with errors",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 360,
+      "passage_required": true
+    },
+    {
+      "id": "ela-6-ri-8-001",
+      "standard_id": "6.RI.8",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Trace the author's argument about renewable energy in this article. Identify the main claim and evaluate which claims are supported by reasons and evidence and which are not.",
+      "rubric": {
+        "4": "Clearly traces argument, identifies claim, evaluates support for multiple claims with sophisticated analysis",
+        "3": "Traces argument, identifies claim, evaluates some claims' support",
+        "2": "Identifies argument but limited evaluation of support",
+        "1": "Attempts response but unclear argument or no evaluation",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.8,
+      "time_estimate_seconds": 420,
+      "passage_required": true
+    },
+    {
+      "id": "ela-6-ri-8-002",
+      "standard_id": "6.RI.8",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "The author makes three specific claims in this editorial. For each claim, identify whether it is supported by reasons and evidence or not. Explain your evaluation using specific examples from the text.",
+      "rubric": {
+        "4": "Identifies all 3 claims, evaluates support for each with specific textual evidence",
+        "3": "Identifies claims and evaluates most with evidence",
+        "2": "Identifies claims but limited or unclear evaluation",
+        "1": "Attempts response but claims or evaluation unclear",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.8,
+      "time_estimate_seconds": 420,
+      "passage_required": true
+    },
+    {
+      "id": "ela-6-ri-9-001",
+      "standard_id": "6.RI.9",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "You have read a memoir excerpt written by a civil rights activist and a biography about the same person. Compare and contrast how each author presents the key events of the activist's life. What differences do you notice in how the events are described?",
+      "rubric": {
+        "4": "Sophisticated comparison identifying multiple differences in presentation with specific examples from both texts",
+        "3": "Compares presentation differences with examples from both texts",
+        "2": "Addresses both texts but limited comparison or few examples",
+        "1": "Focuses on one text or lacks comparison",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.8,
+      "time_estimate_seconds": 480,
+      "passage_required": true
+    },
+    {
+      "id": "ela-6-ri-9-002",
+      "standard_id": "6.RI.9",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Compare how the two articles present information about the same historical event. What facts do both authors include? What information appears in one but not the other? Why might these differences exist?",
+      "rubric": {
+        "4": "Identifies shared facts, unique information in each, and provides thoughtful analysis of why differences exist",
+        "3": "Identifies shared and unique information with some analysis of differences",
+        "2": "Addresses comparison but limited analysis of reasons",
+        "1": "Attempts comparison but incomplete or unclear",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.8,
+      "time_estimate_seconds": 480,
+      "passage_required": true
+    }
+  ]
+}

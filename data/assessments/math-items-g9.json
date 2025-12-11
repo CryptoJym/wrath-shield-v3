@@ -1,0 +1,713 @@
+{
+  "grade": "9",
+  "course": "Algebra I",
+  "items": [
+    {
+      "id": "math-9-sse-a-1-001",
+      "standard_id": "HSA-SSE.A.1",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "The expression 3x² + 12x represents the area of a rectangle. If x represents the width, what does 3x + 12 represent?",
+      "correct_answer": "The length of the rectangle",
+      "explanation": "Factoring: 3x² + 12x = x(3x + 12), so if x is width, then (3x + 12) is length",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 120
+    },
+    {
+      "id": "math-9-sse-a-1-002",
+      "standard_id": "HSA-SSE.A.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A company's profit P in thousands of dollars is modeled by P = -2x² + 40x - 150, where x is the price in dollars. Interpret each term in the expression in the context of the problem: (a) What does -2x² represent? (b) What does 40x represent? (c) What does -150 represent?",
+      "rubric": {
+        "4": "Correctly interprets all three terms with clear economic reasoning: -2x² represents diminishing returns as price increases too high, 40x represents base revenue proportional to price, -150 represents fixed costs",
+        "3": "Correctly interprets 2-3 terms with reasonable economic context",
+        "2": "Interprets 1-2 terms correctly but lacks full economic reasoning",
+        "1": "Attempts interpretation but shows misconceptions about the model",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.70,
+      "time_estimate_seconds": 300
+    },
+    {
+      "id": "math-9-sse-a-1-003",
+      "standard_id": "HSA-SSE.A.1",
+      "dok_level": 3,
+      "question_type": "multi_part",
+      "question": "The expression 4πr² represents the surface area of a sphere. Part A: Identify the coefficient, variable, and exponent. Part B: If the radius doubles, by what factor does the surface area change? Part C: Explain why this relationship makes sense geometrically.",
+      "rubric": {
+        "4": "Part A correctly identifies 4π as coefficient, r as variable, 2 as exponent; Part B correctly states factor of 4; Part C provides clear geometric reasoning about scaling in two dimensions",
+        "3": "All parts addressed with minor errors or incomplete geometric reasoning",
+        "2": "Two parts correct or partially correct responses to all three",
+        "1": "One part correct with significant errors in others",
+        "0": "No response or fundamentally incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 360
+    },
+    {
+      "id": "math-9-sse-a-2-001",
+      "standard_id": "HSA-SSE.A.2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Rewrite the expression x⁴ - 16 in completely factored form. Show all steps and explain the structure you recognized at each step.",
+      "correct_answer": "(x² + 4)(x + 2)(x - 2)",
+      "rubric": {
+        "4": "Correctly factors as (x² + 4)(x + 2)(x - 2) with clear explanation of difference of squares pattern applied twice",
+        "3": "Correctly factors with explanation of at least one pattern recognized",
+        "2": "Partially factors (e.g., stops at (x² + 4)(x² - 4)) with some explanation",
+        "1": "Attempts factoring but with significant errors",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 240
+    },
+    {
+      "id": "math-9-sse-a-2-002",
+      "standard_id": "HSA-SSE.A.2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "The expression 9x² - 30x + 25 represents the area of a square. Factor this expression and explain how the factored form reveals the side length of the square.",
+      "correct_answer": "(3x - 5)²; the side length is (3x - 5)",
+      "rubric": {
+        "4": "Correctly identifies as perfect square trinomial, factors as (3x - 5)², and clearly explains that side length is |3x - 5|",
+        "3": "Correctly factors and identifies side length with minor explanation gaps",
+        "2": "Correctly factors but incomplete explanation of geometric meaning",
+        "1": "Attempts factoring with errors or misses geometric connection",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.60,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-9-sse-a-2-003",
+      "standard_id": "HSA-SSE.A.2",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Show that x³ + y³ = (x + y)(x² - xy + y²) by expanding the right side. Then use this identity to factor 8a³ + 27b³ completely.",
+      "rubric": {
+        "4": "Correctly expands to verify identity with clear algebraic steps, then correctly factors as (2a + 3b)(4a² - 6ab + 9b²)",
+        "3": "Correctly performs both parts with minor computational errors",
+        "2": "Verifies identity but struggles with application, or vice versa",
+        "1": "Attempts both parts but significant errors in both",
+        "0": "No response or fundamentally incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 420
+    },
+    {
+      "id": "math-9-sse-b-3-001",
+      "standard_id": "HSA-SSE.B.3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "The height h (in feet) of a ball thrown upward is given by h = -16t² + 48t + 4. Rewrite this expression in vertex form to find the maximum height. Show your work using completing the square.",
+      "rubric": {
+        "4": "Correctly completes the square to get h = -16(t - 1.5)² + 40, identifies maximum height as 40 feet at t = 1.5 seconds",
+        "3": "Correctly converts to vertex form with minor computational errors",
+        "2": "Shows understanding of completing the square but makes errors in execution",
+        "1": "Attempts completing the square but fundamental misunderstanding",
+        "0": "No response or incorrect method"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.70,
+      "time_estimate_seconds": 360
+    },
+    {
+      "id": "math-9-sse-b-3-002",
+      "standard_id": "HSA-SSE.B.3",
+      "dok_level": 3,
+      "question_type": "multi_part",
+      "question": "Consider the quadratic expression x² - 6x + 8. Part A: Write in factored form. Part B: Write in vertex form (by completing the square). Part C: Explain what information each form reveals about the graph.",
+      "rubric": {
+        "4": "Correctly writes (x-2)(x-4) and (x-3)² - 1; explains factored form shows x-intercepts at 2 and 4, vertex form shows vertex at (3, -1)",
+        "3": "Both forms correct with adequate explanation of one form's meaning",
+        "2": "One form correct with explanation, or both forms with errors",
+        "1": "Attempts but significant errors in conversions or explanations",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 420
+    },
+    {
+      "id": "math-9-sse-b-3-003",
+      "standard_id": "HSA-SSE.B.3",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "A farmer has 120 feet of fencing to create a rectangular pen against a barn wall (so only 3 sides need fencing). The area A = x(120 - 2x) where x is the width. Rewrite to find the dimensions that maximize the area and the maximum area possible.",
+      "rubric": {
+        "4": "Correctly expands to A = -2x² + 120x, completes square or uses vertex formula to find x = 30, calculates dimensions 30 × 60 feet, maximum area 1800 sq ft",
+        "3": "Correct process with minor computational error",
+        "2": "Shows understanding but errors in setup or calculation",
+        "1": "Attempts problem but fundamental misunderstanding of optimization",
+        "0": "No response or completely incorrect approach"
+      },
+      "manifold_fit": {
+        "coherence_delta": 5,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.80,
+      "time_estimate_seconds": 480
+    },
+    {
+      "id": "math-9-ced-a-1-001",
+      "standard_id": "HSA-CED.A.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A phone plan charges a $35 monthly fee plus $0.05 per text message. You have a budget of $50 per month. Create an inequality to represent the number of text messages you can send, solve it, and interpret your answer in context.",
+      "rubric": {
+        "4": "Correctly writes 35 + 0.05m ≤ 50, solves for m ≤ 300, interprets that you can send at most 300 texts",
+        "3": "Correct inequality and solution with minor interpretation issues",
+        "2": "Correct inequality but computational errors, or correct math but wrong inequality direction",
+        "1": "Attempts to set up problem but significant errors",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-9-ced-a-1-002",
+      "standard_id": "HSA-CED.A.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A ball is thrown from a 64-foot cliff with an initial velocity of 48 ft/s. The height is given by h = -16t² + 48t + 64. Create and solve an equation to find when the ball hits the ground. Explain why only one solution makes sense.",
+      "rubric": {
+        "4": "Sets h = 0, correctly solves -16t² + 48t + 64 = 0 to get t = -1 or t = 4, explains t = 4 seconds is valid because time cannot be negative",
+        "3": "Correct setup and solution with adequate reasoning for discarding negative",
+        "2": "Sets up correctly but computational errors, or misses context discussion",
+        "1": "Attempts but significant errors in setup or solution method",
+        "0": "No response or incorrect approach"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.70,
+      "time_estimate_seconds": 300
+    },
+    {
+      "id": "math-9-ced-a-1-003",
+      "standard_id": "HSA-CED.A.1",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "The population of bacteria doubles every 3 hours. If there are initially 500 bacteria, create an equation to model the population P after t hours. Then find when the population will reach 16,000.",
+      "rubric": {
+        "4": "Correctly writes P = 500 · 2^(t/3), solves 16000 = 500 · 2^(t/3) to get t = 15 hours using logarithms or reasoning",
+        "3": "Correct model with minor errors in solution or explanation",
+        "2": "Reasonable model but errors in solving exponential equation",
+        "1": "Attempts exponential model but fundamental misconception",
+        "0": "No response or linear model used"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 360
+    },
+    {
+      "id": "math-9-ced-a-2-001",
+      "standard_id": "HSA-CED.A.2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A concert venue charges $15 for floor seats and $10 for balcony seats. The venue holds 2000 people and must earn at least $25,000. Create a system of inequalities representing this situation, where x = floor seats sold and y = balcony seats sold.",
+      "rubric": {
+        "4": "Correctly writes x + y ≤ 2000, 15x + 10y ≥ 25000, x ≥ 0, y ≥ 0 with clear explanation of each constraint",
+        "3": "Correct main inequalities with minor errors or incomplete non-negativity constraints",
+        "2": "One inequality correct, other has errors",
+        "1": "Attempts to create constraints but significant conceptual errors",
+        "0": "No response or equations instead of inequalities"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 240
+    },
+    {
+      "id": "math-9-ced-a-2-002",
+      "standard_id": "HSA-CED.A.2",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "A company makes two products: chairs require 2 hours of labor and $30 in materials; tables require 5 hours and $50 in materials. The company has 40 labor hours and $400 for materials available. Chairs sell for $60 profit, tables for $100. Create a system to model this, then find one feasible solution and calculate the profit.",
+      "rubric": {
+        "4": "Correctly writes 2c + 5t ≤ 40, 30c + 50t ≤ 400, c,t ≥ 0, provides valid feasible point with correct profit calculation",
+        "3": "Correct constraints with feasible solution but minor calculation errors",
+        "2": "Correct constraints but no feasible solution found, or feasible solution without constraints",
+        "1": "Attempts but multiple errors in constraint formation",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 5,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.80,
+      "time_estimate_seconds": 420
+    },
+    {
+      "id": "math-9-ced-a-3-001",
+      "standard_id": "HSA-CED.A.3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Maria has $200 to spend on supplies for a school event. Decorations cost $5 each and snacks cost $3 each. She needs at least 50 items total. Write a system of inequalities and find one combination of decorations and snacks that satisfies all constraints.",
+      "rubric": {
+        "4": "Correctly writes 5d + 3s ≤ 200, d + s ≥ 50, d ≥ 0, s ≥ 0; provides valid solution like d = 20, s = 30 with verification",
+        "3": "Correct system with valid solution but incomplete verification",
+        "2": "System mostly correct but solution doesn't satisfy all constraints",
+        "1": "Attempts constraints but significant errors",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.60,
+      "time_estimate_seconds": 300
+    },
+    {
+      "id": "math-9-ced-a-3-002",
+      "standard_id": "HSA-CED.A.3",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "A nutritionist is planning meals using two foods. Food A has 20g protein and 400 calories per serving. Food B has 10g protein and 200 calories. A meal should have at least 40g protein but no more than 800 calories. Model with inequalities, graph the feasible region, and identify the corner points.",
+      "rubric": {
+        "4": "Correct inequalities 20a + 10b ≥ 40, 400a + 200b ≤ 800, a,b ≥ 0; accurate graph with corner points (0, 4), (2, 0), and (1, 2) identified",
+        "3": "Correct inequalities and graph with minor errors in corner point identification",
+        "2": "Correct inequalities but errors in graphing or corner points",
+        "1": "Attempts but fundamental errors in constraint modeling",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 480
+    },
+    {
+      "id": "math-9-ced-a-4-001",
+      "standard_id": "HSA-CED.A.4",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "The formula for the volume of a cone is V = (1/3)πr²h. Solve for h in terms of V and r. Then find the height of a cone with volume 100π cm³ and radius 5 cm.",
+      "rubric": {
+        "4": "Correctly rearranges to h = 3V/(πr²), substitutes to find h = 12 cm with clear steps",
+        "3": "Correct rearrangement and calculation with minor errors",
+        "2": "Correct rearrangement but calculation errors, or correct answer without showing rearrangement",
+        "1": "Attempts but significant algebraic errors",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.60,
+      "time_estimate_seconds": 240
+    },
+    {
+      "id": "math-9-ced-a-4-002",
+      "standard_id": "HSA-CED.A.4",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "The kinetic energy formula is KE = (1/2)mv². Rearrange to solve for velocity v. Then explain why we take only the positive root when calculating speed from kinetic energy.",
+      "rubric": {
+        "4": "Correctly solves v = √(2KE/m), explains that speed is a scalar quantity (magnitude only) so negative root is not physically meaningful",
+        "3": "Correct rearrangement with adequate explanation",
+        "2": "Correct rearrangement but weak or missing explanation",
+        "1": "Attempts but significant algebraic errors",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 240
+    },
+    {
+      "id": "math-9-ced-a-4-003",
+      "standard_id": "HSA-CED.A.4",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "The compound interest formula is A = P(1 + r/n)^(nt). Solve for t in terms of the other variables. Then find how long it takes $1000 to double at 6% annual interest compounded monthly.",
+      "rubric": {
+        "4": "Correctly derives t = ln(A/P) / (n·ln(1 + r/n)), correctly calculates t ≈ 11.58 years",
+        "3": "Correct formula derivation with minor calculation errors",
+        "2": "Correct process but significant errors in logarithm manipulation",
+        "1": "Attempts but fundamental misunderstanding of logarithms",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.80,
+      "time_estimate_seconds": 420
+    },
+    {
+      "id": "math-9-rei-a-1-001",
+      "standard_id": "HSA-REI.A.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Solve 3(2x - 4) = 5x + 7. For each step, state the property or operation used and explain why it produces an equivalent equation.",
+      "rubric": {
+        "4": "Correctly solves (x = 19) with clear explanation of distributive property, addition/subtraction properties of equality, naming each step",
+        "3": "Correct solution with most steps justified appropriately",
+        "2": "Correct solution but limited property explanations",
+        "1": "Attempts but significant errors or no justifications",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 240
+    },
+    {
+      "id": "math-9-rei-a-1-002",
+      "standard_id": "HSA-REI.A.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A student claims that if x² = 9, then x = 3. Explain why this reasoning is incomplete. Then solve x² = 9 correctly, justifying each step.",
+      "rubric": {
+        "4": "Explains that taking square root of both sides gives |x| = 3, so x = ±3; justifies with property of square roots and definition of absolute value",
+        "3": "Correctly identifies both solutions with adequate explanation",
+        "2": "Identifies both solutions but weak justification",
+        "1": "Agrees with student or only gives one solution without explanation",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.60,
+      "time_estimate_seconds": 240
+    },
+    {
+      "id": "math-9-rei-a-1-003",
+      "standard_id": "HSA-REI.A.1",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Prove that if a = b and c ≠ 0, then a/c = b/c. Then explain why we cannot divide by a variable without stating it is non-zero, using the equation 2x = x as an example.",
+      "rubric": {
+        "4": "Provides logical proof using multiplication property, then explains that 2x = x has solution x = 0, so dividing by x loses this solution",
+        "3": "Correct proof with adequate example explanation",
+        "2": "Proof or example correct but not both",
+        "1": "Attempts but fundamental logical errors",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 360
+    },
+    {
+      "id": "math-9-rei-b-3-001",
+      "standard_id": "HSA-REI.B.3",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Solve the inequality: 4x - 7 > 2x + 5. Express your answer in interval notation.",
+      "correct_answer": "(6, ∞)",
+      "explanation": "Subtract 2x: 2x - 7 > 5. Add 7: 2x > 12. Divide by 2: x > 6",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 2,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.50,
+      "time_estimate_seconds": 120
+    },
+    {
+      "id": "math-9-rei-b-3-002",
+      "standard_id": "HSA-REI.B.3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Solve: -3(2x + 1) ≥ 15. Graph the solution on a number line and explain what happens to the inequality symbol when dividing by a negative number.",
+      "rubric": {
+        "4": "Correctly solves x ≤ -3, accurate number line with closed circle at -3 shaded left, explains inequality flips because multiplying/dividing by negative reverses order",
+        "3": "Correct solution and graph with basic explanation of sign flip",
+        "2": "Correct solution but graph or explanation has errors",
+        "1": "Attempts but forgets to flip sign or other significant error",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.60,
+      "time_estimate_seconds": 240
+    },
+    {
+      "id": "math-9-rei-b-3-003",
+      "standard_id": "HSA-REI.B.3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Solve the compound inequality: -5 < 2x + 3 ≤ 11. Express your answer in interval notation and graph on a number line.",
+      "correct_answer": "(-4, 4]",
+      "rubric": {
+        "4": "Correctly solves to -4 < x ≤ 4, writes (-4, 4], accurate graph with open circle at -4, closed at 4, shaded between",
+        "3": "Correct solution and notation with minor graphing issues",
+        "2": "Correct solution but interval notation or graph has errors",
+        "1": "Attempts but significant errors in compound inequality handling",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.60,
+      "time_estimate_seconds": 240
+    },
+    {
+      "id": "math-9-rei-b-4-001",
+      "standard_id": "HSA-REI.B.4",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Solve x² + 6x - 7 = 0 by completing the square. Show all steps and verify your solutions by substitution.",
+      "rubric": {
+        "4": "Correctly completes square: (x+3)² = 16, x = -3 ± 4, so x = 1 or x = -7; verifies both solutions",
+        "3": "Correct solutions with completing the square shown, verification attempted",
+        "2": "Process shown but computational errors, or factoring used instead",
+        "1": "Attempts completing the square but fundamental errors",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 300
+    },
+    {
+      "id": "math-9-rei-b-4-002",
+      "standard_id": "HSA-REI.B.4",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Derive the quadratic formula by completing the square on ax² + bx + c = 0. Then use it to solve 2x² - 5x - 3 = 0.",
+      "rubric": {
+        "4": "Correctly derives x = (-b ± √(b²-4ac))/(2a) with clear steps; correctly applies to get x = 3 and x = -1/2",
+        "3": "Correct derivation and application with minor errors",
+        "2": "Either derivation or application correct, not both",
+        "1": "Attempts but significant errors in both parts",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 420
+    },
+    {
+      "id": "math-9-rei-b-4-003",
+      "standard_id": "HSA-REI.B.4",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "The equation x² + 4x + k = 0 has solutions that depend on k. For what values of k does the equation have: (a) two distinct real solutions, (b) exactly one real solution, (c) no real solutions? Justify using the discriminant.",
+      "rubric": {
+        "4": "Correctly calculates discriminant 16 - 4k; (a) k < 4 for two solutions, (b) k = 4 for one solution, (c) k > 4 for no real solutions; clear justification",
+        "3": "All three parts correct with adequate justification",
+        "2": "Two parts correct or process correct with computational errors",
+        "1": "Attempts discriminant analysis but significant errors",
+        "0": "No response or doesn't use discriminant"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 360
+    },
+    {
+      "id": "math-9-rei-c-5-001",
+      "standard_id": "HSA-REI.C.5",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Solve the system using elimination: 3x + 2y = 12 and 2x - 2y = 8. Explain why adding these equations eliminates y and prove that your solution satisfies both original equations.",
+      "rubric": {
+        "4": "Correctly adds to get 5x = 20, x = 4, y = 0; explains coefficients of y are opposites; verifies (4,0) in both equations",
+        "3": "Correct solution with adequate explanation and verification",
+        "2": "Correct solution but weak explanation or incomplete verification",
+        "1": "Attempts but significant errors in process",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 240
+    },
+    {
+      "id": "math-9-rei-c-5-002",
+      "standard_id": "HSA-REI.C.5",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Solve the system: 2x + 3y = 7 and 5x + 4y = 14. Show that multiplying the first equation by a constant before adding maintains the solution set. Explain why this works mathematically.",
+      "rubric": {
+        "4": "Correctly solves (x = 2, y = 1), demonstrates multiplication preserves solutions by showing any scalar multiple of first equation still passes through (2,1), explains multiplication property of equality",
+        "3": "Correct solution with adequate explanation of scalar multiplication",
+        "2": "Correct solution but limited explanation",
+        "1": "Attempts but errors in solving or explaining",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.70,
+      "time_estimate_seconds": 360
+    },
+    {
+      "id": "math-9-rei-c-5-003",
+      "standard_id": "HSA-REI.C.5",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "A system of two linear equations can have exactly one solution, no solution, or infinitely many solutions. Create an example of each type and explain geometrically why each outcome occurs.",
+      "rubric": {
+        "4": "Creates valid examples of all three cases; explains intersecting lines (one solution), parallel lines (no solution), same line (infinite solutions)",
+        "3": "All three examples correct with basic geometric explanation",
+        "2": "Two examples correct with explanations",
+        "1": "One example correct or examples without geometric reasoning",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.70,
+      "time_estimate_seconds": 420
+    },
+    {
+      "id": "math-9-rei-d-10-001",
+      "standard_id": "HSA-REI.D.10",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Graph the equation y = |x - 2| - 3. Identify the vertex, describe the shape, and explain how you can verify that points on your graph satisfy the equation.",
+      "rubric": {
+        "4": "Correct V-shaped graph with vertex at (2, -3); explains absolute value creates V-shape; verifies by substituting points like (2, -3), (0, -1), (4, -1)",
+        "3": "Correct graph with vertex identified and basic verification",
+        "2": "Graph mostly correct but vertex or verification has errors",
+        "1": "Attempts but significant graphing errors",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.60,
+      "time_estimate_seconds": 300
+    },
+    {
+      "id": "math-9-rei-d-10-002",
+      "standard_id": "HSA-REI.D.10",
+      "dok_level": 3,
+      "question_type": "multi_part",
+      "question": "Consider the equation y = 2x² - 8x + 6. Part A: Find the x-intercepts by setting y = 0. Part B: Find the vertex using the formula x = -b/(2a). Part C: Graph the parabola showing intercepts and vertex. Part D: Explain why every point on your graph satisfies the original equation.",
+      "rubric": {
+        "4": "Correctly finds x-intercepts (1, 3), vertex (2, -2), accurate graph, explains that substituting any point's coordinates into equation yields true statement",
+        "3": "All parts correct with minor errors",
+        "2": "Three parts correct",
+        "1": "Two or fewer parts correct",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.70,
+      "time_estimate_seconds": 480
+    },
+    {
+      "id": "math-9-rei-d-10-003",
+      "standard_id": "HSA-REI.D.10",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "The equation x² + y² = 25 represents a circle. Explain why this is not a function, find four points that satisfy the equation, and describe how the graph represents all solutions to the equation.",
+      "rubric": {
+        "4": "Explains vertical line test fails (e.g., x=3 gives y=±4); provides four correct points; explains circle is set of all (x,y) where sum of squares equals 25",
+        "3": "All elements present with minor errors or incomplete explanations",
+        "2": "Two elements correct",
+        "1": "One element correct",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.70,
+      "time_estimate_seconds": 360
+    }
+  ]
+}

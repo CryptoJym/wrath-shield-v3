@@ -1,0 +1,557 @@
+{
+  "grade": "8",
+  "items": [
+    {
+      "id": "sci-8-ps2-1-001",
+      "standard_id": "MS-PS2-1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "According to Newton's Third Law, when a swimmer pushes against the water, what happens?",
+      "options": ["The water pushes back on the swimmer with equal force, moving them forward", "Nothing happens to the swimmer", "The water moves but the swimmer stays still", "The swimmer sinks"],
+      "correct_answer": "The water pushes back on the swimmer with equal force, moving them forward",
+      "explanation": "Newton's Third Law states that for every action, there is an equal and opposite reaction. When the swimmer pushes water backward, the water pushes the swimmer forward.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 45,
+      "science_practice": "Constructing Explanations and Designing Solutions"
+    },
+    {
+      "id": "sci-8-ps2-1-002",
+      "standard_id": "MS-PS2-1",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Apply Newton's Third Law to design a solution for moving a heavy box across a frictionless floor without touching it directly. You may only use other objects. Explain the forces involved and how they follow Newton's Third Law.",
+      "rubric": {
+        "4": "Creative solution (throw objects opposite direction, use compressed air, etc.) with clear explanation of action-reaction force pairs and how momentum is transferred",
+        "3": "Workable solution with force explanation",
+        "2": "Solution present but force explanation incomplete",
+        "1": "Idea without Newton's Third Law connection",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 5,
+        "generativity_delta": 6
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 420,
+      "science_practice": "Constructing Explanations and Designing Solutions"
+    },
+    {
+      "id": "sci-8-ps2-2-001",
+      "standard_id": "MS-PS2-2",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Two forces act on a stationary object: 10 N to the right and 10 N to the left. What will happen to the object?",
+      "options": ["It will remain stationary because the forces are balanced", "It will move to the right", "It will move to the left", "It will move in circles"],
+      "correct_answer": "It will remain stationary because the forces are balanced",
+      "explanation": "When forces are equal in magnitude but opposite in direction, they cancel out (net force = 0). With no net force, the object's motion doesn't change.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 40,
+      "science_practice": "Analyzing and Interpreting Data"
+    },
+    {
+      "id": "sci-8-ps2-2-002",
+      "standard_id": "MS-PS2-2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Plan an investigation to provide evidence that the change in an object's motion depends on the sum of forces acting on it AND the mass of the object. Describe: 1) Your materials, 2) Your procedure with controlled variables, 3) What data you would collect, 4) How you would analyze results.",
+      "rubric": {
+        "4": "Complete investigation: use cart/track/force meter, test different forces with same mass then same force with different masses, measure acceleration, analyze that a=F/m relationship emerges",
+        "3": "Good investigation with variables controlled",
+        "2": "Basic investigation but variables not well controlled",
+        "1": "Mentions testing without clear plan",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 420,
+      "science_practice": "Planning and Carrying Out Investigations"
+    },
+    {
+      "id": "sci-8-ps2-3-001",
+      "standard_id": "MS-PS2-3",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "A student brings a magnet closer to a paper clip. The paper clip starts to move toward the magnet when it is 3 cm away. What factor determines when the paper clip starts to move?",
+      "options": ["The strength of the magnetic field decreases with distance", "The paper clip decides when to move", "Paper clips only move at exactly 3 cm", "The magnet becomes stronger when closer"],
+      "correct_answer": "The strength of the magnetic field decreases with distance",
+      "explanation": "Magnetic force decreases with distance. At 3 cm, the magnetic force became strong enough to overcome friction and move the paper clip.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 45,
+      "science_practice": "Asking Questions and Defining Problems"
+    },
+    {
+      "id": "sci-8-ps2-3-002",
+      "standard_id": "MS-PS2-3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Design a data collection procedure to determine how the strength of a magnetic force changes with distance. What questions would guide your investigation? What data would you collect? Create a sample data table.",
+      "rubric": {
+        "4": "Clear questions (How does distance affect force?), procedure (measure force at multiple distances), data table with distance and force columns, prediction that force decreases with distance squared",
+        "3": "Good procedure with data table",
+        "2": "Some procedure but data collection unclear",
+        "1": "Questions without investigation plan",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 300,
+      "science_practice": "Asking Questions and Defining Problems"
+    },
+    {
+      "id": "sci-8-ps2-4-001",
+      "standard_id": "MS-PS2-4",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Construct and present an argument using evidence to support the claim that gravitational interactions are attractive and depend on the masses of interacting objects. Use examples from everyday life and the solar system.",
+      "rubric": {
+        "4": "Strong argument with multiple evidence types: objects fall toward Earth (attractive), more massive planets have more moons (mass matters), you weigh less on moon (mass matters), tides caused by moon's gravity",
+        "3": "Good argument with several pieces of evidence",
+        "2": "Basic argument with limited evidence",
+        "1": "States gravity attracts without evidence",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 360,
+      "science_practice": "Engaging in Argument from Evidence"
+    },
+    {
+      "id": "sci-8-ps2-5-001",
+      "standard_id": "MS-PS2-5",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Conduct an investigation to demonstrate that magnetic or electric fields exist between objects not in contact. Design your investigation, predict what you will observe, and explain how your observations provide evidence for fields.",
+      "rubric": {
+        "4": "Clear investigation (compass near wire with current, or iron filings around magnet), prediction of field effects, explanation that action at a distance indicates field presence, field visualization",
+        "3": "Good investigation with field evidence",
+        "2": "Investigation shows effect but field concept weak",
+        "1": "Describes magnets working without field explanation",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 360,
+      "science_practice": "Planning and Carrying Out Investigations"
+    },
+    {
+      "id": "sci-8-ps3-1-001",
+      "standard_id": "MS-PS3-1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A 2 kg ball traveling at 3 m/s has kinetic energy of 9 J. A 2 kg ball traveling at 6 m/s has kinetic energy of 36 J. Construct a graphical display of this data and describe the relationship between speed and kinetic energy. What mathematical relationship does this suggest?",
+      "rubric": {
+        "4": "Accurate graph showing curved relationship, identifies KE quadruples when speed doubles, states KE proportional to speed squared (KE = ½mv²)",
+        "3": "Good graph with relationship identified",
+        "2": "Graph created but relationship not clearly stated",
+        "1": "Data listed without graphical analysis",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 300,
+      "science_practice": "Analyzing and Interpreting Data"
+    },
+    {
+      "id": "sci-8-ps3-2-001",
+      "standard_id": "MS-PS3-2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Develop a model to describe how potential energy is stored in a system when objects interact at a distance. Include: 1) A gravitational example, 2) An electromagnetic example (like charged particles), 3) How the arrangement of objects affects the energy stored.",
+      "rubric": {
+        "4": "Both examples with correct energy relationships: gravitational PE increases with height/distance from Earth; electric PE depends on charge arrangement; clear connection between position and energy storage",
+        "3": "Both examples with energy relationship",
+        "2": "One example well developed",
+        "1": "Mentions potential energy without model",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 360,
+      "science_practice": "Developing and Using Models"
+    },
+    {
+      "id": "sci-8-ps3-5-001",
+      "standard_id": "MS-PS3-5",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Construct an argument to support the claim that when the kinetic energy of an object changes, energy is transferred to or from the object. Use a specific example (like braking a car) and explain where the energy goes.",
+      "rubric": {
+        "4": "Clear argument: car braking example, KE decreases, energy transfers to brake pads (heat), tires (friction/heat), sound; conservation of energy maintained, energy transformed not destroyed",
+        "3": "Good argument with energy transfer explained",
+        "2": "Example given but energy transfer incomplete",
+        "1": "States energy changes without transfer explanation",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 300,
+      "science_practice": "Engaging in Argument from Evidence"
+    },
+    {
+      "id": "sci-8-ps4-1-001",
+      "standard_id": "MS-PS4-1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Two sound waves have the same wavelength, but Wave A has twice the amplitude of Wave B. Which statement is correct?",
+      "options": ["Wave A carries more energy than Wave B", "Wave B carries more energy than Wave A", "Both waves carry the same energy", "Amplitude doesn't affect energy"],
+      "correct_answer": "Wave A carries more energy than Wave B",
+      "explanation": "The energy carried by a wave is proportional to the square of its amplitude. Greater amplitude means more energy.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 50,
+      "science_practice": "Using Mathematics and Computational Thinking"
+    },
+    {
+      "id": "sci-8-ps4-1-002",
+      "standard_id": "MS-PS4-1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Use mathematical representations to describe how: 1) Wavelength and frequency are related (wave equation), 2) Amplitude relates to energy. Draw wave diagrams to support your explanation. Include the equation v = fλ and explain each variable.",
+      "rubric": {
+        "4": "Correct equation with variables defined (v=speed, f=frequency, λ=wavelength), wave diagrams showing wavelength/amplitude, explanation that higher amplitude = more energy, frequency increases as wavelength decreases",
+        "3": "Equation and diagrams with some explanation",
+        "2": "Some elements correct but incomplete",
+        "1": "Attempts diagrams without mathematical connection",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 360,
+      "science_practice": "Using Mathematics and Computational Thinking"
+    },
+    {
+      "id": "sci-8-ps4-2-001",
+      "standard_id": "MS-PS4-2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Develop a model to describe what happens to light waves when they encounter: 1) A mirror, 2) A glass window, 3) A brick wall. Explain the differences in terms of reflection, absorption, and transmission.",
+      "rubric": {
+        "4": "Complete model: mirror (mostly reflects), window (mostly transmits, some reflects), wall (mostly absorbs, some reflects); explains that material properties determine which behavior dominates",
+        "3": "All three materials with correct primary behavior",
+        "2": "Some correct but not all three complete",
+        "1": "Lists behaviors without material connection",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 300,
+      "science_practice": "Developing and Using Models"
+    },
+    {
+      "id": "sci-8-ps4-3-001",
+      "standard_id": "MS-PS4-3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Integrate information to support the claim that digitized signals are more reliable than analog signals for encoding and transmitting information. Compare how each type of signal can be affected by noise, and explain why digital signals can be reconstructed more accurately.",
+      "rubric": {
+        "4": "Clear comparison: analog signals degrade with noise (static in radio), digital has discrete values (0,1) that can be regenerated; digital can detect/correct errors; examples from technology (CD vs vinyl, digital vs analog TV)",
+        "3": "Good comparison with reliability explanation",
+        "2": "Some digital advantages but comparison weak",
+        "1": "States digital is better without explanation",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 300,
+      "science_practice": "Obtaining, Evaluating, and Communicating Information"
+    },
+    {
+      "id": "sci-8-ls3-1-001",
+      "standard_id": "MS-LS3-1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Develop a model to describe why mutations in genes may result in harmful, beneficial, or neutral effects on the organism. Include: 1) Where genes are located, 2) What genes code for, 3) How a change in the gene sequence affects the protein, 4) An example of each type of effect.",
+      "rubric": {
+        "4": "Complete model: genes on chromosomes, code for proteins, mutations change amino acid sequence; examples - harmful (sickle cell in severe form), beneficial (lactose tolerance), neutral (silent mutations)",
+        "3": "Good model with understanding of gene-protein relationship",
+        "2": "Some mutation understanding but protein connection weak",
+        "1": "Mentions mutations without mechanism",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 420,
+      "science_practice": "Developing and Using Models"
+    },
+    {
+      "id": "sci-8-ls3-2-001",
+      "standard_id": "MS-LS3-2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Develop a model comparing asexual and sexual reproduction. Explain why: 1) Asexual reproduction produces genetically identical offspring, 2) Sexual reproduction produces offspring with genetic variation. Include implications for adaptation.",
+      "rubric": {
+        "4": "Complete model: asexual = one parent, identical DNA copy, clones; sexual = two parents, mixing of chromosomes, genetic variation; variation allows adaptation to changing environments",
+        "3": "Good comparison with variation explanation",
+        "2": "Some differences but genetic mechanism unclear",
+        "1": "Lists reproduction types without genetic focus",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 360,
+      "science_practice": "Developing and Using Models"
+    },
+    {
+      "id": "sci-8-ls4-4-001",
+      "standard_id": "MS-LS4-4",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Construct an explanation for how genetic variation of traits in a population increases some individuals' probability of surviving in a specific environment. Use the example of antibiotic resistance in bacteria.",
+      "rubric": {
+        "4": "Complete explanation: bacteria population has genetic variation, some randomly have resistance genes, antibiotics kill non-resistant, resistant survive and reproduce, population becomes mostly resistant; connects to natural selection",
+        "3": "Good explanation with selection mechanism",
+        "2": "Describes resistance but mechanism unclear",
+        "1": "States bacteria become resistant without explaining how",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 360,
+      "science_practice": "Constructing Explanations and Designing Solutions"
+    },
+    {
+      "id": "sci-8-ls4-5-001",
+      "standard_id": "MS-LS4-5",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Which technology has allowed humans to most directly modify the inheritance of specific traits in organisms?",
+      "options": ["Genetic engineering/gene editing", "Selective breeding", "Cloning", "Vaccination"],
+      "correct_answer": "Genetic engineering/gene editing",
+      "explanation": "While selective breeding changes traits over generations, genetic engineering allows direct modification of DNA to add, remove, or change specific genes.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 45,
+      "science_practice": "Obtaining, Evaluating, and Communicating Information"
+    },
+    {
+      "id": "sci-8-ls4-6-001",
+      "standard_id": "MS-LS4-6",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Use mathematical representations to support an explanation of how natural selection may lead to increases or decreases of specific traits in a population over time. Create a model showing a starting population with trait variation and how the proportion changes over 5 generations due to selection.",
+      "rubric": {
+        "4": "Mathematical model with starting population (e.g., 100 individuals, 20% with trait), selection pressure, calculations showing trait frequency changing over 5 generations, graph of change over time",
+        "3": "Model with population changes but calculations incomplete",
+        "2": "Shows concept but mathematical representation weak",
+        "1": "States traits change without mathematical support",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 420,
+      "science_practice": "Using Mathematics and Computational Thinking"
+    },
+    {
+      "id": "sci-8-ess1-4-001",
+      "standard_id": "MS-ESS1-4",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Construct a scientific explanation based on evidence from rock strata for how scientists use the geologic time scale to organize Earth's 4.6-billion-year history. Include: 1) How relative age is determined, 2) How absolute age is determined, 3) Major divisions of the time scale.",
+      "rubric": {
+        "4": "Complete explanation: relative dating through superposition and fossils, absolute dating through radiometric methods, major eons/eras with examples of life forms and events that define boundaries",
+        "3": "Good explanation with dating methods and some divisions",
+        "2": "Some dating concepts but time scale organization weak",
+        "1": "States time scale exists without methods explanation",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 360,
+      "science_practice": "Constructing Explanations and Designing Solutions"
+    },
+    {
+      "id": "sci-8-ess2-3-001",
+      "standard_id": "MS-ESS2-3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Analyze and interpret the following data to provide evidence for plate tectonics: 1) Fossils of the same species found on continents now separated by oceans, 2) The shapes of continental coastlines, 3) Seafloor spreading evidence. How does this data support past plate motions?",
+      "rubric": {
+        "4": "All three types of evidence analyzed: matching fossils indicate continents were connected, coastlines fit like puzzle pieces, seafloor spreading shows plates moving apart; synthesis explains plate tectonics theory",
+        "3": "Three types with good analysis",
+        "2": "Some evidence analyzed but synthesis weak",
+        "1": "Lists evidence without analysis",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 300,
+      "science_practice": "Analyzing and Interpreting Data"
+    },
+    {
+      "id": "sci-8-ets1-1-001",
+      "standard_id": "MS-ETS1-1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Define the criteria and constraints for designing a water purification system for a community without access to clean water. Consider: scientific principles of purification, impact on people, environmental impacts, available resources, and cost limitations.",
+      "rubric": {
+        "4": "Complete definition: criteria (removes specific contaminants, produces X liters/day, safe for drinking), constraints (budget, local materials, maintenance by local people, environmental sustainability), considers cultural and practical factors",
+        "3": "Good criteria and constraints with most factors",
+        "2": "Some criteria/constraints but not comprehensive",
+        "1": "General description without specific criteria",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 360,
+      "science_practice": "Asking Questions and Defining Problems"
+    },
+    {
+      "id": "sci-8-ets1-2-001",
+      "standard_id": "MS-ETS1-2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Three solar panel designs are being evaluated. Design A: 20% efficiency, $500/unit, 25-year lifespan. Design B: 15% efficiency, $300/unit, 20-year lifespan. Design C: 25% efficiency, $800/unit, 30-year lifespan. Develop a systematic process to evaluate which design best meets the criteria of efficiency, cost-effectiveness, and longevity.",
+      "rubric": {
+        "4": "Systematic evaluation with weighted criteria or cost-per-year-per-efficiency calculations, trade-off analysis, justified recommendation with reasoning for weights chosen",
+        "3": "Good systematic comparison with most factors",
+        "2": "Comparison made but not fully systematic",
+        "1": "Chooses one without systematic process",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 360,
+      "science_practice": "Analyzing and Interpreting Data"
+    },
+    {
+      "id": "sci-8-ets1-3-001",
+      "standard_id": "MS-ETS1-3",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Three student teams designed rockets. Team A's rocket flew highest but landed far from the target. Team B's landed closest to target but flew lowest. Team C had medium height and accuracy. Analyze this test data to identify the best characteristics that could be combined into an optimal design.",
+      "rubric": {
+        "4": "Thorough analysis: identifies A's propulsion/aerodynamic strengths, B's guidance/stabilization strengths, C's balance; proposes combination with specific features from each; predicts improved performance",
+        "3": "Good analysis with combination proposed",
+        "2": "Some analysis but combination not fully developed",
+        "1": "Lists results without analysis",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 360,
+      "science_practice": "Analyzing and Interpreting Data"
+    },
+    {
+      "id": "sci-8-ets1-4-001",
+      "standard_id": "MS-ETS1-4",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Develop a model for iteratively testing and modifying a bridge design to achieve optimal strength-to-weight ratio. Include: 1) Initial design and hypothesis, 2) Testing procedure, 3) How you would collect and analyze data, 4) How you would modify based on failure points, 5) At least two iterations of improvement.",
+      "rubric": {
+        "4": "Complete iterative process: initial design with rationale, clear test procedure, data table (weight held, failure point, mass of bridge), first modification addressing failure, second test and modification, comparison across iterations showing improvement",
+        "3": "Good iterative process with at least two improvements",
+        "2": "Some iteration but process not fully documented",
+        "1": "Single design without iteration",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 5,
+        "generativity_delta": 6
+      },
+      "difficulty": 0.8,
+      "time_estimate_seconds": 480,
+      "science_practice": "Developing and Using Models"
+    }
+  ]
+}

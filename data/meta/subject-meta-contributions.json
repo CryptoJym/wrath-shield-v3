@@ -1,0 +1,756 @@
+{
+  "version": "1.0",
+  "created_at": "2025-12-08",
+  "description": "Subject-to-MetaDimension contribution matrix based on educational psychology research",
+  "meta_dimensions": {
+    "manifold_fluidity": {
+      "description": "Ability to move fluidly between conceptual states",
+      "high": "Easy state transitions, natural context-switching",
+      "low": "Gets stuck in single perspectives"
+    },
+    "multi_model_coherence": {
+      "description": "Cross-domain integration and synthesis",
+      "high": "Naturally connects ideas across subjects",
+      "low": "Treats each domain in isolation"
+    },
+    "identity_elasticity": {
+      "description": "Adaptability to new contexts and self-concept flexibility",
+      "high": "Comfortable trying new things, growth mindset",
+      "low": "Rigid identity, fear of looking incompetent"
+    },
+    "gradient_awareness": {
+      "description": "Metacognitive monitoring of learning trajectory",
+      "high": "Knows what they're improving at, calibrated self-assessment",
+      "low": "Poor sense of own progress"
+    },
+    "entropy_intuition": {
+      "description": "Comfort with uncertainty and productive exploration",
+      "high": "Embraces confusion as learning opportunity",
+      "low": "Needs constant structure and validation"
+    },
+    "non_dual_resolution": {
+      "description": "Ability to hold contradictions productively",
+      "high": "Comfortable with paradox and ambiguity",
+      "low": "Forces binary choices, black-and-white thinking"
+    },
+    "cooperative_generativity": {
+      "description": "Collaborative creation and value generation",
+      "high": "Builds on others' ideas, co-creates naturally",
+      "low": "Isolated thinking, competitive rather than collaborative"
+    }
+  },
+  "subjects": {
+    "math": {
+      "description": "Mathematical reasoning, numerical fluency, and abstract problem-solving",
+      "category": "academic",
+      "contributions": {
+        "manifold_fluidity": 0.3,
+        "multi_model_coherence": 0.4,
+        "identity_elasticity": 0.1,
+        "gradient_awareness": 0.5,
+        "entropy_intuition": 0.2,
+        "non_dual_resolution": 0.2,
+        "cooperative_generativity": 0.1
+      },
+      "research_basis": {
+        "gradient_awareness": "Mathematical problem-solving requires constant self-monitoring of approach efficacy (Schoenfeld, 1992)",
+        "multi_model_coherence": "Translating between representations (algebraic, geometric, numerical) builds cross-domain integration (Duval, 2006)"
+      },
+      "activities": {
+        "problem_solving": {
+          "description": "Working through novel math problems",
+          "manifold_fluidity": 0.4,
+          "gradient_awareness": 0.6,
+          "entropy_intuition": 0.3,
+          "research_basis": "Novel problem-solving requires flexible strategy switching (Polya, 1945)"
+        },
+        "proof_writing": {
+          "description": "Constructing mathematical proofs and arguments",
+          "multi_model_coherence": 0.6,
+          "non_dual_resolution": 0.4,
+          "gradient_awareness": 0.4,
+          "research_basis": "Proof construction requires holding multiple logical threads simultaneously (Weber, 2001)"
+        },
+        "collaborative_math": {
+          "description": "Group problem-solving and math discussions",
+          "cooperative_generativity": 0.5,
+          "multi_model_coherence": 0.5,
+          "research_basis": "Mathematical discourse communities enhance conceptual understanding (Lampert, 1990)"
+        },
+        "estimation": {
+          "description": "Approximation and number sense activities",
+          "entropy_intuition": 0.5,
+          "gradient_awareness": 0.4,
+          "research_basis": "Estimation requires comfort with inexact answers (Sowder, 1992)"
+        }
+      }
+    },
+    "reading": {
+      "description": "Reading comprehension, literary analysis, and text interpretation",
+      "category": "academic",
+      "contributions": {
+        "manifold_fluidity": 0.4,
+        "multi_model_coherence": 0.3,
+        "identity_elasticity": 0.5,
+        "gradient_awareness": 0.3,
+        "entropy_intuition": 0.3,
+        "non_dual_resolution": 0.4,
+        "cooperative_generativity": 0.2
+      },
+      "research_basis": {
+        "identity_elasticity": "Perspective-taking through literature develops identity flexibility (Mar & Oatley, 2008)",
+        "non_dual_resolution": "Literary interpretation often requires holding multiple valid readings (Rosenblatt, 1978)"
+      },
+      "activities": {
+        "literary_analysis": {
+          "description": "Analyzing themes, symbols, and narrative structure",
+          "non_dual_resolution": 0.6,
+          "multi_model_coherence": 0.5,
+          "research_basis": "Complex texts support multiple valid interpretations requiring dialectical thinking"
+        },
+        "perspective_taking": {
+          "description": "Understanding characters' viewpoints and motivations",
+          "identity_elasticity": 0.7,
+          "non_dual_resolution": 0.5,
+          "research_basis": "Theory of mind development through narrative (Kidd & Castano, 2013)"
+        },
+        "close_reading": {
+          "description": "Detailed textual analysis and annotation",
+          "gradient_awareness": 0.5,
+          "manifold_fluidity": 0.4,
+          "research_basis": "Metacognitive monitoring during reading comprehension (Baker & Brown, 1984)"
+        },
+        "book_discussions": {
+          "description": "Literature circles and group discussions",
+          "cooperative_generativity": 0.5,
+          "non_dual_resolution": 0.5,
+          "identity_elasticity": 0.4,
+          "research_basis": "Dialogic discussion builds collaborative meaning-making (Reznitskaya et al., 2001)"
+        }
+      }
+    },
+    "science": {
+      "description": "Scientific inquiry, experimentation, and evidence-based reasoning",
+      "category": "academic",
+      "contributions": {
+        "manifold_fluidity": 0.3,
+        "multi_model_coherence": 0.5,
+        "identity_elasticity": 0.2,
+        "gradient_awareness": 0.4,
+        "entropy_intuition": 0.6,
+        "non_dual_resolution": 0.3,
+        "cooperative_generativity": 0.4
+      },
+      "research_basis": {
+        "entropy_intuition": "Scientific method embraces uncertainty through hypothesis testing (Popper, 1959)",
+        "multi_model_coherence": "Science requires integrating observations, theories, and mathematical models (Giere, 1988)"
+      },
+      "activities": {
+        "experimentation": {
+          "description": "Designing and conducting experiments",
+          "entropy_intuition": 0.7,
+          "gradient_awareness": 0.5,
+          "cooperative_generativity": 0.5,
+          "research_basis": "Experimental design requires comfort with unexpected results (Chinn & Malhotra, 2002)"
+        },
+        "data_analysis": {
+          "description": "Analyzing and interpreting experimental data",
+          "multi_model_coherence": 0.6,
+          "entropy_intuition": 0.5,
+          "gradient_awareness": 0.4,
+          "research_basis": "Statistical reasoning involves embracing variability (Wild & Pfannkuch, 1999)"
+        },
+        "model_building": {
+          "description": "Creating and revising scientific models",
+          "manifold_fluidity": 0.5,
+          "multi_model_coherence": 0.6,
+          "non_dual_resolution": 0.4,
+          "research_basis": "Model-based reasoning requires flexibility in representation (Lehrer & Schauble, 2006)"
+        },
+        "lab_collaboration": {
+          "description": "Working in lab teams on investigations",
+          "cooperative_generativity": 0.7,
+          "gradient_awareness": 0.4,
+          "research_basis": "Authentic science is inherently collaborative (Dunbar, 1995)"
+        }
+      }
+    },
+    "coding": {
+      "description": "Programming, computational thinking, and software development",
+      "category": "academic",
+      "contributions": {
+        "manifold_fluidity": 0.5,
+        "multi_model_coherence": 0.4,
+        "identity_elasticity": 0.3,
+        "gradient_awareness": 0.6,
+        "entropy_intuition": 0.4,
+        "non_dual_resolution": 0.2,
+        "cooperative_generativity": 0.5
+      },
+      "research_basis": {
+        "gradient_awareness": "Debugging requires constant metacognitive monitoring of program state (Perkins et al., 1986)",
+        "manifold_fluidity": "Programmers shift between abstraction levels continuously (Lister et al., 2004)"
+      },
+      "activities": {
+        "debugging": {
+          "description": "Finding and fixing code errors",
+          "gradient_awareness": 0.8,
+          "manifold_fluidity": 0.5,
+          "entropy_intuition": 0.5,
+          "research_basis": "Debugging is metacognition made visible (McCauley et al., 2008)"
+        },
+        "algorithm_design": {
+          "description": "Creating efficient solutions to problems",
+          "manifold_fluidity": 0.6,
+          "multi_model_coherence": 0.5,
+          "gradient_awareness": 0.5,
+          "research_basis": "Algorithm design requires flexible problem decomposition (Wing, 2006)"
+        },
+        "pair_programming": {
+          "description": "Collaborative coding with a partner",
+          "cooperative_generativity": 0.8,
+          "gradient_awareness": 0.5,
+          "identity_elasticity": 0.4,
+          "research_basis": "Pair programming enhances learning through verbalization (Williams & Kessler, 2000)"
+        },
+        "code_review": {
+          "description": "Reviewing and critiquing code",
+          "multi_model_coherence": 0.5,
+          "gradient_awareness": 0.6,
+          "cooperative_generativity": 0.6,
+          "research_basis": "Code review develops critical analysis of multiple approaches"
+        },
+        "open_source_contribution": {
+          "description": "Contributing to open source projects",
+          "cooperative_generativity": 0.9,
+          "identity_elasticity": 0.5,
+          "entropy_intuition": 0.5,
+          "research_basis": "Open source requires navigating unfamiliar codebases and community norms"
+        }
+      }
+    },
+    "study_skills": {
+      "description": "Learning strategies, time management, and self-regulation",
+      "category": "academic",
+      "contributions": {
+        "manifold_fluidity": 0.3,
+        "multi_model_coherence": 0.3,
+        "identity_elasticity": 0.4,
+        "gradient_awareness": 0.7,
+        "entropy_intuition": 0.3,
+        "non_dual_resolution": 0.2,
+        "cooperative_generativity": 0.2
+      },
+      "research_basis": {
+        "gradient_awareness": "Self-regulated learning is fundamentally metacognitive (Zimmerman, 2002)",
+        "identity_elasticity": "Growth mindset is core to effective study habits (Dweck, 2006)"
+      },
+      "activities": {
+        "goal_setting": {
+          "description": "Setting and tracking learning goals",
+          "gradient_awareness": 0.8,
+          "identity_elasticity": 0.5,
+          "research_basis": "Goal-setting enhances self-monitoring (Locke & Latham, 2002)"
+        },
+        "spaced_repetition": {
+          "description": "Using spaced review for retention",
+          "gradient_awareness": 0.6,
+          "entropy_intuition": 0.4,
+          "research_basis": "Effective spacing requires calibrated memory confidence (Cepeda et al., 2006)"
+        },
+        "reflection_journaling": {
+          "description": "Writing learning reflections",
+          "gradient_awareness": 0.8,
+          "identity_elasticity": 0.6,
+          "non_dual_resolution": 0.4,
+          "research_basis": "Reflective writing enhances metacognitive awareness (Moon, 2006)"
+        },
+        "study_groups": {
+          "description": "Collaborative study sessions",
+          "cooperative_generativity": 0.6,
+          "multi_model_coherence": 0.4,
+          "research_basis": "Peer explanation enhances understanding (Chi et al., 1989)"
+        }
+      }
+    },
+    "critical_thinking": {
+      "description": "Logical reasoning, argument analysis, and evaluation",
+      "category": "academic",
+      "contributions": {
+        "manifold_fluidity": 0.4,
+        "multi_model_coherence": 0.5,
+        "identity_elasticity": 0.4,
+        "gradient_awareness": 0.5,
+        "entropy_intuition": 0.4,
+        "non_dual_resolution": 0.6,
+        "cooperative_generativity": 0.3
+      },
+      "research_basis": {
+        "non_dual_resolution": "Critical thinking requires evaluating competing claims (Ennis, 1985)",
+        "multi_model_coherence": "Argument mapping integrates multiple reasoning chains (van Gelder, 2005)"
+      },
+      "activities": {
+        "argument_analysis": {
+          "description": "Evaluating logical arguments",
+          "non_dual_resolution": 0.7,
+          "multi_model_coherence": 0.6,
+          "research_basis": "Argument mapping enhances critical thinking (van Gelder, 2005)"
+        },
+        "debate": {
+          "description": "Structured argumentation and debate",
+          "non_dual_resolution": 0.8,
+          "identity_elasticity": 0.6,
+          "cooperative_generativity": 0.5,
+          "research_basis": "Debate requires understanding opposing viewpoints (Kuhn, 2005)"
+        },
+        "source_evaluation": {
+          "description": "Assessing credibility of information sources",
+          "entropy_intuition": 0.6,
+          "gradient_awareness": 0.5,
+          "non_dual_resolution": 0.5,
+          "research_basis": "Source evaluation requires calibrated uncertainty (Wineburg & McGrew, 2017)"
+        },
+        "socratic_dialogue": {
+          "description": "Questioning-based inquiry",
+          "non_dual_resolution": 0.7,
+          "manifold_fluidity": 0.5,
+          "identity_elasticity": 0.5,
+          "research_basis": "Socratic questioning develops intellectual humility (Paul & Elder, 2006)"
+        }
+      }
+    },
+    "technology": {
+      "description": "Digital literacy, tool proficiency, and tech fluency",
+      "category": "academic",
+      "contributions": {
+        "manifold_fluidity": 0.4,
+        "multi_model_coherence": 0.4,
+        "identity_elasticity": 0.4,
+        "gradient_awareness": 0.4,
+        "entropy_intuition": 0.5,
+        "non_dual_resolution": 0.2,
+        "cooperative_generativity": 0.4
+      },
+      "research_basis": {
+        "entropy_intuition": "Technology requires comfort with constant change and troubleshooting (Prensky, 2001)",
+        "manifold_fluidity": "Digital natives switch between tools and interfaces fluidly (Jenkins, 2006)"
+      },
+      "activities": {
+        "tool_exploration": {
+          "description": "Learning new software and platforms",
+          "manifold_fluidity": 0.6,
+          "entropy_intuition": 0.6,
+          "identity_elasticity": 0.5,
+          "research_basis": "Tool learning requires adaptive expertise (Hatano & Inagaki, 1986)"
+        },
+        "digital_creation": {
+          "description": "Creating digital media and content",
+          "cooperative_generativity": 0.6,
+          "manifold_fluidity": 0.5,
+          "identity_elasticity": 0.5,
+          "research_basis": "Digital making develops creative confidence (Resnick, 2017)"
+        },
+        "troubleshooting": {
+          "description": "Diagnosing and fixing technical problems",
+          "gradient_awareness": 0.6,
+          "entropy_intuition": 0.7,
+          "manifold_fluidity": 0.5,
+          "research_basis": "Troubleshooting requires systematic hypothesis testing"
+        },
+        "online_collaboration": {
+          "description": "Working with others through digital tools",
+          "cooperative_generativity": 0.7,
+          "multi_model_coherence": 0.4,
+          "research_basis": "Online collaboration requires coordinating multiple communication channels"
+        }
+      }
+    },
+    "problem_solving": {
+      "description": "General problem-solving, heuristics, and strategic thinking",
+      "category": "academic",
+      "contributions": {
+        "manifold_fluidity": 0.6,
+        "multi_model_coherence": 0.5,
+        "identity_elasticity": 0.3,
+        "gradient_awareness": 0.5,
+        "entropy_intuition": 0.5,
+        "non_dual_resolution": 0.3,
+        "cooperative_generativity": 0.3
+      },
+      "research_basis": {
+        "manifold_fluidity": "Expert problem solvers switch strategies flexibly (Chi et al., 1988)",
+        "entropy_intuition": "Effective problem solving requires productive struggle (Kapur, 2008)"
+      },
+      "activities": {
+        "puzzle_solving": {
+          "description": "Logic puzzles and brain teasers",
+          "manifold_fluidity": 0.7,
+          "gradient_awareness": 0.5,
+          "entropy_intuition": 0.4,
+          "research_basis": "Puzzles develop flexible thinking strategies"
+        },
+        "design_challenges": {
+          "description": "Open-ended design problems",
+          "entropy_intuition": 0.7,
+          "cooperative_generativity": 0.6,
+          "manifold_fluidity": 0.6,
+          "research_basis": "Design thinking embraces ambiguity (Brown, 2009)"
+        },
+        "strategic_games": {
+          "description": "Strategy games and simulations",
+          "multi_model_coherence": 0.6,
+          "manifold_fluidity": 0.6,
+          "gradient_awareness": 0.5,
+          "research_basis": "Strategic games develop systems thinking (Gee, 2007)"
+        },
+        "real_world_problems": {
+          "description": "Authentic, ill-structured problems",
+          "entropy_intuition": 0.8,
+          "multi_model_coherence": 0.7,
+          "cooperative_generativity": 0.5,
+          "research_basis": "Real problems lack clear solution paths (Jonassen, 2000)"
+        }
+      }
+    },
+    "art": {
+      "description": "Visual arts, creative expression, and aesthetic development",
+      "category": "enrichment",
+      "contributions": {
+        "manifold_fluidity": 0.6,
+        "multi_model_coherence": 0.3,
+        "identity_elasticity": 0.7,
+        "gradient_awareness": 0.3,
+        "entropy_intuition": 0.7,
+        "non_dual_resolution": 0.5,
+        "cooperative_generativity": 0.6
+      },
+      "research_basis": {
+        "identity_elasticity": "Art-making develops self-expression and identity exploration (Hetland et al., 2007)",
+        "entropy_intuition": "Visual arts embrace ambiguity and multiple interpretations (Eisner, 2002)",
+        "manifold_fluidity": "Artists shift between global and local perspectives (Winner et al., 2013)"
+      },
+      "activities": {
+        "drawing_painting": {
+          "description": "Traditional visual art creation",
+          "manifold_fluidity": 0.6,
+          "identity_elasticity": 0.7,
+          "entropy_intuition": 0.6,
+          "research_basis": "Drawing develops observational flexibility (Edwards, 1979)"
+        },
+        "sculpture_3d": {
+          "description": "Three-dimensional art creation",
+          "manifold_fluidity": 0.7,
+          "multi_model_coherence": 0.5,
+          "entropy_intuition": 0.6,
+          "research_basis": "Sculpture requires spatial reasoning across viewpoints"
+        },
+        "art_critique": {
+          "description": "Analyzing and discussing artwork",
+          "non_dual_resolution": 0.7,
+          "multi_model_coherence": 0.5,
+          "cooperative_generativity": 0.5,
+          "research_basis": "Art criticism develops tolerance for ambiguity (Housen, 2002)"
+        },
+        "collaborative_art": {
+          "description": "Group art projects and murals",
+          "cooperative_generativity": 0.9,
+          "identity_elasticity": 0.6,
+          "non_dual_resolution": 0.5,
+          "research_basis": "Collaborative art requires negotiating aesthetic choices"
+        },
+        "improvisation": {
+          "description": "Spontaneous creative expression",
+          "entropy_intuition": 0.9,
+          "manifold_fluidity": 0.8,
+          "identity_elasticity": 0.7,
+          "research_basis": "Improvisation develops comfort with uncertainty (Sawyer, 2000)"
+        },
+        "digital_art": {
+          "description": "Computer-based art creation",
+          "manifold_fluidity": 0.6,
+          "multi_model_coherence": 0.5,
+          "cooperative_generativity": 0.5,
+          "research_basis": "Digital art bridges traditional and computational thinking"
+        }
+      }
+    },
+    "music": {
+      "description": "Music theory, performance, composition, and appreciation",
+      "category": "enrichment",
+      "contributions": {
+        "manifold_fluidity": 0.7,
+        "multi_model_coherence": 0.5,
+        "identity_elasticity": 0.4,
+        "gradient_awareness": 0.5,
+        "entropy_intuition": 0.5,
+        "non_dual_resolution": 0.6,
+        "cooperative_generativity": 0.7
+      },
+      "research_basis": {
+        "manifold_fluidity": "Musicians develop enhanced cognitive flexibility (Hanna-Pladdy & MacKay, 2011)",
+        "multi_model_coherence": "Music integrates auditory, motor, visual, and emotional processing (Zatorre et al., 2007)",
+        "cooperative_generativity": "Ensemble playing requires real-time coordination (D'Ausilio et al., 2012)"
+      },
+      "activities": {
+        "instrumental_practice": {
+          "description": "Individual instrument practice",
+          "gradient_awareness": 0.7,
+          "manifold_fluidity": 0.5,
+          "identity_elasticity": 0.4,
+          "research_basis": "Deliberate practice develops self-monitoring (Ericsson, 2006)"
+        },
+        "ensemble_performance": {
+          "description": "Playing in groups, bands, or orchestras",
+          "cooperative_generativity": 0.9,
+          "multi_model_coherence": 0.6,
+          "gradient_awareness": 0.6,
+          "research_basis": "Ensemble playing requires distributed cognition (Sawyer, 2006)"
+        },
+        "improvisation": {
+          "description": "Jazz improvisation and spontaneous creation",
+          "entropy_intuition": 0.8,
+          "manifold_fluidity": 0.8,
+          "non_dual_resolution": 0.6,
+          "research_basis": "Musical improvisation engages executive function and default mode network (Limb & Braun, 2008)"
+        },
+        "composition": {
+          "description": "Creating original music",
+          "multi_model_coherence": 0.7,
+          "entropy_intuition": 0.6,
+          "manifold_fluidity": 0.6,
+          "research_basis": "Composition integrates theory, emotion, and structure"
+        },
+        "music_theory": {
+          "description": "Understanding musical structure and notation",
+          "multi_model_coherence": 0.7,
+          "non_dual_resolution": 0.5,
+          "gradient_awareness": 0.4,
+          "research_basis": "Music theory bridges mathematical and aesthetic reasoning"
+        },
+        "active_listening": {
+          "description": "Analytical music appreciation",
+          "non_dual_resolution": 0.6,
+          "manifold_fluidity": 0.5,
+          "entropy_intuition": 0.4,
+          "research_basis": "Active listening develops attention and emotional regulation (Kramer et al., 2009)"
+        }
+      }
+    },
+    "physical_education": {
+      "description": "Physical activity, body awareness, sports, and movement",
+      "category": "enrichment",
+      "contributions": {
+        "manifold_fluidity": 0.4,
+        "multi_model_coherence": 0.3,
+        "identity_elasticity": 0.5,
+        "gradient_awareness": 0.6,
+        "entropy_intuition": 0.4,
+        "non_dual_resolution": 0.2,
+        "cooperative_generativity": 0.5
+      },
+      "research_basis": {
+        "gradient_awareness": "Physical activity provides immediate biofeedback on effort and performance (Ratey, 2008)",
+        "identity_elasticity": "Sports develop resilience and growth mindset through failure and recovery (Dweck, 2006)"
+      },
+      "activities": {
+        "individual_sports": {
+          "description": "Running, swimming, gymnastics, etc.",
+          "gradient_awareness": 0.8,
+          "identity_elasticity": 0.6,
+          "entropy_intuition": 0.4,
+          "research_basis": "Individual sports develop self-monitoring and personal responsibility"
+        },
+        "team_sports": {
+          "description": "Basketball, soccer, volleyball, etc.",
+          "cooperative_generativity": 0.8,
+          "manifold_fluidity": 0.5,
+          "gradient_awareness": 0.5,
+          "research_basis": "Team sports require real-time coordination and role flexibility (Eccles & Tenenbaum, 2004)"
+        },
+        "martial_arts": {
+          "description": "Karate, judo, taekwondo, etc.",
+          "gradient_awareness": 0.7,
+          "non_dual_resolution": 0.5,
+          "identity_elasticity": 0.6,
+          "research_basis": "Martial arts develop mind-body integration and self-discipline (Lakes & Hoyt, 2004)"
+        },
+        "yoga_mindfulness": {
+          "description": "Yoga, meditation, and mindful movement",
+          "gradient_awareness": 0.8,
+          "non_dual_resolution": 0.6,
+          "identity_elasticity": 0.6,
+          "entropy_intuition": 0.5,
+          "research_basis": "Contemplative practices develop interoceptive awareness (Farb et al., 2015)"
+        },
+        "dance": {
+          "description": "Dance and choreography",
+          "manifold_fluidity": 0.7,
+          "cooperative_generativity": 0.7,
+          "identity_elasticity": 0.7,
+          "entropy_intuition": 0.5,
+          "research_basis": "Dance integrates movement, music, and expression (Karpati et al., 2015)"
+        },
+        "outdoor_adventure": {
+          "description": "Hiking, climbing, camping",
+          "entropy_intuition": 0.7,
+          "identity_elasticity": 0.6,
+          "cooperative_generativity": 0.5,
+          "research_basis": "Outdoor experiences develop adaptability and risk assessment (Ewert & Yoshino, 2011)"
+        }
+      }
+    }
+  },
+  "cross_subject_synergies": [
+    {
+      "subjects": ["math", "music"],
+      "synergy_dimension": "manifold_fluidity",
+      "bonus": 0.15,
+      "research_basis": "Pattern recognition transfer - both domains involve hierarchical pattern structures (Spelke, 2008)",
+      "mechanism": "Temporal pattern recognition in music transfers to mathematical sequence understanding"
+    },
+    {
+      "subjects": ["art", "science"],
+      "synergy_dimension": "entropy_intuition",
+      "bonus": 0.2,
+      "research_basis": "Design thinking + scientific method share iterative uncertainty tolerance (Cross, 2011)",
+      "mechanism": "Both disciplines embrace productive failure as part of the creative/discovery process"
+    },
+    {
+      "subjects": ["reading", "art"],
+      "synergy_dimension": "identity_elasticity",
+      "bonus": 0.15,
+      "research_basis": "Narrative imagination combined with visual expression deepens perspective-taking",
+      "mechanism": "Creating visual interpretations of literary works exercises identity flexibility"
+    },
+    {
+      "subjects": ["coding", "music"],
+      "synergy_dimension": "multi_model_coherence",
+      "bonus": 0.15,
+      "research_basis": "Both involve formal symbol systems mapping to experiential outcomes (Papert, 1980)",
+      "mechanism": "Algorithmic composition bridges computational and aesthetic reasoning"
+    },
+    {
+      "subjects": ["physical_education", "study_skills"],
+      "synergy_dimension": "gradient_awareness",
+      "bonus": 0.2,
+      "research_basis": "Physical feedback literacy transfers to cognitive self-monitoring (Diamond, 2000)",
+      "mechanism": "Body awareness develops metacognitive calibration"
+    },
+    {
+      "subjects": ["critical_thinking", "reading"],
+      "synergy_dimension": "non_dual_resolution",
+      "bonus": 0.15,
+      "research_basis": "Literary analysis + logical reasoning develop dialectical thinking",
+      "mechanism": "Evaluating competing interpretations strengthens comfort with ambiguity"
+    },
+    {
+      "subjects": ["art", "music"],
+      "synergy_dimension": "cooperative_generativity",
+      "bonus": 0.2,
+      "research_basis": "Multimodal arts collaboration enhances creative co-construction (Sawyer, 2012)",
+      "mechanism": "Cross-arts projects require negotiating multiple aesthetic frameworks"
+    },
+    {
+      "subjects": ["science", "coding"],
+      "synergy_dimension": "gradient_awareness",
+      "bonus": 0.15,
+      "research_basis": "Computational science requires tracking both code and experimental state",
+      "mechanism": "Debugging simulations exercises multi-level monitoring"
+    },
+    {
+      "subjects": ["problem_solving", "physical_education"],
+      "synergy_dimension": "manifold_fluidity",
+      "bonus": 0.15,
+      "research_basis": "Embodied cognition research shows physical strategies transfer to abstract thinking (Wilson, 2002)",
+      "mechanism": "Physical problem-solving (sports tactics) develops strategic flexibility"
+    },
+    {
+      "subjects": ["technology", "art"],
+      "synergy_dimension": "identity_elasticity",
+      "bonus": 0.15,
+      "research_basis": "Digital creation tools enable identity experimentation (Turkle, 2011)",
+      "mechanism": "Creating digital personas and avatars exercises self-concept flexibility"
+    },
+    {
+      "subjects": ["music", "math"],
+      "synergy_dimension": "multi_model_coherence",
+      "bonus": 0.15,
+      "research_basis": "Rhythmic and harmonic ratios connect auditory and mathematical reasoning (Large, 2010)",
+      "mechanism": "Music theory's mathematical foundations bridge domains"
+    },
+    {
+      "subjects": ["critical_thinking", "science"],
+      "synergy_dimension": "entropy_intuition",
+      "bonus": 0.15,
+      "research_basis": "Both require evaluating evidence under uncertainty",
+      "mechanism": "Scientific skepticism combined with logical analysis develops calibrated uncertainty"
+    }
+  ],
+  "developmental_modifiers": {
+    "description": "Age-based adjustments to contribution weights",
+    "notes": "Younger learners benefit more from concrete/embodied activities (art, music, PE). Older learners can leverage abstract activities (critical thinking, coding).",
+    "age_ranges": {
+      "elementary": {
+        "grades": "K-5",
+        "enrichment_multiplier": 1.2,
+        "academic_multiplier": 0.9,
+        "research_basis": "Embodied and artistic learning is developmentally primary (Piaget, 1952)"
+      },
+      "middle_school": {
+        "grades": "6-8",
+        "enrichment_multiplier": 1.1,
+        "academic_multiplier": 1.0,
+        "research_basis": "Adolescents benefit from both abstract and embodied learning"
+      },
+      "high_school": {
+        "grades": "9-12",
+        "enrichment_multiplier": 1.0,
+        "academic_multiplier": 1.1,
+        "research_basis": "Formal operational thinking enables fuller academic engagement (Piaget, 1952)"
+      }
+    }
+  },
+  "engagement_quality_modifiers": {
+    "description": "Adjustments based on quality of engagement",
+    "levels": {
+      "passive": {
+        "multiplier": 0.5,
+        "examples": ["watching a lecture", "listening to music passively", "watching sports"]
+      },
+      "active": {
+        "multiplier": 1.0,
+        "examples": ["completing exercises", "playing an instrument alone", "individual practice"]
+      },
+      "constructive": {
+        "multiplier": 1.3,
+        "examples": ["creating original work", "composing music", "designing experiments"]
+      },
+      "interactive": {
+        "multiplier": 1.5,
+        "examples": ["collaborative projects", "ensemble performance", "peer tutoring"]
+      }
+    },
+    "research_basis": "ICAP framework - Interactive > Constructive > Active > Passive (Chi & Wylie, 2014)"
+  },
+  "references": {
+    "note": "Key educational psychology references supporting the contribution weights",
+    "citations": [
+      "Baker, L., & Brown, A. L. (1984). Metacognitive skills and reading.",
+      "Brown, T. (2009). Change by Design: How Design Thinking Transforms Organizations.",
+      "Chi, M. T., & Wylie, R. (2014). The ICAP framework: Linking cognitive engagement to active learning outcomes.",
+      "Csikszentmihalyi, M. (1990). Flow: The Psychology of Optimal Experience.",
+      "Diamond, A. (2000). Close interrelation of motor development and cognitive development.",
+      "Dweck, C. S. (2006). Mindset: The New Psychology of Success.",
+      "Eisner, E. W. (2002). The Arts and the Creation of Mind.",
+      "Hetland, L., et al. (2007). Studio Thinking: The Real Benefits of Visual Arts Education.",
+      "Kapur, M. (2008). Productive failure.",
+      "Mar, R. A., & Oatley, K. (2008). The function of fiction is the abstraction and simulation of social experience.",
+      "Ratey, J. J. (2008). Spark: The Revolutionary New Science of Exercise and the Brain.",
+      "Rosenblatt, L. M. (1978). The Reader, the Text, the Poem.",
+      "Sawyer, R. K. (2012). Explaining Creativity: The Science of Human Innovation.",
+      "Schoenfeld, A. H. (1992). Learning to think mathematically.",
+      "Wing, J. M. (2006). Computational thinking.",
+      "Zimmerman, B. J. (2002). Becoming a self-regulated learner."
+    ]
+  }
+}

@@ -1,0 +1,775 @@
+{
+  "grade": "5",
+  "items": [
+    {
+      "id": "ela-5-rl-1-001",
+      "standard_id": "5.RL.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Read the passage carefully. Using specific quotes from the text, explain what the main character learns by the end of the story. Include at least two direct quotes that support your explanation.",
+      "rubric": {
+        "4": "Accurately quotes 2+ relevant passages and provides clear, insightful explanation connecting quotes to character's learning",
+        "3": "Quotes 2 passages accurately with adequate explanation of character's learning",
+        "2": "Quotes 1 passage with explanation OR quotes 2 passages without clear connection to learning",
+        "1": "Attempts to quote text but inaccurate or minimal explanation",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 2,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 300,
+      "passage_required": true
+    },
+    {
+      "id": "ela-5-rl-1-002",
+      "standard_id": "5.RL.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Based on the passage, what can you infer about the setting of the story? Quote accurately from the text to support your inference. Explain how the quote helps you understand where and when the story takes place.",
+      "rubric": {
+        "4": "Makes sophisticated inference about setting with 2+ accurate quotes and clear explanation of how evidence supports inference",
+        "3": "Makes reasonable inference with accurate quote and adequate explanation",
+        "2": "Makes inference with quote but weak connection between evidence and claim",
+        "1": "Attempts response but inference is unsupported or quote is inaccurate",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 240,
+      "passage_required": true
+    },
+    {
+      "id": "ela-5-rl-2-001",
+      "standard_id": "5.RL.2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Identify the theme of this story. Explain how the main character's response to a challenge in the story helps develop this theme. Use specific details from the text to support your answer.",
+      "rubric": {
+        "4": "Clearly identifies theme and provides detailed analysis of how character's response to challenge develops theme with 2+ specific details",
+        "3": "Identifies theme and explains character's response with some textual details",
+        "2": "Identifies theme but weak analysis of character's response OR strong analysis without clear theme",
+        "1": "Attempts to identify theme but lacks supporting details",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 360,
+      "passage_required": true
+    },
+    {
+      "id": "ela-5-rl-2-002",
+      "standard_id": "5.RL.2",
+      "dok_level": 3,
+      "question_type": "multi_part",
+      "question": "Part A: What is the theme of the poem? Part B: How does the speaker's reflection on the topic help convey this theme? Use at least two details from the poem to support your response.",
+      "rubric": {
+        "4": "Part A correctly identifies theme; Part B provides insightful analysis of speaker's reflection with 2+ supporting details",
+        "3": "Part A correctly identifies theme; Part B provides adequate analysis with some details",
+        "2": "Part A identifies theme; Part B has weak or incomplete analysis",
+        "1": "Partial response to either Part A or Part B",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 360,
+      "passage_required": true
+    },
+    {
+      "id": "ela-5-rl-3-001",
+      "standard_id": "5.RL.3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Compare and contrast the two main characters in the story. Use specific details from the text to explain how they are similar and how they are different, especially in how they interact with each other.",
+      "rubric": {
+        "4": "Provides thorough comparison with 2+ similarities and 2+ differences, supported by specific text details about character interactions",
+        "3": "Provides comparison with at least 1 similarity and 1 difference with text support",
+        "2": "Identifies some similarities or differences but lacks text support or incomplete comparison",
+        "1": "Attempts comparison but minimal detail or text support",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 360,
+      "passage_required": true
+    },
+    {
+      "id": "ela-5-rl-3-002",
+      "standard_id": "5.RL.3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "The story takes place in two different settings. Compare and contrast these settings and explain how each setting affects the events that happen there. Draw on specific details from the text.",
+      "rubric": {
+        "4": "Clearly identifies both settings, provides detailed comparison with specific text details, and insightfully explains effect on events",
+        "3": "Identifies settings, provides comparison with text details, and explains effect on events",
+        "2": "Identifies settings with some comparison but weak connection to events",
+        "1": "Attempts response but minimal detail or unclear comparison",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 300,
+      "passage_required": true
+    },
+    {
+      "id": "ela-5-rl-4-001",
+      "standard_id": "5.RL.4",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "In paragraph 3, the author writes that the forest was 'a cathedral of towering trees.' What does this metaphor help the reader understand?",
+      "options": [
+        "A. The forest was dark and scary.",
+        "B. The trees were arranged in rows like church pews.",
+        "C. The forest felt grand, peaceful, and awe-inspiring.",
+        "D. The character was religious and thought about church."
+      ],
+      "correct_answer": "C",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 90,
+      "passage_required": true
+    },
+    {
+      "id": "ela-5-rl-4-002",
+      "standard_id": "5.RL.4",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "The author uses the simile 'her words stung like a swarm of angry bees.' Explain what this figurative language tells us about the effect of the character's words. How does this simile help you understand the situation?",
+      "rubric": {
+        "4": "Thoroughly explains simile meaning, connects to character's impact, and insightfully analyzes how it enhances reader understanding",
+        "3": "Explains simile meaning and connects to situation with adequate analysis",
+        "2": "Explains simile meaning but weak connection to situation or impact",
+        "1": "Attempts to explain simile but incomplete or inaccurate",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 2,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 240,
+      "passage_required": true
+    },
+    {
+      "id": "ela-5-rl-5-001",
+      "standard_id": "5.RL.5",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "This story is divided into three chapters. Explain how each chapter contributes to the overall structure of the story. How do the chapters work together to develop the plot?",
+      "rubric": {
+        "4": "Clearly explains purpose of each chapter and provides insightful analysis of how they connect to develop plot",
+        "3": "Explains purpose of chapters and shows understanding of structural connections",
+        "2": "Identifies chapter purposes but weak analysis of connections",
+        "1": "Attempts response but minimal understanding of structure",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 360,
+      "passage_required": true
+    },
+    {
+      "id": "ela-5-rl-5-002",
+      "standard_id": "5.RL.5",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "This poem has four stanzas. How does the structure of the stanzas help develop the poem's meaning? Explain what each stanza contributes and how they fit together.",
+      "rubric": {
+        "4": "Analyzes each stanza's contribution and provides sophisticated explanation of how structure creates meaning",
+        "3": "Explains stanza contributions and shows understanding of structural unity",
+        "2": "Identifies stanza purposes but weak connection to overall meaning",
+        "1": "Attempts response but limited structural analysis",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 300,
+      "passage_required": true
+    },
+    {
+      "id": "ela-5-rl-6-001",
+      "standard_id": "5.RL.6",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "This story is told from the point of view of the younger sister. How does her point of view influence the way events are described? Use specific examples from the text to support your answer.",
+      "rubric": {
+        "4": "Clearly identifies narrator's POV, provides 2+ examples showing influence on description, with insightful analysis",
+        "3": "Identifies POV and provides examples showing influence with adequate analysis",
+        "2": "Identifies POV with limited examples or weak analysis of influence",
+        "1": "Attempts to address POV but lacks examples or clear analysis",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 300,
+      "passage_required": true
+    },
+    {
+      "id": "ela-5-rl-6-002",
+      "standard_id": "5.RL.6",
+      "dok_level": 3,
+      "question_type": "multi_part",
+      "question": "Part A: From whose point of view is the story told? Part B: How would the description of the conflict be different if it were told from the other main character's point of view? Explain with details from the text.",
+      "rubric": {
+        "4": "Part A correctly identifies POV; Part B provides thoughtful analysis of alternative perspective with specific textual references",
+        "3": "Part A correct; Part B shows understanding of perspective shift with some text support",
+        "2": "Part A correct; Part B has limited or unclear analysis",
+        "1": "Partial response to Part A or Part B only",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 360,
+      "passage_required": true
+    },
+    {
+      "id": "ela-5-rl-9-001",
+      "standard_id": "5.RL.9",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Both stories are adventure stories that deal with the theme of courage. Compare and contrast how each author approaches this theme. What is similar and different about how courage is shown in each story?",
+      "rubric": {
+        "4": "Provides sophisticated comparison of thematic approaches with multiple specific examples from both texts",
+        "3": "Compares thematic approaches with examples from both texts",
+        "2": "Addresses comparison but limited to one text or surface-level analysis",
+        "1": "Attempts comparison but lacks clarity or textual support",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.8,
+      "time_estimate_seconds": 480,
+      "passage_required": true
+    },
+    {
+      "id": "ela-5-rl-9-002",
+      "standard_id": "5.RL.9",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "You have read two mystery stories. Compare how each author creates suspense for the reader. Use specific examples from both stories to support your comparison.",
+      "rubric": {
+        "4": "Analyzes suspense techniques in both texts with 2+ examples from each, showing sophisticated genre understanding",
+        "3": "Compares suspense techniques with examples from both texts",
+        "2": "Addresses suspense but limited examples or one-sided comparison",
+        "1": "Attempts response but unclear comparison or lacks examples",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.8,
+      "time_estimate_seconds": 480,
+      "passage_required": true
+    },
+    {
+      "id": "ela-5-ri-1-001",
+      "standard_id": "5.RI.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Based on the article, what can you infer about why the scientists conducted this experiment? Quote accurately from the text to support your inference.",
+      "rubric": {
+        "4": "Makes insightful inference with 2+ accurate quotes that clearly support the reasoning",
+        "3": "Makes reasonable inference with accurate quote and adequate explanation",
+        "2": "Makes inference with quote but weak connection between evidence and claim",
+        "1": "Attempts response but inference unsupported or quote inaccurate",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 300,
+      "passage_required": true
+    },
+    {
+      "id": "ela-5-ri-1-002",
+      "standard_id": "5.RI.1",
+      "dok_level": 2,
+      "question_type": "constructed_response",
+      "question": "According to the passage, what are two effects of climate change on polar bears? Quote directly from the text to support each effect you identify.",
+      "rubric": {
+        "4": "Identifies 2 effects with accurate quotes for each and clear explanation of connection",
+        "3": "Identifies 2 effects with at least one accurate quote",
+        "2": "Identifies 1 effect with accurate quote OR 2 effects without quotes",
+        "1": "Attempts response but effects unclear or quotes inaccurate",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 2,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 240,
+      "passage_required": true
+    },
+    {
+      "id": "ela-5-ri-2-001",
+      "standard_id": "5.RI.2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "This article has two main ideas. Identify both main ideas and explain how the author uses key details to support each one. Then write a brief summary of the article.",
+      "rubric": {
+        "4": "Correctly identifies 2 main ideas, explains supporting details for each, and provides accurate objective summary",
+        "3": "Identifies 2 main ideas with some supporting details and adequate summary",
+        "2": "Identifies 1 main idea fully OR 2 main ideas with weak support; summary incomplete",
+        "1": "Attempts to identify main ideas but lacks clarity or supporting details",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 420,
+      "passage_required": true
+    },
+    {
+      "id": "ela-5-ri-2-002",
+      "standard_id": "5.RI.2",
+      "dok_level": 3,
+      "question_type": "multi_part",
+      "question": "Part A: What is one main idea of this article? Part B: What are two key details the author uses to support this main idea? Part C: Write a two-sentence summary of the article that does not include personal opinions.",
+      "rubric": {
+        "4": "All three parts answered correctly with main idea, 2 supporting details, and objective summary",
+        "3": "Main idea and details correct; summary mostly objective",
+        "2": "Main idea correct with 1 detail; summary incomplete or contains opinion",
+        "1": "Partial response with errors in multiple parts",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 360,
+      "passage_required": true
+    },
+    {
+      "id": "ela-5-ri-3-001",
+      "standard_id": "5.RI.3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "The article discusses the relationship between bees and flowering plants. Using specific information from the text, explain how bees and flowers interact and why this relationship is important.",
+      "rubric": {
+        "4": "Thoroughly explains interaction with 2+ specific details and insightful analysis of importance",
+        "3": "Explains interaction with specific details and addresses importance",
+        "2": "Explains interaction but limited details or weak explanation of importance",
+        "1": "Attempts to explain but lacks specific information from text",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 300,
+      "passage_required": true
+    },
+    {
+      "id": "ela-5-ri-3-002",
+      "standard_id": "5.RI.3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Based on the historical text, explain the cause-and-effect relationship between the invention of the printing press and the spread of new ideas in Europe. Use specific information from the passage.",
+      "rubric": {
+        "4": "Clearly explains cause-and-effect relationship with multiple specific text details showing deep understanding",
+        "3": "Explains cause-and-effect with specific text details",
+        "2": "Identifies cause and effect but limited explanation or weak text support",
+        "1": "Attempts response but unclear relationship or minimal text support",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 300,
+      "passage_required": true
+    },
+    {
+      "id": "ela-5-ri-8-001",
+      "standard_id": "5.RI.8",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "The author argues that recess should not be taken away as punishment. Identify two reasons the author gives and the evidence used to support each reason. Explain which evidence you find most convincing and why.",
+      "rubric": {
+        "4": "Identifies 2 reasons with corresponding evidence for each and provides thoughtful evaluation of effectiveness",
+        "3": "Identifies 2 reasons with some evidence and basic evaluation",
+        "2": "Identifies reasons but limited evidence OR no evaluation",
+        "1": "Attempts response but reasons or evidence unclear",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 360,
+      "passage_required": true
+    },
+    {
+      "id": "ela-5-ri-8-002",
+      "standard_id": "5.RI.8",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "The author makes several points to support the claim that zoos help protect endangered species. For each point, identify the evidence provided. Then evaluate whether the evidence effectively supports the author's claim.",
+      "rubric": {
+        "4": "Identifies 3+ points with evidence and provides sophisticated evaluation of evidence strength",
+        "3": "Identifies 2-3 points with evidence and adequate evaluation",
+        "2": "Identifies points but limited evidence identification or weak evaluation",
+        "1": "Attempts response but incomplete analysis",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 420,
+      "passage_required": true
+    },
+    {
+      "id": "ela-5-rf-3-001",
+      "standard_id": "5.RF.3",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Which word contains a Latin root meaning 'to carry'?",
+      "options": [
+        "A. transport",
+        "B. translate",
+        "C. transform",
+        "D. transit"
+      ],
+      "correct_answer": "A",
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 60,
+      "passage_required": false
+    },
+    {
+      "id": "ela-5-rf-3-002",
+      "standard_id": "5.RF.3",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Read this sentence: 'The autobiography revealed many surprising facts about the famous inventor.' Based on word parts, what does 'autobiography' mean?",
+      "options": [
+        "A. A book about someone written by another person",
+        "B. A story about one's own life written by oneself",
+        "C. A collection of photographs from someone's life",
+        "D. A biography that includes many pictures"
+      ],
+      "correct_answer": "B",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 90,
+      "passage_required": false
+    },
+    {
+      "id": "ela-5-w-1-001",
+      "standard_id": "5.W.1",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Write an opinion piece arguing whether students should be required to wear school uniforms. Include an introduction with a clear opinion statement, at least two reasons supported by facts or examples, and a conclusion.",
+      "rubric": {
+        "4": "Clear opinion with 2+ well-developed reasons, strong supporting evidence, logical organization, and effective conclusion",
+        "3": "Clear opinion with 2 reasons and supporting evidence, adequate organization and conclusion",
+        "2": "Opinion stated with 1-2 reasons but limited support, weak organization or conclusion",
+        "1": "Opinion unclear or unsupported, poor organization",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 1200,
+      "passage_required": false
+    },
+    {
+      "id": "ela-5-w-1-002",
+      "standard_id": "5.W.1",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "After reading the two articles about screen time for children, write an opinion piece. Part A: State your opinion about whether parents should limit children's screen time. Part B: Use information from both articles to support your opinion with at least two reasons.",
+      "rubric": {
+        "4": "Clear opinion with 2+ reasons drawing on both sources, well-organized with strong conclusion",
+        "3": "Clear opinion with 2 reasons using both sources, adequate organization",
+        "2": "Opinion with reasons but relies on only one source or weak organization",
+        "1": "Opinion unclear or lacks text-based support",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.8,
+      "time_estimate_seconds": 1500,
+      "passage_required": true
+    },
+    {
+      "id": "ela-5-w-2-001",
+      "standard_id": "5.W.2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Write an informative paragraph explaining the water cycle. Include a topic sentence, at least three facts about the process, and a concluding sentence. Use precise vocabulary related to the topic.",
+      "rubric": {
+        "4": "Clear topic sentence, 3+ accurate facts, precise vocabulary, logical flow, effective conclusion",
+        "3": "Topic sentence, 3 facts, some precise vocabulary, adequate organization",
+        "2": "Topic sentence with fewer than 3 facts or limited vocabulary, weak organization",
+        "1": "Attempts informative writing but lacks clarity or accuracy",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 600,
+      "passage_required": false
+    },
+    {
+      "id": "ela-5-w-2-002",
+      "standard_id": "5.W.2",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Based on the passage about ancient Egypt, write an informative essay explaining how the Nile River influenced Egyptian civilization. Include an introduction, body paragraphs with information from the text, and a conclusion.",
+      "rubric": {
+        "4": "Well-organized essay with introduction, 2+ body paragraphs with text evidence, clear explanations, and effective conclusion",
+        "3": "Organized essay with introduction, body paragraphs with some text evidence, and conclusion",
+        "2": "Some organization, limited text evidence, weak introduction or conclusion",
+        "1": "Attempts informative writing but lacks organization or text support",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 1200,
+      "passage_required": true
+    },
+    {
+      "id": "ela-5-w-3-001",
+      "standard_id": "5.W.3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Write a narrative about a time when you or a character faced a difficult decision. Include descriptive details, dialogue, and a clear sequence of events with a beginning, middle, and end.",
+      "rubric": {
+        "4": "Engaging narrative with vivid descriptive details, effective dialogue, clear sequence, and satisfying resolution",
+        "3": "Complete narrative with descriptive details, some dialogue, and clear sequence",
+        "2": "Narrative with limited details, minimal dialogue, or unclear sequence",
+        "1": "Attempts narrative but lacks key elements",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 1200,
+      "passage_required": false
+    },
+    {
+      "id": "ela-5-w-4-001",
+      "standard_id": "5.W.4",
+      "dok_level": 3,
+      "question_type": "multi_part",
+      "question": "Part A: Read the writing prompt and identify the purpose and audience. Part B: Create an outline that shows how you would organize your response appropriately for that purpose and audience.",
+      "rubric": {
+        "4": "Correctly identifies purpose and audience; outline clearly shows appropriate organization with main ideas and supporting details",
+        "3": "Identifies purpose and audience; outline shows reasonable organization",
+        "2": "Partially identifies purpose or audience; outline has some organization",
+        "1": "Incorrect identification of purpose/audience; outline unclear",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 480,
+      "passage_required": true
+    },
+    {
+      "id": "ela-5-w-9-001",
+      "standard_id": "5.W.9",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "After reading the literary passage, write a response analyzing how the author uses figurative language to create mood. Use at least two examples from the text to support your analysis.",
+      "rubric": {
+        "4": "Sophisticated analysis of figurative language's effect on mood with 2+ well-explained examples",
+        "3": "Clear analysis with 2 examples and adequate explanation",
+        "2": "Some analysis with limited examples or weak explanation",
+        "1": "Attempts analysis but lacks textual support",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 600,
+      "passage_required": true
+    },
+    {
+      "id": "ela-5-w-9-002",
+      "standard_id": "5.W.9",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "After reading the informational text about renewable energy, write a response explaining the main benefits and challenges of solar power. Draw evidence from the text to support your explanation.",
+      "rubric": {
+        "4": "Thorough explanation with multiple text-based examples for both benefits and challenges, well-organized",
+        "3": "Clear explanation with text evidence for benefits and challenges",
+        "2": "Addresses topic but limited text evidence or one-sided",
+        "1": "Attempts response but lacks text support",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 600,
+      "passage_required": true
+    },
+    {
+      "id": "ela-5-l-1-001",
+      "standard_id": "5.L.1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Which sentence correctly uses the past perfect tense?",
+      "options": [
+        "A. She has finished her homework before dinner.",
+        "B. She had finished her homework before dinner.",
+        "C. She finished her homework before dinner.",
+        "D. She was finishing her homework before dinner."
+      ],
+      "correct_answer": "B",
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 60,
+      "passage_required": false
+    },
+    {
+      "id": "ela-5-l-1-002",
+      "standard_id": "5.L.1",
+      "dok_level": 2,
+      "question_type": "constructed_response",
+      "question": "Rewrite the following paragraph, correcting all errors in subject-verb agreement and verb tense consistency: 'The team of scientists were excited about their discovery. Yesterday, they find evidence of a new species. The discovery show that more research are needed.'",
+      "rubric": {
+        "4": "All errors corrected with proper subject-verb agreement and consistent verb tense",
+        "3": "Most errors corrected with minor issues remaining",
+        "2": "Some errors corrected but significant issues remain",
+        "1": "Attempts corrections but most errors remain",
+        "0": "No response or no corrections attempted"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 180,
+      "passage_required": false
+    },
+    {
+      "id": "ela-5-sl-1-001",
+      "standard_id": "5.SL.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "After listening to the class discussion about the novel, write a reflection that: 1) summarizes one classmate's main idea, 2) explains how you built on or respectfully disagreed with that idea, and 3) describes how the discussion changed or deepened your understanding.",
+      "rubric": {
+        "4": "Clearly summarizes peer's idea, thoughtfully responds with own perspective, and reflects insightfully on learning",
+        "3": "Summarizes idea, responds appropriately, and shows some reflection",
+        "2": "Partially summarizes or responds, limited reflection",
+        "1": "Attempts response but lacks key elements",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 480,
+      "passage_required": false
+    }
+  ]
+}

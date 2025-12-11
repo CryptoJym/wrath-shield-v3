@@ -1,0 +1,301 @@
+{
+    "subject": "science",
+    "grade": "9",
+    "course": "Biology",
+    "domains": [
+        {
+            "id": "LS1",
+            "name": "From Molecules to Organisms: Structures and Processes",
+            "standards": [
+                {
+                    "id": "HS-LS1-1",
+                    "description": "Construct an explanation based on evidence for how the structure of DNA determines the structure of proteins which carry out the essential functions of life through systems of specialized cells.",
+                    "cluster": "Structure and Function",
+                    "prerequisites": ["MS-LS1-1", "MS-LS3-1"],
+                    "science_practices": ["Constructing Explanations"],
+                    "crosscutting_concepts": ["Structure and Function"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 8
+                },
+                {
+                    "id": "HS-LS1-2",
+                    "description": "Develop and use a model to illustrate the hierarchical organization of interacting systems that provide specific functions within multicellular organisms.",
+                    "cluster": "Structure and Function",
+                    "prerequisites": ["MS-LS1-2", "MS-LS1-3"],
+                    "science_practices": ["Developing and Using Models"],
+                    "crosscutting_concepts": ["Systems and System Models"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 7
+                },
+                {
+                    "id": "HS-LS1-3",
+                    "description": "Plan and conduct an investigation to provide evidence that feedback mechanisms maintain homeostasis.",
+                    "cluster": "Structure and Function",
+                    "prerequisites": ["MS-LS1-3"],
+                    "science_practices": ["Planning and Carrying Out Investigations"],
+                    "crosscutting_concepts": ["Stability and Change"],
+                    "stat_mappings": ["science", "critical_thinking", "problem_solving"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 8
+                },
+                {
+                    "id": "HS-LS1-4",
+                    "description": "Use a model to illustrate the role of cellular division (mitosis) and differentiation in producing and maintaining complex organisms.",
+                    "cluster": "Growth and Development of Organisms",
+                    "prerequisites": ["MS-LS1-4"],
+                    "science_practices": ["Developing and Using Models"],
+                    "crosscutting_concepts": ["Systems and System Models"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 4,
+                    "estimated_hours": 6
+                },
+                {
+                    "id": "HS-LS1-5",
+                    "description": "Use a model to illustrate how photosynthesis transforms light energy into stored chemical energy.",
+                    "cluster": "Organization for Matter and Energy Flow in Organisms",
+                    "prerequisites": ["MS-LS1-6"],
+                    "science_practices": ["Developing and Using Models"],
+                    "crosscutting_concepts": ["Energy and Matter"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 4,
+                    "estimated_hours": 7
+                },
+                {
+                    "id": "HS-LS1-6",
+                    "description": "Construct and revise an explanation based on evidence for how carbon, hydrogen, and oxygen from sugar molecules may combine with other elements to form amino acids and/or other large carbon-based molecules.",
+                    "cluster": "Organization for Matter and Energy Flow in Organisms",
+                    "prerequisites": ["MS-LS1-6", "MS-LS1-7"],
+                    "science_practices": ["Constructing Explanations"],
+                    "crosscutting_concepts": ["Energy and Matter"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 7
+                },
+                {
+                    "id": "HS-LS1-7",
+                    "description": "Use a model to illustrate that cellular respiration is a chemical process whereby the bonds of food molecules and oxygen molecules are broken and the bonds in new compounds are formed resulting in a net transfer of energy.",
+                    "cluster": "Organization for Matter and Energy Flow in Organisms",
+                    "prerequisites": ["MS-LS1-7"],
+                    "science_practices": ["Developing and Using Models"],
+                    "crosscutting_concepts": ["Energy and Matter"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 7
+                }
+            ]
+        },
+        {
+            "id": "LS2",
+            "name": "Ecosystems: Interactions, Energy, and Dynamics",
+            "standards": [
+                {
+                    "id": "HS-LS2-1",
+                    "description": "Use mathematical and/or computational representations to support explanations of factors that affect carrying capacity of ecosystems at different scales.",
+                    "cluster": "Interdependent Relationships in Ecosystems",
+                    "prerequisites": ["MS-LS2-1", "MS-LS2-2"],
+                    "science_practices": ["Using Mathematics and Computational Thinking"],
+                    "crosscutting_concepts": ["Scale, Proportion, and Quantity"],
+                    "stat_mappings": ["science", "critical_thinking", "technology"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 8
+                },
+                {
+                    "id": "HS-LS2-2",
+                    "description": "Use mathematical representations to support and revise explanations based on evidence about factors affecting biodiversity and populations in ecosystems of different scales.",
+                    "cluster": "Interdependent Relationships in Ecosystems",
+                    "prerequisites": ["MS-LS2-1", "MS-LS2-4"],
+                    "science_practices": ["Using Mathematics and Computational Thinking"],
+                    "crosscutting_concepts": ["Scale, Proportion, and Quantity"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 7
+                },
+                {
+                    "id": "HS-LS2-3",
+                    "description": "Construct and revise an explanation based on evidence for the cycling of matter and flow of energy in aerobic and anaerobic conditions.",
+                    "cluster": "Cycles of Matter and Energy Transfer in Ecosystems",
+                    "prerequisites": ["MS-LS2-3"],
+                    "science_practices": ["Constructing Explanations"],
+                    "crosscutting_concepts": ["Energy and Matter"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 7
+                },
+                {
+                    "id": "HS-LS2-4",
+                    "description": "Use mathematical representations to support claims for the cycling of matter and flow of energy among organisms in an ecosystem.",
+                    "cluster": "Cycles of Matter and Energy Transfer in Ecosystems",
+                    "prerequisites": ["MS-LS2-3"],
+                    "science_practices": ["Using Mathematics and Computational Thinking"],
+                    "crosscutting_concepts": ["Energy and Matter"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 7
+                },
+                {
+                    "id": "HS-LS2-5",
+                    "description": "Develop a model to illustrate the role of photosynthesis and cellular respiration in the cycling of carbon among the biosphere, atmosphere, hydrosphere, and geosphere.",
+                    "cluster": "Cycles of Matter and Energy Transfer in Ecosystems",
+                    "prerequisites": ["MS-LS2-3", "HS-LS1-5"],
+                    "science_practices": ["Developing and Using Models"],
+                    "crosscutting_concepts": ["Systems and System Models"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 8
+                },
+                {
+                    "id": "HS-LS2-6",
+                    "description": "Evaluate the claims, evidence, and reasoning that the complex interactions in ecosystems maintain relatively consistent numbers and types of organisms in stable conditions, but changing conditions may result in a new ecosystem.",
+                    "cluster": "Ecosystem Dynamics, Functioning, and Resilience",
+                    "prerequisites": ["MS-LS2-4", "MS-LS2-5"],
+                    "science_practices": ["Engaging in Argument from Evidence"],
+                    "crosscutting_concepts": ["Stability and Change"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 7
+                },
+                {
+                    "id": "HS-LS2-7",
+                    "description": "Design, evaluate, and refine a solution for reducing the impacts of human activities on the environment and biodiversity.",
+                    "cluster": "Social Interactions and Group Behavior",
+                    "prerequisites": ["MS-LS2-5"],
+                    "science_practices": ["Constructing Explanations and Designing Solutions"],
+                    "crosscutting_concepts": ["Stability and Change"],
+                    "stat_mappings": ["science", "critical_thinking", "problem_solving", "technology"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 9
+                }
+            ]
+        },
+        {
+            "id": "LS3",
+            "name": "Heredity: Inheritance and Variation of Traits",
+            "standards": [
+                {
+                    "id": "HS-LS3-1",
+                    "description": "Ask questions to clarify relationships about the role of DNA and chromosomes in coding the instructions for characteristic traits passed from parents to offspring.",
+                    "cluster": "Inheritance of Traits",
+                    "prerequisites": ["MS-LS3-1", "MS-LS3-2"],
+                    "science_practices": ["Asking Questions"],
+                    "crosscutting_concepts": ["Cause and Effect"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 4,
+                    "estimated_hours": 6
+                },
+                {
+                    "id": "HS-LS3-2",
+                    "description": "Make and defend a claim based on evidence that inheritable genetic variations may result from: (1) new genetic combinations through meiosis, (2) viable errors occurring during replication, and/or (3) mutations caused by environmental factors.",
+                    "cluster": "Variation of Traits",
+                    "prerequisites": ["MS-LS3-2"],
+                    "science_practices": ["Engaging in Argument from Evidence"],
+                    "crosscutting_concepts": ["Cause and Effect"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 7
+                },
+                {
+                    "id": "HS-LS3-3",
+                    "description": "Apply concepts of statistics and probability to explain the variation and distribution of expressed traits in a population.",
+                    "cluster": "Variation of Traits",
+                    "prerequisites": ["MS-LS3-2", "MS-LS4-4"],
+                    "science_practices": ["Analyzing and Interpreting Data"],
+                    "crosscutting_concepts": ["Scale, Proportion, and Quantity"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 7
+                }
+            ]
+        },
+        {
+            "id": "LS4",
+            "name": "Biological Evolution: Unity and Diversity",
+            "standards": [
+                {
+                    "id": "HS-LS4-1",
+                    "description": "Communicate scientific information that common ancestry and biological evolution are supported by multiple lines of empirical evidence.",
+                    "cluster": "Evidence of Common Ancestry and Diversity",
+                    "prerequisites": ["MS-LS4-1", "MS-LS4-2"],
+                    "science_practices": ["Obtaining, Evaluating, and Communicating Information"],
+                    "crosscutting_concepts": ["Patterns"],
+                    "stat_mappings": ["science", "critical_thinking", "communication"],
+                    "cognitive_complexity": 4,
+                    "estimated_hours": 6
+                },
+                {
+                    "id": "HS-LS4-2",
+                    "description": "Construct an explanation based on evidence that the process of evolution primarily results from four factors: (1) the potential for a species to increase in number, (2) the heritable genetic variation of individuals in a species due to mutation and sexual reproduction, (3) competition for limited resources, and (4) the proliferation of those organisms that are better able to survive and reproduce in the environment.",
+                    "cluster": "Natural Selection",
+                    "prerequisites": ["MS-LS4-4", "MS-LS4-6"],
+                    "science_practices": ["Constructing Explanations"],
+                    "crosscutting_concepts": ["Cause and Effect"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 8
+                },
+                {
+                    "id": "HS-LS4-3",
+                    "description": "Apply concepts of statistics and probability to support explanations that organisms with an advantageous heritable trait tend to increase in proportion to organisms lacking this trait.",
+                    "cluster": "Natural Selection",
+                    "prerequisites": ["MS-LS4-4", "MS-LS4-6"],
+                    "science_practices": ["Analyzing and Interpreting Data"],
+                    "crosscutting_concepts": ["Cause and Effect"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 7
+                },
+                {
+                    "id": "HS-LS4-4",
+                    "description": "Construct an explanation based on evidence for how natural selection leads to adaptation of populations.",
+                    "cluster": "Adaptation",
+                    "prerequisites": ["MS-LS4-4"],
+                    "science_practices": ["Constructing Explanations"],
+                    "crosscutting_concepts": ["Cause and Effect"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 7
+                },
+                {
+                    "id": "HS-LS4-5",
+                    "description": "Evaluate the evidence supporting claims that changes in environmental conditions may result in: (1) increases in the number of individuals of some species, (2) the emergence of new species over time, and (3) the extinction of other species.",
+                    "cluster": "Adaptation",
+                    "prerequisites": ["MS-LS4-1", "MS-LS4-4"],
+                    "science_practices": ["Engaging in Argument from Evidence"],
+                    "crosscutting_concepts": ["Cause and Effect"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 7
+                }
+            ]
+        },
+        {
+            "id": "ETS1",
+            "name": "Engineering Design",
+            "standards": [
+                {
+                    "id": "HS-ETS1-1",
+                    "description": "Analyze a major global challenge to specify qualitative and quantitative criteria and constraints for solutions that account for societal needs and wants.",
+                    "cluster": "Engineering Design",
+                    "prerequisites": ["MS-ETS1-1"],
+                    "science_practices": ["Asking Questions and Defining Problems"],
+                    "crosscutting_concepts": ["Influence of Engineering, Technology, and Science on Society and the Natural World"],
+                    "stat_mappings": ["science", "critical_thinking", "problem_solving", "technology"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 8
+                },
+                {
+                    "id": "HS-ETS1-2",
+                    "description": "Design a solution to a complex real-world problem by breaking it down into smaller, more manageable problems that can be solved through engineering.",
+                    "cluster": "Engineering Design",
+                    "prerequisites": ["MS-ETS1-2"],
+                    "science_practices": ["Constructing Explanations and Designing Solutions"],
+                    "crosscutting_concepts": ["Systems and System Models"],
+                    "stat_mappings": ["science", "critical_thinking", "problem_solving", "technology"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 9
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,179 @@
+{
+    "subject": "science",
+    "grade": "7",
+    "domains": [
+        {
+            "name": "Life Science: From Molecules to Organisms",
+            "standards": [
+                {
+                    "id": "MS-LS1-1",
+                    "description": "Conduct an investigation to provide evidence that living things are made of cells; either one cell or many different numbers and types of cells.",
+                    "cluster": "From Molecules to Organisms: Structures and Processes",
+                    "prerequisites": ["5-LS1-1"],
+                    "stat_mappings": ["science", "critical_thinking", "problem_solving"],
+                    "cognitive_complexity": 3,
+                    "estimated_hours": 5
+                },
+                {
+                    "id": "MS-LS1-2",
+                    "description": "Develop and use a model to describe the function of a cell as a whole and ways parts of cells contribute to the function.",
+                    "cluster": "From Molecules to Organisms: Structures and Processes",
+                    "prerequisites": ["MS-LS1-1"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 4,
+                    "estimated_hours": 6
+                },
+                {
+                    "id": "MS-LS1-3",
+                    "description": "Use argument supported by evidence for how the body is a system of interacting subsystems composed of groups of cells.",
+                    "cluster": "From Molecules to Organisms: Structures and Processes",
+                    "prerequisites": ["MS-LS1-2"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 4,
+                    "estimated_hours": 6
+                },
+                {
+                    "id": "MS-LS1-4",
+                    "description": "Use argument based on empirical evidence and scientific reasoning to support an explanation for how characteristic animal behaviors and specialized plant structures affect the probability of successful reproduction of animals and plants respectively.",
+                    "cluster": "From Molecules to Organisms: Structures and Processes",
+                    "prerequisites": ["3-LS3-2"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 4,
+                    "estimated_hours": 5
+                },
+                {
+                    "id": "MS-LS1-5",
+                    "description": "Construct a scientific explanation based on evidence for how environmental and genetic factors influence the growth of organisms.",
+                    "cluster": "From Molecules to Organisms: Structures and Processes",
+                    "prerequisites": ["3-LS3-2"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 4,
+                    "estimated_hours": 5
+                },
+                {
+                    "id": "MS-LS1-6",
+                    "description": "Construct a scientific explanation based on evidence for the role of photosynthesis in the cycling of matter and flow of energy into and out of organisms.",
+                    "cluster": "From Molecules to Organisms: Structures and Processes",
+                    "prerequisites": ["5-LS1-1", "5-PS3-1"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 4,
+                    "estimated_hours": 6
+                },
+                {
+                    "id": "MS-LS1-7",
+                    "description": "Develop a model to describe how food is rearranged through chemical reactions forming new molecules that support growth and/or release energy as this matter moves through an organism.",
+                    "cluster": "From Molecules to Organisms: Structures and Processes",
+                    "prerequisites": ["MS-LS1-6", "5-PS1-4"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 4,
+                    "estimated_hours": 6
+                }
+            ]
+        },
+        {
+            "name": "Physical Science: Matter and Its Interactions",
+            "standards": [
+                {
+                    "id": "MS-PS1-1",
+                    "description": "Develop models to describe the atomic composition of simple molecules and extended structures.",
+                    "cluster": "Matter and Its Interactions",
+                    "prerequisites": ["5-PS1-1"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 4,
+                    "estimated_hours": 6
+                },
+                {
+                    "id": "MS-PS1-2",
+                    "description": "Analyze and interpret data on the properties of substances before and after the substances interact to determine if a chemical reaction has occurred.",
+                    "cluster": "Matter and Its Interactions",
+                    "prerequisites": ["5-PS1-4"],
+                    "stat_mappings": ["science", "critical_thinking", "problem_solving"],
+                    "cognitive_complexity": 4,
+                    "estimated_hours": 6
+                },
+                {
+                    "id": "MS-PS1-3",
+                    "description": "Gather and make sense of information to describe that synthetic materials come from natural resources and impact society.",
+                    "cluster": "Matter and Its Interactions",
+                    "prerequisites": ["5-PS1-3"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 3,
+                    "estimated_hours": 4
+                },
+                {
+                    "id": "MS-PS1-4",
+                    "description": "Develop a model that predicts and describes changes in particle motion, temperature, and state of a pure substance when thermal energy is added or removed.",
+                    "cluster": "Matter and Its Interactions",
+                    "prerequisites": ["5-PS1-1"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 4,
+                    "estimated_hours": 6
+                }
+            ]
+        },
+        {
+            "name": "Earth and Space Science: Earth's Systems",
+            "standards": [
+                {
+                    "id": "MS-ESS2-1",
+                    "description": "Develop a model to describe the cycling of Earth's materials and the flow of energy that drives this process.",
+                    "cluster": "Earth's Systems",
+                    "prerequisites": ["5-ESS2-1"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 4,
+                    "estimated_hours": 6
+                },
+                {
+                    "id": "MS-ESS2-2",
+                    "description": "Construct an explanation based on evidence for how geoscience processes have changed Earth's surface at varying time and spatial scales.",
+                    "cluster": "Earth's Systems",
+                    "prerequisites": ["4-ESS1-1", "4-ESS2-1"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 4,
+                    "estimated_hours": 6
+                }
+            ]
+        },
+        {
+            "name": "Engineering Design",
+            "standards": [
+                {
+                    "id": "MS-ETS1-1",
+                    "description": "Define the criteria and constraints of a design problem with sufficient precision to ensure a successful solution, taking into account relevant scientific principles and potential impacts on people and the natural environment that may limit possible solutions.",
+                    "cluster": "Engineering Design",
+                    "prerequisites": ["3-5-ETS1-1"],
+                    "stat_mappings": ["science", "critical_thinking", "technology", "problem_solving"],
+                    "cognitive_complexity": 4,
+                    "estimated_hours": 6
+                },
+                {
+                    "id": "MS-ETS1-2",
+                    "description": "Evaluate competing design solutions using a systematic process to determine how well they meet the criteria and constraints of the problem.",
+                    "cluster": "Engineering Design",
+                    "prerequisites": ["MS-ETS1-1"],
+                    "stat_mappings": ["science", "critical_thinking", "technology"],
+                    "cognitive_complexity": 4,
+                    "estimated_hours": 6
+                },
+                {
+                    "id": "MS-ETS1-3",
+                    "description": "Analyze data from tests to determine similarities and differences among several design solutions to identify the best characteristics of each that can be combined into a new solution to better meet the criteria for success.",
+                    "cluster": "Engineering Design",
+                    "prerequisites": ["MS-ETS1-2"],
+                    "stat_mappings": ["science", "critical_thinking", "technology"],
+                    "cognitive_complexity": 4,
+                    "estimated_hours": 6
+                },
+                {
+                    "id": "MS-ETS1-4",
+                    "description": "Develop a model to generate data for iterative testing and modification of a proposed object, tool, or process such that an optimal design can be achieved.",
+                    "cluster": "Engineering Design",
+                    "prerequisites": ["MS-ETS1-3"],
+                    "stat_mappings": ["science", "technology", "problem_solving"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 7
+                }
+            ]
+        }
+    ]
+}

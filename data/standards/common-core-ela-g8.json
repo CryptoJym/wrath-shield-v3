@@ -1,0 +1,170 @@
+[
+    {
+        "id": "8.RL.1",
+        "category": "Reading",
+        "domain": "Literature",
+        "description": "Cite the textual evidence that most strongly supports an analysis of what the text says explicitly as well as inferences drawn from the text.",
+        "prerequisites": ["7.RL.1"],
+        "cluster": "Key Ideas and Details"
+    },
+    {
+        "id": "8.RL.2",
+        "category": "Reading",
+        "domain": "Literature",
+        "description": "Determine a theme or central idea of a text and analyze its development over the course of the text, including its relationship to the characters, setting, and plot; provide an objective summary of the text.",
+        "prerequisites": ["8.RL.1", "7.RL.2"],
+        "cluster": "Key Ideas and Details"
+    },
+    {
+        "id": "8.RL.3",
+        "category": "Reading",
+        "domain": "Literature",
+        "description": "Analyze how particular lines of dialogue or incidents in a story or drama propel the action, reveal aspects of a character, or provoke a decision.",
+        "prerequisites": ["8.RL.1", "7.RL.3"],
+        "cluster": "Key Ideas and Details"
+    },
+    {
+        "id": "8.RL.4",
+        "category": "Reading",
+        "domain": "Literature",
+        "description": "Determine the meaning of words and phrases as they are used in a text, including figurative and connotative meanings; analyze the impact of specific word choices on meaning and tone, including analogies or allusions to other texts.",
+        "prerequisites": ["7.RL.4"],
+        "cluster": "Craft and Structure"
+    },
+    {
+        "id": "8.RL.5",
+        "category": "Reading",
+        "domain": "Literature",
+        "description": "Compare and contrast the structure of two or more texts and analyze how the differing structure of each text contributes to its meaning and style.",
+        "prerequisites": ["7.RL.5"],
+        "cluster": "Craft and Structure"
+    },
+    {
+        "id": "8.RL.6",
+        "category": "Reading",
+        "domain": "Literature",
+        "description": "Analyze how differences in the points of view of the characters and the audience or reader (e.g., created through the use of dramatic irony) create such effects as suspense or humor.",
+        "prerequisites": ["8.RL.3", "7.RL.6"],
+        "cluster": "Craft and Structure"
+    },
+    {
+        "id": "8.RL.9",
+        "category": "Reading",
+        "domain": "Literature",
+        "description": "Analyze how a modern work of fiction draws on themes, patterns of events, or character types from myths, traditional stories, or religious works such as the Bible, including describing how the material is rendered new.",
+        "prerequisites": ["8.RL.2", "7.RL.9"],
+        "cluster": "Integration of Knowledge and Ideas"
+    },
+    {
+        "id": "8.RI.1",
+        "category": "Reading",
+        "domain": "Informational Text",
+        "description": "Cite the textual evidence that most strongly supports an analysis of what the text says explicitly as well as inferences drawn from the text.",
+        "prerequisites": ["7.RI.1"],
+        "cluster": "Key Ideas and Details"
+    },
+    {
+        "id": "8.RI.2",
+        "category": "Reading",
+        "domain": "Informational Text",
+        "description": "Determine a central idea of a text and analyze its development over the course of the text, including its relationship to supporting ideas; provide an objective summary of the text.",
+        "prerequisites": ["8.RI.1", "7.RI.2"],
+        "cluster": "Key Ideas and Details"
+    },
+    {
+        "id": "8.RI.3",
+        "category": "Reading",
+        "domain": "Informational Text",
+        "description": "Analyze how a text makes connections among and distinctions between individuals, ideas, or events (e.g., through comparisons, analogies, or categories).",
+        "prerequisites": ["8.RI.1", "7.RI.3"],
+        "cluster": "Key Ideas and Details"
+    },
+    {
+        "id": "8.RI.4",
+        "category": "Reading",
+        "domain": "Informational Text",
+        "description": "Determine the meaning of words and phrases as they are used in a text, including figurative, connotative, and technical meanings; analyze the impact of specific word choices on meaning and tone, including analogies or allusions to other texts.",
+        "prerequisites": ["7.RI.4"],
+        "cluster": "Craft and Structure"
+    },
+    {
+        "id": "8.RI.5",
+        "category": "Reading",
+        "domain": "Informational Text",
+        "description": "Analyze in detail the structure of a specific paragraph in a text, including the role of particular sentences in developing and refining a key concept.",
+        "prerequisites": ["8.RI.2", "7.RI.5"],
+        "cluster": "Craft and Structure"
+    },
+    {
+        "id": "8.RI.6",
+        "category": "Reading",
+        "domain": "Informational Text",
+        "description": "Determine an author's point of view or purpose in a text and analyze how the author acknowledges and responds to conflicting evidence or viewpoints.",
+        "prerequisites": ["8.RI.1", "7.RI.6"],
+        "cluster": "Craft and Structure"
+    },
+    {
+        "id": "8.RI.8",
+        "category": "Reading",
+        "domain": "Informational Text",
+        "description": "Delineate and evaluate the argument and specific claims in a text, assessing whether the reasoning is sound and the evidence is relevant and sufficient; recognize when irrelevant evidence is introduced.",
+        "prerequisites": ["8.RI.1", "7.RI.8"],
+        "cluster": "Integration of Knowledge and Ideas"
+    },
+    {
+        "id": "8.RI.9",
+        "category": "Reading",
+        "domain": "Informational Text",
+        "description": "Analyze a case in which two or more texts provide conflicting information on the same topic and identify where the texts disagree on matters of fact or interpretation.",
+        "prerequisites": ["8.RI.6"],
+        "cluster": "Integration of Knowledge and Ideas"
+    },
+    {
+        "id": "8.W.1",
+        "category": "Writing",
+        "domain": "Writing",
+        "description": "Write arguments to support claims with clear reasons and relevant evidence.",
+        "prerequisites": ["7.W.1"],
+        "cluster": "Text Types and Purposes"
+    },
+    {
+        "id": "8.W.2",
+        "category": "Writing",
+        "domain": "Writing",
+        "description": "Write informative/explanatory texts to examine a topic and convey ideas, concepts, and information through the selection, organization, and analysis of relevant content.",
+        "prerequisites": ["7.W.2"],
+        "cluster": "Text Types and Purposes"
+    },
+    {
+        "id": "8.W.3",
+        "category": "Writing",
+        "domain": "Writing",
+        "description": "Write narratives to develop real or imagined experiences or events using effective technique, relevant descriptive details, and well-structured event sequences.",
+        "prerequisites": ["7.W.3"],
+        "cluster": "Text Types and Purposes"
+    },
+    {
+        "id": "8.W.4",
+        "category": "Writing",
+        "domain": "Writing",
+        "description": "Produce clear and coherent writing in which the development, organization, and style are appropriate to task, purpose, and audience.",
+        "prerequisites": ["7.W.4"],
+        "cluster": "Production and Distribution of Writing"
+    },
+    {
+        "id": "8.SL.1",
+        "category": "Speaking & Listening",
+        "domain": "Speaking & Listening",
+        "description": "Engage effectively in a range of collaborative discussions (one-on-one, in groups, and teacher-led) with diverse partners on grade 8 topics, texts, and issues, building on others' ideas and expressing their own clearly.",
+        "prerequisites": ["7.SL.1"],
+        "cluster": "Comprehension and Collaboration"
+    },
+    {
+        "id": "8.L.1",
+        "category": "Language",
+        "domain": "Language",
+        "description": "Demonstrate command of the conventions of standard English grammar and usage when writing or speaking.",
+        "prerequisites": ["7.L.1"],
+        "cluster": "Conventions of Standard English"
+    }
+]

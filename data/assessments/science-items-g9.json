@@ -1,0 +1,607 @@
+{
+  "grade": "9",
+  "course": "Biology",
+  "framework": "NGSS",
+  "items": [
+    {
+      "id": "sci-9-ls1-1-001",
+      "standard_id": "HS-LS1-1",
+      "standard_description": "Construct an explanation based on evidence for how the structure of DNA determines the structure of proteins which carry out the essential functions of life through systems of specialized cells.",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A mutation occurs in a gene that codes for an enzyme involved in cellular respiration. Explain how this mutation at the molecular level could affect the organism at the cellular and organism levels. Use the concepts of DNA → RNA → protein in your explanation.",
+      "rubric": {
+        "4": "Complete causal chain: mutation changes DNA sequence → altered mRNA codon → different amino acid or stop codon → misfolded/nonfunctional enzyme → reduced ATP production in cells → fatigue, weakness, or other organism-level effects. Uses correct terminology throughout.",
+        "3": "Explains most of the chain with minor gaps or terminology errors. Shows understanding of central dogma and connects to organism effect.",
+        "2": "Explains molecular OR organism effect but does not clearly connect them. May have some misconceptions about protein synthesis.",
+        "1": "Shows basic understanding of mutation concept but lacks mechanistic explanation.",
+        "0": "No response or fundamental misconceptions about DNA/protein relationship."
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 420,
+      "science_practice": "Constructing Explanations",
+      "crosscutting_concept": "Cause and Effect"
+    },
+    {
+      "id": "sci-9-ls1-1-002",
+      "standard_id": "HS-LS1-1",
+      "standard_description": "Construct an explanation based on evidence for how the structure of DNA determines the structure of proteins which carry out the essential functions of life through systems of specialized cells.",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Sickle cell anemia is caused by a single nucleotide change in the gene for hemoglobin. The normal codon GAG is changed to GTG. Using a codon chart, determine the amino acid change. Then explain why this single amino acid substitution causes red blood cells to become sickle-shaped under low oxygen conditions and how this affects the organism.",
+      "rubric": {
+        "4": "Correctly identifies glutamic acid → valine substitution. Explains that valine is hydrophobic, causing hemoglobin molecules to stick together → distorts cell shape → blocks capillaries → reduces oxygen delivery → causes pain crises and organ damage.",
+        "3": "Identifies correct amino acid change and explains cellular effect but may have incomplete organism-level explanation.",
+        "2": "Uses codon chart correctly but explanation of mechanism is incomplete or contains minor errors.",
+        "1": "Attempts to use codon chart but makes errors or cannot connect to disease symptoms.",
+        "0": "Cannot interpret codon chart or shows fundamental misconceptions."
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.70,
+      "time_estimate_seconds": 360,
+      "science_practice": "Constructing Explanations",
+      "crosscutting_concept": "Structure and Function"
+    },
+    {
+      "id": "sci-9-ls1-2-001",
+      "standard_id": "HS-LS1-2",
+      "standard_description": "Develop and use a model to illustrate the hierarchical organization of interacting systems that provide specific functions within multicellular organisms.",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Design a model that shows how the digestive system, circulatory system, and cellular respiration work together to provide energy to muscle cells during exercise. Your model should show the flow of matter and energy across at least three levels of biological organization (cellular, tissue/organ, organ system). Include labels and arrows to show the direction of material flow.",
+      "rubric": {
+        "4": "Model shows complete pathway: food breakdown in digestive system → nutrient absorption → circulatory transport → cellular uptake → mitochondrial respiration → ATP production. Correctly shows all three levels with accurate arrows for matter/energy flow.",
+        "3": "Shows most components and connections with minor gaps. Levels of organization are represented but may not be clearly distinguished.",
+        "2": "Shows some correct connections but missing key components or has direction errors in flow arrows.",
+        "1": "Basic diagram with some correct labels but lacks system integration or flow representation.",
+        "0": "Does not demonstrate understanding of system interactions."
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.80,
+      "time_estimate_seconds": 600,
+      "science_practice": "Developing and Using Models",
+      "crosscutting_concept": "Systems and System Models"
+    },
+    {
+      "id": "sci-9-ls1-3-001",
+      "standard_id": "HS-LS1-3",
+      "standard_description": "Plan and conduct an investigation to provide evidence that feedback mechanisms maintain homeostasis.",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Design an experiment to investigate how the human body maintains blood glucose homeostasis after consuming different types of carbohydrates (simple vs. complex). Include: (1) your hypothesis, (2) independent and dependent variables, (3) controls, (4) procedure with at least 5 steps, (5) how you would collect and analyze data, and (6) predicted results with explanation based on feedback mechanisms.",
+      "rubric": {
+        "4": "Complete experimental design with testable hypothesis, clearly identified variables, appropriate controls (fasting baseline, same meal size), detailed procedure, quantitative data collection plan (blood glucose measurements at intervals), and prediction that includes insulin feedback mechanism.",
+        "3": "Solid experimental design with most components. May have minor gaps in controls or data analysis plan.",
+        "2": "Basic experimental structure but missing key controls or unclear procedure. Limited connection to feedback mechanisms.",
+        "1": "Attempts experimental design but lacks scientific rigor or has conceptual errors about homeostasis.",
+        "0": "Does not demonstrate understanding of experimental design or feedback mechanisms."
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 5,
+        "generativity_delta": 6
+      },
+      "difficulty": 0.85,
+      "time_estimate_seconds": 720,
+      "science_practice": "Planning and Carrying Out Investigations",
+      "crosscutting_concept": "Stability and Change"
+    },
+    {
+      "id": "sci-9-ls1-4-001",
+      "standard_id": "HS-LS1-4",
+      "standard_description": "Use a model to illustrate the role of cellular division (mitosis) and differentiation in producing and maintaining complex organisms.",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A skin wound heals over several weeks. Explain how both mitosis and cell differentiation contribute to the healing process. Include the role of stem cells in your explanation and describe what might happen if either process was disrupted.",
+      "rubric": {
+        "4": "Explains that stem cells in skin undergo mitosis to produce new cells, which then differentiate into specific skin cell types (keratinocytes, fibroblasts). Notes that mitosis disruption would prevent new cell production; differentiation disruption would produce wrong cell types. Uses correct terminology.",
+        "3": "Explains both processes and their roles in healing with minor gaps. May not fully address disruption scenarios.",
+        "2": "Describes mitosis OR differentiation but not both, or does not connect them to healing process.",
+        "1": "Shows basic understanding of one process but significant gaps in understanding their relationship.",
+        "0": "Confuses mitosis with meiosis or shows fundamental misconceptions."
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.70,
+      "time_estimate_seconds": 360,
+      "science_practice": "Developing and Using Models",
+      "crosscutting_concept": "Cause and Effect"
+    },
+    {
+      "id": "sci-9-ls1-5-001",
+      "standard_id": "HS-LS1-5",
+      "standard_description": "Use a model to illustrate how photosynthesis transforms light energy into stored chemical energy.",
+      "dok_level": 3,
+      "question_type": "data_analysis",
+      "question": "The graph below shows the rate of photosynthesis in a plant at different light intensities and two different CO₂ concentrations (normal atmospheric: 0.04% and elevated: 0.1%).\n\n[Graph shows two curves: both start at 0, rise steeply, then plateau. The elevated CO₂ curve plateaus at a higher rate and at a higher light intensity.]\n\nAnalyze the data and explain: (a) Why do both curves plateau? (b) Why is the plateau higher for elevated CO₂? (c) What does this suggest about factors limiting photosynthesis? Use your understanding of the light-dependent and light-independent reactions in your explanation.",
+      "rubric": {
+        "4": "Correctly explains: (a) Light saturation point reached - all chlorophyll molecules active or another factor limiting; (b) More CO₂ available for Calvin cycle, more RuBP can be carboxylated; (c) Identifies limiting factors concept - light limits at low intensity, CO₂ limits at high intensity. Connects to correct reactions.",
+        "3": "Explains most points correctly but may not clearly distinguish between limiting factors at different parts of the curve.",
+        "2": "Identifies that something is limiting but cannot fully explain mechanism or connect to specific reactions.",
+        "1": "Recognizes curves plateau but explanation lacks scientific accuracy.",
+        "0": "Cannot interpret graph or shows fundamental misconceptions about photosynthesis."
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 480,
+      "science_practice": "Analyzing and Interpreting Data",
+      "crosscutting_concept": "Energy and Matter"
+    },
+    {
+      "id": "sci-9-ls1-6-001",
+      "standard_id": "HS-LS1-6",
+      "standard_description": "Construct and revise an explanation based on evidence for how carbon, hydrogen, and oxygen from sugar molecules may combine with other elements to form amino acids and/or other large carbon-based molecules.",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A plant absorbs glucose, nitrates, and sulfates from its environment. Explain how these substances can be used to synthesize proteins. In your explanation, describe: (1) which elements from each source contribute to amino acids, (2) how carbon skeletons from glucose are modified, and (3) why nitrogen is essential for protein synthesis.",
+      "rubric": {
+        "4": "Explains: Glucose provides C, H, O for carbon skeleton; nitrates provide N for amino group; sulfates provide S for certain amino acids (cysteine, methionine). Carbon skeletons modified by adding amino group (-NH₂) and removing/adding atoms. Nitrogen essential because it's in every amino acid's amino group and cannot be obtained from glucose alone.",
+        "3": "Identifies sources of elements correctly and explains nitrogen's role but may not fully describe carbon skeleton modification.",
+        "2": "Identifies that different nutrients provide different elements but explanation of process is incomplete.",
+        "1": "Shows basic understanding that proteins come from nutrients but cannot explain mechanism.",
+        "0": "Does not understand that proteins are synthesized from simpler molecules."
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.72,
+      "time_estimate_seconds": 360,
+      "science_practice": "Constructing Explanations",
+      "crosscutting_concept": "Energy and Matter"
+    },
+    {
+      "id": "sci-9-ls1-7-001",
+      "standard_id": "HS-LS1-7",
+      "standard_description": "Use a model to illustrate that cellular respiration is a chemical process whereby the bonds of food molecules and oxygen molecules are broken and the bonds in new compounds are formed resulting in a net transfer of energy.",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "The complete oxidation of one glucose molecule releases approximately 686 kcal of energy, but only about 263 kcal (38%) is captured in ATP. Calculate the energy efficiency and explain what happens to the remaining 62% of energy. Also explain why cells don't release all 686 kcal at once and instead use a series of reactions.",
+      "rubric": {
+        "4": "Correctly calculates efficiency (263/686 × 100 = 38%). Explains remaining 62% released as heat (maintains body temperature, thermodynamically required). Explains stepwise release: prevents cell damage from rapid energy release, allows controlled ATP production, maintains thermodynamic favorability through coupled reactions.",
+        "3": "Correct efficiency calculation and explains heat loss. May not fully explain advantages of stepwise release.",
+        "2": "Calculates efficiency correctly but explanation of energy fate is incomplete or has minor errors.",
+        "1": "Attempts calculation but makes errors or cannot explain where energy goes.",
+        "0": "Cannot perform calculation or shows fundamental misunderstanding of energy transfer."
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 420,
+      "science_practice": "Using Mathematics and Computational Thinking",
+      "crosscutting_concept": "Energy and Matter"
+    },
+    {
+      "id": "sci-9-ls2-1-001",
+      "standard_id": "HS-LS2-1",
+      "standard_description": "Use mathematical and/or computational representations to support explanations of factors that affect carrying capacity of ecosystems at different scales.",
+      "dok_level": 3,
+      "question_type": "data_analysis",
+      "question": "A population of deer on an island was studied for 20 years. The data shows:\n\nYear 0: 100 deer, abundant vegetation\nYear 5: 250 deer, vegetation declining\nYear 10: 400 deer, vegetation severely degraded\nYear 12: 180 deer, vegetation beginning recovery\nYear 20: 220 deer, vegetation stable\n\nCalculate the percent change between Years 0-10 and Years 10-12. Explain what happened to the carrying capacity and why. Predict what the population graph would look like if a new predator were introduced at Year 25.",
+      "rubric": {
+        "4": "Correct calculations: 300% increase (0-10), 55% decrease (10-12). Explains population exceeded carrying capacity, causing resource depletion, then crash. New carrying capacity established at lower level with recovered vegetation. Predator prediction shows decreased prey population, possible oscillations, new equilibrium below current level.",
+        "3": "Correct calculations with good explanation of carrying capacity dynamics. Predator prediction reasonable but may lack detail.",
+        "2": "Calculations correct but explanation of ecological dynamics is incomplete.",
+        "1": "Attempts calculations with errors or shows basic understanding without quantitative analysis.",
+        "0": "Cannot interpret data or calculate percent change."
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 480,
+      "science_practice": "Using Mathematics and Computational Thinking",
+      "crosscutting_concept": "Scale, Proportion, and Quantity"
+    },
+    {
+      "id": "sci-9-ls2-2-001",
+      "standard_id": "HS-LS2-2",
+      "standard_description": "Use mathematical representations to support and revise explanations based on evidence about factors affecting biodiversity and populations in ecosystems of different scales.",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "A conservation biologist is studying two forest fragments: Fragment A (100 hectares) and Fragment B (25 hectares). According to the species-area relationship (S = cA^z, where S = species number, A = area, c = 20, z = 0.25), predict the number of bird species in each fragment. If Fragment A loses 75% of its area to development, predict the new species count. Explain why small fragments often have lower biodiversity per unit area than large fragments, considering edge effects and minimum viable population concepts.",
+      "rubric": {
+        "4": "Correct calculations: Fragment A: S = 20(100)^0.25 = 63 species; Fragment B: S = 20(25)^0.25 = 45 species; After development: S = 20(25)^0.25 = 45 species (loss of 18 species). Explains edge effects (increased predation, wind, light changes at edges), higher edge-to-area ratio in small fragments, minimum viable populations not sustainable in small areas.",
+        "3": "Calculations mostly correct, good ecological explanation but may miss one concept (edge effects OR minimum viable population).",
+        "2": "Attempts calculations with some errors. Basic understanding of fragmentation effects.",
+        "1": "Significant calculation errors or limited ecological understanding.",
+        "0": "Cannot apply formula or explain fragmentation effects."
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.82,
+      "time_estimate_seconds": 540,
+      "science_practice": "Using Mathematics and Computational Thinking",
+      "crosscutting_concept": "Scale, Proportion, and Quantity"
+    },
+    {
+      "id": "sci-9-ls2-3-001",
+      "standard_id": "HS-LS2-3",
+      "standard_description": "Construct and revise an explanation based on evidence for the cycling of matter and flow of energy in aerobic and anaerobic conditions.",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A lake experiences eutrophication after agricultural runoff increases nutrient levels. Explain the sequence of events that leads to a 'dead zone' at the bottom of the lake. In your explanation, compare the energy yield of aerobic vs. anaerobic decomposition and explain why aerobic conditions support more complex food webs.",
+      "rubric": {
+        "4": "Complete sequence: Nutrients → algal bloom → algae die → bacterial decomposition consumes oxygen → hypoxia/anoxia → aerobic organisms die/leave → anaerobic bacteria dominate. Compares energy: aerobic (36-38 ATP/glucose) vs. anaerobic (2 ATP/glucose). More energy from aerobic respiration supports larger organisms and longer food chains.",
+        "3": "Explains eutrophication sequence well, compares energy yield but may not fully connect to food web complexity.",
+        "2": "Describes eutrophication but incomplete comparison of aerobic/anaerobic conditions.",
+        "1": "Basic understanding of eutrophication but lacks energy comparison.",
+        "0": "Does not understand eutrophication or confuses aerobic/anaerobic."
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.73,
+      "time_estimate_seconds": 420,
+      "science_practice": "Constructing Explanations",
+      "crosscutting_concept": "Energy and Matter"
+    },
+    {
+      "id": "sci-9-ls2-4-001",
+      "standard_id": "HS-LS2-4",
+      "standard_description": "Use mathematical representations to support claims for the cycling of matter and flow of energy among organisms in an ecosystem.",
+      "dok_level": 3,
+      "question_type": "data_analysis",
+      "question": "In a grassland ecosystem, the following energy values were measured:\n- Solar energy received: 1,000,000 kcal/m²/year\n- Energy captured by producers: 10,000 kcal/m²/year\n- Energy available to primary consumers: 1,000 kcal/m²/year\n- Energy available to secondary consumers: 100 kcal/m²/year\n- Energy available to tertiary consumers: 10 kcal/m²/year\n\nCalculate: (a) The efficiency of energy capture by producers, (b) The ecological efficiency between each trophic level. Explain why energy transfer is inefficient and predict the maximum number of trophic levels possible.",
+      "rubric": {
+        "4": "Correct calculations: (a) 1% producer efficiency; (b) 10% at each trophic transfer. Explains inefficiency: cellular respiration, heat loss, undigested material, not all biomass consumed. Predicts 4-5 trophic levels maximum because energy becomes too low to support populations.",
+        "3": "Calculations correct, good explanation of inefficiency but prediction may lack quantitative justification.",
+        "2": "Most calculations correct but explanation of inefficiency is incomplete.",
+        "1": "Attempts calculations with errors or limited explanation.",
+        "0": "Cannot perform calculations or fundamental misunderstanding of energy flow."
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.70,
+      "time_estimate_seconds": 420,
+      "science_practice": "Using Mathematics and Computational Thinking",
+      "crosscutting_concept": "Energy and Matter"
+    },
+    {
+      "id": "sci-9-ls2-5-001",
+      "standard_id": "HS-LS2-5",
+      "standard_description": "Develop a model to illustrate the role of photosynthesis and cellular respiration in the cycling of carbon among the biosphere, atmosphere, hydrosphere, and geosphere.",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Create a model showing how a carbon atom in a CO₂ molecule released from a car exhaust could eventually become part of a protein in a fish in the ocean. Your model should include: (1) at least 4 different reservoirs the carbon passes through, (2) the processes that move carbon between reservoirs, (3) approximate time scales for each transition. Explain one way human activities have disrupted this cycle.",
+      "rubric": {
+        "4": "Model shows: Atmosphere (CO₂) → dissolved in ocean (days-years) → phytoplankton photosynthesis (days) → zooplankton consumption → fish consumption → incorporated into fish protein. Or land-based pathway through terrestrial plants. Includes time scales. Explains human disruption: fossil fuel burning adds carbon faster than natural processes remove it.",
+        "3": "Shows valid pathway with most reservoirs and processes. Time scales may be less precise. Good explanation of disruption.",
+        "2": "Shows basic pathway but missing reservoirs or processes. Limited discussion of human impact.",
+        "1": "Incomplete pathway or significant errors in carbon cycle understanding.",
+        "0": "Does not demonstrate understanding of carbon cycling."
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.78,
+      "time_estimate_seconds": 540,
+      "science_practice": "Developing and Using Models",
+      "crosscutting_concept": "Energy and Matter"
+    },
+    {
+      "id": "sci-9-ls2-6-001",
+      "standard_id": "HS-LS2-6",
+      "standard_description": "Evaluate the claims, evidence, and reasoning that the complex interactions in ecosystems maintain relatively consistent numbers and types of organisms in stable conditions, but changing conditions may result in a new ecosystem.",
+      "dok_level": 4,
+      "question_type": "argumentation",
+      "question": "Claim: 'Keystone species are essential for ecosystem stability, and their removal always leads to ecosystem collapse.'\n\nEvaluate this claim using evidence from at least two different ecosystems (e.g., sea otters in kelp forests, wolves in Yellowstone, elephants in savannas). Consider: What evidence supports the importance of keystone species? What evidence might suggest the claim is overstated? Under what conditions might an ecosystem be more or less resilient to keystone species removal?",
+      "rubric": {
+        "4": "Provides evidence from 2+ ecosystems showing keystone species importance (e.g., sea otters control urchins that would destroy kelp; wolves control elk, allowing vegetation recovery). Also notes limitations: not ALL ecosystems depend on single keystone species, some systems may have functional redundancy, ecosystems may reach new stable states rather than 'collapse.' Discusses factors affecting resilience (biodiversity, connectivity, rate of change).",
+        "3": "Good evidence from 2 ecosystems, recognizes nuance in the claim but may not fully explore resilience factors.",
+        "2": "Provides evidence but doesn't critically evaluate the claim or considers only one ecosystem.",
+        "1": "Basic understanding of keystone species without evidence-based evaluation.",
+        "0": "Does not understand keystone species concept or cannot evaluate claim."
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 5,
+        "generativity_delta": 6
+      },
+      "difficulty": 0.83,
+      "time_estimate_seconds": 600,
+      "science_practice": "Engaging in Argument from Evidence",
+      "crosscutting_concept": "Stability and Change"
+    },
+    {
+      "id": "sci-9-ls2-7-001",
+      "standard_id": "HS-LS2-7",
+      "standard_description": "Design, evaluate, and refine a solution for reducing the impacts of human activities on the environment and biodiversity.",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "A city is planning to build a highway that would fragment a forest containing endangered species. Design a solution that balances development needs with biodiversity conservation. Your solution should include: (1) specific mitigation strategies with scientific justification, (2) criteria for evaluating success, (3) potential trade-offs, and (4) how you would monitor and refine the solution over time.",
+      "rubric": {
+        "4": "Solution includes multiple strategies (wildlife corridors/bridges, tunnel passages, vegetation buffers, timing construction to avoid breeding seasons). Provides scientific justification for each. Success criteria are measurable (wildlife crossing rates, population surveys, genetic connectivity). Acknowledges trade-offs (cost, land use, partial effectiveness). Monitoring plan includes long-term population tracking, camera traps, genetic analysis.",
+        "3": "Good solution with most components. May lack specificity in monitoring plan or trade-off analysis.",
+        "2": "Proposes reasonable solutions but lacks scientific justification or measurable success criteria.",
+        "1": "Basic solution with limited scientific reasoning.",
+        "0": "Solution is not feasible or shows no understanding of conservation biology."
+      },
+      "manifold_fit": {
+        "coherence_delta": 5,
+        "entropy_delta": 6,
+        "generativity_delta": 6
+      },
+      "difficulty": 0.85,
+      "time_estimate_seconds": 720,
+      "science_practice": "Designing Solutions",
+      "crosscutting_concept": "Stability and Change"
+    },
+    {
+      "id": "sci-9-ls2-8-001",
+      "standard_id": "HS-LS2-8",
+      "standard_description": "Evaluate the evidence for the role of group behavior on individual and species' chances to survive and reproduce.",
+      "dok_level": 3,
+      "question_type": "argumentation",
+      "question": "Some biologists argue that altruistic behaviors (like alarm calls that attract predators to the caller) shouldn't evolve because they reduce the individual's survival. Construct an argument using evidence from kin selection and/or reciprocal altruism to explain how such behaviors can be favored by natural selection. Use Hamilton's rule (rB > C) to support your argument with a numerical example.",
+      "rubric": {
+        "4": "Explains kin selection: genes for altruism spread if rB > C (where r = relatedness, B = benefit to recipient, C = cost to altruist). Provides example: if r = 0.5 (sibling), B = 3 (survival benefit), C = 1 (risk to altruist), then 0.5 × 3 = 1.5 > 1, so behavior favored. May also discuss reciprocal altruism for non-kin.",
+        "3": "Good explanation of kin selection with example but may have minor errors in calculation or not fully explain reciprocal altruism.",
+        "2": "Understands concept qualitatively but cannot apply Hamilton's rule quantitatively.",
+        "1": "Basic understanding that helping relatives can be beneficial but lacks mechanistic explanation.",
+        "0": "Does not understand how altruism can evolve."
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.78,
+      "time_estimate_seconds": 480,
+      "science_practice": "Engaging in Argument from Evidence",
+      "crosscutting_concept": "Cause and Effect"
+    },
+    {
+      "id": "sci-9-ls3-1-001",
+      "standard_id": "HS-LS3-1",
+      "standard_description": "Ask questions to clarify relationships about the role of DNA and chromosomes in coding the instructions for characteristic traits passed from parents to offspring.",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A couple is concerned about their risk of having a child with cystic fibrosis (CF). Testing reveals that both parents are carriers (heterozygous) for the CF allele. The CF gene is located on chromosome 7 and codes for the CFTR protein, a chloride channel. Explain: (1) the probability their child will have CF, (2) how the mutation affects protein function, and (3) why two healthy parents can have an affected child.",
+      "rubric": {
+        "4": "Correctly explains: (1) 25% probability using Punnett square (Cc × Cc → 1 CC : 2 Cc : 1 cc); (2) Mutation causes misfolded or absent CFTR protein → chloride ions can't exit cells → thick mucus accumulates in lungs and other organs; (3) Recessive allele masked by dominant normal allele in heterozygotes, but when two carriers reproduce, there's a chance of homozygous recessive offspring.",
+        "3": "Correct probability and explains recessive inheritance but protein function explanation may lack detail.",
+        "2": "Understands probability but doesn't fully explain molecular mechanism or vice versa.",
+        "1": "Basic understanding of inheritance but significant gaps in explanation.",
+        "0": "Cannot calculate probability or explain recessive inheritance."
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.68,
+      "time_estimate_seconds": 360,
+      "science_practice": "Asking Questions",
+      "crosscutting_concept": "Cause and Effect"
+    },
+    {
+      "id": "sci-9-ls3-2-001",
+      "standard_id": "HS-LS3-2",
+      "standard_description": "Make and defend a claim based on evidence that inheritable genetic variations may result from: (1) new genetic combinations through meiosis, (2) viable errors occurring during replication, and/or (3) mutations caused by environmental factors.",
+      "dok_level": 3,
+      "question_type": "argumentation",
+      "question": "A scientist discovers a new trait in a population of butterflies that wasn't present in the previous generation. Make and defend claims about three possible sources of this new variation, providing specific mechanisms for each. Rank these sources by how likely each is to produce beneficial vs. harmful variations, and justify your ranking.",
+      "rubric": {
+        "4": "Identifies all three sources: (1) Meiotic recombination (crossing over, independent assortment) - shuffles existing alleles into new combinations; (2) Replication errors (point mutations, insertions, deletions) - random changes during DNA synthesis; (3) Environmental mutagens (UV, chemicals) - induced DNA damage. Rankings justified: recombination most likely beneficial (combines tested alleles), replication errors neutral/slightly deleterious, environmental mutations often harmful (random damage to functional sequences).",
+        "3": "Correctly identifies and explains all three sources. Ranking may be less well-justified.",
+        "2": "Identifies sources but explanations of mechanisms are incomplete.",
+        "1": "Identifies some sources but lacks mechanistic detail or confuses processes.",
+        "0": "Does not understand sources of genetic variation."
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 480,
+      "science_practice": "Engaging in Argument from Evidence",
+      "crosscutting_concept": "Cause and Effect"
+    },
+    {
+      "id": "sci-9-ls3-3-001",
+      "standard_id": "HS-LS3-3",
+      "standard_description": "Apply concepts of statistics and probability to explain the variation and distribution of expressed traits in a population.",
+      "dok_level": 3,
+      "question_type": "data_analysis",
+      "question": "Human height is a polygenic trait influenced by many genes. In a population, height follows a normal distribution with a mean of 170 cm and a standard deviation of 7 cm. Calculate: (a) the range of heights for 68% of the population (1 SD), (b) the approximate percentage of people over 184 cm (2 SD above mean). Explain why height shows this distribution pattern rather than distinct categories like Mendelian traits.",
+      "rubric": {
+        "4": "Correct calculations: (a) 163-177 cm (mean ± 1 SD); (b) approximately 2.5% (2 SD above mean in normal distribution). Explains: Multiple genes each with small additive effects → many possible combinations → continuous distribution. Mendelian traits have few genotypes (e.g., 3 for one gene) creating distinct categories.",
+        "3": "Calculations correct with good explanation of polygenic inheritance but may not fully contrast with Mendelian inheritance.",
+        "2": "Understands that height is polygenic but calculations may have errors.",
+        "1": "Attempts calculations but significant errors; basic understanding of polygenic traits.",
+        "0": "Cannot apply statistical concepts to trait distribution."
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.72,
+      "time_estimate_seconds": 420,
+      "science_practice": "Using Mathematics and Computational Thinking",
+      "crosscutting_concept": "Scale, Proportion, and Quantity"
+    },
+    {
+      "id": "sci-9-ls4-1-001",
+      "standard_id": "HS-LS4-1",
+      "standard_description": "Communicate scientific information that common ancestry and biological evolution are supported by multiple lines of evidence.",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A skeptic claims that evolution is 'just a theory' and not well-supported by evidence. Prepare a scientific response that presents evidence from at least four different fields of study (e.g., paleontology, molecular biology, comparative anatomy, biogeography). For each, explain how the evidence supports common ancestry rather than independent creation of species.",
+      "rubric": {
+        "4": "Presents strong evidence from 4+ fields: Paleontology (transitional fossils show gradual changes, fossils in correct chronological order); Molecular biology (universal genetic code, DNA/protein similarity correlates with evolutionary distance); Comparative anatomy (homologous structures with different functions suggest common ancestor); Biogeography (island species most similar to nearby mainland species, not other islands). Explains how each supports common ancestry.",
+        "3": "Presents evidence from 4 fields but explanation of how it supports common ancestry may be less thorough.",
+        "2": "Presents evidence from 2-3 fields with reasonable explanations.",
+        "1": "Limited evidence or explanations don't clearly connect to common ancestry.",
+        "0": "Cannot articulate scientific evidence for evolution."
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 540,
+      "science_practice": "Obtaining, Evaluating, and Communicating Information",
+      "crosscutting_concept": "Patterns"
+    },
+    {
+      "id": "sci-9-ls4-2-001",
+      "standard_id": "HS-LS4-2",
+      "standard_description": "Construct an explanation based on evidence that the process of evolution primarily results from four factors: (1) the potential for a species to increase in number, (2) the heritable genetic variation of individuals in a species due to mutation and sexual reproduction, (3) competition for limited resources, and (4) the proliferation of those organisms that are better able to survive and reproduce in the environment.",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "The peppered moth (Biston betularia) population changed from mostly light-colored to mostly dark-colored during the Industrial Revolution in England, then back to light-colored after pollution decreased. Explain this classic example of natural selection using all four of Darwin's key factors. Calculate the change in allele frequency if the dark form increased from 2% to 95% over 50 generations.",
+      "rubric": {
+        "4": "Correctly applies all four factors: (1) Moths reproduce abundantly; (2) Variation in color is heritable; (3) Predation by birds creates competition for survival; (4) Moths matching tree color survive and reproduce more. Calculates: 93% change over 50 generations = 1.86% per generation average (or more sophisticated calculation showing selection coefficient). Explains reversal when environment changed.",
+        "3": "Applies all four factors correctly but calculation may lack sophistication.",
+        "2": "Explains selection but may miss one of the four factors or have calculation errors.",
+        "1": "Basic understanding of peppered moth example but incomplete application of selection principles.",
+        "0": "Does not understand natural selection mechanism."
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.72,
+      "time_estimate_seconds": 420,
+      "science_practice": "Constructing Explanations",
+      "crosscutting_concept": "Cause and Effect"
+    },
+    {
+      "id": "sci-9-ls4-3-001",
+      "standard_id": "HS-LS4-3",
+      "standard_description": "Apply concepts of statistics and probability to support explanations that organisms with an advantageous heritable trait tend to increase in proportion to organisms lacking this trait.",
+      "dok_level": 3,
+      "question_type": "data_analysis",
+      "question": "In a population of 1000 beetles, 360 are green (genotype GG), 480 are brown (Gg), and 160 are tan (gg). Birds preferentially eat tan beetles, reducing their survival rate to 50%, while green and brown beetles have 80% survival. Calculate: (a) allele frequencies before selection, (b) number of each genotype after selection, (c) new allele frequencies after selection. Is this population evolving? Explain using Hardy-Weinberg principles.",
+      "rubric": {
+        "4": "Correct calculations: (a) Before: G = (720+480)/2000 = 0.6, g = 0.4; (b) After selection: GG = 288, Gg = 384, gg = 80 (total 752); (c) After: G = (576+384)/1504 = 0.638, g = 0.362. Population is evolving because allele frequencies changed. H-W violated due to differential survival (selection).",
+        "3": "Calculations mostly correct, correctly identifies evolution occurring but may have minor errors.",
+        "2": "Understands concept but significant calculation errors.",
+        "1": "Attempts calculations but fundamental errors; limited understanding of allele frequency.",
+        "0": "Cannot calculate allele frequencies or apply H-W concepts."
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.78,
+      "time_estimate_seconds": 540,
+      "science_practice": "Using Mathematics and Computational Thinking",
+      "crosscutting_concept": "Cause and Effect"
+    },
+    {
+      "id": "sci-9-ls4-4-001",
+      "standard_id": "HS-LS4-4",
+      "standard_description": "Construct an explanation based on evidence for how natural selection leads to adaptation of populations.",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Darwin's finches on the Galápagos Islands have beaks adapted to different food sources. During a severe drought, only large, hard seeds remained available on one island. The population's average beak depth increased by 10% within one generation. Explain the mechanism of this rapid adaptation, distinguishing between (1) the change in individual birds and (2) the change in the population. Predict what might happen if small, soft seeds became abundant again.",
+      "rubric": {
+        "4": "Clearly distinguishes: (1) Individual birds do NOT change - their beak depth is fixed by genetics; (2) Population changes because birds with larger beaks survived and reproduced more, changing the allele frequency. This is selection on existing variation, not induced change. Prediction: If small seeds return, either population would adapt back (if variation remains) or be at disadvantage until mutation/immigration introduces small-beak alleles.",
+        "3": "Correctly distinguishes individual vs. population change. Prediction reasonable but may lack nuance.",
+        "2": "Understands selection occurred but may confuse individual vs. population level change.",
+        "1": "Basic understanding of finch adaptation but significant misconceptions about mechanism.",
+        "0": "Thinks individual birds' beaks changed in response to drought (Lamarckian error)."
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.70,
+      "time_estimate_seconds": 420,
+      "science_practice": "Constructing Explanations",
+      "crosscutting_concept": "Cause and Effect"
+    },
+    {
+      "id": "sci-9-ls4-5-001",
+      "standard_id": "HS-LS4-5",
+      "standard_description": "Evaluate the evidence supporting claims that changes in environmental conditions may result in: (1) increases in the number of individuals of some species, (2) the emergence of new species over time, and (3) the extinction of other species.",
+      "dok_level": 4,
+      "question_type": "argumentation",
+      "question": "Climate models predict that global average temperature will increase by 2-4°C over the next century. Evaluate the following claims about biodiversity outcomes, citing specific evidence:\n\nClaim 1: 'Species will simply move to track their preferred climate.'\nClaim 2: 'Climate change will drive significant extinctions.'\nClaim 3: 'Climate change could lead to new speciation events.'\n\nFor each claim, discuss what evidence supports it, what evidence contradicts it, and under what conditions it might or might not be true.",
+      "rubric": {
+        "4": "Evaluates all three claims with nuance. Claim 1: Some species can track, but barriers (urban areas, oceans, mountains) prevent movement; speed of change may exceed migration rates; habitat may not exist at new latitudes. Claim 2: Supported by coral bleaching, range contractions, phenology mismatches; but species have survived past changes (though slower). Claim 3: Could occur through range fragmentation, new habitats, hybrid zones; but speciation typically slow relative to climate change speed.",
+        "3": "Good evaluation of all three claims with evidence but may not fully explore contradicting evidence.",
+        "2": "Evaluates 2 claims well or all 3 superficially.",
+        "1": "Basic understanding of climate impacts but doesn't evaluate claims critically.",
+        "0": "Does not demonstrate understanding of climate-biodiversity relationships."
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 5,
+        "generativity_delta": 6
+      },
+      "difficulty": 0.85,
+      "time_estimate_seconds": 720,
+      "science_practice": "Engaging in Argument from Evidence",
+      "crosscutting_concept": "Stability and Change"
+    },
+    {
+      "id": "sci-9-ls4-6-001",
+      "standard_id": "HS-LS4-6",
+      "standard_description": "Create or revise a simulation to test a solution to mitigate adverse impacts of human activity on biodiversity.",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Design a computer simulation to test whether assisted migration (moving species to new locations as climate changes) could help save endangered species. Your design should include: (1) key variables to track, (2) parameters that could be adjusted, (3) how you would model ecological interactions, (4) what outcomes would indicate success or failure, and (5) potential unintended consequences your simulation should monitor for.",
+      "rubric": {
+        "4": "Comprehensive simulation design: Variables (population size, genetic diversity, survival rates, reproduction rates). Parameters (climate change rate, dispersal distance, habitat quality, introduction site characteristics). Ecological interactions (competition with native species, predator-prey, parasites/diseases). Success = stable/growing population, genetic diversity maintained, no negative impact on native species. Unintended consequences = invasive species effects, disease transmission, hybridization with natives, cascade effects.",
+        "3": "Good simulation design with most components but may miss one category.",
+        "2": "Basic simulation design but lacking in ecological complexity or unintended consequences.",
+        "1": "Simple simulation concept without consideration of multiple variables.",
+        "0": "Does not demonstrate understanding of simulation design or conservation biology."
+      },
+      "manifold_fit": {
+        "coherence_delta": 5,
+        "entropy_delta": 6,
+        "generativity_delta": 6
+      },
+      "difficulty": 0.88,
+      "time_estimate_seconds": 720,
+      "science_practice": "Developing and Using Models",
+      "crosscutting_concept": "Systems and System Models"
+    }
+  ]
+}

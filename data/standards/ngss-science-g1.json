@@ -1,0 +1,134 @@
+{
+    "subject": "science",
+    "grade": "1",
+    "domains": [
+        {
+            "name": "Physical Science: Waves and Light",
+            "standards": [
+                {
+                    "id": "1-PS4-1",
+                    "description": "Plan and conduct investigations to provide evidence that vibrating materials can make sound and that sound can make materials vibrate.",
+                    "cluster": "Waves and Their Applications in Technologies for Information Transfer",
+                    "prerequisites": [],
+                    "stat_mappings": ["science", "critical_thinking", "problem_solving"],
+                    "cognitive_complexity": 2,
+                    "estimated_hours": 4
+                },
+                {
+                    "id": "1-PS4-2",
+                    "description": "Make observations to construct an evidence-based account that objects can be seen only when illuminated.",
+                    "cluster": "Waves and Their Applications in Technologies for Information Transfer",
+                    "prerequisites": [],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 2,
+                    "estimated_hours": 3
+                },
+                {
+                    "id": "1-PS4-3",
+                    "description": "Plan and conduct an investigation to determine the effect of placing objects made with different materials in the path of a beam of light.",
+                    "cluster": "Waves and Their Applications in Technologies for Information Transfer",
+                    "prerequisites": ["1-PS4-2"],
+                    "stat_mappings": ["science", "critical_thinking", "problem_solving"],
+                    "cognitive_complexity": 3,
+                    "estimated_hours": 4
+                },
+                {
+                    "id": "1-PS4-4",
+                    "description": "Use tools and materials to design and build a device that uses light or sound to solve the problem of communicating over a distance.",
+                    "cluster": "Waves and Their Applications in Technologies for Information Transfer",
+                    "prerequisites": ["1-PS4-1", "1-PS4-3"],
+                    "stat_mappings": ["science", "technology", "problem_solving"],
+                    "cognitive_complexity": 4,
+                    "estimated_hours": 6
+                }
+            ]
+        },
+        {
+            "name": "Life Science: Structure, Function, and Information Processing",
+            "standards": [
+                {
+                    "id": "1-LS1-1",
+                    "description": "Use materials to design a solution to a human problem by mimicking how plants and/or animals use their external parts to help them survive, grow, and meet their needs.",
+                    "cluster": "From Molecules to Organisms: Structures and Processes",
+                    "prerequisites": ["K-LS1-1"],
+                    "stat_mappings": ["science", "technology", "problem_solving"],
+                    "cognitive_complexity": 3,
+                    "estimated_hours": 5
+                },
+                {
+                    "id": "1-LS1-2",
+                    "description": "Read texts and use media to determine patterns in behavior of parents and offspring that help offspring survive.",
+                    "cluster": "From Molecules to Organisms: Structures and Processes",
+                    "prerequisites": ["K-LS1-1"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 2,
+                    "estimated_hours": 3
+                },
+                {
+                    "id": "1-LS3-1",
+                    "description": "Make observations to construct an evidence-based account that young plants and animals are like, but not exactly like, their parents.",
+                    "cluster": "Heredity: Inheritance and Variation of Traits",
+                    "prerequisites": ["1-LS1-2"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 2,
+                    "estimated_hours": 3
+                }
+            ]
+        },
+        {
+            "name": "Earth and Space Science: Space Systems",
+            "standards": [
+                {
+                    "id": "1-ESS1-1",
+                    "description": "Use observations of the sun, moon, and stars to describe patterns that can be predicted.",
+                    "cluster": "Earth's Place in the Universe",
+                    "prerequisites": ["K-ESS2-1"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 2,
+                    "estimated_hours": 4
+                },
+                {
+                    "id": "1-ESS1-2",
+                    "description": "Make observations at different times of year to relate the amount of daylight to the time of year.",
+                    "cluster": "Earth's Place in the Universe",
+                    "prerequisites": ["1-ESS1-1"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 2,
+                    "estimated_hours": 4
+                }
+            ]
+        },
+        {
+            "name": "Engineering Design",
+            "standards": [
+                {
+                    "id": "K-2-ETS1-1",
+                    "description": "Ask questions, make observations, and gather information about a situation people want to change to define a simple problem that can be solved through the development of a new or improved object or tool.",
+                    "cluster": "Engineering Design",
+                    "prerequisites": [],
+                    "stat_mappings": ["science", "critical_thinking", "technology", "problem_solving"],
+                    "cognitive_complexity": 2,
+                    "estimated_hours": 4
+                },
+                {
+                    "id": "K-2-ETS1-2",
+                    "description": "Develop a simple sketch, drawing, or physical model to illustrate how the shape of an object helps it function as needed to solve a given problem.",
+                    "cluster": "Engineering Design",
+                    "prerequisites": ["K-2-ETS1-1"],
+                    "stat_mappings": ["science", "technology", "problem_solving"],
+                    "cognitive_complexity": 3,
+                    "estimated_hours": 5
+                },
+                {
+                    "id": "K-2-ETS1-3",
+                    "description": "Analyze data from tests of two objects designed to solve the same problem to compare the strengths and weaknesses of how each performs.",
+                    "cluster": "Engineering Design",
+                    "prerequisites": ["K-2-ETS1-2"],
+                    "stat_mappings": ["science", "critical_thinking", "technology"],
+                    "cognitive_complexity": 3,
+                    "estimated_hours": 5
+                }
+            ]
+        }
+    ]
+}

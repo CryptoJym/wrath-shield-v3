@@ -1,0 +1,848 @@
+{
+  "grade": "2",
+  "items": [
+    {
+      "id": "ela-2-rl-1-001",
+      "standard_id": "2.RL.1",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Read: 'Maya found a lost puppy in the park. It was cold and hungry. She took it home and gave it food.' Who found the puppy and where?",
+      "correct_answer": "Maya found the puppy in the park",
+      "rubric": {
+        "full_credit": "Identifies who (Maya) and where (park)",
+        "partial_credit": "Identifies only who or where",
+        "no_credit": "Cannot identify key details"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 60,
+      "passage": "Maya found a lost puppy in the park. It was cold and hungry. She took it home and gave it food."
+    },
+    {
+      "id": "ela-2-rl-1-002",
+      "standard_id": "2.RL.1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Read: 'The wizard waved his wand at midnight. Suddenly, the pumpkin turned into a golden coach.' When did the wizard wave his wand?",
+      "options": ["At midnight", "In the morning", "At noon", "In the afternoon"],
+      "correct_answer": "At midnight",
+      "rubric": {
+        "full_credit": "Selects correct answer",
+        "no_credit": "Selects incorrect option"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 30,
+      "passage": "The wizard waved his wand at midnight. Suddenly, the pumpkin turned into a golden coach."
+    },
+    {
+      "id": "ela-2-rl-2-001",
+      "standard_id": "2.RL.2",
+      "dok_level": 3,
+      "question_type": "short_answer",
+      "question": "Read the fable: 'A lion was caught in a net. A tiny mouse chewed the ropes and set him free. The lion learned that even small friends can help.' What is the lesson of this story?",
+      "correct_answer": "Even small friends can be helpful / Don't underestimate others",
+      "rubric": {
+        "full_credit": "Identifies moral about small friends helping",
+        "partial_credit": "Mentions helping but misses size aspect",
+        "no_credit": "Cannot identify lesson"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 1,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 90,
+      "passage": "A lion was caught in a net. A tiny mouse chewed the ropes and set him free. The lion learned that even small friends can help."
+    },
+    {
+      "id": "ela-2-rl-2-002",
+      "standard_id": "2.RL.2",
+      "dok_level": 3,
+      "question_type": "multiple_choice",
+      "question": "Read the folktale: 'The tortoise challenged the hare to a race. The hare ran fast, then stopped to rest. The slow tortoise kept going and won.' What is the central message?",
+      "options": ["Slow and steady wins the race", "Fast is always better", "Racing is fun", "Hares are mean"],
+      "correct_answer": "Slow and steady wins the race",
+      "rubric": {
+        "full_credit": "Identifies correct moral",
+        "no_credit": "Selects incorrect option"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 1,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 60,
+      "passage": "The tortoise challenged the hare to a race. The hare ran fast, then stopped to rest. The slow tortoise kept going and won."
+    },
+    {
+      "id": "ela-2-rl-3-001",
+      "standard_id": "2.RL.3",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Read: 'Emma's ice cream fell on the ground. She wanted to cry, but instead she took a deep breath and asked for another one.' How did Emma respond to losing her ice cream?",
+      "correct_answer": "She stayed calm and asked for another",
+      "rubric": {
+        "full_credit": "Describes Emma's calm response",
+        "partial_credit": "Mentions part of response",
+        "no_credit": "Cannot describe response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 60,
+      "passage": "Emma's ice cream fell on the ground. She wanted to cry, but instead she took a deep breath and asked for another one."
+    },
+    {
+      "id": "ela-2-rl-3-002",
+      "standard_id": "2.RL.3",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Read: 'The storm knocked down all the farmer's crops. He felt sad at first, but then he started planting new seeds right away.' What does this show about the farmer?",
+      "options": ["He doesn't give up easily", "He is scared of storms", "He doesn't like farming", "He was too sad to work"],
+      "correct_answer": "He doesn't give up easily",
+      "rubric": {
+        "full_credit": "Identifies character trait",
+        "no_credit": "Selects incorrect option"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 45,
+      "passage": "The storm knocked down all the farmer's crops. He felt sad at first, but then he started planting new seeds right away."
+    },
+    {
+      "id": "ela-2-rl-4-001",
+      "standard_id": "2.RL.4",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Read the poem: 'The leaves go swish, swish, swish. The wind goes whoosh!' How do the words 'swish' and 'whoosh' help you hear the sounds?",
+      "correct_answer": "They sound like what they describe",
+      "rubric": {
+        "full_credit": "Explains onomatopoeia effect",
+        "partial_credit": "Mentions sounds but vague",
+        "no_credit": "Cannot explain"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 60,
+      "passage": "The leaves go swish, swish, swish. The wind goes whoosh!"
+    },
+    {
+      "id": "ela-2-rl-4-002",
+      "standard_id": "2.RL.4",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Read: 'The mouse ran hippity-hop, hippity-hop across the floor.' What does 'hippity-hop' help you understand?",
+      "options": ["How the mouse moves", "What color the mouse is", "How big the mouse is", "What the mouse eats"],
+      "correct_answer": "How the mouse moves",
+      "rubric": {
+        "full_credit": "Identifies rhythm/movement",
+        "no_credit": "Selects incorrect option"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 45,
+      "passage": "The mouse ran hippity-hop, hippity-hop across the floor."
+    },
+    {
+      "id": "ela-2-rl-5-001",
+      "standard_id": "2.RL.5",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Read: 'Once upon a time, there was a brave knight. He went on many adventures. In the end, the knight found treasure and lived happily ever after.' How does the beginning introduce the story?",
+      "correct_answer": "Introduces the main character (knight)",
+      "rubric": {
+        "full_credit": "Explains how beginning introduces character/setting",
+        "partial_credit": "Mentions beginning but vague",
+        "no_credit": "Cannot explain structure"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 75,
+      "passage": "Once upon a time, there was a brave knight. He went on many adventures. In the end, the knight found treasure and lived happily ever after."
+    },
+    {
+      "id": "ela-2-rl-5-002",
+      "standard_id": "2.RL.5",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "A story starts with 'Long ago in a faraway land...' and ends with 'And they never worried again.' What does the ending do?",
+      "options": ["Concludes the action and shows resolution", "Introduces new characters", "Starts a new problem", "Asks a question"],
+      "correct_answer": "Concludes the action and shows resolution",
+      "rubric": {
+        "full_credit": "Identifies concluding function",
+        "no_credit": "Selects incorrect option"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 45,
+      "passage": null
+    },
+    {
+      "id": "ela-2-rl-7-001",
+      "standard_id": "2.RL.7",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "The text says: 'The house was very old.' The illustration shows a house with broken windows and peeling paint. What does the illustration add to your understanding?",
+      "correct_answer": "Shows specific details of how old/worn the house is",
+      "rubric": {
+        "full_credit": "Explains how illustration adds specific details",
+        "partial_credit": "Mentions illustration shows old",
+        "no_credit": "Cannot connect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 60,
+      "passage": "The house was very old.",
+      "image_prompt": "An old house with broken windows and peeling paint"
+    },
+    {
+      "id": "ela-2-rl-7-002",
+      "standard_id": "2.RL.7",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "The story says 'The children played outside.' The picture shows children building a snowman. What season does the picture show?",
+      "options": ["Winter", "Summer", "Spring", "Fall"],
+      "correct_answer": "Winter",
+      "rubric": {
+        "full_credit": "Uses illustration to determine setting",
+        "no_credit": "Selects incorrect option"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 30,
+      "passage": "The children played outside.",
+      "image_prompt": "Children building a snowman"
+    },
+    {
+      "id": "ela-2-rl-9-001",
+      "standard_id": "2.RL.9",
+      "dok_level": 3,
+      "question_type": "short_answer",
+      "question": "Read two Cinderella stories. In one, a fairy helps Cinderella. In another, fish help her. How are these stories different?",
+      "correct_answer": "Different helpers: fairy vs. fish",
+      "rubric": {
+        "full_credit": "Identifies difference in who helps Cinderella",
+        "partial_credit": "Notes a difference but imprecise",
+        "no_credit": "Cannot compare"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 1,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 120,
+      "passage": "Story 1: A fairy godmother helped Cinderella go to the ball. Story 2: Magical fish granted Cinderella's wish to go to the ball."
+    },
+    {
+      "id": "ela-2-rl-9-002",
+      "standard_id": "2.RL.9",
+      "dok_level": 3,
+      "question_type": "multiple_choice",
+      "question": "One version of 'The Three Little Pigs' has a wolf who is mean. Another version has a wolf who just has allergies and sneezes. How are these versions different?",
+      "options": ["The wolf's character is different", "The pigs are different", "The houses are different", "The ending is different"],
+      "correct_answer": "The wolf's character is different",
+      "rubric": {
+        "full_credit": "Identifies character difference",
+        "no_credit": "Selects incorrect option"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 1,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 60,
+      "passage": null
+    },
+    {
+      "id": "ela-2-ri-1-001",
+      "standard_id": "2.RI.1",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Read: 'Elephants are the largest land animals. They use their trunks to drink water and grab food. Baby elephants stay with their mothers for many years.' What do elephants use their trunks for?",
+      "correct_answer": "To drink water and grab food",
+      "rubric": {
+        "full_credit": "States both uses",
+        "partial_credit": "States one use",
+        "no_credit": "Incorrect answer"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 45,
+      "passage": "Elephants are the largest land animals. They use their trunks to drink water and grab food. Baby elephants stay with their mothers for many years."
+    },
+    {
+      "id": "ela-2-ri-1-002",
+      "standard_id": "2.RI.1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Read: 'The sun is a star. It gives us heat and light. Earth goes around the sun once every year.' How long does it take Earth to go around the sun?",
+      "options": ["One year", "One day", "One month", "One week"],
+      "correct_answer": "One year",
+      "rubric": {
+        "full_credit": "Selects correct answer",
+        "no_credit": "Selects incorrect option"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 30,
+      "passage": "The sun is a star. It gives us heat and light. Earth goes around the sun once every year."
+    },
+    {
+      "id": "ela-2-ri-2-001",
+      "standard_id": "2.RI.2",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Read: 'Recycling helps our planet. We can recycle paper, plastic, and glass. When we recycle, we make less trash. Recycling saves trees and keeps water clean.' What is the main topic of this text?",
+      "correct_answer": "Recycling and how it helps",
+      "rubric": {
+        "full_credit": "Identifies main topic as recycling",
+        "partial_credit": "Mentions helping planet vaguely",
+        "no_credit": "Cannot identify topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 60,
+      "passage": "Recycling helps our planet. We can recycle paper, plastic, and glass. When we recycle, we make less trash. Recycling saves trees and keeps water clean."
+    },
+    {
+      "id": "ela-2-ri-2-002",
+      "standard_id": "2.RI.2",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Paragraph 1: 'Dolphins are mammals that live in the ocean.' Paragraph 2: 'Dolphins breathe air like we do.' What is each paragraph mostly about?",
+      "options": ["Where dolphins live; How dolphins breathe", "What dolphins eat; Where dolphins live", "Dolphin babies; Dolphin sounds", "Dolphin colors; Dolphin sizes"],
+      "correct_answer": "Where dolphins live; How dolphins breathe",
+      "rubric": {
+        "full_credit": "Identifies focus of each paragraph",
+        "no_credit": "Selects incorrect option"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 60,
+      "passage": "Paragraph 1: Dolphins are mammals that live in the ocean. Paragraph 2: Dolphins breathe air like we do."
+    },
+    {
+      "id": "ela-2-ri-3-001",
+      "standard_id": "2.RI.3",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Read: 'First, the colonists came to America. Then, they wanted freedom from England. Finally, they fought the Revolutionary War and won.' What happened after the colonists wanted freedom?",
+      "correct_answer": "They fought the Revolutionary War",
+      "rubric": {
+        "full_credit": "Identifies correct sequence",
+        "partial_credit": "Mentions war but unclear sequence",
+        "no_credit": "Cannot identify sequence"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 60,
+      "passage": "First, the colonists came to America. Then, they wanted freedom from England. Finally, they fought the Revolutionary War and won."
+    },
+    {
+      "id": "ela-2-ri-3-002",
+      "standard_id": "2.RI.3",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Read: 'Water evaporates from oceans. It rises and forms clouds. Then it falls as rain.' What happens after water forms clouds?",
+      "options": ["It falls as rain", "It evaporates", "It rises up", "It disappears"],
+      "correct_answer": "It falls as rain",
+      "rubric": {
+        "full_credit": "Identifies correct step",
+        "no_credit": "Selects incorrect option"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 45,
+      "passage": "Water evaporates from oceans. It rises and forms clouds. Then it falls as rain."
+    },
+    {
+      "id": "ela-2-ri-5-001",
+      "standard_id": "2.RI.5",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Look at the text with a heading that says 'Types of Birds' in bold. Why is this heading in bold print?",
+      "correct_answer": "To show what the section is about",
+      "rubric": {
+        "full_credit": "Explains bold shows importance/topic",
+        "partial_credit": "Mentions finding information",
+        "no_credit": "Cannot explain purpose"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 45,
+      "passage": null
+    },
+    {
+      "id": "ela-2-ri-5-002",
+      "standard_id": "2.RI.5",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "A book has a glossary at the back. What would you use a glossary for?",
+      "options": ["To find word meanings", "To find page numbers", "To see pictures", "To read the story"],
+      "correct_answer": "To find word meanings",
+      "rubric": {
+        "full_credit": "Identifies glossary purpose",
+        "no_credit": "Selects incorrect option"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 30,
+      "passage": null
+    },
+    {
+      "id": "ela-2-rf-3-001",
+      "standard_id": "2.RF.3",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Read the word 'knight'. The letters 'kn' make what sound?",
+      "options": ["/n/", "/k/", "/kn/", "/t/"],
+      "correct_answer": "/n/",
+      "rubric": {
+        "full_credit": "Identifies silent k",
+        "no_credit": "Selects incorrect sound"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 25,
+      "passage": null
+    },
+    {
+      "id": "ela-2-rf-3-002",
+      "standard_id": "2.RF.3",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Read the word 'remake'. What does the prefix 're-' mean?",
+      "correct_answer": "again",
+      "rubric": {
+        "full_credit": "Identifies 're-' means again",
+        "partial_credit": "Related meaning",
+        "no_credit": "Incorrect meaning"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 30,
+      "passage": null
+    },
+    {
+      "id": "ela-2-rf-4-001",
+      "standard_id": "2.RF.4",
+      "dok_level": 2,
+      "question_type": "performance_task",
+      "question": "Read this passage aloud with expression: 'Oh no!' said the rabbit. 'My carrot is gone! Who took my carrot?' He looked all around.",
+      "correct_answer": null,
+      "rubric": {
+        "full_credit": "Reads with appropriate expression, accuracy, and pace",
+        "partial_credit": "Reads accurately but flat expression",
+        "no_credit": "Significant errors or struggles"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 60,
+      "passage": "'Oh no!' said the rabbit. 'My carrot is gone! Who took my carrot?' He looked all around."
+    },
+    {
+      "id": "ela-2-rf-4-002",
+      "standard_id": "2.RF.4",
+      "dok_level": 2,
+      "question_type": "performance_task",
+      "question": "Read this passage smoothly and check for understanding: 'Beavers build dams in rivers. They use sticks and mud. The dams make ponds where beavers live.'",
+      "correct_answer": null,
+      "rubric": {
+        "full_credit": "Fluent reading with comprehension",
+        "partial_credit": "Accurate but choppy, or fluent but poor comprehension",
+        "no_credit": "Many errors and/or no comprehension"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 60,
+      "passage": "Beavers build dams in rivers. They use sticks and mud. The dams make ponds where beavers live."
+    },
+    {
+      "id": "ela-2-w-1-001",
+      "standard_id": "2.W.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Write your opinion: Is it better to have a pet dog or a pet cat? State your opinion, give at least two reasons, use linking words (because, also, and), and write a conclusion.",
+      "correct_answer": null,
+      "rubric": {
+        "full_credit": "Clear opinion, 2+ reasons, linking words, conclusion",
+        "partial_credit": "Opinion with 1 reason or missing elements",
+        "no_credit": "No clear opinion or reasons"
+      },
+      "manifold_fit": {
+        "coherence_delta": 5,
+        "entropy_delta": 2,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 420,
+      "passage": null
+    },
+    {
+      "id": "ela-2-w-1-002",
+      "standard_id": "2.W.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Write your opinion about the best season. Tell which season you like best and give reasons why. Use words like 'because' and 'also.' Write a closing sentence.",
+      "correct_answer": null,
+      "rubric": {
+        "full_credit": "Names season, gives multiple reasons with linking words, provides closure",
+        "partial_credit": "Names season with limited reasons or missing closure",
+        "no_credit": "No clear opinion or support"
+      },
+      "manifold_fit": {
+        "coherence_delta": 5,
+        "entropy_delta": 2,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 420,
+      "passage": null
+    },
+    {
+      "id": "ela-2-w-2-001",
+      "standard_id": "2.W.2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Write an informative paragraph about an animal you know. Introduce the topic, use at least two facts or definitions, and provide a concluding statement.",
+      "correct_answer": null,
+      "rubric": {
+        "full_credit": "Introduces topic, includes 2+ facts, provides conclusion",
+        "partial_credit": "Has topic and 1 fact, or missing conclusion",
+        "no_credit": "No clear topic or facts"
+      },
+      "manifold_fit": {
+        "coherence_delta": 5,
+        "entropy_delta": 1,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 420,
+      "passage": null
+    },
+    {
+      "id": "ela-2-w-2-002",
+      "standard_id": "2.W.2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Write to explain how to make a peanut butter and jelly sandwich. Introduce the topic, explain the steps clearly, and write a closing sentence.",
+      "correct_answer": null,
+      "rubric": {
+        "full_credit": "Clear introduction, sequential steps, conclusion",
+        "partial_credit": "Steps present but unclear or missing intro/conclusion",
+        "no_credit": "Unclear or missing steps"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 1,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 360,
+      "passage": null
+    },
+    {
+      "id": "ela-2-w-3-001",
+      "standard_id": "2.W.3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Write a story about a time you tried something new. Include details about your actions, thoughts, and feelings. Use time words like 'first,' 'then,' 'finally.' End with a closing.",
+      "correct_answer": null,
+      "rubric": {
+        "full_credit": "Elaborated event, includes actions/thoughts/feelings, temporal words, closure",
+        "partial_credit": "Event described but missing elements",
+        "no_credit": "No clear event or sequence"
+      },
+      "manifold_fit": {
+        "coherence_delta": 5,
+        "entropy_delta": 2,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 480,
+      "passage": null
+    },
+    {
+      "id": "ela-2-w-3-002",
+      "standard_id": "2.W.3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Write a narrative about a time you helped someone. Tell what happened in order. Include details about what you did, thought, and felt. Write an ending.",
+      "correct_answer": null,
+      "rubric": {
+        "full_credit": "Clear sequence, rich details, includes thoughts/feelings, closure",
+        "partial_credit": "Some sequence and details but incomplete",
+        "no_credit": "No clear narrative"
+      },
+      "manifold_fit": {
+        "coherence_delta": 5,
+        "entropy_delta": 2,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 480,
+      "passage": null
+    },
+    {
+      "id": "ela-2-sl-1-001",
+      "standard_id": "2.SL.1",
+      "dok_level": 2,
+      "question_type": "performance_task",
+      "question": "In your group, discuss what you learned about [topic]. Build on what others say. Ask questions to clarify. Stay on topic.",
+      "correct_answer": null,
+      "rubric": {
+        "full_credit": "Builds on others' ideas, asks clarifying questions, stays on topic",
+        "partial_credit": "Participates but limited interaction",
+        "no_credit": "Does not follow discussion rules"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 300,
+      "passage": null
+    },
+    {
+      "id": "ela-2-sl-1-002",
+      "standard_id": "2.SL.1",
+      "dok_level": 2,
+      "question_type": "performance_task",
+      "question": "With a partner, discuss your favorite books. Ask your partner questions about their book. Listen carefully and respond to what they say.",
+      "correct_answer": null,
+      "rubric": {
+        "full_credit": "Asks questions, listens and responds appropriately, takes turns",
+        "partial_credit": "Some interaction but limited",
+        "no_credit": "Does not participate appropriately"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 180,
+      "passage": null
+    },
+    {
+      "id": "ela-2-sl-2-001",
+      "standard_id": "2.SL.2",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Listen to the text read aloud. Then describe the key ideas in your own words.",
+      "correct_answer": "varies based on text",
+      "rubric": {
+        "full_credit": "Accurately recounts key ideas",
+        "partial_credit": "Recounts some ideas",
+        "no_credit": "Cannot recount"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 60,
+      "passage": null,
+      "audio_required": true
+    },
+    {
+      "id": "ela-2-sl-2-002",
+      "standard_id": "2.SL.2",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "After listening to the passage about ocean animals, which is a key detail you heard?",
+      "options": ["varies based on text"],
+      "correct_answer": "varies based on text",
+      "rubric": {
+        "full_credit": "Identifies correct key detail",
+        "no_credit": "Selects incorrect option"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 30,
+      "passage": null,
+      "audio_required": true
+    },
+    {
+      "id": "ela-2-l-1-001",
+      "standard_id": "2.L.1",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Choose the sentence with the correct past tense verb.",
+      "options": ["Yesterday, I walked to school.", "Yesterday, I walk to school.", "Yesterday, I walking to school.", "Yesterday, I walks to school."],
+      "correct_answer": "Yesterday, I walked to school.",
+      "rubric": {
+        "full_credit": "Identifies correct past tense",
+        "no_credit": "Selects incorrect option"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 0,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 30,
+      "passage": null
+    },
+    {
+      "id": "ela-2-l-1-002",
+      "standard_id": "2.L.1",
+      "dok_level": 1,
+      "question_type": "short_answer",
+      "question": "Make this noun plural: 'one box, two ___'",
+      "correct_answer": "boxes",
+      "rubric": {
+        "full_credit": "Correct plural form",
+        "no_credit": "Incorrect form"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 0,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 20,
+      "passage": null
+    },
+    {
+      "id": "ela-2-l-2-001",
+      "standard_id": "2.L.2",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Which sentence uses an apostrophe correctly?",
+      "options": ["The dog's bone is big.", "The dogs bone is big.", "The dog bone's is big.", "The dogs' bone is big."],
+      "correct_answer": "The dog's bone is big.",
+      "rubric": {
+        "full_credit": "Identifies correct possessive",
+        "no_credit": "Selects incorrect option"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 0,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 30,
+      "passage": null
+    },
+    {
+      "id": "ela-2-l-2-002",
+      "standard_id": "2.L.2",
+      "dok_level": 1,
+      "question_type": "short_answer",
+      "question": "Add commas to this sentence: 'I need apples bananas and oranges.'",
+      "correct_answer": "I need apples, bananas, and oranges.",
+      "rubric": {
+        "full_credit": "Correctly places commas in a series",
+        "partial_credit": "Some commas correct",
+        "no_credit": "No commas or incorrect placement"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 0,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 30,
+      "passage": null
+    }
+  ]
+}

@@ -1,0 +1,510 @@
+{
+  "grade": "10",
+  "course": "Geometry",
+  "items": [
+    {
+      "id": "math-10-co-a-1-001",
+      "standard_id": "HSG-CO.A.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Define the terms 'point', 'line', and 'plane' in geometry. Explain why these are considered undefined terms and how they are used to build definitions of other geometric objects like 'line segment' and 'ray'.",
+      "rubric": {
+        "4": "Correctly explains that point, line, plane are undefined (no simpler terms to define them); provides intuitive descriptions; shows how segment (part of line between two points) and ray (part of line from point extending infinitely) are built from these",
+        "3": "Adequate explanation of undefined terms with correct definitions of segment and ray",
+        "2": "Partial understanding of undefined terms or definitions",
+        "1": "Attempts but shows misconceptions about foundational concepts",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 300
+    },
+    {
+      "id": "math-10-co-a-1-002",
+      "standard_id": "HSG-CO.A.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Using the precise definition of a circle (the set of all points equidistant from a center point), explain why every diameter of a circle passes through the center. Then prove that all radii of a circle are equal.",
+      "rubric": {
+        "4": "Clearly uses definition to show diameter (chord through center) must pass through center by construction; proves all radii equal by definition of circle (all points are distance r from center)",
+        "3": "Correct reasoning with minor gaps in precision",
+        "2": "Demonstrates understanding but incomplete proofs",
+        "1": "Attempts but significant logical errors",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.70,
+      "time_estimate_seconds": 360
+    },
+    {
+      "id": "math-10-co-a-1-003",
+      "standard_id": "HSG-CO.A.1",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Define 'parallel lines' and 'perpendicular lines' precisely. Then explain how these definitions lead to the fact that if line m is perpendicular to line n, and line p is also perpendicular to line n, then lines m and p must be parallel.",
+      "rubric": {
+        "4": "Precise definitions (parallel: coplanar lines that don't intersect; perpendicular: lines meeting at 90°); logical proof that if m⊥n and p⊥n, both make 90° angles with n, so corresponding angles are equal, making m∥p",
+        "3": "Correct definitions and valid reasoning with minor gaps",
+        "2": "Correct definitions but proof incomplete",
+        "1": "Definitions or proof contain significant errors",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 420
+    },
+    {
+      "id": "math-10-co-b-6-001",
+      "standard_id": "HSG-CO.B.6",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Triangle ABC has vertices A(1, 2), B(4, 2), and C(4, 6). Describe the rigid motion that maps triangle ABC onto a triangle with vertices at A'(1, -2), B'(4, -2), and C'(4, -6). Prove the triangles are congruent.",
+      "rubric": {
+        "4": "Identifies reflection over the x-axis; proves congruence by showing all corresponding sides have equal length (AB=A'B'=3, BC=B'C'=4, AC=A'C'=5)",
+        "3": "Correct transformation identified with congruence shown but minor errors",
+        "2": "Correct transformation but incomplete congruence proof, or vice versa",
+        "1": "Attempts but significant errors in both parts",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.60,
+      "time_estimate_seconds": 300
+    },
+    {
+      "id": "math-10-co-b-6-002",
+      "standard_id": "HSG-CO.B.6",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Prove that any rigid motion (translation, rotation, or reflection) preserves distance between points. Then explain why this property guarantees that rigid motions map congruent figures to congruent figures.",
+      "rubric": {
+        "4": "Provides valid argument for each transformation preserving distance (translation shifts all points equally; rotation preserves distance from center; reflection creates mirror image with same distances); connects to congruence through definition (same size and shape means same distances)",
+        "3": "Valid reasoning for all three transformations with adequate connection to congruence",
+        "2": "Proves distance preservation for some transformations or weak connection to congruence",
+        "1": "Attempts but fundamental misunderstanding of rigid motions",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 5,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.80,
+      "time_estimate_seconds": 480
+    },
+    {
+      "id": "math-10-co-b-6-003",
+      "standard_id": "HSG-CO.B.6",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Given two congruent triangles, describe a sequence of rigid motions that would map one onto the other. The first triangle has vertices at P(0, 0), Q(3, 0), R(0, 4). The second has vertices at P'(5, 1), Q'(5, 4), R'(9, 1).",
+      "rubric": {
+        "4": "Correctly identifies sequence: rotate 90° counterclockwise about origin, then translate right 5 and up 1; or equivalent valid sequence; verifies final positions match",
+        "3": "Correct sequence identified with minor errors in description or verification",
+        "2": "Partially correct sequence or correct idea but incomplete execution",
+        "1": "Attempts but sequence doesn't achieve the mapping",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.70,
+      "time_estimate_seconds": 360
+    },
+    {
+      "id": "math-10-co-c-9-001",
+      "standard_id": "HSG-CO.C.9",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Prove that vertical angles are congruent. State the definition of vertical angles, set up the proof using angle relationships, and provide a complete logical argument.",
+      "rubric": {
+        "4": "Defines vertical angles as non-adjacent angles formed by two intersecting lines; proves using linear pairs: if ∠1 and ∠2 are linear pair, ∠2 and ∠3 are linear pair, then ∠1 + ∠2 = 180° and ∠2 + ∠3 = 180°, so ∠1 = ∠3",
+        "3": "Complete proof with correct logic, minor gaps in formality",
+        "2": "Correct approach but incomplete proof",
+        "1": "Attempts proof but significant logical errors",
+        "0": "No response or no valid proof structure"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.70,
+      "time_estimate_seconds": 360
+    },
+    {
+      "id": "math-10-co-c-9-002",
+      "standard_id": "HSG-CO.C.9",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Prove that when a transversal crosses two parallel lines, alternate interior angles are congruent. Then use this theorem to prove that the sum of angles in a triangle is 180°.",
+      "rubric": {
+        "4": "Proves alternate interior angles using corresponding angles (formed with transversal) and vertical angles; extends to triangle by drawing line parallel to base through vertex, showing angles of triangle equal angles on line (180°)",
+        "3": "Both proofs complete with minor gaps",
+        "2": "One proof complete, other incomplete",
+        "1": "Attempts but significant logical errors in both",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 5,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.80,
+      "time_estimate_seconds": 480
+    },
+    {
+      "id": "math-10-co-c-9-003",
+      "standard_id": "HSG-CO.C.9",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Prove that the diagonals of a parallelogram bisect each other. Include a clearly labeled diagram, state what is given and what you need to prove, and provide a complete two-column or paragraph proof.",
+      "rubric": {
+        "4": "Clear diagram with labeled parallelogram ABCD and diagonals AC, BD intersecting at E; proves ∆AEB ≅ ∆CED (AAS or ASA using parallel sides and alternate interior angles), concluding AE=CE and BE=DE",
+        "3": "Complete proof with minor gaps in reasoning or diagram",
+        "2": "Correct approach but incomplete proof or missing diagram",
+        "1": "Attempts but significant logical errors",
+        "0": "No response or no valid proof"
+      },
+      "manifold_fit": {
+        "coherence_delta": 5,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 480
+    },
+    {
+      "id": "math-10-srt-a-1-001",
+      "standard_id": "HSG-SRT.A.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A dilation with center O and scale factor 2 maps point A to A'. If OA = 5 cm, find OA'. Then explain why the image of line segment AB under this dilation is a line segment parallel to AB.",
+      "rubric": {
+        "4": "Correctly calculates OA' = 10 cm; explains that dilation preserves direction from center, so AB and A'B' have same direction, making them parallel (or uses property that dilation preserves angles)",
+        "3": "Correct calculation with adequate explanation of parallelism",
+        "2": "Correct calculation but weak explanation, or vice versa",
+        "1": "Attempts but significant errors",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.60,
+      "time_estimate_seconds": 240
+    },
+    {
+      "id": "math-10-srt-a-1-002",
+      "standard_id": "HSG-SRT.A.1",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Prove that a dilation maps a line not passing through the center of dilation to a parallel line. Use coordinate geometry with center of dilation at the origin and scale factor k.",
+      "rubric": {
+        "4": "Sets up line y = mx + b (not through origin); shows dilation maps (x, y) to (kx, ky); substitutes to show image satisfies y' = mx' + kb, which is parallel to original (same slope m)",
+        "3": "Complete proof with minor gaps in algebraic reasoning",
+        "2": "Correct approach but algebraic errors or incomplete argument",
+        "1": "Attempts coordinate proof but fundamental errors",
+        "0": "No response or no valid approach"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.80,
+      "time_estimate_seconds": 420
+    },
+    {
+      "id": "math-10-srt-a-1-003",
+      "standard_id": "HSG-SRT.A.1",
+      "dok_level": 3,
+      "question_type": "multi_part",
+      "question": "Triangle ABC has vertices A(0, 0), B(4, 0), C(0, 3). A dilation centered at the origin with scale factor 1.5 is applied. Part A: Find the coordinates of A', B', C'. Part B: Calculate the perimeter of both triangles. Part C: Find the ratio of perimeters and explain its relationship to the scale factor.",
+      "rubric": {
+        "4": "A'(0,0), B'(6,0), C'(0,4.5); Original perimeter = 12, new perimeter = 18; ratio is 1.5 which equals scale factor k (dilation multiplies all lengths by k)",
+        "3": "All parts correct with minor calculation errors",
+        "2": "Two parts correct",
+        "1": "One part correct",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 360
+    },
+    {
+      "id": "math-10-srt-b-4-001",
+      "standard_id": "HSG-SRT.B.4",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Prove the Triangle Proportionality Theorem: If a line parallel to one side of a triangle intersects the other two sides, then it divides those sides proportionally. Include a labeled diagram and complete proof.",
+      "rubric": {
+        "4": "Clear diagram; sets up similar triangles (AA criterion using parallel lines and corresponding angles); shows proportional sides follow from similarity; concludes DE∥BC implies AD/DB = AE/EC",
+        "3": "Complete proof with minor gaps",
+        "2": "Correct approach but incomplete proof",
+        "1": "Attempts but significant errors in logic",
+        "0": "No response or no valid proof"
+      },
+      "manifold_fit": {
+        "coherence_delta": 5,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.80,
+      "time_estimate_seconds": 480
+    },
+    {
+      "id": "math-10-srt-b-4-002",
+      "standard_id": "HSG-SRT.B.4",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "In triangle ABC, D is on AB and E is on AC such that DE ∥ BC. If AD = 6, DB = 4, and AE = 9, find EC. Then find the ratio of the area of triangle ADE to the area of triangle ABC.",
+      "rubric": {
+        "4": "Using Triangle Proportionality: AD/DB = AE/EC, so 6/4 = 9/EC, EC = 6; Ratio of sides AD/AB = 6/10 = 3/5, so ratio of areas = (3/5)² = 9/25",
+        "3": "Both parts correct with minor errors",
+        "2": "One part fully correct",
+        "1": "Attempts but significant errors in proportional reasoning",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.70,
+      "time_estimate_seconds": 300
+    },
+    {
+      "id": "math-10-srt-b-4-003",
+      "standard_id": "HSG-SRT.B.4",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Use similar triangles to prove the Pythagorean Theorem. Hint: In a right triangle, the altitude to the hypotenuse creates two triangles similar to the original. Include diagram and complete proof.",
+      "rubric": {
+        "4": "Draws right triangle ABC with altitude CD to hypotenuse; proves △ABC ~ △ACD ~ △CBD (AA); writes proportions a/c = e/a and b/c = f/b; solves a² = ce and b² = cf; adds to get a² + b² = c(e+f) = c²",
+        "3": "Complete proof with minor gaps in similarity justification",
+        "2": "Correct approach but incomplete algebraic steps",
+        "1": "Attempts but doesn't complete the proof",
+        "0": "No response or invalid approach"
+      },
+      "manifold_fit": {
+        "coherence_delta": 5,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.85,
+      "time_estimate_seconds": 540
+    },
+    {
+      "id": "math-10-srt-c-6-001",
+      "standard_id": "HSG-SRT.C.6",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Define sine, cosine, and tangent for an acute angle in a right triangle. Then explain why sin(θ) and cos(90° - θ) are always equal, using both the definitions and the geometry of the triangle.",
+      "rubric": {
+        "4": "Correctly defines sin θ = opposite/hypotenuse, cos θ = adjacent/hypotenuse, tan θ = opposite/adjacent; explains that the opposite side for angle θ is the adjacent side for (90° - θ), so sin θ = cos(90° - θ)",
+        "3": "Correct definitions and explanation with minor gaps",
+        "2": "Correct definitions but weak explanation, or vice versa",
+        "1": "Attempts but shows confusion between ratios",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 300
+    },
+    {
+      "id": "math-10-srt-c-6-002",
+      "standard_id": "HSG-SRT.C.6",
+      "dok_level": 3,
+      "question_type": "multi_part",
+      "question": "A 20-foot ladder leans against a wall, making a 75° angle with the ground. Part A: Draw and label a diagram. Part B: How high up the wall does the ladder reach? Part C: How far is the base of the ladder from the wall? Show your trigonometric work.",
+      "rubric": {
+        "4": "Correct diagram; Part B: height = 20·sin(75°) ≈ 19.3 ft; Part C: base = 20·cos(75°) ≈ 5.2 ft with correct trig setup",
+        "3": "All parts correct with minor computational errors",
+        "2": "Two parts correct or correct setup with calculation errors",
+        "1": "Attempts but significant errors in trig application",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.60,
+      "time_estimate_seconds": 300
+    },
+    {
+      "id": "math-10-srt-c-6-003",
+      "standard_id": "HSG-SRT.C.6",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Prove that for any acute angle θ in a right triangle, sin²θ + cos²θ = 1. Then explain why this relationship holds for any angle θ (not just acute angles) using the unit circle.",
+      "rubric": {
+        "4": "For right triangle: sin θ = a/c, cos θ = b/c; sin² + cos² = a²/c² + b²/c² = (a² + b²)/c² = c²/c² = 1 by Pythagorean theorem; For unit circle: any point (cos θ, sin θ) is on circle x² + y² = 1",
+        "3": "Both parts explained with minor gaps",
+        "2": "Triangle proof complete, unit circle explanation weak or missing",
+        "1": "Attempts but significant errors",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 5,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 420
+    },
+    {
+      "id": "math-10-c-a-1-001",
+      "standard_id": "HSG-C.A.1",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Prove that all circles are similar. Your proof should define similarity for circles and explain the transformation that maps any circle to any other circle.",
+      "rubric": {
+        "4": "Defines similar figures as those related by a sequence of rigid motions and dilations; proves any circle C₁ can be mapped to circle C₂ by: (1) translating C₁ so centers coincide, (2) dilating by factor r₂/r₁ where r₁, r₂ are radii",
+        "3": "Complete proof with minor gaps in formality",
+        "2": "Correct approach but incomplete justification",
+        "1": "Attempts but doesn't construct valid transformation",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 5,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 420
+    },
+    {
+      "id": "math-10-c-a-1-002",
+      "standard_id": "HSG-C.A.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Two circles have radii 3 cm and 12 cm. What is the scale factor of the dilation that maps the smaller circle to the larger? If the circumference of the smaller circle is 6π cm, what is the circumference of the larger circle? Explain the relationship between scale factor and circumference.",
+      "rubric": {
+        "4": "Scale factor = 12/3 = 4; larger circumference = 4 × 6π = 24π cm; explains that circumference is proportional to radius (C = 2πr), so dilation multiplies circumference by scale factor",
+        "3": "All calculations correct with adequate explanation",
+        "2": "Calculations correct but weak explanation",
+        "1": "Some calculations correct but errors in reasoning",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 240
+    },
+    {
+      "id": "math-10-c-a-1-003",
+      "standard_id": "HSG-C.A.1",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Using the fact that all circles are similar, prove that the ratio of a circle's circumference to its diameter is constant for all circles. Explain why this constant is called π.",
+      "rubric": {
+        "4": "Since all circles are similar and similarity preserves ratios, C/d is the same for all circles; this constant ratio is defined as π; historically discovered by measuring circles; proves C = πd follows from this definition",
+        "3": "Complete argument with minor gaps",
+        "2": "Understands similarity connection but incomplete proof",
+        "1": "Attempts but doesn't connect similarity to constant ratio",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 5,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.80,
+      "time_estimate_seconds": 420
+    },
+    {
+      "id": "math-10-c-a-2-001",
+      "standard_id": "HSG-C.A.2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "In a circle with center O, central angle AOB measures 60° and the radius is 10 cm. Find the arc length of arc AB and the area of sector AOB. Show your formulas and work.",
+      "rubric": {
+        "4": "Arc length = (60/360) × 2π(10) = (1/6)(20π) = 10π/3 ≈ 10.47 cm; Sector area = (60/360) × π(10)² = (1/6)(100π) = 50π/3 ≈ 52.36 cm²",
+        "3": "Both calculations correct with minor errors",
+        "2": "One calculation correct",
+        "1": "Attempts but significant formula or calculation errors",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 240
+    },
+    {
+      "id": "math-10-c-a-2-002",
+      "standard_id": "HSG-C.A.2",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Prove that the inscribed angle theorem: an inscribed angle is half the central angle that subtends the same arc. Consider the case where one side of the inscribed angle passes through the center.",
+      "rubric": {
+        "4": "For inscribed angle ABC with B on circle and AC a diameter: draws radius OB; shows triangle OBC is isosceles (OB=OC=radius); angle OBC = angle OCB; external angle AOB = 2(angle OCB) = 2(inscribed angle ABC)",
+        "3": "Complete proof for diameter case with minor gaps",
+        "2": "Correct approach but incomplete proof",
+        "1": "Attempts but significant logical errors",
+        "0": "No response or no valid proof"
+      },
+      "manifold_fit": {
+        "coherence_delta": 5,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.80,
+      "time_estimate_seconds": 480
+    },
+    {
+      "id": "math-10-c-a-2-003",
+      "standard_id": "HSG-C.A.2",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "A pizza has a diameter of 16 inches. Part A: If you cut it into 8 equal slices, what is the central angle of each slice? Part B: What is the arc length (crust) of one slice? Part C: What is the area of one slice? Part D: If you eat 3 slices, what fraction of the pizza's crust and area have you consumed?",
+      "rubric": {
+        "4": "A: 360°/8 = 45°; B: (45/360)×π(16) = 2π ≈ 6.28 in; C: (45/360)×π(8)² = 8π ≈ 25.13 in²; D: 3/8 of both crust and area (since proportional)",
+        "3": "All parts correct with minor calculation errors",
+        "2": "Three parts correct",
+        "1": "One or two parts correct",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 360
+    }
+  ]
+}

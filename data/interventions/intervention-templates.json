@@ -1,0 +1,676 @@
+{
+  "version": "1.0.0",
+  "description": "C/E/G Manifold Intervention Templates for Attractor Fields",
+  "attractor_fields": {
+    "flow": {
+      "id": "flow",
+      "name": "Flow State",
+      "description": "Optimal learning state with balanced challenge and skill",
+      "coordinates": { "coherence": 75, "entropy": 35, "generativity": 70 },
+      "characteristics": [
+        "Deep engagement",
+        "Automatic processing",
+        "Loss of self-consciousness",
+        "Intrinsic motivation"
+      ],
+      "interventions": [
+        {
+          "id": "flow-maintain-001",
+          "type": "content",
+          "name": "Progressive Challenge",
+          "description": "Gradually increase difficulty while maintaining success rate",
+          "target_movement": { "coherence": 0, "entropy": 5, "generativity": 3 },
+          "duration_minutes": 15,
+          "priority": 1,
+          "triggers": ["success_streak >= 3", "confidence > 0.8"],
+          "prerequisites": [],
+          "content_template": "Present next-level problem in same domain",
+          "success_indicators": ["maintained_engagement", "success_rate > 0.7"],
+          "fallback_intervention": null
+        },
+        {
+          "id": "flow-maintain-002",
+          "type": "exploration",
+          "name": "Parallel Domain Extension",
+          "description": "Apply current skills to related but novel domain",
+          "target_movement": { "coherence": -5, "entropy": 10, "generativity": 10 },
+          "duration_minutes": 20,
+          "priority": 2,
+          "triggers": ["time_in_flow > 30min", "topic_saturation detected"],
+          "prerequisites": ["mastery > 0.75"],
+          "content_template": "Try applying {{current_skill}} to {{related_domain}}",
+          "success_indicators": ["transfer_success", "curiosity_signals"],
+          "fallback_intervention": "flow-maintain-001"
+        },
+        {
+          "id": "flow-maintain-003",
+          "type": "metacognitive",
+          "name": "Strategy Articulation",
+          "description": "Prompt learner to articulate their successful strategy",
+          "target_movement": { "coherence": 5, "entropy": 0, "generativity": 5 },
+          "duration_minutes": 5,
+          "priority": 3,
+          "triggers": ["novel_solution submitted", "efficiency_increase detected"],
+          "prerequisites": [],
+          "content_template": "That was clever! Can you explain how you approached that?",
+          "success_indicators": ["articulation_quality > 0.6", "self_awareness_increase"],
+          "fallback_intervention": null
+        },
+        {
+          "id": "flow-extend-001",
+          "type": "challenge",
+          "name": "Mastery Consolidation",
+          "description": "Varied practice to cement skills before advancement",
+          "target_movement": { "coherence": 5, "entropy": -5, "generativity": 0 },
+          "duration_minutes": 10,
+          "priority": 4,
+          "triggers": ["session_end approaching", "consistency_score > 0.85"],
+          "prerequisites": [],
+          "content_template": "Quick varied practice: 5 problems mixing recent skills",
+          "success_indicators": ["retention_score", "speed_improvement"],
+          "fallback_intervention": null
+        }
+      ]
+    },
+    "confusion": {
+      "id": "confusion",
+      "name": "Confusion State",
+      "description": "High entropy state requiring scaffolding to reduce cognitive load",
+      "coordinates": { "coherence": 35, "entropy": 75, "generativity": 45 },
+      "characteristics": [
+        "Information overload",
+        "Missing mental models",
+        "Pattern recognition failure",
+        "Potential for breakthrough"
+      ],
+      "interventions": [
+        {
+          "id": "confusion-scaffold-001",
+          "type": "scaffolding",
+          "name": "Worked Example",
+          "description": "Show step-by-step solution to similar problem",
+          "target_movement": { "coherence": 15, "entropy": -20, "generativity": 5 },
+          "duration_minutes": 10,
+          "priority": 1,
+          "triggers": ["consecutive_errors >= 2", "time_on_problem > 120s"],
+          "prerequisites": [],
+          "content_template": "Present worked example with highlighted steps",
+          "success_indicators": ["comprehension_check passed", "entropy_decrease"],
+          "fallback_intervention": "confusion-scaffold-002"
+        },
+        {
+          "id": "confusion-scaffold-002",
+          "type": "scaffolding",
+          "name": "Concept Review",
+          "description": "Brief review of prerequisite concept",
+          "target_movement": { "coherence": 20, "entropy": -15, "generativity": 0 },
+          "duration_minutes": 5,
+          "priority": 2,
+          "triggers": ["prerequisite_mastery < 0.6"],
+          "prerequisites": [],
+          "content_template": "Quick review of {{prerequisite_concept}}",
+          "success_indicators": ["prerequisite_mastery_increase", "coherence_increase"],
+          "fallback_intervention": "confusion-decompose-001"
+        },
+        {
+          "id": "confusion-decompose-001",
+          "type": "scaffolding",
+          "name": "Problem Decomposition",
+          "description": "Break complex problem into smaller sub-problems",
+          "target_movement": { "coherence": 25, "entropy": -25, "generativity": 5 },
+          "duration_minutes": 15,
+          "priority": 3,
+          "triggers": ["problem_complexity > threshold", "no_progress > 60s"],
+          "prerequisites": [],
+          "content_template": "Let's break this down: First, solve for {{subproblem_1}}",
+          "success_indicators": ["subproblem_success", "confidence_increase"],
+          "fallback_intervention": "confusion-visual-001"
+        },
+        {
+          "id": "confusion-visual-001",
+          "type": "representation",
+          "name": "Visual Mapping",
+          "description": "Provide visual representation of problem structure",
+          "target_movement": { "coherence": 20, "entropy": -15, "generativity": 10 },
+          "duration_minutes": 8,
+          "priority": 4,
+          "triggers": ["verbal_explanation_failed", "spatial_learner_profile"],
+          "prerequisites": [],
+          "content_template": "Here's a diagram showing how {{concept_a}} connects to {{concept_b}}",
+          "success_indicators": ["pattern_recognition", "aha_moment"],
+          "fallback_intervention": "confusion-scaffold-001"
+        },
+        {
+          "id": "confusion-connect-001",
+          "type": "bridging",
+          "name": "Prior Knowledge Activation",
+          "description": "Connect new concept to something already understood",
+          "target_movement": { "coherence": 18, "entropy": -12, "generativity": 8 },
+          "duration_minutes": 7,
+          "priority": 5,
+          "triggers": ["new_concept_introduction", "no_schema_detected"],
+          "prerequisites": ["prior_knowledge_map available"],
+          "content_template": "This is like {{familiar_concept}} you learned before, but with {{key_difference}}",
+          "success_indicators": ["analogy_comprehension", "schema_activation"],
+          "fallback_intervention": "confusion-scaffold-002"
+        }
+      ]
+    },
+    "boredom": {
+      "id": "boredom",
+      "name": "Boredom State",
+      "description": "Under-challenged state with high coherence but low engagement",
+      "coordinates": { "coherence": 80, "entropy": 25, "generativity": 30 },
+      "characteristics": [
+        "Task too easy",
+        "Lack of novelty",
+        "Disengagement risk",
+        "Untapped potential"
+      ],
+      "interventions": [
+        {
+          "id": "boredom-challenge-001",
+          "type": "challenge",
+          "name": "Skip Ahead",
+          "description": "Jump to more advanced content",
+          "target_movement": { "coherence": -10, "entropy": 25, "generativity": 20 },
+          "duration_minutes": 20,
+          "priority": 1,
+          "triggers": ["accuracy > 0.95", "time_per_problem < expected * 0.5"],
+          "prerequisites": ["current_level_mastery > 0.9"],
+          "content_template": "Present grade+1 level problem",
+          "success_indicators": ["engagement_increase", "productive_struggle"],
+          "fallback_intervention": "boredom-challenge-002"
+        },
+        {
+          "id": "boredom-challenge-002",
+          "type": "exploration",
+          "name": "Open-Ended Project",
+          "description": "Creative application of mastered skills",
+          "target_movement": { "coherence": -5, "entropy": 30, "generativity": 35 },
+          "duration_minutes": 30,
+          "priority": 2,
+          "triggers": ["mastery > 0.9", "engagement_score < 0.5"],
+          "prerequisites": [],
+          "content_template": "Design your own {{domain}} problem",
+          "success_indicators": ["creativity_expression", "intrinsic_motivation"],
+          "fallback_intervention": "boredom-connect-001"
+        },
+        {
+          "id": "boredom-connect-001",
+          "type": "integration",
+          "name": "Cross-Domain Challenge",
+          "description": "Apply skills to unexpected domain",
+          "target_movement": { "coherence": -15, "entropy": 35, "generativity": 25 },
+          "duration_minutes": 25,
+          "priority": 3,
+          "triggers": ["single_domain_fatigue", "transfer_readiness"],
+          "prerequisites": ["multiple_domain_exposure"],
+          "content_template": "How could you use {{mastered_skill}} to solve {{unrelated_problem}}?",
+          "success_indicators": ["novel_connection", "transfer_success"],
+          "fallback_intervention": "boredom-compete-001"
+        },
+        {
+          "id": "boredom-compete-001",
+          "type": "gamification",
+          "name": "Speed Challenge",
+          "description": "Time-based competition with self or peers",
+          "target_movement": { "coherence": 0, "entropy": 20, "generativity": 15 },
+          "duration_minutes": 10,
+          "priority": 4,
+          "triggers": ["competitive_profile", "speed_improvement_potential"],
+          "prerequisites": ["accuracy_stable"],
+          "content_template": "Beat your best time! 10 problems, current record: {{best_time}}",
+          "success_indicators": ["speed_improvement", "maintained_accuracy"],
+          "fallback_intervention": "boredom-teach-001"
+        },
+        {
+          "id": "boredom-teach-001",
+          "type": "metacognitive",
+          "name": "Teaching Mode",
+          "description": "Explain concept as if teaching someone else",
+          "target_movement": { "coherence": 5, "entropy": 15, "generativity": 30 },
+          "duration_minutes": 15,
+          "priority": 5,
+          "triggers": ["deep_mastery detected", "verbal_strength"],
+          "prerequisites": ["concept_mastery > 0.85"],
+          "content_template": "Imagine you're teaching {{concept}} to a younger student. How would you explain it?",
+          "success_indicators": ["explanation_quality", "knowledge_consolidation"],
+          "fallback_intervention": null
+        }
+      ]
+    },
+    "frustration": {
+      "id": "frustration",
+      "name": "Frustration State",
+      "description": "Overwhelmed state requiring emotional and cognitive support",
+      "coordinates": { "coherence": 30, "entropy": 80, "generativity": 25 },
+      "characteristics": [
+        "Cognitive overload",
+        "Emotional dysregulation",
+        "Performance anxiety",
+        "Avoidance tendency"
+      ],
+      "interventions": [
+        {
+          "id": "frustration-support-001",
+          "type": "rest",
+          "name": "Cognitive Break",
+          "description": "Brief pause with low-stakes activity",
+          "target_movement": { "coherence": 5, "entropy": -30, "generativity": 5 },
+          "duration_minutes": 3,
+          "priority": 1,
+          "triggers": ["error_rate > 0.7", "response_time increasing"],
+          "prerequisites": [],
+          "content_template": "Fun fact or simple puzzle unrelated to current topic",
+          "success_indicators": ["stress_reduction", "engagement_recovery"],
+          "fallback_intervention": "frustration-support-002"
+        },
+        {
+          "id": "frustration-support-002",
+          "type": "review",
+          "name": "Success Recall",
+          "description": "Revisit previously mastered content",
+          "target_movement": { "coherence": 25, "entropy": -25, "generativity": 10 },
+          "duration_minutes": 5,
+          "priority": 2,
+          "triggers": ["frustration_signals detected"],
+          "prerequisites": ["mastery_history available"],
+          "content_template": "Solve this problem you've done well before",
+          "success_indicators": ["confidence_boost", "self_efficacy_increase"],
+          "fallback_intervention": "frustration-reframe-001"
+        },
+        {
+          "id": "frustration-reframe-001",
+          "type": "emotional",
+          "name": "Growth Mindset Prompt",
+          "description": "Reframe struggle as part of learning process",
+          "target_movement": { "coherence": 10, "entropy": -15, "generativity": 15 },
+          "duration_minutes": 2,
+          "priority": 3,
+          "triggers": ["negative_self_talk detected", "giving_up signals"],
+          "prerequisites": [],
+          "content_template": "This is hard because it's new! Every expert started exactly where you are.",
+          "success_indicators": ["persistence_increase", "emotional_regulation"],
+          "fallback_intervention": "frustration-simplify-001"
+        },
+        {
+          "id": "frustration-simplify-001",
+          "type": "scaffolding",
+          "name": "Difficulty Reduction",
+          "description": "Temporarily reduce problem complexity",
+          "target_movement": { "coherence": 30, "entropy": -35, "generativity": 5 },
+          "duration_minutes": 10,
+          "priority": 4,
+          "triggers": ["repeated_failure", "cognitive_load > threshold"],
+          "prerequisites": [],
+          "content_template": "Let's try a simpler version: {{simplified_problem}}",
+          "success_indicators": ["success_experience", "confidence_recovery"],
+          "fallback_intervention": "frustration-support-001"
+        },
+        {
+          "id": "frustration-chunk-001",
+          "type": "scaffolding",
+          "name": "Micro-Goal Setting",
+          "description": "Set immediate achievable mini-goal",
+          "target_movement": { "coherence": 20, "entropy": -20, "generativity": 10 },
+          "duration_minutes": 5,
+          "priority": 5,
+          "triggers": ["overwhelm_detected", "goal_too_distant"],
+          "prerequisites": [],
+          "content_template": "Just focus on this one small step: {{micro_goal}}",
+          "success_indicators": ["micro_goal_achieved", "momentum_building"],
+          "fallback_intervention": "frustration-support-002"
+        },
+        {
+          "id": "frustration-breathe-001",
+          "type": "physiological",
+          "name": "Regulation Reset",
+          "description": "Brief breathing or movement break",
+          "target_movement": { "coherence": 5, "entropy": -25, "generativity": 0 },
+          "duration_minutes": 2,
+          "priority": 6,
+          "triggers": ["physiological_stress_indicators", "sustained_frustration > 5min"],
+          "prerequisites": [],
+          "content_template": "Let's take 3 deep breaths together. Ready?",
+          "success_indicators": ["physiological_calming", "cognitive_reset"],
+          "fallback_intervention": "frustration-support-001"
+        }
+      ]
+    },
+    "discovery": {
+      "id": "discovery",
+      "name": "Discovery State",
+      "description": "Productive struggle zone with high generativity and learning potential",
+      "coordinates": { "coherence": 55, "entropy": 60, "generativity": 75 },
+      "characteristics": [
+        "Active exploration",
+        "Hypothesis testing",
+        "Insight formation",
+        "Creative synthesis"
+      ],
+      "interventions": [
+        {
+          "id": "discovery-extend-001",
+          "type": "exploration",
+          "name": "What If",
+          "description": "Extend current insight with hypothetical",
+          "target_movement": { "coherence": 5, "entropy": 10, "generativity": 15 },
+          "duration_minutes": 10,
+          "priority": 1,
+          "triggers": ["aha_moment detected", "novel_solution submitted"],
+          "prerequisites": [],
+          "content_template": "What if we changed {{variable}}? What would happen?",
+          "success_indicators": ["hypothesis_generation", "deeper_exploration"],
+          "fallback_intervention": "discovery-validate-001"
+        },
+        {
+          "id": "discovery-validate-001",
+          "type": "verification",
+          "name": "Test Your Theory",
+          "description": "Challenge learner to verify their insight",
+          "target_movement": { "coherence": 15, "entropy": -5, "generativity": 10 },
+          "duration_minutes": 12,
+          "priority": 2,
+          "triggers": ["hypothesis_stated", "pattern_claimed"],
+          "prerequisites": [],
+          "content_template": "Interesting theory! Can you find 3 examples that prove it? Can you find any that disprove it?",
+          "success_indicators": ["evidence_gathering", "refined_understanding"],
+          "fallback_intervention": "discovery-connect-001"
+        },
+        {
+          "id": "discovery-connect-001",
+          "type": "integration",
+          "name": "Bridge Building",
+          "description": "Connect discovery to broader knowledge network",
+          "target_movement": { "coherence": 20, "entropy": -10, "generativity": 5 },
+          "duration_minutes": 8,
+          "priority": 3,
+          "triggers": ["isolated_insight detected", "connection_opportunity"],
+          "prerequisites": ["knowledge_graph available"],
+          "content_template": "Your discovery connects to {{related_concept}}. Can you see how?",
+          "success_indicators": ["connection_made", "schema_integration"],
+          "fallback_intervention": "discovery-generalize-001"
+        },
+        {
+          "id": "discovery-generalize-001",
+          "type": "abstraction",
+          "name": "Pattern Extraction",
+          "description": "Guide learner to abstract general principle",
+          "target_movement": { "coherence": 15, "entropy": 0, "generativity": 20 },
+          "duration_minutes": 15,
+          "priority": 4,
+          "triggers": ["multiple_examples_solved", "pattern_emerging"],
+          "prerequisites": [],
+          "content_template": "You've solved several like this. What's the underlying pattern?",
+          "success_indicators": ["principle_articulation", "transfer_readiness"],
+          "fallback_intervention": "discovery-apply-001"
+        },
+        {
+          "id": "discovery-apply-001",
+          "type": "application",
+          "name": "Real-World Transfer",
+          "description": "Apply discovery to authentic context",
+          "target_movement": { "coherence": 10, "entropy": 15, "generativity": 20 },
+          "duration_minutes": 20,
+          "priority": 5,
+          "triggers": ["principle_understood", "application_ready"],
+          "prerequisites": ["real_world_context available"],
+          "content_template": "Here's where this actually matters: {{real_world_scenario}}",
+          "success_indicators": ["successful_transfer", "meaning_making"],
+          "fallback_intervention": "discovery-extend-001"
+        },
+        {
+          "id": "discovery-celebrate-001",
+          "type": "motivational",
+          "name": "Insight Acknowledgment",
+          "description": "Recognize and reinforce the discovery moment",
+          "target_movement": { "coherence": 5, "entropy": -5, "generativity": 10 },
+          "duration_minutes": 2,
+          "priority": 6,
+          "triggers": ["breakthrough_moment", "novel_approach_successful"],
+          "prerequisites": [],
+          "content_template": "That's a real insight! Not everyone sees that. You discovered {{insight_summary}}.",
+          "success_indicators": ["intrinsic_motivation_boost", "continued_exploration"],
+          "fallback_intervention": null
+        }
+      ]
+    }
+  },
+  "transition_patterns": [
+    {
+      "id": "confusion-to-flow",
+      "from": "confusion",
+      "to": "flow",
+      "description": "Guide from high entropy to optimal learning state",
+      "typical_path": ["confusion-scaffold-001", "confusion-scaffold-002", "flow-maintain-001"],
+      "average_duration_minutes": 20,
+      "success_rate": 0.75,
+      "key_indicators": ["entropy_decrease", "coherence_increase", "engagement_stabilization"]
+    },
+    {
+      "id": "boredom-to-flow",
+      "from": "boredom",
+      "to": "flow",
+      "description": "Increase challenge to match learner capability",
+      "typical_path": ["boredom-challenge-001"],
+      "average_duration_minutes": 15,
+      "success_rate": 0.85,
+      "key_indicators": ["entropy_increase", "engagement_increase", "generativity_boost"]
+    },
+    {
+      "id": "frustration-to-flow",
+      "from": "frustration",
+      "to": "flow",
+      "description": "Reduce overwhelm and rebuild confidence",
+      "typical_path": ["frustration-support-001", "frustration-support-002", "confusion-scaffold-001"],
+      "average_duration_minutes": 15,
+      "success_rate": 0.70,
+      "key_indicators": ["entropy_decrease", "emotional_stabilization", "coherence_recovery"]
+    },
+    {
+      "id": "confusion-to-discovery",
+      "from": "confusion",
+      "to": "discovery",
+      "description": "Transform confusion into productive exploration",
+      "typical_path": ["confusion-visual-001", "confusion-connect-001", "discovery-extend-001"],
+      "average_duration_minutes": 25,
+      "success_rate": 0.60,
+      "key_indicators": ["pattern_recognition", "generativity_increase", "insight_formation"]
+    },
+    {
+      "id": "boredom-to-discovery",
+      "from": "boredom",
+      "to": "discovery",
+      "description": "Channel mastery into creative exploration",
+      "typical_path": ["boredom-challenge-002", "discovery-extend-001"],
+      "average_duration_minutes": 35,
+      "success_rate": 0.80,
+      "key_indicators": ["creativity_expression", "novel_connections", "intrinsic_motivation"]
+    },
+    {
+      "id": "discovery-to-flow",
+      "from": "discovery",
+      "to": "flow",
+      "description": "Consolidate insights into smooth performance",
+      "typical_path": ["discovery-validate-001", "discovery-connect-001", "flow-maintain-003"],
+      "average_duration_minutes": 20,
+      "success_rate": 0.85,
+      "key_indicators": ["coherence_increase", "entropy_stabilization", "automaticity_emergence"]
+    },
+    {
+      "id": "frustration-to-confusion",
+      "from": "frustration",
+      "to": "confusion",
+      "description": "First step: reduce emotional overwhelm to manageable confusion",
+      "typical_path": ["frustration-breathe-001", "frustration-support-001", "frustration-simplify-001"],
+      "average_duration_minutes": 10,
+      "success_rate": 0.80,
+      "key_indicators": ["emotional_calming", "cognitive_load_reduction", "re-engagement"]
+    },
+    {
+      "id": "flow-to-discovery",
+      "from": "flow",
+      "to": "discovery",
+      "description": "Leverage flow state for deeper exploration",
+      "typical_path": ["flow-maintain-002", "discovery-extend-001"],
+      "average_duration_minutes": 25,
+      "success_rate": 0.75,
+      "key_indicators": ["curiosity_activation", "hypothesis_generation", "creative_risk_taking"]
+    }
+  ],
+  "intervention_types": {
+    "content": {
+      "description": "Direct instructional content delivery",
+      "typical_duration_range": [5, 20],
+      "primary_effect": "coherence_increase"
+    },
+    "scaffolding": {
+      "description": "Temporary support structures for learning",
+      "typical_duration_range": [5, 15],
+      "primary_effect": "entropy_decrease"
+    },
+    "challenge": {
+      "description": "Increased difficulty or novel problems",
+      "typical_duration_range": [10, 30],
+      "primary_effect": "entropy_increase"
+    },
+    "exploration": {
+      "description": "Open-ended discovery opportunities",
+      "typical_duration_range": [15, 45],
+      "primary_effect": "generativity_increase"
+    },
+    "rest": {
+      "description": "Cognitive breaks and recovery",
+      "typical_duration_range": [2, 5],
+      "primary_effect": "entropy_decrease"
+    },
+    "review": {
+      "description": "Revisiting previously learned material",
+      "typical_duration_range": [5, 10],
+      "primary_effect": "coherence_increase"
+    },
+    "emotional": {
+      "description": "Affective and motivational support",
+      "typical_duration_range": [1, 5],
+      "primary_effect": "emotional_regulation"
+    },
+    "metacognitive": {
+      "description": "Reflection on thinking and learning processes",
+      "typical_duration_range": [5, 15],
+      "primary_effect": "self_awareness"
+    },
+    "representation": {
+      "description": "Alternative ways of presenting information",
+      "typical_duration_range": [5, 15],
+      "primary_effect": "comprehension"
+    },
+    "bridging": {
+      "description": "Connecting new knowledge to existing schemas",
+      "typical_duration_range": [5, 10],
+      "primary_effect": "integration"
+    },
+    "integration": {
+      "description": "Cross-domain connections and synthesis",
+      "typical_duration_range": [10, 30],
+      "primary_effect": "transfer"
+    },
+    "gamification": {
+      "description": "Game-like elements for engagement",
+      "typical_duration_range": [5, 15],
+      "primary_effect": "motivation"
+    },
+    "verification": {
+      "description": "Testing and validating understanding",
+      "typical_duration_range": [10, 20],
+      "primary_effect": "accuracy"
+    },
+    "abstraction": {
+      "description": "Extracting general principles from specifics",
+      "typical_duration_range": [10, 20],
+      "primary_effect": "generalization"
+    },
+    "application": {
+      "description": "Applying knowledge to real contexts",
+      "typical_duration_range": [15, 30],
+      "primary_effect": "transfer"
+    },
+    "motivational": {
+      "description": "Reinforcing engagement and persistence",
+      "typical_duration_range": [1, 5],
+      "primary_effect": "motivation"
+    },
+    "physiological": {
+      "description": "Physical state regulation interventions",
+      "typical_duration_range": [1, 5],
+      "primary_effect": "arousal_regulation"
+    }
+  },
+  "trigger_definitions": {
+    "success_streak": {
+      "description": "Consecutive correct responses",
+      "data_type": "integer",
+      "typical_threshold": 3
+    },
+    "confidence": {
+      "description": "Learner's self-reported or inferred confidence level",
+      "data_type": "float",
+      "range": [0, 1]
+    },
+    "consecutive_errors": {
+      "description": "Consecutive incorrect responses",
+      "data_type": "integer",
+      "typical_threshold": 2
+    },
+    "time_on_problem": {
+      "description": "Time spent on current problem",
+      "data_type": "duration",
+      "unit": "seconds"
+    },
+    "prerequisite_mastery": {
+      "description": "Mastery level of prerequisite concepts",
+      "data_type": "float",
+      "range": [0, 1]
+    },
+    "accuracy": {
+      "description": "Overall accuracy rate in current session",
+      "data_type": "float",
+      "range": [0, 1]
+    },
+    "mastery": {
+      "description": "Current topic mastery level",
+      "data_type": "float",
+      "range": [0, 1]
+    },
+    "engagement_score": {
+      "description": "Inferred engagement from behavior signals",
+      "data_type": "float",
+      "range": [0, 1]
+    },
+    "error_rate": {
+      "description": "Recent error frequency",
+      "data_type": "float",
+      "range": [0, 1]
+    },
+    "frustration_signals": {
+      "description": "Behavioral indicators of frustration",
+      "data_type": "boolean"
+    },
+    "aha_moment": {
+      "description": "Detected insight or breakthrough moment",
+      "data_type": "boolean"
+    },
+    "novel_solution": {
+      "description": "Creative or unexpected approach to problem",
+      "data_type": "boolean"
+    }
+  },
+  "metadata": {
+    "created": "2024-01-15",
+    "last_updated": "2024-01-15",
+    "author": "C/E/G Manifold System",
+    "schema_version": "1.0.0",
+    "total_interventions": 25,
+    "total_transition_patterns": 8
+  }
+}

@@ -1,0 +1,415 @@
+{
+  "grade": "10",
+  "course": "Chemistry",
+  "framework": "NGSS",
+  "items": [
+    {
+      "id": "sci-10-ps1-1-001",
+      "standard_id": "HS-PS1-1",
+      "standard_description": "Use the periodic table as a model to predict the relative properties of elements based on the patterns of electrons in the outermost energy level of atoms.",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Sodium (Na), Magnesium (Mg), and Aluminum (Al) are three consecutive elements in Period 3 of the periodic table. Using your knowledge of electron configuration and periodic trends, predict and explain: (1) which element has the smallest atomic radius, (2) which element has the highest ionization energy, (3) how their ionic radii compare to their atomic radii. Support your predictions with specific reference to electron configurations.",
+      "rubric": {
+        "4": "Correctly predicts and explains: (1) Al has smallest atomic radius - same number of shells but increasing nuclear charge pulls electrons closer; (2) Al has highest ionization energy - more protons hold valence electrons more tightly; (3) All form cations, so ionic radii < atomic radii. Na+ loses shell, becomes much smaller; Mg2+ and Al3+ also smaller. Uses correct electron configurations (Na: [Ne]3s1, Mg: [Ne]3s2, Al: [Ne]3s2 3p1).",
+        "3": "Correct predictions with good explanations but may miss some detail about electron configuration.",
+        "2": "Most predictions correct but explanations lack reference to underlying atomic structure.",
+        "1": "Some predictions correct but limited understanding of periodic trends.",
+        "0": "Incorrect predictions or fundamental misconceptions about periodic trends."
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.70,
+      "time_estimate_seconds": 420,
+      "science_practice": "Developing and Using Models",
+      "crosscutting_concept": "Patterns"
+    },
+    {
+      "id": "sci-10-ps1-1-002",
+      "standard_id": "HS-PS1-1",
+      "standard_description": "Use the periodic table as a model to predict the relative properties of elements based on the patterns of electrons in the outermost energy level of atoms.",
+      "dok_level": 3,
+      "question_type": "data_analysis",
+      "question": "The table below shows the first ionization energies (in kJ/mol) for elements in Period 2:\n\nLi: 520 | Be: 900 | B: 801 | C: 1086 | N: 1402 | O: 1314 | F: 1681 | Ne: 2081\n\nAnalyze the data and explain: (a) the general trend from Li to Ne, (b) why boron has a lower ionization energy than beryllium (this seems to break the trend), (c) why oxygen has a lower ionization energy than nitrogen (another apparent anomaly). Use electron configuration in your explanation.",
+      "rubric": {
+        "4": "Explains: (a) General increase due to increasing nuclear charge with same number of shells; (b) B ([He]2s2 2p1) has electron in higher-energy 2p orbital which is easier to remove than Be's 2s electron; (c) O ([He]2s2 2p4) has paired electrons in one 2p orbital, electron-electron repulsion makes one easier to remove than N's unpaired electrons ([He]2s2 2p3). All explanations use correct configurations.",
+        "3": "Correctly explains general trend and one anomaly with good reference to electron configuration.",
+        "2": "Explains general trend but cannot fully explain anomalies.",
+        "1": "Recognizes general trend but explanation lacks depth.",
+        "0": "Cannot interpret ionization energy data."
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.78,
+      "time_estimate_seconds": 480,
+      "science_practice": "Analyzing and Interpreting Data",
+      "crosscutting_concept": "Patterns"
+    },
+    {
+      "id": "sci-10-ps1-2-001",
+      "standard_id": "HS-PS1-2",
+      "standard_description": "Construct and revise an explanation for the outcome of a simple chemical reaction based on the outermost electron states of atoms, trends in the periodic table, and knowledge of the patterns of chemical properties.",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "When sodium metal is placed in chlorine gas, a violent exothermic reaction occurs producing sodium chloride. Construct an explanation for this reaction that addresses: (1) why Na readily loses an electron, (2) why Cl readily gains an electron, (3) why the product is NaCl and not NaCl2 or Na2Cl, (4) why this reaction releases energy. Use electron configurations and energy concepts in your explanation.",
+      "rubric": {
+        "4": "Complete explanation: (1) Na has one valence electron in 3s, low ionization energy, achieves stable [Ne] configuration; (2) Cl has 7 valence electrons, high electron affinity, one electron gives stable [Ar] configuration; (3) One Na provides one electron that one Cl needs - conservation of electrons and charge balance; (4) Energy released because ionic bond formation releases more energy than ionization requires (net negative enthalpy). Uses correct configurations.",
+        "3": "Explains most points correctly with reference to electron configuration but may miss energy analysis.",
+        "2": "Understands electron transfer but explanation of stoichiometry or energy is incomplete.",
+        "1": "Basic understanding of ionic bonding but significant gaps.",
+        "0": "Does not understand ionic bond formation."
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.72,
+      "time_estimate_seconds": 420,
+      "science_practice": "Constructing Explanations",
+      "crosscutting_concept": "Patterns"
+    },
+    {
+      "id": "sci-10-ps1-2-002",
+      "standard_id": "HS-PS1-2",
+      "standard_description": "Construct and revise an explanation for the outcome of a simple chemical reaction based on the outermost electron states of atoms, trends in the periodic table, and knowledge of the patterns of chemical properties.",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Predict the products and explain the bonding in the reaction between: (a) calcium and oxygen, (b) nitrogen and hydrogen. For each reaction, draw Lewis structures of the products, explain whether ionic or covalent bonding occurs and why, and predict relative melting points of the products.",
+      "rubric": {
+        "4": "Correct predictions: (a) Ca + O → CaO, ionic bonding (metal + nonmetal, large electronegativity difference), Ca2+ and O2- with correct Lewis structures, high melting point due to strong ionic lattice; (b) N + H → NH3, covalent bonding (both nonmetals), Lewis structure showing lone pair on N and three N-H bonds, low melting point due to weak intermolecular forces.",
+        "3": "Correct products and bonding types with good Lewis structures but melting point predictions may lack detailed explanation.",
+        "2": "Correct products but errors in Lewis structures or bonding type explanation.",
+        "1": "Partially correct predictions with significant gaps in explanation.",
+        "0": "Cannot predict products or explain bonding."
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 480,
+      "science_practice": "Constructing Explanations",
+      "crosscutting_concept": "Structure and Function"
+    },
+    {
+      "id": "sci-10-ps1-3-001",
+      "standard_id": "HS-PS1-3",
+      "standard_description": "Plan and conduct an investigation to gather evidence to compare the structure of substances at the bulk scale to infer the strength of electrical forces between particles.",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Design an experiment to investigate how molecular structure affects boiling point. You will compare methanol (CH3OH), ethanol (C2H5OH), and 1-propanol (C3H7OH). Include: (1) your hypothesis relating molecular structure to boiling point, (2) procedure with safety precautions, (3) variables (independent, dependent, controlled), (4) predicted results with explanation, and (5) how you would extend this to investigate hydrogen bonding vs. London dispersion forces.",
+      "rubric": {
+        "4": "Complete design: (1) Hypothesis: Boiling point increases with molecular size/mass due to stronger London dispersion forces; (2) Safe procedure for measuring boiling points (water bath heating, thermometer); (3) IV: molecule size, DV: boiling point, Controls: pressure, heating rate, purity; (4) Predicts increasing BP with molecular size, explains intermolecular forces; (5) Extension: compare to alkanes of similar mass to isolate H-bonding effect.",
+        "3": "Good experimental design with most components but may lack extension or detailed safety considerations.",
+        "2": "Basic experimental design but incomplete variable control or safety considerations.",
+        "1": "Simple procedure without proper experimental design principles.",
+        "0": "Does not demonstrate understanding of experimental design."
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.80,
+      "time_estimate_seconds": 600,
+      "science_practice": "Planning and Carrying Out Investigations",
+      "crosscutting_concept": "Structure and Function"
+    },
+    {
+      "id": "sci-10-ps1-3-002",
+      "standard_id": "HS-PS1-3",
+      "standard_description": "Plan and conduct an investigation to gather evidence to compare the structure of substances at the bulk scale to infer the strength of electrical forces between particles.",
+      "dok_level": 3,
+      "question_type": "data_analysis",
+      "question": "The table below shows melting and boiling points for several substances:\n\n| Substance | Formula | Melting Point (°C) | Boiling Point (°C) |\n|-----------|---------|-------------------|--------------------|\n| Sodium chloride | NaCl | 801 | 1413 |\n| Water | H2O | 0 | 100 |\n| Methane | CH4 | -182 | -164 |\n| Diamond | C | 3550 | 4827 |\n| Copper | Cu | 1085 | 2562 |\n\nAnalyze this data to: (a) rank the substances by strength of interparticle forces, (b) identify the type of bonding/forces in each substance, (c) explain why NaCl has high melting/boiling points but conducts electricity when molten while diamond has even higher values but never conducts.",
+      "rubric": {
+        "4": "Correctly ranks and explains: Diamond (covalent network) > Cu (metallic) > NaCl (ionic) > H2O (H-bonding molecular) > CH4 (London dispersion molecular). NaCl: ionic bonds, mobile ions when molten conduct; Diamond: covalent bonds, no mobile charged particles ever. Detailed explanation of each bonding type.",
+        "3": "Correct ranking and bonding types, conductivity explanation may lack detail.",
+        "2": "Most bonding types identified but ranking errors or incomplete conductivity explanation.",
+        "1": "Some bonding types identified but significant misconceptions.",
+        "0": "Cannot interpret data or identify bonding types."
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 480,
+      "science_practice": "Analyzing and Interpreting Data",
+      "crosscutting_concept": "Structure and Function"
+    },
+    {
+      "id": "sci-10-ps1-4-001",
+      "standard_id": "HS-PS1-4",
+      "standard_description": "Develop a model to illustrate that the release or absorption of energy from a chemical reaction system depends upon the changes in total bond energy.",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Using the bond energies below, calculate the enthalpy change for the combustion of methane: CH4 + 2O2 → CO2 + 2H2O\n\nBond energies (kJ/mol): C-H: 413, O=O: 495, C=O: 799, O-H: 467\n\nShow your work including: (1) bonds broken and total energy required, (2) bonds formed and total energy released, (3) net enthalpy change. Is this reaction exothermic or endothermic? Create an energy diagram showing reactants, products, and activation energy.",
+      "rubric": {
+        "4": "Correct calculation: Bonds broken: 4(C-H) + 2(O=O) = 4(413) + 2(495) = 2642 kJ. Bonds formed: 2(C=O) + 4(O-H) = 2(799) + 4(467) = 3466 kJ. ΔH = 2642 - 3466 = -824 kJ (exothermic). Energy diagram shows reactants above products, activation energy barrier, correct energy difference.",
+        "3": "Correct calculation and identification as exothermic. Energy diagram may be incomplete.",
+        "2": "Calculation approach correct but arithmetic errors or incomplete bond counting.",
+        "1": "Attempts calculation but significant conceptual errors.",
+        "0": "Cannot apply bond energy calculations."
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.72,
+      "time_estimate_seconds": 480,
+      "science_practice": "Using Mathematics and Computational Thinking",
+      "crosscutting_concept": "Energy and Matter"
+    },
+    {
+      "id": "sci-10-ps1-4-002",
+      "standard_id": "HS-PS1-4",
+      "standard_description": "Develop a model to illustrate that the release or absorption of energy from a chemical reaction system depends upon the changes in total bond energy.",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Cold packs used for sports injuries contain ammonium nitrate that dissolves in water in an endothermic process. Hot packs often contain iron powder that oxidizes in an exothermic reaction. Develop a model comparing these two processes that shows: (1) energy flow diagrams for each, (2) what happens to bond energies, (3) how temperature of surroundings changes, (4) molecular-level explanation of why one releases and one absorbs energy.",
+      "rubric": {
+        "4": "Complete model: (1) Cold pack: energy flows from surroundings to system (upward arrow); Hot pack: energy flows from system to surroundings (downward arrow); (2) Cold: bonds formed in hydration weaker than ionic bonds broken; Hot: Fe-O bonds formed stronger than O-O bonds broken; (3) Cold: surroundings cool down; Hot: surroundings warm up; (4) Explains energy difference in terms of bond strengths and lattice energy.",
+        "3": "Good model with energy flow diagrams and temperature effects. Bond energy explanation may lack detail.",
+        "2": "Correctly identifies exothermic vs. endothermic but model is incomplete.",
+        "1": "Basic understanding of energy flow but significant gaps in model.",
+        "0": "Does not understand endothermic vs. exothermic processes."
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.73,
+      "time_estimate_seconds": 480,
+      "science_practice": "Developing and Using Models",
+      "crosscutting_concept": "Energy and Matter"
+    },
+    {
+      "id": "sci-10-ps1-5-001",
+      "standard_id": "HS-PS1-5",
+      "standard_description": "Apply scientific principles and evidence to provide an explanation about the effects of changing the temperature or concentration of the reacting particles on the rate at which a reaction occurs.",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A student measures the rate of reaction between magnesium ribbon and hydrochloric acid at different temperatures. The data shows the reaction time doubles for every 10°C decrease in temperature. Explain this observation using collision theory and the concept of activation energy. Include a diagram showing the Maxwell-Boltzmann distribution at two different temperatures and explain how this relates to reaction rate.",
+      "rubric": {
+        "4": "Complete explanation: Higher temperature → molecules have more kinetic energy → more frequent collisions AND more collisions exceed activation energy → faster reaction rate. Maxwell-Boltzmann diagram shows both curves with same shape, higher temperature curve shifted right with more area beyond Ea threshold. Quantifies using Arrhenius relationship concept.",
+        "3": "Good explanation of collision theory and temperature effects. Diagram present but may lack detail.",
+        "2": "Understands that higher temperature increases rate but explanation incomplete or diagram missing.",
+        "1": "Basic understanding without molecular-level explanation.",
+        "0": "Does not understand collision theory or temperature effects."
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 420,
+      "science_practice": "Constructing Explanations",
+      "crosscutting_concept": "Cause and Effect"
+    },
+    {
+      "id": "sci-10-ps1-5-002",
+      "standard_id": "HS-PS1-5",
+      "standard_description": "Apply scientific principles and evidence to provide an explanation about the effects of changing the temperature or concentration of the reacting particles on the rate at which a reaction occurs.",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Design an experiment to determine the order of a reaction with respect to concentration for the reaction: 2HI → H2 + I2. Your design should include: (1) how you would vary concentrations systematically, (2) how you would measure reaction rate, (3) how you would analyze data to determine reaction order (zero, first, or second), (4) expected graphs for each possible order, (5) how you would control temperature and why this is important.",
+      "rubric": {
+        "4": "Complete experimental design: (1) Vary [HI] while keeping other conditions constant (e.g., 0.1M, 0.2M, 0.4M); (2) Measure rate by monitoring color change (I2 production) or pressure change; (3) Plot rate vs [HI], rate vs [HI]2 to find linear relationship; (4) Correct graphs: zero order = horizontal rate vs [HI], first order = linear rate vs [HI], second order = linear rate vs [HI]2; (5) Temperature controlled to isolate concentration effect on rate constant.",
+        "3": "Good experimental design with most components. May lack detail on graph analysis.",
+        "2": "Basic experimental design but incomplete analysis method.",
+        "1": "Simple procedure without systematic approach to determining order.",
+        "0": "Does not demonstrate understanding of reaction order concept."
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.82,
+      "time_estimate_seconds": 600,
+      "science_practice": "Planning and Carrying Out Investigations",
+      "crosscutting_concept": "Cause and Effect"
+    },
+    {
+      "id": "sci-10-ps1-6-001",
+      "standard_id": "HS-PS1-6",
+      "standard_description": "Refine the design of a chemical system by specifying a change in conditions that would produce increased amounts of products at equilibrium.",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "The Haber process synthesizes ammonia: N2(g) + 3H2(g) ⇌ 2NH3(g) ΔH = -92 kJ\n\nAn industrial chemist wants to maximize ammonia production. For each of the following changes, predict the effect on equilibrium position and yield, using Le Chatelier's principle: (1) increasing pressure, (2) increasing temperature, (3) removing NH3 as it forms, (4) adding a catalyst. Then explain why industrial conditions typically use 200 atm, 450°C, and iron catalyst, even though some of these conditions seem suboptimal.",
+      "rubric": {
+        "4": "Correct predictions: (1) Higher pressure favors products (fewer moles of gas) → more NH3; (2) Higher temperature favors endothermic reverse reaction → less NH3; (3) Removing NH3 shifts equilibrium right → more NH3 produced; (4) Catalyst increases rate but doesn't affect equilibrium position. Industrial explanation: High pressure good for yield; high temperature actually decreases yield BUT needed for acceptable reaction rate; catalyst speeds up both directions equally. Compromise between yield and rate.",
+        "3": "Correct predictions for most changes. Industrial conditions explanation may lack nuance.",
+        "2": "Applies Le Chatelier's principle correctly but doesn't fully explain industrial conditions.",
+        "1": "Basic understanding of equilibrium shifts but significant errors.",
+        "0": "Does not understand Le Chatelier's principle."
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.78,
+      "time_estimate_seconds": 540,
+      "science_practice": "Designing Solutions",
+      "crosscutting_concept": "Stability and Change"
+    },
+    {
+      "id": "sci-10-ps1-6-002",
+      "standard_id": "HS-PS1-6",
+      "standard_description": "Refine the design of a chemical system by specifying a change in conditions that would produce increased amounts of products at equilibrium.",
+      "dok_level": 3,
+      "question_type": "data_analysis",
+      "question": "For the equilibrium: 2SO2(g) + O2(g) ⇌ 2SO3(g), the equilibrium constant Kp = 2.5 × 10^12 at 500 K and Kp = 2.0 × 10^4 at 800 K.\n\nAnalyze this data to: (a) determine if the forward reaction is exothermic or endothermic, (b) calculate Q and predict the direction of reaction if at 500 K we have pSO2 = 0.1 atm, pO2 = 0.2 atm, pSO3 = 0.5 atm, (c) recommend conditions for maximum SO3 production in an industrial setting.",
+      "rubric": {
+        "4": "Correct analysis: (a) K decreases with increasing T → exothermic (heat is a product); (b) Q = (0.5)²/[(0.1)²(0.2)] = 125; Q < K → reaction proceeds forward to produce more SO3; (c) Use high pressure (fewer gas moles on product side), low temperature for yield (but need reasonable rate), excess O2 to drive equilibrium, remove SO3.",
+        "3": "Correct determination of exothermic and Q calculation. Recommendations reasonable but may lack detail.",
+        "2": "Identifies reaction as exothermic but errors in Q calculation or incomplete recommendations.",
+        "1": "Basic understanding but significant calculation errors.",
+        "0": "Cannot interpret equilibrium constant data."
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.77,
+      "time_estimate_seconds": 480,
+      "science_practice": "Analyzing and Interpreting Data",
+      "crosscutting_concept": "Stability and Change"
+    },
+    {
+      "id": "sci-10-ps1-7-001",
+      "standard_id": "HS-PS1-7",
+      "standard_description": "Use mathematical representations to support the claim that atoms, and therefore mass, are conserved during a chemical reaction.",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Propane (C3H8) burns in oxygen according to the unbalanced equation: C3H8 + O2 → CO2 + H2O\n\n(a) Balance the equation. (b) If 44.0 g of propane is burned with excess oxygen, calculate the mass of CO2 produced. (c) Verify that mass is conserved by calculating the total mass of reactants and products. (d) Explain at the atomic level why mass must be conserved.",
+      "rubric": {
+        "4": "Correct solution: (a) C3H8 + 5O2 → 3CO2 + 4H2O; (b) 44.0 g ÷ 44.0 g/mol = 1.00 mol C3H8 → 3.00 mol CO2 → 3.00 × 44.0 = 132 g CO2; (c) Reactants: 44.0 + (5 × 32.0) = 204 g; Products: 132 + (4 × 18.0) = 204 g ✓; (d) Atoms are neither created nor destroyed, only rearranged - same atoms on both sides, so same mass.",
+        "3": "Correct balancing and main calculation. Conservation verification may have minor errors.",
+        "2": "Equation balanced correctly but stoichiometry calculation errors.",
+        "1": "Attempts balancing and calculation but significant errors.",
+        "0": "Cannot balance equations or perform stoichiometry."
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.68,
+      "time_estimate_seconds": 420,
+      "science_practice": "Using Mathematics and Computational Thinking",
+      "crosscutting_concept": "Energy and Matter"
+    },
+    {
+      "id": "sci-10-ps1-7-002",
+      "standard_id": "HS-PS1-7",
+      "standard_description": "Use mathematical representations to support the claim that atoms, and therefore mass, are conserved during a chemical reaction.",
+      "dok_level": 3,
+      "question_type": "data_analysis",
+      "question": "A student heats 10.00 g of copper(II) carbonate (CuCO3) in an open crucible. After heating, the residue weighs 6.36 g. The reaction is: CuCO3(s) → CuO(s) + CO2(g)\n\n(a) Calculate the mass of CO2 released. (b) Calculate the percent yield of CuO. (c) The student claims that mass was NOT conserved because the product weighs less than the reactant. Construct an argument explaining why this claim is incorrect. (d) Design a modification to the experiment that would better demonstrate conservation of mass.",
+      "rubric": {
+        "4": "Correct analysis: (a) CO2 = 10.00 - 6.36 = 3.64 g; (b) Theoretical CuO: (10.00/123.6) × 79.5 = 6.43 g; Yield = 6.36/6.43 × 100 = 98.9%; (c) Mass IS conserved - the CO2 escaped into atmosphere; total mass (solid + gas) equals original mass; (d) Conduct reaction in closed system (sealed container) and measure total mass before and after, or capture the CO2 in a separate container.",
+        "3": "Correct calculations and argument. Experimental modification reasonable but may lack detail.",
+        "2": "Calculations correct but argument or modification incomplete.",
+        "1": "Basic calculations with errors; limited understanding of conservation.",
+        "0": "Cannot perform calculations or explain conservation."
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.72,
+      "time_estimate_seconds": 480,
+      "science_practice": "Engaging in Argument from Evidence",
+      "crosscutting_concept": "Energy and Matter"
+    },
+    {
+      "id": "sci-10-ps1-8-001",
+      "standard_id": "HS-PS1-8",
+      "standard_description": "Develop models to illustrate the changes in the composition of the nucleus of the atom and the energy released during the processes of fission, fusion, and radioactive decay.",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Compare and contrast nuclear fission and nuclear fusion in terms of: (1) the nuclear changes that occur (with balanced nuclear equations), (2) the mass-energy relationship (use E = mc²), (3) the conditions required for each process, (4) real-world applications. For fission, use U-235 splitting into Ba-141, Kr-92, and neutrons. For fusion, use the deuterium-tritium reaction.",
+      "rubric": {
+        "4": "Complete comparison: (1) Fission: ²³⁵U + ¹n → ¹⁴¹Ba + ⁹²Kr + 3¹n; Fusion: ²H + ³H → ⁴He + ¹n; (2) Mass defect converted to energy via E=mc²; fission ~200 MeV per event, fusion ~17.6 MeV but more per unit mass; (3) Fission needs critical mass, neutron initiation; fusion needs extreme temperature (10⁷ K) to overcome electrostatic repulsion; (4) Fission: nuclear power plants, weapons; Fusion: stars, hydrogen bombs, future clean energy.",
+        "3": "Correct nuclear equations and good comparison. Some details may be missing.",
+        "2": "Basic understanding of both processes but equations may have errors or comparison incomplete.",
+        "1": "Can describe one process but not compare effectively.",
+        "0": "Does not understand nuclear reactions."
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.78,
+      "time_estimate_seconds": 540,
+      "science_practice": "Developing and Using Models",
+      "crosscutting_concept": "Energy and Matter"
+    },
+    {
+      "id": "sci-10-ps1-8-002",
+      "standard_id": "HS-PS1-8",
+      "standard_description": "Develop models to illustrate the changes in the composition of the nucleus of the atom and the energy released during the processes of fission, fusion, and radioactive decay.",
+      "dok_level": 3,
+      "question_type": "data_analysis",
+      "question": "The radioactive isotope Carbon-14 has a half-life of 5,730 years. An archaeological sample originally had 120 billion C-14 atoms.\n\n(a) Write the balanced nuclear equation for C-14 decay (it undergoes beta-minus decay).\n(b) Calculate how many C-14 atoms remain after 17,190 years.\n(c) If a sample now has only 15 billion C-14 atoms, estimate its age.\n(d) Explain why carbon dating is not effective for samples older than about 50,000 years.",
+      "rubric": {
+        "4": "Correct solutions: (a) ¹⁴C → ¹⁴N + ⁰e + antineutrino (or simplified ¹⁴C → ¹⁴N + β⁻); (b) 17,190 years = 3 half-lives; 120 × (1/2)³ = 15 billion atoms; (c) 120 → 60 → 30 → 15, so 3 half-lives = 17,190 years; (d) After ~9 half-lives (51,570 years), less than 0.2% remains, making measurement unreliable and indistinguishable from background.",
+        "3": "Correct nuclear equation and calculations. Explanation of limit may lack detail.",
+        "2": "Understands half-life calculations but nuclear equation may have errors.",
+        "1": "Basic understanding of half-life but significant calculation errors.",
+        "0": "Cannot write nuclear equations or apply half-life concept."
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.72,
+      "time_estimate_seconds": 480,
+      "science_practice": "Using Mathematics and Computational Thinking",
+      "crosscutting_concept": "Stability and Change"
+    },
+    {
+      "id": "sci-10-ps1-8-003",
+      "standard_id": "HS-PS1-8",
+      "standard_description": "Develop models to illustrate the changes in the composition of the nucleus of the atom and the energy released during the processes of fission, fusion, and radioactive decay.",
+      "dok_level": 4,
+      "question_type": "argumentation",
+      "question": "A community is debating whether to approve a new nuclear power plant. Construct a scientific argument addressing the following claims:\n\nClaim 1: 'Nuclear power is too dangerous due to radiation risks.'\nClaim 2: 'Nuclear power is the best solution for climate change.'\nClaim 3: 'Nuclear waste will remain hazardous for thousands of years.'\n\nFor each claim, evaluate the scientific evidence. Consider the physics of nuclear reactions, types of radiation, half-lives of waste products, and comparison to other energy sources. Take a position on whether the plant should be approved, supported by scientific reasoning.",
+      "rubric": {
+        "4": "Evaluates all claims with scientific evidence: Claim 1 - discusses radiation types, shielding, statistical risk comparison to other industries, Chernobyl/Fukushima lessons. Claim 2 - evaluates CO2 emissions (near zero during operation), baseload power capability, energy density, but also uranium mining impacts. Claim 3 - discusses half-lives of various fission products (Cs-137: 30 years; Pu-239: 24,000 years), geological storage. Takes reasoned position with nuanced understanding of trade-offs.",
+        "3": "Good evaluation of claims with evidence. Position taken with reasonable scientific support.",
+        "2": "Addresses claims but evaluation lacks depth or balance.",
+        "1": "Superficial treatment of claims without scientific evidence.",
+        "0": "Does not evaluate claims scientifically."
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 5,
+        "generativity_delta": 6
+      },
+      "difficulty": 0.85,
+      "time_estimate_seconds": 720,
+      "science_practice": "Engaging in Argument from Evidence",
+      "crosscutting_concept": "Stability and Change"
+    }
+  ]
+}

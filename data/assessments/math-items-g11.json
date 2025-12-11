@@ -1,0 +1,426 @@
+{
+  "grade": "11",
+  "course": "Algebra II",
+  "items": [
+    {
+      "id": "math-11-cn-a-1-001",
+      "standard_id": "HSN-CN.A.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Define the imaginary unit i and explain why it was introduced into mathematics. Then simplify √(-48) and express your answer in the form a + bi.",
+      "rubric": {
+        "4": "Defines i as √(-1) so i² = -1; explains it was introduced to solve equations like x² + 1 = 0; simplifies √(-48) = √(-1)·√(48) = i·4√3 = 4√3·i (or 0 + 4√3i)",
+        "3": "Correct definition, explanation, and simplification with minor errors",
+        "2": "Two of three components correct",
+        "1": "One component correct",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-11-cn-a-1-002",
+      "standard_id": "HSN-CN.A.1",
+      "dok_level": 3,
+      "question_type": "multi_part",
+      "question": "Given the complex numbers z₁ = 3 + 4i and z₂ = 2 - i. Part A: Calculate z₁ + z₂. Part B: Calculate z₁ · z₂. Part C: Find the modulus |z₁|. Part D: Explain the geometric meaning of the modulus.",
+      "rubric": {
+        "4": "A: 5 + 3i; B: (3+4i)(2-i) = 6 - 3i + 8i - 4i² = 6 + 5i + 4 = 10 + 5i; C: |z₁| = √(3² + 4²) = √25 = 5; D: modulus is distance from origin to point (3,4) in complex plane",
+        "3": "All parts correct with minor errors",
+        "2": "Three parts correct",
+        "1": "One or two parts correct",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.60,
+      "time_estimate_seconds": 300
+    },
+    {
+      "id": "math-11-cn-a-1-003",
+      "standard_id": "HSN-CN.A.1",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Prove that for any complex number z = a + bi, the product z · z̄ (where z̄ is the conjugate) equals |z|². Then use this to find the multiplicative inverse of 3 - 4i.",
+      "rubric": {
+        "4": "Proves z·z̄ = (a+bi)(a-bi) = a² - (bi)² = a² + b² = |z|²; uses this to find 1/(3-4i) = (3+4i)/((3-4i)(3+4i)) = (3+4i)/25 = 3/25 + (4/25)i",
+        "3": "Complete proof and calculation with minor errors",
+        "2": "Either proof or calculation complete",
+        "1": "Attempts but significant errors in both",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.70,
+      "time_estimate_seconds": 360
+    },
+    {
+      "id": "math-11-cn-c-7-001",
+      "standard_id": "HSN-CN.C.7",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Solve the equation x² + 6x + 13 = 0 using the quadratic formula. Express your solutions in the form a + bi and verify one solution by substitution.",
+      "rubric": {
+        "4": "Using quadratic formula: x = (-6 ± √(36-52))/2 = (-6 ± √(-16))/2 = (-6 ± 4i)/2 = -3 ± 2i; verifies: (-3+2i)² + 6(-3+2i) + 13 = 9 - 12i + 4i² - 18 + 12i + 13 = 9 - 4 - 18 + 13 = 0 ✓",
+        "3": "Correct solutions with verification attempt",
+        "2": "Correct solutions without verification or verification with errors",
+        "1": "Attempts but significant errors",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.60,
+      "time_estimate_seconds": 300
+    },
+    {
+      "id": "math-11-cn-c-7-002",
+      "standard_id": "HSN-CN.C.7",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Explain why complex solutions to polynomial equations with real coefficients always come in conjugate pairs. Then find a quadratic equation with real coefficients that has 2 + 3i as one of its roots.",
+      "rubric": {
+        "4": "Explains: if a + bi is a root of p(x) with real coefficients, then p(a + bi) = 0; conjugating both sides (and using conjugate of sum/product properties) gives p(a - bi) = 0, so conjugate is also a root; constructs (x - (2+3i))(x - (2-3i)) = x² - 4x + 13",
+        "3": "Correct explanation and equation with minor gaps",
+        "2": "Either explanation or equation correct",
+        "1": "Attempts but significant errors in both",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 5,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 420
+    },
+    {
+      "id": "math-11-cn-c-7-003",
+      "standard_id": "HSN-CN.C.7",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Given that 1 - 2i is a root of x³ - 3x² + 7x - 5 = 0, find all three roots. Explain your strategy for finding the remaining roots.",
+      "rubric": {
+        "4": "Since coefficients are real, 1 + 2i is also a root; (x - (1-2i))(x - (1+2i)) = x² - 2x + 5; divides cubic by this to get x - 1; roots are 1 - 2i, 1 + 2i, and 1",
+        "3": "Correct roots with adequate explanation of method",
+        "2": "Finds some roots but strategy unclear or incomplete",
+        "1": "Attempts but significant errors",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.80,
+      "time_estimate_seconds": 480
+    },
+    {
+      "id": "math-11-if-c-7-001",
+      "standard_id": "HSF-IF.C.7",
+      "dok_level": 3,
+      "question_type": "multi_part",
+      "question": "Consider the rational function f(x) = (2x² - 8)/(x² - 4x + 3). Part A: Factor the numerator and denominator. Part B: Find any holes and vertical asymptotes. Part C: Find the horizontal asymptote. Part D: Sketch the graph showing all asymptotes and intercepts.",
+      "rubric": {
+        "4": "A: 2(x+2)(x-2)/((x-1)(x-3)); B: No holes (no common factors), VAs at x=1 and x=3; C: HA at y=2 (same degree, ratio of leading coefficients); D: Accurate sketch with all features labeled",
+        "3": "All parts correct with minor errors",
+        "2": "Three parts substantially correct",
+        "1": "One or two parts correct",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.70,
+      "time_estimate_seconds": 480
+    },
+    {
+      "id": "math-11-if-c-7-002",
+      "standard_id": "HSF-IF.C.7",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Graph f(x) = 2^(x-1) - 4. Identify the parent function, describe all transformations, find the horizontal asymptote, y-intercept, and any x-intercepts.",
+      "rubric": {
+        "4": "Parent: 2^x; Transformations: shift right 1, shift down 4; HA: y = -4; y-intercept: (0, 2^(-1) - 4) = (0, -3.5); x-intercept: solve 2^(x-1) = 4, x-1 = 2, x = 3, so (3, 0); accurate graph",
+        "3": "All features identified with minor errors",
+        "2": "Most features correct but some errors or incomplete",
+        "1": "Some features correct but significant errors",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.60,
+      "time_estimate_seconds": 360
+    },
+    {
+      "id": "math-11-if-c-7-003",
+      "standard_id": "HSF-IF.C.7",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Graph f(x) = log₂(x + 4) - 2 and its inverse function on the same coordinate plane. Describe the relationship between the two graphs and find where they intersect.",
+      "rubric": {
+        "4": "Correctly graphs log function with VA at x=-4, passing through (-3, -2) and (0, 0); finds inverse f⁻¹(x) = 2^(x+2) - 4; notes graphs are reflections over y=x; solves intersection by setting f(x)=x: x = log₂(x+4) - 2 graphically or noting (0, 0) and (4, 4) are on line y=x",
+        "3": "Both graphs correct with adequate description of relationship",
+        "2": "One graph correct or relationship described without intersection",
+        "1": "Attempts but significant errors",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 5,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.80,
+      "time_estimate_seconds": 480
+    },
+    {
+      "id": "math-11-if-c-7-004",
+      "standard_id": "HSF-IF.C.7",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "The polynomial f(x) = x³ - 4x² - 11x + 30 has roots at x = -3, x = 2, and x = 5. Use this information to sketch the graph, showing all intercepts and describing the end behavior.",
+      "rubric": {
+        "4": "Correctly plots x-intercepts at (-3,0), (2,0), (5,0); finds y-intercept (0, 30); describes end behavior: as x→-∞, f(x)→-∞ and as x→∞, f(x)→∞ (positive leading coefficient, odd degree); accurate sketch showing curve passing through intercepts with correct behavior",
+        "3": "All features correct with minor graphing errors",
+        "2": "Most features identified but significant graphing errors",
+        "1": "Some features correct but major conceptual errors",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.60,
+      "time_estimate_seconds": 300
+    },
+    {
+      "id": "math-11-bf-b-3-001",
+      "standard_id": "HSF-BF.B.3",
+      "dok_level": 3,
+      "question_type": "multi_part",
+      "question": "The function f(x) = x² is transformed to create g(x) = -2(x + 3)² + 5. Part A: Identify each transformation in order. Part B: Find the vertex and axis of symmetry of g(x). Part C: Determine the domain and range. Part D: Compare the graphs of f and g.",
+      "rubric": {
+        "4": "A: Shift left 3, vertical stretch by 2, reflect over x-axis, shift up 5; B: Vertex (-3, 5), axis of symmetry x = -3; C: Domain all reals, range (-∞, 5]; D: g is narrower than f, opens down instead of up, moved from (0,0) to (-3,5)",
+        "3": "All parts correct with minor errors",
+        "2": "Three parts substantially correct",
+        "1": "One or two parts correct",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.60,
+      "time_estimate_seconds": 360
+    },
+    {
+      "id": "math-11-bf-b-3-002",
+      "standard_id": "HSF-BF.B.3",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Describe how to transform the graph of f(x) = ln(x) to obtain g(x) = ln(2 - x) + 1. Then determine the domain and range of g and find its x-intercept.",
+      "rubric": {
+        "4": "Transformations: reflect over y-axis to get ln(-x), shift right 2 to get ln(2-x), shift up 1; Domain: x < 2 (need 2-x > 0); Range: all reals; x-intercept: ln(2-x) + 1 = 0, ln(2-x) = -1, 2-x = e⁻¹, x = 2 - 1/e ≈ 1.63",
+        "3": "All components correct with minor errors",
+        "2": "Most transformations correct but domain/intercept errors",
+        "1": "Some correct elements but significant errors",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 420
+    },
+    {
+      "id": "math-11-bf-b-3-003",
+      "standard_id": "HSF-BF.B.3",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "A function f(x) is even if f(-x) = f(x) and odd if f(-x) = -f(x). Determine whether g(x) = x³ - 4x is even, odd, or neither. Then prove that the product of two odd functions is an even function.",
+      "rubric": {
+        "4": "Shows g(-x) = (-x)³ - 4(-x) = -x³ + 4x = -(x³ - 4x) = -g(x), so g is odd; Proves: if f and h are odd, then (fh)(-x) = f(-x)h(-x) = (-f(x))(-h(x)) = f(x)h(x) = (fh)(x), so product is even",
+        "3": "Both parts correct with minor gaps in proof",
+        "2": "Classification correct, proof incomplete or vice versa",
+        "1": "Attempts but significant errors in both",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 5,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 420
+    },
+    {
+      "id": "math-11-tf-a-1-001",
+      "standard_id": "HSF-TF.A.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Convert 5π/4 radians to degrees. Then find the exact values of sin(5π/4), cos(5π/4), and tan(5π/4), using the unit circle. Explain which quadrant the angle is in and why the signs are what they are.",
+      "rubric": {
+        "4": "Converts: (5π/4)(180°/π) = 225°; In Quadrant III (between 180° and 270°); sin(5π/4) = -√2/2, cos(5π/4) = -√2/2, tan(5π/4) = 1; explains both x and y coordinates negative in QIII so sin and cos negative, tan positive",
+        "3": "All values correct with adequate quadrant explanation",
+        "2": "Conversion and values correct but weak explanation",
+        "1": "Some values correct but significant errors",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 240
+    },
+    {
+      "id": "math-11-tf-a-1-002",
+      "standard_id": "HSF-TF.A.1",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Explain why one radian is approximately 57.3°. Then derive a formula for the arc length s of a circle with radius r, where the central angle is θ radians. Use this to find the arc length when r = 10 cm and θ = 2.5 radians.",
+      "rubric": {
+        "4": "Explains: one radian is angle where arc length equals radius; since circumference = 2πr and full circle = 360°, 2π radians = 360°, so 1 radian = 360°/(2π) ≈ 57.3°; derives s = rθ from proportion; calculates s = 10(2.5) = 25 cm",
+        "3": "All components correct with minor gaps",
+        "2": "Two of three components correct",
+        "1": "One component correct",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.70,
+      "time_estimate_seconds": 360
+    },
+    {
+      "id": "math-11-tf-a-1-003",
+      "standard_id": "HSF-TF.A.1",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "A wheel has radius 2 feet and rotates at 150 revolutions per minute. Find the angular velocity in radians per second and the linear velocity of a point on the edge of the wheel in feet per second.",
+      "rubric": {
+        "4": "Angular velocity: 150 rev/min × (2π rad/rev) × (1 min/60 sec) = 5π rad/sec ≈ 15.7 rad/sec; Linear velocity: v = rω = 2 × 5π = 10π ft/sec ≈ 31.4 ft/sec",
+        "3": "Both calculations correct with minor errors",
+        "2": "One calculation correct",
+        "1": "Attempts but significant unit conversion or formula errors",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.70,
+      "time_estimate_seconds": 300
+    },
+    {
+      "id": "math-11-tf-b-5-001",
+      "standard_id": "HSF-TF.B.5",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A Ferris wheel has a radius of 40 feet, with the center 50 feet above the ground, and completes one revolution every 90 seconds. Write a function h(t) that models a rider's height above the ground at time t seconds, assuming the rider starts at the lowest point.",
+      "rubric": {
+        "4": "Correctly models: h(t) = -40cos(2πt/90) + 50 or h(t) = 40sin(2πt/90 - π/2) + 50; explains amplitude 40 (radius), vertical shift 50 (center height), period 90, starts at minimum so cosine with negative coefficient",
+        "3": "Correct function with adequate explanation",
+        "2": "Function has minor errors or explanation incomplete",
+        "1": "Attempts but significant errors in modeling",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.70,
+      "time_estimate_seconds": 360
+    },
+    {
+      "id": "math-11-tf-b-5-002",
+      "standard_id": "HSF-TF.B.5",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "The average temperature in a city follows a sinusoidal pattern. The high of 85°F occurs on July 15 (day 196), and the low of 35°F occurs on January 15 (day 15). Part A: Find the amplitude, midline, and period. Part B: Write a function T(d) for temperature on day d. Part C: What is the predicted temperature on October 1 (day 274)?",
+      "rubric": {
+        "4": "A: Amplitude = (85-35)/2 = 25°F, midline = (85+35)/2 = 60°F, period = 365 days; B: T(d) = 25cos(2π(d-196)/365) + 60 or equivalent; C: T(274) = 25cos(2π(78)/365) + 60 ≈ 25(-0.24) + 60 ≈ 54°F",
+        "3": "All parts correct with minor calculation errors",
+        "2": "Two parts substantially correct",
+        "1": "One part correct",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 5,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.80,
+      "time_estimate_seconds": 480
+    },
+    {
+      "id": "math-11-tf-b-5-003",
+      "standard_id": "HSF-TF.B.5",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "A sound wave is modeled by y = 3sin(440πt), where y is air pressure change and t is time in seconds. Find the frequency (cycles per second) and period. If another sound is modeled by y = 2sin(880πt), describe how these two sounds relate musically.",
+      "rubric": {
+        "4": "First wave: B = 440π, so ω = 440π, frequency = ω/(2π) = 220 Hz, period = 1/220 sec; Second wave: frequency = 440 Hz; explains second is exactly double frequency (one octave higher), with smaller amplitude (softer)",
+        "3": "Calculations correct with adequate musical description",
+        "2": "Calculations correct but weak musical connection",
+        "1": "Some calculations correct but significant errors",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 360
+    },
+    {
+      "id": "math-11-tf-b-5-004",
+      "standard_id": "HSF-TF.B.5",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "The depth of water in a harbor, in feet, is modeled by d(t) = 8sin(π/6 · t) + 12, where t is hours after midnight. Find the maximum and minimum depths, the times of high and low tide, and the period of the tidal cycle.",
+      "rubric": {
+        "4": "Max depth = 12 + 8 = 20 ft; Min depth = 12 - 8 = 4 ft; Period = 2π/(π/6) = 12 hours; High tide when sin = 1: t = 3, 15 (3am, 3pm); Low tide when sin = -1: t = 9, 21 (9am, 9pm)",
+        "3": "All correct with minor errors",
+        "2": "Most features correct but timing errors",
+        "1": "Some correct but significant misunderstanding of sinusoidal model",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 300
+    }
+  ]
+}

@@ -1,0 +1,1474 @@
+{
+  "grade": "3",
+  "subject": "Mathematics",
+  "version": "1.0.0",
+  "created_at": "2025-01-08",
+  "items": [
+    {
+      "id": "math-3-oa-a-1-001",
+      "standard_id": "3.OA.A.1",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Which expression shows 4 groups of 3?",
+      "options": ["4 + 3", "4 × 3", "4 - 3", "4 ÷ 3"],
+      "correct_answer": "4 × 3",
+      "explanation": "4 groups of 3 means 4 × 3 = 12. Multiplication represents equal groups.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 30
+    },
+    {
+      "id": "math-3-oa-a-1-002",
+      "standard_id": "3.OA.A.1",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Maria has 5 bags with 6 apples in each bag. Write a multiplication equation and find the total number of apples.",
+      "correct_answer": "5 × 6 = 30",
+      "rubric": {
+        "full_credit": "Correct equation AND correct answer (30 apples)",
+        "partial_credit": "Correct equation OR correct answer",
+        "no_credit": "Neither correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 60
+    },
+    {
+      "id": "math-3-oa-a-1-003",
+      "standard_id": "3.OA.A.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Draw an array to show 3 × 4. Explain how your array shows the meaning of multiplication.",
+      "correct_answer": "Array showing 3 rows of 4 (or 4 rows of 3) with explanation connecting rows/columns to groups",
+      "rubric": {
+        "full_credit": "Correct array AND clear explanation connecting array structure to multiplication concept",
+        "partial_credit": "Correct array with incomplete explanation OR incorrect array with good explanation",
+        "no_credit": "Incorrect array and no meaningful explanation"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 120
+    },
+    {
+      "id": "math-3-oa-a-2-001",
+      "standard_id": "3.OA.A.2",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "What does 24 ÷ 6 mean?",
+      "options": [
+        "24 groups of 6",
+        "6 groups of 24",
+        "24 objects split into 6 equal groups",
+        "Adding 24 and 6"
+      ],
+      "correct_answer": "24 objects split into 6 equal groups",
+      "explanation": "Division means splitting a total into equal groups or finding how many are in each group.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 30
+    },
+    {
+      "id": "math-3-oa-a-2-002",
+      "standard_id": "3.OA.A.2",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "There are 32 students in the class. They need to split into 4 equal teams for a game. How many students will be on each team? Write the division equation.",
+      "correct_answer": "32 ÷ 4 = 8; 8 students per team",
+      "rubric": {
+        "full_credit": "Correct equation AND correct answer",
+        "partial_credit": "Correct equation OR correct answer",
+        "no_credit": "Neither correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 60
+    },
+    {
+      "id": "math-3-oa-a-2-003",
+      "standard_id": "3.OA.A.2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Write two different word problems that can be solved using 18 ÷ 3 = 6. One should be about sharing equally, and one should be about making equal groups.",
+      "correct_answer": "Two valid word problems representing different division contexts",
+      "rubric": {
+        "full_credit": "Two correct and distinct word problems representing both division meanings",
+        "partial_credit": "One correct word problem OR two similar problems",
+        "no_credit": "No valid word problems"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-3-oa-a-3-001",
+      "standard_id": "3.OA.A.3",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "A farmer has 7 rows of corn plants with 8 plants in each row. Which equation shows how to find the total number of plants?",
+      "options": ["7 + 8 = 15", "7 × 8 = 56", "8 - 7 = 1", "56 ÷ 7 = 8"],
+      "correct_answer": "7 × 8 = 56",
+      "explanation": "Equal rows of plants is an array situation, solved with multiplication.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 45
+    },
+    {
+      "id": "math-3-oa-a-3-002",
+      "standard_id": "3.OA.A.3",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Mrs. Chen bought 6 packs of juice boxes. Each pack has 4 juice boxes. She gave 8 juice boxes to her neighbors. How many juice boxes does she have left?",
+      "correct_answer": "16 juice boxes (6 × 4 = 24, 24 - 8 = 16)",
+      "rubric": {
+        "full_credit": "Correct answer with evidence of correct operations",
+        "partial_credit": "Correct first step (24) but incorrect final answer",
+        "no_credit": "Incorrect approach"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-3-oa-a-3-003",
+      "standard_id": "3.OA.A.3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "The school cafeteria has 48 apples to share equally among 6 tables. After the apples are divided, 2 students at each table don't want apples and give theirs back. How many apples are given back in total? Show your work and explain your thinking.",
+      "correct_answer": "12 apples given back. 48 ÷ 6 = 8 apples per table, 2 × 6 = 12 apples returned",
+      "rubric": {
+        "full_credit": "Correct answer with clear work showing both division and multiplication steps",
+        "partial_credit": "Correct division step but error in multiplication OR correct thinking with calculation error",
+        "no_credit": "Incorrect approach or no work shown"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 150
+    },
+    {
+      "id": "math-3-oa-a-4-001",
+      "standard_id": "3.OA.A.4",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "What number makes this equation true? 6 × ? = 42",
+      "options": ["6", "7", "8", "9"],
+      "correct_answer": "7",
+      "explanation": "6 × 7 = 42, so the unknown factor is 7.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 30
+    },
+    {
+      "id": "math-3-oa-a-4-002",
+      "standard_id": "3.OA.A.4",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Find the unknown number: ? ÷ 9 = 5. Explain how you found your answer.",
+      "correct_answer": "45. Explanation: 5 × 9 = 45 or similar reasoning",
+      "rubric": {
+        "full_credit": "Correct answer (45) with valid explanation using inverse operation",
+        "partial_credit": "Correct answer without explanation OR incorrect answer with correct method",
+        "no_credit": "Incorrect answer and no valid reasoning"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 60
+    },
+    {
+      "id": "math-3-oa-a-4-003",
+      "standard_id": "3.OA.A.4",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Marcus says that to solve 56 ÷ ? = 8, you can use the multiplication fact 8 × 7 = 56. Is Marcus correct? Explain why or why not, and describe how multiplication and division are related.",
+      "correct_answer": "Yes, Marcus is correct. The unknown is 7 because division and multiplication are inverse operations.",
+      "rubric": {
+        "full_credit": "Correct answer with clear explanation of inverse relationship between operations",
+        "partial_credit": "Correct answer with incomplete explanation",
+        "no_credit": "Incorrect answer or no understanding of relationship"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 120
+    },
+    {
+      "id": "math-3-oa-b-5-001",
+      "standard_id": "3.OA.B.5",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Which property of multiplication is shown? 4 × 7 = 7 × 4",
+      "options": [
+        "Associative property",
+        "Commutative property",
+        "Distributive property",
+        "Identity property"
+      ],
+      "correct_answer": "Commutative property",
+      "explanation": "The commutative property states that the order of factors does not change the product.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 30
+    },
+    {
+      "id": "math-3-oa-b-5-002",
+      "standard_id": "3.OA.B.5",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Use the distributive property to find 7 × 6 by breaking apart 6 into 5 + 1. Show your work.",
+      "correct_answer": "7 × 6 = 7 × (5 + 1) = (7 × 5) + (7 × 1) = 35 + 7 = 42",
+      "rubric": {
+        "full_credit": "Correct breakdown and correct answer with work shown",
+        "partial_credit": "Correct idea but computational error",
+        "no_credit": "Does not demonstrate distributive property"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-3-oa-b-5-003",
+      "standard_id": "3.OA.B.5",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Emma doesn't know 8 × 7 but she knows 8 × 5 = 40 and 8 × 2 = 16. Explain how Emma can use what she knows to find 8 × 7. What property of multiplication is she using?",
+      "correct_answer": "8 × 7 = 8 × (5 + 2) = 40 + 16 = 56. She is using the distributive property.",
+      "rubric": {
+        "full_credit": "Correct method, correct answer, and correct property named",
+        "partial_credit": "Two of three elements correct",
+        "no_credit": "One or none correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 120
+    },
+    {
+      "id": "math-3-oa-b-6-001",
+      "standard_id": "3.OA.B.6",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Which multiplication fact helps you solve 35 ÷ 5 = ?",
+      "options": ["5 × 5 = 25", "5 × 6 = 30", "5 × 7 = 35", "5 × 8 = 40"],
+      "correct_answer": "5 × 7 = 35",
+      "explanation": "Division can be thought of as finding an unknown factor. 5 × ? = 35, so ? = 7.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 30
+    },
+    {
+      "id": "math-3-oa-b-6-002",
+      "standard_id": "3.OA.B.6",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Rewrite 72 ÷ 8 = ? as a multiplication problem with an unknown. Then solve.",
+      "correct_answer": "8 × ? = 72 or ? × 8 = 72; answer is 9",
+      "rubric": {
+        "full_credit": "Correct multiplication equation AND correct answer",
+        "partial_credit": "Correct multiplication equation OR correct answer",
+        "no_credit": "Neither correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 60
+    },
+    {
+      "id": "math-3-oa-b-6-003",
+      "standard_id": "3.OA.B.6",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Explain why knowing your multiplication facts helps you divide. Use 48 ÷ 6 as an example in your explanation.",
+      "correct_answer": "Explanation showing that 48 ÷ 6 = ? is the same as asking 6 × ? = 48, so knowing 6 × 8 = 48 means the answer is 8.",
+      "rubric": {
+        "full_credit": "Clear explanation connecting multiplication and division with correct example",
+        "partial_credit": "Partial explanation or correct answer without clear connection",
+        "no_credit": "No understanding of relationship"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 120
+    },
+    {
+      "id": "math-3-oa-c-7-001",
+      "standard_id": "3.OA.C.7",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "What is 9 × 8?",
+      "options": ["64", "72", "81", "63"],
+      "correct_answer": "72",
+      "explanation": "9 × 8 = 72 is a basic multiplication fact that should be memorized.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 15
+    },
+    {
+      "id": "math-3-oa-c-7-002",
+      "standard_id": "3.OA.C.7",
+      "dok_level": 1,
+      "question_type": "matching",
+      "question": "Match each multiplication problem to its product.",
+      "options": {
+        "problems": ["6 × 7", "8 × 4", "9 × 5", "7 × 7"],
+        "answers": ["42", "32", "45", "49"]
+      },
+      "correct_answer": {"6 × 7": "42", "8 × 4": "32", "9 × 5": "45", "7 × 7": "49"},
+      "explanation": "These are basic multiplication facts within 100.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 45
+    },
+    {
+      "id": "math-3-oa-c-7-003",
+      "standard_id": "3.OA.C.7",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Complete: 56 ÷ 8 = ___ and 63 ÷ 7 = ___. What do you notice about these answers? Explain a strategy you can use.",
+      "correct_answer": "56 ÷ 8 = 7 and 63 ÷ 7 = 9. Student may notice both involve 7 and 8/9, and explain using related multiplication facts.",
+      "rubric": {
+        "full_credit": "Both answers correct with a valid strategy explanation",
+        "partial_credit": "Both answers correct OR one answer with good strategy",
+        "no_credit": "Incorrect answers without strategy"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 60
+    },
+    {
+      "id": "math-3-oa-d-8-001",
+      "standard_id": "3.OA.D.8",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Anna has 24 stickers. She gives 6 to her brother and then divides the rest equally among 3 friends. Which equation shows how many stickers each friend gets?",
+      "options": [
+        "24 - 6 = n",
+        "(24 - 6) ÷ 3 = n",
+        "24 ÷ 3 - 6 = n",
+        "24 + 6 ÷ 3 = n"
+      ],
+      "correct_answer": "(24 - 6) ÷ 3 = n",
+      "explanation": "First subtract the 6 given away, then divide the remaining 18 by 3. Each friend gets 6.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 60
+    },
+    {
+      "id": "math-3-oa-d-8-002",
+      "standard_id": "3.OA.D.8",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Carlos has 5 boxes of crayons with 8 crayons in each box. He gives 12 crayons to his sister. How many crayons does Carlos have left? Write an equation using a letter for the unknown.",
+      "correct_answer": "5 × 8 - 12 = n; n = 28 crayons",
+      "rubric": {
+        "full_credit": "Correct equation with letter AND correct answer",
+        "partial_credit": "Correct answer without equation OR correct equation with wrong answer",
+        "no_credit": "Neither correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-3-oa-d-8-003",
+      "standard_id": "3.OA.D.8",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A bakery makes 36 muffins. They pack 4 muffins in each small box. After filling the small boxes, they have some muffins left over, which they put in a display case. If there are 8 muffins in the display case, how many small boxes did they fill? Write an equation and explain your reasoning.",
+      "correct_answer": "They filled 7 boxes. Equation: 4 × n + 8 = 36 or (36 - 8) ÷ 4 = n",
+      "rubric": {
+        "full_credit": "Correct answer (7 boxes), valid equation, and clear explanation",
+        "partial_credit": "Two of three elements correct",
+        "no_credit": "One or none correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 150
+    },
+    {
+      "id": "math-3-oa-d-9-001",
+      "standard_id": "3.OA.D.9",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Look at this pattern: 5, 10, 15, 20, 25... What is the rule?",
+      "options": [
+        "Add 4",
+        "Add 5",
+        "Multiply by 2",
+        "Add 10"
+      ],
+      "correct_answer": "Add 5",
+      "explanation": "Each number is 5 more than the previous number. This is the 5s multiplication pattern.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 30
+    },
+    {
+      "id": "math-3-oa-d-9-002",
+      "standard_id": "3.OA.D.9",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "In the multiplication table, the products of 4 are: 4, 8, 12, 16, 20, 24... What pattern do you notice about whether these numbers are odd or even? Explain why.",
+      "correct_answer": "All products are even because 4 is even, and an even number times any whole number is always even.",
+      "rubric": {
+        "full_credit": "Identifies pattern as all even AND gives valid explanation",
+        "partial_credit": "Identifies pattern without explanation OR explanation without pattern",
+        "no_credit": "No pattern identified"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-3-oa-d-9-003",
+      "standard_id": "3.OA.D.9",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Look at the 9s row in the multiplication table: 9, 18, 27, 36, 45, 54, 63, 72, 81. Describe at least two patterns you notice. Use properties of operations to explain why one of the patterns works.",
+      "correct_answer": "Patterns may include: tens digit increases by 1, ones digit decreases by 1, digits sum to 9. Explanation might use that 9 = 10 - 1, so 9 × n = 10n - n.",
+      "rubric": {
+        "full_credit": "Two valid patterns identified AND mathematical explanation using properties",
+        "partial_credit": "Two patterns without explanation OR one pattern with explanation",
+        "no_credit": "One pattern or less without explanation"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-3-nbt-a-1-001",
+      "standard_id": "3.NBT.A.1",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "What is 47 rounded to the nearest ten?",
+      "options": ["40", "45", "50", "47"],
+      "correct_answer": "50",
+      "explanation": "47 is between 40 and 50. Since 7 ≥ 5, we round up to 50.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 20
+    },
+    {
+      "id": "math-3-nbt-a-1-002",
+      "standard_id": "3.NBT.A.1",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Round 382 to the nearest ten and to the nearest hundred. Explain your reasoning for each.",
+      "correct_answer": "Nearest ten: 380 (because 2 < 5). Nearest hundred: 400 (because 8 ≥ 5).",
+      "rubric": {
+        "full_credit": "Both answers correct with valid explanations",
+        "partial_credit": "Both answers correct without explanation OR one correct with explanation",
+        "no_credit": "Neither correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 60
+    },
+    {
+      "id": "math-3-nbt-a-1-003",
+      "standard_id": "3.NBT.A.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Maria says that when you round 350 to the nearest hundred, the answer could be 300 or 400. Is she correct? Explain your thinking and describe the rule for rounding when you are exactly in the middle.",
+      "correct_answer": "Using standard rules, 350 rounds to 400 (round up when exactly at 5). However, student should acknowledge the 'halfway' situation and explain the convention.",
+      "rubric": {
+        "full_credit": "Addresses the halfway case, states the convention clearly, and explains reasoning",
+        "partial_credit": "Correct answer with partial explanation",
+        "no_credit": "Incorrect understanding of rounding"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 120
+    },
+    {
+      "id": "math-3-nbt-a-2-001",
+      "standard_id": "3.NBT.A.2",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "What is 456 + 327?",
+      "options": ["773", "783", "793", "683"],
+      "correct_answer": "783",
+      "explanation": "Adding: 6+7=13, write 3 carry 1. 5+2+1=8. 4+3=7. Answer: 783",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 45
+    },
+    {
+      "id": "math-3-nbt-a-2-002",
+      "standard_id": "3.NBT.A.2",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Calculate 705 - 368. Show your work and explain one strategy you used.",
+      "correct_answer": "337. Student should show regrouping or another valid strategy.",
+      "rubric": {
+        "full_credit": "Correct answer with work shown and strategy explanation",
+        "partial_credit": "Correct answer without full explanation OR work shown with minor error",
+        "no_credit": "Incorrect answer without valid work"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-3-nbt-a-2-003",
+      "standard_id": "3.NBT.A.2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Jamal solved 523 - 185 by first adding 15 to both numbers: 538 - 200 = 338. Does his strategy work? Explain why or why not, and show another way to solve the same problem.",
+      "correct_answer": "Yes, it works because adding the same amount to both numbers keeps the difference the same. Show standard algorithm or other valid method getting 338.",
+      "rubric": {
+        "full_credit": "Correct verification, valid explanation, and correct alternative method",
+        "partial_credit": "Two of three elements correct",
+        "no_credit": "One or none correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 150
+    },
+    {
+      "id": "math-3-nbt-a-3-001",
+      "standard_id": "3.NBT.A.3",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "What is 6 × 40?",
+      "options": ["24", "46", "240", "2400"],
+      "correct_answer": "240",
+      "explanation": "6 × 4 = 24, then add the zero from 40 to get 240.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 20
+    },
+    {
+      "id": "math-3-nbt-a-3-002",
+      "standard_id": "3.NBT.A.3",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Calculate 8 × 70. Explain how knowing 8 × 7 helps you find the answer.",
+      "correct_answer": "560. Explanation: 8 × 7 = 56, and 70 is 7 tens, so the answer is 56 tens = 560.",
+      "rubric": {
+        "full_credit": "Correct answer with clear connection to basic fact",
+        "partial_credit": "Correct answer without explanation OR good explanation with minor error",
+        "no_credit": "Incorrect answer without valid reasoning"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 60
+    },
+    {
+      "id": "math-3-nbt-a-3-003",
+      "standard_id": "3.NBT.A.3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Sarah notices that 5 × 60 = 300 and 6 × 50 = 300. Why do these give the same answer? Use the commutative and associative properties to explain.",
+      "correct_answer": "Both equal 5 × 6 × 10 = 300. 5 × 60 = 5 × (6 × 10) = (5 × 6) × 10. 6 × 50 = 6 × (5 × 10) = (6 × 5) × 10. By commutative property 5 × 6 = 6 × 5.",
+      "rubric": {
+        "full_credit": "Shows both are equivalent using properties correctly named",
+        "partial_credit": "Shows equivalence but incomplete property explanation",
+        "no_credit": "Does not demonstrate understanding"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 150
+    },
+    {
+      "id": "math-3-nf-a-1-001",
+      "standard_id": "3.NF.A.1",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "What fraction of the rectangle is shaded? [Rectangle divided into 4 equal parts with 3 shaded]",
+      "options": ["1/4", "3/4", "1/3", "4/3"],
+      "correct_answer": "3/4",
+      "explanation": "The rectangle is divided into 4 equal parts and 3 are shaded, so 3/4 is shaded.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 30
+    },
+    {
+      "id": "math-3-nf-a-1-002",
+      "standard_id": "3.NF.A.1",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Draw a rectangle and shade 5/8 of it. Explain what the numerator and denominator represent.",
+      "correct_answer": "Rectangle divided into 8 equal parts with 5 shaded. Denominator (8) = total parts; Numerator (5) = shaded parts.",
+      "rubric": {
+        "full_credit": "Correct drawing AND correct explanation of both parts",
+        "partial_credit": "Correct drawing OR correct explanation (not both)",
+        "no_credit": "Neither correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-3-nf-a-1-003",
+      "standard_id": "3.NF.A.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Marcus ate 2/6 of a pizza and Sofia ate 3/6 of the same pizza. Who ate more? How much of the pizza was eaten altogether? Use pictures and words to explain your thinking.",
+      "correct_answer": "Sofia ate more (3/6 > 2/6). Together they ate 5/6. Drawing should show pizza divided into 6 parts with 5 marked as eaten.",
+      "rubric": {
+        "full_credit": "Correct comparison, correct sum, and clear visual and verbal explanation",
+        "partial_credit": "Two of three elements correct",
+        "no_credit": "One or none correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 150
+    },
+    {
+      "id": "math-3-nf-a-2-001",
+      "standard_id": "3.NF.A.2",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Which point on the number line shows 1/4? [Number line from 0 to 1 with four points marked A, B, C, D at 1/4, 1/2, 3/4, and 1]",
+      "options": ["Point A", "Point B", "Point C", "Point D"],
+      "correct_answer": "Point A",
+      "explanation": "1/4 is one-fourth of the way from 0 to 1.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 30
+    },
+    {
+      "id": "math-3-nf-a-2-002",
+      "standard_id": "3.NF.A.2",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "On a number line from 0 to 1, mark and label 2/6 and 4/6. Explain how you knew where to place them.",
+      "correct_answer": "Number line divided into 6 equal parts. 2/6 at second mark, 4/6 at fourth mark. Explanation involves dividing into 6 equal parts.",
+      "rubric": {
+        "full_credit": "Correct placement of both fractions with clear explanation",
+        "partial_credit": "Correct placement without explanation OR one correct with explanation",
+        "no_credit": "Neither correctly placed"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-3-nf-a-2-003",
+      "standard_id": "3.NF.A.2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Draw a number line from 0 to 2. Mark and label 3/4, 1, 5/4, and 7/4. Explain how fractions greater than 1 are shown on the number line.",
+      "correct_answer": "Number line with 1 at midpoint. 3/4 before 1, 5/4 and 7/4 after 1. Explanation that fractions > 1 are past the 1 mark.",
+      "rubric": {
+        "full_credit": "All fractions correctly placed with clear explanation of fractions > 1",
+        "partial_credit": "Most fractions correct OR correct placement without explanation",
+        "no_credit": "Major errors in placement or understanding"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 150
+    },
+    {
+      "id": "math-3-nf-a-3-001",
+      "standard_id": "3.NF.A.3",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Which fraction is equivalent to 2/4?",
+      "options": ["1/4", "1/2", "3/4", "2/2"],
+      "correct_answer": "1/2",
+      "explanation": "2/4 and 1/2 represent the same amount. 2 is half of 4, just as 1 is half of 2.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 30
+    },
+    {
+      "id": "math-3-nf-a-3-002",
+      "standard_id": "3.NF.A.3",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Compare 3/8 and 3/4 using <, >, or =. Draw a picture to explain your reasoning.",
+      "correct_answer": "3/8 < 3/4. Picture should show same-sized wholes divided into 8 and 4 parts respectively.",
+      "rubric": {
+        "full_credit": "Correct comparison with clear visual explanation",
+        "partial_credit": "Correct comparison without picture OR picture with minor errors",
+        "no_credit": "Incorrect comparison"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-3-nf-a-3-003",
+      "standard_id": "3.NF.A.3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Without drawing pictures, explain how you can tell which is greater: 5/6 or 5/8. Then explain how you would compare 3/4 and 5/6.",
+      "correct_answer": "5/6 > 5/8 because with same numerator, larger denominator means smaller parts. For 3/4 vs 5/6, could find common denominator or compare to 1 (3/4 = 3 parts from 4, missing 1/4; 5/6 = 5 parts from 6, missing 1/6).",
+      "rubric": {
+        "full_credit": "Both comparisons correct with valid reasoning strategies",
+        "partial_credit": "One comparison correct with reasoning OR both correct without reasoning",
+        "no_credit": "Neither correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 150
+    },
+    {
+      "id": "math-3-md-a-1-001",
+      "standard_id": "3.MD.A.1",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "What time is shown on the clock? [Clock showing 3:47]",
+      "options": ["3:47", "3:45", "9:15", "3:49"],
+      "correct_answer": "3:47",
+      "explanation": "The hour hand is between 3 and 4, and the minute hand points to 47 minutes.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 30
+    },
+    {
+      "id": "math-3-md-a-1-002",
+      "standard_id": "3.MD.A.1",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "The movie starts at 2:15 PM and ends at 4:00 PM. How long is the movie?",
+      "correct_answer": "1 hour and 45 minutes",
+      "rubric": {
+        "full_credit": "Correct answer in hours and minutes",
+        "partial_credit": "Answer in only minutes (105) OR minor calculation error",
+        "no_credit": "Incorrect answer"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 60
+    },
+    {
+      "id": "math-3-md-a-1-003",
+      "standard_id": "3.MD.A.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "School starts at 8:30 AM. Recess is 4 hours and 15 minutes later. Lunch is 45 minutes after recess starts. What time does lunch start? Show how you solved this problem.",
+      "correct_answer": "Lunch starts at 1:30 PM. Recess: 8:30 + 4:15 = 12:45 PM. Lunch: 12:45 + 0:45 = 1:30 PM.",
+      "rubric": {
+        "full_credit": "Correct answer with clear steps shown for both calculations",
+        "partial_credit": "Correct recess time but error in second calculation OR correct method with minor error",
+        "no_credit": "Incorrect approach"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 150
+    },
+    {
+      "id": "math-3-md-a-2-001",
+      "standard_id": "3.MD.A.2",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "About how many liters of water does a bathtub hold?",
+      "options": ["2 liters", "20 liters", "200 liters", "2000 liters"],
+      "correct_answer": "200 liters",
+      "explanation": "A typical bathtub holds about 150-250 liters of water.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 30
+    },
+    {
+      "id": "math-3-md-a-2-002",
+      "standard_id": "3.MD.A.2",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "A bag of apples has a mass of 2 kilograms. How many grams is that? Explain your reasoning.",
+      "correct_answer": "2000 grams. 1 kilogram = 1000 grams, so 2 kg = 2 × 1000 = 2000 g.",
+      "rubric": {
+        "full_credit": "Correct answer with explanation of conversion",
+        "partial_credit": "Correct answer without explanation OR correct reasoning with calculation error",
+        "no_credit": "Incorrect answer without valid reasoning"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 60
+    },
+    {
+      "id": "math-3-md-a-2-003",
+      "standard_id": "3.MD.A.2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A recipe needs 750 milliliters of milk. You have a 1-liter container that is half full. Do you have enough milk? How much more or less than 750 mL do you have? Explain your thinking.",
+      "correct_answer": "Half of 1 L = 500 mL. 500 mL < 750 mL, so not enough. Need 250 mL more (750 - 500 = 250).",
+      "rubric": {
+        "full_credit": "Correct answer with all calculations and clear reasoning",
+        "partial_credit": "Correct conclusion but incomplete work OR all work correct with minor error",
+        "no_credit": "Incorrect conclusion or major calculation errors"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 120
+    },
+    {
+      "id": "math-3-md-b-3-001",
+      "standard_id": "3.MD.B.3",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "According to the bar graph, how many students chose pizza as their favorite lunch? [Bar graph showing Pizza: 8, Sandwich: 5, Salad: 3, Soup: 4]",
+      "options": ["3", "4", "5", "8"],
+      "correct_answer": "8",
+      "explanation": "The bar for pizza reaches up to 8 on the scale.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 30
+    },
+    {
+      "id": "math-3-md-b-3-002",
+      "standard_id": "3.MD.B.3",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Using the bar graph, how many more students chose pizza than salad? [Same graph as above]",
+      "correct_answer": "5 more students (8 - 3 = 5)",
+      "rubric": {
+        "full_credit": "Correct answer with calculation",
+        "partial_credit": "Correct setup with calculation error",
+        "no_credit": "Incorrect approach"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 45
+    },
+    {
+      "id": "math-3-md-b-3-003",
+      "standard_id": "3.MD.B.3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Create a scaled bar graph using this data: Red - 15 votes, Blue - 10 votes, Green - 20 votes, Yellow - 5 votes. Explain why you chose your scale and write two questions that could be answered using your graph.",
+      "correct_answer": "Bar graph with scale of 5 (or 2). Questions should be answerable from graph (comparisons, totals, etc.).",
+      "rubric": {
+        "full_credit": "Accurate scaled bar graph, justified scale choice, and two good questions",
+        "partial_credit": "Correct graph with missing elements OR incomplete questions",
+        "no_credit": "Inaccurate graph or inappropriate scale"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-3-md-b-4-001",
+      "standard_id": "3.MD.B.4",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "How many objects measured 2 and 1/2 inches according to this line plot? [Line plot with X marks at various fractional inches]",
+      "options": ["2", "3", "4", "5"],
+      "correct_answer": "3",
+      "explanation": "Count the X marks above 2 and 1/2 on the line plot.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 30
+    },
+    {
+      "id": "math-3-md-b-4-002",
+      "standard_id": "3.MD.B.4",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Measure 5 pencils to the nearest 1/4 inch and create a line plot showing your data. What is the most common length?",
+      "correct_answer": "Student creates line plot with X marks at quarter-inch intervals and identifies mode.",
+      "rubric": {
+        "full_credit": "Correct line plot with fractional intervals and mode identified",
+        "partial_credit": "Correct line plot OR correct mode with formatting issues",
+        "no_credit": "Incorrect line plot structure"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-3-md-b-4-003",
+      "standard_id": "3.MD.B.4",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A line plot shows leaf lengths: 2 leaves at 1 inch, 3 leaves at 1 1/4 inches, 4 leaves at 1 1/2 inches, and 1 leaf at 1 3/4 inches. If you lined up all the leaves end to end, what would be the total length? Show your work.",
+      "correct_answer": "Total: (2×1) + (3×1.25) + (4×1.5) + (1×1.75) = 2 + 3.75 + 6 + 1.75 = 13.5 inches or 13 1/2 inches",
+      "rubric": {
+        "full_credit": "Correct answer with clear work showing multiplication and addition of fractions",
+        "partial_credit": "Correct approach with calculation error",
+        "no_credit": "Incorrect approach"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-3-md-c-5-001",
+      "standard_id": "3.MD.C.5",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "What is area?",
+      "options": [
+        "The distance around a shape",
+        "The amount of space inside a shape",
+        "The length of one side",
+        "The number of corners"
+      ],
+      "correct_answer": "The amount of space inside a shape",
+      "explanation": "Area measures the space covered by a two-dimensional figure.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 20
+    },
+    {
+      "id": "math-3-md-c-5-002",
+      "standard_id": "3.MD.C.5",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "A square tile is 1 inch on each side. How many of these tiles would you need to cover a rectangle that is 3 inches by 4 inches? Draw a picture to support your answer.",
+      "correct_answer": "12 tiles. Drawing shows 3×4 grid of unit squares.",
+      "rubric": {
+        "full_credit": "Correct answer with supporting picture",
+        "partial_credit": "Correct answer OR correct picture (not both)",
+        "no_credit": "Neither correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-3-md-c-5-003",
+      "standard_id": "3.MD.C.5",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Emma says that a square with sides of 2 inches has an area of 4 inches, but her teacher says the area is 4 square inches. What is the difference? Why is it important to use the correct unit?",
+      "correct_answer": "Inches measure length (one-dimensional); square inches measure area (two-dimensional). Using correct units tells what type of measurement.",
+      "rubric": {
+        "full_credit": "Clear distinction between linear and square units with explanation of importance",
+        "partial_credit": "Partial understanding shown",
+        "no_credit": "No understanding of unit distinction"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 120
+    },
+    {
+      "id": "math-3-md-c-6-001",
+      "standard_id": "3.MD.C.6",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "What is the area of this shape? [Grid showing L-shape made of 7 unit squares]",
+      "options": ["5 square units", "6 square units", "7 square units", "8 square units"],
+      "correct_answer": "7 square units",
+      "explanation": "Count the unit squares: there are 7 square units in the L-shape.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 30
+    },
+    {
+      "id": "math-3-md-c-6-002",
+      "standard_id": "3.MD.C.6",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Draw two different shapes that each have an area of 8 square units on grid paper.",
+      "correct_answer": "Two distinct shapes, each covering exactly 8 unit squares.",
+      "rubric": {
+        "full_credit": "Two different shapes, each with exactly 8 square units",
+        "partial_credit": "One correct shape OR two shapes with minor counting error",
+        "no_credit": "Neither shape has 8 square units"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-3-md-c-6-003",
+      "standard_id": "3.MD.C.6",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "On a grid, draw a rectangle and an L-shaped figure that have the same area. Explain how you made sure both shapes have equal areas.",
+      "correct_answer": "Both shapes with equal area (counting verifies). Explanation describes counting unit squares for each.",
+      "rubric": {
+        "full_credit": "Both shapes with equal areas and clear explanation of verification method",
+        "partial_credit": "Equal areas with incomplete explanation OR unequal areas with good explanation",
+        "no_credit": "Unequal areas without understanding"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 150
+    },
+    {
+      "id": "math-3-md-c-7-001",
+      "standard_id": "3.MD.C.7",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "What is the area of a rectangle with length 5 units and width 3 units?",
+      "options": ["8 square units", "15 square units", "16 square units", "30 square units"],
+      "correct_answer": "15 square units",
+      "explanation": "Area of rectangle = length × width = 5 × 3 = 15 square units.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 30
+    },
+    {
+      "id": "math-3-md-c-7-002",
+      "standard_id": "3.MD.C.7",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "A rectangle is 6 cm long and 4 cm wide. What is its area? Explain how area relates to multiplication.",
+      "correct_answer": "24 square cm. Area = rows × columns, which is the same as multiplication.",
+      "rubric": {
+        "full_credit": "Correct area with explanation connecting to multiplication/arrays",
+        "partial_credit": "Correct area without explanation OR good explanation with calculation error",
+        "no_credit": "Incorrect answer without understanding"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 60
+    },
+    {
+      "id": "math-3-md-c-7-003",
+      "standard_id": "3.MD.C.7",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A rectangle has an area of 24 square inches. What are all the possible whole number dimensions (length and width)? How does this connect to factors of 24?",
+      "correct_answer": "1×24, 2×12, 3×8, 4×6 (and reverses). These are all factor pairs of 24.",
+      "rubric": {
+        "full_credit": "All factor pairs listed with connection to factors explained",
+        "partial_credit": "Most factor pairs OR connection explained without complete list",
+        "no_credit": "Major omissions and no understanding of connection"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 150
+    },
+    {
+      "id": "math-3-md-d-8-001",
+      "standard_id": "3.MD.D.8",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "What is the perimeter of a square with sides of 5 cm?",
+      "options": ["10 cm", "15 cm", "20 cm", "25 cm"],
+      "correct_answer": "20 cm",
+      "explanation": "Perimeter of square = 4 × side length = 4 × 5 = 20 cm.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 25
+    },
+    {
+      "id": "math-3-md-d-8-002",
+      "standard_id": "3.MD.D.8",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "A rectangle has a perimeter of 22 inches. If the length is 7 inches, what is the width? Show your work.",
+      "correct_answer": "Width = 4 inches. Work: 22 = 2(7) + 2w; 22 = 14 + 2w; 8 = 2w; w = 4",
+      "rubric": {
+        "full_credit": "Correct answer with clear work showing perimeter formula application",
+        "partial_credit": "Correct answer without work OR work with calculation error",
+        "no_credit": "Incorrect answer without valid approach"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-3-md-d-8-003",
+      "standard_id": "3.MD.D.8",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Can two rectangles have the same perimeter but different areas? Draw two rectangles with a perimeter of 16 units but different areas. Calculate the area of each.",
+      "correct_answer": "Yes. Examples: 1×7 (P=16, A=7) and 4×4 (P=16, A=16) or 2×6 (P=16, A=12) and 3×5 (P=16, A=15).",
+      "rubric": {
+        "full_credit": "Two correct rectangles with P=16 and different areas calculated correctly",
+        "partial_credit": "One correct rectangle OR correct concept with calculation errors",
+        "no_credit": "Does not demonstrate understanding"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 150
+    },
+    {
+      "id": "math-3-g-a-1-001",
+      "standard_id": "3.G.A.1",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Which shape is a quadrilateral?",
+      "options": ["Triangle", "Pentagon", "Rectangle", "Hexagon"],
+      "correct_answer": "Rectangle",
+      "explanation": "A quadrilateral has 4 sides. Rectangle has 4 sides, so it is a quadrilateral.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 20
+    },
+    {
+      "id": "math-3-g-a-1-002",
+      "standard_id": "3.G.A.1",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Name three attributes that a square and a rhombus share. Name one way they are different.",
+      "correct_answer": "Shared: 4 sides, 4 angles, all sides equal length, quadrilateral. Different: Square has 4 right angles; rhombus may not.",
+      "rubric": {
+        "full_credit": "Three correct shared attributes AND one correct difference",
+        "partial_credit": "Two shared attributes and one difference OR three shared without difference",
+        "no_credit": "Fewer than two correct attributes"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-3-g-a-1-003",
+      "standard_id": "3.G.A.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Explain why all rectangles are quadrilaterals, but not all quadrilaterals are rectangles. Draw examples to support your explanation.",
+      "correct_answer": "Rectangles are quadrilaterals because they have 4 sides. But quadrilaterals include shapes without right angles or without equal opposite sides. Examples: parallelogram, trapezoid.",
+      "rubric": {
+        "full_credit": "Clear explanation with correct drawings showing subset relationship",
+        "partial_credit": "Correct explanation OR correct drawings (not both)",
+        "no_credit": "Does not demonstrate understanding of relationship"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 150
+    },
+    {
+      "id": "math-3-g-a-2-001",
+      "standard_id": "3.G.A.2",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "A square is divided into 4 equal parts. What fraction of the whole is each part?",
+      "options": ["1/2", "1/3", "1/4", "1/5"],
+      "correct_answer": "1/4",
+      "explanation": "When a whole is divided into 4 equal parts, each part is 1/4 of the whole.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 20
+    },
+    {
+      "id": "math-3-g-a-2-002",
+      "standard_id": "3.G.A.2",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Draw a rectangle and partition it into 6 equal parts. Shade 4 parts. What fraction of the rectangle is shaded? What fraction is NOT shaded?",
+      "correct_answer": "Shaded: 4/6 (or 2/3). Not shaded: 2/6 (or 1/3).",
+      "rubric": {
+        "full_credit": "Correct drawing with correct fractions for both",
+        "partial_credit": "Correct drawing with one fraction correct OR incorrect drawing with correct fractions",
+        "no_credit": "Neither drawing nor fractions correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-3-g-a-2-003",
+      "standard_id": "3.G.A.2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Draw two different ways to partition a square into 4 equal parts. For each way, explain how you know the parts are equal.",
+      "correct_answer": "Two different partitioning methods (e.g., horizontal/vertical lines vs. diagonals vs. L-shapes). Explanations should address equal area of each part.",
+      "rubric": {
+        "full_credit": "Two distinct correct partitions with valid explanations of equality",
+        "partial_credit": "Two partitions with one valid explanation OR one partition with good explanation",
+        "no_credit": "Partitions not equal or no valid explanations"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 150
+    }
+  ],
+  "metadata": {
+    "total_items": 66,
+    "standards_covered": 22,
+    "dok_distribution": {
+      "dok_1": 22,
+      "dok_2": 22,
+      "dok_3": 22
+    },
+    "question_type_distribution": {
+      "multiple_choice": 24,
+      "short_answer": 21,
+      "constructed_response": 19,
+      "matching": 1,
+      "drag_drop": 1
+    }
+  }
+}

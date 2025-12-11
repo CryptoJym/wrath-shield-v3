@@ -1,0 +1,199 @@
+{
+    "grade": "1",
+    "subject": "Mathematics",
+    "domains": [
+        {
+            "id": "OA",
+            "name": "Operations & Algebraic Thinking",
+            "standards": [
+                {
+                    "id": "1.OA.A.1",
+                    "description": "Use addition and subtraction within 20 to solve word problems involving situations of adding to, taking from, putting together, taking apart, and comparing, with unknowns in all positions.",
+                    "prerequisites": [
+                        "K.OA.A.2"
+                    ],
+                    "cluster": "Represent and solve problems involving addition and subtraction."
+                },
+                {
+                    "id": "1.OA.A.2",
+                    "description": "Solve word problems that call for addition of three whole numbers whose sum is less than or equal to 20.",
+                    "prerequisites": [
+                        "1.OA.A.1"
+                    ],
+                    "cluster": "Represent and solve problems involving addition and subtraction."
+                },
+                {
+                    "id": "1.OA.B.3",
+                    "description": "Apply properties of operations as strategies to add and subtract.",
+                    "prerequisites": [
+                        "K.OA.A.5"
+                    ],
+                    "cluster": "Understand and apply properties of operations and the relationship between addition and subtraction."
+                },
+                {
+                    "id": "1.OA.B.4",
+                    "description": "Understand subtraction as an unknown-addend problem.",
+                    "prerequisites": [
+                        "1.OA.B.3"
+                    ],
+                    "cluster": "Understand and apply properties of operations and the relationship between addition and subtraction."
+                },
+                {
+                    "id": "1.OA.C.5",
+                    "description": "Relate counting to addition and subtraction (e.g., by counting on 2 to add 2).",
+                    "prerequisites": [
+                        "K.CC.A.2"
+                    ],
+                    "cluster": "Add and subtract within 20."
+                },
+                {
+                    "id": "1.OA.C.6",
+                    "description": "Add and subtract within 20, demonstrating fluency for addition and subtraction within 10.",
+                    "prerequisites": [
+                        "1.OA.C.5",
+                        "K.OA.A.5"
+                    ],
+                    "cluster": "Add and subtract within 20."
+                },
+                {
+                    "id": "1.OA.D.7",
+                    "description": "Understand the meaning of the equal sign, and determine if equations involving addition and subtraction are true or false.",
+                    "prerequisites": [
+                        "1.OA.B.3"
+                    ],
+                    "cluster": "Work with addition and subtraction equations."
+                },
+                {
+                    "id": "1.OA.D.8",
+                    "description": "Determine the unknown whole number in an addition or subtraction equation relating three whole numbers.",
+                    "prerequisites": [
+                        "1.OA.D.7"
+                    ],
+                    "cluster": "Work with addition and subtraction equations."
+                }
+            ]
+        },
+        {
+            "id": "NBT",
+            "name": "Number & Operations in Base Ten",
+            "standards": [
+                {
+                    "id": "1.NBT.A.1",
+                    "description": "Count to 120, starting at any number less than 120. In this range, read and write numerals and represent a number of objects with a written numeral.",
+                    "prerequisites": [
+                        "K.CC.A.1",
+                        "K.CC.A.3"
+                    ],
+                    "cluster": "Extend the counting sequence."
+                },
+                {
+                    "id": "1.NBT.B.2",
+                    "description": "Understand that the two digits of a two-digit number represent amounts of tens and ones.",
+                    "prerequisites": [
+                        "K.NBT.A.1"
+                    ],
+                    "cluster": "Understand place value."
+                },
+                {
+                    "id": "1.NBT.B.3",
+                    "description": "Compare two two-digit numbers based on meanings of the tens and ones digits, recording the results of comparisons with the symbols >, =, and <.",
+                    "prerequisites": [
+                        "1.NBT.B.2"
+                    ],
+                    "cluster": "Understand place value."
+                },
+                {
+                    "id": "1.NBT.C.4",
+                    "description": "Add within 100, including adding a two-digit number and a one-digit number, and adding a two-digit number and a multiple of 10.",
+                    "prerequisites": [
+                        "1.NBT.B.2",
+                        "1.OA.C.6"
+                    ],
+                    "cluster": "Use place value understanding and properties of operations to add and subtract."
+                },
+                {
+                    "id": "1.NBT.C.5",
+                    "description": "Given a two-digit number, mentally find 10 more or 10 less than the number, without having to count; explain the reasoning used.",
+                    "prerequisites": [
+                        "1.NBT.B.2"
+                    ],
+                    "cluster": "Use place value understanding and properties of operations to add and subtract."
+                },
+                {
+                    "id": "1.NBT.C.6",
+                    "description": "Subtract multiples of 10 in the range 10-90 from multiples of 10 in the range 10-90 (positive or zero differences).",
+                    "prerequisites": [
+                        "1.NBT.C.4"
+                    ],
+                    "cluster": "Use place value understanding and properties of operations to add and subtract."
+                }
+            ]
+        },
+        {
+            "id": "MD",
+            "name": "Measurement & Data",
+            "standards": [
+                {
+                    "id": "1.MD.A.1",
+                    "description": "Order three objects by length; compare the lengths of two objects indirectly by using a third object.",
+                    "prerequisites": [
+                        "K.MD.A.2"
+                    ],
+                    "cluster": "Measure lengths indirectly and by iterating length units."
+                },
+                {
+                    "id": "1.MD.A.2",
+                    "description": "Express the length of an object as a whole number of length units, by laying multiple copies of a shorter object (the length unit) end to end.",
+                    "prerequisites": [
+                        "1.MD.A.1"
+                    ],
+                    "cluster": "Measure lengths indirectly and by iterating length units."
+                },
+                {
+                    "id": "1.MD.B.3",
+                    "description": "Tell and write time in hours and half-hours using analog and digital clocks.",
+                    "prerequisites": [],
+                    "cluster": "Work with time and money."
+                },
+                {
+                    "id": "1.MD.B.4",
+                    "description": "Organize, represent, and interpret data with up to three categories; ask and answer questions about the total number of data points, how many in each category, and how many more or less are in one category than in another.",
+                    "prerequisites": [
+                        "K.MD.B.3"
+                    ],
+                    "cluster": "Represent and interpret data."
+                }
+            ]
+        },
+        {
+            "id": "G",
+            "name": "Geometry",
+            "standards": [
+                {
+                    "id": "1.G.A.1",
+                    "description": "Distinguish between defining attributes (e.g., triangles are closed and three-sided) versus non-defining attributes (e.g., color, orientation, overall size); build and draw shapes to possess defining attributes.",
+                    "prerequisites": [
+                        "K.G.B.4"
+                    ],
+                    "cluster": "Reason with shapes and their attributes."
+                },
+                {
+                    "id": "1.G.A.2",
+                    "description": "Compose two-dimensional shapes (rectangles, squares, trapezoids, triangles, half-circles, and quarter-circles) or three-dimensional shapes (cubes, right rectangular prisms, right circular cones, and right circular cylinders) to create a composite shape, and compose new shapes from the composite shape.",
+                    "prerequisites": [
+                        "K.G.B.6"
+                    ],
+                    "cluster": "Reason with shapes and their attributes."
+                },
+                {
+                    "id": "1.G.A.3",
+                    "description": "Partition circles and rectangles into two and four equal shares, describe the shares using the words halves, fourths, and quarters, and use the phrases half of, fourth of, and quarter of.",
+                    "prerequisites": [
+                        "1.G.A.1"
+                    ],
+                    "cluster": "Reason with shapes and their attributes."
+                }
+            ]
+        }
+    ]
+}

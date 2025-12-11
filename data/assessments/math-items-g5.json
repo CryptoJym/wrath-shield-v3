@@ -1,0 +1,1524 @@
+{
+  "grade": "5",
+  "subject": "Mathematics",
+  "version": "1.0.0",
+  "created_at": "2025-01-08",
+  "items": [
+    {
+      "id": "math-5-oa-a-1-001",
+      "standard_id": "5.OA.A.1",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "What is the value of 3 × (4 + 5)?",
+      "options": ["17", "27", "32", "12"],
+      "correct_answer": "27",
+      "explanation": "Following order of operations: parentheses first, 4 + 5 = 9, then 3 × 9 = 27.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 30
+    },
+    {
+      "id": "math-5-oa-a-1-002",
+      "standard_id": "5.OA.A.1",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Evaluate: 2 × [3 + (8 - 2)] ÷ 3. Show your work step by step.",
+      "correct_answer": "6. Work: (8-2)=6, (3+6)=9, (2×9)=18, 18÷3=6",
+      "rubric": {
+        "full_credit": "Correct answer with clear step-by-step work showing order of operations",
+        "partial_credit": "Correct process with minor error OR correct answer without full work",
+        "no_credit": "Incorrect answer with incorrect order of operations"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-5-oa-a-1-003",
+      "standard_id": "5.OA.A.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Insert parentheses, brackets, or braces to make this equation true: 5 + 3 × 4 - 2 = 30. Show that your placement works and explain your reasoning.",
+      "correct_answer": "(5 + 3) × 4 - 2 = 32 - 2 = 30 OR 5 + 3 × (4 - 2) doesn't work. Need (5 + 3) × 4 - 2 = 8 × 4 - 2 = 30.",
+      "rubric": {
+        "full_credit": "Correct placement with verification and explanation of order of operations",
+        "partial_credit": "Correct placement without full explanation",
+        "no_credit": "Incorrect placement"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 150
+    },
+    {
+      "id": "math-5-oa-a-2-001",
+      "standard_id": "5.OA.A.2",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Which expression represents 'add 5 and 7, then multiply by 3'?",
+      "options": ["5 + 7 × 3", "3 × 5 + 7", "(5 + 7) × 3", "5 × 7 + 3"],
+      "correct_answer": "(5 + 7) × 3",
+      "explanation": "Parentheses show that addition happens first, then multiplication by 3.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 30
+    },
+    {
+      "id": "math-5-oa-a-2-002",
+      "standard_id": "5.OA.A.2",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Write an expression for: 'Subtract 4 from 20, then divide the result by 2, and finally add 8.' Do not evaluate it.",
+      "correct_answer": "(20 - 4) ÷ 2 + 8 or [(20 - 4) ÷ 2] + 8",
+      "rubric": {
+        "full_credit": "Correct expression with proper grouping symbols",
+        "partial_credit": "Correct operations in wrong order OR missing necessary grouping",
+        "no_credit": "Incorrect expression"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 60
+    },
+    {
+      "id": "math-5-oa-a-2-003",
+      "standard_id": "5.OA.A.2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Look at the expression: 2 × (3 + 5)². Write this in words without using mathematical symbols. Then explain why 2 × (3 + 5)² is different from (2 × 3 + 5)².",
+      "correct_answer": "Words: 'Add 3 and 5, square the result, then multiply by 2.' Different because first gives 2 × 64 = 128; second gives 11² = 121.",
+      "rubric": {
+        "full_credit": "Correct verbal translation AND clear explanation of difference with evaluations",
+        "partial_credit": "Correct verbal translation OR correct explanation (not both)",
+        "no_credit": "Neither correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 150
+    },
+    {
+      "id": "math-5-oa-b-3-001",
+      "standard_id": "5.OA.B.3",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Pattern A: 0, 2, 4, 6, 8... (add 2). Pattern B: 0, 4, 8, 12, 16... (add 4). What is the relationship between corresponding terms?",
+      "options": [
+        "Pattern B is 2 more than Pattern A",
+        "Pattern B is 2 times Pattern A",
+        "Pattern B is half of Pattern A",
+        "Pattern B is 4 less than Pattern A"
+      ],
+      "correct_answer": "Pattern B is 2 times Pattern A",
+      "explanation": "Each term in Pattern B is double the corresponding term in Pattern A: 0=2×0, 4=2×2, 8=2×4, etc.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 45
+    },
+    {
+      "id": "math-5-oa-b-3-002",
+      "standard_id": "5.OA.B.3",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Generate the first 5 terms for each pattern: Pattern X starts at 1, add 3. Pattern Y starts at 2, add 6. Write ordered pairs using corresponding terms and describe the relationship.",
+      "correct_answer": "X: 1, 4, 7, 10, 13. Y: 2, 8, 14, 20, 26. Pairs: (1,2), (4,8), (7,14), (10,20), (13,26). Y is always 2 times X.",
+      "rubric": {
+        "full_credit": "Correct terms, correct pairs, and correct relationship",
+        "partial_credit": "Two of three elements correct",
+        "no_credit": "Fewer than two correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 120
+    },
+    {
+      "id": "math-5-oa-b-3-003",
+      "standard_id": "5.OA.B.3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Create two numerical patterns that have the relationship 'Pattern B is always 3 times Pattern A plus 1.' Generate 5 terms for each, form ordered pairs, and graph them on a coordinate plane. Describe what you notice about the points.",
+      "correct_answer": "Example: A starts at 0, add 1: 0,1,2,3,4. B: 3(0)+1=1, 3(1)+1=4, 3(2)+1=7, etc. gives 1,4,7,10,13. Points form a line.",
+      "rubric": {
+        "full_credit": "Valid patterns with correct relationship, ordered pairs, graph, and observation about linearity",
+        "partial_credit": "Correct patterns and pairs without graph/observation OR all with minor errors",
+        "no_credit": "Patterns don't match relationship"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-5-nbt-a-1-001",
+      "standard_id": "5.NBT.A.1",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "In the number 555.55, how many times greater is the 5 in the tens place than the 5 in the tenths place?",
+      "options": ["10 times", "100 times", "1,000 times", "10,000 times"],
+      "correct_answer": "100 times",
+      "explanation": "Tens place = 50. Tenths place = 0.5. 50 ÷ 0.5 = 100. Each place is 10 times the place to its right, and there are 2 places between.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 45
+    },
+    {
+      "id": "math-5-nbt-a-1-002",
+      "standard_id": "5.NBT.A.1",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "In 8,888.888, compare the value of the 8 in the hundreds place to the 8 in the hundredths place. How many times greater or less is it?",
+      "correct_answer": "800 ÷ 0.08 = 10,000. The 8 in hundreds is 10,000 times greater than the 8 in hundredths.",
+      "rubric": {
+        "full_credit": "Correct comparison (10,000 times) with values shown",
+        "partial_credit": "Correct answer without work OR correct method with calculation error",
+        "no_credit": "Incorrect comparison"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-5-nbt-a-1-003",
+      "standard_id": "5.NBT.A.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Explain why moving a digit one place to the left multiplies its value by 10, while moving it one place to the right divides its value by 10. Use the number 7.7 as an example.",
+      "correct_answer": "In 7.7, left 7 = 7 (ones), right 7 = 0.7 (tenths). 7 ÷ 0.7 = 10. Our number system is base 10, so each place is 10× the place to its right and 1/10 of the place to its left.",
+      "rubric": {
+        "full_credit": "Clear explanation using base-10 system with example values calculated",
+        "partial_credit": "Correct concept without clear example OR example without conceptual explanation",
+        "no_credit": "Does not demonstrate understanding of place value relationships"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 150
+    },
+    {
+      "id": "math-5-nbt-a-2-001",
+      "standard_id": "5.NBT.A.2",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "What is 4.5 × 100?",
+      "options": ["0.045", "0.45", "45", "450"],
+      "correct_answer": "450",
+      "explanation": "Multiplying by 100 moves decimal point 2 places right: 4.5 → 450.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 20
+    },
+    {
+      "id": "math-5-nbt-a-2-002",
+      "standard_id": "5.NBT.A.2",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Calculate: 3.7 × 1,000 and 3,700 ÷ 1,000. Explain the pattern you see with zeros and decimal point movement.",
+      "correct_answer": "3.7 × 1,000 = 3,700. 3,700 ÷ 1,000 = 3.7. Pattern: Multiply by 10^n moves decimal right n places; divide by 10^n moves it left n places.",
+      "rubric": {
+        "full_credit": "Both calculations correct with clear pattern explanation",
+        "partial_credit": "Both correct without pattern OR pattern with one calculation error",
+        "no_credit": "Neither calculation correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 60
+    },
+    {
+      "id": "math-5-nbt-a-2-003",
+      "standard_id": "5.NBT.A.2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A scientist writes 0.00045 as 4.5 × 10⁻⁴. Explain why this representation makes sense using what you know about dividing by powers of 10. How would you write 45,000 in a similar form?",
+      "correct_answer": "4.5 ÷ 10⁴ = 4.5 ÷ 10,000 = 0.00045. Moving decimal 4 places left. 45,000 = 4.5 × 10⁴ because 4.5 × 10,000 = 45,000.",
+      "rubric": {
+        "full_credit": "Correct explanation of negative exponent AND correct conversion of 45,000",
+        "partial_credit": "One conversion/explanation correct",
+        "no_credit": "Neither demonstrates understanding"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 150
+    },
+    {
+      "id": "math-5-nbt-a-3-001",
+      "standard_id": "5.NBT.A.3",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Which shows 'three and forty-seven thousandths' in standard form?",
+      "options": ["3.47", "3.047", "3.0047", "3.470"],
+      "correct_answer": "3.047",
+      "explanation": "Forty-seven thousandths = 47/1000 = 0.047, so three and forty-seven thousandths = 3.047.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 30
+    },
+    {
+      "id": "math-5-nbt-a-3-002",
+      "standard_id": "5.NBT.A.3",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Order from least to greatest: 0.305, 0.035, 0.35, 0.503. Explain your strategy.",
+      "correct_answer": "0.035 < 0.305 < 0.35 < 0.503. Strategy: Compare place values left to right, or convert all to thousandths: 35, 305, 350, 503.",
+      "rubric": {
+        "full_credit": "Correct order with valid strategy explained",
+        "partial_credit": "Correct order without strategy OR strategy with one ordering error",
+        "no_credit": "Incorrect order"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 60
+    },
+    {
+      "id": "math-5-nbt-a-3-003",
+      "standard_id": "5.NBT.A.3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Write 0.625 in three forms: expanded form, as a fraction, and in words. Then explain why 0.625 and 0.6250 represent the same value even though one has more digits.",
+      "correct_answer": "Expanded: 6×0.1 + 2×0.01 + 5×0.001 or 0.6+0.02+0.005. Fraction: 625/1000 = 5/8. Words: six hundred twenty-five thousandths. Same value because trailing zeros after decimal don't change value (5/8 = 625/1000 = 6250/10000).",
+      "rubric": {
+        "full_credit": "All three forms correct with explanation of equivalent values",
+        "partial_credit": "Two or three forms correct without explanation",
+        "no_credit": "Fewer than two forms correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 150
+    },
+    {
+      "id": "math-5-nbt-a-4-001",
+      "standard_id": "5.NBT.A.4",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "What is 3.847 rounded to the nearest tenth?",
+      "options": ["3.8", "3.9", "3.85", "4.0"],
+      "correct_answer": "3.8",
+      "explanation": "Look at hundredths place: 4 < 5, so round down. 3.847 → 3.8",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 25
+    },
+    {
+      "id": "math-5-nbt-a-4-002",
+      "standard_id": "5.NBT.A.4",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Round 12.3456 to the nearest whole number, tenth, and hundredth. Show your reasoning for each.",
+      "correct_answer": "Whole: 12 (0.3 < 0.5). Tenth: 12.3 (0.04 < 0.05). Hundredth: 12.35 (0.006 ≥ 0.005, round up).",
+      "rubric": {
+        "full_credit": "All three correct with reasoning",
+        "partial_credit": "Two correct with reasoning OR all correct without reasoning",
+        "no_credit": "Fewer than two correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-5-nbt-a-4-003",
+      "standard_id": "5.NBT.A.4",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Find all decimals to the thousandths place that would round to 7.5 when rounded to the nearest tenth. Explain how you determined the range.",
+      "correct_answer": "7.450 to 7.549. Explanation: Numbers from 7.45 and above round up to 7.5; numbers up to 7.549... round down to 7.5 (7.550 rounds to 7.6).",
+      "rubric": {
+        "full_credit": "Correct range with clear explanation of both boundaries",
+        "partial_credit": "Close to correct range with partial explanation",
+        "no_credit": "Incorrect range without understanding"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 120
+    },
+    {
+      "id": "math-5-nbt-b-5-001",
+      "standard_id": "5.NBT.B.5",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "What is 234 × 56?",
+      "options": ["13,004", "13,104", "13,204", "12,104"],
+      "correct_answer": "13,104",
+      "explanation": "Using standard algorithm: 234 × 56 = 234 × 50 + 234 × 6 = 11,700 + 1,404 = 13,104.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 60
+    },
+    {
+      "id": "math-5-nbt-b-5-002",
+      "standard_id": "5.NBT.B.5",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Calculate 408 × 37 using the standard algorithm. Show all your work and verify using estimation.",
+      "correct_answer": "15,096. Work shows partial products: 408×7=2,856 and 408×30=12,240. Estimate: 400×40=16,000, so 15,096 is reasonable.",
+      "rubric": {
+        "full_credit": "Correct answer with algorithm work AND reasonable estimation",
+        "partial_credit": "Correct answer without verification OR good process with calculation error",
+        "no_credit": "Incorrect answer with major errors"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 120
+    },
+    {
+      "id": "math-5-nbt-b-5-003",
+      "standard_id": "5.NBT.B.5",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Explain why 25 × 44 = 100 × 11 = 1,100. Use properties of multiplication to justify this equivalence. Then find another pair of factors that equals 1,100 and explain your reasoning.",
+      "correct_answer": "25 × 44 = 25 × 4 × 11 = 100 × 11. Uses associative property: (25 × 4) × 11 = 100 × 11. Other pairs: 50 × 22, 20 × 55, etc.",
+      "rubric": {
+        "full_credit": "Clear explanation using associative property AND valid alternative factor pair with reasoning",
+        "partial_credit": "Correct explanation OR alternative pair (not both)",
+        "no_credit": "Neither demonstrates understanding"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 150
+    },
+    {
+      "id": "math-5-nbt-b-6-001",
+      "standard_id": "5.NBT.B.6",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "What is 1,848 ÷ 24?",
+      "options": ["77", "87", "67", "97"],
+      "correct_answer": "77",
+      "explanation": "1,848 ÷ 24 = 77. Check: 24 × 77 = 1,848.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 60
+    },
+    {
+      "id": "math-5-nbt-b-6-002",
+      "standard_id": "5.NBT.B.6",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Divide 3,456 ÷ 32 using any strategy. Show your work and verify your answer.",
+      "correct_answer": "108. Work should show long division or partial quotients. Verify: 32 × 108 = 3,456.",
+      "rubric": {
+        "full_credit": "Correct answer with clear work and verification",
+        "partial_credit": "Correct answer without verification OR good work with minor error",
+        "no_credit": "Incorrect answer without valid approach"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 120
+    },
+    {
+      "id": "math-5-nbt-b-6-003",
+      "standard_id": "5.NBT.B.6",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A school has 2,736 students to divide into teams of 18 for field day. How many complete teams can be formed? If the remaining students form a partial team, how many students are on that team? Explain why understanding remainders is important in this context.",
+      "correct_answer": "2,736 ÷ 18 = 152 teams. 2,736 = 18 × 152 = 2,736 exactly. No remainder. If there were a remainder, those students couldn't form a complete team.",
+      "rubric": {
+        "full_credit": "Correct division, interpretation of any remainder, and explanation of context",
+        "partial_credit": "Correct division without full interpretation",
+        "no_credit": "Incorrect division"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 150
+    },
+    {
+      "id": "math-5-nbt-b-7-001",
+      "standard_id": "5.NBT.B.7",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "What is 3.5 + 2.75?",
+      "options": ["5.25", "6.00", "6.25", "5.75"],
+      "correct_answer": "6.25",
+      "explanation": "Align decimals: 3.50 + 2.75 = 6.25.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 25
+    },
+    {
+      "id": "math-5-nbt-b-7-002",
+      "standard_id": "5.NBT.B.7",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Calculate: 4.5 × 2.3 and 8.64 ÷ 0.4. Show your work for each.",
+      "correct_answer": "4.5 × 2.3 = 10.35 (45 × 23 = 1035, place decimal). 8.64 ÷ 0.4 = 21.6 (or 86.4 ÷ 4 = 21.6).",
+      "rubric": {
+        "full_credit": "Both calculations correct with work shown",
+        "partial_credit": "One calculation correct with work OR both correct without work",
+        "no_credit": "Neither correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 120
+    },
+    {
+      "id": "math-5-nbt-b-7-003",
+      "standard_id": "5.NBT.B.7",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A store sells fabric for $8.75 per meter. How much would 2.4 meters cost? If a customer pays with $25, how much change do they receive? Show your work and explain your decimal placement.",
+      "correct_answer": "2.4 × $8.75 = $21.00. Change: $25.00 - $21.00 = $4.00. Explanation: 24 × 875 = 21,000, then place decimal (1+2=3 decimal places in factors).",
+      "rubric": {
+        "full_credit": "Both calculations correct with explanation of decimal placement",
+        "partial_credit": "Both answers correct without explanation OR explanation with calculation error",
+        "no_credit": "Incorrect calculations"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 150
+    },
+    {
+      "id": "math-5-nf-a-1-001",
+      "standard_id": "5.NF.A.1",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "What is 1/3 + 1/4?",
+      "options": ["2/7", "1/7", "7/12", "2/12"],
+      "correct_answer": "7/12",
+      "explanation": "Find LCD (12): 1/3 = 4/12, 1/4 = 3/12. 4/12 + 3/12 = 7/12.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 45
+    },
+    {
+      "id": "math-5-nf-a-1-002",
+      "standard_id": "5.NF.A.1",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Calculate: 2 3/4 - 1 5/6. Show your work finding a common denominator.",
+      "correct_answer": "LCD = 12. 2 9/12 - 1 10/12. Regroup: 1 21/12 - 1 10/12 = 11/12.",
+      "rubric": {
+        "full_credit": "Correct answer with clear work showing common denominator and regrouping",
+        "partial_credit": "Correct answer without full work OR correct process with calculation error",
+        "no_credit": "Incorrect answer without understanding"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 120
+    },
+    {
+      "id": "math-5-nf-a-1-003",
+      "standard_id": "5.NF.A.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Explain why you need a common denominator to add fractions. Use 2/5 + 1/3 as an example, showing what happens if you incorrectly add numerators and denominators (3/8) versus the correct method.",
+      "correct_answer": "Incorrect: 2/5 + 1/3 ≠ 3/8 because fifths and thirds are different-sized pieces. Correct: 2/5 = 6/15, 1/3 = 5/15, sum = 11/15. Common denominator ensures same-sized pieces.",
+      "rubric": {
+        "full_credit": "Clear explanation of why common denominator is needed, with comparison of correct and incorrect methods",
+        "partial_credit": "Correct calculation without full explanation OR good explanation with calculation error",
+        "no_credit": "Does not demonstrate understanding"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 150
+    },
+    {
+      "id": "math-5-nf-a-2-001",
+      "standard_id": "5.NF.A.2",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Maria ran 2 1/4 miles on Monday and 1 3/5 miles on Tuesday. How far did she run in total?",
+      "options": ["3 4/9 miles", "3 17/20 miles", "3 4/5 miles", "3 9/20 miles"],
+      "correct_answer": "3 17/20 miles",
+      "explanation": "2 1/4 + 1 3/5 = 2 5/20 + 1 12/20 = 3 17/20 miles.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-5-nf-a-2-002",
+      "standard_id": "5.NF.A.2",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Tom has 3/4 pound of red apples and 5/8 pound of green apples. He uses 1/2 pound for a pie. How many pounds of apples are left?",
+      "correct_answer": "3/4 + 5/8 = 6/8 + 5/8 = 11/8 = 1 3/8 lb. 1 3/8 - 1/2 = 1 3/8 - 4/8 = 7/8 lb left.",
+      "rubric": {
+        "full_credit": "Correct answer with clear work showing both operations",
+        "partial_credit": "Correct first step OR correct answer with minor error in work",
+        "no_credit": "Incorrect approach"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 120
+    },
+    {
+      "id": "math-5-nf-a-2-003",
+      "standard_id": "5.NF.A.2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Create a word problem that requires adding two fractions with different denominators, then subtracting a third fraction. Solve your own problem and explain each step.",
+      "correct_answer": "Valid problem (e.g., 'Had 2/3 pizza, ordered 1/2 more, ate 1/4') with correct solution and clear steps showing common denominators.",
+      "rubric": {
+        "full_credit": "Valid problem, correct solution, and clear explanation of all steps",
+        "partial_credit": "Valid problem with solution errors OR good solution without clear problem",
+        "no_credit": "Invalid problem or major solution errors"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-5-nf-b-3-001",
+      "standard_id": "5.NF.B.3",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Which fraction represents 7 ÷ 4?",
+      "options": ["4/7", "7/4", "11/4", "3/4"],
+      "correct_answer": "7/4",
+      "explanation": "a ÷ b = a/b, so 7 ÷ 4 = 7/4.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 25
+    },
+    {
+      "id": "math-5-nf-b-3-002",
+      "standard_id": "5.NF.B.3",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Five friends share 3 pizzas equally. How much pizza does each friend get? Express your answer as a fraction and explain what it means.",
+      "correct_answer": "3 ÷ 5 = 3/5 pizza each. Each person gets 3/5 of one whole pizza.",
+      "rubric": {
+        "full_credit": "Correct fraction AND clear interpretation",
+        "partial_credit": "Correct fraction without interpretation OR interpretation without correct fraction",
+        "no_credit": "Neither correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 60
+    },
+    {
+      "id": "math-5-nf-b-3-003",
+      "standard_id": "5.NF.B.3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Explain why 3/4 = 3 ÷ 4 using two different representations: (1) a word problem about sharing, and (2) a number line or area model. Show how both lead to the same understanding.",
+      "correct_answer": "Sharing: 3 items shared by 4 people = 3/4 each. Model: 3 wholes divided into 4 parts each, giving 3/4 to each. Both show 3 ÷ 4 = 3/4.",
+      "rubric": {
+        "full_credit": "Both representations correct and clearly connected",
+        "partial_credit": "One representation correct and well-explained",
+        "no_credit": "Neither representation demonstrates understanding"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 150
+    },
+    {
+      "id": "math-5-nf-b-4-001",
+      "standard_id": "5.NF.B.4",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "What is 2/3 × 3/4?",
+      "options": ["5/7", "6/12", "1/2", "6/7"],
+      "correct_answer": "1/2",
+      "explanation": "2/3 × 3/4 = 6/12 = 1/2.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 30
+    },
+    {
+      "id": "math-5-nf-b-4-002",
+      "standard_id": "5.NF.B.4",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Calculate 3/5 × 2/3 and draw an area model to represent the multiplication.",
+      "correct_answer": "3/5 × 2/3 = 6/15 = 2/5. Area model: rectangle divided into 5 rows and 3 columns, shading 3 rows and 2 columns, overlap is 6/15.",
+      "rubric": {
+        "full_credit": "Correct simplified answer AND accurate area model",
+        "partial_credit": "Correct answer without model OR model without simplified answer",
+        "no_credit": "Neither correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 120
+    },
+    {
+      "id": "math-5-nf-b-4-003",
+      "standard_id": "5.NF.B.4",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "When you multiply 5 × 3/4, you get a product less than 5. But when you multiply 5 × 5/4, you get a product greater than 5. Explain why the size of the fraction (less than 1 or greater than 1) determines whether the product is less than or greater than the whole number.",
+      "correct_answer": "3/4 < 1, so taking 3/4 of 5 gives less than 5 (15/4 = 3.75). 5/4 > 1, so 5/4 of 5 is more than 5 (25/4 = 6.25). Multiplying by fraction < 1 shrinks; > 1 grows.",
+      "rubric": {
+        "full_credit": "Clear explanation with calculations showing both cases and general rule",
+        "partial_credit": "Correct calculations without general explanation OR explanation without calculations",
+        "no_credit": "Does not demonstrate understanding"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 150
+    },
+    {
+      "id": "math-5-nf-b-5-001",
+      "standard_id": "5.NF.B.5",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "If you multiply a number by 3/4, the product will be:",
+      "options": [
+        "Greater than the original number",
+        "Less than the original number",
+        "Equal to the original number",
+        "Cannot be determined"
+      ],
+      "correct_answer": "Less than the original number",
+      "explanation": "Multiplying by a fraction less than 1 scales the number down.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 30
+    },
+    {
+      "id": "math-5-nf-b-5-002",
+      "standard_id": "5.NF.B.5",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Without calculating, predict: Is 7 × 5/8 greater than or less than 7? Is 7 × 9/8 greater than or less than 7? Explain your reasoning.",
+      "correct_answer": "7 × 5/8 < 7 (because 5/8 < 1). 7 × 9/8 > 7 (because 9/8 > 1). Multiplying by < 1 reduces; by > 1 increases.",
+      "rubric": {
+        "full_credit": "Both predictions correct with clear reasoning about scaling",
+        "partial_credit": "Both predictions correct without reasoning OR one correct with reasoning",
+        "no_credit": "Incorrect predictions"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 60
+    },
+    {
+      "id": "math-5-nf-b-5-003",
+      "standard_id": "5.NF.B.5",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A recipe calls for 2 cups of flour. If you want to make 3/4 of the recipe, how much flour do you need? If you want to make 1 1/2 times the recipe, how much flour? Explain how these calculations relate to scaling.",
+      "correct_answer": "3/4 recipe: 2 × 3/4 = 3/2 = 1 1/2 cups (reduced). 1 1/2 recipe: 2 × 3/2 = 3 cups (increased). Scaling < 1 reduces quantity; > 1 increases.",
+      "rubric": {
+        "full_credit": "Both calculations correct with explanation of scaling principle",
+        "partial_credit": "Both calculations correct without explanation OR explanation with one error",
+        "no_credit": "Neither calculation correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 120
+    },
+    {
+      "id": "math-5-nf-b-6-001",
+      "standard_id": "5.NF.B.6",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "A garden is 3 1/2 meters long and 2 1/4 meters wide. What is the area?",
+      "options": ["5 3/4 m²", "6 1/8 m²", "7 7/8 m²", "7 1/2 m²"],
+      "correct_answer": "7 7/8 m²",
+      "explanation": "3 1/2 × 2 1/4 = 7/2 × 9/4 = 63/8 = 7 7/8 m².",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-5-nf-b-6-002",
+      "standard_id": "5.NF.B.6",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "A painter can paint 2/3 of a wall in 1 hour. If he works for 4 1/2 hours, what fraction of walls can he paint?",
+      "correct_answer": "2/3 × 4 1/2 = 2/3 × 9/2 = 18/6 = 3 walls.",
+      "rubric": {
+        "full_credit": "Correct answer with work shown",
+        "partial_credit": "Correct setup with calculation error OR correct answer without work",
+        "no_credit": "Incorrect setup"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-5-nf-b-6-003",
+      "standard_id": "5.NF.B.6",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Create a real-world problem that involves multiplying a mixed number by a fraction. Solve your problem, showing how to convert to improper fractions. Explain why your answer makes sense in the context.",
+      "correct_answer": "Valid problem (e.g., 'Run 3/4 of a 2 1/3 mile trail'). Solution: 3/4 × 7/3 = 21/12 = 1 3/4 miles. Context check: Less than full trail.",
+      "rubric": {
+        "full_credit": "Valid problem, correct solution with conversion, and sensible context interpretation",
+        "partial_credit": "Two of three elements correct",
+        "no_credit": "Invalid problem or major calculation errors"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-5-nf-b-7-001",
+      "standard_id": "5.NF.B.7",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "What is 1/4 ÷ 3?",
+      "options": ["3/4", "1/12", "12", "4/3"],
+      "correct_answer": "1/12",
+      "explanation": "1/4 ÷ 3 = 1/4 × 1/3 = 1/12.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 30
+    },
+    {
+      "id": "math-5-nf-b-7-002",
+      "standard_id": "5.NF.B.7",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Calculate: 6 ÷ 1/2 and 1/2 ÷ 6. Explain why these give different answers.",
+      "correct_answer": "6 ÷ 1/2 = 12 (how many halves in 6). 1/2 ÷ 6 = 1/12 (half split into 6 pieces). Division is not commutative.",
+      "rubric": {
+        "full_credit": "Both calculations correct with explanation of why they differ",
+        "partial_credit": "Both correct without explanation OR one correct with explanation",
+        "no_credit": "Neither correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-5-nf-b-7-003",
+      "standard_id": "5.NF.B.7",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A rope is 1/3 meter long. If you cut it into 4 equal pieces, how long is each piece? Write a division equation and a multiplication equation that both solve this problem. Explain the connection between dividing by 4 and multiplying by 1/4.",
+      "correct_answer": "1/3 ÷ 4 = 1/12 m. 1/3 × 1/4 = 1/12 m. Connection: Dividing by n is the same as multiplying by 1/n.",
+      "rubric": {
+        "full_credit": "Both equations correct with clear explanation of reciprocal relationship",
+        "partial_credit": "Both equations correct without explanation OR explanation with one equation",
+        "no_credit": "Neither equation correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 120
+    },
+    {
+      "id": "math-5-md-a-1-001",
+      "standard_id": "5.MD.A.1",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "How many centimeters are in 3.5 meters?",
+      "options": ["35 cm", "350 cm", "3500 cm", "0.35 cm"],
+      "correct_answer": "350 cm",
+      "explanation": "1 m = 100 cm, so 3.5 m = 3.5 × 100 = 350 cm.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 25
+    },
+    {
+      "id": "math-5-md-a-1-002",
+      "standard_id": "5.MD.A.1",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "A recipe calls for 2.5 liters of water. If you only have a 250 mL measuring cup, how many cups do you need? Show your conversion.",
+      "correct_answer": "2.5 L = 2500 mL. 2500 ÷ 250 = 10 cups.",
+      "rubric": {
+        "full_credit": "Correct answer with conversion shown",
+        "partial_credit": "Correct conversion without final answer OR correct answer without conversion",
+        "no_credit": "Incorrect conversion"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 60
+    },
+    {
+      "id": "math-5-md-a-1-003",
+      "standard_id": "5.MD.A.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A runner completes a 5 km race in 25 minutes. What is her speed in meters per minute? What is her speed in meters per second? Show your work and explain each conversion.",
+      "correct_answer": "5 km = 5000 m. 5000 m ÷ 25 min = 200 m/min. 25 min = 1500 sec, 5000 ÷ 1500 = 3.33 m/sec OR 200 m/min ÷ 60 = 3.33 m/sec.",
+      "rubric": {
+        "full_credit": "Both conversions correct with clear work and explanations",
+        "partial_credit": "One conversion correct with explanation",
+        "no_credit": "Neither conversion correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 150
+    },
+    {
+      "id": "math-5-md-b-2-001",
+      "standard_id": "5.MD.B.2",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "On a line plot showing rainfall in inches, there are X marks at: 1/4 (2 marks), 1/2 (4 marks), 3/4 (3 marks). How many days had rainfall measurements?",
+      "options": ["6 days", "8 days", "9 days", "10 days"],
+      "correct_answer": "9 days",
+      "explanation": "Total marks: 2 + 4 + 3 = 9 days with rainfall measurements.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 30
+    },
+    {
+      "id": "math-5-md-b-2-002",
+      "standard_id": "5.MD.B.2",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "A line plot shows the lengths of caterpillars: 1 1/4 in. (3), 1 1/2 in. (5), 1 3/4 in. (2). What is the total length of all caterpillars?",
+      "correct_answer": "3(1 1/4) + 5(1 1/2) + 2(1 3/4) = 3 3/4 + 7 1/2 + 3 1/2 = 14 3/4 inches.",
+      "rubric": {
+        "full_credit": "Correct total with work showing multiplication and addition of fractions",
+        "partial_credit": "Correct approach with calculation error",
+        "no_credit": "Incorrect approach"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 120
+    },
+    {
+      "id": "math-5-md-b-2-003",
+      "standard_id": "5.MD.B.2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Create a line plot with at least 8 data points using fractions (1/8, 1/4, 3/8, or 1/2). Then calculate the difference between the longest and shortest measurements, and find the total of all measurements.",
+      "correct_answer": "Valid line plot with 8+ points. Calculations for range (difference) and total using fraction operations.",
+      "rubric": {
+        "full_credit": "Valid line plot AND both calculations correct with work shown",
+        "partial_credit": "Valid line plot with one calculation correct",
+        "no_credit": "Invalid line plot or neither calculation correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-5-md-c-3-001",
+      "standard_id": "5.MD.C.3",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Volume is measured in:",
+      "options": ["Square units", "Cubic units", "Linear units", "Circular units"],
+      "correct_answer": "Cubic units",
+      "explanation": "Volume measures 3-dimensional space, so it uses cubic units (length × width × height).",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 20
+    },
+    {
+      "id": "math-5-md-c-3-002",
+      "standard_id": "5.MD.C.3",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "A unit cube has side length 1 cm. How many unit cubes would fit in a box that is 3 cm × 4 cm × 2 cm? Explain your reasoning.",
+      "correct_answer": "3 × 4 × 2 = 24 unit cubes. Reasoning: 3 cubes in length, 4 in width, 2 in height; multiply to find total.",
+      "rubric": {
+        "full_credit": "Correct answer with clear explanation of 3-dimensional reasoning",
+        "partial_credit": "Correct answer without explanation OR good reasoning with calculation error",
+        "no_credit": "Incorrect answer without understanding"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 60
+    },
+    {
+      "id": "math-5-md-c-3-003",
+      "standard_id": "5.MD.C.3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Explain the difference between area and volume. Why is area measured in square units while volume is measured in cubic units? Use examples of when you would use each measurement.",
+      "correct_answer": "Area measures 2D space (length × width = square units), like floor space. Volume measures 3D space (length × width × height = cubic units), like water in a tank. Dimensions determine units.",
+      "rubric": {
+        "full_credit": "Clear distinction with correct unit explanation and appropriate examples for each",
+        "partial_credit": "Correct distinction without examples OR examples without clear explanation",
+        "no_credit": "Does not demonstrate understanding of difference"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 120
+    },
+    {
+      "id": "math-5-md-c-4-001",
+      "standard_id": "5.MD.C.4",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "What is the volume of a rectangular prism made of 12 unit cubes arranged as 3 × 4 × 1?",
+      "options": ["7 cubic units", "8 cubic units", "12 cubic units", "14 cubic units"],
+      "correct_answer": "12 cubic units",
+      "explanation": "Counting the unit cubes: 3 × 4 × 1 = 12 cubic units.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 25
+    },
+    {
+      "id": "math-5-md-c-4-002",
+      "standard_id": "5.MD.C.4",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "A figure is made of unit cubes arranged in an L-shape. The base is 4 cubes × 3 cubes, and there's a section on top that is 2 cubes × 3 cubes × 2 cubes high. What is the total volume?",
+      "correct_answer": "Base layer: 4 × 3 × 1 = 12 cubes. Top section: 2 × 3 × 2 = 12 cubes. Total: 24 cubic units.",
+      "rubric": {
+        "full_credit": "Correct total with clear work showing both parts",
+        "partial_credit": "Correct approach with calculation error",
+        "no_credit": "Incorrect approach to composite volume"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-5-md-c-4-003",
+      "standard_id": "5.MD.C.4",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Design two different rectangular prisms that each have a volume of 36 cubic inches. For each, list the dimensions and verify the volume. Which would require more material to wrap (greater surface area)?",
+      "correct_answer": "Options: 6×6×1, 4×3×3, 9×2×2, 12×3×1, etc. Surface areas differ. Example: 6×6×1 SA=84, 4×3×3 SA=66. Prism closer to cube has less surface area.",
+      "rubric": {
+        "full_credit": "Two valid prisms with correct surface area calculations and correct comparison",
+        "partial_credit": "Two valid prisms without surface area OR surface areas with minor errors",
+        "no_credit": "Invalid prisms or major calculation errors"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-5-md-c-5-001",
+      "standard_id": "5.MD.C.5",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "What is the volume of a rectangular prism with length 5 cm, width 3 cm, and height 4 cm?",
+      "options": ["12 cm³", "40 cm³", "60 cm³", "80 cm³"],
+      "correct_answer": "60 cm³",
+      "explanation": "V = l × w × h = 5 × 3 × 4 = 60 cm³.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 30
+    },
+    {
+      "id": "math-5-md-c-5-002",
+      "standard_id": "5.MD.C.5",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "A storage box has a volume of 180 cubic inches. If the length is 9 inches and the width is 4 inches, what is the height? Show how you found your answer.",
+      "correct_answer": "V = l × w × h → 180 = 9 × 4 × h → 180 = 36h → h = 5 inches.",
+      "rubric": {
+        "full_credit": "Correct height with algebraic work shown",
+        "partial_credit": "Correct height without work OR correct equation with calculation error",
+        "no_credit": "Incorrect approach"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 60
+    },
+    {
+      "id": "math-5-md-c-5-003",
+      "standard_id": "5.MD.C.5",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "An aquarium is 50 cm long, 30 cm wide, and 40 cm tall. If 1 liter = 1,000 cm³, how many liters of water can it hold? If you want to fill it only 80% full, how many liters would that be?",
+      "correct_answer": "V = 50 × 30 × 40 = 60,000 cm³ = 60 L. 80% full: 0.8 × 60 = 48 L.",
+      "rubric": {
+        "full_credit": "Both calculations correct with unit conversion shown",
+        "partial_credit": "Volume correct without percent calculation OR percent correct with volume error",
+        "no_credit": "Incorrect volume calculation"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 120
+    },
+    {
+      "id": "math-5-g-a-1-001",
+      "standard_id": "5.G.A.1",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "What is the name of the point (0, 0) on a coordinate plane?",
+      "options": ["The vertex", "The origin", "The axis", "The quadrant"],
+      "correct_answer": "The origin",
+      "explanation": "The origin is the point where the x-axis and y-axis intersect, located at (0, 0).",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.2,
+      "time_estimate_seconds": 15
+    },
+    {
+      "id": "math-5-g-a-1-002",
+      "standard_id": "5.G.A.1",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Plot these points on a coordinate plane: A(2, 5), B(4, 3), C(0, 4), D(5, 0). Explain what the coordinates represent for point A.",
+      "correct_answer": "Points plotted correctly. For A(2, 5): 2 is the x-coordinate (horizontal distance from origin) and 5 is the y-coordinate (vertical distance from origin).",
+      "rubric": {
+        "full_credit": "All points plotted correctly with clear explanation of coordinates",
+        "partial_credit": "Most points correct OR all points without explanation",
+        "no_credit": "Multiple points incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-5-g-a-1-003",
+      "standard_id": "5.G.A.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "On a coordinate plane, plot points A(1, 1), B(1, 4), C(4, 4), and D(4, 1). Connect them in order. What shape did you create? Calculate the perimeter and area of the shape using the coordinates.",
+      "correct_answer": "Square with side 3 units. Perimeter = 4 × 3 = 12 units. Area = 3 × 3 = 9 square units.",
+      "rubric": {
+        "full_credit": "Shape identified correctly with correct perimeter and area calculations",
+        "partial_credit": "Shape correct with one measurement correct OR both measurements with minor error",
+        "no_credit": "Shape incorrect or major calculation errors"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 150
+    },
+    {
+      "id": "math-5-g-a-2-001",
+      "standard_id": "5.G.A.2",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "A map uses a coordinate grid where each unit represents 1 mile. If a park is at (3, 4) and a school is at (3, 9), how far apart are they?",
+      "options": ["3 miles", "4 miles", "5 miles", "7 miles"],
+      "correct_answer": "5 miles",
+      "explanation": "Same x-coordinate, so distance is |9 - 4| = 5 miles.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 45
+    },
+    {
+      "id": "math-5-g-a-2-002",
+      "standard_id": "5.G.A.2",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "A treasure map shows clues: 'Start at origin. Go 5 units right and 3 units up.' What are the coordinates of the treasure? Plot the path on a coordinate grid.",
+      "correct_answer": "Treasure at (5, 3). Path from (0,0) → (5,0) → (5,3) or directly to (5,3).",
+      "rubric": {
+        "full_credit": "Correct coordinates with path shown on grid",
+        "partial_credit": "Correct coordinates without grid OR grid with minor error",
+        "no_credit": "Incorrect coordinates"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 60
+    },
+    {
+      "id": "math-5-g-a-2-003",
+      "standard_id": "5.G.A.2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Create a word problem that involves finding locations on a coordinate plane. Your problem should require plotting at least 3 points and calculating the total distance traveled. Provide the solution.",
+      "correct_answer": "Valid problem (e.g., delivery route). 3+ points plotted. Distance calculated by adding horizontal and vertical movements between consecutive points.",
+      "rubric": {
+        "full_credit": "Valid problem with correct solution showing all calculations",
+        "partial_credit": "Valid problem with minor calculation error OR solution without clear problem",
+        "no_credit": "Invalid problem or major errors"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-5-g-b-3-001",
+      "standard_id": "5.G.B.3",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "All rectangles have four right angles. All squares have four right angles. What can we conclude?",
+      "options": [
+        "All rectangles are squares",
+        "All squares are rectangles",
+        "Rectangles and squares are unrelated",
+        "Some squares don't have right angles"
+      ],
+      "correct_answer": "All squares are rectangles",
+      "explanation": "Since squares have the defining property of rectangles (4 right angles) plus additional properties (4 equal sides), all squares are rectangles.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 45
+    },
+    {
+      "id": "math-5-g-b-3-002",
+      "standard_id": "5.G.B.3",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Triangles can be classified by their angles: acute (all angles < 90°), right (one 90° angle), obtuse (one angle > 90°). If a triangle is equilateral (all sides equal), what type of triangle is it based on angles? Explain why.",
+      "correct_answer": "Acute triangle. All angles in an equilateral triangle are 60°, which is less than 90°.",
+      "rubric": {
+        "full_credit": "Correct classification with explanation using angle measurements",
+        "partial_credit": "Correct classification without complete explanation",
+        "no_credit": "Incorrect classification"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-5-g-b-3-003",
+      "standard_id": "5.G.B.3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Create a Venn diagram showing the relationship between quadrilaterals, parallelograms, rectangles, rhombuses, and squares. Explain why a square belongs in multiple categories.",
+      "correct_answer": "Venn diagram with: Quadrilaterals (outer), Parallelograms (subset), Rectangles and Rhombuses (overlapping subsets of parallelograms), Squares (in the overlap). Square has all properties of each category.",
+      "rubric": {
+        "full_credit": "Correct Venn diagram with clear explanation of square's multiple category membership",
+        "partial_credit": "Mostly correct diagram OR correct explanation without complete diagram",
+        "no_credit": "Major errors in hierarchy"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-5-g-b-4-001",
+      "standard_id": "5.G.B.4",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Which statement is true?",
+      "options": [
+        "All parallelograms are rectangles",
+        "All trapezoids are parallelograms",
+        "All rhombuses are parallelograms",
+        "All squares are rhombuses but no rhombuses are squares"
+      ],
+      "correct_answer": "All rhombuses are parallelograms",
+      "explanation": "Rhombuses have two pairs of parallel sides, which defines a parallelogram. They also have all sides equal.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 45
+    },
+    {
+      "id": "math-5-g-b-4-002",
+      "standard_id": "5.G.B.4",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "A shape has these properties: 4 sides, 2 pairs of parallel sides, 4 equal sides, 4 right angles. Name all the categories this shape belongs to, from most general to most specific.",
+      "correct_answer": "Polygon → Quadrilateral → Parallelogram → Rectangle and Rhombus → Square. This shape is a square.",
+      "rubric": {
+        "full_credit": "All categories listed in correct hierarchical order with shape identified",
+        "partial_credit": "Most categories listed OR correct shape without complete hierarchy",
+        "no_credit": "Major categories missing or shape incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-5-g-b-4-003",
+      "standard_id": "5.G.B.4",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Is the statement 'All rectangles are squares' true or false? Provide a counterexample if false. Then explain why 'All squares are rectangles' IS true. What makes these statements logically different?",
+      "correct_answer": "False. Counterexample: a 3×5 rectangle is not a square. 'All squares are rectangles' is true because squares have all rectangle properties (4 right angles, opposite sides equal). The difference: subset relationship is not reversible.",
+      "rubric": {
+        "full_credit": "Correct evaluation with valid counterexample AND clear explanation of logical difference",
+        "partial_credit": "Correct evaluation with counterexample but weak logical explanation",
+        "no_credit": "Incorrect evaluation"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 150
+    }
+  ],
+  "metadata": {
+    "total_items": 75,
+    "standards_covered": 25,
+    "dok_distribution": {
+      "dok_1": 24,
+      "dok_2": 26,
+      "dok_3": 25
+    },
+    "question_type_distribution": {
+      "multiple_choice": 27,
+      "short_answer": 25,
+      "constructed_response": 23
+    }
+  }
+}

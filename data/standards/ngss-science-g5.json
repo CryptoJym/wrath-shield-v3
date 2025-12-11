@@ -1,0 +1,166 @@
+{
+    "subject": "science",
+    "grade": "5",
+    "domains": [
+        {
+            "name": "Physical Science: Structure and Properties of Matter",
+            "standards": [
+                {
+                    "id": "5-PS1-1",
+                    "description": "Develop a model to describe that matter is made of particles too small to be seen.",
+                    "cluster": "Matter and Its Interactions",
+                    "prerequisites": ["2-PS1-1"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 3,
+                    "estimated_hours": 4
+                },
+                {
+                    "id": "5-PS1-2",
+                    "description": "Measure and graph quantities to provide evidence that regardless of the type of change that occurs when heating, cooling, or mixing substances, the total weight of matter is conserved.",
+                    "cluster": "Matter and Its Interactions",
+                    "prerequisites": ["5-PS1-1", "2-PS1-4"],
+                    "stat_mappings": ["science", "critical_thinking", "problem_solving"],
+                    "cognitive_complexity": 4,
+                    "estimated_hours": 5
+                },
+                {
+                    "id": "5-PS1-3",
+                    "description": "Make observations and measurements to identify materials based on their properties.",
+                    "cluster": "Matter and Its Interactions",
+                    "prerequisites": ["2-PS1-1"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 3,
+                    "estimated_hours": 4
+                },
+                {
+                    "id": "5-PS1-4",
+                    "description": "Conduct an investigation to determine whether the mixing of two or more substances results in new substances.",
+                    "cluster": "Matter and Its Interactions",
+                    "prerequisites": ["5-PS1-2"],
+                    "stat_mappings": ["science", "critical_thinking", "problem_solving"],
+                    "cognitive_complexity": 4,
+                    "estimated_hours": 5
+                }
+            ]
+        },
+        {
+            "name": "Physical Science: Matter and Energy in Organisms and Ecosystems",
+            "standards": [
+                {
+                    "id": "5-PS3-1",
+                    "description": "Use models to describe that energy in animals' food (used for body repair, growth, motion, and to maintain body warmth) was once energy from the sun.",
+                    "cluster": "Energy",
+                    "prerequisites": ["4-PS3-2"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 3,
+                    "estimated_hours": 4
+                }
+            ]
+        },
+        {
+            "name": "Life Science: Matter and Energy in Organisms and Ecosystems",
+            "standards": [
+                {
+                    "id": "5-LS1-1",
+                    "description": "Support an argument that plants get the materials they need for growth chiefly from air and water.",
+                    "cluster": "From Molecules to Organisms: Structures and Processes",
+                    "prerequisites": ["2-LS2-1"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 3,
+                    "estimated_hours": 4
+                },
+                {
+                    "id": "5-LS2-1",
+                    "description": "Develop a model to describe the movement of matter among plants, animals, decomposers, and the environment.",
+                    "cluster": "Ecosystems: Interactions, Energy, and Dynamics",
+                    "prerequisites": ["5-LS1-1", "5-PS3-1"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 4,
+                    "estimated_hours": 5
+                }
+            ]
+        },
+        {
+            "name": "Earth and Space Science: Earth's Systems",
+            "standards": [
+                {
+                    "id": "5-ESS1-1",
+                    "description": "Support an argument that differences in the apparent brightness of the sun compared to other stars is due to their relative distances from Earth.",
+                    "cluster": "Earth's Place in the Universe",
+                    "prerequisites": ["1-ESS1-1"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 3,
+                    "estimated_hours": 4
+                },
+                {
+                    "id": "5-ESS1-2",
+                    "description": "Represent data in graphical displays to reveal patterns of daily changes in length and direction of shadows, day and night, and the seasonal appearance of some stars in the night sky.",
+                    "cluster": "Earth's Place in the Universe",
+                    "prerequisites": ["1-ESS1-1"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 3,
+                    "estimated_hours": 4
+                },
+                {
+                    "id": "5-ESS2-1",
+                    "description": "Develop a model using an example to describe ways the geosphere, biosphere, hydrosphere, and/or atmosphere interact.",
+                    "cluster": "Earth's Systems",
+                    "prerequisites": ["4-ESS2-1"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 4,
+                    "estimated_hours": 5
+                },
+                {
+                    "id": "5-ESS2-2",
+                    "description": "Describe and graph the amounts and percentages of water and fresh water in various reservoirs to provide evidence about the distribution of water on Earth.",
+                    "cluster": "Earth's Systems",
+                    "prerequisites": ["2-ESS2-3"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 3,
+                    "estimated_hours": 4
+                },
+                {
+                    "id": "5-ESS3-1",
+                    "description": "Obtain and combine information about ways individual communities use science ideas to protect the Earth's resources and environment.",
+                    "cluster": "Earth and Human Activity",
+                    "prerequisites": ["4-ESS3-1"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 3,
+                    "estimated_hours": 4
+                }
+            ]
+        },
+        {
+            "name": "Engineering Design",
+            "standards": [
+                {
+                    "id": "3-5-ETS1-1",
+                    "description": "Define a simple design problem reflecting a need or a want that includes specified criteria for success and constraints on materials, time, or cost.",
+                    "cluster": "Engineering Design",
+                    "prerequisites": ["K-2-ETS1-1"],
+                    "stat_mappings": ["science", "critical_thinking", "technology", "problem_solving"],
+                    "cognitive_complexity": 3,
+                    "estimated_hours": 5
+                },
+                {
+                    "id": "3-5-ETS1-2",
+                    "description": "Generate and compare multiple possible solutions to a problem based on how well each is likely to meet the criteria and constraints of the problem.",
+                    "cluster": "Engineering Design",
+                    "prerequisites": ["3-5-ETS1-1"],
+                    "stat_mappings": ["science", "critical_thinking", "technology", "problem_solving"],
+                    "cognitive_complexity": 4,
+                    "estimated_hours": 6
+                },
+                {
+                    "id": "3-5-ETS1-3",
+                    "description": "Plan and carry out fair tests in which variables are controlled and failure points are considered to identify aspects of a model or prototype that can be improved.",
+                    "cluster": "Engineering Design",
+                    "prerequisites": ["3-5-ETS1-2"],
+                    "stat_mappings": ["science", "critical_thinking", "technology"],
+                    "cognitive_complexity": 4,
+                    "estimated_hours": 6
+                }
+            ]
+        }
+    ]
+}

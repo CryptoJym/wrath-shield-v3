@@ -1,0 +1,213 @@
+{
+    "subject": "science",
+    "grade": "10",
+    "course": "Chemistry",
+    "domains": [
+        {
+            "id": "PS1",
+            "name": "Matter and Its Interactions",
+            "standards": [
+                {
+                    "id": "HS-PS1-1",
+                    "description": "Use the periodic table as a model to predict the relative properties of elements based on the patterns of electrons in the outermost energy level of atoms.",
+                    "cluster": "Structure and Properties of Matter",
+                    "prerequisites": ["MS-PS1-1"],
+                    "science_practices": ["Developing and Using Models"],
+                    "crosscutting_concepts": ["Patterns"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 4,
+                    "estimated_hours": 7
+                },
+                {
+                    "id": "HS-PS1-2",
+                    "description": "Construct and revise an explanation for the outcome of a simple chemical reaction based on the outermost electron states of atoms, trends in the periodic table, and knowledge of the patterns of chemical properties.",
+                    "cluster": "Structure and Properties of Matter",
+                    "prerequisites": ["MS-PS1-2", "HS-PS1-1"],
+                    "science_practices": ["Constructing Explanations"],
+                    "crosscutting_concepts": ["Patterns"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 8
+                },
+                {
+                    "id": "HS-PS1-3",
+                    "description": "Plan and conduct an investigation to gather evidence to compare the structure of substances at the bulk scale to infer the strength of electrical forces between particles.",
+                    "cluster": "Structure and Properties of Matter",
+                    "prerequisites": ["MS-PS1-1"],
+                    "science_practices": ["Planning and Carrying Out Investigations"],
+                    "crosscutting_concepts": ["Patterns"],
+                    "stat_mappings": ["science", "critical_thinking", "problem_solving"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 8
+                },
+                {
+                    "id": "HS-PS1-4",
+                    "description": "Develop a model to illustrate that the release or absorption of energy from a chemical reaction system depends upon the changes in total bond energy.",
+                    "cluster": "Chemical Reactions",
+                    "prerequisites": ["MS-PS1-2", "MS-PS1-6"],
+                    "science_practices": ["Developing and Using Models"],
+                    "crosscutting_concepts": ["Energy and Matter"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 8
+                },
+                {
+                    "id": "HS-PS1-5",
+                    "description": "Apply scientific principles and evidence to provide an explanation about the effects of changing the temperature or concentration of the reacting particles on the rate at which a reaction occurs.",
+                    "cluster": "Chemical Reactions",
+                    "prerequisites": ["MS-PS1-2"],
+                    "science_practices": ["Constructing Explanations"],
+                    "crosscutting_concepts": ["Patterns"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 7
+                },
+                {
+                    "id": "HS-PS1-6",
+                    "description": "Refine the design of a chemical system by specifying a change in conditions that would produce increased amounts of products at equilibrium.",
+                    "cluster": "Chemical Reactions",
+                    "prerequisites": ["HS-PS1-5"],
+                    "science_practices": ["Constructing Explanations and Designing Solutions"],
+                    "crosscutting_concepts": ["Stability and Change"],
+                    "stat_mappings": ["science", "critical_thinking", "problem_solving"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 8
+                },
+                {
+                    "id": "HS-PS1-7",
+                    "description": "Use mathematical representations to support the claim that atoms, and therefore mass, are conserved during a chemical reaction.",
+                    "cluster": "Chemical Reactions",
+                    "prerequisites": ["MS-PS1-5"],
+                    "science_practices": ["Using Mathematics and Computational Thinking"],
+                    "crosscutting_concepts": ["Energy and Matter"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 4,
+                    "estimated_hours": 6
+                },
+                {
+                    "id": "HS-PS1-8",
+                    "description": "Develop models to illustrate the changes in the composition of the nucleus of the atom and the energy released during the processes of fission, fusion, and radioactive decay.",
+                    "cluster": "Nuclear Processes",
+                    "prerequisites": ["MS-PS1-1"],
+                    "science_practices": ["Developing and Using Models"],
+                    "crosscutting_concepts": ["Energy and Matter"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 8
+                }
+            ]
+        },
+        {
+            "id": "PS2",
+            "name": "Motion and Stability: Forces and Interactions (Chemistry Applications)",
+            "standards": [
+                {
+                    "id": "HS-PS2-6",
+                    "description": "Communicate scientific and technical information about why the molecular-level structure is important in the functioning of designed materials.",
+                    "cluster": "Types of Interactions",
+                    "prerequisites": ["MS-PS2-3", "HS-PS1-3"],
+                    "science_practices": ["Obtaining, Evaluating, and Communicating Information"],
+                    "crosscutting_concepts": ["Structure and Function"],
+                    "stat_mappings": ["science", "critical_thinking", "communication", "technology"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 7
+                }
+            ]
+        },
+        {
+            "id": "PS3",
+            "name": "Energy (Chemistry Applications)",
+            "standards": [
+                {
+                    "id": "HS-PS3-1",
+                    "description": "Create a computational model to calculate the change in the energy of one component in a system when the change in energy of the other component(s) and energy flows in and out of the system are known.",
+                    "cluster": "Definitions of Energy",
+                    "prerequisites": ["MS-PS3-1", "MS-PS3-2"],
+                    "science_practices": ["Using Mathematics and Computational Thinking"],
+                    "crosscutting_concepts": ["Systems and System Models"],
+                    "stat_mappings": ["science", "critical_thinking", "technology"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 8
+                },
+                {
+                    "id": "HS-PS3-2",
+                    "description": "Develop and use models to illustrate that energy at the macroscopic scale can be accounted for as a combination of energy associated with the motions of particles (objects) and energy associated with the relative positions of particles (objects).",
+                    "cluster": "Definitions of Energy",
+                    "prerequisites": ["MS-PS3-2"],
+                    "science_practices": ["Developing and Using Models"],
+                    "crosscutting_concepts": ["Energy and Matter"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 7
+                },
+                {
+                    "id": "HS-PS3-4",
+                    "description": "Plan and conduct an investigation to provide evidence that the transfer of thermal energy when two components of different temperature are combined within a closed system results in a more uniform energy distribution among the components in the system (second law of thermodynamics).",
+                    "cluster": "Conservation of Energy and Energy Transfer",
+                    "prerequisites": ["MS-PS3-3", "MS-PS3-4"],
+                    "science_practices": ["Planning and Carrying Out Investigations"],
+                    "crosscutting_concepts": ["Systems and System Models"],
+                    "stat_mappings": ["science", "critical_thinking", "problem_solving"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 8
+                }
+            ]
+        },
+        {
+            "id": "ESS2",
+            "name": "Earth's Systems (Chemistry Applications)",
+            "standards": [
+                {
+                    "id": "HS-ESS2-5",
+                    "description": "Plan and conduct an investigation of the properties of water and its effects on Earth materials and surface processes.",
+                    "cluster": "Earth Materials and Systems",
+                    "prerequisites": ["MS-ESS2-4"],
+                    "science_practices": ["Planning and Carrying Out Investigations"],
+                    "crosscutting_concepts": ["Structure and Function"],
+                    "stat_mappings": ["science", "critical_thinking", "problem_solving"],
+                    "cognitive_complexity": 4,
+                    "estimated_hours": 7
+                },
+                {
+                    "id": "HS-ESS2-6",
+                    "description": "Develop a quantitative model to describe the cycling of carbon among the hydrosphere, atmosphere, geosphere, and biosphere.",
+                    "cluster": "Weather and Climate",
+                    "prerequisites": ["MS-ESS2-6", "HS-PS1-7"],
+                    "science_practices": ["Developing and Using Models"],
+                    "crosscutting_concepts": ["Energy and Matter"],
+                    "stat_mappings": ["science", "critical_thinking", "technology"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 8
+                }
+            ]
+        },
+        {
+            "id": "ETS1",
+            "name": "Engineering Design",
+            "standards": [
+                {
+                    "id": "HS-ETS1-3",
+                    "description": "Evaluate a solution to a complex real-world problem based on prioritized criteria and trade-offs that account for a range of constraints, including cost, safety, reliability, and aesthetics as well as possible social, cultural, and environmental impacts.",
+                    "cluster": "Engineering Design",
+                    "prerequisites": ["MS-ETS1-2", "MS-ETS1-3"],
+                    "science_practices": ["Constructing Explanations and Designing Solutions"],
+                    "crosscutting_concepts": ["Influence of Engineering, Technology, and Science on Society and the Natural World"],
+                    "stat_mappings": ["science", "critical_thinking", "problem_solving", "technology"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 9
+                },
+                {
+                    "id": "HS-ETS1-4",
+                    "description": "Use a computer simulation to model the impact of proposed solutions to a complex real-world problem with numerous criteria and constraints on interactions within and between systems relevant to the problem.",
+                    "cluster": "Engineering Design",
+                    "prerequisites": ["MS-ETS1-4"],
+                    "science_practices": ["Using Mathematics and Computational Thinking"],
+                    "crosscutting_concepts": ["Systems and System Models"],
+                    "stat_mappings": ["science", "critical_thinking", "problem_solving", "technology"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 9
+                }
+            ]
+        }
+    ]
+}

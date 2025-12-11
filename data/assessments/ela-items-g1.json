@@ -1,0 +1,850 @@
+{
+  "grade": "1",
+  "items": [
+    {
+      "id": "ela-1-rl-1-001",
+      "standard_id": "1.RL.1",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Read the story: 'The little dog ran to the park. He played with a ball.' What did the dog do at the park?",
+      "correct_answer": "played with a ball",
+      "rubric": {
+        "full_credit": "Identifies playing with ball",
+        "partial_credit": "Mentions park or playing",
+        "no_credit": "Unrelated answer"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 45,
+      "passage": "The little dog ran to the park. He played with a ball."
+    },
+    {
+      "id": "ela-1-rl-1-002",
+      "standard_id": "1.RL.1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Read: 'Mom made cookies. She put them on a plate. The cookies were warm.' What did Mom put on the plate?",
+      "options": ["Cookies", "Cake", "Bread", "Apples"],
+      "correct_answer": "Cookies",
+      "rubric": {
+        "full_credit": "Selects 'Cookies'",
+        "no_credit": "Selects incorrect option"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 30,
+      "passage": "Mom made cookies. She put them on a plate. The cookies were warm."
+    },
+    {
+      "id": "ela-1-rl-2-001",
+      "standard_id": "1.RL.2",
+      "dok_level": 3,
+      "question_type": "short_answer",
+      "question": "Read: 'The ant worked hard all summer. The grasshopper played. When winter came, the ant had food but the grasshopper did not.' What lesson does this story teach?",
+      "correct_answer": "It is important to work hard and prepare",
+      "rubric": {
+        "full_credit": "Identifies moral about hard work/preparation",
+        "partial_credit": "Mentions working or consequences",
+        "no_credit": "Cannot identify lesson"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 1,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 90,
+      "passage": "The ant worked hard all summer. The grasshopper played. When winter came, the ant had food but the grasshopper did not."
+    },
+    {
+      "id": "ela-1-rl-2-002",
+      "standard_id": "1.RL.2",
+      "dok_level": 2,
+      "question_type": "sequencing",
+      "question": "Put these story events in order: The bird flew away. The egg hatched. The mother bird sat on the egg.",
+      "correct_answer": ["The mother bird sat on the egg", "The egg hatched", "The bird flew away"],
+      "rubric": {
+        "full_credit": "Correct sequence",
+        "partial_credit": "Two events in correct order",
+        "no_credit": "Incorrect order"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 60,
+      "passage": "The mother bird sat on the egg. The egg hatched. The bird flew away."
+    },
+    {
+      "id": "ela-1-rl-3-001",
+      "standard_id": "1.RL.3",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Read: 'Ben was scared of the dark. He saw a shadow. Then he saw it was just his coat on a chair.' Where does this story happen?",
+      "correct_answer": "in a room/bedroom",
+      "rubric": {
+        "full_credit": "Identifies setting as room/bedroom",
+        "partial_credit": "Mentions inside/home",
+        "no_credit": "Cannot identify setting"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 60,
+      "passage": "Ben was scared of the dark. He saw a shadow. Then he saw it was just his coat on a chair."
+    },
+    {
+      "id": "ela-1-rl-3-002",
+      "standard_id": "1.RL.3",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Read: 'Lily smiled when she got a present. She clapped her hands and said thank you.' How did Lily feel?",
+      "options": ["Happy", "Sad", "Angry", "Scared"],
+      "correct_answer": "Happy",
+      "rubric": {
+        "full_credit": "Selects 'Happy'",
+        "no_credit": "Selects incorrect option"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 30,
+      "passage": "Lily smiled when she got a present. She clapped her hands and said thank you."
+    },
+    {
+      "id": "ela-1-rl-4-001",
+      "standard_id": "1.RL.4",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "In the poem 'The wind howled all night long,' what does 'howled' help you imagine?",
+      "options": ["A loud, scary sound", "A quiet whisper", "A happy song", "Silence"],
+      "correct_answer": "A loud, scary sound",
+      "rubric": {
+        "full_credit": "Selects sensory description",
+        "no_credit": "Selects incorrect option"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 45,
+      "passage": "The wind howled all night long."
+    },
+    {
+      "id": "ela-1-rl-4-002",
+      "standard_id": "1.RL.4",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "In the story, 'The girl stomped her feet.' How is the girl probably feeling?",
+      "correct_answer": "angry or upset",
+      "rubric": {
+        "full_credit": "Identifies angry/upset/frustrated",
+        "partial_credit": "Mentions negative feeling",
+        "no_credit": "Cannot connect word to feeling"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 45,
+      "passage": "The girl stomped her feet."
+    },
+    {
+      "id": "ela-1-rl-7-001",
+      "standard_id": "1.RL.7",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Look at the picture of a boy with an umbrella in the rain. Read: 'Tom walked to school.' What does the picture tell you that the words do not?",
+      "options": ["It was raining", "Tom was happy", "School was far away", "Tom had a backpack"],
+      "correct_answer": "It was raining",
+      "rubric": {
+        "full_credit": "Selects 'It was raining'",
+        "no_credit": "Selects incorrect option"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 45,
+      "passage": "Tom walked to school.",
+      "image_prompt": "A boy with an umbrella walking in the rain"
+    },
+    {
+      "id": "ela-1-rl-7-002",
+      "standard_id": "1.RL.7",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Look at the picture showing a messy room. The story says: 'Jake played all day.' How does the picture help you understand what Jake did?",
+      "correct_answer": "Shows Jake made a mess with his toys",
+      "rubric": {
+        "full_credit": "Connects illustration to story details",
+        "partial_credit": "Describes picture without connecting",
+        "no_credit": "Cannot make connection"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 60,
+      "passage": "Jake played all day.",
+      "image_prompt": "A messy room with toys scattered everywhere"
+    },
+    {
+      "id": "ela-1-rl-9-001",
+      "standard_id": "1.RL.9",
+      "dok_level": 3,
+      "question_type": "short_answer",
+      "question": "Story 1: 'The fox wanted grapes. He jumped but could not reach them. He said the grapes were bad anyway.' Story 2: 'The crow had cheese. The fox said nice things to make the crow sing and drop the cheese.' How are these foxes alike?",
+      "correct_answer": "Both foxes are tricky/clever to get what they want",
+      "rubric": {
+        "full_credit": "Identifies foxes as tricky/wanting food",
+        "partial_credit": "Mentions one similarity",
+        "no_credit": "Cannot compare"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 1,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 120,
+      "passage": "Story 1: The fox wanted grapes. He jumped but could not reach them. He said the grapes were bad anyway. Story 2: The crow had cheese. The fox said nice things to make the crow sing and drop the cheese."
+    },
+    {
+      "id": "ela-1-rl-9-002",
+      "standard_id": "1.RL.9",
+      "dok_level": 3,
+      "question_type": "multiple_choice",
+      "question": "In one story, a turtle wins a race by going slow and steady. In another story, a rabbit loses because he took a nap. How are these stories alike?",
+      "options": ["Both show slow and steady wins", "Both have happy endings", "Both are about racing only", "Both have mean characters"],
+      "correct_answer": "Both show slow and steady wins",
+      "rubric": {
+        "full_credit": "Identifies common theme",
+        "no_credit": "Selects incorrect option"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 1,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 60,
+      "passage": null
+    },
+    {
+      "id": "ela-1-ri-1-001",
+      "standard_id": "1.RI.1",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Read: 'Frogs live near water. They eat bugs. Frogs can jump very far.' What do frogs eat?",
+      "correct_answer": "bugs",
+      "rubric": {
+        "full_credit": "States bugs/insects",
+        "no_credit": "Incorrect answer"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 30,
+      "passage": "Frogs live near water. They eat bugs. Frogs can jump very far."
+    },
+    {
+      "id": "ela-1-ri-1-002",
+      "standard_id": "1.RI.1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Read: 'Penguins are birds that cannot fly. They swim very well. They live where it is cold.' Where do penguins live?",
+      "options": ["Where it is cold", "In the desert", "In trees", "Where it is hot"],
+      "correct_answer": "Where it is cold",
+      "rubric": {
+        "full_credit": "Selects correct answer",
+        "no_credit": "Selects incorrect option"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 30,
+      "passage": "Penguins are birds that cannot fly. They swim very well. They live where it is cold."
+    },
+    {
+      "id": "ela-1-ri-2-001",
+      "standard_id": "1.RI.2",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Read: 'Bats sleep during the day. They come out at night to find food. Bats use sound to find their way in the dark.' What is the main topic of this text?",
+      "options": ["Bats and how they live", "Animals that fly", "Sleeping habits", "Finding food"],
+      "correct_answer": "Bats and how they live",
+      "rubric": {
+        "full_credit": "Identifies main topic",
+        "no_credit": "Selects incorrect option"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 45,
+      "passage": "Bats sleep during the day. They come out at night to find food. Bats use sound to find their way in the dark."
+    },
+    {
+      "id": "ela-1-ri-2-002",
+      "standard_id": "1.RI.2",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Read: 'Firefighters help people. They put out fires. They save people from danger. They teach us about fire safety.' Tell one key detail about firefighters.",
+      "correct_answer": "any detail: put out fires, save people, teach safety",
+      "rubric": {
+        "full_credit": "States any key detail from text",
+        "partial_credit": "Related but vague",
+        "no_credit": "Unrelated answer"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 45,
+      "passage": "Firefighters help people. They put out fires. They save people from danger. They teach us about fire safety."
+    },
+    {
+      "id": "ela-1-ri-3-001",
+      "standard_id": "1.RI.3",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Read: 'First, a caterpillar hatches from an egg. Then it eats and grows. Next, it makes a cocoon. Finally, a butterfly comes out.' What happens after the caterpillar makes a cocoon?",
+      "correct_answer": "a butterfly comes out",
+      "rubric": {
+        "full_credit": "Identifies butterfly emergence",
+        "partial_credit": "Mentions change",
+        "no_credit": "Incorrect sequence"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 60,
+      "passage": "First, a caterpillar hatches from an egg. Then it eats and grows. Next, it makes a cocoon. Finally, a butterfly comes out."
+    },
+    {
+      "id": "ela-1-ri-3-002",
+      "standard_id": "1.RI.3",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Read: 'George Washington was the first president. He led the army before that. People called him the Father of Our Country.' What did George Washington do before being president?",
+      "options": ["Led the army", "Was a teacher", "Built houses", "Sailed ships"],
+      "correct_answer": "Led the army",
+      "rubric": {
+        "full_credit": "Selects correct answer",
+        "no_credit": "Selects incorrect option"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 45,
+      "passage": "George Washington was the first president. He led the army before that. People called him the Father of Our Country."
+    },
+    {
+      "id": "ela-1-ri-7-001",
+      "standard_id": "1.RI.7",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Look at the diagram of a plant with labels (roots, stem, leaves). Read: 'Plants have different parts.' What does the picture show you about plants?",
+      "correct_answer": "Plants have roots, stem, and leaves",
+      "rubric": {
+        "full_credit": "Names parts shown in diagram",
+        "partial_credit": "Names some parts",
+        "no_credit": "Cannot connect illustration to text"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 60,
+      "passage": "Plants have different parts.",
+      "image_prompt": "A labeled diagram showing plant parts: roots, stem, leaves"
+    },
+    {
+      "id": "ela-1-ri-7-002",
+      "standard_id": "1.RI.7",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "The text says 'Bears are big animals.' The picture shows a bear next to a person. How does the picture help you understand the text?",
+      "options": ["Shows how big bears really are", "Shows what bears eat", "Shows where bears live", "Shows bear babies"],
+      "correct_answer": "Shows how big bears really are",
+      "rubric": {
+        "full_credit": "Connects illustration to key idea",
+        "no_credit": "Selects incorrect option"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 45,
+      "passage": "Bears are big animals.",
+      "image_prompt": "A bear standing next to a person for size comparison"
+    },
+    {
+      "id": "ela-1-rf-2-001",
+      "standard_id": "1.RF.2",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "What is the first sound in the word 'sun'?",
+      "options": ["/s/", "/u/", "/n/", "/t/"],
+      "correct_answer": "/s/",
+      "rubric": {
+        "full_credit": "Identifies /s/ sound",
+        "no_credit": "Selects incorrect sound"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 0,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 20,
+      "passage": null
+    },
+    {
+      "id": "ela-1-rf-2-002",
+      "standard_id": "1.RF.2",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Which words have the same middle sound? 'cat, hat, cup'",
+      "options": ["cat and hat", "cat and cup", "hat and cup", "None of them"],
+      "correct_answer": "cat and hat",
+      "rubric": {
+        "full_credit": "Identifies matching sounds",
+        "no_credit": "Selects incorrect pair"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 30,
+      "passage": null
+    },
+    {
+      "id": "ela-1-rf-3-001",
+      "standard_id": "1.RF.3",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Read the word: 'ship'. What sound does 'sh' make?",
+      "options": ["/sh/ as in shoe", "/s/ as in sun", "/h/ as in hat", "/ch/ as in chip"],
+      "correct_answer": "/sh/ as in shoe",
+      "rubric": {
+        "full_credit": "Identifies /sh/ digraph",
+        "no_credit": "Selects incorrect sound"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 25,
+      "passage": null
+    },
+    {
+      "id": "ela-1-rf-3-002",
+      "standard_id": "1.RF.3",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Read this word aloud: 'green'. What two letters make the /gr/ blend?",
+      "correct_answer": "g and r",
+      "rubric": {
+        "full_credit": "Identifies g and r",
+        "partial_credit": "Identifies one letter",
+        "no_credit": "Cannot identify blend"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 30,
+      "passage": null
+    },
+    {
+      "id": "ela-1-rf-4-001",
+      "standard_id": "1.RF.4",
+      "dok_level": 2,
+      "question_type": "performance_task",
+      "question": "Read this sentence aloud: 'The big red fox ran fast.' Read it smoothly and with expression.",
+      "correct_answer": null,
+      "rubric": {
+        "full_credit": "Reads accurately with appropriate pace and expression",
+        "partial_credit": "Reads accurately but choppy or flat",
+        "no_credit": "Cannot read or many errors"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 30,
+      "passage": "The big red fox ran fast."
+    },
+    {
+      "id": "ela-1-rf-4-002",
+      "standard_id": "1.RF.4",
+      "dok_level": 2,
+      "question_type": "performance_task",
+      "question": "Read this passage: 'Sam has a pet. It is a fish. The fish is blue. Sam feeds it every day.' Read with good speed and accuracy.",
+      "correct_answer": null,
+      "rubric": {
+        "full_credit": "Fluent reading with accuracy",
+        "partial_credit": "Some hesitation or minor errors",
+        "no_credit": "Significant struggles or errors"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 45,
+      "passage": "Sam has a pet. It is a fish. The fish is blue. Sam feeds it every day."
+    },
+    {
+      "id": "ela-1-w-1-001",
+      "standard_id": "1.W.1",
+      "dok_level": 2,
+      "question_type": "constructed_response",
+      "question": "Do you think cats or dogs make better pets? Write your opinion and give one reason why.",
+      "correct_answer": null,
+      "rubric": {
+        "full_credit": "States opinion with supporting reason and closure",
+        "partial_credit": "States opinion with weak reason or no closure",
+        "no_credit": "No clear opinion stated"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 2,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 300,
+      "passage": null
+    },
+    {
+      "id": "ela-1-w-1-002",
+      "standard_id": "1.W.1",
+      "dok_level": 2,
+      "question_type": "constructed_response",
+      "question": "What is your favorite season? Write your opinion. Tell why you like it. Write an ending sentence.",
+      "correct_answer": null,
+      "rubric": {
+        "full_credit": "Names season, gives reason, provides closure",
+        "partial_credit": "Missing one element",
+        "no_credit": "Missing multiple elements"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 2,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 300,
+      "passage": null
+    },
+    {
+      "id": "ela-1-w-2-001",
+      "standard_id": "1.W.2",
+      "dok_level": 2,
+      "question_type": "constructed_response",
+      "question": "Write about an animal you know about. Tell the topic and two facts about the animal.",
+      "correct_answer": null,
+      "rubric": {
+        "full_credit": "Names topic, provides 2+ facts, has closure",
+        "partial_credit": "Names topic with 1 fact",
+        "no_credit": "No clear topic or facts"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 1,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 300,
+      "passage": null
+    },
+    {
+      "id": "ela-1-w-2-002",
+      "standard_id": "1.W.2",
+      "dok_level": 2,
+      "question_type": "constructed_response",
+      "question": "Write about how to brush your teeth. Tell what to do first, next, and last.",
+      "correct_answer": null,
+      "rubric": {
+        "full_credit": "Explains procedure with clear sequence",
+        "partial_credit": "Mentions steps but unclear order",
+        "no_credit": "No clear explanation"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 1,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 300,
+      "passage": null
+    },
+    {
+      "id": "ela-1-w-3-001",
+      "standard_id": "1.W.3",
+      "dok_level": 2,
+      "question_type": "constructed_response",
+      "question": "Write a story about a time you went somewhere fun. Tell what happened first, next, and last. Use words like 'then' and 'after.'",
+      "correct_answer": null,
+      "rubric": {
+        "full_credit": "Narrates events in sequence with temporal words",
+        "partial_credit": "Some events in order, few temporal words",
+        "no_credit": "No clear sequence"
+      },
+      "manifold_fit": {
+        "coherence_delta": 5,
+        "entropy_delta": 2,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 360,
+      "passage": null
+    },
+    {
+      "id": "ela-1-w-3-002",
+      "standard_id": "1.W.3",
+      "dok_level": 2,
+      "question_type": "constructed_response",
+      "question": "Write about your birthday or a special day. What happened? How did you feel at the end?",
+      "correct_answer": null,
+      "rubric": {
+        "full_credit": "Narrates event with details and reaction/closure",
+        "partial_credit": "Narrates but missing reaction or closure",
+        "no_credit": "No event described"
+      },
+      "manifold_fit": {
+        "coherence_delta": 5,
+        "entropy_delta": 2,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 360,
+      "passage": null
+    },
+    {
+      "id": "ela-1-sl-1-001",
+      "standard_id": "1.SL.1",
+      "dok_level": 2,
+      "question_type": "performance_task",
+      "question": "Have a conversation with your partner about your favorite book. Take turns talking and ask each other questions.",
+      "correct_answer": null,
+      "rubric": {
+        "full_credit": "Takes turns, asks/answers questions, builds on ideas",
+        "partial_credit": "Participates but limited interaction",
+        "no_credit": "Does not participate appropriately"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 180,
+      "passage": null
+    },
+    {
+      "id": "ela-1-sl-1-002",
+      "standard_id": "1.SL.1",
+      "dok_level": 2,
+      "question_type": "performance_task",
+      "question": "In your group, discuss what makes a good friend. Follow the rules: listen carefully, take turns, and stay on topic.",
+      "correct_answer": null,
+      "rubric": {
+        "full_credit": "Follows all discussion rules and contributes",
+        "partial_credit": "Follows some rules",
+        "no_credit": "Does not follow rules"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 180,
+      "passage": null
+    },
+    {
+      "id": "ela-1-sl-2-001",
+      "standard_id": "1.SL.2",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Listen to the story read aloud. Then answer: What was the problem in the story?",
+      "correct_answer": "varies based on story",
+      "rubric": {
+        "full_credit": "Identifies the main problem",
+        "partial_credit": "Identifies related detail",
+        "no_credit": "Cannot identify problem"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 45,
+      "passage": null,
+      "audio_required": true
+    },
+    {
+      "id": "ela-1-sl-2-002",
+      "standard_id": "1.SL.2",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Listen to the information about whales. How do baby whales get food?",
+      "options": ["From their mothers", "From the ocean floor", "From seaweed", "From other fish"],
+      "correct_answer": "From their mothers",
+      "rubric": {
+        "full_credit": "Selects correct answer",
+        "no_credit": "Selects incorrect option"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 30,
+      "passage": null,
+      "audio_required": true
+    },
+    {
+      "id": "ela-1-l-1-001",
+      "standard_id": "1.L.1",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Choose the correct sentence.",
+      "options": ["She runs fast.", "She run fast.", "Her runs fast.", "She running fast."],
+      "correct_answer": "She runs fast.",
+      "rubric": {
+        "full_credit": "Selects grammatically correct sentence",
+        "no_credit": "Selects incorrect option"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 0,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 30,
+      "passage": null
+    },
+    {
+      "id": "ela-1-l-1-002",
+      "standard_id": "1.L.1",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Which word completes the sentence? 'The dogs ___ in the yard.'",
+      "options": ["play", "plays", "playing", "played"],
+      "correct_answer": "play",
+      "rubric": {
+        "full_credit": "Selects correct verb form",
+        "no_credit": "Selects incorrect option"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 0,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 30,
+      "passage": null
+    },
+    {
+      "id": "ela-1-l-2-001",
+      "standard_id": "1.L.2",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Which sentence has correct punctuation?",
+      "options": ["Is it raining?", "Is it raining.", "is it raining?", "Is it raining"],
+      "correct_answer": "Is it raining?",
+      "rubric": {
+        "full_credit": "Identifies correct punctuation",
+        "no_credit": "Selects incorrect option"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 0,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 30,
+      "passage": null
+    },
+    {
+      "id": "ela-1-l-2-002",
+      "standard_id": "1.L.2",
+      "dok_level": 1,
+      "question_type": "short_answer",
+      "question": "Fix this sentence: 'my friend sam lives in texas'",
+      "correct_answer": "My friend Sam lives in Texas.",
+      "rubric": {
+        "full_credit": "Capitalizes My, Sam, Texas; adds period",
+        "partial_credit": "Corrects some but not all",
+        "no_credit": "No corrections made"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 60,
+      "passage": null
+    }
+  ]
+}

@@ -1,0 +1,262 @@
+{
+    "grade": "8",
+    "subject": "Mathematics",
+    "domains": [
+        {
+            "id": "NS",
+            "name": "The Number System",
+            "standards": [
+                {
+                    "id": "8.NS.A.1",
+                    "description": "Know that numbers that are not rational are called irrational. Understand informally that every number has a decimal expansion; for rational numbers show that the decimal expansion repeats eventually, and convert a decimal expansion which repeats eventually into a rational number.",
+                    "prerequisites": [
+                        "7.NS.A.2"
+                    ],
+                    "cluster": "Know that there are numbers that are not rational, and approximate them by rational numbers."
+                },
+                {
+                    "id": "8.NS.A.2",
+                    "description": "Use rational approximations of irrational numbers to compare the size of irrational numbers, locate them approximately on a number line diagram, and estimate the value of expressions.",
+                    "prerequisites": [
+                        "8.NS.A.1"
+                    ],
+                    "cluster": "Know that there are numbers that are not rational, and approximate them by rational numbers."
+                }
+            ]
+        },
+        {
+            "id": "EE",
+            "name": "Expressions & Equations",
+            "standards": [
+                {
+                    "id": "8.EE.A.1",
+                    "description": "Know and apply the properties of integer exponents to generate equivalent numerical expressions.",
+                    "prerequisites": [
+                        "7.EE.A.1"
+                    ],
+                    "cluster": "Work with radicals and integer exponents."
+                },
+                {
+                    "id": "8.EE.A.2",
+                    "description": "Use square root and cube root symbols to represent solutions to equations of the form x² = p and x³ = p, where p is a positive rational number. Evaluate square roots of small perfect squares and cube roots of small perfect cubes.",
+                    "prerequisites": [
+                        "8.NS.A.1"
+                    ],
+                    "cluster": "Work with radicals and integer exponents."
+                },
+                {
+                    "id": "8.EE.A.3",
+                    "description": "Use numbers expressed in the form of a single digit times an integer power of 10 to estimate very large or very small quantities, and to express how many times as much one is than the other.",
+                    "prerequisites": [
+                        "8.EE.A.1"
+                    ],
+                    "cluster": "Work with radicals and integer exponents."
+                },
+                {
+                    "id": "8.EE.A.4",
+                    "description": "Perform operations with numbers expressed in scientific notation, including problems where both decimal and scientific notation are used.",
+                    "prerequisites": [
+                        "8.EE.A.3"
+                    ],
+                    "cluster": "Work with radicals and integer exponents."
+                },
+                {
+                    "id": "8.EE.B.5",
+                    "description": "Graph proportional relationships, interpreting the unit rate as the slope of the graph. Compare two different proportional relationships represented in different ways.",
+                    "prerequisites": [
+                        "7.RP.A.2"
+                    ],
+                    "cluster": "Understand the connections between proportional relationships, lines, and linear equations."
+                },
+                {
+                    "id": "8.EE.B.6",
+                    "description": "Use similar triangles to explain why the slope m is the same between any two distinct points on a non-vertical line in the coordinate plane; derive the equation y = mx for a line through the origin and the equation y = mx + b for a line intercepting the vertical axis at b.",
+                    "prerequisites": [
+                        "8.EE.B.5"
+                    ],
+                    "cluster": "Understand the connections between proportional relationships, lines, and linear equations."
+                },
+                {
+                    "id": "8.EE.C.7",
+                    "description": "Solve linear equations in one variable.",
+                    "prerequisites": [
+                        "7.EE.B.4"
+                    ],
+                    "cluster": "Analyze and solve linear equations and pairs of simultaneous linear equations."
+                },
+                {
+                    "id": "8.EE.C.8",
+                    "description": "Analyze and solve pairs of simultaneous linear equations.",
+                    "prerequisites": [
+                        "8.EE.C.7"
+                    ],
+                    "cluster": "Analyze and solve linear equations and pairs of simultaneous linear equations."
+                }
+            ]
+        },
+        {
+            "id": "F",
+            "name": "Functions",
+            "standards": [
+                {
+                    "id": "8.F.A.1",
+                    "description": "Understand that a function is a rule that assigns to each input exactly one output. The graph of a function is the set of ordered pairs consisting of an input and the corresponding output.",
+                    "prerequisites": [
+                        "8.EE.B.5"
+                    ],
+                    "cluster": "Define, evaluate, and compare functions."
+                },
+                {
+                    "id": "8.F.A.2",
+                    "description": "Compare properties of two functions each represented in a different way (algebraically, graphically, numerically in tables, or by verbal descriptions).",
+                    "prerequisites": [
+                        "8.F.A.1"
+                    ],
+                    "cluster": "Define, evaluate, and compare functions."
+                },
+                {
+                    "id": "8.F.A.3",
+                    "description": "Interpret the equation y = mx + b as defining a linear function, whose graph is a straight line; give examples of functions that are not linear.",
+                    "prerequisites": [
+                        "8.EE.B.6",
+                        "8.F.A.1"
+                    ],
+                    "cluster": "Define, evaluate, and compare functions."
+                },
+                {
+                    "id": "8.F.B.4",
+                    "description": "Construct a function to model a linear relationship between two quantities. Determine the rate of change and initial value of the function from a description of a relationship or from two (x, y) values, including reading these from a table or from a graph.",
+                    "prerequisites": [
+                        "8.F.A.3"
+                    ],
+                    "cluster": "Use functions to model relationships between quantities."
+                },
+                {
+                    "id": "8.F.B.5",
+                    "description": "Describe qualitatively the functional relationship between two quantities by analyzing a graph (e.g., where the function is increasing or decreasing, linear or nonlinear).",
+                    "prerequisites": [
+                        "8.F.A.1"
+                    ],
+                    "cluster": "Use functions to model relationships between quantities."
+                }
+            ]
+        },
+        {
+            "id": "G",
+            "name": "Geometry",
+            "standards": [
+                {
+                    "id": "8.G.A.1",
+                    "description": "Verify experimentally the properties of rotations, reflections, and translations.",
+                    "prerequisites": [
+                        "7.G.A.2"
+                    ],
+                    "cluster": "Understand congruence and similarity using physical models, transparencies, or geometry software."
+                },
+                {
+                    "id": "8.G.A.2",
+                    "description": "Understand that a two-dimensional figure is congruent to another if the second can be obtained from the first by a sequence of rotations, reflections, and translations.",
+                    "prerequisites": [
+                        "8.G.A.1"
+                    ],
+                    "cluster": "Understand congruence and similarity using physical models, transparencies, or geometry software."
+                },
+                {
+                    "id": "8.G.A.3",
+                    "description": "Describe the effect of dilations, translations, rotations, and reflections on two-dimensional figures using coordinates.",
+                    "prerequisites": [
+                        "8.G.A.2"
+                    ],
+                    "cluster": "Understand congruence and similarity using physical models, transparencies, or geometry software."
+                },
+                {
+                    "id": "8.G.A.4",
+                    "description": "Understand that a two-dimensional figure is similar to another if the second can be obtained from the first by a sequence of rotations, reflections, translations, and dilations.",
+                    "prerequisites": [
+                        "8.G.A.3"
+                    ],
+                    "cluster": "Understand congruence and similarity using physical models, transparencies, or geometry software."
+                },
+                {
+                    "id": "8.G.A.5",
+                    "description": "Use informal arguments to establish facts about the angle sum and exterior angle of triangles, about the angles created when parallel lines are cut by a transversal, and the angle-angle criterion for similarity of triangles.",
+                    "prerequisites": [
+                        "7.G.B.5"
+                    ],
+                    "cluster": "Understand congruence and similarity using physical models, transparencies, or geometry software."
+                },
+                {
+                    "id": "8.G.B.6",
+                    "description": "Explain a proof of the Pythagorean Theorem and its converse.",
+                    "prerequisites": [
+                        "8.G.A.5"
+                    ],
+                    "cluster": "Understand and apply the Pythagorean Theorem."
+                },
+                {
+                    "id": "8.G.B.7",
+                    "description": "Apply the Pythagorean Theorem to determine unknown side lengths in right triangles in real-world and mathematical problems in two and three dimensions.",
+                    "prerequisites": [
+                        "8.G.B.6"
+                    ],
+                    "cluster": "Understand and apply the Pythagorean Theorem."
+                },
+                {
+                    "id": "8.G.B.8",
+                    "description": "Apply the Pythagorean Theorem to find the distance between two points in a coordinate system.",
+                    "prerequisites": [
+                        "8.G.B.7"
+                    ],
+                    "cluster": "Understand and apply the Pythagorean Theorem."
+                },
+                {
+                    "id": "8.G.C.9",
+                    "description": "Know the formulas for the volumes of cones, cylinders, and spheres and use them to solve real-world and mathematical problems.",
+                    "prerequisites": [
+                        "7.G.B.6"
+                    ],
+                    "cluster": "Solve real-world and mathematical problems involving volume of cylinders, cones, and spheres."
+                }
+            ]
+        },
+        {
+            "id": "SP",
+            "name": "Statistics & Probability",
+            "standards": [
+                {
+                    "id": "8.SP.A.1",
+                    "description": "Construct and interpret scatter plots for bivariate measurement data to investigate patterns of association between two quantities. Describe patterns such as clustering, outliers, positive or negative association, linear association, and nonlinear association.",
+                    "prerequisites": [
+                        "7.SP.B.4"
+                    ],
+                    "cluster": "Investigate patterns of association in bivariate data."
+                },
+                {
+                    "id": "8.SP.A.2",
+                    "description": "Know that straight lines are widely used to model relationships between two quantitative variables. For scatter plots that suggest a linear association, informally fit a straight line, and informally assess the model fit by judging the closeness of the data points to the line.",
+                    "prerequisites": [
+                        "8.SP.A.1",
+                        "8.F.A.3"
+                    ],
+                    "cluster": "Investigate patterns of association in bivariate data."
+                },
+                {
+                    "id": "8.SP.A.3",
+                    "description": "Use the equation of a linear model to solve problems in the context of bivariate measurement data, interpreting the slope and intercept.",
+                    "prerequisites": [
+                        "8.SP.A.2"
+                    ],
+                    "cluster": "Investigate patterns of association in bivariate data."
+                },
+                {
+                    "id": "8.SP.A.4",
+                    "description": "Understand that patterns of association can also be seen in bivariate categorical data by displaying frequencies and relative frequencies in a two-way table. Construct and interpret a two-way table summarizing data on two categorical variables collected from the same subjects.",
+                    "prerequisites": [
+                        "7.SP.B.4"
+                    ],
+                    "cluster": "Investigate patterns of association in bivariate data."
+                }
+            ]
+        }
+    ]
+}

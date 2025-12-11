@@ -1,0 +1,507 @@
+{
+  "grade": "2",
+  "items": [
+    {
+      "id": "sci-2-ps1-1-001",
+      "standard_id": "2-PS1-1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Which property can you use to sort these objects: a rock, a sponge, and a marble?",
+      "options": ["Hardness - some are hard, some are soft", "They are all the same color", "They all float in water", "They all make sounds"],
+      "correct_answer": "Hardness - some are hard, some are soft",
+      "explanation": "Objects can be sorted by their properties like hardness. A rock and marble are hard, while a sponge is soft. This is an observable property.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 35,
+      "science_practice": "Analyzing and Interpreting Data"
+    },
+    {
+      "id": "sci-2-ps1-1-002",
+      "standard_id": "2-PS1-1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "You have five objects: a coin, a feather, a rubber ball, a piece of wood, and a metal spoon. Plan an investigation to classify them by at least two different properties. What properties will you use? Make a chart to show how you would sort them.",
+      "rubric": {
+        "4": "Two clear properties identified (e.g., sinks/floats, magnetic/not, hard/soft) with accurate sorting chart",
+        "3": "Two properties with mostly correct sorting",
+        "2": "One property clearly used or two with some sorting errors",
+        "1": "Properties mentioned but sorting unclear",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 240,
+      "science_practice": "Planning and Carrying Out Investigations"
+    },
+    {
+      "id": "sci-2-ps1-2-001",
+      "standard_id": "2-PS1-2",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "You need to choose a material to make a raincoat. Which property is MOST important?",
+      "options": ["The material does not let water through", "The material is very heavy", "The material is rough", "The material is very loud"],
+      "correct_answer": "The material does not let water through",
+      "explanation": "A raincoat needs to keep you dry. The most important property is being waterproof - not letting water pass through.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 35,
+      "science_practice": "Analyzing and Interpreting Data"
+    },
+    {
+      "id": "sci-2-ps1-2-002",
+      "standard_id": "2-PS1-2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "You are testing three materials to see which would be best for wrapping a gift: paper, plastic wrap, and fabric. Design a test to compare them. What property will you test? What will you do? What will you look for?",
+      "rubric": {
+        "4": "Clear test with identified property, controlled procedure, and observable outcome described",
+        "3": "Test with property and procedure but outcome less clear",
+        "2": "Basic test idea but missing procedure details",
+        "1": "Mentions testing but no clear plan",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 210,
+      "science_practice": "Planning and Carrying Out Investigations"
+    },
+    {
+      "id": "sci-2-ps1-3-001",
+      "standard_id": "2-PS1-3",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "You build a tower with LEGO blocks. Then you take it apart and build a car. What happened to the pieces?",
+      "options": ["The same pieces were rearranged to make something new", "The pieces disappeared", "New pieces appeared", "The pieces changed color"],
+      "correct_answer": "The same pieces were rearranged to make something new",
+      "explanation": "When you take apart an object made of pieces and build something new, the pieces don't change. They are just arranged in a different way.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 35,
+      "science_practice": "Constructing Explanations and Designing Solutions"
+    },
+    {
+      "id": "sci-2-ps1-3-002",
+      "standard_id": "2-PS1-3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Use 10 small cubes to build something. Draw it. Now take the same cubes and build something different. Draw that too. Explain what is the same and what is different about your two creations.",
+      "rubric": {
+        "4": "Two clear drawings with explanation that same pieces/amount used but arrangement and shape changed",
+        "3": "Two drawings with some explanation of similarities/differences",
+        "2": "Two drawings but explanation incomplete",
+        "1": "One drawing or drawings without explanation",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 180,
+      "science_practice": "Constructing Explanations and Designing Solutions"
+    },
+    {
+      "id": "sci-2-ps1-4-001",
+      "standard_id": "2-PS1-4",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "You put ice cubes in a glass of water. After 30 minutes, the ice is gone. What happened?",
+      "options": ["The ice melted and became water", "The ice disappeared forever", "The ice jumped out of the glass", "Someone took the ice"],
+      "correct_answer": "The ice melted and became water",
+      "explanation": "Heat from the room caused the ice to warm up and melt. The ice didn't disappear - it changed from solid ice to liquid water.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 30,
+      "science_practice": "Constructing Explanations and Designing Solutions"
+    },
+    {
+      "id": "sci-2-ps1-4-002",
+      "standard_id": "2-PS1-4",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Think about chocolate. What happens when you heat chocolate? What happens when you cool it down? Can this change go back and forth? Now think about cooking an egg. Can that change be reversed? Explain your thinking.",
+      "rubric": {
+        "4": "Correctly identifies chocolate melting/solidifying as reversible and egg cooking as not reversible with clear explanation",
+        "3": "Identifies both examples with partial explanation of reversibility",
+        "2": "One example correct with explanation",
+        "1": "Mentions heating/cooling but reversibility concept unclear",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 240,
+      "science_practice": "Engaging in Argument from Evidence"
+    },
+    {
+      "id": "sci-2-ls2-1-001",
+      "standard_id": "2-LS2-1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "A student puts one plant in a sunny window and one plant in a dark closet. Both plants get water. After two weeks, the plant in the window is healthy, but the plant in the closet is droopy and pale. What does this show?",
+      "options": ["Plants need sunlight to grow well", "Plants don't need water", "Dark closets make plants grow faster", "Both plants grew the same"],
+      "correct_answer": "Plants need sunlight to grow well",
+      "explanation": "The plant in the dark didn't grow well because it didn't have sunlight. Plants need light to make their food through photosynthesis.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 40,
+      "science_practice": "Analyzing and Interpreting Data"
+    },
+    {
+      "id": "sci-2-ls2-1-002",
+      "standard_id": "2-LS2-1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Design an investigation to test if plants need water to grow. What materials would you need? What would you do? What would you look for to know if your investigation worked?",
+      "rubric": {
+        "4": "Complete design with two plants (one watered, one not), same light/soil conditions, observations planned over time",
+        "3": "Good design with control and test plant, some variables controlled",
+        "2": "Basic idea of comparing plants but variables not clearly controlled",
+        "1": "Mentions plants and water but no clear investigation plan",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 240,
+      "science_practice": "Planning and Carrying Out Investigations"
+    },
+    {
+      "id": "sci-2-ls2-2-001",
+      "standard_id": "2-LS2-2",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "A bee visits a flower and gets pollen on its body. Then it flies to another flower. What happens next?",
+      "options": ["The pollen moves to the new flower, helping plants make seeds", "The bee turns into a flower", "The flower follows the bee home", "Nothing happens to the pollen"],
+      "correct_answer": "The pollen moves to the new flower, helping plants make seeds",
+      "explanation": "Bees help pollinate flowers by carrying pollen from one flower to another. This helps plants make seeds so new plants can grow.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 35,
+      "science_practice": "Developing and Using Models"
+    },
+    {
+      "id": "sci-2-ls2-2-002",
+      "standard_id": "2-LS2-2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Some plants have seeds that stick to animal fur. Make a model or draw a picture showing how an animal helps spread these seeds. Explain how this helps the plant.",
+      "rubric": {
+        "4": "Model/drawing shows seeds attaching to animal, traveling, then falling off in new location, with explanation of how this spreads plants",
+        "3": "Shows seed dispersal process with some explanation",
+        "2": "Shows animal and seeds but process not complete",
+        "1": "Drawing related to seeds or animals but process unclear",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 210,
+      "science_practice": "Developing and Using Models"
+    },
+    {
+      "id": "sci-2-ls4-1-001",
+      "standard_id": "2-LS4-1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "You observe animals in a pond and animals in a desert. What is TRUE about what you would find?",
+      "options": ["Different habitats have different types of animals", "All habitats have the exact same animals", "Deserts have more fish than ponds", "Animals don't live in either place"],
+      "correct_answer": "Different habitats have different types of animals",
+      "explanation": "Different habitats have different conditions, so different animals live in each place. Ponds have fish and frogs, while deserts have lizards and snakes.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 35,
+      "science_practice": "Analyzing and Interpreting Data"
+    },
+    {
+      "id": "sci-2-ls4-1-002",
+      "standard_id": "2-LS4-1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Compare a forest habitat and an ocean habitat. Make a chart with at least 3 plants and 3 animals that live in each habitat. Why do you think different living things are found in each place?",
+      "rubric": {
+        "4": "Chart with 3+ correct plants and animals for each habitat and explanation of how habitat conditions affect what lives there",
+        "3": "Chart with correct organisms and some explanation",
+        "2": "Chart with some correct organisms but explanation missing",
+        "1": "Partial chart or organisms not matched to correct habitat",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 240,
+      "science_practice": "Analyzing and Interpreting Data"
+    },
+    {
+      "id": "sci-2-ess1-1-001",
+      "standard_id": "2-ESS1-1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "A volcano erupts and lava covers the land. A canyon forms over millions of years from a river. What is different about these two events?",
+      "options": ["The volcano changed Earth quickly, but the canyon formed slowly", "Both events happened in one day", "Neither event changed the Earth", "The canyon formed faster than the volcano erupted"],
+      "correct_answer": "The volcano changed Earth quickly, but the canyon formed slowly",
+      "explanation": "Some Earth events happen quickly like volcanoes and earthquakes. Others happen slowly over millions of years like canyons forming.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 40,
+      "science_practice": "Obtaining, Evaluating, and Communicating Information"
+    },
+    {
+      "id": "sci-2-ess1-1-002",
+      "standard_id": "2-ESS1-1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Make a list of Earth events that happen quickly (in seconds to days) and events that happen slowly (over many years). Give at least 2 examples for each. Explain what makes them fast or slow.",
+      "rubric": {
+        "4": "Two+ correct examples for each category with clear explanation of timeframes",
+        "3": "Two examples each with some time explanation",
+        "2": "Some examples but categories mixed or timeframes unclear",
+        "1": "Few examples without clear categorization",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 210,
+      "science_practice": "Obtaining, Evaluating, and Communicating Information"
+    },
+    {
+      "id": "sci-2-ess2-1-001",
+      "standard_id": "2-ESS2-1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Farmers plant trees along the edge of their fields. How does this help prevent erosion?",
+      "options": ["Tree roots hold the soil in place so wind doesn't blow it away", "Trees make the wind blow faster", "Trees make more rain fall", "Trees don't affect erosion at all"],
+      "correct_answer": "Tree roots hold the soil in place so wind doesn't blow it away",
+      "explanation": "Tree roots grow into the soil and hold it together. This helps prevent wind and water from carrying soil away.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 40,
+      "science_practice": "Constructing Explanations and Designing Solutions"
+    },
+    {
+      "id": "sci-2-ess2-1-002",
+      "standard_id": "2-ESS2-1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A beach is losing sand to the ocean waves. Compare two solutions: building a wall along the beach OR planting grass on the sand dunes behind the beach. Which do you think would work better? Explain your reasoning.",
+      "rubric": {
+        "4": "Evaluates both solutions with pros/cons, makes reasoned choice with scientific explanation",
+        "3": "Compares both with preference explained",
+        "2": "Describes both but comparison weak",
+        "1": "Discusses one solution only",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 240,
+      "science_practice": "Engaging in Argument from Evidence"
+    },
+    {
+      "id": "sci-2-ess2-2-001",
+      "standard_id": "2-ESS2-2",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Which group shows only landforms?",
+      "options": ["Mountains, valleys, and plains", "Rivers, lakes, and oceans", "Rain, snow, and sunshine", "Trees, flowers, and grass"],
+      "correct_answer": "Mountains, valleys, and plains",
+      "explanation": "Landforms are features of the land like mountains, valleys, plains, and hills. Rivers and lakes are bodies of water, not landforms.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 30,
+      "science_practice": "Developing and Using Models"
+    },
+    {
+      "id": "sci-2-ess2-2-002",
+      "standard_id": "2-ESS2-2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Draw a map of an imaginary place that has at least 2 types of landforms (mountains, hills, plains, valleys) and 2 bodies of water (river, lake, ocean). Label each feature. Explain why you put the water where you did.",
+      "rubric": {
+        "4": "Map with 2+ landforms and 2+ water features, all labeled, with logical explanation of water placement",
+        "3": "Map with required features labeled and some explanation",
+        "2": "Map with some features but labels or explanation incomplete",
+        "1": "Simple map with few features identified",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 240,
+      "science_practice": "Developing and Using Models"
+    },
+    {
+      "id": "sci-2-ess2-3-001",
+      "standard_id": "2-ESS2-3",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Where on Earth can you find water in solid form?",
+      "options": ["In glaciers and ice caps at the poles", "In the hot desert", "In a boiling pot", "In a rain cloud"],
+      "correct_answer": "In glaciers and ice caps at the poles",
+      "explanation": "Water exists as a solid (ice) in cold places like glaciers, ice caps, and polar regions. These areas are cold enough to keep water frozen.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 35,
+      "science_practice": "Obtaining, Evaluating, and Communicating Information"
+    },
+    {
+      "id": "sci-2-ess2-3-002",
+      "standard_id": "2-ESS2-3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Make a chart showing where water is found on Earth. Include at least 4 different places. For each, tell if the water is liquid, solid, or both. Where is MOST of Earth's water found?",
+      "rubric": {
+        "4": "Chart with 4+ locations, correct states of water, and identifies oceans as largest water source",
+        "3": "Chart with locations and states, mentions oceans as main source",
+        "2": "Chart with some locations and states but main source not identified",
+        "1": "Few locations without states or organization",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 210,
+      "science_practice": "Obtaining, Evaluating, and Communicating Information"
+    },
+    {
+      "id": "sci-2-ets1-1-001",
+      "standard_id": "K-2-ETS1-1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Your classroom needs a better way to organize crayons. What should you do FIRST?",
+      "options": ["Ask questions about the problem - how many crayons? How are they used?", "Start building something right away", "Buy new crayons", "Throw away all the crayons"],
+      "correct_answer": "Ask questions about the problem - how many crayons? How are they used?",
+      "explanation": "Before solving a problem, we need to understand it. Asking questions helps us know what we need to build.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 1,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 35,
+      "science_practice": "Asking Questions and Defining Problems"
+    },
+    {
+      "id": "sci-2-ets1-2-001",
+      "standard_id": "K-2-ETS1-2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Draw a design for a bird feeder that keeps squirrels from eating the bird food. Label the parts of your design and explain how each part helps solve the problem.",
+      "rubric": {
+        "4": "Creative design with multiple labeled features that address squirrel problem (slippery surface, location, barriers)",
+        "3": "Design with labeled features and some explanation",
+        "2": "Design present but features not clearly anti-squirrel",
+        "1": "Simple bird feeder without squirrel consideration",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 5,
+        "generativity_delta": 6
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 300,
+      "science_practice": "Developing and Using Models"
+    },
+    {
+      "id": "sci-2-ets1-3-001",
+      "standard_id": "K-2-ETS1-3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Two groups designed bridges to hold toy cars. Bridge A held 5 cars before breaking. Bridge B held 10 cars. Both bridges used the same amount of paper. What questions would you ask to understand why Bridge B was stronger? What might be different about the two bridges?",
+      "rubric": {
+        "4": "Multiple relevant questions about design differences (folds, shape, supports) with hypotheses about why one was stronger",
+        "3": "Good questions with some hypotheses",
+        "2": "Some questions but hypotheses weak",
+        "1": "Basic question without analysis",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 210,
+      "science_practice": "Analyzing and Interpreting Data"
+    }
+  ]
+}

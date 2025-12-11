@@ -1,0 +1,475 @@
+{
+  "grade": "7",
+  "items": [
+    {
+      "id": "sci-7-ls1-1-001",
+      "standard_id": "MS-LS1-1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "When viewing a drop of pond water under a microscope, you see small green structures moving around. What is the most likely explanation?",
+      "options": ["They are single-celled organisms made of one cell", "They are tiny fish", "They are pieces of plants that fell in the water", "They are bubbles of air"],
+      "correct_answer": "They are single-celled organisms made of one cell",
+      "explanation": "Many living things, like algae and protozoa, consist of just one cell. These microscopic organisms are common in pond water.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 45,
+      "science_practice": "Planning and Carrying Out Investigations"
+    },
+    {
+      "id": "sci-7-ls1-1-002",
+      "standard_id": "MS-LS1-1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Design an investigation to provide evidence that living things are made of cells. What materials would you need? What procedure would you follow? What observations would support the claim?",
+      "rubric": {
+        "4": "Complete investigation: microscope, slides, stains; examine multiple organisms (plant, animal, microbe); observation of cell structures in all samples supports cell theory",
+        "3": "Good investigation with materials and procedure, some prediction",
+        "2": "Basic investigation idea but key elements missing",
+        "1": "Mentions microscope but no clear investigation plan",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 360,
+      "science_practice": "Planning and Carrying Out Investigations"
+    },
+    {
+      "id": "sci-7-ls1-2-001",
+      "standard_id": "MS-LS1-2",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Which cell part is responsible for controlling what enters and exits the cell?",
+      "options": ["Cell membrane", "Nucleus", "Mitochondria", "Ribosome"],
+      "correct_answer": "Cell membrane",
+      "explanation": "The cell membrane is selectively permeable, meaning it controls which substances can enter and exit the cell, maintaining homeostasis.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 40,
+      "science_practice": "Developing and Using Models"
+    },
+    {
+      "id": "sci-7-ls1-2-002",
+      "standard_id": "MS-LS1-2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Develop and use a model to describe how a cell functions like a factory. Assign factory jobs to at least 5 cell parts (nucleus, cell membrane, mitochondria, ribosomes, vacuole, chloroplast). Explain how each part contributes to the whole cell's function.",
+      "rubric": {
+        "4": "Five or more cell parts with accurate factory analogies (nucleus=manager, mitochondria=power plant, ribosomes=assembly line, membrane=security, vacuole=storage), explains how they work together",
+        "3": "Good analogies for most parts with some integration",
+        "2": "Some accurate analogies but connection weak",
+        "1": "Lists parts without meaningful analogies",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 360,
+      "science_practice": "Developing and Using Models"
+    },
+    {
+      "id": "sci-7-ls1-3-001",
+      "standard_id": "MS-LS1-3",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "The human body is organized in a hierarchy. Which correctly shows this organization from simplest to most complex?",
+      "options": ["Cells → Tissues → Organs → Organ systems → Organism", "Organs → Cells → Tissues → Organism → Organ systems", "Organism → Cells → Tissues → Organs → Organ systems", "Organ systems → Organs → Tissues → Cells → Organism"],
+      "correct_answer": "Cells → Tissues → Organs → Organ systems → Organism",
+      "explanation": "Living things are organized hierarchically: cells combine to form tissues, tissues form organs, organs form organ systems, and systems make up the organism.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 45,
+      "science_practice": "Developing and Using Models"
+    },
+    {
+      "id": "sci-7-ls1-3-002",
+      "standard_id": "MS-LS1-3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Use evidence to argue that the body is a system of interacting subsystems. Choose two organ systems (e.g., digestive and circulatory) and explain how they work together. What would happen if one system failed?",
+      "rubric": {
+        "4": "Two systems described with specific interactions (e.g., digestive breaks down food, circulatory transports nutrients), failure consequences explained for both systems",
+        "3": "Good description of two systems and their interaction",
+        "2": "Some interaction described but failure consequences weak",
+        "1": "Describes systems separately without interaction",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 360,
+      "science_practice": "Engaging in Argument from Evidence"
+    },
+    {
+      "id": "sci-7-ls1-4-001",
+      "standard_id": "MS-LS1-4",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Many flowers have bright colors and sweet nectar. How do these features affect the probability of successful reproduction?",
+      "options": ["They attract pollinators, increasing the chance of pollen transfer", "They make the plant grow faster", "They protect the plant from herbivores", "They have no effect on reproduction"],
+      "correct_answer": "They attract pollinators, increasing the chance of pollen transfer",
+      "explanation": "Specialized plant structures like colorful petals and nectar attract pollinators (bees, butterflies) that carry pollen between flowers, enabling reproduction.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 45,
+      "science_practice": "Engaging in Argument from Evidence"
+    },
+    {
+      "id": "sci-7-ls1-5-001",
+      "standard_id": "MS-LS1-5",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Two identical seedlings are planted. One receives full sunlight and nutrients; the other gets limited light and nutrients. After 8 weeks, they look very different in size. Construct a scientific explanation for how environmental factors influenced their growth, using evidence about what plants need.",
+      "rubric": {
+        "4": "Complete explanation: plants need light for photosynthesis and nutrients for building tissues; limited resources = less energy and building materials = stunted growth; references genetic potential vs. environmental expression",
+        "3": "Good explanation with light and nutrient connection",
+        "2": "Basic explanation but scientific reasoning incomplete",
+        "1": "States one grew better without explanation",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 300,
+      "science_practice": "Constructing Explanations and Designing Solutions"
+    },
+    {
+      "id": "sci-7-ls1-6-001",
+      "standard_id": "MS-LS1-6",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "During photosynthesis, what happens to the light energy absorbed by chlorophyll?",
+      "options": ["It is converted into chemical energy stored in glucose", "It is reflected back into the environment", "It heats up the plant", "It is stored as light in the leaves"],
+      "correct_answer": "It is converted into chemical energy stored in glucose",
+      "explanation": "Photosynthesis converts light energy into chemical energy stored in glucose molecules. This energy can later be released through cellular respiration.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 45,
+      "science_practice": "Constructing Explanations and Designing Solutions"
+    },
+    {
+      "id": "sci-7-ls1-6-002",
+      "standard_id": "MS-LS1-6",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Construct a scientific explanation for the role of photosynthesis in the cycling of matter and flow of energy. Include: 1) What materials go in, 2) What comes out, 3) How energy flows, 4) How this connects to cellular respiration.",
+      "rubric": {
+        "4": "Complete explanation: CO2 + H2O + light → glucose + O2; energy stored in glucose; respiration reverses process releasing energy; cycle of matter between photosynthesis and respiration",
+        "3": "Good explanation with inputs, outputs, and energy flow",
+        "2": "Basic photosynthesis explanation but connections incomplete",
+        "1": "Lists materials without energy or cycling discussion",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 360,
+      "science_practice": "Constructing Explanations and Designing Solutions"
+    },
+    {
+      "id": "sci-7-ls1-7-001",
+      "standard_id": "MS-LS1-7",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Develop a model showing how food molecules are rearranged through chemical reactions in an organism. Show: 1) Food entering the organism, 2) Digestion breaking down large molecules, 3) Cells using molecules for energy and building blocks.",
+      "rubric": {
+        "4": "Complete model with food → digestion → small molecules → cell transport → cellular respiration (energy) + building proteins/structures (growth), matter conservation shown",
+        "3": "Good model with most stages and some matter tracking",
+        "2": "Some stages shown but connections weak",
+        "1": "Basic digestion model without molecular focus",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 360,
+      "science_practice": "Developing and Using Models"
+    },
+    {
+      "id": "sci-7-ps1-1-001",
+      "standard_id": "MS-PS1-1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "A water molecule (H₂O) consists of:",
+      "options": ["Two hydrogen atoms bonded to one oxygen atom", "Two oxygen atoms bonded to one hydrogen atom", "Three hydrogen atoms bonded together", "One atom of water"],
+      "correct_answer": "Two hydrogen atoms bonded to one oxygen atom",
+      "explanation": "The chemical formula H₂O indicates a molecule with 2 hydrogen atoms (H₂) and 1 oxygen atom (O) bonded together.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 35,
+      "science_practice": "Developing and Using Models"
+    },
+    {
+      "id": "sci-7-ps1-1-002",
+      "standard_id": "MS-PS1-1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Develop models to describe the atomic composition of: 1) Carbon dioxide (CO₂), 2) Glucose (C₆H₁₂O₆), and 3) Table salt (NaCl). Include diagrams showing atoms and how many of each are present.",
+      "rubric": {
+        "4": "Three accurate models: CO₂ (1C, 2O), glucose (6C, 12H, 6O), NaCl (1Na, 1Cl) with diagrams showing atom arrangements",
+        "3": "Three models with mostly correct atom counts",
+        "2": "Some models correct or counts partially wrong",
+        "1": "Attempts models but significant errors",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 300,
+      "science_practice": "Developing and Using Models"
+    },
+    {
+      "id": "sci-7-ps1-2-001",
+      "standard_id": "MS-PS1-2",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Which observation is the BEST evidence that a chemical reaction has occurred?",
+      "options": ["A new substance with different properties forms", "The mixture changes color temporarily", "The substances get warmer when mixed", "The substances change shape"],
+      "correct_answer": "A new substance with different properties forms",
+      "explanation": "The defining characteristic of a chemical reaction is the formation of new substances with different chemical properties. Other signs (heat, color) may occur without a chemical change.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 45,
+      "science_practice": "Analyzing and Interpreting Data"
+    },
+    {
+      "id": "sci-7-ps1-2-002",
+      "standard_id": "MS-PS1-2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "You mix two clear liquids together. After mixing, you observe: the mixture gets warm, a solid forms at the bottom, and the liquid turns yellow. Analyze this data to determine if a chemical reaction occurred. What evidence supports your conclusion?",
+      "rubric": {
+        "4": "Identifies chemical reaction occurred with three pieces of evidence analyzed: temperature change (energy released), precipitate formation (new substance), color change (new substance with different properties)",
+        "3": "Correct conclusion with two pieces of evidence analyzed",
+        "2": "Correct conclusion but evidence analysis weak",
+        "1": "Makes conclusion without evidence analysis",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 270,
+      "science_practice": "Analyzing and Interpreting Data"
+    },
+    {
+      "id": "sci-7-ps1-3-001",
+      "standard_id": "MS-PS1-3",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Nylon fabric is made from petroleum products through chemical processes. This is an example of:",
+      "options": ["A synthetic material made from natural resources", "A natural material found in nature", "A material that has always existed", "A material that creates itself"],
+      "correct_answer": "A synthetic material made from natural resources",
+      "explanation": "Synthetic materials like nylon, plastic, and polyester are created by humans from natural resources (like petroleum) through chemical reactions.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 40,
+      "science_practice": "Obtaining, Evaluating, and Communicating Information"
+    },
+    {
+      "id": "sci-7-ps1-4-001",
+      "standard_id": "MS-PS1-4",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Develop a model that predicts what happens to the particles in ice when thermal energy is added. Describe: 1) Particle motion at different stages, 2) Temperature changes, 3) State changes that occur.",
+      "rubric": {
+        "4": "Complete model: particles vibrate in place (ice) → more motion with heating → particles slide past each other (water) → temperature steady during phase change → particles move freely (steam)",
+        "3": "Good model with particle motion and state changes",
+        "2": "Some states shown but particle motion unclear",
+        "1": "States listed without particle model",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 360,
+      "science_practice": "Developing and Using Models"
+    },
+    {
+      "id": "sci-7-ess2-1-001",
+      "standard_id": "MS-ESS2-1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Develop a model to describe how matter cycles through the rock cycle. Include: 1) The three types of rocks, 2) The processes that change one rock type to another, 3) The energy that drives these changes.",
+      "rubric": {
+        "4": "Complete cycle with igneous, sedimentary, metamorphic rocks; processes (weathering, erosion, deposition, compaction, heat/pressure, melting, cooling); energy sources (sun for weathering, Earth's interior for heat)",
+        "3": "Good cycle with most processes and energy sources",
+        "2": "Rock types and some processes but energy unclear",
+        "1": "Lists rock types without cycling",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 360,
+      "science_practice": "Developing and Using Models"
+    },
+    {
+      "id": "sci-7-ess2-2-001",
+      "standard_id": "MS-ESS2-2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "The Grand Canyon exposes rock layers billions of years old. Construct an explanation based on evidence for how geoscience processes (erosion, tectonic uplift) shaped this landscape over different time scales.",
+      "rubric": {
+        "4": "Explanation includes: tectonic forces lifting the Colorado Plateau (millions of years), river erosion cutting through layers (millions of years), rock layers showing different ancient environments, ongoing processes today",
+        "3": "Good explanation with erosion and time scales",
+        "2": "Basic erosion explanation without tectonic forces or time scales",
+        "1": "States canyon was carved without process explanation",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 360,
+      "science_practice": "Constructing Explanations and Designing Solutions"
+    },
+    {
+      "id": "sci-7-ets1-1-001",
+      "standard_id": "MS-ETS1-1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "A city wants to reduce traffic accidents. Which approach best defines the criteria and constraints for a solution?",
+      "options": ["Reduce accidents by 50% within budget of $1 million without adding to commute time", "Make traffic better", "Spend money on roads", "Ask drivers to be more careful"],
+      "correct_answer": "Reduce accidents by 50% within budget of $1 million without adding to commute time",
+      "explanation": "Good design problems have specific, measurable criteria (reduce by 50%) and clear constraints (budget, time impact) that guide solution development.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 50,
+      "science_practice": "Asking Questions and Defining Problems"
+    },
+    {
+      "id": "sci-7-ets1-2-001",
+      "standard_id": "MS-ETS1-2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Three water filter designs are being tested. Design A removes 95% of contaminants but costs $50. Design B removes 80% and costs $20. Design C removes 90% and costs $35. Using a systematic process, evaluate which design best meets the criteria of being effective AND affordable. Show your reasoning.",
+      "rubric": {
+        "4": "Systematic evaluation with scoring/weighing criteria, clear reasoning for trade-offs between effectiveness and cost, justified recommendation",
+        "3": "Good evaluation with both criteria considered",
+        "2": "Comparison made but systematic process unclear",
+        "1": "Chooses one without systematic evaluation",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 300,
+      "science_practice": "Analyzing and Interpreting Data"
+    },
+    {
+      "id": "sci-7-ets1-3-001",
+      "standard_id": "MS-ETS1-3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Three groups designed wind turbine blades. Group A's blade spun fastest but broke in high winds. Group B's blade was most durable but spun slowly. Group C's blade was medium in both. Analyze this data to identify the best characteristics that could be combined into an improved design.",
+      "rubric": {
+        "4": "Analyzes each design's strengths/weaknesses, proposes combination (A's aerodynamic shape + B's durable material + C's balance), explains how new design addresses original failures",
+        "3": "Good analysis with combination proposed",
+        "2": "Identifies characteristics but combination not developed",
+        "1": "Lists results without analysis",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 300,
+      "science_practice": "Analyzing and Interpreting Data"
+    },
+    {
+      "id": "sci-7-ets1-4-001",
+      "standard_id": "MS-ETS1-4",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "You are designing a bridge to hold the maximum weight. Develop a model of your initial design, describe what data you would collect from testing, and explain how you would modify the design based on failure points. Include at least two iterations.",
+      "rubric": {
+        "4": "Initial model with rationale, test procedure with data collection (weight held, failure point), first modification based on data, second test and modification, optimal design explained",
+        "3": "Good iterative process with at least one modification",
+        "2": "Design and testing but iteration incomplete",
+        "1": "Single design without iteration",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 5,
+        "generativity_delta": 6
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 420,
+      "science_practice": "Developing and Using Models"
+    }
+  ]
+}

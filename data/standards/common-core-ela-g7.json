@@ -1,0 +1,162 @@
+[
+    {
+        "id": "7.RL.1",
+        "category": "Reading",
+        "domain": "Literature",
+        "description": "Cite several pieces of textual evidence to support analysis of what the text says explicitly as well as inferences drawn from the text.",
+        "prerequisites": ["6.RL.1"],
+        "cluster": "Key Ideas and Details"
+    },
+    {
+        "id": "7.RL.2",
+        "category": "Reading",
+        "domain": "Literature",
+        "description": "Determine a theme or central idea of a text and analyze its development over the course of the text; provide an objective summary of the text.",
+        "prerequisites": ["7.RL.1", "6.RL.2"],
+        "cluster": "Key Ideas and Details"
+    },
+    {
+        "id": "7.RL.3",
+        "category": "Reading",
+        "domain": "Literature",
+        "description": "Analyze how particular elements of a story or drama interact (e.g., how setting shapes the characters or plot).",
+        "prerequisites": ["7.RL.1", "6.RL.3"],
+        "cluster": "Key Ideas and Details"
+    },
+    {
+        "id": "7.RL.4",
+        "category": "Reading",
+        "domain": "Literature",
+        "description": "Determine the meaning of words and phrases as they are used in a text, including figurative and connotative meanings; analyze the impact of rhymes and other repetitions of sounds (e.g., alliteration) on a specific verse or stanza of a poem or section of a story or drama.",
+        "prerequisites": ["6.RL.4"],
+        "cluster": "Craft and Structure"
+    },
+    {
+        "id": "7.RL.5",
+        "category": "Reading",
+        "domain": "Literature",
+        "description": "Analyze how a drama's or poem's form or structure (e.g., soliloquy, sonnet) contributes to its meaning.",
+        "prerequisites": ["7.RL.2", "6.RL.5"],
+        "cluster": "Craft and Structure"
+    },
+    {
+        "id": "7.RL.6",
+        "category": "Reading",
+        "domain": "Literature",
+        "description": "Analyze how an author develops and contrasts the points of view of different characters or narrators in a text.",
+        "prerequisites": ["7.RL.3", "6.RL.6"],
+        "cluster": "Craft and Structure"
+    },
+    {
+        "id": "7.RL.9",
+        "category": "Reading",
+        "domain": "Literature",
+        "description": "Compare and contrast a fictional portrayal of a time, place, or character and a historical account of the same period as a means of understanding how authors of fiction use or alter history.",
+        "prerequisites": ["7.RL.2"],
+        "cluster": "Integration of Knowledge and Ideas"
+    },
+    {
+        "id": "7.RI.1",
+        "category": "Reading",
+        "domain": "Informational Text",
+        "description": "Cite several pieces of textual evidence to support analysis of what the text says explicitly as well as inferences drawn from the text.",
+        "prerequisites": ["6.RI.1"],
+        "cluster": "Key Ideas and Details"
+    },
+    {
+        "id": "7.RI.2",
+        "category": "Reading",
+        "domain": "Informational Text",
+        "description": "Determine two or more central ideas in a text and analyze their development over the course of the text; provide an objective summary of the text.",
+        "prerequisites": ["7.RI.1", "6.RI.2"],
+        "cluster": "Key Ideas and Details"
+    },
+    {
+        "id": "7.RI.3",
+        "category": "Reading",
+        "domain": "Informational Text",
+        "description": "Analyze the interactions between individuals, events, and ideas in a text (e.g., how ideas influence individuals or events, or how individuals influence ideas or events).",
+        "prerequisites": ["7.RI.1", "6.RI.3"],
+        "cluster": "Key Ideas and Details"
+    },
+    {
+        "id": "7.RI.4",
+        "category": "Reading",
+        "domain": "Informational Text",
+        "description": "Determine the meaning of words and phrases as they are used in a text, including figurative, connotative, and technical meanings; analyze the impact of a specific word choice on meaning and tone.",
+        "prerequisites": ["6.RI.4"],
+        "cluster": "Craft and Structure"
+    },
+    {
+        "id": "7.RI.5",
+        "category": "Reading",
+        "domain": "Informational Text",
+        "description": "Analyze the structure an author uses to organize a text, including how the major sections contribute to the whole and to the development of the ideas.",
+        "prerequisites": ["7.RI.2", "6.RI.5"],
+        "cluster": "Craft and Structure"
+    },
+    {
+        "id": "7.RI.6",
+        "category": "Reading",
+        "domain": "Informational Text",
+        "description": "Determine an author's point of view or purpose in a text and analyze how the author distinguishes his or her position from that of others.",
+        "prerequisites": ["7.RI.1", "6.RI.6"],
+        "cluster": "Craft and Structure"
+    },
+    {
+        "id": "7.RI.8",
+        "category": "Reading",
+        "domain": "Informational Text",
+        "description": "Trace and evaluate the argument and specific claims in a text, assessing whether the reasoning is sound and the evidence is relevant and sufficient to support the claims.",
+        "prerequisites": ["7.RI.1", "6.RI.8"],
+        "cluster": "Integration of Knowledge and Ideas"
+    },
+    {
+        "id": "7.W.1",
+        "category": "Writing",
+        "domain": "Writing",
+        "description": "Write arguments to support claims with clear reasons and relevant evidence.",
+        "prerequisites": ["6.W.1"],
+        "cluster": "Text Types and Purposes"
+    },
+    {
+        "id": "7.W.2",
+        "category": "Writing",
+        "domain": "Writing",
+        "description": "Write informative/explanatory texts to examine a topic and convey ideas, concepts, and information through the selection, organization, and analysis of relevant content.",
+        "prerequisites": ["6.W.2"],
+        "cluster": "Text Types and Purposes"
+    },
+    {
+        "id": "7.W.3",
+        "category": "Writing",
+        "domain": "Writing",
+        "description": "Write narratives to develop real or imagined experiences or events using effective technique, relevant descriptive details, and well-structured event sequences.",
+        "prerequisites": ["6.W.3"],
+        "cluster": "Text Types and Purposes"
+    },
+    {
+        "id": "7.W.4",
+        "category": "Writing",
+        "domain": "Writing",
+        "description": "Produce clear and coherent writing in which the development, organization, and style are appropriate to task, purpose, and audience.",
+        "prerequisites": ["6.W.4"],
+        "cluster": "Production and Distribution of Writing"
+    },
+    {
+        "id": "7.SL.1",
+        "category": "Speaking & Listening",
+        "domain": "Speaking & Listening",
+        "description": "Engage effectively in a range of collaborative discussions (one-on-one, in groups, and teacher-led) with diverse partners on grade 7 topics, texts, and issues, building on others' ideas and expressing their own clearly.",
+        "prerequisites": ["6.SL.1"],
+        "cluster": "Comprehension and Collaboration"
+    },
+    {
+        "id": "7.L.1",
+        "category": "Language",
+        "domain": "Language",
+        "description": "Demonstrate command of the conventions of standard English grammar and usage when writing or speaking.",
+        "prerequisites": ["6.L.1"],
+        "cluster": "Conventions of Standard English"
+    }
+]

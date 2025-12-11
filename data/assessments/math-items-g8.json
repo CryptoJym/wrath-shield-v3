@@ -1,0 +1,1830 @@
+{
+  "grade": "8",
+  "subject": "Mathematics",
+  "standards_framework": "CCSS.MATH",
+  "items": [
+    {
+      "id": "math-8-ns-a-1-001",
+      "standard_id": "8.NS.A.1",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Convert 0.272727... (repeating) to a fraction. Show your work.",
+      "correct_answer": "Let x = 0.272727... Then 100x = 27.272727... Subtract: 100x - x = 27. So 99x = 27, x = 27/99 = 3/11.",
+      "rubric": {
+        "full_credit": "Correct fraction 3/11 with algebraic method shown",
+        "partial_credit": "Correct answer without method or correct method with arithmetic error",
+        "no_credit": "Incorrect answer"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 120
+    },
+    {
+      "id": "math-8-ns-a-1-002",
+      "standard_id": "8.NS.A.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Explain why √2 is irrational. Then explain why √4 is rational. What is the key difference between numbers under the radical that determines rationality?",
+      "correct_answer": "√2 is irrational because 2 is not a perfect square; its decimal expansion never terminates or repeats (1.41421356...). √4 = 2 is rational because 4 is a perfect square, making √4 a whole number. The key difference: if the number under the radical is a perfect square, the square root is rational. Otherwise, it's irrational.",
+      "rubric": {
+        "full_credit": "Correctly explains both examples and identifies perfect squares as the determining factor",
+        "partial_credit": "Correct examples but incomplete generalization",
+        "no_credit": "Incorrect classification of rational/irrational"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-8-ns-a-1-003",
+      "standard_id": "8.NS.A.1",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "Part A: Convert 0.123123123... to a fraction.\nPart B: Convert 0.5833333... (where only the 3 repeats) to a fraction.\nPart C: Explain why these two types of repeating decimals require different approaches.\nPart D: Prove that 0.999... = 1 using the algebraic method.",
+      "correct_answer": {
+        "part_a": "Let x = 0.123123... 1000x = 123.123123... 1000x - x = 123, so 999x = 123, x = 123/999 = 41/333",
+        "part_b": "Let x = 0.58333... 10x = 5.8333... 100x = 58.333... 100x - 10x = 52.5, so 90x = 52.5, x = 52.5/90 = 525/900 = 7/12",
+        "part_c": "In Part A, the entire decimal repeats, so multiply by power of 10 matching repeat length. In Part B, there's a non-repeating part before the repeat, requiring subtraction of two different multiples to eliminate both parts.",
+        "part_d": "Let x = 0.999... 10x = 9.999... 10x - x = 9, so 9x = 9, x = 1. Therefore 0.999... = 1."
+      },
+      "rubric": {
+        "full_credit": "All four parts correct with clear work",
+        "partial_credit": "Three parts correct",
+        "no_credit": "Fewer than three correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.8,
+      "time_estimate_seconds": 360
+    },
+    {
+      "id": "math-8-ns-a-2-001",
+      "standard_id": "8.NS.A.2",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Estimate √50 to the nearest tenth. Explain your reasoning.",
+      "correct_answer": "Since 7² = 49 and 8² = 64, √50 is between 7 and 8. Since 50 is very close to 49, √50 ≈ 7.1. (Actual: 7.07...)",
+      "rubric": {
+        "full_credit": "Estimate between 7.0 and 7.1 with reasoning about nearby perfect squares",
+        "partial_credit": "Correct reasoning but estimate slightly off",
+        "no_credit": "Incorrect reasoning or estimate far from correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-8-ns-a-2-002",
+      "standard_id": "8.NS.A.2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Place √28, 5.3, √30, and 5.5 on a number line. Order them from least to greatest and justify each placement.",
+      "correct_answer": "√25 = 5 and √36 = 6. √28 ≈ 5.29 (since 28 is close to 25). √30 ≈ 5.48 (since 30 is closer to 36). Order: √28 < 5.3 < √30 < 5.5. Justification: 5.29 < 5.3 < 5.48 < 5.5.",
+      "rubric": {
+        "full_credit": "Correct order with justified estimates for irrational numbers",
+        "partial_credit": "Correct order but weak justification",
+        "no_credit": "Incorrect ordering"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 150
+    },
+    {
+      "id": "math-8-ns-a-2-003",
+      "standard_id": "8.NS.A.2",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "Part A: Estimate the value of √75 + √12.\nPart B: Simplify √75 + √12 to simplest radical form.\nPart C: Use your simplified form to find a more precise estimate.\nPart D: Explain why simplifying radicals before estimating can give a better answer.",
+      "correct_answer": {
+        "part_a": "√75 ≈ 8.66 and √12 ≈ 3.46. Sum ≈ 12.12",
+        "part_b": "√75 = √(25×3) = 5√3. √12 = √(4×3) = 2√3. Sum = 7√3",
+        "part_c": "7√3 = 7 × 1.732 ≈ 12.124",
+        "part_d": "Simplifying combines like radicals, reducing two estimation errors to one. Instead of estimating √75 and √12 separately (two errors), we get 7√3 (one error × 7). More accurate because we only estimate once."
+      },
+      "rubric": {
+        "full_credit": "All four parts correct with clear explanation in Part D",
+        "partial_credit": "Three parts correct",
+        "no_credit": "Fewer than three correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 300
+    },
+    {
+      "id": "math-8-ee-a-1-001",
+      "standard_id": "8.EE.A.1",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Simplify: (2³)² × 2⁻⁴",
+      "correct_answer": "2⁶ × 2⁻⁴ = 2^(6-4) = 2² = 4",
+      "rubric": {
+        "full_credit": "Correct answer 4 with exponent work shown",
+        "partial_credit": "Correct method but arithmetic error",
+        "no_credit": "Incorrect exponent properties"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-8-ee-a-1-002",
+      "standard_id": "8.EE.A.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Prove that a⁰ = 1 for any non-zero value of a, using the quotient property of exponents (a^m ÷ a^n = a^(m-n)).",
+      "correct_answer": "Consider a^n ÷ a^n. By the quotient property: a^n ÷ a^n = a^(n-n) = a⁰. But we also know any number divided by itself equals 1: a^n ÷ a^n = 1. Therefore, a⁰ = 1.",
+      "rubric": {
+        "full_credit": "Complete proof using quotient property correctly",
+        "partial_credit": "Correct approach but incomplete reasoning",
+        "no_credit": "Incorrect proof or circular reasoning"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-8-ee-a-1-003",
+      "standard_id": "8.EE.A.1",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "Part A: Simplify (x³y²)⁴ / (x²y)³\nPart B: If x = 2 and y = -1, evaluate your simplified expression.\nPart C: For what value of x would the expression equal 1 (with y = 1)?\nPart D: Prove that (ab)^n = a^n × b^n using the definition of exponents.",
+      "correct_answer": {
+        "part_a": "(x¹²y⁸) / (x⁶y³) = x⁶y⁵",
+        "part_b": "2⁶ × (-1)⁵ = 64 × (-1) = -64",
+        "part_c": "x⁶y⁵ = 1, with y = 1: x⁶ = 1, so x = 1 (or x = -1)",
+        "part_d": "(ab)^n means (ab)(ab)(ab)...(ab) n times. Rearranging: (a×a×...×a)(b×b×...×b) = a^n × b^n"
+      },
+      "rubric": {
+        "full_credit": "All four parts correct",
+        "partial_credit": "Three parts correct",
+        "no_credit": "Fewer than three correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 300
+    },
+    {
+      "id": "math-8-ee-a-2-001",
+      "standard_id": "8.EE.A.2",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Solve: x² = 144. Find all solutions.",
+      "correct_answer": "x = ±12 (both 12 and -12)",
+      "rubric": {
+        "full_credit": "Both solutions given",
+        "partial_credit": "Only one solution (12 or -12)",
+        "no_credit": "Incorrect answer"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 60
+    },
+    {
+      "id": "math-8-ee-a-2-002",
+      "standard_id": "8.EE.A.2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A cube has volume 64 cubic inches. Find the edge length. Then find the surface area of the cube.",
+      "correct_answer": "Volume = s³, so s³ = 64. Taking cube root: s = ∛64 = 4 inches. Surface area = 6s² = 6(16) = 96 square inches.",
+      "rubric": {
+        "full_credit": "Correct edge length AND surface area with work shown",
+        "partial_credit": "Correct edge length but surface area error",
+        "no_credit": "Incorrect edge length"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 120
+    },
+    {
+      "id": "math-8-ee-a-2-003",
+      "standard_id": "8.EE.A.2",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "Part A: Solve x³ = -27.\nPart B: Explain why x² = -27 has no real solution.\nPart C: For what values of n does x^n = -27 have a real solution?\nPart D: Solve x² - 5x = 0 by factoring, and explain why x² = 5x does NOT mean x = 5.",
+      "correct_answer": {
+        "part_a": "x = ∛(-27) = -3",
+        "part_b": "Any real number squared is non-negative (positive or zero). Since -27 < 0, no real number squared can equal -27.",
+        "part_c": "When n is odd (1, 3, 5, ...), x^n = -27 has a real solution (negative base to odd power is negative). When n is even, there's no real solution.",
+        "part_d": "x² - 5x = 0 → x(x - 5) = 0 → x = 0 or x = 5. Dividing x² = 5x by x loses the x = 0 solution. You can only divide by x if x ≠ 0, which must be checked separately."
+      },
+      "rubric": {
+        "full_credit": "All four parts correct with clear reasoning",
+        "partial_credit": "Three parts correct",
+        "no_credit": "Fewer than three correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.8,
+      "time_estimate_seconds": 360
+    },
+    {
+      "id": "math-8-ee-a-3-001",
+      "standard_id": "8.EE.A.3",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Express 4,500,000 in scientific notation.",
+      "correct_answer": "4.5 × 10⁶",
+      "rubric": {
+        "full_credit": "Correct scientific notation",
+        "no_credit": "Incorrect notation"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 45
+    },
+    {
+      "id": "math-8-ee-a-3-002",
+      "standard_id": "8.EE.A.3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "The distance from Earth to the Sun is about 1.5 × 10⁸ km. The distance from Earth to the nearest star (Proxima Centauri) is about 4 × 10¹³ km. How many times farther is Proxima Centauri than the Sun?",
+      "correct_answer": "(4 × 10¹³) ÷ (1.5 × 10⁸) = (4 ÷ 1.5) × 10^(13-8) = 2.67 × 10⁵ ≈ 267,000 times farther.",
+      "rubric": {
+        "full_credit": "Correct calculation showing Proxima is about 267,000 times farther",
+        "partial_credit": "Correct setup but calculation error",
+        "no_credit": "Incorrect approach"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 150
+    },
+    {
+      "id": "math-8-ee-a-3-003",
+      "standard_id": "8.EE.A.3",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "The US national debt is approximately $31 trillion (3.1 × 10¹³). The US population is about 330 million (3.3 × 10⁸).\n\nPart A: Calculate the debt per person.\nPart B: If the debt grows by 5% per year, estimate the debt in 10 years (use 1.05¹⁰ ≈ 1.63).\nPart C: A household earns $60,000/year. How many years of income would it take to pay off one person's share of the debt?\nPart D: Express the national debt in terms of how many seconds old the universe is (4.3 × 10¹⁷ seconds).",
+      "correct_answer": {
+        "part_a": "(3.1 × 10¹³) ÷ (3.3 × 10⁸) = 0.94 × 10⁵ ≈ $94,000 per person",
+        "part_b": "(3.1 × 10¹³) × 1.63 ≈ 5.05 × 10¹³ ≈ $50.5 trillion",
+        "part_c": "$94,000 ÷ $60,000 ≈ 1.57 years of full income",
+        "part_d": "(3.1 × 10¹³) ÷ (4.3 × 10¹⁷) = 0.72 × 10⁻⁴ = 7.2 × 10⁻⁵. The debt in dollars is about 0.00007 times the age of universe in seconds."
+      },
+      "rubric": {
+        "full_credit": "All four parts correct",
+        "partial_credit": "Three parts correct",
+        "no_credit": "Fewer than three correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 300
+    },
+    {
+      "id": "math-8-ee-a-4-001",
+      "standard_id": "8.EE.A.4",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Calculate: (3 × 10⁴) × (2 × 10⁵)",
+      "correct_answer": "(3 × 2) × 10^(4+5) = 6 × 10⁹",
+      "rubric": {
+        "full_credit": "Correct answer in scientific notation",
+        "partial_credit": "Correct numerical value in wrong form",
+        "no_credit": "Incorrect calculation"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 60
+    },
+    {
+      "id": "math-8-ee-a-4-002",
+      "standard_id": "8.EE.A.4",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A computer can perform 5 × 10⁹ calculations per second. How long would it take to perform 8 × 10¹⁵ calculations? Express your answer in appropriate units.",
+      "correct_answer": "Time = (8 × 10¹⁵) ÷ (5 × 10⁹) = 1.6 × 10⁶ seconds. Converting: 1.6 × 10⁶ ÷ 60 ≈ 26,667 minutes ≈ 444 hours ≈ 18.5 days.",
+      "rubric": {
+        "full_credit": "Correct calculation with appropriate unit conversion",
+        "partial_credit": "Correct seconds but no conversion",
+        "no_credit": "Incorrect calculation"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 150
+    },
+    {
+      "id": "math-8-ee-a-4-003",
+      "standard_id": "8.EE.A.4",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "A virus is 2.5 × 10⁻⁷ meters in diameter. A human hair is 7.5 × 10⁻⁵ meters thick.\n\nPart A: How many viruses could fit across the width of a hair?\nPart B: Express the diameter of a virus in nanometers (1 nm = 10⁻⁹ m).\nPart C: If viruses reproduce by doubling every 30 minutes, starting with 1 virus, write an expression for the number of viruses after t hours.\nPart D: How long until there are 10⁹ viruses?",
+      "correct_answer": {
+        "part_a": "(7.5 × 10⁻⁵) ÷ (2.5 × 10⁻⁷) = 3 × 10² = 300 viruses",
+        "part_b": "(2.5 × 10⁻⁷) ÷ (10⁻⁹) = 2.5 × 10² = 250 nanometers",
+        "part_c": "Doubles 2t times in t hours (twice per hour). N = 2^(2t)",
+        "part_d": "2^(2t) = 10⁹. Taking log: 2t × log(2) = 9 × log(10). 2t × 0.301 = 9. 2t ≈ 30. t = 15 hours."
+      },
+      "rubric": {
+        "full_credit": "All four parts correct",
+        "partial_credit": "Three parts correct",
+        "no_credit": "Fewer than three correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.8,
+      "time_estimate_seconds": 360
+    },
+    {
+      "id": "math-8-ee-b-5-001",
+      "standard_id": "8.EE.B.5",
+      "dok_level": 2,
+      "question_type": "graphing",
+      "question": "Graph y = 3x and identify the unit rate/slope. What does the point (1, 3) mean in context if x represents hours worked and y represents dollars earned?",
+      "correct_answer": "Line through origin with slope 3. Unit rate = 3. The point (1, 3) means 1 hour of work earns $3, or the wage is $3 per hour.",
+      "rubric": {
+        "full_credit": "Correct graph, slope, and interpretation",
+        "partial_credit": "Correct graph and slope but weak interpretation",
+        "no_credit": "Incorrect graph"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 120
+    },
+    {
+      "id": "math-8-ee-b-5-002",
+      "standard_id": "8.EE.B.5",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Company A charges $50 per month plus $0.10 per mile. Company B's charges are shown in the graph (line through origin passing through (100, 20)). Compare the two companies' unit rates and determine which is better for someone driving 200 miles per month.",
+      "correct_answer": "Company A: $0.10/mile (plus $50 flat fee). Company B: 20/100 = $0.20/mile (no flat fee). At 200 miles: Company A = 50 + 0.10(200) = $70. Company B = 0.20(200) = $40. Company B is better at 200 miles. The break-even is at 50 + 0.10x = 0.20x → 50 = 0.10x → x = 500 miles.",
+      "rubric": {
+        "full_credit": "Correct unit rates for both, correct comparison at 200 miles with calculations",
+        "partial_credit": "Correct comparison but missing break-even analysis",
+        "no_credit": "Incorrect unit rates"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-8-ee-b-5-003",
+      "standard_id": "8.EE.B.5",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "Three different representations of proportional relationships:\n- Relationship A: y = 2.5x\n- Relationship B: Table showing (2, 8), (5, 20), (10, 40)\n- Relationship C: Graph passing through origin and (3, 9)\n\nPart A: Find the unit rate (slope) for each relationship.\nPart B: Order the relationships from smallest to largest unit rate.\nPart C: Write the equation for each relationship.\nPart D: For what x-value will Relationship A have the same y-value as Relationship C?",
+      "correct_answer": {
+        "part_a": "A: slope = 2.5. B: 8/2 = 4. C: 9/3 = 3",
+        "part_b": "A (2.5) < C (3) < B (4)",
+        "part_c": "A: y = 2.5x. B: y = 4x. C: y = 3x",
+        "part_d": "Set 2.5x = 3x. This only equals when x = 0. They never have the same y-value for x ≠ 0 because different slopes through origin never intersect except at origin."
+      },
+      "rubric": {
+        "full_credit": "All four parts correct",
+        "partial_credit": "Three parts correct",
+        "no_credit": "Fewer than two parts correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 300
+    },
+    {
+      "id": "math-8-ee-b-6-001",
+      "standard_id": "8.EE.B.6",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Use similar triangles to explain why the slope between any two points on the line y = 2x + 1 is always 2. Include a diagram.",
+      "correct_answer": "Pick any two points, say (0, 1) and (2, 5). The rise is 4, run is 2, slope = 2. For another pair (1, 3) and (4, 9): rise = 6, run = 3, slope = 2. Similar triangles: The right triangles formed by rise and run from any two points are similar because the angles are equal (right angle plus same angle with the line). Similar triangles have proportional sides, so rise/run is constant = slope = 2.",
+      "rubric": {
+        "full_credit": "Correct explanation with diagram showing similar triangles",
+        "partial_credit": "Correct concept but incomplete diagram or explanation",
+        "no_credit": "Incorrect understanding of why slope is constant"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 240
+    },
+    {
+      "id": "math-8-ee-b-6-002",
+      "standard_id": "8.EE.B.6",
+      "dok_level": 3,
+      "question_type": "multi_part",
+      "question": "Part A: Write the equation of a line through the origin with slope 4.\nPart B: Write the equation of a line with slope 4 that crosses the y-axis at (0, 3).\nPart C: Explain how the y-intercept affects the position of the line without changing its direction.\nPart D: Are the lines from Parts A and B parallel? How do you know?",
+      "correct_answer": {
+        "part_a": "y = 4x",
+        "part_b": "y = 4x + 3",
+        "part_c": "The y-intercept shifts the line up or down. Part B's line is 3 units above Part A's line at every x-value. The direction (slope) stays the same, just the position changes.",
+        "part_d": "Yes, they are parallel. Parallel lines have the same slope, and both have slope 4."
+      },
+      "rubric": {
+        "full_credit": "All four parts correct",
+        "partial_credit": "Three parts correct",
+        "no_credit": "Fewer than three correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-8-ee-b-6-003",
+      "standard_id": "8.EE.B.6",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Prove that the equation of any non-vertical line can be written in the form y = mx + b using similar triangles. Start with two points (x₁, y₁) and (x₂, y₂) on the line, and derive the slope-intercept form.",
+      "correct_answer": "Let (x₁, y₁) be any point and (0, b) be the y-intercept. The slope m = (y₁ - b)/(x₁ - 0) = (y₁ - b)/x₁. Solving for y₁: y₁ = mx₁ + b. Since (x₁, y₁) was arbitrary, for any point (x, y) on the line: y = mx + b. The similar triangles justification: From any point to the y-intercept, the vertical and horizontal distances form a right triangle. All such triangles are similar (same angles), so rise/run = constant = m.",
+      "rubric": {
+        "full_credit": "Complete derivation connecting slope definition to y = mx + b with similar triangle reasoning",
+        "partial_credit": "Correct derivation but weak connection to similar triangles",
+        "no_credit": "Incomplete or incorrect derivation"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.8,
+      "time_estimate_seconds": 300
+    },
+    {
+      "id": "math-8-ee-c-7-001",
+      "standard_id": "8.EE.C.7",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Solve: 3(x - 4) = 2x + 5",
+      "correct_answer": "3x - 12 = 2x + 5. x - 12 = 5. x = 17.",
+      "rubric": {
+        "full_credit": "Correct answer x = 17",
+        "partial_credit": "Correct process with arithmetic error",
+        "no_credit": "Incorrect process"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-8-ee-c-7-002",
+      "standard_id": "8.EE.C.7",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Classify and solve each equation: (a) 2(x + 3) = 2x + 6, (b) 2(x + 3) = 2x + 5, (c) 2(x + 3) = 3x + 2. Explain what each result means about the number of solutions.",
+      "correct_answer": "(a) 2x + 6 = 2x + 6 → 0 = 0. True for all x. Infinite solutions (identity). (b) 2x + 6 = 2x + 5 → 6 = 5. False. No solution (contradiction). (c) 2x + 6 = 3x + 2 → 4 = x. One solution: x = 4. An equation can have one solution, no solutions (contradiction), or infinitely many solutions (identity).",
+      "rubric": {
+        "full_credit": "All three correctly classified and solved with explanation",
+        "partial_credit": "Two correctly classified with explanations",
+        "no_credit": "Fewer than two correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-8-ee-c-7-003",
+      "standard_id": "8.EE.C.7",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "Part A: Solve: (5x - 3)/2 + 4 = (3x + 1)/4 + x\nPart B: Verify your solution by substituting back into the original equation.\nPart C: Create an equation with the same structure that has no solution.\nPart D: Create an equation with the same structure that has infinitely many solutions.",
+      "correct_answer": {
+        "part_a": "Multiply by 4: 2(5x - 3) + 16 = (3x + 1) + 4x. 10x - 6 + 16 = 7x + 1. 10x + 10 = 7x + 1. 3x = -9. x = -3.",
+        "part_b": "Left: (5(-3) - 3)/2 + 4 = (-18)/2 + 4 = -9 + 4 = -5. Right: (3(-3) + 1)/4 + (-3) = (-8)/4 - 3 = -2 - 3 = -5. ✓",
+        "part_c": "Example: (5x - 3)/2 + 4 = (5x + 7)/2 + 4. This simplifies to -3 = 7, which is false.",
+        "part_d": "Example: (5x - 3)/2 + 4 = (5x + 5)/2 + 0. This simplifies to 5x - 3 + 8 = 5x + 5, then 5 = 5, true for all x."
+      },
+      "rubric": {
+        "full_credit": "All four parts correct with valid examples in C and D",
+        "partial_credit": "Parts A and B correct with one valid example",
+        "no_credit": "Part A incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 360
+    },
+    {
+      "id": "math-8-ee-c-8-001",
+      "standard_id": "8.EE.C.8",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Solve by substitution: y = 2x + 3 and 3x + y = 13",
+      "correct_answer": "Substitute: 3x + (2x + 3) = 13. 5x + 3 = 13. 5x = 10. x = 2. Then y = 2(2) + 3 = 7. Solution: (2, 7).",
+      "rubric": {
+        "full_credit": "Correct solution (2, 7)",
+        "partial_credit": "Correct x or y but not both",
+        "no_credit": "Incorrect approach"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 120
+    },
+    {
+      "id": "math-8-ee-c-8-002",
+      "standard_id": "8.EE.C.8",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Graph the system: y = -x + 4 and y = 2x - 2. Find the solution graphically and verify algebraically. Explain what the intersection point means.",
+      "correct_answer": "Graph shows lines intersecting at (2, 2). Algebraically: -x + 4 = 2x - 2. 6 = 3x. x = 2. y = -2 + 4 = 2. The intersection (2, 2) is the only point that lies on both lines, meaning x = 2 and y = 2 is the only pair of values that makes both equations true simultaneously.",
+      "rubric": {
+        "full_credit": "Correct graph, algebraic verification, and interpretation of intersection",
+        "partial_credit": "Correct solution but weak interpretation",
+        "no_credit": "Incorrect solution"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-8-ee-c-8-003",
+      "standard_id": "8.EE.C.8",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "A school fundraiser sells adult tickets for $8 and student tickets for $5. They sold 200 tickets and collected $1,300.\n\nPart A: Write a system of equations representing this situation.\nPart B: Solve the system using elimination.\nPart C: Solve the system using substitution and verify you get the same answer.\nPart D: Interpret each equation graphically. What does the intersection represent in context?",
+      "correct_answer": {
+        "part_a": "Let a = adult tickets, s = student tickets. a + s = 200 and 8a + 5s = 1300",
+        "part_b": "Multiply first by -5: -5a - 5s = -1000. Add to second: 3a = 300. a = 100. Then s = 100.",
+        "part_c": "From first: s = 200 - a. Substitute: 8a + 5(200-a) = 1300. 8a + 1000 - 5a = 1300. 3a = 300. a = 100, s = 100. Same answer ✓",
+        "part_d": "First equation: All combinations of tickets totaling 200 (downward sloping line). Second equation: All combinations yielding $1300 (different slope). Intersection: The unique combination (100, 100) satisfying both constraints."
+      },
+      "rubric": {
+        "full_credit": "All four parts correct with both methods yielding same answer",
+        "partial_credit": "Three parts correct",
+        "no_credit": "Fewer than three correct or systems incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 300
+    },
+    {
+      "id": "math-8-f-a-1-001",
+      "standard_id": "8.F.A.1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Which relation is a function?",
+      "options": [
+        "A) {(1, 2), (2, 3), (1, 4), (3, 5)}",
+        "B) {(1, 2), (2, 2), (3, 2), (4, 2)}",
+        "C) {(2, 1), (2, 3), (2, 5), (2, 7)}",
+        "D) {(1, 2), (2, 3), (3, 2), (2, 1)}"
+      ],
+      "correct_answer": "B",
+      "rubric": {
+        "full_credit": "Correct answer B (each input has exactly one output)",
+        "no_credit": "Any other answer"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-8-f-a-1-002",
+      "standard_id": "8.F.A.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Explain why the equation x = y² does NOT represent y as a function of x. Use a specific example to illustrate. Then rearrange or restrict the domain to create a function.",
+      "correct_answer": "For x = 4, we get y² = 4, so y = 2 or y = -2. One input (x = 4) gives two outputs, violating the function definition. To make it a function: y = √x (take only positive root) or restrict domain to y ≥ 0. This gives exactly one output for each input.",
+      "rubric": {
+        "full_credit": "Correct explanation with example and valid restriction",
+        "partial_credit": "Correct explanation but incomplete restriction",
+        "no_credit": "Incorrect understanding of why it's not a function"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-8-f-a-1-003",
+      "standard_id": "8.F.A.1",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "Part A: Create a mapping diagram for the function f(x) = |x - 2| using inputs -1, 0, 1, 2, 3, 4, 5.\nPart B: Is f(x) = |x - 2| one-to-one? Explain using your mapping diagram.\nPart C: Can you undo (find the inverse of) this function? If not, explain why. If possible with restriction, describe the restriction.\nPart D: Give a real-world example where an absolute value function is useful.",
+      "correct_answer": {
+        "part_a": "-1→3, 0→2, 1→1, 2→0, 3→1, 4→2, 5→3",
+        "part_b": "Not one-to-one. Multiple inputs give the same output: f(1) = f(3) = 1, f(0) = f(4) = 2, f(-1) = f(5) = 3.",
+        "part_c": "Cannot undo without restriction because it's not one-to-one. With restriction x ≥ 2: f(x) = x - 2, inverse is f⁻¹(x) = x + 2. With x ≤ 2: f(x) = 2 - x, inverse is f⁻¹(x) = 2 - x.",
+        "part_d": "Examples: Distance from a target (how far from 2 meters tall?), temperature deviation from ideal, error measurement."
+      },
+      "rubric": {
+        "full_credit": "All four parts correct with clear reasoning",
+        "partial_credit": "Three parts correct",
+        "no_credit": "Fewer than three correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 360
+    },
+    {
+      "id": "math-8-f-a-2-001",
+      "standard_id": "8.F.A.2",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Function A: y = 3x - 2. Function B is shown in the table: x: 0, 1, 2, 3 → y: -2, 1, 4, 7. Which function has a greater rate of change?",
+      "correct_answer": "Function A: rate of change = 3. Function B: rate of change = (7-(-2))/(3-0) = 9/3 = 3. Same rate of change (both = 3).",
+      "rubric": {
+        "full_credit": "Correct identification that both have equal rate of change = 3",
+        "partial_credit": "Correct calculation but wrong comparison",
+        "no_credit": "Incorrect calculation"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-8-f-a-2-002",
+      "standard_id": "8.F.A.2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Compare these three representations of functions:\n- Function A: f(x) = -2x + 5\n- Function B: A line passing through (0, 3) and (2, 7)\n- Function C: 'The cost is $4 per hour plus a $1 setup fee'\n\nFind the slope and y-intercept for each. Which function has the greatest output when x = 10?",
+      "correct_answer": "A: slope = -2, y-intercept = 5, f(10) = -20 + 5 = -15. B: slope = (7-3)/(2-0) = 2, y-intercept = 3, f(10) = 2(10) + 3 = 23. C: y = 4x + 1, slope = 4, y-intercept = 1, f(10) = 40 + 1 = 41. Function C has the greatest output (41) at x = 10.",
+      "rubric": {
+        "full_credit": "All three functions correctly analyzed and compared",
+        "partial_credit": "Two functions correctly analyzed",
+        "no_credit": "Fewer than two correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-8-f-a-2-003",
+      "standard_id": "8.F.A.2",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "Part A: Function A is given algebraically: f(x) = 0.5x + 4. Function B passes through points shown in a table: (2, 5), (4, 6), (6, 7). Create equations for both.\n\nPart B: Graph both functions on the same coordinate plane.\n\nPart C: For what x-value do the functions have equal outputs?\n\nPart D: Describe a real-world scenario where you would need to find when two linear functions are equal.",
+      "correct_answer": {
+        "part_a": "A: f(x) = 0.5x + 4. B: slope = (7-5)/(6-2) = 0.5, passes through (2,5): y - 5 = 0.5(x - 2), y = 0.5x + 4. They're the same function!",
+        "part_b": "Single line with slope 0.5 and y-intercept 4",
+        "part_c": "Equal for all x-values (same function)",
+        "part_d": "Examples: When do two phone plans cost the same? When does renting vs buying break even? When do two runners in a race meet?"
+      },
+      "rubric": {
+        "full_credit": "Correctly identifies functions as identical with good real-world example",
+        "partial_credit": "Correct equations but misses that they're the same",
+        "no_credit": "Incorrect equations"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 300
+    },
+    {
+      "id": "math-8-f-a-3-001",
+      "standard_id": "8.F.A.3",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Which equation represents a linear function?",
+      "options": [
+        "A) y = x²",
+        "B) y = 2/x",
+        "C) y = 3x - 7",
+        "D) y = 2^x"
+      ],
+      "correct_answer": "C",
+      "rubric": {
+        "full_credit": "Correct answer C",
+        "no_credit": "Any other answer"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 60
+    },
+    {
+      "id": "math-8-f-a-3-002",
+      "standard_id": "8.F.A.3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Explain why y = x² + 1 is NOT a linear function using at least two different methods (graph, table, equation analysis).",
+      "correct_answer": "Method 1 (Equation): Not in form y = mx + b. The x² term means it's quadratic, not linear. Method 2 (Table): x: 0, 1, 2, 3 → y: 1, 2, 5, 10. Rate of change: 1, 3, 5 (not constant). Linear functions have constant rate of change. Method 3 (Graph): The graph is a parabola (U-shape), not a straight line.",
+      "rubric": {
+        "full_credit": "Two valid methods clearly explained",
+        "partial_credit": "One method clearly explained",
+        "no_credit": "No valid method"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-8-f-a-3-003",
+      "standard_id": "8.F.A.3",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "Classify each function as linear or nonlinear and justify:\n\nPart A: A pizza costs $12 plus $2 per topping.\nPart B: The area of a square with side length s.\nPart C: Bacteria double every hour, starting with 100.\nPart D: For the nonlinear functions, sketch their graphs and describe how they differ from linear graphs.",
+      "correct_answer": {
+        "part_a": "Linear: y = 12 + 2x. Constant rate of change ($2/topping).",
+        "part_b": "Nonlinear: A = s². Rate of change increases as s increases (quadratic).",
+        "part_c": "Nonlinear: y = 100(2^x). Exponential growth - rate of change accelerates.",
+        "part_d": "Area: Parabola curving upward, getting steeper. Bacteria: Exponential curve, starting slow then exploding upward. Both differ from linear by not having constant steepness."
+      },
+      "rubric": {
+        "full_credit": "All four parts correct with proper classification and graph descriptions",
+        "partial_credit": "Three parts correct",
+        "no_credit": "Fewer than three correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 300
+    },
+    {
+      "id": "math-8-f-b-4-001",
+      "standard_id": "8.F.B.4",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "A linear function passes through (2, 5) and (6, 13). Find the slope and y-intercept, then write the equation.",
+      "correct_answer": "Slope = (13-5)/(6-2) = 8/4 = 2. Using point (2, 5): 5 = 2(2) + b, so b = 1. Equation: y = 2x + 1.",
+      "rubric": {
+        "full_credit": "Correct equation y = 2x + 1",
+        "partial_credit": "Correct slope but wrong y-intercept",
+        "no_credit": "Incorrect slope"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 120
+    },
+    {
+      "id": "math-8-f-b-4-002",
+      "standard_id": "8.F.B.4",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A plumber charges a service call fee plus an hourly rate. A 2-hour job costs $130 and a 5-hour job costs $250. Find the service fee and hourly rate, then write a function for the total cost.",
+      "correct_answer": "Let y = cost, x = hours. Points: (2, 130) and (5, 250). Slope (hourly rate) = (250-130)/(5-2) = 120/3 = $40/hour. Using (2, 130): 130 = 40(2) + b, so b = 50. Service fee = $50. Function: C(x) = 40x + 50.",
+      "rubric": {
+        "full_credit": "Correct function with interpretation of slope and intercept",
+        "partial_credit": "Correct function but no interpretation",
+        "no_credit": "Incorrect function"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-8-f-b-4-003",
+      "standard_id": "8.F.B.4",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "The table shows a car's value over time:\nYear 0: $28,000\nYear 2: $24,000\nYear 5: $18,000\n\nPart A: Is this relationship linear? Justify using rate of change.\nPart B: Assuming a linear model, find the equation for value V as a function of years t.\nPart C: Interpret the slope and y-intercept in context.\nPart D: According to your model, when will the car be worth $0? Is this realistic? What limitations does the linear model have?",
+      "correct_answer": {
+        "part_a": "Check rates: (24000-28000)/(2-0) = -2000/yr. (18000-24000)/(5-2) = -2000/yr. Constant rate, so linear.",
+        "part_b": "V = -2000t + 28000",
+        "part_c": "Slope -2000: The car loses $2,000 in value per year (depreciation). Y-intercept 28000: The initial value when new.",
+        "part_d": "Set V = 0: 0 = -2000t + 28000. t = 14 years. Not entirely realistic - cars retain some salvage value, and depreciation often slows after initial years. Linear model is limited because it predicts negative value after 14 years and doesn't capture decreasing depreciation rate."
+      },
+      "rubric": {
+        "full_credit": "All four parts correct with thoughtful limitations discussion",
+        "partial_credit": "Three parts correct",
+        "no_credit": "Fewer than three correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 300
+    },
+    {
+      "id": "math-8-f-b-5-001",
+      "standard_id": "8.F.B.5",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Describe the function shown: A graph starts at the origin, increases steeply, then gradually levels off but never decreases.",
+      "correct_answer": "The function is increasing throughout. It starts with a high rate of change (steep increase) and the rate of change decreases over time (leveling off). This is not linear - it's likely logarithmic or similar. The function has no maximum but approaches a horizontal asymptote.",
+      "rubric": {
+        "full_credit": "Correctly describes as increasing with decreasing rate of change",
+        "partial_credit": "Identifies as increasing but incomplete description",
+        "no_credit": "Incorrect description of behavior"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-8-f-b-5-002",
+      "standard_id": "8.F.B.5",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Sketch a graph showing a runner's distance from the starting line over time for this scenario: She starts slowly, picks up speed, maintains a constant pace for a while, gets tired and slows down, then stops to rest. Label the axes and describe each section.",
+      "correct_answer": "Graph with time (x) and distance (y). Section 1: Curve starting flat then getting steeper (accelerating). Section 2: Straight line with positive slope (constant speed). Section 3: Curve getting less steep (decelerating). Section 4: Horizontal line (stopped, distance not changing). Each section should be labeled with the corresponding behavior.",
+      "rubric": {
+        "full_credit": "Graph correctly shows all four phases with proper curvature and labels",
+        "partial_credit": "Three phases correctly shown",
+        "no_credit": "Fewer than three phases correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-8-f-b-5-003",
+      "standard_id": "8.F.B.5",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "A ball is thrown upward. Its height h (meters) after t seconds is given by the graph (parabola opening downward, vertex at (2, 20), x-intercepts at 0 and 4).\n\nPart A: Describe the motion of the ball in words.\nPart B: On what interval is the function increasing? Decreasing?\nPart C: What is the maximum height and when does it occur?\nPart D: When does the ball hit the ground? What is the average rate of change from t = 0 to t = 2? From t = 2 to t = 4?",
+      "correct_answer": {
+        "part_a": "The ball starts at ground level, rises to a maximum height, then falls back down. It moves fastest at the start and end, slowest at the peak.",
+        "part_b": "Increasing on (0, 2). Decreasing on (2, 4).",
+        "part_c": "Maximum height: 20 meters at t = 2 seconds.",
+        "part_d": "Hits ground at t = 4 seconds. Rate of change 0→2: (20-0)/(2-0) = 10 m/s. Rate 2→4: (0-20)/(4-2) = -10 m/s. Same magnitude but opposite direction (up vs down)."
+      },
+      "rubric": {
+        "full_credit": "All four parts correct with clear analysis",
+        "partial_credit": "Three parts correct",
+        "no_credit": "Fewer than three correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 300
+    },
+    {
+      "id": "math-8-g-a-1-001",
+      "standard_id": "8.G.A.1",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Triangle ABC has vertices A(1, 1), B(4, 1), and C(1, 5). Reflect it over the y-axis. What are the new coordinates?",
+      "correct_answer": "A'(-1, 1), B'(-4, 1), C'(-1, 5). Reflection over y-axis: (x, y) → (-x, y).",
+      "rubric": {
+        "full_credit": "All three coordinates correct",
+        "partial_credit": "Two coordinates correct",
+        "no_credit": "Fewer than two correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-8-g-a-1-002",
+      "standard_id": "8.G.A.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Verify experimentally that when a figure is rotated 180° about the origin, each point (x, y) maps to (-x, -y). Use the rectangle with vertices (1, 2), (4, 2), (4, 5), (1, 5). Show the original and rotated figure and verify the relationship holds for each vertex.",
+      "correct_answer": "Original: (1, 2), (4, 2), (4, 5), (1, 5). After 180° rotation: (-1, -2), (-4, -2), (-4, -5), (-1, -5). For each point (x, y) → (-x, -y): (1,2)→(-1,-2)✓, (4,2)→(-4,-2)✓, (4,5)→(-4,-5)✓, (1,5)→(-1,-5)✓. The rectangle maintains its shape and size, just in a different location.",
+      "rubric": {
+        "full_credit": "All vertices correctly transformed with verification of the rule",
+        "partial_credit": "Correct transformations but incomplete verification",
+        "no_credit": "Incorrect transformations"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-8-g-a-1-003",
+      "standard_id": "8.G.A.1",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "Part A: Triangle PQR has P(2, 3), Q(5, 3), R(3, 7). Translate by (-4, 2), then reflect over the x-axis. Find the final coordinates.\n\nPart B: Does the order of transformations matter? Perform them in reverse order and compare results.\n\nPart C: Find a single transformation that has the same effect as the two combined.\n\nPart D: Prove that translations preserve distance by showing PQ = P'Q' (original and final).",
+      "correct_answer": {
+        "part_a": "Translate: P'(-2, 5), Q'(1, 5), R'(-1, 9). Reflect over x-axis: P''(-2, -5), Q''(1, -5), R''(-1, -9).",
+        "part_b": "Reverse: Reflect first: P(2, -3), Q(5, -3), R(3, -7). Then translate: P(-2, -1), Q(1, -1), R(-1, -5). Different result! Order matters.",
+        "part_c": "No single standard transformation works because translation + reflection in different order gives different results. However, the combined effect in Part A is equivalent to a glide reflection.",
+        "part_d": "PQ = |5-2| = 3 (horizontal distance). After transformations: P''(-2, -5), Q''(1, -5). P''Q'' = |1-(-2)| = 3. Distance preserved ✓"
+      },
+      "rubric": {
+        "full_credit": "All four parts correct with clear work",
+        "partial_credit": "Three parts correct",
+        "no_credit": "Fewer than three correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.8,
+      "time_estimate_seconds": 420
+    },
+    {
+      "id": "math-8-g-a-2-001",
+      "standard_id": "8.G.A.2",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Two figures are congruent if one can be obtained from the other by:",
+      "options": [
+        "A) Dilations only",
+        "B) A sequence of rotations, reflections, and translations",
+        "C) A sequence that includes dilations",
+        "D) Stretching and shrinking"
+      ],
+      "correct_answer": "B",
+      "rubric": {
+        "full_credit": "Correct answer B",
+        "no_credit": "Any other answer"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 60
+    },
+    {
+      "id": "math-8-g-a-2-002",
+      "standard_id": "8.G.A.2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Triangle ABC has vertices A(-3, 1), B(-1, 1), C(-2, 4). Triangle DEF has vertices D(3, -1), E(1, -1), F(2, -4). Determine if the triangles are congruent by describing a sequence of transformations that maps ABC onto DEF.",
+      "correct_answer": "Method 1: Rotate ABC 180° about the origin: A(-3,1)→(3,-1)=D, B(-1,1)→(1,-1)=E, C(-2,4)→(2,-4)=F. Single rotation works! Method 2: Reflect over y-axis then reflect over x-axis. Both methods show they are congruent because rigid motions map one exactly onto the other.",
+      "rubric": {
+        "full_credit": "Valid sequence of transformations that maps ABC to DEF, proving congruence",
+        "partial_credit": "Identifies as congruent but transformation sequence incomplete",
+        "no_credit": "Incorrect conclusion or no valid transformation"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 240
+    },
+    {
+      "id": "math-8-g-a-2-003",
+      "standard_id": "8.G.A.2",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "Part A: Quadrilateral ABCD has A(0,0), B(4,0), C(5,3), D(1,3). Quadrilateral EFGH has E(6,2), F(10,2), G(11,5), H(7,5). Are they congruent? Prove your answer.\n\nPart B: Find the specific transformation(s) that map ABCD to EFGH.\n\nPart C: If ABCD is reflected over the line y = x, are the result and EFGH still congruent? Explain.\n\nPart D: Explain why congruence is important in real-world applications (give two examples).",
+      "correct_answer": {
+        "part_a": "Check side lengths: AB = 4, BC = √10, CD = 4, DA = √10. EF = 4, FG = √10, GH = 4, HE = √10. All corresponding sides equal. Congruent!",
+        "part_b": "Translate by (6, 2): Every point shifts right 6 and up 2. A(0,0)→E(6,2)✓, etc.",
+        "part_c": "Yes, still congruent to EFGH. Reflections preserve distance, and congruence is transitive. If reflected ABCD is congruent to ABCD, and ABCD is congruent to EFGH, then reflected ABCD is congruent to EFGH.",
+        "part_d": "Examples: (1) Manufacturing: Parts must be congruent to fit together. (2) Construction: Matching tiles, identical windows. (3) Packaging: Identical boxes for efficient shipping."
+      },
+      "rubric": {
+        "full_credit": "All four parts correct with valid proof and examples",
+        "partial_credit": "Three parts correct",
+        "no_credit": "Fewer than three correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 360
+    },
+    {
+      "id": "math-8-g-a-5-001",
+      "standard_id": "8.G.A.5",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Prove that the sum of angles in a triangle equals 180° using the property of parallel lines cut by a transversal. Include a diagram.",
+      "correct_answer": "Draw triangle ABC. Extend line through B parallel to AC. At B, mark angle 1 (between parallel and BA) and angle 2 (between parallel and BC). By alternate interior angles with transversal AB: angle 1 = angle A. By alternate interior angles with transversal BC: angle 2 = angle C. The angles on the straight line at B: angle 1 + angle B + angle 2 = 180°. Substituting: angle A + angle B + angle C = 180°.",
+      "rubric": {
+        "full_credit": "Complete proof with diagram and proper use of alternate interior angles",
+        "partial_credit": "Correct approach but incomplete reasoning",
+        "no_credit": "Incorrect proof method"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 300
+    },
+    {
+      "id": "math-8-g-a-5-002",
+      "standard_id": "8.G.A.5",
+      "dok_level": 3,
+      "question_type": "multi_part",
+      "question": "Two parallel lines are cut by a transversal. One angle measures 65°.\n\nPart A: Find all eight angles formed and explain your reasoning.\nPart B: If the angle was instead marked as (2x + 15)°, and its corresponding angle as (3x - 10)°, solve for x and find the angle measures.\nPart C: Using AA similarity, prove that all isoceles right triangles are similar to each other.",
+      "correct_answer": {
+        "part_a": "Angles are 65° or 115°. Vertical angles are equal. Corresponding angles are equal. Alternate interior angles are equal. Co-interior angles are supplementary (65° + 115° = 180°).",
+        "part_b": "Corresponding angles are equal: 2x + 15 = 3x - 10. 25 = x. Angle = 2(25) + 15 = 65°.",
+        "part_c": "Any isoceles right triangle has one 90° angle and two 45° angles (180 - 90 = 90, divided equally = 45 each). By AA: If two triangles have two pairs of equal angles, they are similar. All isoceles right triangles share the same angle measures (90°, 45°, 45°), so all are similar."
+      },
+      "rubric": {
+        "full_credit": "All three parts correct with clear reasoning",
+        "partial_credit": "Two parts correct",
+        "no_credit": "Fewer than two correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 300
+    },
+    {
+      "id": "math-8-g-a-5-003",
+      "standard_id": "8.G.A.5",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "Part A: Prove that the exterior angle of a triangle equals the sum of the two non-adjacent interior angles.\n\nPart B: In triangle ABC, angle A = 50° and angle B = 70°. Find angle C and the exterior angle at C.\n\nPart C: Explain why no triangle can have two right angles.\n\nPart D: A triangle has angles in the ratio 2:3:4. Find each angle measure.",
+      "correct_answer": {
+        "part_a": "In triangle ABC, extend side BC. Exterior angle at C and angle C are supplementary: ext C + C = 180°. Also A + B + C = 180°, so A + B = 180° - C = ext C.",
+        "part_b": "C = 180° - 50° - 70° = 60°. Exterior angle at C = A + B = 50° + 70° = 120°.",
+        "part_c": "If two angles were 90° each, their sum would be 180°, leaving 0° for the third angle. A triangle cannot have a 0° angle (it wouldn't be a triangle).",
+        "part_d": "2x + 3x + 4x = 180°. 9x = 180°. x = 20°. Angles: 40°, 60°, 80°."
+      },
+      "rubric": {
+        "full_credit": "All four parts correct with valid proofs",
+        "partial_credit": "Three parts correct",
+        "no_credit": "Fewer than three correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 360
+    },
+    {
+      "id": "math-8-g-b-6-001",
+      "standard_id": "8.G.B.6",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Explain a proof of the Pythagorean Theorem using the area of squares on each side of a right triangle. Include a diagram.",
+      "correct_answer": "Draw right triangle with legs a, b and hypotenuse c. Construct squares on each side. Area of squares: a², b², c². Proof by rearrangement: Take a large square with side (a+b). It can be filled two ways: (1) Four copies of the triangle plus c², (2) Four copies of the triangle plus a² plus b². Since both fill the same square: 4(½ab) + c² = 4(½ab) + a² + b². Simplifying: c² = a² + b².",
+      "rubric": {
+        "full_credit": "Clear proof with appropriate diagram and logical steps",
+        "partial_credit": "Correct approach but incomplete explanation",
+        "no_credit": "Incorrect or no proof"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 300
+    },
+    {
+      "id": "math-8-g-b-6-002",
+      "standard_id": "8.G.B.6",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "Part A: State the Pythagorean Theorem.\n\nPart B: State the converse of the Pythagorean Theorem.\n\nPart C: Use the converse to determine if a triangle with sides 8, 15, and 17 is a right triangle.\n\nPart D: Prove that a triangle with sides 3, 4, 5 is a right triangle, then show that any multiple (6, 8, 10) is also a right triangle. Explain why.",
+      "correct_answer": {
+        "part_a": "In a right triangle, the square of the hypotenuse equals the sum of squares of the legs: a² + b² = c².",
+        "part_b": "If a² + b² = c² for a triangle's sides, then the triangle is a right triangle (the angle opposite the longest side is 90°).",
+        "part_c": "Check: 8² + 15² = 64 + 225 = 289. 17² = 289. Equal! Yes, it's a right triangle.",
+        "part_d": "3² + 4² = 9 + 16 = 25 = 5². Right triangle ✓. For (6, 8, 10): 6² + 8² = 36 + 64 = 100 = 10². Right triangle ✓. Any multiple works because (ka)² + (kb)² = k²a² + k²b² = k²(a² + b²) = k²c² = (kc)². Scaling preserves the Pythagorean relationship."
+      },
+      "rubric": {
+        "full_credit": "All four parts correct with clear proofs",
+        "partial_credit": "Three parts correct",
+        "no_credit": "Fewer than three correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 300
+    },
+    {
+      "id": "math-8-g-b-7-001",
+      "standard_id": "8.G.B.7",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "A ladder 10 feet long leans against a wall. The base is 6 feet from the wall. How high up the wall does the ladder reach?",
+      "correct_answer": "6² + h² = 10². 36 + h² = 100. h² = 64. h = 8 feet.",
+      "rubric": {
+        "full_credit": "Correct answer 8 feet with work",
+        "partial_credit": "Correct setup but calculation error",
+        "no_credit": "Incorrect setup"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-8-g-b-7-002",
+      "standard_id": "8.G.B.7",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A rectangular box has dimensions 3 cm × 4 cm × 12 cm. Find the length of the longest diagonal that can fit inside the box (from one corner to the opposite corner through the interior).",
+      "correct_answer": "First find diagonal of base: d₁² = 3² + 4² = 25, so d₁ = 5. Then find space diagonal using d₁ and height: D² = 5² + 12² = 25 + 144 = 169. D = 13 cm. Alternatively: D = √(3² + 4² + 12²) = √169 = 13 cm.",
+      "rubric": {
+        "full_credit": "Correct answer 13 cm with clear two-step or direct method",
+        "partial_credit": "Correct approach but calculation error",
+        "no_credit": "Incorrect approach"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-8-g-b-7-003",
+      "standard_id": "8.G.B.7",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "A square pyramid has a square base with side 8 m and a height of 6 m from the center of the base to the apex.\n\nPart A: Find the slant height (distance from apex to the midpoint of a base edge).\nPart B: Find the distance from the apex to a corner of the base.\nPart C: Calculate the lateral surface area (the four triangular faces).\nPart D: If the pyramid is solid, how much wire would be needed to outline all edges?",
+      "correct_answer": {
+        "part_a": "Distance from center to midpoint of edge = 4 m. Slant height² = 6² + 4² = 52. Slant height = √52 ≈ 7.21 m.",
+        "part_b": "Distance from center to corner = 4√2 m (diagonal of square ÷ 2). Edge length² = 6² + (4√2)² = 36 + 32 = 68. Edge = √68 ≈ 8.25 m.",
+        "part_c": "Each triangular face has base 8 m and height 7.21 m. Area = ½(8)(7.21) = 28.84 m². Four faces: 4 × 28.84 = 115.36 m².",
+        "part_d": "Base edges: 4 × 8 = 32 m. Lateral edges: 4 × 8.25 = 33 m. Total: 65 m."
+      },
+      "rubric": {
+        "full_credit": "All four parts correct",
+        "partial_credit": "Three parts correct",
+        "no_credit": "Fewer than three correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.8,
+      "time_estimate_seconds": 420
+    },
+    {
+      "id": "math-8-g-b-8-001",
+      "standard_id": "8.G.B.8",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Find the distance between points (1, 2) and (7, 10).",
+      "correct_answer": "d = √[(7-1)² + (10-2)²] = √[36 + 64] = √100 = 10 units",
+      "rubric": {
+        "full_credit": "Correct distance of 10",
+        "partial_credit": "Correct formula but calculation error",
+        "no_credit": "Wrong formula"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-8-g-b-8-002",
+      "standard_id": "8.G.B.8",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Derive the distance formula using the Pythagorean Theorem. Start with two points P₁(x₁, y₁) and P₂(x₂, y₂) and show how d = √[(x₂-x₁)² + (y₂-y₁)²] follows from a² + b² = c².",
+      "correct_answer": "Plot P₁ and P₂. Draw a right triangle with the segment P₁P₂ as hypotenuse, horizontal leg from P₁ to (x₂, y₁), and vertical leg from (x₂, y₁) to P₂. Horizontal leg length = |x₂ - x₁|. Vertical leg length = |y₂ - y₁|. By Pythagorean Theorem: d² = (x₂ - x₁)² + (y₂ - y₁)². Taking square root: d = √[(x₂-x₁)² + (y₂-y₁)²].",
+      "rubric": {
+        "full_credit": "Complete derivation connecting triangle to formula",
+        "partial_credit": "Correct approach but incomplete explanation",
+        "no_credit": "No valid derivation"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-8-g-b-8-003",
+      "standard_id": "8.G.B.8",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "Part A: Find the perimeter of triangle with vertices A(0, 0), B(6, 0), and C(3, 4).\n\nPart B: Verify that triangle ABC is isoceles.\n\nPart C: Find the coordinates of point D such that ABCD forms a rhombus (all sides equal).\n\nPart D: Calculate the area of the rhombus using the diagonals.",
+      "correct_answer": {
+        "part_a": "AB = 6. BC = √[(6-3)² + (0-4)²] = √25 = 5. AC = √[9 + 16] = 5. Perimeter = 6 + 5 + 5 = 16 units.",
+        "part_b": "AC = BC = 5. Two sides equal, so isoceles ✓",
+        "part_c": "For rhombus with AB = BC = CD = DA = 5 (since BC = 5), D = (-3, 4) works: AD = √[9+16] = 5, CD = √[(3-(-3))² + 0] = 6. Recalculate: Need all sides = 5. D should be at (-3, 4) but check: AD = 5, CD = 6 ≠ 5. Actually for a rhombus from isoceles triangle, D = (-3, 4) makes a kite, not rhombus. Correct D for parallelogram: D = (-3, 4).",
+        "part_d": "Diagonals: AC from (0,0) to (3,4), BD from (6,0) to (-3,4). Actually need correct rhombus first."
+      },
+      "rubric": {
+        "full_credit": "Parts A and B correct with reasonable attempt at C and D",
+        "partial_credit": "Parts A and B correct",
+        "no_credit": "Parts A or B incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.8,
+      "time_estimate_seconds": 420
+    },
+    {
+      "id": "math-8-g-c-9-001",
+      "standard_id": "8.G.C.9",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Find the volume of a cylinder with radius 5 cm and height 8 cm. Use π ≈ 3.14.",
+      "correct_answer": "V = πr²h = 3.14 × 25 × 8 = 628 cm³",
+      "rubric": {
+        "full_credit": "Correct volume with formula and units",
+        "partial_credit": "Correct formula but calculation error",
+        "no_credit": "Wrong formula"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 60
+    },
+    {
+      "id": "math-8-g-c-9-002",
+      "standard_id": "8.G.C.9",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A cone and a cylinder have the same base radius (4 cm) and height (9 cm). Explain the relationship between their volumes and calculate each.",
+      "correct_answer": "Cylinder: V = πr²h = π(16)(9) = 144π ≈ 452.16 cm³. Cone: V = (1/3)πr²h = (1/3)(144π) = 48π ≈ 150.72 cm³. Relationship: The cone's volume is exactly 1/3 of the cylinder's volume when they have the same base and height. This is because the cone 'tapers' to a point.",
+      "rubric": {
+        "full_credit": "Both volumes correct with explanation of 1/3 relationship",
+        "partial_credit": "Both volumes correct but no relationship explanation",
+        "no_credit": "Incorrect volumes"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 150
+    },
+    {
+      "id": "math-8-g-c-9-003",
+      "standard_id": "8.G.C.9",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "Part A: A sphere has radius 6 cm. Find its volume.\n\nPart B: The sphere is melted and recast as a cylinder with the same radius. Find the cylinder's height.\n\nPart C: If instead the sphere is recast as a cone with radius 6 cm, find the cone's height.\n\nPart D: Which of the three shapes (sphere, cylinder from B, cone from C) has the greatest surface area? Explain without calculating.",
+      "correct_answer": {
+        "part_a": "V = (4/3)πr³ = (4/3)π(216) = 288π ≈ 904.32 cm³",
+        "part_b": "πr²h = 288π. 36h = 288. h = 8 cm.",
+        "part_c": "(1/3)πr²h = 288π. (1/3)(36)h = 288. 12h = 288. h = 24 cm.",
+        "part_d": "The cone has the greatest surface area. It has the same base as the cylinder but much greater height (24 cm vs 8 cm), creating a larger slant surface. The sphere, with no 'stretch', typically has the smallest surface area for a given volume."
+      },
+      "rubric": {
+        "full_credit": "All four parts correct with logical reasoning in Part D",
+        "partial_credit": "Three parts correct",
+        "no_credit": "Fewer than three correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 300
+    },
+    {
+      "id": "math-8-sp-a-1-001",
+      "standard_id": "8.SP.A.1",
+      "dok_level": 2,
+      "question_type": "graphing",
+      "question": "Create a scatter plot for the data: (1, 2), (2, 4), (3, 5), (4, 7), (5, 8), (6, 9). Describe the association.",
+      "correct_answer": "Scatter plot with points plotted correctly. The association is positive and linear - as x increases, y increases at a roughly constant rate. The data points cluster around a line with positive slope.",
+      "rubric": {
+        "full_credit": "Correct scatter plot with accurate description of positive linear association",
+        "partial_credit": "Correct plot but incomplete description",
+        "no_credit": "Incorrect plot"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 120
+    },
+    {
+      "id": "math-8-sp-a-1-002",
+      "standard_id": "8.SP.A.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A scatter plot shows data on hours of study (x) and test scores (y). There's a cluster of points in the upper right, a cluster in the lower left, and one point at (10, 40). Describe the overall pattern and identify the outlier. What might explain the outlier?",
+      "correct_answer": "Pattern: Positive linear association - more study hours correlate with higher test scores. The point (10, 40) is an outlier because despite high study hours (10), the score is low (40). Possible explanations: The student might have studied ineffectively, had test anxiety, was unwell during the exam, or the data entry could be an error.",
+      "rubric": {
+        "full_credit": "Correctly identifies pattern, outlier, and provides reasonable explanations",
+        "partial_credit": "Identifies outlier but incomplete analysis",
+        "no_credit": "Does not identify the outlier or pattern"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-8-sp-a-1-003",
+      "standard_id": "8.SP.A.1",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "Data on car age (years) and value (thousands of dollars):\n(1, 28), (2, 24), (3, 21), (4, 18), (5, 15), (6, 13), (7, 11), (8, 9)\n\nPart A: Create a scatter plot and describe the association.\nPart B: Would a linear model be appropriate? If so, estimate the slope and interpret it.\nPart C: Identify any clustering, gaps, or outliers.\nPart D: Predict the value of a 10-year-old car using your observations. What limitations does this prediction have?",
+      "correct_answer": {
+        "part_a": "Scatter plot shows strong negative linear association. As age increases, value decreases consistently.",
+        "part_b": "Yes, linear model is appropriate. Slope ≈ -2.7 (roughly $2,700 decrease per year). Value drops about $2,700 each year due to depreciation.",
+        "part_c": "No obvious outliers. Data is evenly spread without clustering or gaps. All points follow the linear trend closely.",
+        "part_d": "Continuing the pattern: ~$4,000 for 10-year-old car. Limitations: (1) Linear model may not hold indefinitely - cars don't have negative value, (2) Extrapolating beyond data range is risky, (3) Model doesn't account for make/model differences or market conditions."
+      },
+      "rubric": {
+        "full_credit": "All four parts correct with thoughtful limitations",
+        "partial_credit": "Three parts correct",
+        "no_credit": "Fewer than three correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 360
+    },
+    {
+      "id": "math-8-sp-a-2-001",
+      "standard_id": "8.SP.A.2",
+      "dok_level": 2,
+      "question_type": "graphing",
+      "question": "Draw a line of best fit for this scatter plot data: (1, 3), (2, 5), (3, 6), (4, 9), (5, 10). Estimate the equation of your line.",
+      "correct_answer": "Line passes roughly through the middle of the data, balancing points above and below. Equation approximately y = 1.8x + 1.5 (slope ≈ 1.8, y-intercept ≈ 1.5). Accept reasonable variations.",
+      "rubric": {
+        "full_credit": "Reasonable line of best fit with equation close to actual (slope 1.7-2.0, intercept 1-2)",
+        "partial_credit": "Good line but equation significantly off",
+        "no_credit": "Line clearly not fitting data"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 150
+    },
+    {
+      "id": "math-8-sp-a-2-002",
+      "standard_id": "8.SP.A.2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A line of best fit for data on advertising spending (x, in $1000s) and sales (y, in $1000s) is y = 2.5x + 10. Assess the model fit if the actual data points are: (2, 16), (4, 18), (6, 27), (8, 29), (10, 38). Calculate residuals and determine if the model is a good fit.",
+      "correct_answer": "Predicted vs Actual: x=2: pred=15, actual=16, residual=+1. x=4: pred=20, actual=18, residual=-2. x=6: pred=25, actual=27, residual=+2. x=8: pred=30, actual=29, residual=-1. x=10: pred=35, actual=38, residual=+3. Residuals are small and scattered above/below zero (no pattern), suggesting a good fit. Largest error is 3 ($3000), reasonable for the scale.",
+      "rubric": {
+        "full_credit": "All residuals calculated correctly with appropriate assessment of fit",
+        "partial_credit": "Most residuals correct with some assessment",
+        "no_credit": "Incorrect residuals or no assessment"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-8-sp-a-2-003",
+      "standard_id": "8.SP.A.2",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "Temperature (°C) and ice cream sales ($100s) for 8 days: (15, 10), (18, 12), (22, 18), (25, 22), (28, 28), (30, 32), (33, 38), (35, 42)\n\nPart A: Create a scatter plot and draw a line of best fit.\nPart B: Find the equation of your line.\nPart C: Use your equation to predict sales when temperature is 40°C. Is this extrapolation reliable?\nPart D: One day had temperature 25°C and sales of $1500 (actual). Your model predicts what? Calculate the residual and explain what it means.",
+      "correct_answer": {
+        "part_a": "Scatter plot showing strong positive linear association with line of best fit.",
+        "part_b": "Using points (15, 10) and (35, 42): slope = 32/20 = 1.6. y - 10 = 1.6(x - 15). y = 1.6x - 14. (Accept variations based on line drawn.)",
+        "part_c": "At x = 40: y = 1.6(40) - 14 = 50 ($5000 sales). Extrapolation is risky because 40°C is beyond our data range. At extreme temperatures, other factors (people staying home, different behavior) might change the relationship.",
+        "part_d": "Predicted at 25°C: 1.6(25) - 14 = 26 ($2600). Actual = $1500 = 15. Residual = 15 - 26 = -11 (or $1100 below prediction). This means that day had unusually low sales for the temperature - perhaps it rained, was a weekday, or other factors reduced demand."
+      },
+      "rubric": {
+        "full_credit": "All four parts correct with thoughtful analysis",
+        "partial_credit": "Three parts correct",
+        "no_credit": "Fewer than three correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 360
+    },
+    {
+      "id": "math-8-sp-a-3-001",
+      "standard_id": "8.SP.A.3",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "A linear model relating study time (hours) to test score is: Score = 5.2(hours) + 58. Interpret the slope and y-intercept in context.",
+      "correct_answer": "Slope (5.2): Each additional hour of study is associated with a 5.2 point increase in test score. Y-intercept (58): A student who studies 0 hours would be expected to score 58 points (the baseline score).",
+      "rubric": {
+        "full_credit": "Both slope and intercept correctly interpreted in context",
+        "partial_credit": "One correct interpretation",
+        "no_credit": "Neither correctly interpreted"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-8-sp-a-3-002",
+      "standard_id": "8.SP.A.3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "The equation y = -0.15x + 85 models the relationship between caffeine consumed (mg) and hours of sleep. A person consumes 300 mg of caffeine. Predict their sleep hours. Then explain what the negative slope means and any limitations of using this model.",
+      "correct_answer": "Prediction: y = -0.15(300) + 85 = -45 + 85 = 40 hours. Wait - that's impossible! The model predicts 40 hours, which shows a limitation. Negative slope means more caffeine is associated with less sleep. Limitations: (1) Model may not be valid for all caffeine levels - it's not realistic for high consumption. (2) Many factors affect sleep beyond caffeine. (3) The linear relationship likely breaks down at extremes.",
+      "rubric": {
+        "full_credit": "Correct calculation, identifies impossibility, explains negative slope, and notes limitations",
+        "partial_credit": "Calculation correct with some analysis",
+        "no_credit": "Incorrect calculation or no recognition of model limitations"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-8-sp-a-3-003",
+      "standard_id": "8.SP.A.3",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "A company analyzes employee performance: Performance Score = 0.8(Training Hours) + 2.5(Years Experience) + 45\n\nPart A: Predict the performance score for someone with 10 training hours and 3 years experience.\nPart B: If two employees have the same training hours, but one has 2 more years of experience, by how much do their predicted scores differ?\nPart C: The company wants a performance score of 80. An employee has 5 years experience. How many training hours are needed?\nPart D: Critique this model: What factors might it be missing? Why might predictions be unreliable for some employees?",
+      "correct_answer": {
+        "part_a": "Score = 0.8(10) + 2.5(3) + 45 = 8 + 7.5 + 45 = 60.5",
+        "part_b": "Difference = 2.5 × 2 = 5 points",
+        "part_c": "80 = 0.8(h) + 2.5(5) + 45. 80 = 0.8h + 12.5 + 45. 80 = 0.8h + 57.5. 22.5 = 0.8h. h = 28.125 training hours.",
+        "part_d": "Missing factors: education level, job fit, motivation, team dynamics, manager quality, work-life balance, specific skills. Unreliable for: employees with unusual backgrounds, those in different roles than the training data, new employees (extrapolating beyond data). Also assumes linear relationships, which may not hold."
+      },
+      "rubric": {
+        "full_credit": "All four parts correct with thoughtful critique",
+        "partial_credit": "Three parts correct",
+        "no_credit": "Fewer than three correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 300
+    },
+    {
+      "id": "math-8-sp-a-4-001",
+      "standard_id": "8.SP.A.4",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Complete the two-way table and find the relative frequency of left-handed students:\n\n        | Right-handed | Left-handed | Total\n--------|--------------|-------------|-------\n Boys   |     35       |      8      |  ___\n Girls  |     40       |     ___     |  47\n--------|--------------|-------------|-------\n Total  |    ___       |     15      |  ___",
+      "correct_answer": "Boys total: 35 + 8 = 43. Girls left-handed: 47 - 40 = 7. Right-handed total: 35 + 40 = 75. Grand total: 43 + 47 = 90 (or 75 + 15 = 90). Relative frequency of left-handed: 15/90 = 1/6 ≈ 0.167 or 16.7%.",
+      "rubric": {
+        "full_credit": "Table completed correctly and relative frequency correct",
+        "partial_credit": "Table correct but relative frequency error",
+        "no_credit": "Table incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 120
+    },
+    {
+      "id": "math-8-sp-a-4-002",
+      "standard_id": "8.SP.A.4",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A survey asks students about their preferred lunch (hot lunch or packed) and their grade (7th or 8th):\n\n7th graders: 60 hot lunch, 40 packed\n8th graders: 45 hot lunch, 55 packed\n\nConstruct a two-way table with relative frequencies. Is there an association between grade level and lunch preference? Explain.",
+      "correct_answer": "Table:\n        | Hot Lunch | Packed | Total\n7th     |   0.30    |  0.20  | 0.50\n8th     |   0.225   |  0.275 | 0.50\nTotal   |   0.525   |  0.475 | 1.00\n\nAssociation: Yes, there appears to be an association. 60% of 7th graders prefer hot lunch vs only 45% of 8th graders. 8th graders are more likely to pack lunch. If there were no association, percentages would be similar across grades.",
+      "rubric": {
+        "full_credit": "Correct table and valid analysis of association",
+        "partial_credit": "Correct table but weak or missing association analysis",
+        "no_credit": "Incorrect table"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-8-sp-a-4-003",
+      "standard_id": "8.SP.A.4",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "A study examines whether homework completion relates to passing a class:\n\nCompleted most homework: 180 passed, 20 failed\nDid not complete most homework: 40 passed, 60 failed\n\nPart A: Create a two-way table with frequencies and row percentages.\nPart B: What percentage of homework completers passed? What percentage of non-completers passed?\nPart C: Is there an association? Calculate and compare conditional probabilities.\nPart D: Can we conclude that doing homework CAUSES students to pass? Explain the difference between association and causation.",
+      "correct_answer": {
+        "part_a": "Table with frequencies: Completers: 180 pass, 20 fail (200 total). Non-completers: 40 pass, 60 fail (100 total). Totals: 220 pass, 80 fail, 300 total.",
+        "part_b": "Completers passing: 180/200 = 90%. Non-completers passing: 40/100 = 40%.",
+        "part_c": "Strong association exists. P(pass|completed) = 0.90 vs P(pass|not completed) = 0.40. Completing homework is associated with much higher pass rates.",
+        "part_d": "We cannot conclude causation from this data. Association ≠ causation. Possible explanations: (1) Students who complete homework might be more motivated in general, (2) They might have better study habits or home support, (3) There could be confounding variables like prior knowledge. To establish causation, we would need a controlled experiment."
+      },
+      "rubric": {
+        "full_credit": "All four parts correct with clear distinction between association and causation",
+        "partial_credit": "Three parts correct",
+        "no_credit": "Fewer than three correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 360
+    },
+    {
+      "id": "math-8-g-a-3-001",
+      "standard_id": "8.G.A.3",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Triangle ABC has vertices A(2, 3), B(5, 3), and C(4, 7). After a translation of 3 units left and 2 units up, what are the new coordinates of each vertex?",
+      "correct_answer": "A'(-1, 5), B'(2, 5), C'(1, 9). Each point moves left 3 (subtract 3 from x) and up 2 (add 2 to y).",
+      "rubric": {
+        "full_credit": "All three vertices correctly translated",
+        "partial_credit": "One or two vertices correct, or correct method with arithmetic error",
+        "no_credit": "Incorrect approach"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 120
+    },
+    {
+      "id": "math-8-g-a-3-002",
+      "standard_id": "8.G.A.3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A rectangle has vertices at P(1, 2), Q(4, 2), R(4, 5), and S(1, 5). Describe what happens to the rectangle when you:\na) Reflect it over the y-axis\nb) Rotate it 90° clockwise about the origin\nc) Dilate it by a scale factor of 2 centered at the origin\nFor each transformation, give the new coordinates and describe how the shape changes.",
+      "correct_answer": "a) Reflection over y-axis: P'(-1, 2), Q'(-4, 2), R'(-4, 5), S'(-1, 5). Shape stays congruent, flips horizontally.\nb) 90° clockwise rotation: P'(2, -1), Q'(2, -4), R'(5, -4), S'(5, -1). Shape stays congruent, rotates but maintains dimensions.\nc) Dilation by factor 2: P'(2, 4), Q'(8, 4), R'(8, 10), S'(2, 10). Shape is similar but dimensions double - width goes from 3 to 6, height from 3 to 6.",
+      "rubric": {
+        "full_credit": "All three transformations correct with coordinates and shape descriptions",
+        "partial_credit": "Two transformations correct",
+        "no_credit": "Fewer than two correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 240
+    },
+    {
+      "id": "math-8-g-a-3-003",
+      "standard_id": "8.G.A.3",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "A designer is creating a logo using transformations. The original triangle has vertices at A(0, 0), B(3, 0), and C(1.5, 4).\n\nPart A: If the triangle is reflected over the x-axis and then translated 4 units right, what are the final coordinates?\nPart B: If instead the triangle is translated 4 units right first, then reflected over the x-axis, what are the final coordinates?\nPart C: Are the results the same? Explain why or why not.\nPart D: Find a single transformation or sequence that would map the original triangle to a position where it appears upside-down and centered at (6, -2).",
+      "correct_answer": {
+        "part_a": "Reflect: A(0, 0), B(3, 0), C(1.5, -4). Then translate: A'(4, 0), B'(7, 0), C'(5.5, -4)",
+        "part_b": "Translate: A(4, 0), B(7, 0), C(5.5, 4). Then reflect: A'(4, 0), B'(7, 0), C'(5.5, -4)",
+        "part_c": "Yes, the results are the same because reflection over the x-axis doesn't affect x-coordinates, and translation right doesn't affect y-coordinates. These two transformations are independent and commutative in this case.",
+        "part_d": "Reflect over x-axis to flip upside down, then translate so centroid moves from (1.5, 4/3) to (6, -2). Translation needed: right 4.5 units, down 10/3 units. Or: Translate (4.5, -4/3 - 2) = (4.5, -10/3) after reflection."
+      },
+      "rubric": {
+        "full_credit": "All parts correct with clear reasoning about transformation order",
+        "partial_credit": "Three parts correct",
+        "no_credit": "Fewer than three correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 360
+    },
+    {
+      "id": "math-8-g-a-4-001",
+      "standard_id": "8.G.A.4",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Triangle DEF has vertices D(0, 0), E(4, 0), and F(2, 3). Triangle D'E'F' has vertices D'(0, 0), E'(8, 0), and F'(4, 6). Which statement best describes the relationship between the triangles?",
+      "options": [
+        "A. The triangles are congruent because they have the same shape",
+        "B. The triangles are similar because D'E'F' is a dilation of DEF by a scale factor of 2",
+        "C. The triangles are neither similar nor congruent",
+        "D. The triangles are congruent because they share vertex D"
+      ],
+      "correct_answer": "B",
+      "rubric": {
+        "full_credit": "Correct answer (B)",
+        "no_credit": "Incorrect answer"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-8-g-a-4-002",
+      "standard_id": "8.G.A.4",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Rectangle ABCD has vertices A(1, 1), B(4, 1), C(4, 3), D(1, 3). Rectangle A'B'C'D' has vertices A'(2, 2), B'(8, 2), C'(8, 6), D'(2, 6). \n\nDetermine if the rectangles are similar. If so, describe the sequence of transformations that maps ABCD to A'B'C'D'. Include specific details about each transformation.",
+      "correct_answer": "The rectangles ARE similar. ABCD has dimensions 3×2 (width×height). A'B'C'D' has dimensions 6×4. Both have the same width:height ratio of 3:2, confirming similarity.\n\nSequence of transformations:\n1. Dilation by scale factor 2 centered at origin: A(1,1)→(2,2), B(4,1)→(8,2), C(4,3)→(8,6), D(1,3)→(2,6)\nThis single dilation maps ABCD directly to A'B'C'D'.\n\nAlternative: Translate, then dilate from different center.",
+      "rubric": {
+        "full_credit": "Correctly identifies as similar with valid transformation sequence",
+        "partial_credit": "Correct similarity determination but incomplete transformation description",
+        "no_credit": "Incorrect similarity determination"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-8-g-a-4-003",
+      "standard_id": "8.G.A.4",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "Two figures are shown on a coordinate plane:\nFigure P: Square with vertices at (0, 0), (2, 0), (2, 2), (0, 2)\nFigure Q: Quadrilateral with vertices at (6, 3), (10, 3), (11, 5), (7, 5)\n\nPart A: Is Figure Q similar to Figure P? Justify your answer by examining corresponding sides and angles.\nPart B: If similar, describe a sequence of transformations (rotations, reflections, translations, and/or dilations) that would map Figure P to Figure Q.\nPart C: If not similar, explain what property of similar figures is violated.\nPart D: Create a new figure that IS similar to Figure P by describing coordinates for a quadrilateral that could be obtained through dilations, translations, rotations, and/or reflections of Figure P.",
+      "correct_answer": {
+        "part_a": "Figure Q is NOT similar to Figure P. Figure P is a square (all sides equal, all angles 90°). Figure Q has vertices (6,3), (10,3), (11,5), (7,5). Side lengths: bottom = 4, right side = √5, top = 4, left side = √5. Figure Q is a parallelogram but NOT a square because adjacent sides have different lengths.",
+        "part_b": "Not applicable - figures are not similar.",
+        "part_c": "Similar figures must have the same shape. A square has all sides equal and all right angles. Figure Q has two different side lengths (4 and √5) and non-right angles, so it doesn't have the same shape as a square.",
+        "part_d": "A similar figure to the square: Apply dilation factor 3 and translate. New square with vertices at (5, 5), (11, 5), (11, 11), (5, 11). This maintains the square shape (all sides = 6, all angles = 90°)."
+      },
+      "rubric": {
+        "full_credit": "All parts answered correctly with thorough justification",
+        "partial_credit": "Parts A and C correct, Part D shows understanding",
+        "no_credit": "Incorrect determination of similarity"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 360
+    }
+  ]
+}

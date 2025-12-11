@@ -1,0 +1,439 @@
+{
+  "grade": "11",
+  "course": "Physics",
+  "framework": "NGSS",
+  "items": [
+    {
+      "id": "sci-11-ps2-1-001",
+      "standard_id": "HS-PS2-1",
+      "standard_description": "Analyze data to support the claim that Newton's second law of motion describes the mathematical relationship among the net force on a macroscopic object, its mass, and its acceleration.",
+      "dok_level": 3,
+      "question_type": "data_analysis",
+      "question": "A physics student collects the following data for a cart on a frictionless track:\n\n| Trial | Mass (kg) | Applied Force (N) | Acceleration (m/s²) |\n|-------|-----------|------------------|--------------------|\n| 1 | 0.50 | 2.0 | 4.0 |\n| 2 | 0.50 | 4.0 | 8.0 |\n| 3 | 1.00 | 4.0 | 4.0 |\n| 4 | 1.50 | 6.0 | 4.0 |\n| 5 | 2.00 | 4.0 | 2.0 |\n\n(a) Create two graphs: acceleration vs. force (constant mass) and acceleration vs. mass (constant force).\n(b) Determine the mathematical relationships from your graphs.\n(c) Combine these relationships into a single equation.\n(d) Use your equation to predict the acceleration when F = 10 N and m = 2.5 kg.",
+      "rubric": {
+        "4": "Creates correct graphs: (a) linear a vs. F through origin, hyperbolic a vs. 1/m; (b) a ∝ F (direct proportionality), a ∝ 1/m (inverse proportionality); (c) a = F/m (Newton's second law); (d) a = 10/2.5 = 4.0 m/s². Graphs properly labeled with correct data points.",
+        "3": "Correct graphs and relationships. Prediction correct but may have minor graphing errors.",
+        "2": "Understands relationships but graphs may be incomplete or equation derivation unclear.",
+        "1": "Attempts graphs but cannot derive relationships correctly.",
+        "0": "Cannot analyze data or create appropriate graphs."
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.72,
+      "time_estimate_seconds": 540,
+      "science_practice": "Analyzing and Interpreting Data",
+      "crosscutting_concept": "Patterns"
+    },
+    {
+      "id": "sci-11-ps2-1-002",
+      "standard_id": "HS-PS2-1",
+      "standard_description": "Analyze data to support the claim that Newton's second law of motion describes the mathematical relationship among the net force on a macroscopic object, its mass, and its acceleration.",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "A 1500 kg car accelerates from rest to 30 m/s in 10 seconds on a level road. The engine provides a constant forward force of 6000 N.\n\n(a) Calculate the expected acceleration if there were no friction.\n(b) Calculate the actual acceleration from the motion data.\n(c) Determine the friction force acting on the car.\n(d) If the car then travels up a 10° incline at constant velocity, calculate the engine force needed.\n(e) Explain why the engine force on the incline is different from that on level ground.",
+      "rubric": {
+        "4": "Correct calculations: (a) a = F/m = 6000/1500 = 4.0 m/s²; (b) a = Δv/Δt = 30/10 = 3.0 m/s²; (c) Fnet = ma = 1500(3) = 4500 N, friction = 6000 - 4500 = 1500 N; (d) Fgrav,parallel = mgsinθ = 1500(9.8)sin10° = 2553 N, total engine force = 2553 + 1500 = 4053 N; (e) On incline, engine must overcome both friction AND gravity component. Forces explained with free body diagrams.",
+        "3": "Calculations mostly correct. May have minor errors in incline problem.",
+        "2": "Parts (a)-(c) correct but incline analysis incomplete.",
+        "1": "Basic acceleration calculations but cannot analyze forces.",
+        "0": "Cannot apply Newton's second law."
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.80,
+      "time_estimate_seconds": 600,
+      "science_practice": "Using Mathematics and Computational Thinking",
+      "crosscutting_concept": "Cause and Effect"
+    },
+    {
+      "id": "sci-11-ps2-2-001",
+      "standard_id": "HS-PS2-2",
+      "standard_description": "Use mathematical representations to support the claim that the total momentum of a system of objects is conserved when there is no net force on the system.",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A 60 kg astronaut floating in space throws a 5 kg toolkit at 8 m/s relative to the space station.\n\n(a) Calculate the astronaut's recoil velocity.\n(b) If the astronaut is 20 m from the station, calculate how long it takes to reach it.\n(c) The astronaut wants to stop when reaching the station. Calculate the impulse needed.\n(d) Explain why momentum is conserved in this situation and what would happen differently on Earth.",
+      "rubric": {
+        "4": "Correct calculations: (a) p_initial = 0, so 60v + 5(8) = 0, v = -0.67 m/s (toward station); (b) t = d/v = 20/0.67 = 30 s; (c) Impulse = Δp = mv = 60(0.67) = 40 kg·m/s; (d) No external forces in space → momentum conserved. On Earth, friction and gravity are external forces that would affect motion. Clear explanation of system boundaries.",
+        "3": "Calculations correct. Earth comparison may lack detail about external forces.",
+        "2": "Basic momentum conservation understood but calculation errors.",
+        "1": "Attempts problem but significant conceptual errors.",
+        "0": "Does not understand momentum conservation."
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.73,
+      "time_estimate_seconds": 480,
+      "science_practice": "Using Mathematics and Computational Thinking",
+      "crosscutting_concept": "Systems and System Models"
+    },
+    {
+      "id": "sci-11-ps2-2-002",
+      "standard_id": "HS-PS2-2",
+      "standard_description": "Use mathematical representations to support the claim that the total momentum of a system of objects is conserved when there is no net force on the system.",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Two ice hockey pucks undergo a collision on frictionless ice. Puck A (0.2 kg) travels east at 5 m/s. Puck B (0.3 kg) travels north at 4 m/s. After collision, they stick together.\n\n(a) Calculate the velocity (magnitude and direction) of the combined pucks after collision.\n(b) Calculate the kinetic energy before and after collision.\n(c) Explain why kinetic energy is not conserved but momentum is.\n(d) Design an experiment to verify momentum conservation in a 2D collision.",
+      "rubric": {
+        "4": "Correct vector analysis: (a) px = 0.2(5) = 1.0 kg·m/s, py = 0.3(4) = 1.2 kg·m/s; p_total = √(1² + 1.2²) = 1.56 kg·m/s; v = 1.56/0.5 = 3.12 m/s at θ = tan⁻¹(1.2/1.0) = 50.2° north of east; (b) KE_before = 0.5(0.2)(25) + 0.5(0.3)(16) = 4.9 J; KE_after = 0.5(0.5)(3.12)² = 2.43 J; (c) Kinetic energy converted to deformation/heat in inelastic collision, but momentum has no mechanism for transfer without external force. (d) Air hockey table, video analysis, measure velocities via frame-by-frame.",
+        "3": "Correct vector calculations. Energy analysis correct. Experiment design may lack detail.",
+        "2": "Understands 2D momentum but calculation errors or incomplete energy analysis.",
+        "1": "Attempts 2D problem but cannot properly combine vectors.",
+        "0": "Cannot analyze 2D collisions."
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.82,
+      "time_estimate_seconds": 600,
+      "science_practice": "Planning and Carrying Out Investigations",
+      "crosscutting_concept": "Systems and System Models"
+    },
+    {
+      "id": "sci-11-ps2-3-001",
+      "standard_id": "HS-PS2-3",
+      "standard_description": "Apply scientific and engineering ideas to design, evaluate, and refine a device that minimizes the force on a macroscopic object during a collision.",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Design a protective system for a phone that could survive a 1.5 m drop onto concrete. The phone has a mass of 0.2 kg and the screen cracks if force exceeds 1000 N.\n\n(a) Calculate the phone's velocity just before impact.\n(b) If the phone stops in 0.001 s on bare concrete, calculate the average force.\n(c) Calculate the minimum stopping time needed to keep force under 1000 N.\n(d) Design a case that achieves this stopping time. Explain the materials and mechanisms you would use.\n(e) Explain the physics principle that makes your design work.",
+      "rubric": {
+        "4": "Correct calculations: (a) v = √(2gh) = √(2×9.8×1.5) = 5.42 m/s; (b) F = mΔv/Δt = 0.2(5.42)/0.001 = 1084 N > 1000 N, screen cracks; (c) t_min = mΔv/F = 0.2(5.42)/1000 = 0.00108 s ≈ 1.1 ms; (d) Case with deformable foam/air pockets that compress to extend impact time, corner bumpers, flexible edges; (e) Impulse-momentum theorem: extending time reduces force for same momentum change.",
+        "3": "Correct calculations and reasonable design. Physics explanation may lack depth.",
+        "2": "Calculations correct but design lacks engineering detail.",
+        "1": "Basic understanding of the problem but calculation errors.",
+        "0": "Cannot apply impulse-momentum concepts."
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 5,
+        "generativity_delta": 6
+      },
+      "difficulty": 0.78,
+      "time_estimate_seconds": 600,
+      "science_practice": "Designing Solutions",
+      "crosscutting_concept": "Cause and Effect"
+    },
+    {
+      "id": "sci-11-ps2-4-001",
+      "standard_id": "HS-PS2-4",
+      "standard_description": "Use mathematical representations of Newton's Law of Gravitation and Coulomb's Law to describe and predict the gravitational and electrostatic forces between objects.",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Compare gravitational and electrostatic forces for the hydrogen atom (proton and electron separated by 5.3 × 10⁻¹¹ m).\n\nGiven: G = 6.67 × 10⁻¹¹ N·m²/kg², k = 9.0 × 10⁹ N·m²/C²\nProton mass = 1.67 × 10⁻²⁷ kg, Electron mass = 9.11 × 10⁻³¹ kg\nElementary charge = 1.60 × 10⁻¹⁹ C\n\n(a) Calculate the gravitational force between proton and electron.\n(b) Calculate the electrostatic force between proton and electron.\n(c) Calculate the ratio of electrostatic to gravitational force.\n(d) Explain why atoms are held together by electrostatic rather than gravitational forces.\n(e) At what separation would a proton and an antiproton have equal electrostatic and gravitational forces? Is this physically meaningful?",
+      "rubric": {
+        "4": "Correct calculations: (a) Fg = Gm₁m₂/r² = (6.67×10⁻¹¹)(1.67×10⁻²⁷)(9.11×10⁻³¹)/(5.3×10⁻¹¹)² = 3.6×10⁻⁴⁷ N; (b) Fe = kq₁q₂/r² = (9×10⁹)(1.6×10⁻¹⁹)²/(5.3×10⁻¹¹)² = 8.2×10⁻⁸ N; (c) Ratio = 2.3×10³⁹; (d) Electrostatic force ~10³⁹ times stronger at atomic scales; (e) Set Fe = Fg, solve for r → astronomically large, not physically meaningful due to other particles.",
+        "3": "Calculations correct with good explanations. Part (e) may be incomplete.",
+        "2": "Basic force calculations correct but ratio or explanation incomplete.",
+        "1": "Attempts calculations but significant errors.",
+        "0": "Cannot apply force laws."
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 540,
+      "science_practice": "Using Mathematics and Computational Thinking",
+      "crosscutting_concept": "Scale, Proportion, and Quantity"
+    },
+    {
+      "id": "sci-11-ps2-5-001",
+      "standard_id": "HS-PS2-5",
+      "standard_description": "Plan and conduct an investigation to provide evidence that an electric current can produce a magnetic field and that a changing magnetic field can produce an electric current.",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Design two experiments to demonstrate electromagnetic induction:\n\nExperiment A: Show that electric current produces a magnetic field.\nExperiment B: Show that a changing magnetic field produces electric current.\n\nFor each experiment, provide: (1) materials needed, (2) detailed procedure, (3) expected observations, (4) how you would vary conditions to test the relationship (e.g., current magnitude, rate of magnetic field change), (5) safety precautions.",
+      "rubric": {
+        "4": "Complete experimental designs: Exp A - Current through wire near compass; vary current to show field strength proportionality; or electromagnet lifting iron filings. Exp B - Magnet through coil connected to galvanometer; vary speed to show induced current depends on rate of flux change. Both include proper controls, safety (electrical safety, magnet handling), and quantitative predictions (direction from Lenz's law).",
+        "3": "Both experiments well-designed with most components. May lack quantitative predictions.",
+        "2": "Basic experiments described but lacking controls or variation testing.",
+        "1": "Simple demonstrations without experimental rigor.",
+        "0": "Does not understand electromagnetic induction."
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.77,
+      "time_estimate_seconds": 600,
+      "science_practice": "Planning and Carrying Out Investigations",
+      "crosscutting_concept": "Cause and Effect"
+    },
+    {
+      "id": "sci-11-ps2-6-001",
+      "standard_id": "HS-PS2-6",
+      "standard_description": "Communicate scientific and technical information about why the molecular-level structure is important in the functioning of designed materials.",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Carbon can exist as diamond, graphite, or graphene - three materials with vastly different properties.\n\n(a) Describe the molecular structure of each material.\n(b) Explain why diamond is the hardest natural substance while graphite is a lubricant.\n(c) Explain why graphite conducts electricity but diamond does not.\n(d) Describe why graphene is both strong and conductive.\n(e) Propose a potential application for graphene based on its properties.",
+      "rubric": {
+        "4": "Complete explanation: (a) Diamond: 3D tetrahedral sp³ network; Graphite: 2D hexagonal sp² layers with weak van der Waals between; Graphene: single layer of graphite; (b) Diamond has strong covalent bonds in all directions; graphite layers slide easily; (c) Graphite has delocalized electrons from p-orbitals perpendicular to layers; diamond has all electrons in σ bonds; (d) Graphene has both strong σ bonds in plane and mobile π electrons; (e) Realistic application (e.g., flexible electronics, supercapacitors) with property justification.",
+        "3": "Correctly describes structures and explains most properties. Application reasonable.",
+        "2": "Understands structures but property explanations incomplete.",
+        "1": "Basic structure descriptions without property connections.",
+        "0": "Does not understand structure-property relationships."
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 480,
+      "science_practice": "Obtaining, Evaluating, and Communicating Information",
+      "crosscutting_concept": "Structure and Function"
+    },
+    {
+      "id": "sci-11-ps3-1-001",
+      "standard_id": "HS-PS3-1",
+      "standard_description": "Create a computational model to calculate the change in the energy of one component in a system when the change in energy of the other component(s) and energy flows in and out of the system are known.",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "A 2 kg block slides down a 30° incline from a height of 5 m. The coefficient of kinetic friction is 0.2.\n\n(a) Calculate the gravitational potential energy at the top.\n(b) Calculate the work done against friction during the slide.\n(c) Calculate the kinetic energy at the bottom.\n(d) Calculate the speed at the bottom.\n(e) Create an energy bar chart showing PE, KE, and thermal energy at the top, middle, and bottom of the incline.",
+      "rubric": {
+        "4": "Correct calculations: (a) PE = mgh = 2(9.8)(5) = 98 J; (b) Distance = h/sin30° = 10 m; Normal force = mgcos30° = 17 N; Friction = μN = 3.4 N; Wf = 3.4(10) = 34 J; (c) KE = PE - Wf = 98 - 34 = 64 J; (d) v = √(2KE/m) = √(64) = 8 m/s; (e) Energy bar chart shows PE decreasing, KE and thermal increasing, total constant. All calculations shown with correct units.",
+        "3": "Calculations correct. Bar chart may be incomplete or lack detail.",
+        "2": "Most calculations correct but friction work calculation error or incomplete analysis.",
+        "1": "Basic energy concepts but significant calculation errors.",
+        "0": "Cannot apply energy conservation with non-conservative forces."
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.78,
+      "time_estimate_seconds": 600,
+      "science_practice": "Using Mathematics and Computational Thinking",
+      "crosscutting_concept": "Energy and Matter"
+    },
+    {
+      "id": "sci-11-ps3-2-001",
+      "standard_id": "HS-PS3-2",
+      "standard_description": "Develop and use models to illustrate that energy at the macroscopic scale can be accounted for as a combination of energy associated with the motions of particles (objects) and energy associated with the relative position of particles (objects).",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A spring-mass system oscillates vertically with a 0.5 kg mass and spring constant k = 200 N/m. The amplitude is 0.1 m.\n\n(a) Calculate the maximum potential energy stored in the spring.\n(b) Calculate the maximum kinetic energy of the mass.\n(c) At what position is the kinetic energy equal to the potential energy?\n(d) Create a graph showing PE, KE, and total mechanical energy as functions of position over one complete oscillation.\n(e) Explain at the particle level why energy oscillates between kinetic and potential forms.",
+      "rubric": {
+        "4": "Correct analysis: (a) PE_max = ½kA² = ½(200)(0.1)² = 1 J; (b) KE_max = 1 J (at equilibrium); (c) When KE = PE = 0.5 J; ½kx² = 0.5, x = ±0.071 m; (d) Graph shows KE and PE as sinusoids 90° out of phase, total E constant at 1 J; (e) Particle explanation: at max displacement, particles in spring are displaced from equilibrium (PE); at equilibrium position, mass has maximum velocity (KE). Energy transfers as work done by spring force.",
+        "3": "Calculations and graph correct. Particle-level explanation may lack depth.",
+        "2": "Basic calculations correct but graph or explanation incomplete.",
+        "1": "Understands oscillation qualitatively but calculation errors.",
+        "0": "Does not understand energy in oscillating systems."
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 540,
+      "science_practice": "Developing and Using Models",
+      "crosscutting_concept": "Energy and Matter"
+    },
+    {
+      "id": "sci-11-ps3-3-001",
+      "standard_id": "HS-PS3-3",
+      "standard_description": "Design, build, and refine a device that works within given constraints to convert one form of energy into another form of energy.",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Design a device that converts gravitational potential energy to electrical energy to power an LED for at least 10 seconds. Constraints: maximum falling mass of 1 kg, maximum drop height of 2 m, must not use batteries or chemical energy.\n\n(a) Calculate the available gravitational PE.\n(b) Describe your device design with a labeled diagram.\n(c) List energy conversions in your device chain.\n(d) Estimate efficiency at each conversion step and overall efficiency.\n(e) Explain what happens to the 'lost' energy at each step.\n(f) Propose one refinement to improve efficiency.",
+      "rubric": {
+        "4": "Complete design: (a) PE = mgh = 1(9.8)(2) = 19.6 J; (b) Design (e.g., falling mass turns generator): mass on string → pulley → gear system → DC motor/generator → LED; labeled diagram; (c) PE → KE → rotational KE → electrical → light + heat; (d) Reasonable estimates: mechanical ~90%, generator ~60%, LED ~20%, overall ~10%; (e) Friction → heat, generator resistance → heat, LED inefficiency → heat; (f) Specific refinement (reduce friction, use higher efficiency generator) with justification.",
+        "3": "Good design with most calculations. Efficiency estimates reasonable but may lack detail.",
+        "2": "Basic design with energy conversions identified but efficiency analysis weak.",
+        "1": "Simple design without quantitative analysis.",
+        "0": "Does not understand energy conversion principles."
+      },
+      "manifold_fit": {
+        "coherence_delta": 5,
+        "entropy_delta": 6,
+        "generativity_delta": 6
+      },
+      "difficulty": 0.85,
+      "time_estimate_seconds": 720,
+      "science_practice": "Designing Solutions",
+      "crosscutting_concept": "Energy and Matter"
+    },
+    {
+      "id": "sci-11-ps3-4-001",
+      "standard_id": "HS-PS3-4",
+      "standard_description": "Plan and conduct an investigation to provide evidence that the transfer of thermal energy when two components of different temperature are combined within a closed system results in a more uniform energy distribution among the components in the system (second law of thermodynamics).",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Design an experiment to investigate heat transfer and thermal equilibrium when hot metal is placed in cool water.\n\n(a) Write your hypothesis relating mass, specific heat, and final temperature.\n(b) List materials and procedure with at least 6 steps.\n(c) Identify variables (IV, DV, controlled).\n(d) Derive an equation to predict final temperature using conservation of energy.\n(e) Explain how this experiment demonstrates the second law of thermodynamics.\n(f) Identify potential sources of error and how to minimize them.",
+      "rubric": {
+        "4": "Complete design: (a) Hypothesis involving Q_lost = Q_gained; (b) Detailed procedure with calorimeter, thermometers, masses; (c) IV: metal type/mass, DV: final temperature, Controls: water mass, initial temps, insulation; (d) m_metal × c_metal × (T_i,metal - T_f) = m_water × c_water × (T_f - T_i,water); solve for T_f; (e) Heat flows from hot to cold spontaneously, never reverse; entropy increases; (f) Heat loss to surroundings, measurement errors, incomplete transfer; use insulated container, repeat trials.",
+        "3": "Good experimental design with most components. Equation derivation correct. May lack detail in error analysis.",
+        "2": "Basic experiment designed but equation derivation or error analysis incomplete.",
+        "1": "Simple procedure without proper scientific method.",
+        "0": "Does not understand thermal energy transfer."
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.80,
+      "time_estimate_seconds": 600,
+      "science_practice": "Planning and Carrying Out Investigations",
+      "crosscutting_concept": "Energy and Matter"
+    },
+    {
+      "id": "sci-11-ps3-5-001",
+      "standard_id": "HS-PS3-5",
+      "standard_description": "Develop and use a model of two objects interacting through electric or magnetic fields to illustrate the forces between objects and the changes in energy of the objects due to the interaction.",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Two charged particles, q₁ = +3 μC and q₂ = -3 μC, are initially 0.5 m apart and then released.\n\nGiven: k = 9 × 10⁹ N·m²/C², mass of each particle = 0.01 kg\n\n(a) Calculate the initial potential energy of the system.\n(b) Calculate the force on each particle and describe their motion.\n(c) When the particles are 0.1 m apart, calculate the new potential energy.\n(d) Calculate the kinetic energy and speed of each particle at this point.\n(e) Draw energy diagrams showing PE, KE, and total energy at both positions.\n(f) What would change if both particles were positive?",
+      "rubric": {
+        "4": "Correct analysis: (a) U = kq₁q₂/r = (9×10⁹)(3×10⁻⁶)(-3×10⁻⁶)/0.5 = -0.162 J; (b) F = kq₁q₂/r² = 0.324 N attractive, particles accelerate toward each other; (c) U = -0.81 J; (d) ΔKE = -ΔU = 0.648 J, each gets 0.324 J, v = √(2KE/m) = 8.05 m/s; (e) Energy diagrams show U negative, decreasing (more negative), KE increasing, total constant; (f) Positive charges would repel, need external work to bring closer, U would be positive.",
+        "3": "Calculations correct. Energy diagrams present. Sign conventions may have minor issues.",
+        "2": "Basic calculations correct but energy diagram incomplete or sign errors.",
+        "1": "Attempts problem but significant calculation or conceptual errors.",
+        "0": "Does not understand electric potential energy."
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.77,
+      "time_estimate_seconds": 540,
+      "science_practice": "Developing and Using Models",
+      "crosscutting_concept": "Energy and Matter"
+    },
+    {
+      "id": "sci-11-ps4-1-001",
+      "standard_id": "HS-PS4-1",
+      "standard_description": "Use mathematical representations to support a claim regarding relationships among the frequency, wavelength, and speed of waves traveling in various media.",
+      "dok_level": 3,
+      "question_type": "data_analysis",
+      "question": "A student investigates waves on a string by varying tension and measuring frequency and wavelength.\n\n| Trial | Tension (N) | Frequency (Hz) | Wavelength (m) |\n|-------|-------------|----------------|----------------|\n| 1 | 10 | 20 | 0.50 |\n| 2 | 10 | 40 | 0.25 |\n| 3 | 10 | 60 | 0.167 |\n| 4 | 40 | 40 | 0.50 |\n| 5 | 90 | 60 | 0.50 |\n\n(a) Calculate the wave speed for each trial.\n(b) What relationship exists between frequency and wavelength at constant tension?\n(c) What relationship exists between tension and wave speed at constant frequency?\n(d) Derive a formula relating wave speed, tension, and linear mass density.\n(e) If the string has linear mass density μ = 0.01 kg/m, verify your formula with Trial 1.",
+      "rubric": {
+        "4": "Correct analysis: (a) All v = fλ = 10 m/s (trials 1-3), 20 m/s (trial 4), 30 m/s (trial 5); (b) Inverse relationship: f × λ = constant = v; (c) v ∝ √T; (d) v = √(T/μ); (e) √(10/0.01) = √1000 = 31.6 m/s... wait, should be 10 m/s, so μ = T/v² = 10/100 = 0.1 kg/m. Verifies formula correctly.",
+        "3": "Calculations and relationships correct. Formula derivation may have minor issues.",
+        "2": "Basic calculations correct but relationships not fully explained.",
+        "1": "Can calculate wave speed but cannot analyze relationships.",
+        "0": "Cannot apply wave equation."
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.73,
+      "time_estimate_seconds": 540,
+      "science_practice": "Analyzing and Interpreting Data",
+      "crosscutting_concept": "Patterns"
+    },
+    {
+      "id": "sci-11-ps4-2-001",
+      "standard_id": "HS-PS4-2",
+      "standard_description": "Evaluate questions about the advantages of using a digital transmission and storage of information.",
+      "dok_level": 3,
+      "question_type": "argumentation",
+      "question": "Compare analog and digital audio recording and transmission:\n\n(a) Explain how sound is represented in analog vs. digital formats.\n(b) Why does analog audio degrade with copying while digital audio does not?\n(c) Explain the concepts of sampling rate and bit depth. What sampling rate is needed to accurately capture frequencies up to 20 kHz?\n(d) What information is lost in digital conversion, and can humans detect this loss?\n(e) Evaluate the claim: 'Vinyl records sound better than digital music.'",
+      "rubric": {
+        "4": "Complete analysis: (a) Analog: continuous signal (groove shape, magnetic tape); Digital: discrete samples converted to binary; (b) Analog: each copy adds noise; Digital: exact replication of 1s and 0s; (c) Sampling rate = samples/second, bit depth = amplitude precision; Nyquist: need 40 kHz to capture 20 kHz; (d) Information between samples lost; frequencies above Nyquist/2 lost; CD quality (44.1 kHz, 16-bit) generally indistinguishable; (e) Nuanced evaluation: vinyl may have 'warmth' (actually harmonic distortion), but digital has lower noise floor, wider dynamic range, no degradation.",
+        "3": "Good explanations of concepts. Vinyl claim evaluation may lack technical depth.",
+        "2": "Understands basic differences but cannot explain sampling theory.",
+        "1": "Basic understanding of analog vs digital without technical detail.",
+        "0": "Does not understand digital signal processing."
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 540,
+      "science_practice": "Engaging in Argument from Evidence",
+      "crosscutting_concept": "Structure and Function"
+    },
+    {
+      "id": "sci-11-ps4-3-001",
+      "standard_id": "HS-PS4-3",
+      "standard_description": "Evaluate the claims, evidence, and reasoning behind the idea that electromagnetic radiation can be described either by a wave model or a particle model, and that for some situations one model is more useful than the other.",
+      "dok_level": 4,
+      "question_type": "argumentation",
+      "question": "Evaluate evidence for wave and particle models of light:\n\n(a) Describe an experiment that can only be explained by the wave model of light.\n(b) Describe an experiment that can only be explained by the particle model of light.\n(c) For the photoelectric effect, explain why the wave model fails to predict the observations.\n(d) Calculate the energy of a photon with wavelength 500 nm (h = 6.63 × 10⁻³⁴ J·s, c = 3 × 10⁸ m/s).\n(e) Explain wave-particle duality and why both models are necessary.",
+      "rubric": {
+        "4": "Complete analysis: (a) Diffraction/interference (double-slit) - requires wave superposition; (b) Photoelectric effect - discrete energy packets; (c) Wave model predicts: intensity increases electron energy, delay for dim light, all frequencies work. Observations: frequency threshold, no delay, intensity affects number not energy; (d) E = hf = hc/λ = (6.63×10⁻³⁴)(3×10⁸)/(500×10⁻⁹) = 3.98×10⁻¹⁹ J = 2.49 eV; (e) Light exhibits both wave and particle behaviors depending on experiment; complementary descriptions of quantum entity.",
+        "3": "Correct experiments and calculations. Wave-particle duality explanation may lack depth.",
+        "2": "Identifies experiments correctly but photoelectric explanation incomplete.",
+        "1": "Basic understanding of models without supporting evidence.",
+        "0": "Does not understand wave-particle duality."
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.80,
+      "time_estimate_seconds": 600,
+      "science_practice": "Engaging in Argument from Evidence",
+      "crosscutting_concept": "Systems and System Models"
+    },
+    {
+      "id": "sci-11-ps4-4-001",
+      "standard_id": "HS-PS4-4",
+      "standard_description": "Evaluate the validity and reliability of claims in published materials of the effects that different frequencies of electromagnetic radiation have when absorbed by matter.",
+      "dok_level": 3,
+      "question_type": "argumentation",
+      "question": "Evaluate the following claims about electromagnetic radiation:\n\nClaim 1: 'Cell phones cause brain cancer because they emit radiation.'\nClaim 2: 'Microwave ovens are dangerous because they use radiation to cook food.'\nClaim 3: 'Getting a suntan is safe as long as you don't burn.'\n\nFor each claim, evaluate based on: (a) the type of radiation involved, (b) the mechanism of interaction with matter, (c) the energy of photons compared to molecular bond energies, (d) scientific evidence for or against the claim.",
+      "rubric": {
+        "4": "Complete evaluation: Claim 1: Radio waves are non-ionizing, E << bond energy, cannot damage DNA directly. Large studies show no causal link. Claim 2: Microwaves excite water molecules (rotational, not ionizing), contained in oven, no residual radiation in food. Safe by design. Claim 3: UV radiation IS ionizing, can damage DNA even without visible burn, accumulates over time. Tanning = DNA damage response. All evaluations reference photon energy vs. ionization energy (~10 eV).",
+        "3": "Correctly evaluates claims with good scientific reasoning. May lack specific energy comparisons.",
+        "2": "Identifies radiation types but mechanism explanations incomplete.",
+        "1": "Basic understanding of radiation types without critical evaluation.",
+        "0": "Cannot distinguish ionizing from non-ionizing radiation."
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.78,
+      "time_estimate_seconds": 540,
+      "science_practice": "Obtaining, Evaluating, and Communicating Information",
+      "crosscutting_concept": "Cause and Effect"
+    },
+    {
+      "id": "sci-11-ps4-5-001",
+      "standard_id": "HS-PS4-5",
+      "standard_description": "Communicate technical information about how some technological devices use the principles of wave behavior and wave interactions with matter to transmit and capture information and energy.",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Explain how fiber optic cables transmit information over long distances:\n\n(a) Describe total internal reflection and the conditions required for it to occur.\n(b) Calculate the critical angle for light traveling from glass (n = 1.5) to air (n = 1.0).\n(c) Explain why fiber optic cables are preferred over copper cables for data transmission.\n(d) Describe how dispersion affects signal quality and one method to minimize it.\n(e) Explain how wavelength-division multiplexing increases data capacity.",
+      "rubric": {
+        "4": "Complete explanation: (a) Total internal reflection when angle > critical angle, light stays in denser medium; (b) sin θc = n₂/n₁ = 1/1.5, θc = 41.8°; (c) Higher bandwidth, lower signal loss over distance, immune to EM interference, more secure; (d) Dispersion: different wavelengths travel at different speeds, pulses spread; minimize with single-mode fiber, dispersion-compensating fiber; (e) Multiple wavelengths carry separate signals simultaneously, multiplying capacity.",
+        "3": "Correct physics explanations and calculation. Some applications may lack detail.",
+        "2": "Understands total internal reflection but practical applications incomplete.",
+        "1": "Basic concept of fiber optics without physics explanation.",
+        "0": "Does not understand wave behavior in optical fibers."
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 540,
+      "science_practice": "Obtaining, Evaluating, and Communicating Information",
+      "crosscutting_concept": "Structure and Function"
+    }
+  ]
+}

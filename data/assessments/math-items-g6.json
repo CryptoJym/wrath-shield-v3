@@ -1,0 +1,1748 @@
+{
+  "grade": "6",
+  "subject": "Mathematics",
+  "items": [
+    {
+      "id": "math-6-rp-a-1-001",
+      "standard_id": "6.RP.A.1",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "A recipe calls for 2 cups of flour for every 3 cups of sugar. Write the ratio of flour to sugar in three different ways.",
+      "correct_answer": "2:3, 2/3, 2 to 3",
+      "rubric": {
+        "full_credit": "All three forms correct",
+        "partial_credit": "1-2 forms correct",
+        "no_credit": "No correct forms"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-6-rp-a-1-002",
+      "standard_id": "6.RP.A.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Marcus says the ratio of boys to girls in his class is 3:5, while Jayla says the ratio of girls to boys is 5:3. Can both students be correct? Explain your reasoning and describe what each ratio represents.",
+      "correct_answer": "Yes, both are correct. Marcus describes boys compared to girls (3 boys for every 5 girls), while Jayla describes girls compared to boys (5 girls for every 3 boys). The order of comparison matters in ratios.",
+      "rubric": {
+        "full_credit": "Correctly explains both ratios are valid, identifies order matters, explains what each ratio represents",
+        "partial_credit": "Identifies both can be correct but incomplete explanation",
+        "no_credit": "Incorrectly states one is wrong or no valid explanation"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-6-rp-a-1-003",
+      "standard_id": "6.RP.A.1",
+      "dok_level": 3,
+      "question_type": "multi_part",
+      "question": "A farmer has chickens and cows. There are 18 animal heads and 52 animal legs in total.\n\nPart A: Write a ratio comparing chickens to cows.\nPart B: Explain how you determined the number of each animal.\nPart C: If 4 more chickens are added, what is the new ratio of chickens to cows?",
+      "correct_answer": {
+        "part_a": "10:8 or 5:4",
+        "part_b": "Each chicken has 2 legs, each cow has 4 legs. If all 18 were chickens, there would be 36 legs. The extra 16 legs (52-36) come from cows having 2 extra legs each, so 16÷2=8 cows. Therefore 18-8=10 chickens.",
+        "part_c": "14:8 or 7:4"
+      },
+      "rubric": {
+        "full_credit": "All three parts correct with clear reasoning",
+        "partial_credit": "2 parts correct or all parts with minor errors",
+        "no_credit": "Fewer than 2 parts correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 300
+    },
+    {
+      "id": "math-6-rp-a-2-001",
+      "standard_id": "6.RP.A.2",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "A car travels 180 miles in 3 hours. What is the unit rate in miles per hour?",
+      "options": [
+        "A) 540 miles per hour",
+        "B) 60 miles per hour",
+        "C) 183 miles per hour",
+        "D) 0.017 miles per hour"
+      ],
+      "correct_answer": "B",
+      "rubric": {
+        "full_credit": "Correct answer B",
+        "no_credit": "Any other answer"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 60
+    },
+    {
+      "id": "math-6-rp-a-2-002",
+      "standard_id": "6.RP.A.2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Store A sells 5 notebooks for $8.75. Store B sells 3 notebooks for $4.95. Store C sells 8 notebooks for $15.20. Which store offers the best deal? Show your work and explain your reasoning using unit rates.",
+      "correct_answer": "Store B offers the best deal. Unit rates: Store A = $1.75/notebook, Store B = $1.65/notebook, Store C = $1.90/notebook. Store B has the lowest cost per notebook.",
+      "rubric": {
+        "full_credit": "Correctly calculates all three unit rates and identifies Store B with clear explanation",
+        "partial_credit": "Calculates unit rates correctly but wrong conclusion, or correct conclusion with calculation errors",
+        "no_credit": "Incorrect unit rates and wrong conclusion"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-6-rp-a-2-003",
+      "standard_id": "6.RP.A.2",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "A streaming service offers two plans: Plan A costs $12.99/month for unlimited movies, or Plan B charges $2.49 per movie. Marcus watches about 4-6 movies per month. Design a decision-making strategy for Marcus that considers both cost efficiency and viewing habits. Include a recommendation with mathematical justification.",
+      "correct_answer": "Strategy should include: calculating costs at different viewing levels (4 movies = $9.96 Plan B, 5 movies = $12.45 Plan B, 6 movies = $14.94 Plan B). Break-even is between 5-6 movies. Recommendation: If consistently watching 5+ movies, Plan A is better. If 5 or fewer, Plan B saves money. The break-even point is exactly at 12.99÷2.49 ≈ 5.2 movies.",
+      "rubric": {
+        "full_credit": "Complete strategy with break-even analysis, considers variability, provides justified recommendation",
+        "partial_credit": "Correct calculations but incomplete strategy or weak justification",
+        "no_credit": "Incorrect calculations or no clear strategy"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.8,
+      "time_estimate_seconds": 360
+    },
+    {
+      "id": "math-6-rp-a-3-001",
+      "standard_id": "6.RP.A.3",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Complete the table of equivalent ratios:\n\nMiles: 15, 30, ___, 75\nHours: 3, ___, 12, ___",
+      "correct_answer": "Miles: 60; Hours: 6, 15",
+      "rubric": {
+        "full_credit": "All three values correct",
+        "partial_credit": "2 values correct",
+        "no_credit": "Fewer than 2 values correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 120
+    },
+    {
+      "id": "math-6-rp-a-3-002",
+      "standard_id": "6.RP.A.3",
+      "dok_level": 3,
+      "question_type": "multi_part",
+      "question": "A lemonade recipe uses 4 cups of water for every 1 cup of lemon juice.\n\nPart A: Create a double number line diagram showing at least 4 equivalent ratios.\nPart B: Use your diagram to determine how much lemon juice is needed for 14 cups of water.\nPart C: If you only have 2.5 cups of lemon juice, how much water should you use?",
+      "correct_answer": {
+        "part_a": "Double number line showing water (0, 4, 8, 12, 16) aligned with lemon juice (0, 1, 2, 3, 4)",
+        "part_b": "3.5 cups of lemon juice",
+        "part_c": "10 cups of water"
+      },
+      "rubric": {
+        "full_credit": "Correct diagram with proper alignment and both calculations correct",
+        "partial_credit": "Diagram correct with one calculation correct, or minor diagram errors with both calculations correct",
+        "no_credit": "Diagram incorrect and calculations incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 240
+    },
+    {
+      "id": "math-6-rp-a-3-003",
+      "standard_id": "6.RP.A.3",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "A paint store mixes custom colors. Purple paint requires 3 parts blue to 2 parts red. A customer wants 20 gallons of purple paint, but the store only has 11 gallons of blue paint available. Can the order be fulfilled? If not, what is the maximum amount of purple paint that can be made, and how much of each color is needed? Explain your reasoning.",
+      "correct_answer": "The order cannot be fulfilled. 20 gallons of purple needs 12 gallons blue (3/5 × 20) and 8 gallons red (2/5 × 20). With only 11 gallons of blue, maximum purple = 11 × (5/3) = 18.33 gallons. This requires 11 gallons blue and 7.33 gallons red.",
+      "rubric": {
+        "full_credit": "Correctly determines order cannot be fulfilled, calculates maximum purple paint, and determines amounts of each color with clear reasoning",
+        "partial_credit": "Correct conclusion but errors in calculations, or calculations correct but unclear reasoning",
+        "no_credit": "Incorrect conclusion with incorrect calculations"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 300
+    },
+    {
+      "id": "math-6-ns-a-1-001",
+      "standard_id": "6.NS.A.1",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Calculate: 3/4 ÷ 2/5",
+      "correct_answer": "15/8 or 1 7/8 or 1.875",
+      "rubric": {
+        "full_credit": "Correct answer in any equivalent form",
+        "no_credit": "Incorrect answer"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-6-ns-a-1-002",
+      "standard_id": "6.NS.A.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A ribbon is 5 1/4 feet long. How many pieces that are 3/8 foot long can be cut from the ribbon? Will there be any ribbon left over? If so, how much?",
+      "correct_answer": "14 pieces can be cut. 5 1/4 ÷ 3/8 = 21/4 × 8/3 = 168/12 = 14. No ribbon left over (divides evenly).",
+      "rubric": {
+        "full_credit": "Correct number of pieces with accurate remainder determination and shown work",
+        "partial_credit": "Correct division but error in interpreting remainder",
+        "no_credit": "Incorrect division"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-6-ns-a-1-003",
+      "standard_id": "6.NS.A.1",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "A community garden is 8 3/4 acres. Different sections are being allocated:\n\nPart A: If each family gets 1/8 acre for vegetables, how many families can have plots?\nPart B: After allocating family plots, 2 1/4 acres remain for a community orchard. Each fruit tree needs 3/16 acre. How many trees can be planted?\nPart C: The remaining space will be walking paths. How much land is left for paths?",
+      "correct_answer": {
+        "part_a": "70 families (8 3/4 ÷ 1/8 = 35/4 × 8 = 70)",
+        "part_b": "12 trees (2 1/4 ÷ 3/16 = 9/4 × 16/3 = 12)",
+        "part_c": "This is a logic check - if 70 families get 1/8 acre each, that's 70/8 = 8.75 acres, which exceeds the total. The problem requires re-reading: 70 families at 1/8 acre = 8.75 acres, but we only have 8.75 acres total, so 2.25 acres cannot also remain. Paths = 0 acres if family plots use all land."
+      },
+      "rubric": {
+        "full_credit": "Correctly identifies the mathematical inconsistency in the problem or solves assuming Parts A and B are independent scenarios",
+        "partial_credit": "Correct calculations for Parts A and B individually",
+        "no_credit": "Incorrect division operations"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.8,
+      "time_estimate_seconds": 360
+    },
+    {
+      "id": "math-6-ns-b-2-001",
+      "standard_id": "6.NS.B.2",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Calculate using the standard algorithm: 7,854 ÷ 23",
+      "correct_answer": "341 R 11 or 341.478...",
+      "rubric": {
+        "full_credit": "Correct quotient with or without remainder",
+        "partial_credit": "Minor arithmetic error but correct process",
+        "no_credit": "Incorrect process or major errors"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 120
+    },
+    {
+      "id": "math-6-ns-b-2-002",
+      "standard_id": "6.NS.B.2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A school is planning a field trip for 1,247 students. Each bus holds 36 students. How many buses are needed? Explain why your answer makes sense in this real-world context.",
+      "correct_answer": "35 buses are needed. 1,247 ÷ 36 = 34.638..., but you cannot have a partial bus. You must round up to 35 buses to ensure all 1,247 students have seats.",
+      "rubric": {
+        "full_credit": "Correct answer of 35 with explanation of why rounding up is necessary",
+        "partial_credit": "Answer of 34 with correct division but no consideration of context",
+        "no_credit": "Incorrect division or nonsensical answer"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 150
+    },
+    {
+      "id": "math-6-ns-b-2-003",
+      "standard_id": "6.NS.B.2",
+      "dok_level": 3,
+      "question_type": "multi_part",
+      "question": "A warehouse has 15,680 items to pack into boxes.\n\nPart A: If each box holds 48 items, how many complete boxes can be filled?\nPart B: How many items will be left over?\nPart C: If leftover items are packed in smaller boxes holding 12 items each, how many small boxes are needed?",
+      "correct_answer": {
+        "part_a": "326 complete boxes",
+        "part_b": "32 items left over (15,680 - 326×48 = 15,680 - 15,648 = 32)",
+        "part_c": "3 small boxes (32 ÷ 12 = 2 R 8, need 3 boxes to fit all)"
+      },
+      "rubric": {
+        "full_credit": "All three parts correct with appropriate rounding in Part C",
+        "partial_credit": "Parts A and B correct but error in Part C context",
+        "no_credit": "Fewer than 2 parts correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 240
+    },
+    {
+      "id": "math-6-ns-b-3-001",
+      "standard_id": "6.NS.B.3",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Calculate: 45.72 × 3.8",
+      "correct_answer": "173.736",
+      "rubric": {
+        "full_credit": "Correct answer",
+        "partial_credit": "Correct digits but decimal point error",
+        "no_credit": "Incorrect calculation"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 120
+    },
+    {
+      "id": "math-6-ns-b-3-002",
+      "standard_id": "6.NS.B.3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A student calculated 12.5 × 0.4 and got 50. Without recalculating, explain how you know this answer is incorrect. Then find the correct answer.",
+      "correct_answer": "The answer is incorrect because multiplying by 0.4 (less than 1) should make the number smaller, not larger. Also, estimating: 12.5 × 0.4 ≈ 12 × 0.5 = 6, so 50 is way too large. Correct answer: 5.0",
+      "rubric": {
+        "full_credit": "Valid explanation of why 50 is unreasonable AND correct answer of 5",
+        "partial_credit": "Correct answer but weak explanation, or good explanation but wrong answer",
+        "no_credit": "No valid reasoning and incorrect answer"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-6-ns-b-3-003",
+      "standard_id": "6.NS.B.3",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "A carpenter is building a rectangular deck that measures 12.75 feet by 8.5 feet.\n\nPart A: Calculate the area of the deck.\nPart B: Decking boards cost $4.29 per square foot installed. What is the total cost for the deck surface?\nPart C: The carpenter wants to add a 3.25-foot wide walkway around the entire deck. What is the total area including the walkway?",
+      "correct_answer": {
+        "part_a": "108.375 square feet",
+        "part_b": "$464.93 (108.375 × 4.29 = 464.92875, rounded to nearest cent)",
+        "part_c": "New dimensions: (12.75 + 6.5) × (8.5 + 6.5) = 19.25 × 15 = 288.75 square feet"
+      },
+      "rubric": {
+        "full_credit": "All three parts correct with appropriate precision",
+        "partial_credit": "Two parts correct",
+        "no_credit": "Fewer than two parts correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 300
+    },
+    {
+      "id": "math-6-ns-c-5-001",
+      "standard_id": "6.NS.C.5",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Which situation is best represented by -15?",
+      "options": [
+        "A) A temperature of 15°F",
+        "B) A gain of 15 yards in football",
+        "C) A withdrawal of $15 from a bank account",
+        "D) 15 feet above sea level"
+      ],
+      "correct_answer": "C",
+      "rubric": {
+        "full_credit": "Correct answer C",
+        "no_credit": "Any other answer"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 60
+    },
+    {
+      "id": "math-6-ns-c-5-002",
+      "standard_id": "6.NS.C.5",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Create a real-world scenario where 0 represents sea level, positive numbers represent heights above sea level, and negative numbers represent depths below sea level. Describe at least three specific locations with their elevations using positive and negative numbers.",
+      "correct_answer": "Example: Mount Everest summit at +29,032 feet, Denver Colorado at +5,280 feet, Death Valley at -282 feet, Mariana Trench at -36,000 feet. Answers will vary but should correctly use positive for above sea level and negative for below.",
+      "rubric": {
+        "full_credit": "Clear scenario with at least 3 locations correctly using positive and negative numbers",
+        "partial_credit": "Correct concept but fewer than 3 locations or minor errors in number usage",
+        "no_credit": "Incorrect use of positive/negative or no clear scenario"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-6-ns-c-5-003",
+      "standard_id": "6.NS.C.5",
+      "dok_level": 3,
+      "question_type": "multi_part",
+      "question": "A submarine is at -450 feet (450 feet below sea level).\n\nPart A: The submarine rises 175 feet. Write an expression and find its new depth.\nPart B: From the new position, it descends 280 feet. Write an expression and find its new depth.\nPart C: What single movement would take the submarine from its starting position to its final position?",
+      "correct_answer": {
+        "part_a": "-450 + 175 = -275 feet",
+        "part_b": "-275 + (-280) = -555 feet OR -275 - 280 = -555 feet",
+        "part_c": "Descend 105 feet (or -105 feet movement since -555 - (-450) = -105)"
+      },
+      "rubric": {
+        "full_credit": "All three parts correct with proper expressions",
+        "partial_credit": "Two parts correct",
+        "no_credit": "Fewer than two parts correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-6-ns-c-6-001",
+      "standard_id": "6.NS.C.6",
+      "dok_level": 2,
+      "question_type": "graphing",
+      "question": "Plot the following points on a coordinate plane: A(-3, 4), B(2, -5), C(-4, -2), D(0, 3)",
+      "correct_answer": "Points correctly plotted at the given coordinates",
+      "rubric": {
+        "full_credit": "All 4 points correctly plotted",
+        "partial_credit": "3 points correctly plotted",
+        "no_credit": "Fewer than 3 points correctly plotted"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 120
+    },
+    {
+      "id": "math-6-ns-c-6-002",
+      "standard_id": "6.NS.C.6",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Explain why the point (-5, 3) is in a different quadrant than the point (5, 3). Use mathematical vocabulary including 'origin,' 'x-axis,' 'y-axis,' and 'quadrant' in your explanation.",
+      "correct_answer": "(-5, 3) is in Quadrant II because the x-coordinate is negative (left of the y-axis) and y-coordinate is positive (above the x-axis). (5, 3) is in Quadrant I because both coordinates are positive. Both points are the same distance from the origin horizontally (5 units) and vertically (3 units), but they are reflected across the y-axis.",
+      "rubric": {
+        "full_credit": "Correctly identifies quadrants, uses all required vocabulary, and explains the difference clearly",
+        "partial_credit": "Identifies quadrants correctly but incomplete vocabulary use or explanation",
+        "no_credit": "Incorrect quadrant identification or no mathematical vocabulary"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-6-ns-c-6-003",
+      "standard_id": "6.NS.C.6",
+      "dok_level": 3,
+      "question_type": "multi_part",
+      "question": "Part A: On a number line, plot -2.5 and 7/4.\nPart B: Which number is greater? Explain how you can tell from the number line.\nPart C: Find a rational number that is exactly halfway between -2.5 and 7/4.",
+      "correct_answer": {
+        "part_a": "-2.5 plotted at -2.5, 7/4 (or 1.75) plotted at 1.75",
+        "part_b": "7/4 is greater because it is to the right of -2.5 on the number line",
+        "part_c": "Halfway point = (-2.5 + 1.75)/2 = -0.75/2 = -0.375 or -3/8"
+      },
+      "rubric": {
+        "full_credit": "All three parts correct",
+        "partial_credit": "Two parts correct",
+        "no_credit": "Fewer than two parts correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-6-ns-c-7-001",
+      "standard_id": "6.NS.C.7",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Order from least to greatest: -8, |−3|, -1, |5|, -6, 0",
+      "correct_answer": "-8, -6, -1, 0, |−3| (or 3), |5| (or 5) → -8, -6, -1, 0, 3, 5",
+      "rubric": {
+        "full_credit": "Correct order with absolute values evaluated",
+        "partial_credit": "Minor position error or absolute value not evaluated but concept understood",
+        "no_credit": "Multiple errors or absolute value misunderstood"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-6-ns-c-7-002",
+      "standard_id": "6.NS.C.7",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Jamal says that -10 is greater than -2 because 10 is greater than 2. Is Jamal correct? Explain your reasoning using a number line and the concept of absolute value.",
+      "correct_answer": "Jamal is incorrect. On a number line, -2 is to the right of -10, so -2 > -10. While |−10| = 10 > |−2| = 2, this means -10 is farther from zero, not greater. For negative numbers, the one closer to zero (smaller absolute value) is actually greater.",
+      "rubric": {
+        "full_credit": "Correctly identifies error, uses number line reasoning, explains relationship between absolute value and ordering negative numbers",
+        "partial_credit": "Correct conclusion but incomplete explanation",
+        "no_credit": "Agrees with Jamal or provides incorrect reasoning"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-6-ns-c-7-003",
+      "standard_id": "6.NS.C.7",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "Two hikers are comparing their positions relative to base camp (elevation 0).\n\nPart A: Hiker A is at -85 feet and Hiker B is at -120 feet. Who is higher? Explain.\nPart B: Which hiker is farther from base camp? Use absolute value to justify your answer.\nPart C: If Hiker A descends to be at the same distance from base camp as Hiker B (but still below), what is Hiker A's new elevation?",
+      "correct_answer": {
+        "part_a": "Hiker A is higher because -85 > -120 (closer to 0)",
+        "part_b": "Hiker B is farther because |−120| = 120 > |−85| = 85",
+        "part_c": "-120 feet (same distance from base camp as Hiker B, still below)"
+      },
+      "rubric": {
+        "full_credit": "All three parts correct with proper reasoning",
+        "partial_credit": "Two parts correct",
+        "no_credit": "Fewer than two parts correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 240
+    },
+    {
+      "id": "math-6-ns-c-8-001",
+      "standard_id": "6.NS.C.8",
+      "dok_level": 2,
+      "question_type": "graphing",
+      "question": "A treasure map shows locations at coordinates: Start (0, 0), Tree (-4, 3), Rock (5, -2), Cave (-3, -5). Plot these points and identify which quadrant each non-origin point is in.",
+      "correct_answer": "Tree at (-4, 3) - Quadrant II; Rock at (5, -2) - Quadrant IV; Cave at (-3, -5) - Quadrant III",
+      "rubric": {
+        "full_credit": "All points correctly plotted and quadrants correctly identified",
+        "partial_credit": "Points plotted correctly but 1-2 quadrant errors, or quadrants correct but plotting errors",
+        "no_credit": "Multiple plotting and quadrant errors"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 150
+    },
+    {
+      "id": "math-6-ns-c-8-002",
+      "standard_id": "6.NS.C.8",
+      "dok_level": 3,
+      "question_type": "multi_part",
+      "question": "A drone starts at position (2, 3) on a grid where each unit represents 10 meters.\n\nPart A: The drone flies to (-4, 3). How far did it travel and in what direction?\nPart B: From (-4, 3), it flies to (-4, -2). How far did it travel and in what direction?\nPart C: What are the total horizontal and vertical distances traveled?",
+      "correct_answer": {
+        "part_a": "60 meters west (moved 6 units left × 10m)",
+        "part_b": "50 meters south (moved 5 units down × 10m)",
+        "part_c": "Total horizontal: 60 meters; Total vertical: 50 meters"
+      },
+      "rubric": {
+        "full_credit": "All parts correct with proper direction and distance",
+        "partial_credit": "Distance calculations correct but direction errors, or two parts fully correct",
+        "no_credit": "Fewer than two parts correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-6-ns-c-8-003",
+      "standard_id": "6.NS.C.8",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "A city planner is designing a park on a coordinate grid where each unit = 100 feet. The park boundaries are at: (-5, 4), (3, 4), (3, -2), (-5, -2). Calculate the perimeter of the park in feet and explain how you used coordinates to find the distances.",
+      "correct_answer": "The park is a rectangle. Width = distance from -5 to 3 = 8 units = 800 feet. Height = distance from -2 to 4 = 6 units = 600 feet. Perimeter = 2(800) + 2(600) = 2800 feet. Used absolute value to find distances between coordinates: |3 - (-5)| = 8 and |4 - (-2)| = 6.",
+      "rubric": {
+        "full_credit": "Correct perimeter with clear explanation of how coordinates determine distances",
+        "partial_credit": "Correct perimeter but weak explanation, or good explanation with calculation error",
+        "no_credit": "Incorrect perimeter and no valid method"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 240
+    },
+    {
+      "id": "math-6-ee-a-1-001",
+      "standard_id": "6.EE.A.1",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Evaluate: 2³ + 4² - 5¹",
+      "correct_answer": "8 + 16 - 5 = 19",
+      "rubric": {
+        "full_credit": "Correct answer of 19",
+        "partial_credit": "Correct exponent evaluations but arithmetic error",
+        "no_credit": "Incorrect exponent evaluation"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 60
+    },
+    {
+      "id": "math-6-ee-a-1-002",
+      "standard_id": "6.EE.A.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Compare: 2⁴ and 4². Are they equal? Explain why or why not, and describe a general pattern you notice.",
+      "correct_answer": "Yes, they are equal. 2⁴ = 16 and 4² = 16. Pattern: (aᵇ)ᶜ = aᵇˣᶜ, and since 4 = 2², we have 4² = (2²)² = 2⁴. In general, when the base of one expression equals a power of the other's base, they can be equal.",
+      "rubric": {
+        "full_credit": "Correctly identifies equality, shows work, and describes a valid general pattern",
+        "partial_credit": "Correct identification and work but no pattern, or pattern but no work shown",
+        "no_credit": "Incorrect conclusion"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-6-ee-a-1-003",
+      "standard_id": "6.EE.A.1",
+      "dok_level": 3,
+      "question_type": "multi_part",
+      "question": "Part A: Write 64 as a power of 2.\nPart B: Write 64 as a power of 4.\nPart C: Write 64 as a power of 8.\nPart D: Explain the relationship between your answers.",
+      "correct_answer": {
+        "part_a": "2⁶",
+        "part_b": "4³",
+        "part_c": "8²",
+        "part_d": "All equal 64. Notice 2⁶ = (2²)³ = 4³ and 2⁶ = (2³)² = 8². The exponents decrease (6, 3, 2) as the bases increase (2, 4, 8) because larger bases need fewer multiplications."
+      },
+      "rubric": {
+        "full_credit": "All four parts correct with valid relationship explanation",
+        "partial_credit": "Parts A-C correct but weak/no relationship explanation",
+        "no_credit": "Fewer than three correct expressions"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-6-ee-a-2-001",
+      "standard_id": "6.EE.A.2",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Evaluate 3x² - 2y when x = 4 and y = 5.",
+      "correct_answer": "3(16) - 2(5) = 48 - 10 = 38",
+      "rubric": {
+        "full_credit": "Correct answer of 38",
+        "partial_credit": "Correct substitution but arithmetic error",
+        "no_credit": "Incorrect substitution"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-6-ee-a-2-002",
+      "standard_id": "6.EE.A.2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Write an algebraic expression for: 'Triple the sum of a number and 7, then subtract the square of the number.' Define your variable and then evaluate when the number is 3.",
+      "correct_answer": "Let n = the number. Expression: 3(n + 7) - n². When n = 3: 3(3 + 7) - 3² = 3(10) - 9 = 30 - 9 = 21",
+      "rubric": {
+        "full_credit": "Correct expression with defined variable AND correct evaluation",
+        "partial_credit": "Correct expression but evaluation error, or minor expression error but correct method",
+        "no_credit": "Incorrect expression structure"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 150
+    },
+    {
+      "id": "math-6-ee-a-2-003",
+      "standard_id": "6.EE.A.2",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "A phone plan charges $0.05 per text message and $0.10 per minute of calls.\n\nPart A: Write an expression for the total cost if you send t text messages and talk for m minutes.\nPart B: Last month you sent 200 texts and talked for 150 minutes. What was the cost?\nPart C: This month you have a budget of $30. If you plan to talk for 100 minutes, what is the maximum number of texts you can send?",
+      "correct_answer": {
+        "part_a": "0.05t + 0.10m or equivalent",
+        "part_b": "0.05(200) + 0.10(150) = 10 + 15 = $25",
+        "part_c": "30 = 0.05t + 0.10(100); 30 = 0.05t + 10; 20 = 0.05t; t = 400 texts maximum"
+      },
+      "rubric": {
+        "full_credit": "All three parts correct",
+        "partial_credit": "Two parts correct",
+        "no_credit": "Fewer than two parts correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 240
+    },
+    {
+      "id": "math-6-ee-a-3-001",
+      "standard_id": "6.EE.A.3",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Use the distributive property to expand: 4(3x + 5)",
+      "correct_answer": "12x + 20",
+      "rubric": {
+        "full_credit": "Correct expansion",
+        "no_credit": "Incorrect expansion"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 60
+    },
+    {
+      "id": "math-6-ee-a-3-002",
+      "standard_id": "6.EE.A.3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Factor the expression 18x + 24 in two different ways, and explain which factorization uses the greatest common factor.",
+      "correct_answer": "Method 1: 2(9x + 12). Method 2: 6(3x + 4). The GCF is 6, so 6(3x + 4) is the complete factorization. You could also write 3(6x + 8), but 6(3x + 4) uses the largest common factor.",
+      "rubric": {
+        "full_credit": "Two valid factorizations with correct identification of GCF factorization",
+        "partial_credit": "Two factorizations but incorrect GCF identification",
+        "no_credit": "Fewer than two valid factorizations"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 150
+    },
+    {
+      "id": "math-6-ee-a-3-003",
+      "standard_id": "6.EE.A.3",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Simplify the expression 3(2x + 4) + 2(3x - 1) - (4x + 5). Show each step and name the property used. Then evaluate your simplified expression when x = 5.",
+      "correct_answer": "Step 1: 6x + 12 + 6x - 2 - 4x - 5 (Distributive Property)\nStep 2: 6x + 6x - 4x + 12 - 2 - 5 (Commutative Property)\nStep 3: 8x + 5 (Combining like terms)\nWhen x = 5: 8(5) + 5 = 45",
+      "rubric": {
+        "full_credit": "Correct simplification with properties named AND correct evaluation",
+        "partial_credit": "Correct simplification without properties, or properties named but minor error",
+        "no_credit": "Incorrect simplification"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 240
+    },
+    {
+      "id": "math-6-ee-a-4-001",
+      "standard_id": "6.EE.A.4",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Which expression is equivalent to 2(x + 5)?",
+      "options": [
+        "A) 2x + 5",
+        "B) 2x + 10",
+        "C) x + 10",
+        "D) 2x + 7"
+      ],
+      "correct_answer": "B",
+      "rubric": {
+        "full_credit": "Correct answer B",
+        "no_credit": "Any other answer"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 45
+    },
+    {
+      "id": "math-6-ee-a-4-002",
+      "standard_id": "6.EE.A.4",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Determine whether 3(x + 4) - 2 and 3x + 10 are equivalent expressions. Prove your answer by testing with at least two different values of x AND by simplifying algebraically.",
+      "correct_answer": "Algebraic proof: 3(x + 4) - 2 = 3x + 12 - 2 = 3x + 10. Yes, they are equivalent.\nTest with x = 0: 3(0 + 4) - 2 = 12 - 2 = 10; 3(0) + 10 = 10 ✓\nTest with x = 5: 3(5 + 4) - 2 = 27 - 2 = 25; 3(5) + 10 = 25 ✓",
+      "rubric": {
+        "full_credit": "Correct algebraic simplification AND two correct test values",
+        "partial_credit": "Correct algebraic proof OR correct test values, but not both",
+        "no_credit": "Incorrect conclusion or no valid proof method"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-6-ee-a-4-003",
+      "standard_id": "6.EE.A.4",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "Part A: Write three different expressions that are all equivalent to 6x + 18.\nPart B: Explain how you can verify they are equivalent without substituting numbers.\nPart C: A student says 6x + 18 is equivalent to 6(x + 3). Another student says it's equivalent to 3(2x + 6). Who is correct? Explain.",
+      "correct_answer": {
+        "part_a": "Examples: 6(x + 3), 3(2x + 6), 2(3x + 9), 6x + 18, x + x + x + x + x + x + 18, etc.",
+        "part_b": "Use properties of operations: factor, distribute, or combine like terms to show they simplify to the same form",
+        "part_c": "Both are correct. 6(x + 3) = 6x + 18 ✓ and 3(2x + 6) = 6x + 18 ✓. An expression can have multiple equivalent forms."
+      },
+      "rubric": {
+        "full_credit": "Three valid equivalent expressions, correct verification method, and correct conclusion with explanation",
+        "partial_credit": "Two parts fully correct",
+        "no_credit": "Fewer than two parts correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 240
+    },
+    {
+      "id": "math-6-ee-b-5-001",
+      "standard_id": "6.EE.B.5",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Which value of x makes the equation x + 7 = 15 true?",
+      "options": [
+        "A) x = 22",
+        "B) x = 8",
+        "C) x = 7",
+        "D) x = 105"
+      ],
+      "correct_answer": "B",
+      "rubric": {
+        "full_credit": "Correct answer B",
+        "no_credit": "Any other answer"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 45
+    },
+    {
+      "id": "math-6-ee-b-5-002",
+      "standard_id": "6.EE.B.5",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Consider the inequality x + 5 > 12. Test the values 5, 7, and 10 to determine which make the inequality true. Then describe the set of all values that make the inequality true.",
+      "correct_answer": "x = 5: 5 + 5 = 10, 10 > 12 is FALSE\nx = 7: 7 + 5 = 12, 12 > 12 is FALSE\nx = 10: 10 + 5 = 15, 15 > 12 is TRUE\nAll values greater than 7 make the inequality true (x > 7).",
+      "rubric": {
+        "full_credit": "All three tests correct AND correct description of solution set",
+        "partial_credit": "All tests correct but incomplete solution set description",
+        "no_credit": "Incorrect testing or wrong solution set"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 150
+    },
+    {
+      "id": "math-6-ee-b-5-003",
+      "standard_id": "6.EE.B.5",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "A carnival game costs $3 to play. If you win, you get $10. If you lose, you get nothing.\n\nPart A: Write an inequality to represent the minimum number of games (g) you need to win to make a profit, assuming you play 10 games total.\nPart B: Solve the inequality and interpret what it means.\nPart C: Is it possible to break even? If so, how many games would you need to win?",
+      "correct_answer": {
+        "part_a": "10g - 30 > 0 (or 10g > 30, winnings must exceed cost)",
+        "part_b": "g > 3, meaning you need to win more than 3 games (at least 4) to make a profit",
+        "part_c": "Yes, win exactly 3 games: 10(3) - 30 = 0. You break even with 3 wins out of 10 plays."
+      },
+      "rubric": {
+        "full_credit": "All three parts correct with valid reasoning",
+        "partial_credit": "Two parts correct",
+        "no_credit": "Fewer than two parts correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 240
+    },
+    {
+      "id": "math-6-ee-b-6-001",
+      "standard_id": "6.EE.B.6",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Write an expression using a variable for: 'Five more than twice a number.'",
+      "correct_answer": "2n + 5 (or 5 + 2n, where n is the number)",
+      "rubric": {
+        "full_credit": "Correct expression with any variable",
+        "partial_credit": "Order of operations error but correct understanding",
+        "no_credit": "Incorrect expression"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 60
+    },
+    {
+      "id": "math-6-ee-b-6-002",
+      "standard_id": "6.EE.B.6",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A gym charges a $50 registration fee plus $25 per month. Write an expression for the total cost after m months, then use it to find the cost after 8 months and to determine how many months of membership $300 would cover.",
+      "correct_answer": "Expression: 50 + 25m. After 8 months: 50 + 25(8) = $250. For $300: 300 = 50 + 25m → 250 = 25m → m = 10 months.",
+      "rubric": {
+        "full_credit": "Correct expression, correct 8-month calculation, and correct months for $300",
+        "partial_credit": "Correct expression but one calculation error",
+        "no_credit": "Incorrect expression"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-6-ee-b-6-003",
+      "standard_id": "6.EE.B.6",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "Two cell phone companies offer plans:\nCompany A: $40/month plus $0.05 per text\nCompany B: $30/month plus $0.10 per text\n\nPart A: Write expressions for the monthly cost at each company, using t for number of texts.\nPart B: For what number of texts do both plans cost the same?\nPart C: Advise a customer who sends about 250 texts per month. Which plan should they choose and why?",
+      "correct_answer": {
+        "part_a": "Company A: 40 + 0.05t; Company B: 30 + 0.10t",
+        "part_b": "40 + 0.05t = 30 + 0.10t → 10 = 0.05t → t = 200 texts",
+        "part_c": "At 250 texts: A = 40 + 12.50 = $52.50; B = 30 + 25 = $55. Choose Company A because it's cheaper for heavy texters (over 200 texts)."
+      },
+      "rubric": {
+        "full_credit": "All three parts correct with clear reasoning in Part C",
+        "partial_credit": "Two parts correct",
+        "no_credit": "Fewer than two parts correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 300
+    },
+    {
+      "id": "math-6-ee-b-7-001",
+      "standard_id": "6.EE.B.7",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Solve: x + 14 = 32",
+      "correct_answer": "x = 18",
+      "rubric": {
+        "full_credit": "Correct answer",
+        "no_credit": "Incorrect answer"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 45
+    },
+    {
+      "id": "math-6-ee-b-7-002",
+      "standard_id": "6.EE.B.7",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "The sum of two consecutive integers is 47. Write an equation to represent this situation and solve to find both integers.",
+      "correct_answer": "Let n = first integer, n + 1 = second integer. Equation: n + (n + 1) = 47 → 2n + 1 = 47 → 2n = 46 → n = 23. The integers are 23 and 24.",
+      "rubric": {
+        "full_credit": "Correct equation with defined variable AND correct solution",
+        "partial_credit": "Correct equation but arithmetic error, or correct answer without equation",
+        "no_credit": "Incorrect equation and wrong answer"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 150
+    },
+    {
+      "id": "math-6-ee-b-7-003",
+      "standard_id": "6.EE.B.7",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "A parking garage charges a flat fee plus an hourly rate. Parking for 2 hours costs $11, and parking for 5 hours costs $20.\n\nPart A: Write a system of equations to represent this situation.\nPart B: Find the flat fee and hourly rate.\nPart C: How much would it cost to park for 8 hours?",
+      "correct_answer": {
+        "part_a": "Let f = flat fee, h = hourly rate. f + 2h = 11 and f + 5h = 20",
+        "part_b": "Subtracting: 3h = 9, so h = $3/hour. Then f + 6 = 11, so f = $5 flat fee.",
+        "part_c": "5 + 3(8) = 5 + 24 = $29"
+      },
+      "rubric": {
+        "full_credit": "All three parts correct",
+        "partial_credit": "Two parts correct",
+        "no_credit": "Fewer than two parts correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 240
+    },
+    {
+      "id": "math-6-ee-c-9-001",
+      "standard_id": "6.EE.C.9",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "A car travels at a constant speed of 60 mph. Write an equation showing the relationship between distance (d) and time (t).",
+      "correct_answer": "d = 60t",
+      "rubric": {
+        "full_credit": "Correct equation",
+        "no_credit": "Incorrect equation"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 60
+    },
+    {
+      "id": "math-6-ee-c-9-002",
+      "standard_id": "6.EE.C.9",
+      "dok_level": 3,
+      "question_type": "multi_part",
+      "question": "A bathtub is being filled with water at a constant rate. After 3 minutes, there are 18 gallons. After 7 minutes, there are 42 gallons.\n\nPart A: What is the rate of water flow in gallons per minute?\nPart B: Write an equation relating gallons (g) to minutes (m).\nPart C: How long will it take to fill the 80-gallon tub?",
+      "correct_answer": {
+        "part_a": "(42 - 18)/(7 - 3) = 24/4 = 6 gallons per minute",
+        "part_b": "g = 6m (assuming tub started empty)",
+        "part_c": "80 = 6m → m = 80/6 = 13.33 minutes (or 13 minutes 20 seconds)"
+      },
+      "rubric": {
+        "full_credit": "All three parts correct",
+        "partial_credit": "Rate correct but equation or time incorrect",
+        "no_credit": "Rate incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-6-ee-c-9-003",
+      "standard_id": "6.EE.C.9",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Two candles are lit at the same time. Candle A is 12 inches tall and burns at 0.5 inches per hour. Candle B is 8 inches tall and burns at 0.25 inches per hour. Write equations for the height of each candle over time, determine when they will be the same height, and explain which candle will last longer.",
+      "correct_answer": "Candle A: h = 12 - 0.5t; Candle B: h = 8 - 0.25t. Same height when 12 - 0.5t = 8 - 0.25t → 4 = 0.25t → t = 16 hours. At t = 16, both are 4 inches tall. Candle A lasts 24 hours (12 ÷ 0.5), Candle B lasts 32 hours (8 ÷ 0.25). Candle B lasts longer despite starting shorter because it burns slower.",
+      "rubric": {
+        "full_credit": "Both equations correct, correct intersection time, and correct analysis of which lasts longer with reasoning",
+        "partial_credit": "Equations correct but error in analysis",
+        "no_credit": "Incorrect equations"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 300
+    },
+    {
+      "id": "math-6-g-a-1-001",
+      "standard_id": "6.G.A.1",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Find the area of a triangle with base 12 cm and height 8 cm.",
+      "correct_answer": "A = (1/2)(12)(8) = 48 cm²",
+      "rubric": {
+        "full_credit": "Correct area with units",
+        "partial_credit": "Correct calculation, missing units",
+        "no_credit": "Incorrect calculation"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 60
+    },
+    {
+      "id": "math-6-g-a-1-002",
+      "standard_id": "6.G.A.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "An irregular hexagon can be decomposed into a rectangle and two congruent triangles. The rectangle is 10 m by 6 m, and each triangle has a base of 6 m and height of 4 m. Find the total area of the hexagon and explain your method.",
+      "correct_answer": "Rectangle area: 10 × 6 = 60 m². Each triangle: (1/2)(6)(4) = 12 m². Two triangles: 24 m². Total: 60 + 24 = 84 m². Method: Decompose complex shape into simpler shapes, find each area, then add.",
+      "rubric": {
+        "full_credit": "Correct total area with clear explanation of decomposition method",
+        "partial_credit": "Correct calculations but weak explanation",
+        "no_credit": "Incorrect area calculation"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-6-g-a-1-003",
+      "standard_id": "6.G.A.1",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "A park is shaped like the figure below: a rectangle with a triangular section removed from one corner. The rectangle is 50 m by 30 m. The removed triangle has legs of 15 m and 20 m.\n\nPart A: Calculate the area of the park.\nPart B: The city wants to add a walking path around the perimeter. Calculate the total perimeter length.\nPart C: If sod costs $0.50 per square meter and path edging costs $12 per meter, what is the total landscaping cost?",
+      "correct_answer": {
+        "part_a": "Rectangle: 50 × 30 = 1500 m². Triangle removed: (1/2)(15)(20) = 150 m². Park area: 1500 - 150 = 1350 m²",
+        "part_b": "Perimeter: 50 + 30 + (50-15) + √(15² + 20²) + (30-20) = 50 + 30 + 35 + 25 + 10 = 150 m",
+        "part_c": "Sod: 1350 × $0.50 = $675. Edging: 150 × $12 = $1800. Total: $2475"
+      },
+      "rubric": {
+        "full_credit": "All three parts correct",
+        "partial_credit": "Two parts correct",
+        "no_credit": "Fewer than two parts correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 360
+    },
+    {
+      "id": "math-6-g-a-2-001",
+      "standard_id": "6.G.A.2",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Find the volume of a rectangular prism with length 4.5 cm, width 3 cm, and height 2 cm.",
+      "correct_answer": "V = 4.5 × 3 × 2 = 27 cm³",
+      "rubric": {
+        "full_credit": "Correct volume with units",
+        "partial_credit": "Correct calculation, missing units",
+        "no_credit": "Incorrect calculation"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 60
+    },
+    {
+      "id": "math-6-g-a-2-002",
+      "standard_id": "6.G.A.2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A storage box has dimensions 2½ ft × 1¾ ft × 1½ ft. What is the volume of the box? How many unit cubes with ¼ ft edges would fit inside?",
+      "correct_answer": "Volume = (5/2)(7/4)(3/2) = 105/16 = 6.5625 cubic feet. Unit cube volume = (1/4)³ = 1/64 cubic feet. Number of cubes = (105/16) ÷ (1/64) = (105/16)(64/1) = 420 unit cubes.",
+      "rubric": {
+        "full_credit": "Correct volume AND correct number of unit cubes",
+        "partial_credit": "Correct volume but error in unit cube calculation",
+        "no_credit": "Incorrect volume"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-6-g-a-2-003",
+      "standard_id": "6.G.A.2",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "A shipping company uses boxes with internal dimensions 1½ ft × 1 ft × ¾ ft. They need to ship small cubes that are ¼ ft on each side.\n\nPart A: How many small cubes fit in one box?\nPart B: If the company needs to ship 500 small cubes, how many boxes are needed?\nPart C: Each box costs $2.50 and each cube has shipping weight 0.5 lbs at $0.12/lb. What is the total shipping cost?",
+      "correct_answer": {
+        "part_a": "Along length: 1.5 ÷ 0.25 = 6. Along width: 1 ÷ 0.25 = 4. Along height: 0.75 ÷ 0.25 = 3. Total: 6 × 4 × 3 = 72 cubes per box",
+        "part_b": "500 ÷ 72 = 6.94..., so 7 boxes needed",
+        "part_c": "Box cost: 7 × $2.50 = $17.50. Shipping: 500 × 0.5 × $0.12 = $30. Total: $47.50"
+      },
+      "rubric": {
+        "full_credit": "All three parts correct",
+        "partial_credit": "Two parts correct",
+        "no_credit": "Part A incorrect (affects all subsequent parts)"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 300
+    },
+    {
+      "id": "math-6-g-a-3-001",
+      "standard_id": "6.G.A.3",
+      "dok_level": 2,
+      "question_type": "graphing",
+      "question": "Plot the rectangle with vertices at A(-3, 2), B(4, 2), C(4, -1), and D(-3, -1). Find its perimeter and area.",
+      "correct_answer": "Rectangle with length 7 units, width 3 units. Perimeter = 2(7) + 2(3) = 20 units. Area = 7 × 3 = 21 square units.",
+      "rubric": {
+        "full_credit": "Correct plot AND correct perimeter and area",
+        "partial_credit": "Correct plot with one calculation error",
+        "no_credit": "Incorrect plot"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 150
+    },
+    {
+      "id": "math-6-g-a-3-002",
+      "standard_id": "6.G.A.3",
+      "dok_level": 3,
+      "question_type": "multi_part",
+      "question": "A triangle has vertices at P(-2, 4), Q(6, 4), and R(2, -2).\n\nPart A: Plot the triangle on a coordinate plane.\nPart B: Find the length of the base (PQ) and the height of the triangle.\nPart C: Calculate the area of the triangle.",
+      "correct_answer": {
+        "part_a": "Triangle plotted correctly",
+        "part_b": "Base PQ = |6 - (-2)| = 8 units. Height = |4 - (-2)| = 6 units (vertical distance from R to line PQ)",
+        "part_c": "Area = (1/2)(8)(6) = 24 square units"
+      },
+      "rubric": {
+        "full_credit": "Correct plot, base, height, and area",
+        "partial_credit": "Correct plot and two of three calculations",
+        "no_credit": "Incorrect plot or fewer than two correct calculations"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-6-g-a-3-003",
+      "standard_id": "6.G.A.3",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Design a logo using a coordinate plane. Create a polygon with at least 6 vertices that includes points in all four quadrants. List all vertices, calculate the perimeter (you may use the distance formula for diagonal sides), and describe your design.",
+      "correct_answer": "Answers will vary. Example: Hexagon with vertices at (0, 4), (3, 2), (3, -2), (0, -4), (-3, -2), (-3, 2). Should include coordinates in all four quadrants, correct perimeter calculation, and description.",
+      "rubric": {
+        "full_credit": "Valid polygon with 6+ vertices in all four quadrants, correct perimeter, and clear description",
+        "partial_credit": "Valid polygon but missing one quadrant or calculation error",
+        "no_credit": "Fewer than 6 vertices or not in all four quadrants"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 300
+    },
+    {
+      "id": "math-6-g-a-4-001",
+      "standard_id": "6.G.A.4",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "A cube has edges of 5 cm. What is its surface area?",
+      "correct_answer": "SA = 6 × 5² = 6 × 25 = 150 cm²",
+      "rubric": {
+        "full_credit": "Correct surface area with units",
+        "partial_credit": "Correct calculation, missing units",
+        "no_credit": "Incorrect calculation"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 60
+    },
+    {
+      "id": "math-6-g-a-4-002",
+      "standard_id": "6.G.A.4",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Draw a net for a rectangular prism with dimensions 4 cm × 3 cm × 2 cm. Label each face with its dimensions and calculate the total surface area by finding the area of each face.",
+      "correct_answer": "Net should show 6 rectangles: 2 faces of 4×3 = 12 cm² each, 2 faces of 4×2 = 8 cm² each, 2 faces of 3×2 = 6 cm² each. Total SA = 2(12) + 2(8) + 2(6) = 24 + 16 + 12 = 52 cm²",
+      "rubric": {
+        "full_credit": "Correct net with labeled dimensions AND correct surface area",
+        "partial_credit": "Correct net but calculation error, or no net but correct surface area",
+        "no_credit": "Incorrect net and incorrect surface area"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-6-g-a-4-003",
+      "standard_id": "6.G.A.4",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "A triangular prism has triangular bases that are right triangles with legs 6 cm and 8 cm, and the prism is 12 cm long.\n\nPart A: Sketch a net for this prism.\nPart B: Find the area of each face (including the triangular bases).\nPart C: Calculate the total surface area.",
+      "correct_answer": {
+        "part_a": "Net showing 2 triangular bases and 3 rectangular faces",
+        "part_b": "Triangular bases: (1/2)(6)(8) = 24 cm² each. Rectangular faces: 6×12 = 72 cm², 8×12 = 96 cm², 10×12 = 120 cm² (hypotenuse = √(36+64) = 10)",
+        "part_c": "Total SA = 2(24) + 72 + 96 + 120 = 48 + 288 = 336 cm²"
+      },
+      "rubric": {
+        "full_credit": "Correct net, all face areas correct (including hypotenuse calculation), and correct total",
+        "partial_credit": "Correct total surface area but minor errors in individual faces",
+        "no_credit": "Incorrect total surface area"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 300
+    },
+    {
+      "id": "math-6-sp-a-1-001",
+      "standard_id": "6.SP.A.1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Which of the following is a statistical question?",
+      "options": [
+        "A) How many days are in June?",
+        "B) What is 15 × 4?",
+        "C) How many hours do sixth graders sleep per night?",
+        "D) What is the capital of France?"
+      ],
+      "correct_answer": "C",
+      "rubric": {
+        "full_credit": "Correct answer C",
+        "no_credit": "Any other answer"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 60
+    },
+    {
+      "id": "math-6-sp-a-1-002",
+      "standard_id": "6.SP.A.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Explain why 'How tall is the Statue of Liberty?' is NOT a statistical question, but 'How tall are the students in our class?' IS a statistical question. Use the concept of variability in your explanation.",
+      "correct_answer": "The Statue of Liberty has one fixed height (about 305 feet including base), so there's no variability - the answer is a single value. Student heights vary from person to person, so collecting this data will produce different values that can be analyzed for patterns, center, and spread. A statistical question anticipates variability in the data.",
+      "rubric": {
+        "full_credit": "Correctly explains variability concept and applies it to both examples",
+        "partial_credit": "Correct conclusion but incomplete explanation of variability",
+        "no_credit": "Does not address variability or incorrect classification"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 150
+    },
+    {
+      "id": "math-6-sp-a-1-003",
+      "standard_id": "6.SP.A.1",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "A researcher wants to study video game habits among middle school students.\n\nPart A: Write three statistical questions the researcher could investigate.\nPart B: For each question, explain what kind of variability you would expect in the data.\nPart C: Which of your questions would likely show the MOST variability? Explain why.",
+      "correct_answer": {
+        "part_a": "Examples: How many hours per week do middle schoolers play video games? What types of games are most popular? At what age did students start playing video games?",
+        "part_b": "Hours: Will range from 0 to many hours. Game types: Different students prefer different genres. Starting age: Likely varies from preschool to present.",
+        "part_c": "Answers will vary but should identify which question and provide logical reasoning about expected data spread."
+      },
+      "rubric": {
+        "full_credit": "Three valid statistical questions, reasonable variability descriptions for each, and logical analysis for Part C",
+        "partial_credit": "Two parts fully correct",
+        "no_credit": "Fewer than two valid statistical questions"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 240
+    },
+    {
+      "id": "math-6-sp-a-2-001",
+      "standard_id": "6.SP.A.2",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Given the data set: 12, 15, 18, 15, 20, 15, 22, 18, 15, 30. Identify the center (mode and median) and describe the general shape of the distribution.",
+      "correct_answer": "Mode = 15 (appears 4 times). Median = 15+18/2 = 16.5 (middle of ordered data). Shape: Slightly skewed right due to outlier 30.",
+      "rubric": {
+        "full_credit": "Correct mode, median, and reasonable shape description",
+        "partial_credit": "Two of three elements correct",
+        "no_credit": "Fewer than two correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 120
+    },
+    {
+      "id": "math-6-sp-a-2-002",
+      "standard_id": "6.SP.A.2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Two classes took the same test. Class A scores: 70, 75, 78, 80, 82, 85, 88, 90, 92, 95. Class B scores: 60, 70, 75, 80, 85, 85, 90, 95, 98, 100. Compare the distributions by discussing center, spread, and shape.",
+      "correct_answer": "Class A: Mean ≈ 83.5, range = 25, fairly symmetric distribution. Class B: Mean ≈ 83.8, range = 40, more spread out, slightly bimodal or right-skewed. Both have similar centers but Class B has greater spread (more variability in scores).",
+      "rubric": {
+        "full_credit": "Correctly compares center, spread, and shape for both classes",
+        "partial_credit": "Compares two of three aspects correctly",
+        "no_credit": "Fewer than two correct comparisons"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 240
+    },
+    {
+      "id": "math-6-sp-a-2-003",
+      "standard_id": "6.SP.A.2",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "A store tracks daily customer counts for two weeks:\nWeek 1: 45, 52, 48, 61, 89, 120, 95\nWeek 2: 42, 55, 51, 58, 92, 118, 88\n\nPart A: Describe the distribution of each week's data (center, spread, shape).\nPart B: Why do you think certain days have much higher counts?\nPart C: Would mean or median be a better measure of a 'typical' day? Explain.",
+      "correct_answer": {
+        "part_a": "Week 1: Mean ≈ 72.9, range = 75, bimodal/skewed right. Week 2: Mean ≈ 72, range = 76, similar pattern.",
+        "part_b": "Weekend days likely have higher customer counts (days 5-7 in each week show higher numbers).",
+        "part_c": "Median would be better because the high weekend values skew the mean upward. Median gives a better sense of typical weekday traffic."
+      },
+      "rubric": {
+        "full_credit": "All three parts correct with reasonable analysis",
+        "partial_credit": "Two parts correct",
+        "no_credit": "Fewer than two parts correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 300
+    },
+    {
+      "id": "math-6-sp-a-3-001",
+      "standard_id": "6.SP.A.3",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "For the data set 8, 12, 15, 15, 18, 22, find the mean and median. Which measure of center is greater?",
+      "correct_answer": "Mean = (8+12+15+15+18+22)/6 = 90/6 = 15. Median = (15+15)/2 = 15. They are equal.",
+      "rubric": {
+        "full_credit": "Both calculations correct with correct comparison",
+        "partial_credit": "One calculation correct",
+        "no_credit": "Both incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-6-sp-a-3-002",
+      "standard_id": "6.SP.A.3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "The salaries at a small company are: $35,000, $38,000, $42,000, $45,000, $48,000, $250,000 (the CEO). Calculate the mean and median salary. Which measure better represents a 'typical' salary at this company? Explain your reasoning.",
+      "correct_answer": "Mean = $76,333. Median = ($42,000 + $45,000)/2 = $43,500. The median better represents a typical salary because the CEO's salary is an outlier that pulls the mean much higher than what most employees earn. 5 of 6 employees earn less than the mean.",
+      "rubric": {
+        "full_credit": "Both calculations correct AND clear explanation of why median is more representative",
+        "partial_credit": "Calculations correct but weak explanation",
+        "no_credit": "Calculations incorrect or wrong conclusion"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-6-sp-a-3-003",
+      "standard_id": "6.SP.A.3",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "A teacher reports that the class test average is 78, but a student claims the 'middle' score is only 72.\n\nPart A: Explain how both statements could be true.\nPart B: Create a data set of 7 test scores where the mean is 78 and the median is 72.\nPart C: What does the difference between mean and median tell you about the shape of the score distribution?",
+      "correct_answer": {
+        "part_a": "The teacher used the mean (average) while the student used the median. These can differ when data is skewed.",
+        "part_b": "Example: 65, 68, 70, 72, 75, 80, 116 (sums to 546, mean = 78, median = 72)",
+        "part_c": "Mean > Median indicates the distribution is skewed right (has some high outliers pulling up the mean)."
+      },
+      "rubric": {
+        "full_credit": "All three parts correct with valid data set in Part B",
+        "partial_credit": "Parts A and C correct but invalid data set",
+        "no_credit": "Fewer than two parts correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 300
+    },
+    {
+      "id": "math-6-sp-b-4-001",
+      "standard_id": "6.SP.B.4",
+      "dok_level": 2,
+      "question_type": "graphing",
+      "question": "Create a dot plot for the following quiz scores: 7, 8, 8, 9, 9, 9, 10, 10, 7, 8, 9, 10",
+      "correct_answer": "Dot plot with: 2 dots at 7, 3 dots at 8, 4 dots at 9, 3 dots at 10",
+      "rubric": {
+        "full_credit": "Correct dot plot with accurate frequency at each value",
+        "partial_credit": "Minor frequency errors (1 dot off)",
+        "no_credit": "Multiple errors or wrong structure"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 120
+    },
+    {
+      "id": "math-6-sp-b-4-002",
+      "standard_id": "6.SP.B.4",
+      "dok_level": 3,
+      "question_type": "multi_part",
+      "question": "Students' daily screen time (in hours): 1, 2, 2, 3, 3, 3, 4, 4, 5, 8\n\nPart A: Create a box plot for this data.\nPart B: Identify the five-number summary (min, Q1, median, Q3, max).\nPart C: Is there an outlier? Explain using the IQR method.",
+      "correct_answer": {
+        "part_a": "Box plot correctly showing the five-number summary",
+        "part_b": "Min = 1, Q1 = 2, Median = 3, Q3 = 4, Max = 8",
+        "part_c": "IQR = Q3 - Q1 = 4 - 2 = 2. Upper fence = Q3 + 1.5(IQR) = 4 + 3 = 7. Since 8 > 7, yes, 8 is an outlier."
+      },
+      "rubric": {
+        "full_credit": "Correct box plot, five-number summary, and outlier analysis",
+        "partial_credit": "Two of three parts correct",
+        "no_credit": "Fewer than two parts correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 240
+    },
+    {
+      "id": "math-6-sp-b-4-003",
+      "standard_id": "6.SP.B.4",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Create a histogram for student ages at a summer camp (ages 8-15) that would show: (1) a peak at age 11, (2) more younger campers than older campers, and (3) a range of 7 years. Explain how your histogram demonstrates each feature.",
+      "correct_answer": "Example frequencies: 8→5, 9→8, 10→12, 11→15, 12→10, 13→6, 14→3, 15→1. Histogram should show tallest bar at 11, generally decreasing pattern after 11, and span from 8 to 15. Explanation should reference bar heights and distribution shape.",
+      "rubric": {
+        "full_credit": "Valid histogram showing all three features with clear explanation",
+        "partial_credit": "Histogram shows 2 of 3 features",
+        "no_credit": "Histogram does not meet requirements"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 300
+    },
+    {
+      "id": "math-6-sp-b-5-001",
+      "standard_id": "6.SP.B.5",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Find the mean, median, range, and interquartile range (IQR) for: 4, 7, 9, 11, 14, 18, 22",
+      "correct_answer": "Mean = 85/7 ≈ 12.14. Median = 11. Range = 22 - 4 = 18. IQR = Q3 - Q1 = 18 - 7 = 11.",
+      "rubric": {
+        "full_credit": "All four measures correct",
+        "partial_credit": "Three measures correct",
+        "no_credit": "Fewer than three correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 150
+    },
+    {
+      "id": "math-6-sp-b-5-002",
+      "standard_id": "6.SP.B.5",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Monthly rainfall (in inches) for a city: Jan:4.2, Feb:3.8, Mar:4.5, Apr:5.1, May:3.9, Jun:2.1, Jul:1.2, Aug:1.5, Sep:2.8, Oct:3.6, Nov:4.0, Dec:4.8. Summarize this data set by calculating appropriate measures of center and variability, and describe what the data tells you about rainfall patterns.",
+      "correct_answer": "Mean ≈ 3.46 inches. Median = 3.75 inches. Range = 3.9 inches. The data shows seasonal variation with less rainfall in summer months (Jun-Aug) and more in winter/spring. The median is slightly higher than mean, suggesting slight left skew from low summer values.",
+      "rubric": {
+        "full_credit": "Correct calculations AND meaningful interpretation of seasonal patterns",
+        "partial_credit": "Correct calculations but weak interpretation",
+        "no_credit": "Incorrect calculations"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 240
+    },
+    {
+      "id": "math-6-sp-b-5-003",
+      "standard_id": "6.SP.B.5",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "A scientist collects temperature data (°F) at two locations:\nLocation A: 65, 68, 70, 72, 75, 78, 80, 82, 85\nLocation B: 60, 65, 72, 75, 75, 75, 78, 85, 90\n\nPart A: Calculate mean, median, and IQR for each location.\nPart B: Which location has more consistent temperatures? Justify using statistics.\nPart C: A weather report says 'Location B has similar temperatures to Location A.' Do you agree? Use your analysis to support your answer.",
+      "correct_answer": {
+        "part_a": "A: Mean=75, Median=75, IQR=82-68=14. B: Mean≈75, Median=75, IQR=78-65=13",
+        "part_b": "Location B has slightly more consistent temperatures (smaller IQR), though the difference is minimal.",
+        "part_c": "Partially agree. Centers are nearly identical (both mean and median = 75). However, Location B has greater range (30 vs 20) with more extreme values, so while 'typical' temperatures are similar, Location B has more extreme variations."
+      },
+      "rubric": {
+        "full_credit": "All calculations correct AND thoughtful analysis using statistics to support conclusions",
+        "partial_credit": "Calculations correct but weak analysis",
+        "no_credit": "Calculations incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 360
+    }
+  ]
+}

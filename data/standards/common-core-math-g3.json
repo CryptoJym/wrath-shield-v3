@@ -1,0 +1,243 @@
+{
+    "grade": "3",
+    "subject": "Mathematics",
+    "domains": [
+        {
+            "id": "OA",
+            "name": "Operations & Algebraic Thinking",
+            "standards": [
+                {
+                    "id": "3.OA.A.1",
+                    "description": "Interpret products of whole numbers, e.g., interpret 5 × 7 as the total number of objects in 5 groups of 7 objects each.",
+                    "prerequisites": [
+                        "2.OA.C.4"
+                    ],
+                    "cluster": "Represent and solve problems involving multiplication and division."
+                },
+                {
+                    "id": "3.OA.A.2",
+                    "description": "Interpret whole-number quotients of whole numbers, e.g., interpret 56 ÷ 8 as the number of objects in each share when 56 objects are partitioned equally into 8 shares.",
+                    "prerequisites": [
+                        "3.OA.A.1"
+                    ],
+                    "cluster": "Represent and solve problems involving multiplication and division."
+                },
+                {
+                    "id": "3.OA.A.3",
+                    "description": "Use multiplication and division within 100 to solve word problems in situations involving equal groups, arrays, and measurement quantities.",
+                    "prerequisites": [
+                        "3.OA.A.2"
+                    ],
+                    "cluster": "Represent and solve problems involving multiplication and division."
+                },
+                {
+                    "id": "3.OA.A.4",
+                    "description": "Determine the unknown whole number in a multiplication or division equation relating three whole numbers.",
+                    "prerequisites": [
+                        "3.OA.A.3"
+                    ],
+                    "cluster": "Represent and solve problems involving multiplication and division."
+                },
+                {
+                    "id": "3.OA.B.5",
+                    "description": "Apply properties of operations as strategies to multiply and divide.",
+                    "prerequisites": [
+                        "3.OA.A.1"
+                    ],
+                    "cluster": "Understand properties of multiplication and the relationship between multiplication and division."
+                },
+                {
+                    "id": "3.OA.B.6",
+                    "description": "Understand division as an unknown-factor problem.",
+                    "prerequisites": [
+                        "3.OA.A.2",
+                        "3.OA.B.5"
+                    ],
+                    "cluster": "Understand properties of multiplication and the relationship between multiplication and division."
+                },
+                {
+                    "id": "3.OA.C.7",
+                    "description": "Fluently multiply and divide within 100, using strategies such as the relationship between multiplication and division or properties of operations. By the end of Grade 3, know from memory all products of two one-digit numbers.",
+                    "prerequisites": [
+                        "3.OA.B.5",
+                        "3.OA.B.6"
+                    ],
+                    "cluster": "Multiply and divide within 100."
+                },
+                {
+                    "id": "3.OA.D.8",
+                    "description": "Solve two-step word problems using the four operations. Represent these problems using equations with a letter standing for the unknown quantity.",
+                    "prerequisites": [
+                        "3.OA.A.3",
+                        "2.OA.A.1"
+                    ],
+                    "cluster": "Solve problems involving the four operations, and identify and explain patterns in arithmetic."
+                },
+                {
+                    "id": "3.OA.D.9",
+                    "description": "Identify arithmetic patterns (including patterns in the addition table or multiplication table), and explain them using properties of operations.",
+                    "prerequisites": [
+                        "3.OA.C.7"
+                    ],
+                    "cluster": "Solve problems involving the four operations, and identify and explain patterns in arithmetic."
+                }
+            ]
+        },
+        {
+            "id": "NBT",
+            "name": "Number & Operations in Base Ten",
+            "standards": [
+                {
+                    "id": "3.NBT.A.1",
+                    "description": "Use place value understanding to round whole numbers to the nearest 10 or 100.",
+                    "prerequisites": [
+                        "2.NBT.A.1"
+                    ],
+                    "cluster": "Use place value understanding and properties of operations to perform multi-digit arithmetic."
+                },
+                {
+                    "id": "3.NBT.A.2",
+                    "description": "Fluently add and subtract within 1000 using strategies and algorithms based on place value, properties of operations, and/or the relationship between addition and subtraction.",
+                    "prerequisites": [
+                        "2.NBT.B.7"
+                    ],
+                    "cluster": "Use place value understanding and properties of operations to perform multi-digit arithmetic."
+                },
+                {
+                    "id": "3.NBT.A.3",
+                    "description": "Multiply one-digit whole numbers by multiples of 10 in the range 10-90 (e.g., 9 × 80, 5 × 60) using strategies based on place value and properties of operations.",
+                    "prerequisites": [
+                        "3.OA.C.7",
+                        "2.NBT.A.1"
+                    ],
+                    "cluster": "Use place value understanding and properties of operations to perform multi-digit arithmetic."
+                }
+            ]
+        },
+        {
+            "id": "NF",
+            "name": "Number & Operations—Fractions",
+            "standards": [
+                {
+                    "id": "3.NF.A.1",
+                    "description": "Understand a fraction 1/b as the quantity formed by 1 part when a whole is partitioned into b equal parts; understand a fraction a/b as the quantity formed by a parts of size 1/b.",
+                    "prerequisites": [
+                        "2.G.A.3"
+                    ],
+                    "cluster": "Develop understanding of fractions as numbers."
+                },
+                {
+                    "id": "3.NF.A.2",
+                    "description": "Understand a fraction as a number on the number line; represent fractions on a number line diagram.",
+                    "prerequisites": [
+                        "3.NF.A.1"
+                    ],
+                    "cluster": "Develop understanding of fractions as numbers."
+                },
+                {
+                    "id": "3.NF.A.3",
+                    "description": "Explain equivalence of fractions in special cases, and compare fractions by reasoning about their size.",
+                    "prerequisites": [
+                        "3.NF.A.2"
+                    ],
+                    "cluster": "Develop understanding of fractions as numbers."
+                }
+            ]
+        },
+        {
+            "id": "MD",
+            "name": "Measurement & Data",
+            "standards": [
+                {
+                    "id": "3.MD.A.1",
+                    "description": "Tell and write time to the nearest minute and measure time intervals in minutes. Solve word problems involving addition and subtraction of time intervals in minutes.",
+                    "prerequisites": [
+                        "2.MD.C.7"
+                    ],
+                    "cluster": "Solve problems involving measurement and estimation."
+                },
+                {
+                    "id": "3.MD.A.2",
+                    "description": "Measure and estimate liquid volumes and masses of objects using standard units of grams (g), kilograms (kg), and liters (l).",
+                    "prerequisites": [
+                        "2.MD.A.1"
+                    ],
+                    "cluster": "Solve problems involving measurement and estimation."
+                },
+                {
+                    "id": "3.MD.B.3",
+                    "description": "Draw a scaled picture graph and a scaled bar graph to represent a data set with several categories. Solve one- and two-step 'how many more' and 'how many less' problems using information presented in scaled bar graphs.",
+                    "prerequisites": [
+                        "2.MD.D.10"
+                    ],
+                    "cluster": "Represent and interpret data."
+                },
+                {
+                    "id": "3.MD.B.4",
+                    "description": "Generate measurement data by measuring lengths using rulers marked with halves and fourths of an inch. Show the data by making a line plot, where the horizontal scale is marked off in appropriate units.",
+                    "prerequisites": [
+                        "2.MD.D.9",
+                        "3.NF.A.1"
+                    ],
+                    "cluster": "Represent and interpret data."
+                },
+                {
+                    "id": "3.MD.C.5",
+                    "description": "Recognize area as an attribute of plane figures and understand concepts of area measurement.",
+                    "prerequisites": [
+                        "2.G.A.2"
+                    ],
+                    "cluster": "Geometric measurement: understand concepts of area and relate area to multiplication and to addition."
+                },
+                {
+                    "id": "3.MD.C.6",
+                    "description": "Measure areas by counting unit squares (square cm, square m, square in, square ft, and improvised units).",
+                    "prerequisites": [
+                        "3.MD.C.5"
+                    ],
+                    "cluster": "Geometric measurement: understand concepts of area and relate area to multiplication and to addition."
+                },
+                {
+                    "id": "3.MD.C.7",
+                    "description": "Relate area to the operations of multiplication and addition.",
+                    "prerequisites": [
+                        "3.MD.C.6",
+                        "3.OA.A.1"
+                    ],
+                    "cluster": "Geometric measurement: understand concepts of area and relate area to multiplication and to addition."
+                },
+                {
+                    "id": "3.MD.D.8",
+                    "description": "Solve real world and mathematical problems involving perimeters of polygons.",
+                    "prerequisites": [
+                        "3.MD.C.5"
+                    ],
+                    "cluster": "Geometric measurement: recognize perimeter."
+                }
+            ]
+        },
+        {
+            "id": "G",
+            "name": "Geometry",
+            "standards": [
+                {
+                    "id": "3.G.A.1",
+                    "description": "Understand that shapes in different categories (e.g., rhombuses, rectangles, and others) may share attributes (e.g., having four sides), and that the shared attributes can define a larger category (e.g., quadrilaterals).",
+                    "prerequisites": [
+                        "2.G.A.1"
+                    ],
+                    "cluster": "Reason with shapes and their attributes."
+                },
+                {
+                    "id": "3.G.A.2",
+                    "description": "Partition shapes into parts with equal areas. Express the area of each part as a unit fraction of the whole.",
+                    "prerequisites": [
+                        "2.G.A.3",
+                        "3.NF.A.1"
+                    ],
+                    "cluster": "Reason with shapes and their attributes."
+                }
+            ]
+        }
+    ]
+}

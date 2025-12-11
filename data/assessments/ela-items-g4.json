@@ -1,0 +1,845 @@
+{
+  "grade": "4",
+  "items": [
+    {
+      "id": "ela-4-rl-1-001",
+      "standard_id": "4.RL.1",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Read the passage: 'The old mansion stood at the end of Maple Street, its windows dark and its garden overgrown. Neighbors whispered that no one had lived there for twenty years, yet sometimes late at night, a single light would flicker in the attic window.' What can you infer about the mansion? Cite specific details from the text to support your inference.",
+      "correct_answer": "The mansion may be haunted or mysterious; details: windows dark, overgrown, no one lived there 20 years, flickering light at night",
+      "rubric": {
+        "full_credit": "Makes inference with 2+ text details",
+        "partial_credit": "Makes inference with 1 detail",
+        "no_credit": "No inference or details"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 1,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 120,
+      "passage": "The old mansion stood at the end of Maple Street, its windows dark and its garden overgrown. Neighbors whispered that no one had lived there for twenty years, yet sometimes late at night, a single light would flicker in the attic window."
+    },
+    {
+      "id": "ela-4-rl-1-002",
+      "standard_id": "4.RL.1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Read: 'Marcus clutched his science project to his chest as he walked into class. He had worked on it every night for two weeks, carefully testing each hypothesis and documenting his results. When he saw the other projects on display, his shoulders relaxed and a small smile crossed his face.' What does the text explicitly tell us, and what can we infer about Marcus's feelings?",
+      "options": ["The text says he worked hard; we can infer he felt relieved and confident about his project", "The text says he was scared; we can infer he wanted to leave", "The text says the other projects were bad; we can infer he would win", "The text says his teacher was there; we can infer he was nervous"],
+      "correct_answer": "The text says he worked hard; we can infer he felt relieved and confident about his project",
+      "rubric": {
+        "full_credit": "Distinguishes explicit from inferential",
+        "no_credit": "Selects incorrect option"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 1,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 90,
+      "passage": "Marcus clutched his science project to his chest as he walked into class. He had worked on it every night for two weeks, carefully testing each hypothesis and documenting his results. When he saw the other projects on display, his shoulders relaxed and a small smile crossed his face."
+    },
+    {
+      "id": "ela-4-rl-2-001",
+      "standard_id": "4.RL.2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Read the story about a character who learns a lesson about honesty. Determine the theme and write a summary of the text in your own words.",
+      "correct_answer": null,
+      "rubric": {
+        "full_credit": "Identifies theme with evidence, provides accurate summary",
+        "partial_credit": "Theme or summary present but not both",
+        "no_credit": "Cannot identify theme or summarize"
+      },
+      "manifold_fit": {
+        "coherence_delta": 5,
+        "entropy_delta": 1,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 300,
+      "passage": "Anna found a twenty-dollar bill on the playground. She knew it probably belonged to someone, but she tucked it in her pocket anyway. All day, she couldn't focus. She kept thinking about whose money it might be. After school, she saw a younger student crying by the swings, searching the ground. 'I lost my birthday money,' the girl sobbed. Anna felt her pocket grow heavy. She took a deep breath and handed over the bill. 'Is this yours?' The girl's face lit up with joy. As Anna walked home, she felt lighter than she had all day."
+    },
+    {
+      "id": "ela-4-rl-2-002",
+      "standard_id": "4.RL.2",
+      "dok_level": 3,
+      "question_type": "short_answer",
+      "question": "Read the poem about perseverance. What is the theme? Use specific details from the poem to support your answer.",
+      "correct_answer": "Theme: Never give up / Perseverance leads to success",
+      "rubric": {
+        "full_credit": "Identifies theme with poem details as support",
+        "partial_credit": "Theme identified but weak support",
+        "no_credit": "Cannot identify theme"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 1,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 150,
+      "passage": "The mountain rose up steep and tall, / I stumbled, tripped, began to fall. / But still I climbed through wind and rain, / Through aching muscles, burning pain. / And when at last I reached the top, / I knew that I could never stop. / For every peak I learn to climb / Just leads me to another time."
+    },
+    {
+      "id": "ela-4-rl-3-001",
+      "standard_id": "4.RL.3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Read the story and describe the main character in depth. Include details about the character's thoughts, words, and actions from the text.",
+      "correct_answer": null,
+      "rubric": {
+        "full_credit": "In-depth description with thoughts, words, and actions cited",
+        "partial_credit": "Description with some but not all elements",
+        "no_credit": "Superficial or missing description"
+      },
+      "manifold_fit": {
+        "coherence_delta": 5,
+        "entropy_delta": 1,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 300,
+      "passage": "Elena stood at the edge of the diving board, her toes curling over the rough surface. 'I can do this,' she whispered to herself, though her heart hammered against her ribs. Below, her teammates cheered, but she barely heard them. She thought about all the hours of practice, the early morning drills, her coach's voice saying, 'Trust yourself.' Elena bent her knees, raised her arms, and launched herself into the air. For one perfect moment, she felt weightless. When she surfaced, she was grinning. 'Again!' she shouted, already climbing out of the pool."
+    },
+    {
+      "id": "ela-4-rl-3-002",
+      "standard_id": "4.RL.3",
+      "dok_level": 3,
+      "question_type": "short_answer",
+      "question": "Describe the setting in the story. How does the setting affect the events?",
+      "correct_answer": "describes setting with specific details and explains its influence on plot",
+      "rubric": {
+        "full_credit": "Detailed setting description with clear connection to events",
+        "partial_credit": "Setting described but weak connection",
+        "no_credit": "Cannot describe setting"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 1,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 150,
+      "passage": "The blizzard had trapped them in the cabin for three days now. Snow piled against the windows, blocking the light. The fire crackled low, and their supply of wood was running out. Maya checked the pantry again: a few cans of soup, some crackers, and a jar of peanut butter. 'We'll have to ration,' she told her brother, trying to keep her voice steady. Outside, the wind howled like a hungry wolf."
+    },
+    {
+      "id": "ela-4-rl-4-001",
+      "standard_id": "4.RL.4",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Read: 'He was as brave as Hercules facing the lion.' What does this comparison mean? What is the allusion to?",
+      "correct_answer": "Very brave; Hercules was a mythological hero known for bravery and strength",
+      "rubric": {
+        "full_credit": "Explains meaning and identifies mythological allusion",
+        "partial_credit": "Explains meaning OR identifies allusion",
+        "no_credit": "Cannot explain"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 90,
+      "passage": "He was as brave as Hercules facing the lion."
+    },
+    {
+      "id": "ela-4-rl-4-002",
+      "standard_id": "4.RL.4",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Read: 'She had an Achilles' heel when it came to chocolate cake.' What does 'Achilles' heel' mean in this context?",
+      "options": ["A weakness or vulnerable point", "A strong muscle", "A type of injury", "A Greek dessert"],
+      "correct_answer": "A weakness or vulnerable point",
+      "rubric": {
+        "full_credit": "Understands allusion meaning",
+        "no_credit": "Selects incorrect option"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 60,
+      "passage": "She had an Achilles' heel when it came to chocolate cake."
+    },
+    {
+      "id": "ela-4-rl-5-001",
+      "standard_id": "4.RL.5",
+      "dok_level": 3,
+      "question_type": "short_answer",
+      "question": "What are three differences between a poem and a prose story? Give examples of structural elements for each.",
+      "correct_answer": "Poem: verse, rhythm, meter, stanzas, rhyme. Prose: paragraphs, chapters, sentences, dialogue",
+      "rubric": {
+        "full_credit": "Identifies 3+ differences with specific elements",
+        "partial_credit": "1-2 differences identified",
+        "no_credit": "Cannot distinguish"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 120,
+      "passage": null
+    },
+    {
+      "id": "ela-4-rl-5-002",
+      "standard_id": "4.RL.5",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "In a drama script, what are the words in brackets or italics typically called, and what purpose do they serve?",
+      "options": ["Stage directions - they tell actors how to move and speak", "Dialogue - they tell what characters say", "Settings - they describe where the play takes place", "Cast list - they name the characters"],
+      "correct_answer": "Stage directions - they tell actors how to move and speak",
+      "rubric": {
+        "full_credit": "Identifies element and purpose",
+        "no_credit": "Selects incorrect option"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 45,
+      "passage": null
+    },
+    {
+      "id": "ela-4-rl-6-001",
+      "standard_id": "4.RL.6",
+      "dok_level": 3,
+      "question_type": "short_answer",
+      "question": "Read Passage A (first-person) and Passage B (third-person). Compare and contrast the points of view. How does the change in narrator affect what the reader knows?",
+      "correct_answer": "First person: reader knows narrator's thoughts directly. Third person: reader sees multiple characters but from outside",
+      "rubric": {
+        "full_credit": "Compares/contrasts with specific observations about reader knowledge",
+        "partial_credit": "Identifies difference but weak analysis",
+        "no_credit": "Cannot compare"
+      },
+      "manifold_fit": {
+        "coherence_delta": 5,
+        "entropy_delta": 1,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 180,
+      "passage": "Passage A: I couldn't believe my eyes when I opened the door. The entire room was decorated for my birthday. My heart raced with excitement.\n\nPassage B: Maya opened the door and gasped. The room was filled with balloons and streamers. Her brother watched from the corner, hoping his surprise had worked."
+    },
+    {
+      "id": "ela-4-rl-6-002",
+      "standard_id": "4.RL.6",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Read: 'I crept down the stairs, my flashlight cutting through the darkness.' This story is written in which point of view?",
+      "options": ["First person - uses 'I'", "Third person - uses 'he/she'", "Second person - uses 'you'", "No particular point of view"],
+      "correct_answer": "First person - uses 'I'",
+      "rubric": {
+        "full_credit": "Identifies POV with evidence",
+        "no_credit": "Selects incorrect option"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 30,
+      "passage": "I crept down the stairs, my flashlight cutting through the darkness."
+    },
+    {
+      "id": "ela-4-rl-9-001",
+      "standard_id": "4.RL.9",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Compare and contrast the theme of 'good versus evil' in a Greek myth and a modern fantasy story. How is this theme treated similarly and differently in each text?",
+      "correct_answer": null,
+      "rubric": {
+        "full_credit": "Detailed comparison with similarities and differences in theme treatment",
+        "partial_credit": "Some comparison but incomplete",
+        "no_credit": "Cannot compare themes"
+      },
+      "manifold_fit": {
+        "coherence_delta": 5,
+        "entropy_delta": 1,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 360,
+      "passage": null
+    },
+    {
+      "id": "ela-4-rl-9-002",
+      "standard_id": "4.RL.9",
+      "dok_level": 3,
+      "question_type": "short_answer",
+      "question": "Both the Native American tale 'How the Bear Lost His Tail' and the African tale 'Why Mosquitoes Buzz' explain something in nature. Compare the patterns of events in these stories.",
+      "correct_answer": "Both use animal characters and a chain of events to explain natural phenomena",
+      "rubric": {
+        "full_credit": "Identifies similar patterns with specific examples",
+        "partial_credit": "Notes similarity but vague",
+        "no_credit": "Cannot compare"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 1,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 150,
+      "passage": null
+    },
+    {
+      "id": "ela-4-ri-1-001",
+      "standard_id": "4.RI.1",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Read the article about climate change. What does the text explicitly state about rising sea levels? What can you infer about the future based on the evidence provided?",
+      "correct_answer": "Explicit: sea levels are rising. Inference: coastal areas may flood in future",
+      "rubric": {
+        "full_credit": "Distinguishes explicit from inferential with text evidence",
+        "partial_credit": "One but not both",
+        "no_credit": "Cannot distinguish or cite evidence"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 1,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 150,
+      "passage": "Scientists have measured a rise in global sea levels of about 8 inches since 1900. The rate of rise is accelerating. Many coastal cities are already experiencing more frequent flooding during storms. Some island nations have begun planning for the possibility that their land could become uninhabitable within the next century."
+    },
+    {
+      "id": "ela-4-ri-1-002",
+      "standard_id": "4.RI.1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Read: 'The ancient Egyptians built pyramids as tombs for their pharaohs. These massive structures took thousands of workers many years to complete. The Great Pyramid of Giza, built around 2560 BCE, remained the tallest human-made structure for over 3,800 years.' Which statement is an inference, not explicitly stated?",
+      "options": ["Building pyramids was extremely difficult and required great skill", "Pyramids were tombs for pharaohs", "The Great Pyramid was built around 2560 BCE", "Thousands of workers built the pyramids"],
+      "correct_answer": "Building pyramids was extremely difficult and required great skill",
+      "rubric": {
+        "full_credit": "Identifies inference vs. explicit statement",
+        "no_credit": "Selects explicit statement"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 1,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 90,
+      "passage": "The ancient Egyptians built pyramids as tombs for their pharaohs. These massive structures took thousands of workers many years to complete. The Great Pyramid of Giza, built around 2560 BCE, remained the tallest human-made structure for over 3,800 years."
+    },
+    {
+      "id": "ela-4-ri-2-001",
+      "standard_id": "4.RI.2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Read the article about endangered species. Determine the main idea and explain how it is supported by key details. Then summarize the text.",
+      "correct_answer": null,
+      "rubric": {
+        "full_credit": "Main idea stated, key details explained, accurate summary",
+        "partial_credit": "Some elements present but incomplete",
+        "no_credit": "Cannot identify main idea or summarize"
+      },
+      "manifold_fit": {
+        "coherence_delta": 5,
+        "entropy_delta": 1,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 300,
+      "passage": "Many animal species face extinction due to human activities. Habitat destruction is the leading cause, as forests are cleared for farming and cities expand into wild areas. Pollution contaminates water and food sources that animals depend on. Climate change alters weather patterns, affecting migration and breeding. However, conservation efforts offer hope. Protected areas give animals safe spaces to live. Breeding programs help increase populations of the most endangered species. By understanding these threats and solutions, we can work to preserve Earth's biodiversity."
+    },
+    {
+      "id": "ela-4-ri-2-002",
+      "standard_id": "4.RI.2",
+      "dok_level": 3,
+      "question_type": "short_answer",
+      "question": "Read the passage about the American Revolution. What is the main idea? List three key details that support this main idea.",
+      "correct_answer": "Main idea: colonists fought for independence. Details: unfair taxes, Boston Tea Party, Declaration of Independence, war victories, etc.",
+      "rubric": {
+        "full_credit": "Main idea with 3 supporting details",
+        "partial_credit": "Main idea with 1-2 details",
+        "no_credit": "Cannot identify main idea"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 150,
+      "passage": "The American colonists' desire for independence led to the Revolutionary War. Tensions rose as Britain imposed taxes without colonial representation. Events like the Boston Tea Party showed growing resistance. In 1776, the colonies declared independence. After years of fighting, with key victories at Saratoga and Yorktown, the colonists won their freedom. The Treaty of Paris in 1783 officially ended the war and recognized the United States as an independent nation."
+    },
+    {
+      "id": "ela-4-ri-3-001",
+      "standard_id": "4.RI.3",
+      "dok_level": 3,
+      "question_type": "short_answer",
+      "question": "Read the text about photosynthesis. Explain what happens and why, based on the specific information in the text.",
+      "correct_answer": "Plants absorb sunlight, water, and CO2; convert to glucose and oxygen; because they need energy to grow",
+      "rubric": {
+        "full_credit": "Explains process and cause/effect with text evidence",
+        "partial_credit": "Partial explanation",
+        "no_credit": "Cannot explain process"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 1,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 150,
+      "passage": "Photosynthesis is the process by which plants make their own food. Plants absorb sunlight through their leaves. They also take in water through their roots and carbon dioxide from the air. Using the sun's energy, they convert these ingredients into glucose, a type of sugar that provides energy for growth. Oxygen is released as a byproduct. This is why plants are essential for life on Earth—they produce the oxygen we breathe."
+    },
+    {
+      "id": "ela-4-ri-3-002",
+      "standard_id": "4.RI.3",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Read: 'The Industrial Revolution began in Britain in the late 1700s. New machines were invented that could produce goods faster than hand labor. As a result, factories were built, and many people moved from farms to cities for work. This caused cities to grow rapidly and changed how people lived.' What caused cities to grow?",
+      "options": ["Factories were built and offered jobs", "Farms became more productive", "Machines were invented", "The Revolution began in Britain"],
+      "correct_answer": "Factories were built and offered jobs",
+      "rubric": {
+        "full_credit": "Identifies cause-effect relationship",
+        "no_credit": "Selects incorrect option"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 60,
+      "passage": "The Industrial Revolution began in Britain in the late 1700s. New machines were invented that could produce goods faster than hand labor. As a result, factories were built, and many people moved from farms to cities for work. This caused cities to grow rapidly and changed how people lived."
+    },
+    {
+      "id": "ela-4-ri-8-001",
+      "standard_id": "4.RI.8",
+      "dok_level": 3,
+      "question_type": "short_answer",
+      "question": "Read the argument about school uniforms. What reasons and evidence does the author provide? Are the reasons well-supported?",
+      "correct_answer": "Identifies reasons and evaluates evidence quality",
+      "rubric": {
+        "full_credit": "Identifies reasons, evidence, and evaluates support",
+        "partial_credit": "Identifies reasons but weak evaluation",
+        "no_credit": "Cannot identify reasoning"
+      },
+      "manifold_fit": {
+        "coherence_delta": 5,
+        "entropy_delta": 1,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 180,
+      "passage": "Schools should require uniforms for all students. First, uniforms reduce bullying based on clothing choices. A 2019 study found that schools with uniform policies reported 23% fewer bullying incidents. Second, uniforms save families money. Instead of buying multiple trendy outfits, parents can purchase a few affordable uniform pieces. Finally, uniforms help students focus on learning rather than fashion. When everyone looks the same, students can concentrate on their education."
+    },
+    {
+      "id": "ela-4-ri-8-002",
+      "standard_id": "4.RI.8",
+      "dok_level": 3,
+      "question_type": "multiple_choice",
+      "question": "Read: 'Exercise is important for children's health. Studies show that active children have stronger bones and muscles. Additionally, exercise helps children sleep better and concentrate in school.' What type of evidence does the author use?",
+      "options": ["Research studies and cause-effect relationships", "Personal stories only", "Opinions without facts", "Historical examples"],
+      "correct_answer": "Research studies and cause-effect relationships",
+      "rubric": {
+        "full_credit": "Identifies evidence types",
+        "no_credit": "Selects incorrect option"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 60,
+      "passage": "Exercise is important for children's health. Studies show that active children have stronger bones and muscles. Additionally, exercise helps children sleep better and concentrate in school."
+    },
+    {
+      "id": "ela-4-rf-3-001",
+      "standard_id": "4.RF.3",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Read the word 'transportation'. Break it into its meaningful parts (prefix, root, suffix). What does each part mean?",
+      "correct_answer": "trans- (across) + port (carry) + -ation (action/process) = the action of carrying across",
+      "rubric": {
+        "full_credit": "Correctly identifies and defines all parts",
+        "partial_credit": "Some parts correct",
+        "no_credit": "Cannot break down word"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 90,
+      "passage": null
+    },
+    {
+      "id": "ela-4-rf-3-002",
+      "standard_id": "4.RF.3",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Which word uses the Greek root 'graph' (meaning 'write')?",
+      "options": ["Paragraph", "Grapefruit", "Grapes", "Grasp"],
+      "correct_answer": "Paragraph",
+      "rubric": {
+        "full_credit": "Identifies word with Greek root",
+        "no_credit": "Selects incorrect option"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 30,
+      "passage": null
+    },
+    {
+      "id": "ela-4-rf-4-001",
+      "standard_id": "4.RF.4",
+      "dok_level": 2,
+      "question_type": "performance_task",
+      "question": "Read this grade-level passage aloud with purpose and understanding. Then answer comprehension questions.",
+      "correct_answer": null,
+      "rubric": {
+        "full_credit": "Fluent reading with accuracy, expression, and comprehension",
+        "partial_credit": "Some fluency or comprehension issues",
+        "no_credit": "Significant struggles"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 180,
+      "passage": "The expedition to the South Pole was unlike anything the explorers had experienced. Temperatures plunged to negative fifty degrees, and blinding snowstorms could appear without warning. The team relied on specially trained sled dogs to pull their supplies across the frozen landscape. Each day brought new challenges: crevasses hidden beneath the snow, equipment failures, and the constant battle against frostbite. Yet the explorers pressed on, driven by their determination to be the first to reach the bottom of the world."
+    },
+    {
+      "id": "ela-4-rf-4-002",
+      "standard_id": "4.RF.4",
+      "dok_level": 2,
+      "question_type": "performance_task",
+      "question": "Read this poetry selection with appropriate phrasing and expression.",
+      "correct_answer": null,
+      "rubric": {
+        "full_credit": "Reads with appropriate phrasing, emphasis, and expression",
+        "partial_credit": "Some appropriate elements",
+        "no_credit": "Monotone or many errors"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 120,
+      "passage": "I wandered lonely as a cloud\nThat floats on high o'er vales and hills,\nWhen all at once I saw a crowd,\nA host of golden daffodils;\nBeside the lake, beneath the trees,\nFluttering and dancing in the breeze."
+    },
+    {
+      "id": "ela-4-w-1-001",
+      "standard_id": "4.W.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Write an opinion piece about whether video games are beneficial or harmful for children. Introduce your topic, state your opinion, provide reasons supported by facts and details, use linking words and phrases, and write a strong concluding statement.",
+      "correct_answer": null,
+      "rubric": {
+        "full_credit": "Introduction, clear opinion, organized reasons with facts, transitions, conclusion",
+        "partial_credit": "Some elements present but weak",
+        "no_credit": "Missing multiple elements"
+      },
+      "manifold_fit": {
+        "coherence_delta": 6,
+        "entropy_delta": 2,
+        "generativity_delta": 6
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 900,
+      "passage": null
+    },
+    {
+      "id": "ela-4-w-1-002",
+      "standard_id": "4.W.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Write an opinion essay about whether schools should have longer recess periods. Include an introduction, your clearly stated opinion, at least three reasons with supporting information, transition words, and a conclusion.",
+      "correct_answer": null,
+      "rubric": {
+        "full_credit": "All elements present with strong reasoning",
+        "partial_credit": "Some elements weak or missing",
+        "no_credit": "Incomplete opinion piece"
+      },
+      "manifold_fit": {
+        "coherence_delta": 6,
+        "entropy_delta": 2,
+        "generativity_delta": 6
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 900,
+      "passage": null
+    },
+    {
+      "id": "ela-4-w-2-001",
+      "standard_id": "4.W.2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Write an informative essay about a natural disaster (hurricane, earthquake, tornado, or flood). Include an introduction, organize information in paragraphs, use facts and definitions, include formatting if helpful, and write a concluding section.",
+      "correct_answer": null,
+      "rubric": {
+        "full_credit": "Clear introduction, organized paragraphs, facts, definitions, conclusion",
+        "partial_credit": "Some organization but missing elements",
+        "no_credit": "Disorganized or off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 6,
+        "entropy_delta": 1,
+        "generativity_delta": 6
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 900,
+      "passage": null
+    },
+    {
+      "id": "ela-4-w-2-002",
+      "standard_id": "4.W.2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Write an informative text explaining how the human digestive system works. Introduce the topic, use scientific vocabulary, include facts, group related information, and provide a concluding statement.",
+      "correct_answer": null,
+      "rubric": {
+        "full_credit": "Accurate information, vocabulary, organization, conclusion",
+        "partial_credit": "Some accurate info but weak organization",
+        "no_credit": "Inaccurate or unclear"
+      },
+      "manifold_fit": {
+        "coherence_delta": 5,
+        "entropy_delta": 1,
+        "generativity_delta": 6
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 840,
+      "passage": null
+    },
+    {
+      "id": "ela-4-w-3-001",
+      "standard_id": "4.W.3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Write a narrative story about a character who discovers something unexpected. Use dialogue, description, and pacing to develop the plot. Include a clear sequence of events and a resolution.",
+      "correct_answer": null,
+      "rubric": {
+        "full_credit": "Effective dialogue, description, pacing, clear sequence, resolution",
+        "partial_credit": "Narrative present but technique weak",
+        "no_credit": "No clear narrative"
+      },
+      "manifold_fit": {
+        "coherence_delta": 6,
+        "entropy_delta": 2,
+        "generativity_delta": 7
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 1080,
+      "passage": null
+    },
+    {
+      "id": "ela-4-w-3-002",
+      "standard_id": "4.W.3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Write a story about a time when things didn't go as planned but something good happened anyway. Use concrete words, sensory details, and show how characters respond to situations.",
+      "correct_answer": null,
+      "rubric": {
+        "full_credit": "Concrete details, sensory language, character development, resolution",
+        "partial_credit": "Story present but lacking technique",
+        "no_credit": "No clear story"
+      },
+      "manifold_fit": {
+        "coherence_delta": 6,
+        "entropy_delta": 2,
+        "generativity_delta": 7
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 1080,
+      "passage": null
+    },
+    {
+      "id": "ela-4-w-4-001",
+      "standard_id": "4.W.4",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Write a formal letter to your principal suggesting an improvement to your school. Organize your writing appropriately for a formal letter, with clear development suitable for this audience and purpose.",
+      "correct_answer": null,
+      "rubric": {
+        "full_credit": "Proper format, appropriate tone, clear organization for purpose/audience",
+        "partial_credit": "Some elements appropriate",
+        "no_credit": "Wrong format or inappropriate tone"
+      },
+      "manifold_fit": {
+        "coherence_delta": 5,
+        "entropy_delta": 1,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 600,
+      "passage": null
+    },
+    {
+      "id": "ela-4-w-4-002",
+      "standard_id": "4.W.4",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Write a news article about an event at your school. Use an appropriate structure for a news article, including a headline, lead paragraph, and supporting details.",
+      "correct_answer": null,
+      "rubric": {
+        "full_credit": "News format, headline, lead, organized details",
+        "partial_credit": "Attempts format but incomplete",
+        "no_credit": "Wrong format"
+      },
+      "manifold_fit": {
+        "coherence_delta": 5,
+        "entropy_delta": 1,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 600,
+      "passage": null
+    },
+    {
+      "id": "ela-4-sl-1-001",
+      "standard_id": "4.SL.1",
+      "dok_level": 3,
+      "question_type": "performance_task",
+      "question": "Lead a discussion about the book your group read. Come prepared with notes, pose questions, respond to others' questions, and keep the discussion on track.",
+      "correct_answer": null,
+      "rubric": {
+        "full_credit": "Prepared, poses and answers questions, builds on ideas, stays on track",
+        "partial_credit": "Participates but limited leadership",
+        "no_credit": "Does not participate effectively"
+      },
+      "manifold_fit": {
+        "coherence_delta": 5,
+        "entropy_delta": 1,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 480,
+      "passage": null
+    },
+    {
+      "id": "ela-4-sl-1-002",
+      "standard_id": "4.SL.1",
+      "dok_level": 2,
+      "question_type": "performance_task",
+      "question": "In a group discussion about current events, explain your own ideas clearly and make connections to what others have said.",
+      "correct_answer": null,
+      "rubric": {
+        "full_credit": "Clear ideas, explicit connections to others' contributions",
+        "partial_credit": "Some contribution but limited connections",
+        "no_credit": "Does not engage appropriately"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 1,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 360,
+      "passage": null
+    },
+    {
+      "id": "ela-4-l-1-001",
+      "standard_id": "4.L.1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Which sentence uses relative pronouns correctly?",
+      "options": ["The dog that lives next door barks all night.", "The dog who lives next door barks all night.", "The dog which lives next door, barks all night.", "The dog whom lives next door barks all night."],
+      "correct_answer": "The dog that lives next door barks all night.",
+      "rubric": {
+        "full_credit": "Identifies correct usage",
+        "no_credit": "Selects incorrect option"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 45,
+      "passage": null
+    },
+    {
+      "id": "ela-4-l-1-002",
+      "standard_id": "4.L.1",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Combine these two sentences using a relative pronoun: 'The scientist made a discovery. The discovery changed the world.'",
+      "correct_answer": "The scientist made a discovery that/which changed the world.",
+      "rubric": {
+        "full_credit": "Correctly combines with relative pronoun",
+        "partial_credit": "Combines but awkward",
+        "no_credit": "Cannot combine"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 60,
+      "passage": null
+    },
+    {
+      "id": "ela-4-l-2-001",
+      "standard_id": "4.L.2",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Which sentence uses commas correctly with introductory elements?",
+      "options": ["After the movie ended, we went for ice cream.", "After the movie ended we went for ice cream.", "After, the movie ended we went for ice cream.", "After the movie, ended we went for ice cream."],
+      "correct_answer": "After the movie ended, we went for ice cream.",
+      "rubric": {
+        "full_credit": "Identifies correct comma placement",
+        "no_credit": "Selects incorrect option"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 0,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 30,
+      "passage": null
+    },
+    {
+      "id": "ela-4-l-2-002",
+      "standard_id": "4.L.2",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Add correct punctuation to this sentence with a quotation: 'Where are you going asked Mom'",
+      "correct_answer": "\"Where are you going?\" asked Mom.",
+      "rubric": {
+        "full_credit": "Correct quotation marks and punctuation",
+        "partial_credit": "Some correct punctuation",
+        "no_credit": "Incorrect punctuation"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 45,
+      "passage": null
+    }
+  ]
+}

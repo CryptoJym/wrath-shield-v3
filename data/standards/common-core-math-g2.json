@@ -1,0 +1,235 @@
+{
+    "grade": "2",
+    "subject": "Mathematics",
+    "domains": [
+        {
+            "id": "OA",
+            "name": "Operations & Algebraic Thinking",
+            "standards": [
+                {
+                    "id": "2.OA.A.1",
+                    "description": "Use addition and subtraction within 100 to solve one- and two-step word problems involving situations of adding to, taking from, putting together, taking apart, and comparing, with unknowns in all positions.",
+                    "prerequisites": [
+                        "1.OA.A.1"
+                    ],
+                    "cluster": "Represent and solve problems involving addition and subtraction."
+                },
+                {
+                    "id": "2.OA.B.2",
+                    "description": "Fluently add and subtract within 20 using mental strategies. By end of Grade 2, know from memory all sums of two one-digit numbers.",
+                    "prerequisites": [
+                        "1.OA.C.6"
+                    ],
+                    "cluster": "Add and subtract within 20."
+                },
+                {
+                    "id": "2.OA.C.3",
+                    "description": "Determine whether a group of objects (up to 20) has an odd or even number of members, e.g., by pairing objects or counting them by 2s; write an equation to express an even number as a sum of two equal addends.",
+                    "prerequisites": [
+                        "2.OA.B.2"
+                    ],
+                    "cluster": "Work with equal groups of objects to gain foundations for multiplication."
+                },
+                {
+                    "id": "2.OA.C.4",
+                    "description": "Use addition to find the total number of objects arranged in rectangular arrays with up to 5 rows and up to 5 columns; write an equation to express the total as a sum of equal addends.",
+                    "prerequisites": [
+                        "2.OA.C.3"
+                    ],
+                    "cluster": "Work with equal groups of objects to gain foundations for multiplication."
+                }
+            ]
+        },
+        {
+            "id": "NBT",
+            "name": "Number & Operations in Base Ten",
+            "standards": [
+                {
+                    "id": "2.NBT.A.1",
+                    "description": "Understand that the three digits of a three-digit number represent amounts of hundreds, tens, and ones.",
+                    "prerequisites": [
+                        "1.NBT.B.2"
+                    ],
+                    "cluster": "Understand place value."
+                },
+                {
+                    "id": "2.NBT.A.2",
+                    "description": "Count within 1000; skip-count by 5s, 10s, and 100s.",
+                    "prerequisites": [
+                        "1.NBT.A.1"
+                    ],
+                    "cluster": "Understand place value."
+                },
+                {
+                    "id": "2.NBT.A.3",
+                    "description": "Read and write numbers to 1000 using base-ten numerals, number names, and expanded form.",
+                    "prerequisites": [
+                        "2.NBT.A.1"
+                    ],
+                    "cluster": "Understand place value."
+                },
+                {
+                    "id": "2.NBT.A.4",
+                    "description": "Compare two three-digit numbers based on meanings of the hundreds, tens, and ones digits, using >, =, and < symbols to record the results of comparisons.",
+                    "prerequisites": [
+                        "2.NBT.A.1",
+                        "1.NBT.B.3"
+                    ],
+                    "cluster": "Understand place value."
+                },
+                {
+                    "id": "2.NBT.B.5",
+                    "description": "Fluently add and subtract within 100 using strategies based on place value, properties of operations, and/or the relationship between addition and subtraction.",
+                    "prerequisites": [
+                        "1.NBT.C.4",
+                        "2.OA.B.2"
+                    ],
+                    "cluster": "Use place value understanding and properties of operations to add and subtract."
+                },
+                {
+                    "id": "2.NBT.B.6",
+                    "description": "Add up to four two-digit numbers using strategies based on place value and properties of operations.",
+                    "prerequisites": [
+                        "2.NBT.B.5"
+                    ],
+                    "cluster": "Use place value understanding and properties of operations to add and subtract."
+                },
+                {
+                    "id": "2.NBT.B.7",
+                    "description": "Add and subtract within 1000, using concrete models or drawings and strategies based on place value, properties of operations, and/or the relationship between addition and subtraction.",
+                    "prerequisites": [
+                        "2.NBT.A.1",
+                        "2.NBT.B.5"
+                    ],
+                    "cluster": "Use place value understanding and properties of operations to add and subtract."
+                },
+                {
+                    "id": "2.NBT.B.8",
+                    "description": "Mentally add 10 or 100 to a given number 100-900, and mentally subtract 10 or 100 from a given number 100-900.",
+                    "prerequisites": [
+                        "1.NBT.C.5",
+                        "2.NBT.A.1"
+                    ],
+                    "cluster": "Use place value understanding and properties of operations to add and subtract."
+                },
+                {
+                    "id": "2.NBT.B.9",
+                    "description": "Explain why addition and subtraction strategies work, using place value and the properties of operations.",
+                    "prerequisites": [
+                        "2.NBT.B.7"
+                    ],
+                    "cluster": "Use place value understanding and properties of operations to add and subtract."
+                }
+            ]
+        },
+        {
+            "id": "MD",
+            "name": "Measurement & Data",
+            "standards": [
+                {
+                    "id": "2.MD.A.1",
+                    "description": "Measure the length of an object by selecting and using appropriate tools such as rulers, yardsticks, meter sticks, and measuring tapes.",
+                    "prerequisites": [
+                        "1.MD.A.2"
+                    ],
+                    "cluster": "Measure and estimate lengths in standard units."
+                },
+                {
+                    "id": "2.MD.A.2",
+                    "description": "Measure the length of an object twice, using length units of different lengths for the two measurements; describe how the two measurements relate to the size of the unit chosen.",
+                    "prerequisites": [
+                        "2.MD.A.1"
+                    ],
+                    "cluster": "Measure and estimate lengths in standard units."
+                },
+                {
+                    "id": "2.MD.A.3",
+                    "description": "Estimate lengths using units of inches, feet, centimeters, and meters.",
+                    "prerequisites": [
+                        "2.MD.A.1"
+                    ],
+                    "cluster": "Measure and estimate lengths in standard units."
+                },
+                {
+                    "id": "2.MD.A.4",
+                    "description": "Measure to determine how much longer one object is than another, expressing the length difference in terms of a standard length unit.",
+                    "prerequisites": [
+                        "2.MD.A.1"
+                    ],
+                    "cluster": "Measure and estimate lengths in standard units."
+                },
+                {
+                    "id": "2.MD.B.5",
+                    "description": "Use addition and subtraction within 100 to solve word problems involving lengths that are given in the same units.",
+                    "prerequisites": [
+                        "2.MD.A.4",
+                        "2.NBT.B.5"
+                    ],
+                    "cluster": "Relate addition and subtraction to length."
+                },
+                {
+                    "id": "2.MD.C.7",
+                    "description": "Tell and write time from analog and digital clocks to the nearest five minutes, using a.m. and p.m.",
+                    "prerequisites": [
+                        "1.MD.B.3"
+                    ],
+                    "cluster": "Work with time and money."
+                },
+                {
+                    "id": "2.MD.C.8",
+                    "description": "Solve word problems involving dollar bills, quarters, dimes, nickels, and pennies, using $ and ¢ symbols appropriately.",
+                    "prerequisites": [
+                        "2.NBT.B.5"
+                    ],
+                    "cluster": "Work with time and money."
+                },
+                {
+                    "id": "2.MD.D.9",
+                    "description": "Generate measurement data by measuring lengths of several objects to the nearest whole unit, or by making repeated measurements of the same object. Show the measurements by making a line plot.",
+                    "prerequisites": [
+                        "2.MD.A.1"
+                    ],
+                    "cluster": "Represent and interpret data."
+                },
+                {
+                    "id": "2.MD.D.10",
+                    "description": "Draw a picture graph and a bar graph (with single-unit scale) to represent a data set with up to four categories. Solve simple put-together, take-apart, and compare problems using information presented in a bar graph.",
+                    "prerequisites": [
+                        "1.MD.B.4"
+                    ],
+                    "cluster": "Represent and interpret data."
+                }
+            ]
+        },
+        {
+            "id": "G",
+            "name": "Geometry",
+            "standards": [
+                {
+                    "id": "2.G.A.1",
+                    "description": "Recognize and draw shapes having specified attributes, such as a given number of angles or a given number of equal faces. Identify triangles, quadrilaterals, pentagons, hexagons, and cubes.",
+                    "prerequisites": [
+                        "1.G.A.1"
+                    ],
+                    "cluster": "Reason with shapes and their attributes."
+                },
+                {
+                    "id": "2.G.A.2",
+                    "description": "Partition a rectangle into rows and columns of same-size squares and count to find the total number of them.",
+                    "prerequisites": [
+                        "2.OA.C.4"
+                    ],
+                    "cluster": "Reason with shapes and their attributes."
+                },
+                {
+                    "id": "2.G.A.3",
+                    "description": "Partition circles and rectangles into two, three, or four equal shares, describe the shares using the words halves, thirds, half of, a third of, etc., and describe the whole as two halves, three thirds, four fourths.",
+                    "prerequisites": [
+                        "1.G.A.3"
+                    ],
+                    "cluster": "Reason with shapes and their attributes."
+                }
+            ]
+        }
+    ]
+}

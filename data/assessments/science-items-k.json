@@ -1,0 +1,445 @@
+{
+  "grade": "K",
+  "items": [
+    {
+      "id": "sci-k-ps2-1-001",
+      "standard_id": "K-PS2-1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Which picture shows a push?",
+      "options": ["A child pushing a toy car", "A child watching a toy car", "A child sitting next to a toy car", "A child picking up a toy car"],
+      "correct_answer": "A child pushing a toy car",
+      "explanation": "A push moves an object away from you. When a child pushes a toy car, they are using force to move it forward.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 0,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 30,
+      "science_practice": "Planning and Carrying Out Investigations"
+    },
+    {
+      "id": "sci-k-ps2-1-002",
+      "standard_id": "K-PS2-1",
+      "dok_level": 2,
+      "question_type": "constructed_response",
+      "question": "Draw a picture showing how you could make a ball move far and how you could make it move a short distance. Label your pictures.",
+      "rubric": {
+        "4": "Two clear pictures showing strong/weak push with accurate labels and explanation",
+        "3": "Two pictures with labels showing different force levels",
+        "2": "Pictures present but labels or force difference unclear",
+        "1": "Attempted drawing but concept not demonstrated",
+        "0": "No response or unrelated drawing"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 180,
+      "science_practice": "Planning and Carrying Out Investigations"
+    },
+    {
+      "id": "sci-k-ps2-2-001",
+      "standard_id": "K-PS2-2",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Sara wants to make her toy car go faster. What should she do?",
+      "options": ["Push the car harder", "Push the car softer", "Push the car sideways", "Do not push the car"],
+      "correct_answer": "Push the car harder",
+      "explanation": "A stronger push gives an object more speed. Pushing harder makes the car go faster.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 30,
+      "science_practice": "Constructing Explanations and Designing Solutions"
+    },
+    {
+      "id": "sci-k-ps2-2-002",
+      "standard_id": "K-PS2-2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "You have a ramp and a toy car. Tell how you would test if the car goes faster when you push it hard or push it soft. What would you look at to know which push was stronger?",
+      "rubric": {
+        "4": "Clear procedure with comparison of two push strengths and observable outcome (distance or speed)",
+        "3": "Procedure mentions both push types but observation method less clear",
+        "2": "Basic idea of testing but incomplete procedure",
+        "1": "Mentions pushing but no comparison or observation method",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 180,
+      "science_practice": "Planning and Carrying Out Investigations"
+    },
+    {
+      "id": "sci-k-ls1-1-001",
+      "standard_id": "K-LS1-1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "What do ALL plants need to live?",
+      "options": ["Water and sunlight", "Toys and books", "Crayons and paper", "Blocks and puzzles"],
+      "correct_answer": "Water and sunlight",
+      "explanation": "All plants need water and sunlight to survive. These help plants make their food and grow.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 25,
+      "science_practice": "Obtaining, Evaluating, and Communicating Information"
+    },
+    {
+      "id": "sci-k-ls1-1-002",
+      "standard_id": "K-LS1-1",
+      "dok_level": 2,
+      "question_type": "constructed_response",
+      "question": "Look at a picture of a dog and a fish. Draw what each animal needs to survive. Are any needs the same?",
+      "rubric": {
+        "4": "Identifies specific needs for both animals and correctly identifies water/food as common needs",
+        "3": "Shows needs for both animals with some common needs identified",
+        "2": "Shows needs but common elements not identified",
+        "1": "Shows items but not clearly related to survival needs",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 2,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 150,
+      "science_practice": "Analyzing and Interpreting Data"
+    },
+    {
+      "id": "sci-k-ess2-2-001",
+      "standard_id": "K-ESS2-2",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "How do beavers change the land where they live?",
+      "options": ["They build dams that create ponds", "They fly high in the sky", "They swim without touching the water", "They hide underground all the time"],
+      "correct_answer": "They build dams that create ponds",
+      "explanation": "Beavers change their environment by building dams out of sticks and mud. This creates ponds where they can live safely.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 35,
+      "science_practice": "Engaging in Argument from Evidence"
+    },
+    {
+      "id": "sci-k-ess2-2-002",
+      "standard_id": "K-ESS2-2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Think about birds making nests. How do birds change the environment to meet their needs? Draw a picture and tell about it.",
+      "rubric": {
+        "4": "Picture and explanation show how birds gather materials and build nests for shelter/eggs with clear connection to needs",
+        "3": "Shows nest building with some connection to bird needs",
+        "2": "Shows nest but limited connection to needs",
+        "1": "Drawing of bird but nest or needs not clear",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 180,
+      "science_practice": "Constructing Explanations and Designing Solutions"
+    },
+    {
+      "id": "sci-k-ess2-1-001",
+      "standard_id": "K-ESS2-1",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Which words describe weather?",
+      "options": ["Sunny, rainy, windy", "Happy, sad, angry", "Red, blue, green", "Big, small, tiny"],
+      "correct_answer": "Sunny, rainy, windy",
+      "explanation": "Weather describes what is happening outside with the sky, temperature, and wind. Sunny, rainy, and windy are all types of weather.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 0,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.2,
+      "time_estimate_seconds": 25,
+      "science_practice": "Obtaining, Evaluating, and Communicating Information"
+    },
+    {
+      "id": "sci-k-ess2-1-002",
+      "standard_id": "K-ESS2-1",
+      "dok_level": 2,
+      "question_type": "constructed_response",
+      "question": "For one week, draw a picture of the weather each day. What pattern did you see? Was the weather the same or different each day?",
+      "rubric": {
+        "4": "Weather recorded for multiple days with pattern identified and described",
+        "3": "Weather recorded with attempt to identify pattern",
+        "2": "Weather recorded but no pattern discussion",
+        "1": "Some weather drawings but incomplete",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 2,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 240,
+      "science_practice": "Analyzing and Interpreting Data"
+    },
+    {
+      "id": "sci-k-ess3-1-001",
+      "standard_id": "K-ESS3-1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Where would a polar bear live best?",
+      "options": ["In a cold, snowy place", "In a hot desert", "In a warm rainforest", "In a pond"],
+      "correct_answer": "In a cold, snowy place",
+      "explanation": "Polar bears need cold places to live because they have thick fur to keep warm in snow and ice. They find food and make homes in cold areas.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 30,
+      "science_practice": "Developing and Using Models"
+    },
+    {
+      "id": "sci-k-ess3-1-002",
+      "standard_id": "K-ESS3-1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Draw a fish in its home. What does the fish need in its home to survive? Why does the fish live there and not on land?",
+      "rubric": {
+        "4": "Drawing shows water habitat with explanation of fish needs (water, food, shelter) and why water is necessary",
+        "3": "Shows fish in water with some needs identified",
+        "2": "Fish in water but needs not clearly explained",
+        "1": "Drawing present but habitat/needs unclear",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 180,
+      "science_practice": "Developing and Using Models"
+    },
+    {
+      "id": "sci-k-ess3-2-001",
+      "standard_id": "K-ESS3-2",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Why do we check the weather forecast before going outside?",
+      "options": ["To know if we need an umbrella or jacket", "To know what color to wear", "To know what games to play inside", "To know what food to eat"],
+      "correct_answer": "To know if we need an umbrella or jacket",
+      "explanation": "Weather forecasts help us prepare for conditions like rain or cold. This helps us stay safe and comfortable.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 30,
+      "science_practice": "Asking Questions and Defining Problems"
+    },
+    {
+      "id": "sci-k-ess3-2-002",
+      "standard_id": "K-ESS3-2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A big storm is coming to your town. What would you and your family do to get ready? Draw and tell about it.",
+      "rubric": {
+        "4": "Shows multiple preparation actions (staying inside, gathering supplies, securing items) with clear explanation",
+        "3": "Shows preparation with some explanation",
+        "2": "Shows one preparation action",
+        "1": "Response relates to storms but preparation not clear",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 180,
+      "science_practice": "Obtaining, Evaluating, and Communicating Information"
+    },
+    {
+      "id": "sci-k-ess3-3-001",
+      "standard_id": "K-ESS3-3",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Which action helps keep the Earth clean?",
+      "options": ["Putting trash in a garbage can", "Throwing trash on the ground", "Leaving the water running", "Breaking tree branches"],
+      "correct_answer": "Putting trash in a garbage can",
+      "explanation": "Putting trash in proper containers keeps litter off the ground and helps protect plants, animals, and water.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 25,
+      "science_practice": "Constructing Explanations and Designing Solutions"
+    },
+    {
+      "id": "sci-k-ess3-3-002",
+      "standard_id": "K-ESS3-3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Think of one way people hurt the land, water, or air. Draw a solution that would help make it better.",
+      "rubric": {
+        "4": "Identifies problem clearly and proposes logical solution with drawing and explanation",
+        "3": "Shows problem and solution with some explanation",
+        "2": "Shows either problem or solution but not both clearly",
+        "1": "Drawing present but connection to environmental issue unclear",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 180,
+      "science_practice": "Constructing Explanations and Designing Solutions"
+    },
+    {
+      "id": "sci-k-ets1-1-001",
+      "standard_id": "K-2-ETS1-1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "The class needs a way to carry books from the library. What question should they ask first?",
+      "options": ["How many books do we need to carry?", "What color should our carrier be?", "When is lunch time?", "Who likes to read?"],
+      "correct_answer": "How many books do we need to carry?",
+      "explanation": "To solve a problem, we first need to understand it. Knowing how many books helps us design something that will work.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 1,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 35,
+      "science_practice": "Asking Questions and Defining Problems"
+    },
+    {
+      "id": "sci-k-ets1-1-002",
+      "standard_id": "K-2-ETS1-1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "The classroom pet hamster needs a new toy to play with. What questions would you ask before making a toy for the hamster?",
+      "rubric": {
+        "4": "Multiple relevant questions about hamster size, safety, what hamsters like, materials available",
+        "3": "At least two relevant questions about the problem",
+        "2": "One relevant question with some connection to problem",
+        "1": "Questions present but not related to design problem",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 150,
+      "science_practice": "Asking Questions and Defining Problems"
+    },
+    {
+      "id": "sci-k-ets1-2-001",
+      "standard_id": "K-2-ETS1-2",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "You want to make a cup that will not spill. Which shape would work best?",
+      "options": ["A tall cup with a lid", "A flat plate", "A ball", "A stick"],
+      "correct_answer": "A tall cup with a lid",
+      "explanation": "A tall cup can hold liquid and a lid helps prevent spilling. The shape must match what we want the object to do.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 30,
+      "science_practice": "Developing and Using Models"
+    },
+    {
+      "id": "sci-k-ets1-2-002",
+      "standard_id": "K-2-ETS1-2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Draw a picture of a container that would be good for carrying water without spilling. Label the parts that help it work.",
+      "rubric": {
+        "4": "Clear drawing with labeled features explaining how shape prevents spilling (lid, handles, stable base)",
+        "3": "Drawing with some labeled features related to function",
+        "2": "Drawing of container but labels unclear or missing",
+        "1": "Drawing present but not clearly a container or labeled",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 180,
+      "science_practice": "Developing and Using Models"
+    },
+    {
+      "id": "sci-k-ets1-3-001",
+      "standard_id": "K-2-ETS1-3",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Two students made paper airplanes. One flew far and one flew short. What should they compare?",
+      "options": ["How the planes were folded", "What color paper was used", "What time they threw them", "Who threw them first"],
+      "correct_answer": "How the planes were folded",
+      "explanation": "To understand why one plane flew better, we need to compare how they were made. The folds and shape affect how the plane flies.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 35,
+      "science_practice": "Analyzing and Interpreting Data"
+    },
+    {
+      "id": "sci-k-ets1-3-002",
+      "standard_id": "K-2-ETS1-3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Your class tested two different ramps to see which one made a ball roll farther. One ramp was tall, one was short. The tall ramp made the ball go farther. Draw both ramps and explain why you think the tall one worked better.",
+      "rubric": {
+        "4": "Both ramps drawn with clear height difference and explanation connecting height to ball speed/distance",
+        "3": "Both ramps shown with some attempt at explanation",
+        "2": "Ramps drawn but explanation missing or incorrect",
+        "1": "Single ramp or unclear drawing",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 180,
+      "science_practice": "Analyzing and Interpreting Data"
+    }
+  ]
+}

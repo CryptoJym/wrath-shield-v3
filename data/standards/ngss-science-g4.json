@@ -1,0 +1,179 @@
+{
+    "subject": "science",
+    "grade": "4",
+    "domains": [
+        {
+            "name": "Physical Science: Energy",
+            "standards": [
+                {
+                    "id": "4-PS3-1",
+                    "description": "Use evidence to construct an explanation relating the speed of an object to the energy of that object.",
+                    "cluster": "Energy",
+                    "prerequisites": ["3-PS2-1"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 3,
+                    "estimated_hours": 4
+                },
+                {
+                    "id": "4-PS3-2",
+                    "description": "Make observations to provide evidence that energy can be transferred from place to place by sound, light, heat, and electric currents.",
+                    "cluster": "Energy",
+                    "prerequisites": ["1-PS4-1"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 3,
+                    "estimated_hours": 4
+                },
+                {
+                    "id": "4-PS3-3",
+                    "description": "Ask questions and predict outcomes about the changes in energy that occur when objects collide.",
+                    "cluster": "Energy",
+                    "prerequisites": ["4-PS3-1"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 3,
+                    "estimated_hours": 4
+                },
+                {
+                    "id": "4-PS3-4",
+                    "description": "Apply scientific ideas to design, test, and refine a device that converts energy from one form to another.",
+                    "cluster": "Energy",
+                    "prerequisites": ["4-PS3-2"],
+                    "stat_mappings": ["science", "technology", "problem_solving"],
+                    "cognitive_complexity": 4,
+                    "estimated_hours": 6
+                },
+                {
+                    "id": "4-PS4-1",
+                    "description": "Develop a model of waves to describe patterns in terms of amplitude and wavelength and that waves can cause objects to move.",
+                    "cluster": "Waves and Their Applications in Technologies for Information Transfer",
+                    "prerequisites": ["1-PS4-1"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 3,
+                    "estimated_hours": 5
+                },
+                {
+                    "id": "4-PS4-2",
+                    "description": "Develop a model to describe that light reflecting from objects and entering the eye allows objects to be seen.",
+                    "cluster": "Waves and Their Applications in Technologies for Information Transfer",
+                    "prerequisites": ["1-PS4-2"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 3,
+                    "estimated_hours": 4
+                },
+                {
+                    "id": "4-PS4-3",
+                    "description": "Generate and compare multiple solutions that use patterns to transfer information.",
+                    "cluster": "Waves and Their Applications in Technologies for Information Transfer",
+                    "prerequisites": ["4-PS4-1"],
+                    "stat_mappings": ["science", "technology", "problem_solving"],
+                    "cognitive_complexity": 4,
+                    "estimated_hours": 5
+                }
+            ]
+        },
+        {
+            "name": "Life Science: Structure, Function, and Information Processing",
+            "standards": [
+                {
+                    "id": "4-LS1-1",
+                    "description": "Construct an argument that plants and animals have internal and external structures that function to support survival, growth, behavior, and reproduction.",
+                    "cluster": "From Molecules to Organisms: Structures and Processes",
+                    "prerequisites": ["3-LS1-1"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 3,
+                    "estimated_hours": 5
+                },
+                {
+                    "id": "4-LS1-2",
+                    "description": "Use a model to describe that animals receive different types of information through their senses, process the information in their brain, and respond to the information in different ways.",
+                    "cluster": "From Molecules to Organisms: Structures and Processes",
+                    "prerequisites": ["4-LS1-1"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 3,
+                    "estimated_hours": 4
+                }
+            ]
+        },
+        {
+            "name": "Earth and Space Science: Earth's Systems",
+            "standards": [
+                {
+                    "id": "4-ESS1-1",
+                    "description": "Identify evidence from patterns in rock formations and fossils in rock layers to support an explanation for changes in a landscape over time.",
+                    "cluster": "Earth's Place in the Universe",
+                    "prerequisites": ["3-LS4-1"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 3,
+                    "estimated_hours": 4
+                },
+                {
+                    "id": "4-ESS2-1",
+                    "description": "Make observations and/or measurements to provide evidence of the effects of weathering or the rate of erosion by water, ice, wind, or vegetation.",
+                    "cluster": "Earth's Systems",
+                    "prerequisites": ["2-ESS2-1"],
+                    "stat_mappings": ["science", "critical_thinking", "problem_solving"],
+                    "cognitive_complexity": 3,
+                    "estimated_hours": 4
+                },
+                {
+                    "id": "4-ESS2-2",
+                    "description": "Analyze and interpret data from maps to describe patterns of Earth's features.",
+                    "cluster": "Earth's Systems",
+                    "prerequisites": ["2-ESS2-2"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 3,
+                    "estimated_hours": 4
+                },
+                {
+                    "id": "4-ESS3-1",
+                    "description": "Obtain and combine information to describe that energy and fuels are derived from natural resources and their uses affect the environment.",
+                    "cluster": "Earth and Human Activity",
+                    "prerequisites": ["4-PS3-2"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 3,
+                    "estimated_hours": 4
+                },
+                {
+                    "id": "4-ESS3-2",
+                    "description": "Generate and compare multiple solutions to reduce the impacts of natural Earth processes on humans.",
+                    "cluster": "Earth and Human Activity",
+                    "prerequisites": ["4-ESS2-1"],
+                    "stat_mappings": ["science", "technology", "problem_solving"],
+                    "cognitive_complexity": 4,
+                    "estimated_hours": 5
+                }
+            ]
+        },
+        {
+            "name": "Engineering Design",
+            "standards": [
+                {
+                    "id": "3-5-ETS1-1",
+                    "description": "Define a simple design problem reflecting a need or a want that includes specified criteria for success and constraints on materials, time, or cost.",
+                    "cluster": "Engineering Design",
+                    "prerequisites": ["K-2-ETS1-1"],
+                    "stat_mappings": ["science", "critical_thinking", "technology", "problem_solving"],
+                    "cognitive_complexity": 3,
+                    "estimated_hours": 5
+                },
+                {
+                    "id": "3-5-ETS1-2",
+                    "description": "Generate and compare multiple possible solutions to a problem based on how well each is likely to meet the criteria and constraints of the problem.",
+                    "cluster": "Engineering Design",
+                    "prerequisites": ["3-5-ETS1-1"],
+                    "stat_mappings": ["science", "critical_thinking", "technology", "problem_solving"],
+                    "cognitive_complexity": 4,
+                    "estimated_hours": 6
+                },
+                {
+                    "id": "3-5-ETS1-3",
+                    "description": "Plan and carry out fair tests in which variables are controlled and failure points are considered to identify aspects of a model or prototype that can be improved.",
+                    "cluster": "Engineering Design",
+                    "prerequisites": ["3-5-ETS1-2"],
+                    "stat_mappings": ["science", "critical_thinking", "technology"],
+                    "cognitive_complexity": 4,
+                    "estimated_hours": 6
+                }
+            ]
+        }
+    ]
+}

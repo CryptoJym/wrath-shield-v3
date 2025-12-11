@@ -1,0 +1,565 @@
+{
+  "grade": "4",
+  "items": [
+    {
+      "id": "sci-4-ps3-1-001",
+      "standard_id": "4-PS3-1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "A truck and a bicycle are both moving at 20 mph. Which has more kinetic energy?",
+      "options": ["The truck, because it has more mass", "The bicycle, because it is lighter", "They have the same energy because they're moving at the same speed", "Neither has kinetic energy"],
+      "correct_answer": "The truck, because it has more mass",
+      "explanation": "Kinetic energy depends on both mass and speed. At the same speed, an object with more mass has more kinetic energy.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 45,
+      "science_practice": "Constructing Explanations and Designing Solutions"
+    },
+    {
+      "id": "sci-4-ps3-1-002",
+      "standard_id": "4-PS3-1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "You roll two balls down a ramp - a heavy metal ball and a light plastic ball - at the same speed. At the bottom, they each hit a block. The metal ball pushes the block farther. Use evidence about energy to explain why.",
+      "rubric": {
+        "4": "Explains that heavier ball has more kinetic energy at same speed, more energy transferred to block, causing greater movement",
+        "3": "Connects mass and energy with some explanation of transfer",
+        "2": "Mentions mass affecting outcome but energy explanation incomplete",
+        "1": "States metal ball is heavier without energy connection",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 270,
+      "science_practice": "Constructing Explanations and Designing Solutions"
+    },
+    {
+      "id": "sci-4-ps3-2-001",
+      "standard_id": "4-PS3-2",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "A metal spoon sitting in hot soup becomes warm. What type of energy transfer is this?",
+      "options": ["Heat energy moving from the soup to the spoon", "Light energy moving from the spoon to the soup", "Sound energy from the bowl", "Electrical energy from the table"],
+      "correct_answer": "Heat energy moving from the soup to the spoon",
+      "explanation": "Heat energy transfers from warmer objects to cooler objects. The hot soup transfers heat to the cooler metal spoon.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 40,
+      "science_practice": "Constructing Explanations and Designing Solutions"
+    },
+    {
+      "id": "sci-4-ps3-2-002",
+      "standard_id": "4-PS3-2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Energy can be transferred in different ways: by sound, light, heat, and electric currents. Give one real-world example of each type of energy transfer. Explain how the energy moves from one place to another in each example.",
+      "rubric": {
+        "4": "Four correct examples with clear explanation of energy movement for each (e.g., sun to Earth for light, heater to room for heat)",
+        "3": "Four examples with explanation for most",
+        "2": "Some examples correct with partial explanations",
+        "1": "Few examples without clear energy transfer explanation",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 300,
+      "science_practice": "Constructing Explanations and Designing Solutions"
+    },
+    {
+      "id": "sci-4-ps3-3-001",
+      "standard_id": "4-PS3-3",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Two billiard balls collide. Ball A was moving fast, Ball B was still. After collision, Ball A slows down and Ball B starts moving. What happened to the energy?",
+      "options": ["Energy transferred from Ball A to Ball B", "Energy was created in Ball B", "Energy disappeared from Ball A", "No energy was involved"],
+      "correct_answer": "Energy transferred from Ball A to Ball B",
+      "explanation": "When objects collide, energy transfers between them. The moving ball transfers some of its kinetic energy to the stationary ball.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 45,
+      "science_practice": "Asking Questions and Defining Problems"
+    },
+    {
+      "id": "sci-4-ps3-3-002",
+      "standard_id": "4-PS3-3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "You drop a ball from 1 meter high. It bounces back up but not quite as high as where it started. Ask two questions about what happened to the energy. Then, predict what would happen if you dropped the ball from 2 meters instead.",
+      "rubric": {
+        "4": "Two investigable questions about energy loss (friction, sound, heat) and correct prediction that ball bounces higher but still loses some energy",
+        "3": "Good questions and reasonable prediction",
+        "2": "Questions or prediction present but not both developed",
+        "1": "Basic observation without energy questions",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 270,
+      "science_practice": "Asking Questions and Defining Problems"
+    },
+    {
+      "id": "sci-4-ps3-4-001",
+      "standard_id": "4-PS3-4",
+      "dok_level": 3,
+      "question_type": "multiple_choice",
+      "question": "A solar-powered calculator converts energy from what form to what form?",
+      "options": ["Light energy to electrical energy", "Sound energy to light energy", "Electrical energy to heat energy", "Kinetic energy to sound energy"],
+      "correct_answer": "Light energy to electrical energy",
+      "explanation": "Solar panels convert light energy from the sun into electrical energy that powers the calculator.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 40,
+      "science_practice": "Constructing Explanations and Designing Solutions"
+    },
+    {
+      "id": "sci-4-ps3-4-002",
+      "standard_id": "4-PS3-4",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Design a device that converts one form of energy to another useful form. Draw your device and label: 1) What energy goes IN, 2) What energy comes OUT, 3) How the conversion happens. Explain a problem your device could solve.",
+      "rubric": {
+        "4": "Creative device with clear input/output energy labeled, mechanism explained, and practical problem solved",
+        "3": "Device with energy conversion shown and some explanation",
+        "2": "Device drawn but energy conversion unclear",
+        "1": "Drawing without energy concepts",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 5,
+        "generativity_delta": 6
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 360,
+      "science_practice": "Constructing Explanations and Designing Solutions"
+    },
+    {
+      "id": "sci-4-ps4-1-001",
+      "standard_id": "4-PS4-1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "A wave with a large amplitude compared to a wave with a small amplitude will:",
+      "options": ["Carry more energy", "Move faster", "Have a different color", "Last longer"],
+      "correct_answer": "Carry more energy",
+      "explanation": "A wave's amplitude is related to its energy. Larger amplitude means the wave carries more energy.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 40,
+      "science_practice": "Developing and Using Models"
+    },
+    {
+      "id": "sci-4-ps4-1-002",
+      "standard_id": "4-PS4-1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Draw two waves: one with HIGH amplitude and one with LOW amplitude. Draw two more waves: one with LONG wavelength and one with SHORT wavelength. Label all parts. Explain how a loud sound is different from a quiet sound using wave properties.",
+      "rubric": {
+        "4": "Four correctly drawn waves with labels, clear explanation connecting amplitude to loudness",
+        "3": "Waves drawn correctly with some explanation",
+        "2": "Some waves correct or explanation incomplete",
+        "1": "Attempts drawing but properties confused",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 300,
+      "science_practice": "Developing and Using Models"
+    },
+    {
+      "id": "sci-4-ps4-2-001",
+      "standard_id": "4-PS4-2",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "When you look in a mirror, you see your reflection. What is happening to the light?",
+      "options": ["Light bounces off the mirror back to your eyes", "Light goes through the mirror", "Light is absorbed by the mirror", "New light is created by the mirror"],
+      "correct_answer": "Light bounces off the mirror back to your eyes",
+      "explanation": "Mirrors reflect light. Light bounces off the smooth surface of the mirror and travels back to your eyes, allowing you to see a reflection.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 35,
+      "science_practice": "Developing and Using Models"
+    },
+    {
+      "id": "sci-4-ps4-2-002",
+      "standard_id": "4-PS4-2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Create a model showing how you see an apple on a table. Draw: 1) the light source, 2) the apple, 3) your eye, and 4) arrows showing how light travels. Explain what happens to the light at each step.",
+      "rubric": {
+        "4": "Complete model with light source, arrows to apple, reflection off apple to eye, with clear explanation of light path",
+        "3": "Model with most components and partial explanation",
+        "2": "Some components shown but light path incomplete",
+        "1": "Drawing without clear light path",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 270,
+      "science_practice": "Developing and Using Models"
+    },
+    {
+      "id": "sci-4-ps4-3-001",
+      "standard_id": "4-PS4-3",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "A lighthouse uses flashing light patterns to send messages to ships. Which pattern best represents the message 'SOS' in Morse code (... --- ...)?",
+      "options": ["Short-short-short, long-long-long, short-short-short flashes", "One long continuous light", "Random flashing", "No light at all"],
+      "correct_answer": "Short-short-short, long-long-long, short-short-short flashes",
+      "explanation": "Information can be encoded in patterns of light. Different patterns represent different messages, just like Morse code.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 45,
+      "science_practice": "Constructing Explanations and Designing Solutions"
+    },
+    {
+      "id": "sci-4-ps4-3-002",
+      "standard_id": "4-PS4-3",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Design your own code system using light or sound patterns to send secret messages to a friend. Create a code for at least 5 letters or words. Explain how your system works and why it is effective for communication.",
+      "rubric": {
+        "4": "Creative, consistent code system with 5+ symbols, clear explanation of how sender and receiver use it, and why patterns work for communication",
+        "3": "Working code system with explanation",
+        "2": "Some code elements but system incomplete",
+        "1": "Idea present but not a working code",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 5,
+        "generativity_delta": 6
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 360,
+      "science_practice": "Constructing Explanations and Designing Solutions"
+    },
+    {
+      "id": "sci-4-ls1-1-001",
+      "standard_id": "4-LS1-1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "A cactus has thick stems that store water. How does this internal structure help the cactus survive?",
+      "options": ["It allows the cactus to live in dry desert environments", "It helps the cactus move to find water", "It protects the cactus from sunlight", "It helps the cactus communicate with other plants"],
+      "correct_answer": "It allows the cactus to live in dry desert environments",
+      "explanation": "Internal structures have specific functions. The cactus's water-storing stems help it survive in dry environments where water is scarce.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 40,
+      "science_practice": "Constructing Explanations and Designing Solutions"
+    },
+    {
+      "id": "sci-4-ls1-1-002",
+      "standard_id": "4-LS1-1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Compare the structures of a fish and a bird. Identify at least two external structures and one internal structure for each animal. Explain how these structures help each animal survive in its environment.",
+      "rubric": {
+        "4": "Multiple structures for each animal (fins/wings, scales/feathers, gills/lungs) with clear function and environment connection",
+        "3": "Structures identified for both with some functional explanation",
+        "2": "Some structures but connection to survival incomplete",
+        "1": "Few structures without function explanation",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 300,
+      "science_practice": "Constructing Explanations and Designing Solutions"
+    },
+    {
+      "id": "sci-4-ls1-2-001",
+      "standard_id": "4-LS1-2",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "A rabbit sees a hawk flying overhead and immediately runs to hide. What is the order of events in the rabbit's response?",
+      "options": ["Eyes detect hawk → brain processes danger → legs run", "Legs run → brain thinks → eyes see", "Brain processes → nothing happens → ears hear", "Random movement → eyes open → sleep"],
+      "correct_answer": "Eyes detect hawk → brain processes danger → legs run",
+      "explanation": "Animals receive information through senses, the brain processes the information, and then the body responds appropriately.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 45,
+      "science_practice": "Developing and Using Models"
+    },
+    {
+      "id": "sci-4-ls1-2-002",
+      "standard_id": "4-LS1-2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Create a model showing how a dog responds when it smells food. Include: 1) the sensory receptor, 2) how the brain processes the information, and 3) how the dog responds. Use arrows to show the flow of information.",
+      "rubric": {
+        "4": "Complete model with nose (receptor), brain (processing), body response (moving toward food), arrows showing information flow",
+        "3": "Model with main components and some flow explanation",
+        "2": "Some components shown but information flow unclear",
+        "1": "Simple drawing without information processing shown",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 270,
+      "science_practice": "Developing and Using Models"
+    },
+    {
+      "id": "sci-4-ess1-1-001",
+      "standard_id": "4-ESS1-1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Scientists find a rock layer with sea shells on top of a mountain. What evidence does this provide about Earth's past?",
+      "options": ["The mountain was once under the ocean", "Shells can climb mountains", "The ocean is rising today", "Someone put the shells there recently"],
+      "correct_answer": "The mountain was once under the ocean",
+      "explanation": "Rock layers and fossils provide evidence of past environments. Sea shell fossils on a mountain indicate that area was once an ocean floor.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 45,
+      "science_practice": "Analyzing and Interpreting Data"
+    },
+    {
+      "id": "sci-4-ess1-1-002",
+      "standard_id": "4-ESS1-1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "You are studying rock layers in a canyon. The bottom layer has fish fossils, the middle layer has fern fossils, and the top layer has no fossils but shows cracks. Describe how the environment in this area changed over time. Use evidence from each layer.",
+      "rubric": {
+        "4": "Explains environmental changes chronologically: ocean (fish) → swamp/forest (ferns) → dry land (cracks), using all evidence",
+        "3": "Most environments correctly identified with evidence",
+        "2": "Some environments identified but sequence or evidence weak",
+        "1": "Recognizes layers but doesn't interpret environment",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 300,
+      "science_practice": "Analyzing and Interpreting Data"
+    },
+    {
+      "id": "sci-4-ess2-1-001",
+      "standard_id": "4-ESS2-1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Over many years, a river carves a canyon through rock. What process is most responsible for this change?",
+      "options": ["Erosion by water", "Volcanic eruption", "Earthquake", "Plant growth"],
+      "correct_answer": "Erosion by water",
+      "explanation": "Flowing water slowly erodes rock over time, carrying small pieces away. Over millions of years, this creates canyons.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 35,
+      "science_practice": "Constructing Explanations and Designing Solutions"
+    },
+    {
+      "id": "sci-4-ess2-1-002",
+      "standard_id": "4-ESS2-1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Design an investigation to test how the speed of water affects erosion. What materials would you use? What would you measure? What do you predict you would observe?",
+      "rubric": {
+        "4": "Complete investigation with materials (soil, trays, water), controlled variables, measurement plan (amount eroded), and prediction (faster water = more erosion)",
+        "3": "Good investigation with most elements",
+        "2": "Basic investigation idea but variables or measurement unclear",
+        "1": "Mentions water and erosion but no investigation plan",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 300,
+      "science_practice": "Planning and Carrying Out Investigations"
+    },
+    {
+      "id": "sci-4-ess2-2-001",
+      "standard_id": "4-ESS2-2",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Looking at a topographic map, you see many lines close together in one area. What does this pattern indicate?",
+      "options": ["A steep slope or mountain", "A flat plain", "A deep lake", "A city"],
+      "correct_answer": "A steep slope or mountain",
+      "explanation": "On topographic maps, lines close together indicate rapid elevation change - a steep slope. Lines far apart show flat areas.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 40,
+      "science_practice": "Analyzing and Interpreting Data"
+    },
+    {
+      "id": "sci-4-ess3-1-001",
+      "standard_id": "4-ESS3-1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Burning coal releases energy, but also causes pollution. This is an example of how using natural resources:",
+      "options": ["Has both benefits and drawbacks for the environment", "Has no effect on the environment", "Only helps the environment", "Creates new natural resources"],
+      "correct_answer": "Has both benefits and drawbacks for the environment",
+      "explanation": "Using natural resources like fossil fuels provides energy but can harm the environment through pollution.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 40,
+      "science_practice": "Obtaining, Evaluating, and Communicating Information"
+    },
+    {
+      "id": "sci-4-ess3-2-001",
+      "standard_id": "4-ESS3-2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Earthquakes can damage buildings and hurt people. Compare TWO different solutions for reducing earthquake damage: 1) Building codes requiring stronger buildings, and 2) Early warning systems. What are the pros and cons of each?",
+      "rubric": {
+        "4": "Both solutions analyzed with pros and cons (cost, effectiveness, accessibility), reasoned comparison",
+        "3": "Both solutions with some pros and cons for each",
+        "2": "One solution well-analyzed or both superficially",
+        "1": "Mentions solutions without analysis",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 300,
+      "science_practice": "Constructing Explanations and Designing Solutions"
+    },
+    {
+      "id": "sci-4-ets1-1-001",
+      "standard_id": "3-5-ETS1-1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "A school wants to design a new playground. Which criteria would be MOST important for success?",
+      "options": ["Safety, fun for students, and fits in available space", "It should be the tallest in the state", "It should have only one type of equipment", "It should use materials that rust quickly"],
+      "correct_answer": "Safety, fun for students, and fits in available space",
+      "explanation": "Design criteria are the requirements for success. A playground needs to be safe, enjoyable, and fit within space constraints.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 40,
+      "science_practice": "Asking Questions and Defining Problems"
+    },
+    {
+      "id": "sci-4-ets1-2-001",
+      "standard_id": "3-5-ETS1-2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Your community needs a way to reduce plastic waste. Generate three possible solutions. Compare them based on: 1) How well it reduces waste, 2) How easy it is to implement, and 3) How much it costs. Recommend the best solution.",
+      "rubric": {
+        "4": "Three creative solutions with systematic comparison across all three criteria, well-reasoned recommendation",
+        "3": "Three solutions with comparison and recommendation",
+        "2": "Some solutions but comparison incomplete",
+        "1": "Ideas without comparison",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 5,
+        "generativity_delta": 6
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 360,
+      "science_practice": "Constructing Explanations and Designing Solutions"
+    },
+    {
+      "id": "sci-4-ets1-3-001",
+      "standard_id": "3-5-ETS1-3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Students tested egg-drop containers. They recorded: Design A - egg broke, Design B - egg cracked slightly, Design C - egg was unharmed. Design A used foam, Design B used paper, Design C used foam with bubble wrap inside. What can you conclude from this test? What variables should be controlled for a fair test?",
+      "rubric": {
+        "4": "Correct conclusion about materials protecting egg, identifies key variables (drop height, egg size, container size) and explains importance of control",
+        "3": "Good conclusions with some variables identified",
+        "2": "Basic conclusion but variables incomplete",
+        "1": "Observations without analysis of variables",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 270,
+      "science_practice": "Planning and Carrying Out Investigations"
+    }
+  ]
+}

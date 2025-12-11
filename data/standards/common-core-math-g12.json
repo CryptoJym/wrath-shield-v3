@@ -1,0 +1,277 @@
+{
+    "grade": "12",
+    "subject": "Mathematics",
+    "course": "Pre-Calculus and Statistics",
+    "domains": [
+        {
+            "id": "F-TF",
+            "name": "Trigonometric Functions (Advanced)",
+            "standards": [
+                {
+                    "id": "HSF-TF.A.3",
+                    "description": "Use special triangles to determine geometrically the values of sine, cosine, tangent for π/3, π/4 and π/6, and use the unit circle to express the values of sine, cosine, and tangent for π - x, π + x, and 2π - x in terms of their values for x, where x is any real number.",
+                    "prerequisites": ["HSF-TF.A.2", "HSG-SRT.C.6"],
+                    "cluster": "Extend the domain of trigonometric functions using the unit circle."
+                },
+                {
+                    "id": "HSF-TF.A.4",
+                    "description": "Use the unit circle to explain symmetry (odd and even) and periodicity of trigonometric functions.",
+                    "prerequisites": ["HSF-TF.A.3"],
+                    "cluster": "Extend the domain of trigonometric functions using the unit circle."
+                },
+                {
+                    "id": "HSF-TF.B.6",
+                    "description": "Understand that restricting a trigonometric function to a domain on which it is always increasing or always decreasing allows its inverse to be constructed.",
+                    "prerequisites": ["HSF-TF.A.4", "HSF-BF.B.4"],
+                    "cluster": "Model periodic phenomena with trigonometric functions."
+                },
+                {
+                    "id": "HSF-TF.B.7",
+                    "description": "Use inverse functions to solve trigonometric equations that arise in modeling contexts; evaluate the solutions using technology, and interpret them in terms of the context.",
+                    "prerequisites": ["HSF-TF.B.6", "HSF-TF.B.5"],
+                    "cluster": "Model periodic phenomena with trigonometric functions."
+                },
+                {
+                    "id": "HSF-TF.C.9",
+                    "description": "Prove the addition and subtraction formulas for sine, cosine, and tangent and use them to solve problems.",
+                    "prerequisites": ["HSF-TF.C.8", "HSF-TF.A.3"],
+                    "cluster": "Prove and apply trigonometric identities."
+                }
+            ]
+        },
+        {
+            "id": "N-VM",
+            "name": "Vector and Matrix Quantities",
+            "standards": [
+                {
+                    "id": "HSN-VM.A.1",
+                    "description": "Recognize vector quantities as having both magnitude and direction. Represent vector quantities by directed line segments, and use appropriate symbols for vectors and their magnitudes (e.g., v, |v|, ||v||, v).",
+                    "prerequisites": ["HSG-GPE.B.4"],
+                    "cluster": "Represent and model with vector quantities."
+                },
+                {
+                    "id": "HSN-VM.A.2",
+                    "description": "Find the components of a vector by subtracting the coordinates of an initial point from the coordinates of a terminal point.",
+                    "prerequisites": ["HSN-VM.A.1"],
+                    "cluster": "Represent and model with vector quantities."
+                },
+                {
+                    "id": "HSN-VM.A.3",
+                    "description": "Solve problems involving velocity and other quantities that can be represented by vectors.",
+                    "prerequisites": ["HSN-VM.A.2"],
+                    "cluster": "Represent and model with vector quantities."
+                },
+                {
+                    "id": "HSN-VM.B.4",
+                    "description": "Add and subtract vectors.",
+                    "prerequisites": ["HSN-VM.A.2"],
+                    "cluster": "Perform operations on vectors."
+                },
+                {
+                    "id": "HSN-VM.B.5",
+                    "description": "Multiply a vector by a scalar.",
+                    "prerequisites": ["HSN-VM.B.4"],
+                    "cluster": "Perform operations on vectors."
+                }
+            ]
+        },
+        {
+            "id": "S-ID",
+            "name": "Interpreting Categorical and Quantitative Data",
+            "standards": [
+                {
+                    "id": "HSS-ID.A.1",
+                    "description": "Represent data with plots on the real number line (dot plots, histograms, and box plots).",
+                    "prerequisites": ["8.SP.A.1"],
+                    "cluster": "Summarize, represent, and interpret data on a single count or measurement variable."
+                },
+                {
+                    "id": "HSS-ID.A.2",
+                    "description": "Use statistics appropriate to the shape of the data distribution to compare center (median, mean) and spread (interquartile range, standard deviation) of two or more different data sets.",
+                    "prerequisites": ["HSS-ID.A.1"],
+                    "cluster": "Summarize, represent, and interpret data on a single count or measurement variable."
+                },
+                {
+                    "id": "HSS-ID.A.3",
+                    "description": "Interpret differences in shape, center, and spread in the context of the data sets, accounting for possible effects of extreme data points (outliers).",
+                    "prerequisites": ["HSS-ID.A.2"],
+                    "cluster": "Summarize, represent, and interpret data on a single count or measurement variable."
+                },
+                {
+                    "id": "HSS-ID.A.4",
+                    "description": "Use the mean and standard deviation of a data set to fit it to a normal distribution and to estimate population percentages. Recognize that there are data sets for which such a procedure is not appropriate. Use calculators, spreadsheets, and tables to estimate areas under the normal curve.",
+                    "prerequisites": ["HSS-ID.A.3"],
+                    "cluster": "Summarize, represent, and interpret data on a single count or measurement variable."
+                },
+                {
+                    "id": "HSS-ID.B.5",
+                    "description": "Summarize categorical data for two categories in two-way frequency tables. Interpret relative frequencies in the context of the data (including joint, marginal, and conditional relative frequencies). Recognize possible associations and trends in the data.",
+                    "prerequisites": ["8.SP.A.4"],
+                    "cluster": "Summarize, represent, and interpret data on two categorical and quantitative variables."
+                },
+                {
+                    "id": "HSS-ID.B.6",
+                    "description": "Represent data on two quantitative variables on a scatter plot, and describe how the variables are related.",
+                    "prerequisites": ["8.SP.A.2", "HSS-ID.A.1"],
+                    "cluster": "Summarize, represent, and interpret data on two categorical and quantitative variables."
+                },
+                {
+                    "id": "HSS-ID.C.7",
+                    "description": "Interpret the slope (rate of change) and the intercept (constant term) of a linear model in the context of the data.",
+                    "prerequisites": ["8.SP.A.3", "HSS-ID.B.6"],
+                    "cluster": "Interpret linear models."
+                },
+                {
+                    "id": "HSS-ID.C.8",
+                    "description": "Compute (using technology) and interpret the correlation coefficient of a linear fit.",
+                    "prerequisites": ["HSS-ID.C.7"],
+                    "cluster": "Interpret linear models."
+                },
+                {
+                    "id": "HSS-ID.C.9",
+                    "description": "Distinguish between correlation and causation.",
+                    "prerequisites": ["HSS-ID.C.8"],
+                    "cluster": "Interpret linear models."
+                }
+            ]
+        },
+        {
+            "id": "S-IC",
+            "name": "Making Inferences and Justifying Conclusions",
+            "standards": [
+                {
+                    "id": "HSS-IC.A.1",
+                    "description": "Understand statistics as a process for making inferences about population parameters based on a random sample from that population.",
+                    "prerequisites": ["HSS-ID.A.3"],
+                    "cluster": "Understand and evaluate random processes underlying statistical experiments."
+                },
+                {
+                    "id": "HSS-IC.A.2",
+                    "description": "Decide if a specified model is consistent with results from a given data-generating process, e.g., using simulation.",
+                    "prerequisites": ["HSS-IC.A.1"],
+                    "cluster": "Understand and evaluate random processes underlying statistical experiments."
+                },
+                {
+                    "id": "HSS-IC.B.3",
+                    "description": "Recognize the purposes of and differences among sample surveys, experiments, and observational studies; explain how randomization relates to each.",
+                    "prerequisites": ["HSS-IC.A.1"],
+                    "cluster": "Make inferences and justify conclusions from sample surveys, experiments, and observational studies."
+                },
+                {
+                    "id": "HSS-IC.B.4",
+                    "description": "Use data from a sample survey to estimate a population mean or proportion; develop a margin of error through the use of simulation models for random sampling.",
+                    "prerequisites": ["HSS-IC.A.2", "HSS-ID.A.4"],
+                    "cluster": "Make inferences and justify conclusions from sample surveys, experiments, and observational studies."
+                },
+                {
+                    "id": "HSS-IC.B.5",
+                    "description": "Use data from a randomized experiment to compare two treatments; use simulations to decide if differences between parameters are significant.",
+                    "prerequisites": ["HSS-IC.B.3", "HSS-IC.B.4"],
+                    "cluster": "Make inferences and justify conclusions from sample surveys, experiments, and observational studies."
+                },
+                {
+                    "id": "HSS-IC.B.6",
+                    "description": "Evaluate reports based on data.",
+                    "prerequisites": ["HSS-IC.B.5", "HSS-ID.C.9"],
+                    "cluster": "Make inferences and justify conclusions from sample surveys, experiments, and observational studies."
+                }
+            ]
+        },
+        {
+            "id": "S-CP",
+            "name": "Conditional Probability and the Rules of Probability",
+            "standards": [
+                {
+                    "id": "HSS-CP.A.1",
+                    "description": "Describe events as subsets of a sample space (the set of outcomes) using characteristics (or categories) of the outcomes, or as unions, intersections, or complements of other events.",
+                    "prerequisites": ["HSS-ID.B.5"],
+                    "cluster": "Understand independence and conditional probability and use them to interpret data."
+                },
+                {
+                    "id": "HSS-CP.A.2",
+                    "description": "Understand that two events A and B are independent if the probability of A and B occurring together is the product of their probabilities, and use this characterization to determine if they are independent.",
+                    "prerequisites": ["HSS-CP.A.1"],
+                    "cluster": "Understand independence and conditional probability and use them to interpret data."
+                },
+                {
+                    "id": "HSS-CP.A.3",
+                    "description": "Understand the conditional probability of A given B as P(A and B)/P(B), and interpret independence of A and B as saying that the conditional probability of A given B is the same as the probability of A, and the conditional probability of B given A is the same as the probability of B.",
+                    "prerequisites": ["HSS-CP.A.2"],
+                    "cluster": "Understand independence and conditional probability and use them to interpret data."
+                },
+                {
+                    "id": "HSS-CP.A.4",
+                    "description": "Construct and interpret two-way frequency tables of data when two categories are associated with each object being classified. Use the two-way table as a sample space to decide if events are independent and to approximate conditional probabilities.",
+                    "prerequisites": ["HSS-CP.A.3", "HSS-ID.B.5"],
+                    "cluster": "Understand independence and conditional probability and use them to interpret data."
+                },
+                {
+                    "id": "HSS-CP.A.5",
+                    "description": "Recognize and explain the concepts of conditional probability and independence in everyday language and everyday situations.",
+                    "prerequisites": ["HSS-CP.A.4"],
+                    "cluster": "Understand independence and conditional probability and use them to interpret data."
+                },
+                {
+                    "id": "HSS-CP.B.6",
+                    "description": "Find the conditional probability of A given B as the fraction of B's outcomes that also belong to A, and interpret the answer in terms of the model.",
+                    "prerequisites": ["HSS-CP.A.3"],
+                    "cluster": "Use the rules of probability to compute probabilities of compound events."
+                },
+                {
+                    "id": "HSS-CP.B.7",
+                    "description": "Apply the Addition Rule, P(A or B) = P(A) + P(B) - P(A and B), and interpret the answer in terms of the model.",
+                    "prerequisites": ["HSS-CP.A.1", "HSS-CP.B.6"],
+                    "cluster": "Use the rules of probability to compute probabilities of compound events."
+                }
+            ]
+        },
+        {
+            "id": "S-MD",
+            "name": "Using Probability to Make Decisions",
+            "standards": [
+                {
+                    "id": "HSS-MD.A.1",
+                    "description": "Define a random variable for a quantity of interest by assigning a numerical value to each event in a sample space; graph the corresponding probability distribution using the same graphical displays as for data distributions.",
+                    "prerequisites": ["HSS-CP.A.1", "HSS-ID.A.1"],
+                    "cluster": "Calculate expected values and use them to solve problems."
+                },
+                {
+                    "id": "HSS-MD.A.2",
+                    "description": "Calculate the expected value of a random variable; interpret it as the mean of the probability distribution.",
+                    "prerequisites": ["HSS-MD.A.1"],
+                    "cluster": "Calculate expected values and use them to solve problems."
+                },
+                {
+                    "id": "HSS-MD.A.3",
+                    "description": "Develop a probability distribution for a random variable defined for a sample space in which theoretical probabilities can be calculated; find the expected value.",
+                    "prerequisites": ["HSS-MD.A.2"],
+                    "cluster": "Calculate expected values and use them to solve problems."
+                },
+                {
+                    "id": "HSS-MD.A.4",
+                    "description": "Develop a probability distribution for a random variable defined for a sample space in which probabilities are assigned empirically; find the expected value.",
+                    "prerequisites": ["HSS-MD.A.3"],
+                    "cluster": "Calculate expected values and use them to solve problems."
+                },
+                {
+                    "id": "HSS-MD.B.5",
+                    "description": "Weigh the possible outcomes of a decision by assigning probabilities to payoff values and finding expected values.",
+                    "prerequisites": ["HSS-MD.A.2"],
+                    "cluster": "Use probability to evaluate outcomes of decisions."
+                },
+                {
+                    "id": "HSS-MD.B.6",
+                    "description": "Use probabilities to make fair decisions (e.g., drawing by lots, using a random number generator).",
+                    "prerequisites": ["HSS-MD.B.5"],
+                    "cluster": "Use probability to evaluate outcomes of decisions."
+                },
+                {
+                    "id": "HSS-MD.B.7",
+                    "description": "Analyze decisions and strategies using probability concepts (e.g., product testing, medical testing, pulling a hockey goalie at the end of a game).",
+                    "prerequisites": ["HSS-MD.B.5", "HSS-MD.B.6"],
+                    "cluster": "Use probability to evaluate outcomes of decisions."
+                }
+            ]
+        }
+    ]
+}

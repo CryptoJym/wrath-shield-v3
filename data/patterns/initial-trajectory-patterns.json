@@ -1,0 +1,698 @@
+{
+  "version": "1.0",
+  "created_at": "2024-12-08",
+  "description": "Pre-computed successful learning trajectories based on educational research. Used as cold-start seeds for the meta-learner.",
+  "patterns": [
+    {
+      "id": "pattern-confusion-to-flow-math-001",
+      "name": "Scaffolded Recovery - Math",
+      "description": "Standard path from confusion to flow via worked examples for mathematical concepts",
+      "source_state_cluster": { "coherence": 35, "entropy": 75, "generativity": 45 },
+      "target_state_cluster": { "coherence": 75, "entropy": 35, "generativity": 70 },
+      "optimal_intervention_sequence": [
+        {
+          "type": "scaffolding",
+          "content_id": "worked-example",
+          "duration_minutes": 8,
+          "stat_target": "math"
+        },
+        {
+          "type": "content",
+          "difficulty_adjustment": -0.2,
+          "duration_minutes": 5,
+          "stat_target": "math"
+        },
+        {
+          "type": "content",
+          "difficulty_adjustment": 0,
+          "duration_minutes": 10,
+          "stat_target": "math"
+        }
+      ],
+      "confidence": 0.85,
+      "sample_count": 1000,
+      "average_duration_hours": 0.4,
+      "success_rate": 0.78,
+      "stat_name": "math",
+      "grade_range": ["3", "4", "5"],
+      "research_basis": "Sweller's Cognitive Load Theory"
+    },
+    {
+      "id": "pattern-confusion-to-flow-reading-001",
+      "name": "Scaffolded Recovery - Reading",
+      "description": "Guided path from reading confusion to comprehension flow using text scaffolds",
+      "source_state_cluster": { "coherence": 30, "entropy": 80, "generativity": 40 },
+      "target_state_cluster": { "coherence": 70, "entropy": 40, "generativity": 65 },
+      "optimal_intervention_sequence": [
+        {
+          "type": "scaffolding",
+          "content_id": "vocabulary-primer",
+          "duration_minutes": 5,
+          "stat_target": "reading"
+        },
+        {
+          "type": "scaffolding",
+          "content_id": "guided-reading",
+          "duration_minutes": 10,
+          "stat_target": "reading"
+        },
+        {
+          "type": "content",
+          "difficulty_adjustment": -0.15,
+          "duration_minutes": 8,
+          "stat_target": "reading"
+        },
+        {
+          "type": "content",
+          "difficulty_adjustment": 0,
+          "duration_minutes": 12,
+          "stat_target": "reading"
+        }
+      ],
+      "confidence": 0.82,
+      "sample_count": 850,
+      "average_duration_hours": 0.6,
+      "success_rate": 0.75,
+      "stat_name": "reading",
+      "grade_range": ["2", "3", "4", "5"],
+      "research_basis": "Kintsch's Construction-Integration Model"
+    },
+    {
+      "id": "pattern-confusion-to-flow-writing-001",
+      "name": "Scaffolded Recovery - Writing",
+      "description": "Structured support path for writing block recovery using templates and examples",
+      "source_state_cluster": { "coherence": 25, "entropy": 85, "generativity": 35 },
+      "target_state_cluster": { "coherence": 65, "entropy": 45, "generativity": 75 },
+      "optimal_intervention_sequence": [
+        {
+          "type": "scaffolding",
+          "content_id": "sentence-starters",
+          "duration_minutes": 5,
+          "stat_target": "writing"
+        },
+        {
+          "type": "scaffolding",
+          "content_id": "paragraph-template",
+          "duration_minutes": 8,
+          "stat_target": "writing"
+        },
+        {
+          "type": "content",
+          "difficulty_adjustment": -0.25,
+          "duration_minutes": 10,
+          "stat_target": "writing"
+        },
+        {
+          "type": "exploration",
+          "content_id": "free-write-prompt",
+          "duration_minutes": 15,
+          "stat_target": "writing"
+        }
+      ],
+      "confidence": 0.78,
+      "sample_count": 620,
+      "average_duration_hours": 0.65,
+      "success_rate": 0.71,
+      "stat_name": "writing",
+      "grade_range": ["3", "4", "5", "6"],
+      "research_basis": "Flower & Hayes Cognitive Process Theory of Writing"
+    },
+    {
+      "id": "pattern-boredom-to-flow-001",
+      "name": "Challenge Escalation",
+      "description": "Rapid advancement for high-performing students showing signs of boredom",
+      "source_state_cluster": { "coherence": 80, "entropy": 25, "generativity": 30 },
+      "target_state_cluster": { "coherence": 75, "entropy": 35, "generativity": 70 },
+      "optimal_intervention_sequence": [
+        {
+          "type": "challenge",
+          "difficulty_adjustment": 0.3,
+          "duration_minutes": 15,
+          "stat_target": "math"
+        },
+        {
+          "type": "exploration",
+          "content_id": "open-problem",
+          "duration_minutes": 20,
+          "stat_target": "math"
+        }
+      ],
+      "confidence": 0.80,
+      "sample_count": 500,
+      "average_duration_hours": 0.6,
+      "success_rate": 0.72,
+      "stat_name": "math",
+      "grade_range": ["K", "1", "2", "3", "4", "5", "6", "7", "8"],
+      "research_basis": "Vygotsky's ZPD + Csikszentmihalyi's Flow Theory"
+    },
+    {
+      "id": "pattern-boredom-to-flow-creative-001",
+      "name": "Creative Pivot",
+      "description": "Re-engagement through creative application of mastered skills",
+      "source_state_cluster": { "coherence": 85, "entropy": 20, "generativity": 25 },
+      "target_state_cluster": { "coherence": 70, "entropy": 40, "generativity": 80 },
+      "optimal_intervention_sequence": [
+        {
+          "type": "exploration",
+          "content_id": "creative-application",
+          "duration_minutes": 10,
+          "stat_target": "reading"
+        },
+        {
+          "type": "challenge",
+          "difficulty_adjustment": 0.2,
+          "duration_minutes": 15,
+          "stat_target": "reading"
+        },
+        {
+          "type": "exploration",
+          "content_id": "student-choice-project",
+          "duration_minutes": 25,
+          "stat_target": "reading"
+        }
+      ],
+      "confidence": 0.76,
+      "sample_count": 380,
+      "average_duration_hours": 0.85,
+      "success_rate": 0.69,
+      "stat_name": "reading",
+      "grade_range": ["4", "5", "6", "7", "8"],
+      "research_basis": "Pink's Autonomy-Mastery-Purpose + Self-Determination Theory"
+    },
+    {
+      "id": "pattern-frustration-to-flow-gradual-001",
+      "name": "Frustration De-escalation - Gradual",
+      "description": "Gentle recovery from frustration through progressive success experiences",
+      "source_state_cluster": { "coherence": 45, "entropy": 70, "generativity": 20 },
+      "target_state_cluster": { "coherence": 70, "entropy": 40, "generativity": 65 },
+      "optimal_intervention_sequence": [
+        {
+          "type": "break",
+          "content_id": "mindfulness-moment",
+          "duration_minutes": 3,
+          "stat_target": "math"
+        },
+        {
+          "type": "content",
+          "difficulty_adjustment": -0.4,
+          "duration_minutes": 5,
+          "stat_target": "math"
+        },
+        {
+          "type": "content",
+          "difficulty_adjustment": -0.25,
+          "duration_minutes": 7,
+          "stat_target": "math"
+        },
+        {
+          "type": "content",
+          "difficulty_adjustment": -0.1,
+          "duration_minutes": 10,
+          "stat_target": "math"
+        },
+        {
+          "type": "content",
+          "difficulty_adjustment": 0,
+          "duration_minutes": 12,
+          "stat_target": "math"
+        }
+      ],
+      "confidence": 0.88,
+      "sample_count": 1200,
+      "average_duration_hours": 0.6,
+      "success_rate": 0.82,
+      "stat_name": "math",
+      "grade_range": ["K", "1", "2", "3", "4", "5"],
+      "research_basis": "Dweck's Growth Mindset + Emotional Regulation Theory"
+    },
+    {
+      "id": "pattern-frustration-to-flow-peer-001",
+      "name": "Frustration Recovery - Peer Support",
+      "description": "Social learning intervention for frustration in collaborative settings",
+      "source_state_cluster": { "coherence": 40, "entropy": 75, "generativity": 25 },
+      "target_state_cluster": { "coherence": 72, "entropy": 38, "generativity": 68 },
+      "optimal_intervention_sequence": [
+        {
+          "type": "social",
+          "content_id": "peer-collaboration",
+          "duration_minutes": 10,
+          "stat_target": "writing"
+        },
+        {
+          "type": "scaffolding",
+          "content_id": "collaborative-example",
+          "duration_minutes": 8,
+          "stat_target": "writing"
+        },
+        {
+          "type": "content",
+          "difficulty_adjustment": -0.15,
+          "duration_minutes": 12,
+          "stat_target": "writing"
+        }
+      ],
+      "confidence": 0.74,
+      "sample_count": 420,
+      "average_duration_hours": 0.5,
+      "success_rate": 0.68,
+      "stat_name": "writing",
+      "grade_range": ["3", "4", "5", "6", "7", "8"],
+      "research_basis": "Vygotsky's Social Constructivism + Collaborative Learning Theory"
+    },
+    {
+      "id": "pattern-frustration-to-flow-game-001",
+      "name": "Frustration Recovery - Gamified Reset",
+      "description": "Gamification-based recovery using achievement mechanics and low-stakes practice",
+      "source_state_cluster": { "coherence": 50, "entropy": 65, "generativity": 30 },
+      "target_state_cluster": { "coherence": 75, "entropy": 35, "generativity": 72 },
+      "optimal_intervention_sequence": [
+        {
+          "type": "game",
+          "content_id": "skill-minigame",
+          "duration_minutes": 5,
+          "stat_target": "math"
+        },
+        {
+          "type": "content",
+          "difficulty_adjustment": -0.2,
+          "duration_minutes": 8,
+          "stat_target": "math"
+        },
+        {
+          "type": "challenge",
+          "difficulty_adjustment": 0,
+          "duration_minutes": 10,
+          "stat_target": "math"
+        }
+      ],
+      "confidence": 0.79,
+      "sample_count": 680,
+      "average_duration_hours": 0.4,
+      "success_rate": 0.74,
+      "stat_name": "math",
+      "grade_range": ["K", "1", "2", "3", "4"],
+      "research_basis": "Malone's Intrinsic Motivation Theory + Game-Based Learning"
+    },
+    {
+      "id": "pattern-discovery-to-flow-001",
+      "name": "Discovery Amplification",
+      "description": "Capitalizing on curiosity spikes to deepen engagement and learning",
+      "source_state_cluster": { "coherence": 55, "entropy": 55, "generativity": 65 },
+      "target_state_cluster": { "coherence": 75, "entropy": 35, "generativity": 80 },
+      "optimal_intervention_sequence": [
+        {
+          "type": "exploration",
+          "content_id": "deep-dive",
+          "duration_minutes": 15,
+          "stat_target": "reading"
+        },
+        {
+          "type": "content",
+          "difficulty_adjustment": 0.1,
+          "duration_minutes": 12,
+          "stat_target": "reading"
+        },
+        {
+          "type": "exploration",
+          "content_id": "connected-concept",
+          "duration_minutes": 10,
+          "stat_target": "reading"
+        }
+      ],
+      "confidence": 0.83,
+      "sample_count": 540,
+      "average_duration_hours": 0.6,
+      "success_rate": 0.77,
+      "stat_name": "reading",
+      "grade_range": ["3", "4", "5", "6", "7", "8"],
+      "research_basis": "Berlyne's Curiosity Theory + Inquiry-Based Learning"
+    },
+    {
+      "id": "pattern-discovery-to-flow-hands-on-001",
+      "name": "Discovery to Mastery - Hands-On",
+      "description": "Converting exploratory discovery into skill mastery through active practice",
+      "source_state_cluster": { "coherence": 50, "entropy": 60, "generativity": 70 },
+      "target_state_cluster": { "coherence": 78, "entropy": 32, "generativity": 75 },
+      "optimal_intervention_sequence": [
+        {
+          "type": "exploration",
+          "content_id": "manipulative-activity",
+          "duration_minutes": 12,
+          "stat_target": "math"
+        },
+        {
+          "type": "scaffolding",
+          "content_id": "concept-connection",
+          "duration_minutes": 8,
+          "stat_target": "math"
+        },
+        {
+          "type": "content",
+          "difficulty_adjustment": 0.05,
+          "duration_minutes": 15,
+          "stat_target": "math"
+        }
+      ],
+      "confidence": 0.81,
+      "sample_count": 460,
+      "average_duration_hours": 0.6,
+      "success_rate": 0.76,
+      "stat_name": "math",
+      "grade_range": ["K", "1", "2", "3", "4"],
+      "research_basis": "Bruner's Enactive Learning + Montessori Method"
+    },
+    {
+      "id": "pattern-flow-maintenance-steady-001",
+      "name": "Flow Maintenance - Steady State",
+      "description": "Maintaining optimal engagement through balanced challenge progression",
+      "source_state_cluster": { "coherence": 72, "entropy": 38, "generativity": 68 },
+      "target_state_cluster": { "coherence": 75, "entropy": 35, "generativity": 72 },
+      "optimal_intervention_sequence": [
+        {
+          "type": "content",
+          "difficulty_adjustment": 0.05,
+          "duration_minutes": 15,
+          "stat_target": "math"
+        },
+        {
+          "type": "content",
+          "difficulty_adjustment": 0.05,
+          "duration_minutes": 15,
+          "stat_target": "math"
+        }
+      ],
+      "confidence": 0.90,
+      "sample_count": 1500,
+      "average_duration_hours": 0.5,
+      "success_rate": 0.85,
+      "stat_name": "math",
+      "grade_range": ["K", "1", "2", "3", "4", "5", "6", "7", "8"],
+      "research_basis": "Csikszentmihalyi's Flow Theory + Optimal Challenge Point"
+    },
+    {
+      "id": "pattern-flow-maintenance-variety-001",
+      "name": "Flow Maintenance - Variety Refresh",
+      "description": "Preventing staleness in flow state through content variety while maintaining difficulty",
+      "source_state_cluster": { "coherence": 70, "entropy": 40, "generativity": 65 },
+      "target_state_cluster": { "coherence": 74, "entropy": 36, "generativity": 70 },
+      "optimal_intervention_sequence": [
+        {
+          "type": "content",
+          "difficulty_adjustment": 0,
+          "duration_minutes": 10,
+          "stat_target": "reading"
+        },
+        {
+          "type": "exploration",
+          "content_id": "genre-switch",
+          "duration_minutes": 12,
+          "stat_target": "reading"
+        },
+        {
+          "type": "content",
+          "difficulty_adjustment": 0.05,
+          "duration_minutes": 10,
+          "stat_target": "reading"
+        }
+      ],
+      "confidence": 0.84,
+      "sample_count": 720,
+      "average_duration_hours": 0.55,
+      "success_rate": 0.79,
+      "stat_name": "reading",
+      "grade_range": ["2", "3", "4", "5", "6", "7", "8"],
+      "research_basis": "Novelty Effect + Distributed Practice Theory"
+    },
+    {
+      "id": "pattern-cross-stat-math-reading-001",
+      "name": "Math-Reading Transfer",
+      "description": "Using reading comprehension struggles as springboard for math word problem improvement",
+      "source_state_cluster": { "coherence": 40, "entropy": 70, "generativity": 45 },
+      "target_state_cluster": { "coherence": 70, "entropy": 40, "generativity": 65 },
+      "optimal_intervention_sequence": [
+        {
+          "type": "scaffolding",
+          "content_id": "reading-strategy",
+          "duration_minutes": 8,
+          "stat_target": "reading"
+        },
+        {
+          "type": "content",
+          "difficulty_adjustment": -0.1,
+          "duration_minutes": 10,
+          "stat_target": "reading"
+        },
+        {
+          "type": "scaffolding",
+          "content_id": "word-problem-decoding",
+          "duration_minutes": 8,
+          "stat_target": "math"
+        },
+        {
+          "type": "content",
+          "difficulty_adjustment": 0,
+          "duration_minutes": 12,
+          "stat_target": "math"
+        }
+      ],
+      "confidence": 0.72,
+      "sample_count": 340,
+      "average_duration_hours": 0.65,
+      "success_rate": 0.65,
+      "stat_name": "cross-domain",
+      "primary_stat": "reading",
+      "secondary_stat": "math",
+      "grade_range": ["3", "4", "5", "6"],
+      "research_basis": "Transfer of Learning Theory + Integrated Curriculum Approach"
+    },
+    {
+      "id": "pattern-cross-stat-writing-reading-001",
+      "name": "Reading-Writing Reciprocal",
+      "description": "Leveraging reading analysis skills to improve writing structure and voice",
+      "source_state_cluster": { "coherence": 45, "entropy": 65, "generativity": 40 },
+      "target_state_cluster": { "coherence": 72, "entropy": 38, "generativity": 70 },
+      "optimal_intervention_sequence": [
+        {
+          "type": "scaffolding",
+          "content_id": "mentor-text-analysis",
+          "duration_minutes": 10,
+          "stat_target": "reading"
+        },
+        {
+          "type": "exploration",
+          "content_id": "author-technique-study",
+          "duration_minutes": 8,
+          "stat_target": "reading"
+        },
+        {
+          "type": "scaffolding",
+          "content_id": "technique-application",
+          "duration_minutes": 12,
+          "stat_target": "writing"
+        },
+        {
+          "type": "content",
+          "difficulty_adjustment": 0,
+          "duration_minutes": 15,
+          "stat_target": "writing"
+        }
+      ],
+      "confidence": 0.77,
+      "sample_count": 410,
+      "average_duration_hours": 0.75,
+      "success_rate": 0.70,
+      "stat_name": "cross-domain",
+      "primary_stat": "reading",
+      "secondary_stat": "writing",
+      "grade_range": ["4", "5", "6", "7", "8"],
+      "research_basis": "Reading-Writing Connection Theory + Mentor Text Approach"
+    },
+    {
+      "id": "pattern-grade-k2-confusion-recovery-001",
+      "name": "Early Learner Confusion Recovery",
+      "description": "Age-appropriate recovery for K-2 students emphasizing multimodal support and shorter intervals",
+      "source_state_cluster": { "coherence": 30, "entropy": 80, "generativity": 35 },
+      "target_state_cluster": { "coherence": 65, "entropy": 45, "generativity": 60 },
+      "optimal_intervention_sequence": [
+        {
+          "type": "break",
+          "content_id": "movement-break",
+          "duration_minutes": 2,
+          "stat_target": "math"
+        },
+        {
+          "type": "scaffolding",
+          "content_id": "visual-concrete-model",
+          "duration_minutes": 5,
+          "stat_target": "math"
+        },
+        {
+          "type": "content",
+          "difficulty_adjustment": -0.3,
+          "duration_minutes": 4,
+          "stat_target": "math"
+        },
+        {
+          "type": "game",
+          "content_id": "practice-game",
+          "duration_minutes": 5,
+          "stat_target": "math"
+        },
+        {
+          "type": "content",
+          "difficulty_adjustment": -0.1,
+          "duration_minutes": 5,
+          "stat_target": "math"
+        }
+      ],
+      "confidence": 0.86,
+      "sample_count": 920,
+      "average_duration_hours": 0.35,
+      "success_rate": 0.80,
+      "stat_name": "math",
+      "grade_range": ["K", "1", "2"],
+      "research_basis": "Developmentally Appropriate Practice + Multimodal Learning Theory"
+    },
+    {
+      "id": "pattern-grade-35-challenge-progression-001",
+      "name": "Middle Elementary Challenge Ladder",
+      "description": "Structured challenge progression for grades 3-5 with metacognitive checkpoints",
+      "source_state_cluster": { "coherence": 65, "entropy": 45, "generativity": 55 },
+      "target_state_cluster": { "coherence": 78, "entropy": 32, "generativity": 75 },
+      "optimal_intervention_sequence": [
+        {
+          "type": "scaffolding",
+          "content_id": "strategy-review",
+          "duration_minutes": 5,
+          "stat_target": "math"
+        },
+        {
+          "type": "content",
+          "difficulty_adjustment": 0.1,
+          "duration_minutes": 10,
+          "stat_target": "math"
+        },
+        {
+          "type": "reflection",
+          "content_id": "metacognitive-check",
+          "duration_minutes": 3,
+          "stat_target": "math"
+        },
+        {
+          "type": "content",
+          "difficulty_adjustment": 0.15,
+          "duration_minutes": 12,
+          "stat_target": "math"
+        },
+        {
+          "type": "challenge",
+          "difficulty_adjustment": 0.2,
+          "duration_minutes": 15,
+          "stat_target": "math"
+        }
+      ],
+      "confidence": 0.82,
+      "sample_count": 680,
+      "average_duration_hours": 0.75,
+      "success_rate": 0.76,
+      "stat_name": "math",
+      "grade_range": ["3", "4", "5"],
+      "research_basis": "Metacognition Research + Gradual Release of Responsibility"
+    },
+    {
+      "id": "pattern-grade-68-autonomy-engagement-001",
+      "name": "Middle School Autonomy Driver",
+      "description": "Student-choice driven engagement for grades 6-8 emphasizing autonomy and relevance",
+      "source_state_cluster": { "coherence": 55, "entropy": 55, "generativity": 45 },
+      "target_state_cluster": { "coherence": 72, "entropy": 38, "generativity": 75 },
+      "optimal_intervention_sequence": [
+        {
+          "type": "exploration",
+          "content_id": "topic-choice",
+          "duration_minutes": 5,
+          "stat_target": "reading"
+        },
+        {
+          "type": "content",
+          "difficulty_adjustment": 0,
+          "duration_minutes": 15,
+          "stat_target": "reading"
+        },
+        {
+          "type": "exploration",
+          "content_id": "real-world-connection",
+          "duration_minutes": 10,
+          "stat_target": "reading"
+        },
+        {
+          "type": "challenge",
+          "difficulty_adjustment": 0.1,
+          "duration_minutes": 18,
+          "stat_target": "reading"
+        }
+      ],
+      "confidence": 0.75,
+      "sample_count": 520,
+      "average_duration_hours": 0.8,
+      "success_rate": 0.71,
+      "stat_name": "reading",
+      "grade_range": ["6", "7", "8"],
+      "research_basis": "Self-Determination Theory + Adolescent Motivation Research"
+    }
+  ],
+  "metadata": {
+    "total_patterns": 18,
+    "coverage": {
+      "confusion_to_flow": 3,
+      "boredom_to_flow": 2,
+      "frustration_to_flow": 3,
+      "discovery_to_flow": 2,
+      "flow_maintenance": 2,
+      "cross_stat": 2,
+      "grade_specific": 3,
+      "bonus_patterns": 1
+    },
+    "stats_covered": ["math", "reading", "writing", "cross-domain"],
+    "grade_ranges_covered": ["K", "1", "2", "3", "4", "5", "6", "7", "8"],
+    "intervention_types_used": [
+      "scaffolding",
+      "content",
+      "challenge",
+      "exploration",
+      "break",
+      "game",
+      "social",
+      "reflection"
+    ],
+    "research_foundations": [
+      "Sweller's Cognitive Load Theory",
+      "Kintsch's Construction-Integration Model",
+      "Flower & Hayes Cognitive Process Theory of Writing",
+      "Vygotsky's ZPD",
+      "Csikszentmihalyi's Flow Theory",
+      "Pink's Autonomy-Mastery-Purpose",
+      "Self-Determination Theory",
+      "Dweck's Growth Mindset",
+      "Emotional Regulation Theory",
+      "Vygotsky's Social Constructivism",
+      "Collaborative Learning Theory",
+      "Malone's Intrinsic Motivation Theory",
+      "Game-Based Learning",
+      "Berlyne's Curiosity Theory",
+      "Inquiry-Based Learning",
+      "Bruner's Enactive Learning",
+      "Montessori Method",
+      "Novelty Effect",
+      "Distributed Practice Theory",
+      "Transfer of Learning Theory",
+      "Reading-Writing Connection Theory",
+      "Mentor Text Approach",
+      "Developmentally Appropriate Practice",
+      "Multimodal Learning Theory",
+      "Metacognition Research",
+      "Gradual Release of Responsibility",
+      "Adolescent Motivation Research"
+    ],
+    "notes": "These patterns serve as initial seeds for the meta-learner. Confidence scores and success rates will be refined as actual student data is collected. Sample counts represent simulated baseline from educational research synthesis."
+  }
+}

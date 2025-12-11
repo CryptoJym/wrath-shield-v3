@@ -1,0 +1,229 @@
+{
+    "subject": "science",
+    "grade": "11",
+    "course": "Physics",
+    "domains": [
+        {
+            "id": "PS2",
+            "name": "Motion and Stability: Forces and Interactions",
+            "standards": [
+                {
+                    "id": "HS-PS2-1",
+                    "description": "Analyze data to support the claim that Newton's second law of motion describes the mathematical relationship among the net force on a macroscopic object, its mass, and its acceleration.",
+                    "cluster": "Forces and Motion",
+                    "prerequisites": ["MS-PS2-1", "MS-PS2-2"],
+                    "science_practices": ["Analyzing and Interpreting Data"],
+                    "crosscutting_concepts": ["Cause and Effect"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 8
+                },
+                {
+                    "id": "HS-PS2-2",
+                    "description": "Use mathematical representations to support the claim that the total momentum of a system of objects is conserved when there is no net force on the system.",
+                    "cluster": "Forces and Motion",
+                    "prerequisites": ["MS-PS2-2"],
+                    "science_practices": ["Using Mathematics and Computational Thinking"],
+                    "crosscutting_concepts": ["Systems and System Models"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 8
+                },
+                {
+                    "id": "HS-PS2-3",
+                    "description": "Apply scientific and engineering ideas to design, evaluate, and refine a device that minimizes the force on a macroscopic object during a collision.",
+                    "cluster": "Forces and Motion",
+                    "prerequisites": ["MS-PS2-1", "HS-PS2-2"],
+                    "science_practices": ["Constructing Explanations and Designing Solutions"],
+                    "crosscutting_concepts": ["Cause and Effect"],
+                    "stat_mappings": ["science", "critical_thinking", "problem_solving", "technology"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 9
+                },
+                {
+                    "id": "HS-PS2-4",
+                    "description": "Use mathematical representations of Newton's Law of Gravitation and Coulomb's Law to describe and predict the gravitational and electrostatic forces between objects.",
+                    "cluster": "Types of Interactions",
+                    "prerequisites": ["MS-PS2-4", "MS-PS2-5"],
+                    "science_practices": ["Using Mathematics and Computational Thinking"],
+                    "crosscutting_concepts": ["Patterns"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 8
+                },
+                {
+                    "id": "HS-PS2-5",
+                    "description": "Plan and conduct an investigation to provide evidence that an electric current can produce a magnetic field and that a changing magnetic field can produce an electric current.",
+                    "cluster": "Types of Interactions",
+                    "prerequisites": ["MS-PS2-3", "MS-PS2-5"],
+                    "science_practices": ["Planning and Carrying Out Investigations"],
+                    "crosscutting_concepts": ["Cause and Effect"],
+                    "stat_mappings": ["science", "critical_thinking", "problem_solving"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 8
+                }
+            ]
+        },
+        {
+            "id": "PS3",
+            "name": "Energy",
+            "standards": [
+                {
+                    "id": "HS-PS3-1",
+                    "description": "Create a computational model to calculate the change in the energy of one component in a system when the change in energy of the other component(s) and energy flows in and out of the system are known.",
+                    "cluster": "Definitions of Energy",
+                    "prerequisites": ["MS-PS3-1", "MS-PS3-5"],
+                    "science_practices": ["Using Mathematics and Computational Thinking"],
+                    "crosscutting_concepts": ["Systems and System Models"],
+                    "stat_mappings": ["science", "critical_thinking", "technology"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 8
+                },
+                {
+                    "id": "HS-PS3-2",
+                    "description": "Develop and use models to illustrate that energy at the macroscopic scale can be accounted for as a combination of energy associated with the motions of particles (objects) and energy associated with the relative positions of particles (objects).",
+                    "cluster": "Definitions of Energy",
+                    "prerequisites": ["MS-PS3-1", "MS-PS3-2"],
+                    "science_practices": ["Developing and Using Models"],
+                    "crosscutting_concepts": ["Energy and Matter"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 7
+                },
+                {
+                    "id": "HS-PS3-3",
+                    "description": "Design, build, and refine a device that works within given constraints to convert one form of energy into another form of energy.",
+                    "cluster": "Conservation of Energy and Energy Transfer",
+                    "prerequisites": ["MS-PS3-3", "MS-PS3-5"],
+                    "science_practices": ["Constructing Explanations and Designing Solutions"],
+                    "crosscutting_concepts": ["Energy and Matter"],
+                    "stat_mappings": ["science", "critical_thinking", "problem_solving", "technology"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 10
+                },
+                {
+                    "id": "HS-PS3-5",
+                    "description": "Develop and use a model of two objects interacting through electric or magnetic fields to illustrate the forces between objects and the changes in energy of the objects due to the interaction.",
+                    "cluster": "Relationship Between Energy and Forces",
+                    "prerequisites": ["MS-PS2-3", "MS-PS3-2"],
+                    "science_practices": ["Developing and Using Models"],
+                    "crosscutting_concepts": ["Cause and Effect"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 7
+                }
+            ]
+        },
+        {
+            "id": "PS4",
+            "name": "Waves and Their Applications in Technologies for Information Transfer",
+            "standards": [
+                {
+                    "id": "HS-PS4-1",
+                    "description": "Use mathematical representations to support a claim regarding relationships among the frequency, wavelength, and speed of waves traveling in various media.",
+                    "cluster": "Wave Properties",
+                    "prerequisites": ["MS-PS4-1"],
+                    "science_practices": ["Using Mathematics and Computational Thinking"],
+                    "crosscutting_concepts": ["Cause and Effect"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 4,
+                    "estimated_hours": 7
+                },
+                {
+                    "id": "HS-PS4-2",
+                    "description": "Evaluate questions about the advantages of using a digital transmission and storage of information.",
+                    "cluster": "Information Technologies and Instrumentation",
+                    "prerequisites": ["MS-PS4-3"],
+                    "science_practices": ["Asking Questions"],
+                    "crosscutting_concepts": ["Stability and Change"],
+                    "stat_mappings": ["science", "critical_thinking", "technology"],
+                    "cognitive_complexity": 4,
+                    "estimated_hours": 6
+                },
+                {
+                    "id": "HS-PS4-3",
+                    "description": "Evaluate the claims, evidence, and reasoning behind the idea that electromagnetic radiation can be described either by a wave model or a particle model, and that for some situations one model is more useful than the other.",
+                    "cluster": "Electromagnetic Radiation",
+                    "prerequisites": ["MS-PS4-2"],
+                    "science_practices": ["Engaging in Argument from Evidence"],
+                    "crosscutting_concepts": ["Systems and System Models"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 8
+                },
+                {
+                    "id": "HS-PS4-4",
+                    "description": "Evaluate the validity and reliability of claims in published materials of the effects that different frequencies of electromagnetic radiation have when absorbed by matter.",
+                    "cluster": "Electromagnetic Radiation",
+                    "prerequisites": ["MS-PS4-2", "HS-PS4-3"],
+                    "science_practices": ["Obtaining, Evaluating, and Communicating Information"],
+                    "crosscutting_concepts": ["Cause and Effect"],
+                    "stat_mappings": ["science", "critical_thinking", "communication"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 7
+                },
+                {
+                    "id": "HS-PS4-5",
+                    "description": "Communicate technical information about how some technological devices use the principles of wave behavior and wave interactions with matter to transmit and capture information and energy.",
+                    "cluster": "Information Technologies and Instrumentation",
+                    "prerequisites": ["MS-PS4-3", "HS-PS4-1"],
+                    "science_practices": ["Obtaining, Evaluating, and Communicating Information"],
+                    "crosscutting_concepts": ["Cause and Effect"],
+                    "stat_mappings": ["science", "critical_thinking", "communication", "technology"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 7
+                }
+            ]
+        },
+        {
+            "id": "ETS1",
+            "name": "Engineering Design",
+            "standards": [
+                {
+                    "id": "HS-ETS1-1",
+                    "description": "Analyze a major global challenge to specify qualitative and quantitative criteria and constraints for solutions that account for societal needs and wants.",
+                    "cluster": "Engineering Design",
+                    "prerequisites": ["MS-ETS1-1"],
+                    "science_practices": ["Asking Questions and Defining Problems"],
+                    "crosscutting_concepts": ["Influence of Engineering, Technology, and Science on Society and the Natural World"],
+                    "stat_mappings": ["science", "critical_thinking", "problem_solving", "technology"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 8
+                },
+                {
+                    "id": "HS-ETS1-2",
+                    "description": "Design a solution to a complex real-world problem by breaking it down into smaller, more manageable problems that can be solved through engineering.",
+                    "cluster": "Engineering Design",
+                    "prerequisites": ["MS-ETS1-2"],
+                    "science_practices": ["Constructing Explanations and Designing Solutions"],
+                    "crosscutting_concepts": ["Systems and System Models"],
+                    "stat_mappings": ["science", "critical_thinking", "problem_solving", "technology"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 9
+                },
+                {
+                    "id": "HS-ETS1-3",
+                    "description": "Evaluate a solution to a complex real-world problem based on prioritized criteria and trade-offs that account for a range of constraints, including cost, safety, reliability, and aesthetics as well as possible social, cultural, and environmental impacts.",
+                    "cluster": "Engineering Design",
+                    "prerequisites": ["MS-ETS1-2", "MS-ETS1-3"],
+                    "science_practices": ["Constructing Explanations and Designing Solutions"],
+                    "crosscutting_concepts": ["Influence of Engineering, Technology, and Science on Society and the Natural World"],
+                    "stat_mappings": ["science", "critical_thinking", "problem_solving", "technology"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 9
+                },
+                {
+                    "id": "HS-ETS1-4",
+                    "description": "Use a computer simulation to model the impact of proposed solutions to a complex real-world problem with numerous criteria and constraints on interactions within and between systems relevant to the problem.",
+                    "cluster": "Engineering Design",
+                    "prerequisites": ["MS-ETS1-4"],
+                    "science_practices": ["Using Mathematics and Computational Thinking"],
+                    "crosscutting_concepts": ["Systems and System Models"],
+                    "stat_mappings": ["science", "critical_thinking", "problem_solving", "technology"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 9
+                }
+            ]
+        }
+    ]
+}

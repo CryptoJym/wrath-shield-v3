@@ -1,0 +1,1131 @@
+{
+  "grade": "1",
+  "subject": "Mathematics",
+  "version": "1.0.0",
+  "created_at": "2025-01-08",
+  "items": [
+    {
+      "id": "math-g1-oa-a-1-001",
+      "standard_id": "1.OA.A.1",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Jake has 8 stickers. He gets 5 more.\n🌟🌟🌟🌟🌟🌟🌟🌟 + 🌟🌟🌟🌟🌟\nHow many stickers does Jake have now?",
+      "options": ["11", "12", "13", "14"],
+      "correct_answer": "13",
+      "explanation": "8 + 5 = 13. Jake now has 13 stickers.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 25
+    },
+    {
+      "id": "math-g1-oa-a-1-002",
+      "standard_id": "1.OA.A.1",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "There are 14 birds. 6 fly away.\n🐦🐦🐦🐦🐦🐦🐦🐦🐦🐦🐦🐦🐦🐦\nHow many birds are left?",
+      "options": ["6", "7", "8", "9"],
+      "correct_answer": "8",
+      "explanation": "14 - 6 = 8. There are 8 birds left.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 25
+    },
+    {
+      "id": "math-g1-oa-a-1-003",
+      "standard_id": "1.OA.A.1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Emma has 7 red apples and 9 green apples.\n🍎🍎🍎🍎🍎🍎🍎 🍏🍏🍏🍏🍏🍏🍏🍏🍏\nHow many apples does Emma have in all?",
+      "options": ["14", "15", "16", "17"],
+      "correct_answer": "16",
+      "explanation": "7 + 9 = 16. Emma has 16 apples altogether.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 30
+    },
+    {
+      "id": "math-g1-oa-a-1-004",
+      "standard_id": "1.OA.A.1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Sam has some toys. He has 5 more toys than Ben.\nBen has 8 toys.\nHow many toys does Sam have?",
+      "options": ["3", "11", "13", "15"],
+      "correct_answer": "13",
+      "explanation": "Sam has 5 more than Ben's 8 toys: 8 + 5 = 13 toys.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 35
+    },
+    {
+      "id": "math-g1-oa-a-2-001",
+      "standard_id": "1.OA.A.2",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Add three numbers:\n4 + 5 + 6 = ?",
+      "options": ["13", "14", "15", "16"],
+      "correct_answer": "15",
+      "explanation": "4 + 5 = 9, then 9 + 6 = 15.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 30
+    },
+    {
+      "id": "math-g1-oa-a-2-002",
+      "standard_id": "1.OA.A.2",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Lily found 3 shells 🐚🐚🐚\nThen 4 more shells 🐚🐚🐚🐚\nThen 5 more shells 🐚🐚🐚🐚🐚\nHow many shells in all?",
+      "options": ["10", "11", "12", "13"],
+      "correct_answer": "12",
+      "explanation": "3 + 4 + 5 = 12 shells in all.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 35
+    },
+    {
+      "id": "math-g1-oa-a-2-003",
+      "standard_id": "1.OA.A.2",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "7 + 2 + 8 = ?",
+      "options": ["15", "16", "17", "18"],
+      "correct_answer": "17",
+      "explanation": "7 + 2 = 9, then 9 + 8 = 17. Or: 7 + 8 = 15, then 15 + 2 = 17.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 30
+    },
+    {
+      "id": "math-g1-oa-b-3-001",
+      "standard_id": "1.OA.B.3",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "If 5 + 7 = 12,\nwhat is 7 + 5?",
+      "options": ["10", "11", "12", "13"],
+      "correct_answer": "12",
+      "explanation": "The order doesn't matter when adding! 5 + 7 = 7 + 5 = 12.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": -1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 15
+    },
+    {
+      "id": "math-g1-oa-b-3-002",
+      "standard_id": "1.OA.B.3",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Which shows an easier way to add?\n8 + 6 = ?",
+      "options": ["8 + 2 + 4 = 14", "8 + 3 + 3 = 14", "10 + 4 = 14", "6 + 6 + 2 = 14"],
+      "correct_answer": "10 + 4 = 14",
+      "explanation": "Making a 10 is easy! 8 + 2 = 10, and 6 - 2 = 4. So 8 + 6 = 10 + 4 = 14.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 30
+    },
+    {
+      "id": "math-g1-oa-b-3-003",
+      "standard_id": "1.OA.B.3",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "(3 + 4) + 6 = 3 + (4 + ?)\nWhat number goes in the box?",
+      "options": ["3", "4", "6", "7"],
+      "correct_answer": "6",
+      "explanation": "We can group numbers differently: (3 + 4) + 6 = 3 + (4 + 6). The 6 stays the same.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 25
+    },
+    {
+      "id": "math-g1-oa-b-4-001",
+      "standard_id": "1.OA.B.4",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "12 - 7 = ?\nThink: 7 + ___ = 12",
+      "options": ["4", "5", "6", "7"],
+      "correct_answer": "5",
+      "explanation": "7 + 5 = 12, so 12 - 7 = 5. Subtraction is finding the missing addend!",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 25
+    },
+    {
+      "id": "math-g1-oa-b-4-002",
+      "standard_id": "1.OA.B.4",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "15 - 8 = ?\nThink: 8 + ___ = 15",
+      "options": ["5", "6", "7", "8"],
+      "correct_answer": "7",
+      "explanation": "8 + 7 = 15, so 15 - 8 = 7.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 25
+    },
+    {
+      "id": "math-g1-oa-b-4-003",
+      "standard_id": "1.OA.B.4",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "If 6 + 9 = 15,\nwhat is 15 - 9?",
+      "options": ["5", "6", "7", "8"],
+      "correct_answer": "6",
+      "explanation": "Addition and subtraction are related! If 6 + 9 = 15, then 15 - 9 = 6.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": -1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 20
+    },
+    {
+      "id": "math-g1-oa-c-5-001",
+      "standard_id": "1.OA.C.5",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Start at 9. Count on 3.\n9 → 10 → 11 → 12\nWhat is 9 + 3?",
+      "options": ["11", "12", "13", "14"],
+      "correct_answer": "12",
+      "explanation": "Count on from 9: \"10, 11, 12\". That's 3 counts, so 9 + 3 = 12.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 20
+    },
+    {
+      "id": "math-g1-oa-c-5-002",
+      "standard_id": "1.OA.C.5",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Start at 14. Count back 3.\n14 → 13 → 12 → 11\nWhat is 14 - 3?",
+      "options": ["10", "11", "12", "13"],
+      "correct_answer": "11",
+      "explanation": "Count back from 14: \"13, 12, 11\". That's 3 counts back, so 14 - 3 = 11.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 20
+    },
+    {
+      "id": "math-g1-oa-c-5-003",
+      "standard_id": "1.OA.C.5",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "7 + 4 = ?\nCount on from 7.",
+      "options": ["10", "11", "12", "13"],
+      "correct_answer": "11",
+      "explanation": "Start at 7, count on 4: \"8, 9, 10, 11\". So 7 + 4 = 11.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 20
+    },
+    {
+      "id": "math-g1-oa-c-6-001",
+      "standard_id": "1.OA.C.6",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "8 + 7 = ?",
+      "options": ["13", "14", "15", "16"],
+      "correct_answer": "15",
+      "explanation": "8 + 7 = 15. You can think: 8 + 2 = 10, and 7 - 2 = 5, so 10 + 5 = 15.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 15
+    },
+    {
+      "id": "math-g1-oa-c-6-002",
+      "standard_id": "1.OA.C.6",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "16 - 9 = ?",
+      "options": ["5", "6", "7", "8"],
+      "correct_answer": "7",
+      "explanation": "16 - 9 = 7. Think: 9 + 7 = 16.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 15
+    },
+    {
+      "id": "math-g1-oa-c-6-003",
+      "standard_id": "1.OA.C.6",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "5 + 4 = ?",
+      "options": ["7", "8", "9", "10"],
+      "correct_answer": "9",
+      "explanation": "5 + 4 = 9. This is a fact within 10 to know by heart!",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.15,
+      "time_estimate_seconds": 10
+    },
+    {
+      "id": "math-g1-oa-c-6-004",
+      "standard_id": "1.OA.C.6",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "10 - 6 = ?",
+      "options": ["3", "4", "5", "6"],
+      "correct_answer": "4",
+      "explanation": "10 - 6 = 4. Know your facts within 10!",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.15,
+      "time_estimate_seconds": 10
+    },
+    {
+      "id": "math-g1-oa-d-7-001",
+      "standard_id": "1.OA.D.7",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Is this equation TRUE or FALSE?\n5 + 3 = 8",
+      "options": ["TRUE", "FALSE"],
+      "correct_answer": "TRUE",
+      "explanation": "5 + 3 does equal 8, so this equation is TRUE.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.15,
+      "time_estimate_seconds": 10
+    },
+    {
+      "id": "math-g1-oa-d-7-002",
+      "standard_id": "1.OA.D.7",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Is this equation TRUE or FALSE?\n7 = 10 - 4",
+      "options": ["TRUE", "FALSE"],
+      "correct_answer": "FALSE",
+      "explanation": "10 - 4 = 6, not 7. So this equation is FALSE.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 15
+    },
+    {
+      "id": "math-g1-oa-d-7-003",
+      "standard_id": "1.OA.D.7",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Is this equation TRUE or FALSE?\n6 + 5 = 5 + 6",
+      "options": ["TRUE", "FALSE"],
+      "correct_answer": "TRUE",
+      "explanation": "Both sides equal 11. The order of adding doesn't matter!",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": -1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 20
+    },
+    {
+      "id": "math-g1-oa-d-8-001",
+      "standard_id": "1.OA.D.8",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Find the missing number:\n___ + 5 = 12",
+      "options": ["5", "6", "7", "8"],
+      "correct_answer": "7",
+      "explanation": "What plus 5 equals 12? 7 + 5 = 12, so the missing number is 7.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 25
+    },
+    {
+      "id": "math-g1-oa-d-8-002",
+      "standard_id": "1.OA.D.8",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Find the missing number:\n14 - ___ = 8",
+      "options": ["4", "5", "6", "7"],
+      "correct_answer": "6",
+      "explanation": "14 minus what equals 8? 14 - 6 = 8, so the missing number is 6.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 30
+    },
+    {
+      "id": "math-g1-oa-d-8-003",
+      "standard_id": "1.OA.D.8",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Find the missing number:\n9 + 6 = ___",
+      "options": ["13", "14", "15", "16"],
+      "correct_answer": "15",
+      "explanation": "9 + 6 = 15. The missing number is the answer.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 15
+    },
+    {
+      "id": "math-g1-nbt-a-1-001",
+      "standard_id": "1.NBT.A.1",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "What number comes after 99?",
+      "options": ["98", "100", "101", "109"],
+      "correct_answer": "100",
+      "explanation": "When counting, after 99 comes 100.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 15
+    },
+    {
+      "id": "math-g1-nbt-a-1-002",
+      "standard_id": "1.NBT.A.1",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Count forward. What comes next?\n115, 116, 117, ___",
+      "options": ["118", "119", "120", "108"],
+      "correct_answer": "118",
+      "explanation": "Counting forward from 117, the next number is 118.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.2,
+      "time_estimate_seconds": 15
+    },
+    {
+      "id": "math-g1-nbt-a-1-003",
+      "standard_id": "1.NBT.A.1",
+      "dok_level": 2,
+      "question_type": "drag_drop",
+      "question": "Put these numbers in order from smallest to biggest.",
+      "items_to_order": ["108", "89", "120", "95"],
+      "correct_order": ["89", "95", "108", "120"],
+      "explanation": "From smallest to biggest: 89, 95, 108, 120.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 40
+    },
+    {
+      "id": "math-g1-nbt-b-2-001",
+      "standard_id": "1.NBT.B.2",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "How many tens and ones are in 45?\n🔟🔟🔟🔟 🔵🔵🔵🔵🔵",
+      "options": ["4 tens and 5 ones", "5 tens and 4 ones", "40 tens and 5 ones", "45 ones"],
+      "correct_answer": "4 tens and 5 ones",
+      "explanation": "45 = 4 tens + 5 ones. The 4 is in the tens place, the 5 is in the ones place.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": -1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 20
+    },
+    {
+      "id": "math-g1-nbt-b-2-002",
+      "standard_id": "1.NBT.B.2",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "What number has 7 tens and 3 ones?",
+      "options": ["37", "73", "703", "370"],
+      "correct_answer": "73",
+      "explanation": "7 tens = 70, plus 3 ones = 73.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 20
+    },
+    {
+      "id": "math-g1-nbt-b-2-003",
+      "standard_id": "1.NBT.B.2",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "In the number 58, what does the 5 mean?",
+      "options": ["5 ones", "5 tens", "50 tens", "58 ones"],
+      "correct_answer": "5 tens",
+      "explanation": "The 5 is in the tens place, so it means 5 tens (or 50).",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": -1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 20
+    },
+    {
+      "id": "math-g1-nbt-b-3-001",
+      "standard_id": "1.NBT.B.3",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Compare: 45 ___ 54",
+      "options": [">", "<", "="],
+      "correct_answer": "<",
+      "explanation": "45 is less than 54. Look at the tens: 4 tens < 5 tens.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 15
+    },
+    {
+      "id": "math-g1-nbt-b-3-002",
+      "standard_id": "1.NBT.B.3",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Compare: 67 ___ 63",
+      "options": [">", "<", "="],
+      "correct_answer": ">",
+      "explanation": "67 > 63. Same tens (6), but 7 ones > 3 ones.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 15
+    },
+    {
+      "id": "math-g1-nbt-b-3-003",
+      "standard_id": "1.NBT.B.3",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Which symbol makes this true?\n82 ___ 28",
+      "options": [">", "<", "="],
+      "correct_answer": ">",
+      "explanation": "82 > 28. Compare tens first: 8 tens > 2 tens.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 20
+    },
+    {
+      "id": "math-g1-nbt-c-4-001",
+      "standard_id": "1.NBT.C.4",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "35 + 4 = ?",
+      "options": ["37", "38", "39", "40"],
+      "correct_answer": "39",
+      "explanation": "35 + 4 = 39. Add the ones: 5 + 4 = 9. Keep the 3 tens.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.2,
+      "time_estimate_seconds": 15
+    },
+    {
+      "id": "math-g1-nbt-c-4-002",
+      "standard_id": "1.NBT.C.4",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "27 + 40 = ?",
+      "options": ["57", "67", "77", "31"],
+      "correct_answer": "67",
+      "explanation": "27 + 40 = 67. Add the tens: 2 tens + 4 tens = 6 tens = 60. Then 60 + 7 = 67.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 20
+    },
+    {
+      "id": "math-g1-nbt-c-4-003",
+      "standard_id": "1.NBT.C.4",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "46 + 8 = ?",
+      "options": ["52", "53", "54", "55"],
+      "correct_answer": "54",
+      "explanation": "46 + 8 = 54. 6 + 8 = 14, so we get 5 tens and 4 ones.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 25
+    },
+    {
+      "id": "math-g1-nbt-c-5-001",
+      "standard_id": "1.NBT.C.5",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "What is 10 more than 43?",
+      "options": ["33", "44", "53", "54"],
+      "correct_answer": "53",
+      "explanation": "10 more than 43 is 53. Add 1 to the tens: 4 tens → 5 tens.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.2,
+      "time_estimate_seconds": 15
+    },
+    {
+      "id": "math-g1-nbt-c-5-002",
+      "standard_id": "1.NBT.C.5",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "What is 10 less than 72?",
+      "options": ["52", "61", "62", "71"],
+      "correct_answer": "62",
+      "explanation": "10 less than 72 is 62. Subtract 1 from tens: 7 tens → 6 tens.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.2,
+      "time_estimate_seconds": 15
+    },
+    {
+      "id": "math-g1-nbt-c-5-003",
+      "standard_id": "1.NBT.C.5",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Start at 58. Go 10 more, then 10 more.\nWhere do you land?",
+      "options": ["68", "70", "78", "80"],
+      "correct_answer": "78",
+      "explanation": "58 + 10 = 68, then 68 + 10 = 78.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 25
+    },
+    {
+      "id": "math-g1-nbt-c-6-001",
+      "standard_id": "1.NBT.C.6",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "70 - 30 = ?",
+      "options": ["30", "40", "50", "100"],
+      "correct_answer": "40",
+      "explanation": "70 - 30 = 40. Think: 7 tens - 3 tens = 4 tens = 40.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.2,
+      "time_estimate_seconds": 15
+    },
+    {
+      "id": "math-g1-nbt-c-6-002",
+      "standard_id": "1.NBT.C.6",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "90 - 50 = ?",
+      "options": ["30", "40", "45", "50"],
+      "correct_answer": "40",
+      "explanation": "90 - 50 = 40. Think: 9 tens - 5 tens = 4 tens = 40.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.2,
+      "time_estimate_seconds": 15
+    },
+    {
+      "id": "math-g1-nbt-c-6-003",
+      "standard_id": "1.NBT.C.6",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "80 - 80 = ?",
+      "options": ["0", "8", "16", "80"],
+      "correct_answer": "0",
+      "explanation": "80 - 80 = 0. When we subtract a number from itself, we get 0.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": -1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.2,
+      "time_estimate_seconds": 15
+    },
+    {
+      "id": "math-g1-md-a-1-001",
+      "standard_id": "1.MD.A.1",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Look at the pencils:\nA: ✏️✏️✏️✏️✏️✏️\nB: ✏️✏️✏️✏️\nC: ✏️✏️✏️✏️✏️✏️✏️✏️\nPut them in order from shortest to longest.",
+      "options": ["A, B, C", "B, A, C", "C, A, B", "B, C, A"],
+      "correct_answer": "B, A, C",
+      "explanation": "B is shortest (4), A is medium (6), C is longest (8).",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 30
+    },
+    {
+      "id": "math-g1-md-a-1-002",
+      "standard_id": "1.MD.A.1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "String A is longer than String B.\nString B is longer than String C.\nWhich string is the shortest?",
+      "options": ["String A", "String B", "String C", "They are the same"],
+      "correct_answer": "String C",
+      "explanation": "If A > B and B > C, then C is the shortest of all three.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 30
+    },
+    {
+      "id": "math-g1-md-a-1-003",
+      "standard_id": "1.MD.A.1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "The blue ribbon is shorter than the red ribbon.\nThe red ribbon is shorter than the yellow ribbon.\nWhich ribbon is longest?",
+      "options": ["Blue", "Red", "Yellow", "They are equal"],
+      "correct_answer": "Yellow",
+      "explanation": "Blue < Red < Yellow, so Yellow is the longest.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 30
+    },
+    {
+      "id": "math-g1-md-a-2-001",
+      "standard_id": "1.MD.A.2",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "How long is this line?\n📎📎📎📎📎\n(Measured in paper clips)",
+      "options": ["3 paper clips", "4 paper clips", "5 paper clips", "6 paper clips"],
+      "correct_answer": "5 paper clips",
+      "explanation": "Count the paper clips: 1, 2, 3, 4, 5. The line is 5 paper clips long.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.2,
+      "time_estimate_seconds": 15
+    },
+    {
+      "id": "math-g1-md-a-2-002",
+      "standard_id": "1.MD.A.2",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "A book is 8 cubes long.\nA pencil is 6 cubes long.\nHow much longer is the book?",
+      "options": ["1 cube", "2 cubes", "3 cubes", "14 cubes"],
+      "correct_answer": "2 cubes",
+      "explanation": "8 - 6 = 2. The book is 2 cubes longer than the pencil.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 25
+    },
+    {
+      "id": "math-g1-md-a-2-003",
+      "standard_id": "1.MD.A.2",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "To measure a pencil, you line up 7 small cubes end to end.\nHow long is the pencil?",
+      "options": ["6 cubes", "7 cubes", "8 cubes", "14 cubes"],
+      "correct_answer": "7 cubes",
+      "explanation": "If 7 cubes fit end to end, the pencil is 7 cubes long.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 20
+    },
+    {
+      "id": "math-g1-md-b-3-001",
+      "standard_id": "1.MD.B.3",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "What time does this clock show?\n🕐 (Clock showing 1:00)",
+      "options": ["12:00", "1:00", "1:30", "2:00"],
+      "correct_answer": "1:00",
+      "explanation": "The hour hand points to 1 and the minute hand points to 12. It's 1:00.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.2,
+      "time_estimate_seconds": 15
+    },
+    {
+      "id": "math-g1-md-b-3-002",
+      "standard_id": "1.MD.B.3",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "What time does this clock show?\n🕧 (Clock showing 12:30)",
+      "options": ["12:00", "12:30", "6:00", "6:30"],
+      "correct_answer": "12:30",
+      "explanation": "The hour hand is between 12 and 1, and minute hand points to 6. It's 12:30 (half past 12).",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 20
+    },
+    {
+      "id": "math-g1-md-b-3-003",
+      "standard_id": "1.MD.B.3",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "It's 3:00 now. 🕒\nIn half an hour, what time will it be?",
+      "options": ["3:00", "3:30", "4:00", "4:30"],
+      "correct_answer": "3:30",
+      "explanation": "Half an hour after 3:00 is 3:30 (half past 3).",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 25
+    },
+    {
+      "id": "math-g1-md-b-4-001",
+      "standard_id": "1.MD.B.4",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Favorite Fruits:\n🍎 Apple: 5 kids\n🍌 Banana: 3 kids\n🍊 Orange: 4 kids\nHow many kids in all?",
+      "options": ["10", "11", "12", "13"],
+      "correct_answer": "12",
+      "explanation": "5 + 3 + 4 = 12 kids in all.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 25
+    },
+    {
+      "id": "math-g1-md-b-4-002",
+      "standard_id": "1.MD.B.4",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Favorite Colors:\n🔴 Red: 6\n🔵 Blue: 8\n🟢 Green: 4\nHow many more like Blue than Green?",
+      "options": ["2", "3", "4", "5"],
+      "correct_answer": "4",
+      "explanation": "8 - 4 = 4. Four more kids like blue than green.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 30
+    },
+    {
+      "id": "math-g1-md-b-4-003",
+      "standard_id": "1.MD.B.4",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Pets at Home:\n🐕 Dogs: 7\n🐈 Cats: 5\n🐟 Fish: 3\nWhich pet do most kids have?",
+      "options": ["Dogs", "Cats", "Fish", "They are equal"],
+      "correct_answer": "Dogs",
+      "explanation": "7 > 5 > 3. Dogs have the most votes (7).",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 25
+    },
+    {
+      "id": "math-g1-g-a-1-001",
+      "standard_id": "1.G.A.1",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Which is a defining attribute of a triangle?",
+      "options": ["It is blue", "It has 3 sides", "It is small", "It is pointing up"],
+      "correct_answer": "It has 3 sides",
+      "explanation": "A triangle ALWAYS has 3 sides. Color, size, and direction can change.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": -1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 20
+    },
+    {
+      "id": "math-g1-g-a-1-002",
+      "standard_id": "1.G.A.1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "A rectangle must have:\n(Choose the defining attribute)",
+      "options": ["Red color", "4 corners and 4 sides", "Be horizontal", "Be small"],
+      "correct_answer": "4 corners and 4 sides",
+      "explanation": "A rectangle always has 4 corners and 4 sides. Color, size, and position don't matter.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 25
+    },
+    {
+      "id": "math-g1-g-a-1-003",
+      "standard_id": "1.G.A.1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Which is NOT a defining attribute of a circle?",
+      "options": ["It is round", "It has no corners", "It is red", "It is curved"],
+      "correct_answer": "It is red",
+      "explanation": "Color is not a defining attribute. A circle can be any color! But it must be round with no corners.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 25
+    },
+    {
+      "id": "math-g1-g-a-2-001",
+      "standard_id": "1.G.A.2",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Put 2 squares together side by side.\n⬛⬛\nWhat shape do you make?",
+      "options": ["Square", "Rectangle", "Triangle", "Circle"],
+      "correct_answer": "Rectangle",
+      "explanation": "Two squares side by side make a rectangle that is longer than it is tall.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 20
+    },
+    {
+      "id": "math-g1-g-a-2-002",
+      "standard_id": "1.G.A.2",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "You have a rectangle. You cut it in half with a diagonal line.\nWhat two shapes do you get?",
+      "options": ["2 squares", "2 triangles", "2 circles", "2 rectangles"],
+      "correct_answer": "2 triangles",
+      "explanation": "Cutting a rectangle diagonally gives you 2 triangles.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 25
+    },
+    {
+      "id": "math-g1-g-a-2-003",
+      "standard_id": "1.G.A.2",
+      "dok_level": 3,
+      "question_type": "multiple_choice",
+      "question": "How can you use 2 half-circles to make a new shape?",
+      "options": ["Put them together to make a circle", "Make a square", "Make a triangle", "Make a rectangle"],
+      "correct_answer": "Put them together to make a circle",
+      "explanation": "Two half-circles put together make a whole circle!",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 20
+    },
+    {
+      "id": "math-g1-g-a-3-001",
+      "standard_id": "1.G.A.3",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "A pizza is cut into 2 equal parts.\nEach part is called a:",
+      "options": ["Whole", "Half", "Fourth", "Third"],
+      "correct_answer": "Half",
+      "explanation": "When something is divided into 2 equal parts, each part is called a half.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.2,
+      "time_estimate_seconds": 15
+    },
+    {
+      "id": "math-g1-g-a-3-002",
+      "standard_id": "1.G.A.3",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "A square is divided into 4 equal parts.\nEach part is called a:",
+      "options": ["Half", "Third", "Fourth or quarter", "Whole"],
+      "correct_answer": "Fourth or quarter",
+      "explanation": "When divided into 4 equal parts, each part is a fourth (also called a quarter).",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 15
+    },
+    {
+      "id": "math-g1-g-a-3-003",
+      "standard_id": "1.G.A.3",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Sam ate half of a cookie.\nHow much of the cookie is left?",
+      "options": ["None", "Half", "The whole cookie", "Two halves"],
+      "correct_answer": "Half",
+      "explanation": "A cookie has 2 halves. If Sam ate one half, there is still one half left.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 20
+    }
+  ],
+  "metadata": {
+    "total_items": 63,
+    "standards_covered": [
+      "1.OA.A.1", "1.OA.A.2", "1.OA.B.3", "1.OA.B.4", "1.OA.C.5", "1.OA.C.6", "1.OA.D.7", "1.OA.D.8",
+      "1.NBT.A.1", "1.NBT.B.2", "1.NBT.B.3", "1.NBT.C.4", "1.NBT.C.5", "1.NBT.C.6",
+      "1.MD.A.1", "1.MD.A.2", "1.MD.B.3", "1.MD.B.4",
+      "1.G.A.1", "1.G.A.2", "1.G.A.3"
+    ],
+    "dok_distribution": {
+      "dok_1": 28,
+      "dok_2": 33,
+      "dok_3": 2
+    },
+    "question_type_distribution": {
+      "multiple_choice": 62,
+      "drag_drop": 1
+    }
+  }
+}

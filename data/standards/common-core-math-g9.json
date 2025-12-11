@@ -1,0 +1,253 @@
+{
+    "grade": "9",
+    "subject": "Mathematics",
+    "course": "Algebra I",
+    "domains": [
+        {
+            "id": "N-RN",
+            "name": "The Real Number System",
+            "standards": [
+                {
+                    "id": "HSN-RN.A.1",
+                    "description": "Explain how the definition of the meaning of rational exponents follows from extending the properties of integer exponents to those values, allowing for a notation for radicals in terms of rational exponents.",
+                    "prerequisites": ["8.EE.A.1", "8.EE.A.2"],
+                    "cluster": "Extend the properties of exponents to rational exponents."
+                },
+                {
+                    "id": "HSN-RN.A.2",
+                    "description": "Rewrite expressions involving radicals and rational exponents using the properties of exponents.",
+                    "prerequisites": ["HSN-RN.A.1"],
+                    "cluster": "Extend the properties of exponents to rational exponents."
+                },
+                {
+                    "id": "HSN-RN.B.3",
+                    "description": "Explain why the sum or product of two rational numbers is rational; that the sum of a rational number and an irrational number is irrational; and that the product of a nonzero rational number and an irrational number is irrational.",
+                    "prerequisites": ["8.NS.A.1", "8.NS.A.2"],
+                    "cluster": "Use properties of rational and irrational numbers."
+                }
+            ]
+        },
+        {
+            "id": "A-SSE",
+            "name": "Seeing Structure in Expressions",
+            "standards": [
+                {
+                    "id": "HSA-SSE.A.1",
+                    "description": "Interpret expressions that represent a quantity in terms of its context.",
+                    "prerequisites": ["8.EE.A.1", "8.EE.A.2"],
+                    "cluster": "Interpret the structure of expressions."
+                },
+                {
+                    "id": "HSA-SSE.A.2",
+                    "description": "Use the structure of an expression to identify ways to rewrite it. For example, see x^4 - y^4 as (x^2)^2 - (y^2)^2, thus recognizing it as a difference of squares that can be factored as (x^2 - y^2)(x^2 + y^2).",
+                    "prerequisites": ["HSA-SSE.A.1"],
+                    "cluster": "Interpret the structure of expressions."
+                },
+                {
+                    "id": "HSA-SSE.B.3",
+                    "description": "Choose and produce an equivalent form of an expression to reveal and explain properties of the quantity represented by the expression.",
+                    "prerequisites": ["HSA-SSE.A.2"],
+                    "cluster": "Write expressions in equivalent forms to solve problems."
+                }
+            ]
+        },
+        {
+            "id": "A-APR",
+            "name": "Arithmetic with Polynomials and Rational Expressions",
+            "standards": [
+                {
+                    "id": "HSA-APR.A.1",
+                    "description": "Understand that polynomials form a system analogous to the integers, namely, they are closed under the operations of addition, subtraction, and multiplication; add, subtract, and multiply polynomials.",
+                    "prerequisites": ["8.EE.A.1", "HSA-SSE.A.1"],
+                    "cluster": "Perform arithmetic operations on polynomials."
+                }
+            ]
+        },
+        {
+            "id": "A-CED",
+            "name": "Creating Equations",
+            "standards": [
+                {
+                    "id": "HSA-CED.A.1",
+                    "description": "Create equations and inequalities in one variable and use them to solve problems. Include equations arising from linear and quadratic functions, and simple rational and exponential functions.",
+                    "prerequisites": ["8.EE.C.7", "8.F.A.1"],
+                    "cluster": "Create equations that describe numbers or relationships."
+                },
+                {
+                    "id": "HSA-CED.A.2",
+                    "description": "Create equations in two or more variables to represent relationships between quantities; graph equations on coordinate axes with labels and scales.",
+                    "prerequisites": ["8.EE.B.6", "8.F.B.4"],
+                    "cluster": "Create equations that describe numbers or relationships."
+                },
+                {
+                    "id": "HSA-CED.A.3",
+                    "description": "Represent constraints by equations or inequalities, and by systems of equations and/or inequalities, and interpret solutions as viable or nonviable options in a modeling context.",
+                    "prerequisites": ["8.EE.C.8", "HSA-CED.A.1"],
+                    "cluster": "Create equations that describe numbers or relationships."
+                },
+                {
+                    "id": "HSA-CED.A.4",
+                    "description": "Rearrange formulas to highlight a quantity of interest, using the same reasoning as in solving equations.",
+                    "prerequisites": ["8.EE.C.7", "HSA-CED.A.1"],
+                    "cluster": "Create equations that describe numbers or relationships."
+                }
+            ]
+        },
+        {
+            "id": "A-REI",
+            "name": "Reasoning with Equations and Inequalities",
+            "standards": [
+                {
+                    "id": "HSA-REI.A.1",
+                    "description": "Explain each step in solving a simple equation as following from the equality of numbers asserted at the previous step, starting from the assumption that the original equation has a solution. Construct a viable argument to justify a solution method.",
+                    "prerequisites": ["8.EE.C.7"],
+                    "cluster": "Understand solving equations as a process of reasoning and explain the reasoning."
+                },
+                {
+                    "id": "HSA-REI.B.3",
+                    "description": "Solve linear equations and inequalities in one variable, including equations with coefficients represented by letters.",
+                    "prerequisites": ["HSA-REI.A.1"],
+                    "cluster": "Solve equations and inequalities in one variable."
+                },
+                {
+                    "id": "HSA-REI.B.4",
+                    "description": "Solve quadratic equations in one variable.",
+                    "prerequisites": ["HSA-REI.B.3", "HSA-SSE.B.3"],
+                    "cluster": "Solve equations and inequalities in one variable."
+                },
+                {
+                    "id": "HSA-REI.C.5",
+                    "description": "Prove that, given a system of two equations in two variables, replacing one equation by the sum of that equation and a multiple of the other produces a system with the same solutions.",
+                    "prerequisites": ["8.EE.C.8"],
+                    "cluster": "Solve systems of equations."
+                },
+                {
+                    "id": "HSA-REI.C.6",
+                    "description": "Solve systems of linear equations exactly and approximately (e.g., with graphs), focusing on pairs of linear equations in two variables.",
+                    "prerequisites": ["HSA-REI.C.5", "8.EE.C.8"],
+                    "cluster": "Solve systems of equations."
+                },
+                {
+                    "id": "HSA-REI.D.10",
+                    "description": "Understand that the graph of an equation in two variables is the set of all its solutions plotted in the coordinate plane, often forming a curve (which could be a line).",
+                    "prerequisites": ["8.F.A.1", "8.EE.B.6"],
+                    "cluster": "Represent and solve equations and inequalities graphically."
+                },
+                {
+                    "id": "HSA-REI.D.11",
+                    "description": "Explain why the x-coordinates of the points where the graphs of the equations y = f(x) and y = g(x) intersect are the solutions of the equation f(x) = g(x); find the solutions approximately, e.g., using technology to graph the functions, make tables of values, or find successive approximations.",
+                    "prerequisites": ["HSA-REI.D.10", "HSA-REI.C.6"],
+                    "cluster": "Represent and solve equations and inequalities graphically."
+                },
+                {
+                    "id": "HSA-REI.D.12",
+                    "description": "Graph the solutions to a linear inequality in two variables as a half-plane (excluding the boundary in the case of a strict inequality), and graph the solution set to a system of linear inequalities in two variables as the intersection of the corresponding half-planes.",
+                    "prerequisites": ["HSA-REI.D.10", "HSA-CED.A.3"],
+                    "cluster": "Represent and solve equations and inequalities graphically."
+                }
+            ]
+        },
+        {
+            "id": "F-IF",
+            "name": "Interpreting Functions",
+            "standards": [
+                {
+                    "id": "HSF-IF.A.1",
+                    "description": "Understand that a function from one set (called the domain) to another set (called the range) assigns to each element of the domain exactly one element of the range. If f is a function and x is an element of its domain, then f(x) denotes the output of f corresponding to the input x. The graph of f is the graph of the equation y = f(x).",
+                    "prerequisites": ["8.F.A.1"],
+                    "cluster": "Understand the concept of a function and use function notation."
+                },
+                {
+                    "id": "HSF-IF.A.2",
+                    "description": "Use function notation, evaluate functions for inputs in their domains, and interpret statements that use function notation in terms of a context.",
+                    "prerequisites": ["HSF-IF.A.1"],
+                    "cluster": "Understand the concept of a function and use function notation."
+                },
+                {
+                    "id": "HSF-IF.A.3",
+                    "description": "Recognize that sequences are functions, sometimes defined recursively, whose domain is a subset of the integers.",
+                    "prerequisites": ["HSF-IF.A.1"],
+                    "cluster": "Understand the concept of a function and use function notation."
+                },
+                {
+                    "id": "HSF-IF.B.4",
+                    "description": "For a function that models a relationship between two quantities, interpret key features of graphs and tables in terms of the quantities, and sketch graphs showing key features given a verbal description of the relationship.",
+                    "prerequisites": ["8.F.B.5", "HSF-IF.A.2"],
+                    "cluster": "Interpret functions that arise in applications in terms of the context."
+                },
+                {
+                    "id": "HSF-IF.B.5",
+                    "description": "Relate the domain of a function to its graph and, where applicable, to the quantitative relationship it describes.",
+                    "prerequisites": ["HSF-IF.A.1", "HSF-IF.B.4"],
+                    "cluster": "Interpret functions that arise in applications in terms of the context."
+                },
+                {
+                    "id": "HSF-IF.B.6",
+                    "description": "Calculate and interpret the average rate of change of a function (presented symbolically or as a table) over a specified interval. Estimate the rate of change from a graph.",
+                    "prerequisites": ["8.F.B.4", "HSF-IF.B.4"],
+                    "cluster": "Interpret functions that arise in applications in terms of the context."
+                },
+                {
+                    "id": "HSF-IF.C.7",
+                    "description": "Graph functions expressed symbolically and show key features of the graph, by hand in simple cases and using technology for more complicated cases.",
+                    "prerequisites": ["HSF-IF.B.4", "HSF-IF.B.5"],
+                    "cluster": "Analyze functions using different representations."
+                },
+                {
+                    "id": "HSF-IF.C.9",
+                    "description": "Compare properties of two functions each represented in a different way (algebraically, graphically, numerically in tables, or by verbal descriptions).",
+                    "prerequisites": ["8.F.A.2", "HSF-IF.C.7"],
+                    "cluster": "Analyze functions using different representations."
+                }
+            ]
+        },
+        {
+            "id": "F-BF",
+            "name": "Building Functions",
+            "standards": [
+                {
+                    "id": "HSF-BF.A.1",
+                    "description": "Write a function that describes a relationship between two quantities.",
+                    "prerequisites": ["8.F.B.4", "HSF-IF.A.2"],
+                    "cluster": "Build a function that models a relationship between two quantities."
+                },
+                {
+                    "id": "HSF-BF.A.2",
+                    "description": "Write arithmetic and geometric sequences both recursively and with an explicit formula, use them to model situations, and translate between the two forms.",
+                    "prerequisites": ["HSF-IF.A.3", "HSF-BF.A.1"],
+                    "cluster": "Build a function that models a relationship between two quantities."
+                }
+            ]
+        },
+        {
+            "id": "F-LE",
+            "name": "Linear, Quadratic, and Exponential Models",
+            "standards": [
+                {
+                    "id": "HSF-LE.A.1",
+                    "description": "Distinguish between situations that can be modeled with linear functions and with exponential functions.",
+                    "prerequisites": ["8.F.A.3", "HSF-IF.B.6"],
+                    "cluster": "Construct and compare linear, quadratic, and exponential models and solve problems."
+                },
+                {
+                    "id": "HSF-LE.A.2",
+                    "description": "Construct linear and exponential functions, including arithmetic and geometric sequences, given a graph, a description of a relationship, or two input-output pairs (include reading these from a table).",
+                    "prerequisites": ["HSF-LE.A.1", "HSF-BF.A.2"],
+                    "cluster": "Construct and compare linear, quadratic, and exponential models and solve problems."
+                },
+                {
+                    "id": "HSF-LE.A.3",
+                    "description": "Observe using graphs and tables that a quantity increasing exponentially eventually exceeds a quantity increasing linearly, quadratically, or (more generally) as a polynomial function.",
+                    "prerequisites": ["HSF-LE.A.2"],
+                    "cluster": "Construct and compare linear, quadratic, and exponential models and solve problems."
+                },
+                {
+                    "id": "HSF-LE.B.5",
+                    "description": "Interpret the parameters in a linear or exponential function in terms of a context.",
+                    "prerequisites": ["8.SP.A.3", "HSF-LE.A.2"],
+                    "cluster": "Interpret expressions for functions in terms of the situation they model."
+                }
+            ]
+        }
+    ]
+}

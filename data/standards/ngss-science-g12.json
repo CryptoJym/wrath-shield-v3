@@ -1,0 +1,284 @@
+{
+    "subject": "science",
+    "grade": "12",
+    "course": "Earth Science/AP Prep",
+    "domains": [
+        {
+            "id": "ESS1",
+            "name": "Earth's Place in the Universe",
+            "standards": [
+                {
+                    "id": "HS-ESS1-1",
+                    "description": "Develop a model based on evidence to illustrate the life span of the sun and the role of nuclear fusion in the sun's core to release energy that eventually reaches Earth in the form of radiation.",
+                    "cluster": "The Universe and Its Stars",
+                    "prerequisites": ["MS-ESS1-2", "HS-PS1-8"],
+                    "science_practices": ["Developing and Using Models"],
+                    "crosscutting_concepts": ["Scale, Proportion, and Quantity"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 8
+                },
+                {
+                    "id": "HS-ESS1-2",
+                    "description": "Construct an explanation of the Big Bang theory based on astronomical evidence of light spectra, motion of distant galaxies, and composition of matter in the universe.",
+                    "cluster": "The Universe and Its Stars",
+                    "prerequisites": ["MS-ESS1-2"],
+                    "science_practices": ["Constructing Explanations"],
+                    "crosscutting_concepts": ["Energy and Matter"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 8
+                },
+                {
+                    "id": "HS-ESS1-3",
+                    "description": "Communicate scientific ideas about the way stars, over their life cycle, produce elements.",
+                    "cluster": "The Universe and Its Stars",
+                    "prerequisites": ["MS-ESS1-2", "HS-PS1-8"],
+                    "science_practices": ["Obtaining, Evaluating, and Communicating Information"],
+                    "crosscutting_concepts": ["Energy and Matter"],
+                    "stat_mappings": ["science", "critical_thinking", "communication"],
+                    "cognitive_complexity": 4,
+                    "estimated_hours": 6
+                },
+                {
+                    "id": "HS-ESS1-4",
+                    "description": "Use mathematical or computational representations to predict the motion of orbiting objects in the solar system.",
+                    "cluster": "Earth and the Solar System",
+                    "prerequisites": ["MS-ESS1-1", "HS-PS2-4"],
+                    "science_practices": ["Using Mathematics and Computational Thinking"],
+                    "crosscutting_concepts": ["Systems and System Models"],
+                    "stat_mappings": ["science", "critical_thinking", "technology"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 8
+                },
+                {
+                    "id": "HS-ESS1-5",
+                    "description": "Evaluate evidence of the past and current movements of continental and oceanic crust and the theory of plate tectonics to explain the ages of crustal rocks.",
+                    "cluster": "The History of Planet Earth",
+                    "prerequisites": ["MS-ESS2-2", "MS-ESS2-3"],
+                    "science_practices": ["Engaging in Argument from Evidence"],
+                    "crosscutting_concepts": ["Stability and Change"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 7
+                },
+                {
+                    "id": "HS-ESS1-6",
+                    "description": "Apply scientific reasoning and evidence from ancient Earth materials, meteorites, and other planetary surfaces to construct an account of Earth's formation and early history.",
+                    "cluster": "The History of Planet Earth",
+                    "prerequisites": ["MS-ESS1-4"],
+                    "science_practices": ["Constructing Explanations"],
+                    "crosscutting_concepts": ["Stability and Change"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 7
+                }
+            ]
+        },
+        {
+            "id": "ESS2",
+            "name": "Earth's Systems",
+            "standards": [
+                {
+                    "id": "HS-ESS2-1",
+                    "description": "Develop a model to illustrate how Earth's internal and surface processes operate at different spatial and temporal scales to form continental and ocean-floor features.",
+                    "cluster": "Earth Materials and Systems",
+                    "prerequisites": ["MS-ESS2-1", "MS-ESS2-2"],
+                    "science_practices": ["Developing and Using Models"],
+                    "crosscutting_concepts": ["Stability and Change"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 8
+                },
+                {
+                    "id": "HS-ESS2-2",
+                    "description": "Analyze geoscience data to make the claim that one change to Earth's surface can create feedbacks that cause changes to other Earth systems.",
+                    "cluster": "Earth Materials and Systems",
+                    "prerequisites": ["MS-ESS2-1"],
+                    "science_practices": ["Analyzing and Interpreting Data"],
+                    "crosscutting_concepts": ["Stability and Change"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 7
+                },
+                {
+                    "id": "HS-ESS2-3",
+                    "description": "Develop a model based on evidence of Earth's interior to describe the cycling of matter by thermal convection.",
+                    "cluster": "Plate Tectonics and Large-Scale System Interactions",
+                    "prerequisites": ["MS-ESS2-1", "MS-ESS2-2"],
+                    "science_practices": ["Developing and Using Models"],
+                    "crosscutting_concepts": ["Energy and Matter"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 8
+                },
+                {
+                    "id": "HS-ESS2-4",
+                    "description": "Use a model to describe how variations in the flow of energy into and out of Earth's systems result in changes in climate.",
+                    "cluster": "Weather and Climate",
+                    "prerequisites": ["MS-ESS2-5", "MS-ESS2-6"],
+                    "science_practices": ["Developing and Using Models"],
+                    "crosscutting_concepts": ["Cause and Effect"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 8
+                },
+                {
+                    "id": "HS-ESS2-5",
+                    "description": "Plan and conduct an investigation of the properties of water and its effects on Earth materials and surface processes.",
+                    "cluster": "The Roles of Water in Earth's Surface Processes",
+                    "prerequisites": ["MS-ESS2-4"],
+                    "science_practices": ["Planning and Carrying Out Investigations"],
+                    "crosscutting_concepts": ["Structure and Function"],
+                    "stat_mappings": ["science", "critical_thinking", "problem_solving"],
+                    "cognitive_complexity": 4,
+                    "estimated_hours": 7
+                },
+                {
+                    "id": "HS-ESS2-6",
+                    "description": "Develop a quantitative model to describe the cycling of carbon among the hydrosphere, atmosphere, geosphere, and biosphere.",
+                    "cluster": "Weather and Climate",
+                    "prerequisites": ["MS-ESS2-6", "HS-LS2-5"],
+                    "science_practices": ["Developing and Using Models"],
+                    "crosscutting_concepts": ["Energy and Matter"],
+                    "stat_mappings": ["science", "critical_thinking", "technology"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 8
+                },
+                {
+                    "id": "HS-ESS2-7",
+                    "description": "Construct an argument based on evidence about the simultaneous coevolution of Earth's systems and life on Earth.",
+                    "cluster": "Biogeology",
+                    "prerequisites": ["MS-ESS2-1", "HS-LS4-1"],
+                    "science_practices": ["Engaging in Argument from Evidence"],
+                    "crosscutting_concepts": ["Stability and Change"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 7
+                }
+            ]
+        },
+        {
+            "id": "ESS3",
+            "name": "Earth and Human Activity",
+            "standards": [
+                {
+                    "id": "HS-ESS3-1",
+                    "description": "Construct an explanation based on evidence for how the availability of natural resources, occurrence of natural hazards, and changes in climate have influenced human activity.",
+                    "cluster": "Natural Resources",
+                    "prerequisites": ["MS-ESS3-1", "MS-ESS3-2"],
+                    "science_practices": ["Constructing Explanations"],
+                    "crosscutting_concepts": ["Cause and Effect"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 7
+                },
+                {
+                    "id": "HS-ESS3-2",
+                    "description": "Evaluate competing design solutions for developing, managing, and utilizing energy and mineral resources based on cost-benefit ratios.",
+                    "cluster": "Natural Resources",
+                    "prerequisites": ["MS-ESS3-3", "MS-ESS3-4"],
+                    "science_practices": ["Engaging in Argument from Evidence"],
+                    "crosscutting_concepts": ["Influence of Engineering, Technology, and Science on Society and the Natural World"],
+                    "stat_mappings": ["science", "critical_thinking", "problem_solving"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 8
+                },
+                {
+                    "id": "HS-ESS3-3",
+                    "description": "Create a computational simulation to illustrate the relationships among management of natural resources, the sustainability of human populations, and biodiversity.",
+                    "cluster": "Human Impacts on Earth Systems",
+                    "prerequisites": ["MS-ESS3-3", "MS-ESS3-4"],
+                    "science_practices": ["Using Mathematics and Computational Thinking"],
+                    "crosscutting_concepts": ["Stability and Change"],
+                    "stat_mappings": ["science", "critical_thinking", "technology", "problem_solving"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 9
+                },
+                {
+                    "id": "HS-ESS3-4",
+                    "description": "Evaluate or refine a technological solution that reduces impacts of human activities on natural systems.",
+                    "cluster": "Human Impacts on Earth Systems",
+                    "prerequisites": ["MS-ESS3-3"],
+                    "science_practices": ["Constructing Explanations and Designing Solutions"],
+                    "crosscutting_concepts": ["Stability and Change"],
+                    "stat_mappings": ["science", "critical_thinking", "problem_solving", "technology"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 8
+                },
+                {
+                    "id": "HS-ESS3-5",
+                    "description": "Analyze geoscience data and the results from global climate models to make an evidence-based forecast of the current rate of global or regional climate change and associated future impacts to Earth systems.",
+                    "cluster": "Global Climate Change",
+                    "prerequisites": ["MS-ESS3-5", "HS-ESS2-4"],
+                    "science_practices": ["Analyzing and Interpreting Data"],
+                    "crosscutting_concepts": ["Stability and Change"],
+                    "stat_mappings": ["science", "critical_thinking", "technology"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 8
+                },
+                {
+                    "id": "HS-ESS3-6",
+                    "description": "Use a computational representation to illustrate the relationships among Earth systems and how those relationships are being modified due to human activity.",
+                    "cluster": "Global Climate Change",
+                    "prerequisites": ["MS-ESS3-5", "HS-ESS2-6"],
+                    "science_practices": ["Using Mathematics and Computational Thinking"],
+                    "crosscutting_concepts": ["Systems and System Models"],
+                    "stat_mappings": ["science", "critical_thinking", "technology"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 8
+                }
+            ]
+        },
+        {
+            "id": "ETS1",
+            "name": "Engineering Design",
+            "standards": [
+                {
+                    "id": "HS-ETS1-1",
+                    "description": "Analyze a major global challenge to specify qualitative and quantitative criteria and constraints for solutions that account for societal needs and wants.",
+                    "cluster": "Engineering Design",
+                    "prerequisites": ["MS-ETS1-1"],
+                    "science_practices": ["Asking Questions and Defining Problems"],
+                    "crosscutting_concepts": ["Influence of Engineering, Technology, and Science on Society and the Natural World"],
+                    "stat_mappings": ["science", "critical_thinking", "problem_solving", "technology"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 8
+                },
+                {
+                    "id": "HS-ETS1-2",
+                    "description": "Design a solution to a complex real-world problem by breaking it down into smaller, more manageable problems that can be solved through engineering.",
+                    "cluster": "Engineering Design",
+                    "prerequisites": ["MS-ETS1-2"],
+                    "science_practices": ["Constructing Explanations and Designing Solutions"],
+                    "crosscutting_concepts": ["Systems and System Models"],
+                    "stat_mappings": ["science", "critical_thinking", "problem_solving", "technology"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 9
+                },
+                {
+                    "id": "HS-ETS1-3",
+                    "description": "Evaluate a solution to a complex real-world problem based on prioritized criteria and trade-offs that account for a range of constraints, including cost, safety, reliability, and aesthetics as well as possible social, cultural, and environmental impacts.",
+                    "cluster": "Engineering Design",
+                    "prerequisites": ["MS-ETS1-2", "MS-ETS1-3"],
+                    "science_practices": ["Constructing Explanations and Designing Solutions"],
+                    "crosscutting_concepts": ["Influence of Engineering, Technology, and Science on Society and the Natural World"],
+                    "stat_mappings": ["science", "critical_thinking", "problem_solving", "technology"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 9
+                },
+                {
+                    "id": "HS-ETS1-4",
+                    "description": "Use a computer simulation to model the impact of proposed solutions to a complex real-world problem with numerous criteria and constraints on interactions within and between systems relevant to the problem.",
+                    "cluster": "Engineering Design",
+                    "prerequisites": ["MS-ETS1-4"],
+                    "science_practices": ["Using Mathematics and Computational Thinking"],
+                    "crosscutting_concepts": ["Systems and System Models"],
+                    "stat_mappings": ["science", "critical_thinking", "problem_solving", "technology"],
+                    "cognitive_complexity": 5,
+                    "estimated_hours": 9
+                }
+            ]
+        }
+    ]
+}

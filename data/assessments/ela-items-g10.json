@@ -1,0 +1,1061 @@
+{
+  "grade": "10",
+  "subject": "ELA",
+  "standard_band": "9-10",
+  "items": [
+    {
+      "id": "ela-10-rl-1-001",
+      "standard_id": "9-10.RL.1",
+      "standard_description": "Cite strong and thorough textual evidence to support analysis of what the text says explicitly as well as inferences drawn from the text",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "The author leaves several key details ambiguous throughout the narrative. Identify two instances of deliberate ambiguity and analyze what the reader can reasonably infer from contextual evidence. How does this ambiguity serve the author's larger purpose?",
+      "rubric": {
+        "4": "Identifies sophisticated instances of ambiguity; provides nuanced inference with strong textual support; insightful connection to authorial purpose",
+        "3": "Identifies valid ambiguity with adequate inference and evidence; reasonable purpose connection",
+        "2": "Identifies ambiguity but limited inference OR weak purpose connection",
+        "1": "Unclear identification without meaningful analysis",
+        "0": "No response or off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.78,
+      "time_estimate_seconds": 540,
+      "passage_required": true
+    },
+    {
+      "id": "ela-10-rl-1-002",
+      "standard_id": "9-10.RL.1",
+      "standard_description": "Cite strong and thorough textual evidence to support analysis of what the text says explicitly as well as inferences drawn from the text",
+      "dok_level": 4,
+      "question_type": "essay",
+      "question": "Critics have offered competing interpretations of the protagonist's motivation in the climactic scene. Present your own interpretation, supported by thorough textual evidence. Address at least one alternative interpretation and explain why your reading is more strongly supported by the text.",
+      "rubric": {
+        "4": "Sophisticated interpretation with compelling evidence; nuanced treatment of alternatives; masterful textual analysis",
+        "3": "Clear interpretation with adequate evidence; appropriate treatment of alternative",
+        "2": "Basic interpretation with limited evidence OR weak alternative treatment",
+        "1": "Unclear interpretation without sufficient support",
+        "0": "No response or off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.85,
+      "time_estimate_seconds": 1200,
+      "passage_required": true
+    },
+    {
+      "id": "ela-10-rl-2-001",
+      "standard_id": "9-10.RL.2",
+      "standard_description": "Determine a theme or central idea of a text and analyze in detail its development over the course of the text",
+      "dok_level": 4,
+      "question_type": "essay",
+      "question": "Identify a theme that develops complexity as the narrative progresses. Analyze how the author complicates the theme through conflicting perspectives, ironic reversals, or ambiguous resolutions. How does this complexity reflect the author's worldview or commentary on the human condition?",
+      "rubric": {
+        "4": "Sophisticated theme identification; nuanced analysis of complication; insightful worldview connection",
+        "3": "Clear theme with adequate complication analysis; reasonable worldview discussion",
+        "2": "Basic theme analysis with limited complexity recognition",
+        "1": "Superficial theme identification without developmental analysis",
+        "0": "No response or off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.85,
+      "time_estimate_seconds": 1200,
+      "passage_required": true
+    },
+    {
+      "id": "ela-10-rl-2-002",
+      "standard_id": "9-10.RL.2",
+      "standard_description": "Determine a theme or central idea of a text and analyze in detail its development over the course of the text",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Trace how the theme of [identity/justice/power/isolation] emerges in the text. Identify the key moment where the theme crystallizes most clearly and explain how earlier textual elements prepared the reader for this realization.",
+      "rubric": {
+        "4": "Sophisticated thematic tracing; insightful identification of crystallizing moment; nuanced analysis of preparation",
+        "3": "Adequate tracing with appropriate moment identification; reasonable preparation analysis",
+        "2": "Basic tracing with limited moment analysis",
+        "1": "Vague thematic engagement without clear tracing",
+        "0": "No response or off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 540,
+      "passage_required": true
+    },
+    {
+      "id": "ela-10-rl-3-001",
+      "standard_id": "9-10.RL.3",
+      "standard_description": "Analyze how complex characters develop over the course of a text, interact with other characters, and advance the plot or develop the theme",
+      "dok_level": 4,
+      "question_type": "essay",
+      "question": "Analyze the relationship between the protagonist and antagonist as a dialectic that drives both plot and theme. How does their conflict illuminate broader questions about [morality/society/human nature]? Consider how each character's development depends on the other.",
+      "rubric": {
+        "4": "Sophisticated dialectical analysis; nuanced understanding of mutual development; insightful thematic connection",
+        "3": "Clear relationship analysis with adequate development discussion; reasonable thematic link",
+        "2": "Basic relationship analysis with limited dialectical understanding",
+        "1": "Superficial character discussion without relational analysis",
+        "0": "No response or off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.85,
+      "time_estimate_seconds": 1200,
+      "passage_required": true
+    },
+    {
+      "id": "ela-10-rl-3-002",
+      "standard_id": "9-10.RL.3",
+      "standard_description": "Analyze how complex characters develop over the course of a text, interact with other characters, and advance the plot or develop the theme",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Select a secondary character whose role might initially seem minor. Analyze how this character functions as a foil, catalyst, or thematic counterpoint to the protagonist. What would be lost from the narrative without this character?",
+      "rubric": {
+        "4": "Sophisticated analysis of secondary character function; nuanced understanding of narrative contribution; insightful counterfactual reasoning",
+        "3": "Clear function analysis with adequate contribution discussion",
+        "2": "Basic function identification with limited analysis",
+        "1": "Superficial character mention without functional analysis",
+        "0": "No response or off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 540,
+      "passage_required": true
+    },
+    {
+      "id": "ela-10-rl-4-001",
+      "standard_id": "9-10.RL.4",
+      "standard_description": "Determine the meaning of words and phrases as they are used in the text, including figurative and connotative meanings",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Analyze the author's use of an extended metaphor or pattern of imagery that recurs throughout the text. How do the connotations of this figurative language evolve as the narrative progresses? What does this evolution suggest about the text's meaning?",
+      "rubric": {
+        "4": "Sophisticated pattern analysis; nuanced tracking of connotative evolution; insightful meaning connection",
+        "3": "Clear pattern identification with adequate evolution analysis",
+        "2": "Basic pattern recognition with limited evolution tracking",
+        "1": "Superficial metaphor mention without developmental analysis",
+        "0": "No response or off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 540,
+      "passage_required": true
+    },
+    {
+      "id": "ela-10-rl-4-002",
+      "standard_id": "9-10.RL.4",
+      "standard_description": "Determine the meaning of words and phrases as they are used in the text, including figurative and connotative meanings",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "The author repeatedly associates the protagonist with images of water and fluidity, while describing the antagonist with images of stone and rigidity. This pattern of imagery primarily serves to:",
+      "options": [
+        "A. Establish the physical settings of the characters' homes",
+        "B. Characterize fundamental differences in the characters' adaptability and worldviews",
+        "C. Foreshadow the drowning scene at the novel's climax",
+        "D. Create a contrast between natural and artificial environments"
+      ],
+      "correct_answer": "B",
+      "explanation": "The water/stone imagery pattern establishes a symbolic contrast between characters' essential natures - the protagonist's adaptability versus the antagonist's inflexibility - which illuminates their conflict throughout the narrative.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 2,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 120,
+      "passage_required": true
+    },
+    {
+      "id": "ela-10-rl-5-001",
+      "standard_id": "9-10.RL.5",
+      "standard_description": "Analyze how an author's choices concerning how to structure a text, order events, and manipulate time create such effects as mystery, tension, or surprise",
+      "dok_level": 4,
+      "question_type": "essay",
+      "question": "The author employs a complex narrative structure that departs from simple chronology. Analyze how this structural choice affects the reader's understanding and emotional experience. Consider how information revealed at different points changes the meaning of earlier or later scenes.",
+      "rubric": {
+        "4": "Sophisticated structural analysis; nuanced understanding of revelation timing; insightful discussion of reader experience",
+        "3": "Clear structure analysis with adequate revelation discussion",
+        "2": "Basic structure recognition with limited effect analysis",
+        "1": "Superficial structure mention without meaningful analysis",
+        "0": "No response or off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.82,
+      "time_estimate_seconds": 900,
+      "passage_required": true
+    },
+    {
+      "id": "ela-10-rl-5-002",
+      "standard_id": "9-10.RL.5",
+      "standard_description": "Analyze how an author's choices concerning how to structure a text, order events, and manipulate time create such effects as mystery, tension, or surprise",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Examine how the author controls pacing through the text. Identify a section where time seems to slow down and one where it accelerates. Analyze why the author made these pacing choices at these particular moments and their effects on the reader.",
+      "rubric": {
+        "4": "Sophisticated pacing analysis; nuanced understanding of temporal manipulation; insightful effect discussion",
+        "3": "Clear pacing identification with adequate effect analysis",
+        "2": "Basic pacing recognition with limited effect understanding",
+        "1": "Superficial pacing mention without meaningful analysis",
+        "0": "No response or off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.72,
+      "time_estimate_seconds": 540,
+      "passage_required": true
+    },
+    {
+      "id": "ela-10-rl-6-001",
+      "standard_id": "9-10.RL.6",
+      "standard_description": "Analyze a particular point of view or cultural experience reflected in a work of literature from outside the United States",
+      "dok_level": 4,
+      "question_type": "essay",
+      "question": "This text emerges from a specific cultural and historical context different from American experience. Analyze how the author's cultural perspective shapes the text's values, conflicts, and resolutions. What might American readers learn from engaging with this perspective, and what assumptions might they need to question?",
+      "rubric": {
+        "4": "Sophisticated cultural analysis; nuanced understanding of perspective's influence; insightful discussion of cross-cultural learning",
+        "3": "Clear cultural analysis with adequate perspective discussion",
+        "2": "Basic cultural recognition with limited perspective analysis",
+        "1": "Superficial cultural mention without meaningful analysis",
+        "0": "No response or off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.85,
+      "time_estimate_seconds": 1200,
+      "passage_required": true
+    },
+    {
+      "id": "ela-10-rl-7-001",
+      "standard_id": "9-10.RL.7",
+      "standard_description": "Analyze the representation of a subject or a key scene in two different artistic mediums",
+      "dok_level": 4,
+      "question_type": "essay",
+      "question": "Compare the treatment of a key scene in the original literary text and its adaptation (film, graphic novel, stage production). Analyze how each medium's unique capabilities and constraints lead to different emphases, interpretations, or emotional effects. Evaluate the artistic choices made by the adapter.",
+      "rubric": {
+        "4": "Sophisticated comparative analysis; nuanced understanding of medium capabilities; insightful evaluation of adaptive choices",
+        "3": "Clear comparison with adequate medium analysis; reasonable evaluation",
+        "2": "Basic comparison with limited medium-specific analysis",
+        "1": "Superficial comparison without meaningful analysis",
+        "0": "No response or off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.8,
+      "time_estimate_seconds": 1200,
+      "passage_required": true
+    },
+    {
+      "id": "ela-10-rl-9-001",
+      "standard_id": "9-10.RL.9",
+      "standard_description": "Analyze how an author draws on and transforms source material in a specific work",
+      "dok_level": 4,
+      "question_type": "essay",
+      "question": "The author transforms elements from [classical tragedy/biblical narrative/folklore/earlier literary tradition]. Analyze the nature and purpose of these transformations. What commentary does the new work offer on its source material, and how does knowledge of the source enrich understanding of the new work?",
+      "rubric": {
+        "4": "Sophisticated transformation analysis; nuanced understanding of intertextual dialogue; insightful commentary discussion",
+        "3": "Clear transformation identification with adequate commentary analysis",
+        "2": "Basic source recognition with limited transformation analysis",
+        "1": "Superficial source mention without meaningful analysis",
+        "0": "No response or off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.85,
+      "time_estimate_seconds": 1200,
+      "passage_required": true
+    },
+    {
+      "id": "ela-10-rl-10-001",
+      "standard_id": "9-10.RL.10",
+      "standard_description": "Read and comprehend literature, including stories, dramas, and poems, in the grades 9-10 text complexity band proficiently",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Reflect on your reading process with this challenging text. What made it complex (vocabulary, syntax, structure, cultural references, ambiguity)? How did you adapt your reading strategies to meet these challenges? What aspects remain unclear, and how might you resolve them?",
+      "rubric": {
+        "4": "Sophisticated metacognitive reflection; precise identification of complexity sources; insightful strategy adaptation discussion",
+        "3": "Clear reflection with adequate complexity identification; reasonable strategy discussion",
+        "2": "Basic reflection with limited complexity awareness",
+        "1": "Superficial engagement with reading process",
+        "0": "No response or off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.68,
+      "time_estimate_seconds": 420,
+      "passage_required": true
+    },
+    {
+      "id": "ela-10-ri-1-001",
+      "standard_id": "9-10.RI.1",
+      "standard_description": "Cite strong and thorough textual evidence to support analysis of what the text says explicitly as well as inferences drawn from the text",
+      "dok_level": 4,
+      "question_type": "essay",
+      "question": "The author's argument depends on both explicit claims and unstated assumptions. Identify two key assumptions that underlie the argument and evaluate whether these assumptions are warranted. Use textual evidence to support your analysis of both the explicit and implicit elements of the argument.",
+      "rubric": {
+        "4": "Sophisticated assumption identification; nuanced evaluation of warrants; insightful textual support for analysis",
+        "3": "Clear assumption identification with adequate evaluation; appropriate evidence",
+        "2": "Basic assumption recognition with limited evaluation",
+        "1": "Unclear assumptions without meaningful analysis",
+        "0": "No response or off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.85,
+      "time_estimate_seconds": 900,
+      "passage_required": true
+    },
+    {
+      "id": "ela-10-ri-2-001",
+      "standard_id": "9-10.RI.2",
+      "standard_description": "Determine a central idea of a text and analyze its development over the course of the text",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "The author develops a nuanced central idea that may not be immediately apparent. Trace how the idea emerges, is complicated by counterpoints or qualifications, and arrives at a refined conclusion. How does this developmental process shape the reader's understanding?",
+      "rubric": {
+        "4": "Sophisticated idea tracing; nuanced understanding of complication; insightful reader understanding analysis",
+        "3": "Clear idea development tracing with adequate complication recognition",
+        "2": "Basic idea identification with limited development analysis",
+        "1": "Vague idea without developmental tracing",
+        "0": "No response or off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 540,
+      "passage_required": true
+    },
+    {
+      "id": "ela-10-ri-3-001",
+      "standard_id": "9-10.RI.3",
+      "standard_description": "Analyze how the author unfolds an analysis or series of ideas or events",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Map the logical structure of the author's argument. How does each section build upon, qualify, or complicate what came before? Identify transitions that signal the logical relationships between ideas and explain how the structure makes the argument more (or less) effective.",
+      "rubric": {
+        "4": "Sophisticated structural mapping; nuanced transition analysis; insightful effectiveness evaluation",
+        "3": "Clear structural analysis with adequate transition identification",
+        "2": "Basic structure recognition with limited transition analysis",
+        "1": "Superficial structure mention without meaningful analysis",
+        "0": "No response or off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 540,
+      "passage_required": true
+    },
+    {
+      "id": "ela-10-ri-4-001",
+      "standard_id": "9-10.RI.4",
+      "standard_description": "Determine the meaning of words and phrases as they are used in a text, including figurative, connotative, and technical meanings",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "The author employs specialized terminology from [discipline/field]. Analyze how the author defines, contextualizes, and applies these terms for a general audience. How does this vocabulary contribute to the author's credibility and the precision of the argument?",
+      "rubric": {
+        "4": "Sophisticated terminology analysis; nuanced understanding of audience adaptation; insightful credibility connection",
+        "3": "Clear terminology identification with adequate contextualization analysis",
+        "2": "Basic terminology recognition with limited analysis",
+        "1": "Superficial vocabulary mention without meaningful analysis",
+        "0": "No response or off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.72,
+      "time_estimate_seconds": 480,
+      "passage_required": true
+    },
+    {
+      "id": "ela-10-ri-5-001",
+      "standard_id": "9-10.RI.5",
+      "standard_description": "Analyze in detail how an author's ideas or claims are developed and refined by particular sentences, paragraphs, or larger portions of a text",
+      "dok_level": 4,
+      "question_type": "essay",
+      "question": "Select a pivotal paragraph where the author's argument takes a significant turn or reaches a crucial conclusion. Conduct a sentence-by-sentence analysis of how the author builds to this moment. How does each sentence contribute to the paragraph's argumentative work?",
+      "rubric": {
+        "4": "Sophisticated close reading; nuanced sentence-level analysis; insightful understanding of argumentative construction",
+        "3": "Clear paragraph analysis with adequate sentence-level attention",
+        "2": "Basic paragraph analysis without detailed sentence work",
+        "1": "Superficial paragraph summary without analytical depth",
+        "0": "No response or off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.82,
+      "time_estimate_seconds": 720,
+      "passage_required": true
+    },
+    {
+      "id": "ela-10-ri-6-001",
+      "standard_id": "9-10.RI.6",
+      "standard_description": "Determine an author's point of view or purpose in a text and analyze how an author uses rhetoric to advance that point of view or purpose",
+      "dok_level": 4,
+      "question_type": "essay",
+      "question": "Conduct a comprehensive rhetorical analysis of the text. Analyze the rhetorical situation (speaker, audience, purpose, context), the author's use of rhetorical appeals and strategies, and the effectiveness of these choices. Consider how the rhetoric might work differently for different audiences.",
+      "rubric": {
+        "4": "Sophisticated rhetorical analysis; nuanced understanding of situation and strategies; insightful audience-differentiated evaluation",
+        "3": "Clear rhetorical analysis covering key elements; appropriate effectiveness evaluation",
+        "2": "Basic rhetorical recognition with limited analysis",
+        "1": "Superficial rhetorical mention without meaningful analysis",
+        "0": "No response or off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.88,
+      "time_estimate_seconds": 1500,
+      "passage_required": true
+    },
+    {
+      "id": "ela-10-ri-6-002",
+      "standard_id": "9-10.RI.6",
+      "standard_description": "Determine an author's point of view or purpose in a text and analyze how an author uses rhetoric to advance that point of view or purpose",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Identify the author's primary purpose and analyze how the choice of rhetorical strategies reflects this purpose. How might the author have argued differently if writing for a hostile audience? What does the rhetoric reveal about the author's assumptions about the target audience?",
+      "rubric": {
+        "4": "Sophisticated purpose identification; nuanced strategy-purpose alignment; insightful audience assumption analysis",
+        "3": "Clear purpose with adequate strategy analysis; reasonable audience discussion",
+        "2": "Basic purpose recognition with limited strategy connection",
+        "1": "Vague purpose without meaningful analysis",
+        "0": "No response or off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.78,
+      "time_estimate_seconds": 600,
+      "passage_required": true
+    },
+    {
+      "id": "ela-10-ri-7-001",
+      "standard_id": "9-10.RI.7",
+      "standard_description": "Analyze various accounts of a subject told in different mediums, determining which details are emphasized in each account",
+      "dok_level": 4,
+      "question_type": "essay",
+      "question": "Compare coverage of the same issue in a long-form print article, a data visualization/infographic, and a video report. Analyze what each medium emphasizes and de-emphasizes. How do the affordances and constraints of each medium shape what the audience learns and how they understand the issue?",
+      "rubric": {
+        "4": "Sophisticated cross-medium analysis; nuanced understanding of medium affordances; insightful learning impact discussion",
+        "3": "Clear comparison with adequate medium-specific analysis",
+        "2": "Basic comparison with limited medium understanding",
+        "1": "Superficial comparison without meaningful analysis",
+        "0": "No response or off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.8,
+      "time_estimate_seconds": 1200,
+      "passage_required": true
+    },
+    {
+      "id": "ela-10-ri-8-001",
+      "standard_id": "9-10.RI.8",
+      "standard_description": "Delineate and evaluate the argument and specific claims in a text, assessing whether the reasoning is valid and the evidence is relevant and sufficient",
+      "dok_level": 4,
+      "question_type": "essay",
+      "question": "Evaluate the logical validity of the author's argument. Identify the type of reasoning used (deductive, inductive, analogical) and assess whether the conclusions follow from the premises. Identify any logical fallacies and explain how they affect the argument's persuasiveness and soundness.",
+      "rubric": {
+        "4": "Sophisticated logical analysis; precise reasoning type identification; nuanced fallacy analysis with soundness evaluation",
+        "3": "Clear logical evaluation with appropriate reasoning identification; adequate fallacy discussion",
+        "2": "Basic logical recognition with limited fallacy analysis",
+        "1": "Superficial logic mention without meaningful analysis",
+        "0": "No response or off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.85,
+      "time_estimate_seconds": 900,
+      "passage_required": true
+    },
+    {
+      "id": "ela-10-ri-8-002",
+      "standard_id": "9-10.RI.8",
+      "standard_description": "Delineate and evaluate the argument and specific claims in a text, assessing whether the reasoning is valid and the evidence is relevant and sufficient",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Create an argument map showing the main claim, subclaims, evidence, and warrants in the author's argument. Identify the strongest and weakest parts of the argument and explain your assessment.",
+      "rubric": {
+        "4": "Sophisticated argument mapping; comprehensive element identification; nuanced strength assessment",
+        "3": "Clear argument map with adequate element identification; reasonable assessment",
+        "2": "Basic mapping with limited element identification",
+        "1": "Incomplete or inaccurate mapping",
+        "0": "No response or off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 600,
+      "passage_required": true
+    },
+    {
+      "id": "ela-10-ri-9-001",
+      "standard_id": "9-10.RI.9",
+      "standard_description": "Analyze seminal U.S. documents of historical and literary significance",
+      "dok_level": 4,
+      "question_type": "essay",
+      "question": "Analyze Lincoln's Second Inaugural Address as both a historical document and a rhetorical masterpiece. How does Lincoln use biblical allusion and parallel structure to frame the Civil War's meaning? How does the speech's rhetoric attempt to heal national division while acknowledging moral complexity?",
+      "rubric": {
+        "4": "Sophisticated analysis integrating historical and rhetorical dimensions; nuanced understanding of technique and purpose; insightful complexity discussion",
+        "3": "Clear analysis with adequate attention to both dimensions",
+        "2": "Basic analysis favoring one dimension over the other",
+        "1": "Superficial engagement without meaningful analysis",
+        "0": "No response or off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.88,
+      "time_estimate_seconds": 1500,
+      "passage_required": true
+    },
+    {
+      "id": "ela-10-ri-9-002",
+      "standard_id": "9-10.RI.9",
+      "standard_description": "Analyze seminal U.S. documents of historical and literary significance",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Compare how the Federalist Papers and Anti-Federalist writings use different rhetorical strategies to argue for their visions of American government. What do these rhetorical choices reveal about each side's assumptions about the audience and about democratic governance?",
+      "rubric": {
+        "4": "Sophisticated comparative analysis; nuanced understanding of rhetorical differences; insightful audience/governance discussion",
+        "3": "Clear comparison with adequate rhetorical analysis",
+        "2": "Basic comparison with limited rhetorical attention",
+        "1": "Superficial comparison without meaningful analysis",
+        "0": "No response or off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.82,
+      "time_estimate_seconds": 900,
+      "passage_required": true
+    },
+    {
+      "id": "ela-10-w-1-001",
+      "standard_id": "9-10.W.1",
+      "standard_description": "Write arguments to support claims in an analysis of substantive topics or texts",
+      "dok_level": 4,
+      "question_type": "essay",
+      "question": "Write an argumentative essay that takes a nuanced position on a complex issue, acknowledging that reasonable people might disagree. Develop a sophisticated claim that goes beyond simple pro/con dichotomies. Support your argument with evidence, address significant counterarguments, and maintain appropriate style and tone.",
+      "rubric": {
+        "4": "Sophisticated nuanced argument; compelling evidence integration; masterful counterargument treatment; polished academic style",
+        "3": "Clear nuanced argument with adequate support; appropriate counterargument treatment; consistent style",
+        "2": "Basic argument with limited nuance OR weak counterargument treatment",
+        "1": "Simplistic argument without nuance or counterargument engagement",
+        "0": "No response or off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 5,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.88,
+      "time_estimate_seconds": 2700,
+      "passage_required": false
+    },
+    {
+      "id": "ela-10-w-1-002",
+      "standard_id": "9-10.W.1",
+      "standard_description": "Write arguments to support claims in an analysis of substantive topics or texts",
+      "dok_level": 4,
+      "question_type": "essay",
+      "question": "Synthesize ideas from multiple sources to develop an original argument about a significant issue. Your argument should demonstrate critical engagement with sources rather than mere summary. Integrate evidence smoothly, use appropriate attribution, and develop a clear line of reasoning that leads to a compelling conclusion.",
+      "rubric": {
+        "4": "Sophisticated synthesis; original argument emerging from sources; masterful evidence integration; compelling reasoning",
+        "3": "Clear synthesis with adequate originality; appropriate integration and reasoning",
+        "2": "Basic synthesis with limited originality OR weak integration",
+        "1": "Summary without synthesis or original argument",
+        "0": "No response or off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 5,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.9,
+      "time_estimate_seconds": 3000,
+      "passage_required": true
+    },
+    {
+      "id": "ela-10-w-2-001",
+      "standard_id": "9-10.W.2",
+      "standard_description": "Write informative/explanatory texts to examine and convey complex ideas, concepts, and information clearly and accurately",
+      "dok_level": 4,
+      "question_type": "essay",
+      "question": "Write an informative essay explaining a complex concept that involves multiple interacting factors or perspectives. Use appropriate text structures to organize information logically. Include precise definitions, relevant examples, and clear explanations that make the complexity accessible to your audience.",
+      "rubric": {
+        "4": "Sophisticated explanation of complexity; masterful organization; precise and accessible language; engaging presentation",
+        "3": "Clear explanation with appropriate organization; adequate precision and accessibility",
+        "2": "Basic explanation with limited organizational clarity OR accessibility",
+        "1": "Confusing explanation with poor organization",
+        "0": "No response or off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.82,
+      "time_estimate_seconds": 2100,
+      "passage_required": false
+    },
+    {
+      "id": "ela-10-w-3-001",
+      "standard_id": "9-10.W.3",
+      "standard_description": "Write narratives to develop real or imagined experiences or events using effective technique, well-chosen details, and well-structured event sequences",
+      "dok_level": 4,
+      "question_type": "essay",
+      "question": "Write a narrative that employs multiple perspectives or a complex narrative structure (such as nonlinear chronology, frame narrative, or parallel storylines). Use narrative techniques purposefully to create specific effects. Develop characters, setting, and theme through well-chosen details and events.",
+      "rubric": {
+        "4": "Sophisticated narrative structure; masterful technique; compelling character/setting/theme development",
+        "3": "Clear complex structure with appropriate technique; adequate development",
+        "2": "Basic structure with limited technique OR development",
+        "1": "Simple narrative without complexity or technique",
+        "0": "No response or off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 5,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.85,
+      "time_estimate_seconds": 2400,
+      "passage_required": false
+    },
+    {
+      "id": "ela-10-w-4-001",
+      "standard_id": "9-10.W.4",
+      "standard_description": "Produce clear and coherent writing in which the development, organization, and style are appropriate to task, purpose, and audience",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Write three versions of the same information for different audiences: a formal academic audience, a general public audience, and a peer audience (classmates). Then analyze how you adapted development, organization, and style for each audience.",
+      "rubric": {
+        "4": "Sophisticated audience adaptation across all versions; insightful analysis of choices",
+        "3": "Clear adaptation with appropriate analysis; adequate version differentiation",
+        "2": "Basic adaptation with limited differentiation OR analysis",
+        "1": "Minimal adaptation between versions",
+        "0": "No response or off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 900,
+      "passage_required": false
+    },
+    {
+      "id": "ela-10-w-5-001",
+      "standard_id": "9-10.W.5",
+      "standard_description": "Develop and strengthen writing as needed by planning, revising, editing, rewriting, or trying a new approach",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Review your draft and develop a comprehensive revision plan. Identify issues at the global level (thesis, argument structure, evidence) and local level (paragraphs, sentences, word choice). For significant weaknesses, propose two alternative revision approaches and explain which you would choose and why.",
+      "rubric": {
+        "4": "Sophisticated multi-level revision plan; thoughtful alternative approaches; insightful decision-making",
+        "3": "Clear revision plan addressing both levels; adequate alternatives",
+        "2": "Basic plan focusing on one level OR limited alternatives",
+        "1": "Superficial editing suggestions without comprehensive plan",
+        "0": "No response or off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 600,
+      "passage_required": false
+    },
+    {
+      "id": "ela-10-w-7-001",
+      "standard_id": "9-10.W.7",
+      "standard_description": "Conduct short as well as more sustained research projects to answer a question or solve a problem",
+      "dok_level": 4,
+      "question_type": "essay",
+      "question": "Design a research project to investigate a complex question that emerged from your reading. Formulate your research question, identify diverse source types you would consult, explain your search strategy, and describe how you would synthesize findings to develop new understanding.",
+      "rubric": {
+        "4": "Sophisticated research design; nuanced question formulation; comprehensive source strategy; insightful synthesis approach",
+        "3": "Clear research design with adequate question and sources",
+        "2": "Basic design with limited source diversity OR synthesis strategy",
+        "1": "Underdeveloped design without clear direction",
+        "0": "No response or off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.8,
+      "time_estimate_seconds": 720,
+      "passage_required": true
+    },
+    {
+      "id": "ela-10-w-8-001",
+      "standard_id": "9-10.W.8",
+      "standard_description": "Gather relevant information from multiple authoritative print and digital sources, assess the usefulness of each source, and integrate information while avoiding plagiarism",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "You have gathered sources representing different perspectives on a contested issue. Evaluate each source for credibility, bias, and relevance. Explain how you would integrate these diverse sources into a balanced research essay while maintaining academic integrity and your own analytical voice.",
+      "rubric": {
+        "4": "Sophisticated source evaluation; nuanced bias recognition; insightful integration strategy maintaining voice",
+        "3": "Clear evaluation with adequate bias awareness; appropriate integration approach",
+        "2": "Basic evaluation with limited bias recognition OR integration strategy",
+        "1": "Superficial evaluation without meaningful integration plan",
+        "0": "No response or off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.78,
+      "time_estimate_seconds": 600,
+      "passage_required": false
+    },
+    {
+      "id": "ela-10-w-9-001",
+      "standard_id": "9-10.W.9",
+      "standard_description": "Draw evidence from literary or informational texts to support analysis, reflection, and research",
+      "dok_level": 4,
+      "question_type": "essay",
+      "question": "Using evidence from both literary and informational texts, write an essay that explores how a significant theme or issue is represented across genres. Analyze how each genre approaches the topic differently and what insights emerge from reading across these genres.",
+      "rubric": {
+        "4": "Sophisticated cross-genre analysis; nuanced theme exploration; insightful genre-specific insights",
+        "3": "Clear cross-genre analysis with adequate theme development",
+        "2": "Basic analysis with limited genre differentiation",
+        "1": "Superficial treatment without cross-genre insight",
+        "0": "No response or off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.85,
+      "time_estimate_seconds": 1800,
+      "passage_required": true
+    },
+    {
+      "id": "ela-10-sl-1-001",
+      "standard_id": "9-10.SL.1",
+      "standard_description": "Initiate and participate effectively in a range of collaborative discussions",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Design a discussion protocol for exploring a complex, potentially controversial topic from the texts. What ground rules would you establish? What types of questions would generate productive dialogue? How would you ensure all perspectives are heard and that the discussion advances understanding?",
+      "rubric": {
+        "4": "Sophisticated protocol design; nuanced understanding of productive discussion dynamics; insightful perspective-balancing strategies",
+        "3": "Clear protocol with adequate ground rules and question types",
+        "2": "Basic protocol with limited sophistication",
+        "1": "Underdeveloped protocol without meaningful structure",
+        "0": "No response or off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.72,
+      "time_estimate_seconds": 540,
+      "passage_required": true
+    },
+    {
+      "id": "ela-10-sl-3-001",
+      "standard_id": "9-10.SL.3",
+      "standard_description": "Evaluate a speaker's point of view, reasoning, and use of evidence and rhetoric",
+      "dok_level": 4,
+      "question_type": "essay",
+      "question": "Watch/listen to a contemporary speech or presentation on a significant issue. Write a comprehensive rhetorical analysis evaluating the speaker's ethos, logos, and pathos appeals; use of evidence; logical structure; and rhetorical techniques. Assess the speech's effectiveness and identify any weaknesses in reasoning or evidence.",
+      "rubric": {
+        "4": "Sophisticated comprehensive analysis; nuanced appeal identification; insightful effectiveness evaluation",
+        "3": "Clear analysis covering main rhetorical elements; adequate evaluation",
+        "2": "Basic analysis missing key elements OR weak evaluation",
+        "1": "Superficial analysis without meaningful evaluation",
+        "0": "No response or off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.85,
+      "time_estimate_seconds": 1200,
+      "passage_required": true
+    },
+    {
+      "id": "ela-10-sl-4-001",
+      "standard_id": "9-10.SL.4",
+      "standard_description": "Present information, findings, and supporting evidence clearly, concisely, and logically",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Develop a complete presentation plan for sharing your research findings with an academic audience. Include your thesis, main points with evidence, logical organization, and anticipated questions. Explain how you would use verbal and nonverbal communication to enhance your credibility and audience engagement.",
+      "rubric": {
+        "4": "Sophisticated presentation plan; comprehensive content and delivery strategy; insightful communication awareness",
+        "3": "Clear plan with adequate content and delivery consideration",
+        "2": "Basic plan with limited delivery attention",
+        "1": "Underdeveloped plan without presentation awareness",
+        "0": "No response or off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 720,
+      "passage_required": false
+    },
+    {
+      "id": "ela-10-sl-6-001",
+      "standard_id": "9-10.SL.6",
+      "standard_description": "Adapt speech to a variety of contexts and tasks, demonstrating command of formal English when indicated or appropriate",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Prepare talking points on the same topic for three contexts: a formal debate, a panel discussion with experts, and a casual podcast interview. Analyze how register, vocabulary, sentence structure, and communication style differ across these contexts while maintaining your core message.",
+      "rubric": {
+        "4": "Sophisticated context adaptation; nuanced register awareness; insightful analysis of consistency/variation",
+        "3": "Clear adaptation with appropriate register shifts; adequate analysis",
+        "2": "Basic adaptation with limited register awareness",
+        "1": "Minimal differentiation across contexts",
+        "0": "No response or off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 720,
+      "passage_required": false
+    },
+    {
+      "id": "ela-10-l-1-001",
+      "standard_id": "9-10.L.1",
+      "standard_description": "Demonstrate command of the conventions of standard English grammar and usage when writing or speaking",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Analyze how the author uses sentence variety (simple, compound, complex, compound-complex) to control rhythm and emphasis. Then revise a paragraph from your own writing to improve sentence variety while maintaining clarity. Explain how your revisions enhance the writing's effect.",
+      "rubric": {
+        "4": "Sophisticated sentence variety analysis; masterful revision; insightful effect explanation",
+        "3": "Clear analysis with effective revision; adequate explanation",
+        "2": "Basic analysis with limited revision impact",
+        "1": "Superficial analysis without meaningful revision",
+        "0": "No response or off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.72,
+      "time_estimate_seconds": 540,
+      "passage_required": true
+    },
+    {
+      "id": "ela-10-l-2-001",
+      "standard_id": "9-10.L.2",
+      "standard_description": "Demonstrate command of the conventions of standard English capitalization, punctuation, and spelling when writing",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Analyze how a skilled author uses punctuation rhetorically - not just for correctness, but for effect. Identify examples where punctuation choices (such as em dashes, colons, semicolons, or ellipses) create specific rhythmic, emphatic, or tonal effects. Then apply this understanding to your own writing.",
+      "rubric": {
+        "4": "Sophisticated punctuation analysis; nuanced understanding of rhetorical effects; masterful application",
+        "3": "Clear analysis with adequate effect identification; appropriate application",
+        "2": "Basic analysis with limited effect understanding",
+        "1": "Superficial punctuation mention without rhetorical awareness",
+        "0": "No response or off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 480,
+      "passage_required": true
+    },
+    {
+      "id": "ela-10-l-3-001",
+      "standard_id": "9-10.L.3",
+      "standard_description": "Apply knowledge of language to understand how language functions in different contexts, to make effective choices for meaning or style",
+      "dok_level": 4,
+      "question_type": "essay",
+      "question": "Analyze the author's distinctive writing style by examining diction, syntax, figurative language, and tone. What makes this voice recognizable and effective? Then write a passage in imitation of this style on a different topic, and reflect on what you learned about the author's craft through this imitation.",
+      "rubric": {
+        "4": "Sophisticated style analysis; masterful imitation capturing key elements; insightful reflection on craft",
+        "3": "Clear style analysis with adequate imitation; appropriate reflection",
+        "2": "Basic analysis with limited imitation success",
+        "1": "Superficial analysis without meaningful imitation",
+        "0": "No response or off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.82,
+      "time_estimate_seconds": 900,
+      "passage_required": true
+    },
+    {
+      "id": "ela-10-l-4-001",
+      "standard_id": "9-10.L.4",
+      "standard_description": "Determine or clarify the meaning of unknown and multiple-meaning words and phrases",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "The text uses words with Latin and Greek roots that appear across academic disciplines. Select five such words, identify their roots and affixes, and explain how understanding the etymology helps you grasp their meaning. Then generate other English words that share these roots.",
+      "rubric": {
+        "4": "Sophisticated etymological analysis; nuanced root understanding; insightful word generation",
+        "3": "Clear analysis with appropriate root identification; adequate word generation",
+        "2": "Basic etymology with limited root understanding",
+        "1": "Superficial etymology without meaningful analysis",
+        "0": "No response or off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.68,
+      "time_estimate_seconds": 480,
+      "passage_required": true
+    },
+    {
+      "id": "ela-10-l-5-001",
+      "standard_id": "9-10.L.5",
+      "standard_description": "Demonstrate understanding of figurative language, word relationships, and nuances in word meanings",
+      "dok_level": 4,
+      "question_type": "essay",
+      "question": "Analyze how the author's figurative language creates a coherent symbolic system throughout the text. Identify the key symbols or image patterns and explain how they relate to each other and to the text's central themes. How does understanding this symbolic system deepen interpretation?",
+      "rubric": {
+        "4": "Sophisticated symbolic analysis; nuanced pattern recognition; insightful interpretation connection",
+        "3": "Clear symbolic identification with adequate pattern analysis",
+        "2": "Basic symbol recognition with limited pattern understanding",
+        "1": "Superficial symbol mention without system analysis",
+        "0": "No response or off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.82,
+      "time_estimate_seconds": 900,
+      "passage_required": true
+    },
+    {
+      "id": "ela-10-l-6-001",
+      "standard_id": "9-10.L.6",
+      "standard_description": "Acquire and use accurately general academic and domain-specific words and phrases",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Identify academic vocabulary used across the texts you have read this unit. Create a personal academic vocabulary guide that includes definitions, example sentences from the texts, and your own sentences. Explain how command of this vocabulary enhances your ability to discuss complex ideas.",
+      "rubric": {
+        "4": "Comprehensive vocabulary guide; sophisticated example sentences; insightful understanding of vocabulary's role",
+        "3": "Clear guide with adequate examples; appropriate vocabulary discussion",
+        "2": "Basic guide with limited examples OR discussion",
+        "1": "Underdeveloped guide without meaningful engagement",
+        "0": "No response or off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.68,
+      "time_estimate_seconds": 600,
+      "passage_required": true
+    }
+  ],
+  "metadata": {
+    "created": "2025-01-13",
+    "version": "1.0",
+    "total_items": 45,
+    "dok_distribution": {
+      "dok_2": 2,
+      "dok_3": 22,
+      "dok_4": 21
+    },
+    "average_difficulty": 0.79,
+    "strand_coverage": {
+      "RL": 13,
+      "RI": 12,
+      "W": 9,
+      "SL": 4,
+      "L": 7
+    }
+  }
+}

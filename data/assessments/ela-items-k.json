@@ -1,0 +1,848 @@
+{
+  "grade": "K",
+  "items": [
+    {
+      "id": "ela-k-rl-1-001",
+      "standard_id": "K.RL.1",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Look at the picture. The cat sat on a mat. Where did the cat sit?",
+      "options": ["On a mat", "On a bed", "On a chair", "On a table"],
+      "correct_answer": "On a mat",
+      "rubric": {
+        "full_credit": "Selects 'On a mat'",
+        "no_credit": "Selects incorrect option"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 0,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.2,
+      "time_estimate_seconds": 30,
+      "passage": "The cat sat on a mat.",
+      "image_prompt": "A cat sitting on a colorful mat"
+    },
+    {
+      "id": "ela-k-rl-1-002",
+      "standard_id": "K.RL.1",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Listen to the story: 'The frog jumped into the pond. Splash!' What did the frog do?",
+      "correct_answer": "jumped into the pond",
+      "rubric": {
+        "full_credit": "Identifies frog jumping into pond",
+        "partial_credit": "Mentions jumping or pond separately",
+        "no_credit": "Unrelated answer"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 45,
+      "passage": "The frog jumped into the pond. Splash!"
+    },
+    {
+      "id": "ela-k-rl-2-001",
+      "standard_id": "K.RL.2",
+      "dok_level": 2,
+      "question_type": "sequencing",
+      "question": "Put the story in order: A bird made a nest. The bird found sticks. Baby birds hatched.",
+      "correct_answer": ["The bird found sticks", "A bird made a nest", "Baby birds hatched"],
+      "rubric": {
+        "full_credit": "Correct order: sticks, nest, hatched",
+        "partial_credit": "Two items in correct order",
+        "no_credit": "Random order"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 60,
+      "passage": "A bird found sticks. A bird made a nest. Baby birds hatched."
+    },
+    {
+      "id": "ela-k-rl-2-002",
+      "standard_id": "K.RL.2",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Tell me what happened in this story: 'Sam got a ball. Sam threw the ball. The dog caught the ball.'",
+      "correct_answer": "Sam threw a ball and the dog caught it",
+      "rubric": {
+        "full_credit": "Retells key events in order",
+        "partial_credit": "Mentions some events",
+        "no_credit": "Cannot retell story"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 1,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 60,
+      "passage": "Sam got a ball. Sam threw the ball. The dog caught the ball."
+    },
+    {
+      "id": "ela-k-rl-3-001",
+      "standard_id": "K.RL.3",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "In the story, 'The bear lived in a cave. He slept all winter.' Where did the bear live?",
+      "options": ["In a cave", "In a house", "In a tree", "In water"],
+      "correct_answer": "In a cave",
+      "rubric": {
+        "full_credit": "Selects 'In a cave'",
+        "no_credit": "Selects incorrect option"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 0,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 30,
+      "passage": "The bear lived in a cave. He slept all winter."
+    },
+    {
+      "id": "ela-k-rl-3-002",
+      "standard_id": "K.RL.3",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Read: 'Pig had a party. Cow and Duck came to play.' Who are the characters in this story?",
+      "correct_answer": "Pig, Cow, and Duck",
+      "rubric": {
+        "full_credit": "Names all three characters",
+        "partial_credit": "Names 1-2 characters",
+        "no_credit": "Cannot identify characters"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 45,
+      "passage": "Pig had a party. Cow and Duck came to play."
+    },
+    {
+      "id": "ela-k-rl-4-001",
+      "standard_id": "K.RL.4",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "In the story, 'The tiny ant carried a big crumb.' What does 'tiny' mean?",
+      "options": ["Very small", "Very big", "Very fast", "Very loud"],
+      "correct_answer": "Very small",
+      "rubric": {
+        "full_credit": "Selects 'Very small'",
+        "no_credit": "Selects incorrect option"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 30,
+      "passage": "The tiny ant carried a big crumb."
+    },
+    {
+      "id": "ela-k-rl-4-002",
+      "standard_id": "K.RL.4",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "The story says 'The bunny hopped quickly away.' What does 'quickly' tell us about how the bunny moved?",
+      "correct_answer": "fast",
+      "rubric": {
+        "full_credit": "Explains quickly means fast/speedy",
+        "partial_credit": "Shows some understanding",
+        "no_credit": "Cannot explain word"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 45,
+      "passage": "The bunny hopped quickly away."
+    },
+    {
+      "id": "ela-k-rl-9-001",
+      "standard_id": "K.RL.9",
+      "dok_level": 3,
+      "question_type": "short_answer",
+      "question": "Story 1: 'The red hen found seeds. She planted them.' Story 2: 'The brown hen found a worm. She ate it.' How are these hens different?",
+      "correct_answer": "One hen planted seeds, the other ate a worm",
+      "rubric": {
+        "full_credit": "Identifies key difference in actions",
+        "partial_credit": "Identifies one difference",
+        "no_credit": "Cannot compare"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 1,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 90,
+      "passage": "Story 1: The red hen found seeds. She planted them. Story 2: The brown hen found a worm. She ate it."
+    },
+    {
+      "id": "ela-k-rl-9-002",
+      "standard_id": "K.RL.9",
+      "dok_level": 3,
+      "question_type": "multiple_choice",
+      "question": "Max the dog loves to run. Bella the cat loves to nap. How are Max and Bella the same?",
+      "options": ["They are both pets", "They both run", "They both nap", "They both swim"],
+      "correct_answer": "They are both pets",
+      "rubric": {
+        "full_credit": "Selects 'They are both pets'",
+        "no_credit": "Selects incorrect option"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 45,
+      "passage": "Max the dog loves to run. Bella the cat loves to nap."
+    },
+    {
+      "id": "ela-k-ri-1-001",
+      "standard_id": "K.RI.1",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Read: 'Apples grow on trees. They can be red or green.' Where do apples grow?",
+      "options": ["On trees", "In the ground", "In water", "On bushes"],
+      "correct_answer": "On trees",
+      "rubric": {
+        "full_credit": "Selects 'On trees'",
+        "no_credit": "Selects incorrect option"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 0,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.2,
+      "time_estimate_seconds": 30,
+      "passage": "Apples grow on trees. They can be red or green."
+    },
+    {
+      "id": "ela-k-ri-1-002",
+      "standard_id": "K.RI.1",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Read: 'Fish live in water. They use fins to swim.' What do fish use to swim?",
+      "correct_answer": "fins",
+      "rubric": {
+        "full_credit": "Identifies fins",
+        "partial_credit": "Related answer about swimming",
+        "no_credit": "Incorrect answer"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 30,
+      "passage": "Fish live in water. They use fins to swim."
+    },
+    {
+      "id": "ela-k-ri-2-001",
+      "standard_id": "K.RI.2",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Read: 'Dogs make great pets. They can play fetch. They can learn tricks.' What is this text mostly about?",
+      "options": ["Dogs as pets", "Cats", "Wild animals", "Fish"],
+      "correct_answer": "Dogs as pets",
+      "rubric": {
+        "full_credit": "Selects 'Dogs as pets'",
+        "no_credit": "Selects incorrect option"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 45,
+      "passage": "Dogs make great pets. They can play fetch. They can learn tricks."
+    },
+    {
+      "id": "ela-k-ri-2-002",
+      "standard_id": "K.RI.2",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Read: 'The sun is very hot. It gives us light. It helps plants grow.' What is the main topic?",
+      "correct_answer": "the sun",
+      "rubric": {
+        "full_credit": "Identifies the sun as main topic",
+        "partial_credit": "Mentions sun-related concept",
+        "no_credit": "Unrelated answer"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 45,
+      "passage": "The sun is very hot. It gives us light. It helps plants grow."
+    },
+    {
+      "id": "ela-k-ri-3-001",
+      "standard_id": "K.RI.3",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Read: 'Seeds need water. Water helps seeds grow into plants.' How does water help seeds?",
+      "correct_answer": "helps them grow into plants",
+      "rubric": {
+        "full_credit": "Connects water to plant growth",
+        "partial_credit": "Mentions growing",
+        "no_credit": "Cannot make connection"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 45,
+      "passage": "Seeds need water. Water helps seeds grow into plants."
+    },
+    {
+      "id": "ela-k-ri-3-002",
+      "standard_id": "K.RI.3",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Read: 'Bees visit flowers. Bees make honey.' What do bees do with flowers?",
+      "options": ["Visit them", "Eat them", "Water them", "Plant them"],
+      "correct_answer": "Visit them",
+      "rubric": {
+        "full_credit": "Selects 'Visit them'",
+        "no_credit": "Selects incorrect option"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 30,
+      "passage": "Bees visit flowers. Bees make honey."
+    },
+    {
+      "id": "ela-k-rf-1-001",
+      "standard_id": "K.RF.1",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Look at this sentence: 'I like cats.' Which word comes first?",
+      "options": ["I", "like", "cats", "the"],
+      "correct_answer": "I",
+      "rubric": {
+        "full_credit": "Selects 'I'",
+        "no_credit": "Selects incorrect option"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 0,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.2,
+      "time_estimate_seconds": 20,
+      "passage": "I like cats."
+    },
+    {
+      "id": "ela-k-rf-1-002",
+      "standard_id": "K.RF.1",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "We read words from _____ to _____.",
+      "options": ["Left to right", "Right to left", "Top to bottom", "Bottom to top"],
+      "correct_answer": "Left to right",
+      "rubric": {
+        "full_credit": "Selects 'Left to right'",
+        "no_credit": "Selects incorrect option"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 0,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 20,
+      "passage": null
+    },
+    {
+      "id": "ela-k-rf-2-001",
+      "standard_id": "K.RF.2",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "How many syllables are in the word 'apple'?",
+      "options": ["2", "1", "3", "4"],
+      "correct_answer": "2",
+      "rubric": {
+        "full_credit": "Selects '2'",
+        "no_credit": "Selects incorrect option"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 0,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 30,
+      "passage": null
+    },
+    {
+      "id": "ela-k-rf-2-002",
+      "standard_id": "K.RF.2",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Which words rhyme? Pick two that sound the same at the end.",
+      "options": ["cat - hat", "dog - run", "big - top", "sun - cup"],
+      "correct_answer": "cat - hat",
+      "rubric": {
+        "full_credit": "Selects 'cat - hat'",
+        "no_credit": "Selects incorrect pair"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 30,
+      "passage": null
+    },
+    {
+      "id": "ela-k-rf-3-001",
+      "standard_id": "K.RF.3",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "What sound does the letter 'B' make?",
+      "options": ["/b/ as in ball", "/d/ as in dog", "/p/ as in pig", "/m/ as in mom"],
+      "correct_answer": "/b/ as in ball",
+      "rubric": {
+        "full_credit": "Selects /b/ sound",
+        "no_credit": "Selects incorrect sound"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 0,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 20,
+      "passage": null
+    },
+    {
+      "id": "ela-k-rf-3-002",
+      "standard_id": "K.RF.3",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Look at the picture of a sun. What word matches this picture? Sound out the letters: s-u-n.",
+      "correct_answer": "sun",
+      "rubric": {
+        "full_credit": "Says/writes 'sun'",
+        "partial_credit": "Attempts to blend sounds",
+        "no_credit": "Cannot decode"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 30,
+      "image_prompt": "A bright yellow sun"
+    },
+    {
+      "id": "ela-k-w-1-001",
+      "standard_id": "K.W.1",
+      "dok_level": 2,
+      "question_type": "constructed_response",
+      "question": "Draw and write about your favorite animal. Tell why you like it.",
+      "correct_answer": null,
+      "rubric": {
+        "full_credit": "Draws animal, names it, and gives a reason for preference",
+        "partial_credit": "Draws and names animal OR gives reason",
+        "no_credit": "No discernible opinion expressed"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 2,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 180,
+      "passage": null
+    },
+    {
+      "id": "ela-k-w-1-002",
+      "standard_id": "K.W.1",
+      "dok_level": 2,
+      "question_type": "constructed_response",
+      "question": "Do you like sunny days or rainy days? Draw a picture and tell why.",
+      "correct_answer": null,
+      "rubric": {
+        "full_credit": "States preference with reason and drawing",
+        "partial_credit": "States preference with drawing OR reason only",
+        "no_credit": "No preference stated"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 150,
+      "passage": null
+    },
+    {
+      "id": "ela-k-w-2-001",
+      "standard_id": "K.W.2",
+      "dok_level": 2,
+      "question_type": "constructed_response",
+      "question": "Draw a picture of a dog. Write or tell one thing about dogs.",
+      "correct_answer": null,
+      "rubric": {
+        "full_credit": "Draws dog and provides factual information",
+        "partial_credit": "Draws dog OR provides information",
+        "no_credit": "No relevant information"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 150,
+      "passage": null
+    },
+    {
+      "id": "ela-k-w-2-002",
+      "standard_id": "K.W.2",
+      "dok_level": 2,
+      "question_type": "constructed_response",
+      "question": "What do you know about the color red? Draw and write about it.",
+      "correct_answer": null,
+      "rubric": {
+        "full_credit": "Names topic and provides 1-2 facts about red things",
+        "partial_credit": "Draws red items or mentions red",
+        "no_credit": "No relevant information"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 150,
+      "passage": null
+    },
+    {
+      "id": "ela-k-w-3-001",
+      "standard_id": "K.W.3",
+      "dok_level": 2,
+      "question_type": "constructed_response",
+      "question": "Draw and write about something fun you did. What happened first? What happened next?",
+      "correct_answer": null,
+      "rubric": {
+        "full_credit": "Narrates event with sequence (first, then/next)",
+        "partial_credit": "Describes event without clear sequence",
+        "no_credit": "No event described"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 2,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 180,
+      "passage": null
+    },
+    {
+      "id": "ela-k-w-3-002",
+      "standard_id": "K.W.3",
+      "dok_level": 2,
+      "question_type": "constructed_response",
+      "question": "Draw and write about your morning. What did you do first? Then what happened?",
+      "correct_answer": null,
+      "rubric": {
+        "full_credit": "Describes 2+ events in order",
+        "partial_credit": "Describes 1 event or events out of order",
+        "no_credit": "No events described"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 2,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 180,
+      "passage": null
+    },
+    {
+      "id": "ela-k-sl-1-001",
+      "standard_id": "K.SL.1",
+      "dok_level": 2,
+      "question_type": "performance_task",
+      "question": "Talk with a partner about your favorite food. Take turns speaking and listening.",
+      "correct_answer": null,
+      "rubric": {
+        "full_credit": "Participates in turn-taking conversation",
+        "partial_credit": "Speaks but doesn't listen OR listens but doesn't speak",
+        "no_credit": "Does not participate"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 120,
+      "passage": null
+    },
+    {
+      "id": "ela-k-sl-1-002",
+      "standard_id": "K.SL.1",
+      "dok_level": 2,
+      "question_type": "performance_task",
+      "question": "In your group, talk about pets. Follow the rules: Listen when others talk. Wait your turn.",
+      "correct_answer": null,
+      "rubric": {
+        "full_credit": "Follows conversation rules and contributes",
+        "partial_credit": "Follows some rules or contributes minimally",
+        "no_credit": "Does not follow rules or participate"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 180,
+      "passage": null
+    },
+    {
+      "id": "ela-k-sl-2-001",
+      "standard_id": "K.SL.2",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Listen to the story about the hungry bear. What did the bear eat?",
+      "correct_answer": "varies based on story read",
+      "rubric": {
+        "full_credit": "Identifies correct detail from story",
+        "partial_credit": "Identifies related but incorrect detail",
+        "no_credit": "Cannot recall detail"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 45,
+      "passage": null,
+      "audio_required": true
+    },
+    {
+      "id": "ela-k-sl-2-002",
+      "standard_id": "K.SL.2",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "After listening to the story, answer: Where did the girl go?",
+      "options": ["To the park", "To school", "To the store", "To bed"],
+      "correct_answer": "varies based on story",
+      "rubric": {
+        "full_credit": "Selects correct location",
+        "no_credit": "Selects incorrect option"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 30,
+      "passage": null,
+      "audio_required": true
+    },
+    {
+      "id": "ela-k-sl-6-001",
+      "standard_id": "K.SL.6",
+      "dok_level": 2,
+      "question_type": "performance_task",
+      "question": "Tell the class about your favorite toy. Speak clearly so everyone can hear.",
+      "correct_answer": null,
+      "rubric": {
+        "full_credit": "Speaks audibly and shares thoughts clearly",
+        "partial_credit": "Speaks but hard to hear or understand",
+        "no_credit": "Does not speak or is inaudible"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 60,
+      "passage": null
+    },
+    {
+      "id": "ela-k-sl-6-002",
+      "standard_id": "K.SL.6",
+      "dok_level": 2,
+      "question_type": "performance_task",
+      "question": "Show your picture to the class. Tell them what it is about in a loud, clear voice.",
+      "correct_answer": null,
+      "rubric": {
+        "full_credit": "Expresses ideas clearly and audibly",
+        "partial_credit": "Attempts but unclear or too quiet",
+        "no_credit": "Cannot express ideas"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 60,
+      "passage": null
+    },
+    {
+      "id": "ela-k-l-1-001",
+      "standard_id": "K.L.1",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Which sentence uses the correct word? 'I ___ a cat.'",
+      "options": ["have", "has", "haves", "having"],
+      "correct_answer": "have",
+      "rubric": {
+        "full_credit": "Selects 'have'",
+        "no_credit": "Selects incorrect option"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 0,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 30,
+      "passage": null
+    },
+    {
+      "id": "ela-k-l-1-002",
+      "standard_id": "K.L.1",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Choose the sentence that is correct.",
+      "options": ["The cat is big.", "cat big is The.", "is The big cat.", "big The cat is."],
+      "correct_answer": "The cat is big.",
+      "rubric": {
+        "full_credit": "Selects 'The cat is big.'",
+        "no_credit": "Selects incorrect option"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 0,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 30,
+      "passage": null
+    },
+    {
+      "id": "ela-k-l-2-001",
+      "standard_id": "K.L.2",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Which word needs a capital letter at the start? '___ is my friend.'",
+      "options": ["sam", "the", "a", "my"],
+      "correct_answer": "sam",
+      "rubric": {
+        "full_credit": "Identifies 'sam' (name needs capital)",
+        "no_credit": "Selects incorrect option"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 0,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 30,
+      "passage": null
+    },
+    {
+      "id": "ela-k-l-2-002",
+      "standard_id": "K.L.2",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "What goes at the end of this sentence? 'I like apples___'",
+      "options": [".", "?", "!", ","],
+      "correct_answer": ".",
+      "rubric": {
+        "full_credit": "Selects period (.)",
+        "no_credit": "Selects incorrect punctuation"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 0,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 20,
+      "passage": null
+    },
+    {
+      "id": "ela-k-l-5-001",
+      "standard_id": "K.L.5",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Big and little are ___.",
+      "options": ["Opposites", "The same", "Colors", "Numbers"],
+      "correct_answer": "Opposites",
+      "rubric": {
+        "full_credit": "Selects 'Opposites'",
+        "no_credit": "Selects incorrect option"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 30,
+      "passage": null
+    },
+    {
+      "id": "ela-k-l-5-002",
+      "standard_id": "K.L.5",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Which word means the same as 'happy'?",
+      "options": ["Glad", "Sad", "Mad", "Tired"],
+      "correct_answer": "Glad",
+      "rubric": {
+        "full_credit": "Selects 'Glad'",
+        "no_credit": "Selects incorrect option"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 30,
+      "passage": null
+    }
+  ]
+}

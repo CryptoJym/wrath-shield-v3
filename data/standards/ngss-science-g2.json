@@ -1,0 +1,152 @@
+{
+    "subject": "science",
+    "grade": "2",
+    "domains": [
+        {
+            "name": "Physical Science: Structure and Properties of Matter",
+            "standards": [
+                {
+                    "id": "2-PS1-1",
+                    "description": "Plan and conduct an investigation to describe and classify different kinds of materials by their observable properties.",
+                    "cluster": "Matter and Its Interactions",
+                    "prerequisites": [],
+                    "stat_mappings": ["science", "critical_thinking", "problem_solving"],
+                    "cognitive_complexity": 2,
+                    "estimated_hours": 4
+                },
+                {
+                    "id": "2-PS1-2",
+                    "description": "Analyze data obtained from testing different materials to determine which materials have the properties that are best suited for an intended purpose.",
+                    "cluster": "Matter and Its Interactions",
+                    "prerequisites": ["2-PS1-1"],
+                    "stat_mappings": ["science", "critical_thinking", "technology"],
+                    "cognitive_complexity": 3,
+                    "estimated_hours": 4
+                },
+                {
+                    "id": "2-PS1-3",
+                    "description": "Make observations to construct an evidence-based account of how an object made of a small set of pieces can be disassembled and made into a new object.",
+                    "cluster": "Matter and Its Interactions",
+                    "prerequisites": ["2-PS1-1"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 2,
+                    "estimated_hours": 3
+                },
+                {
+                    "id": "2-PS1-4",
+                    "description": "Construct an argument with evidence that some changes caused by heating or cooling can be reversed and some cannot.",
+                    "cluster": "Matter and Its Interactions",
+                    "prerequisites": ["2-PS1-1"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 3,
+                    "estimated_hours": 4
+                }
+            ]
+        },
+        {
+            "name": "Life Science: Interdependent Relationships in Ecosystems",
+            "standards": [
+                {
+                    "id": "2-LS2-1",
+                    "description": "Plan and conduct an investigation to determine if plants need sunlight and water to grow.",
+                    "cluster": "Ecosystems: Interactions, Energy, and Dynamics",
+                    "prerequisites": ["1-LS1-1"],
+                    "stat_mappings": ["science", "critical_thinking", "problem_solving"],
+                    "cognitive_complexity": 2,
+                    "estimated_hours": 4
+                },
+                {
+                    "id": "2-LS2-2",
+                    "description": "Develop a simple model that mimics the function of an animal in dispersing seeds or pollinating plants.",
+                    "cluster": "Ecosystems: Interactions, Energy, and Dynamics",
+                    "prerequisites": ["1-LS1-1"],
+                    "stat_mappings": ["science", "technology", "problem_solving"],
+                    "cognitive_complexity": 3,
+                    "estimated_hours": 5
+                },
+                {
+                    "id": "2-LS4-1",
+                    "description": "Make observations of plants and animals to compare the diversity of life in different habitats.",
+                    "cluster": "Biological Evolution: Unity and Diversity",
+                    "prerequisites": ["K-LS1-1"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 2,
+                    "estimated_hours": 3
+                }
+            ]
+        },
+        {
+            "name": "Earth and Space Science: Earth's Systems",
+            "standards": [
+                {
+                    "id": "2-ESS1-1",
+                    "description": "Use information from several sources to provide evidence that Earth events can occur quickly or slowly.",
+                    "cluster": "Earth's Place in the Universe",
+                    "prerequisites": ["1-ESS1-1"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 2,
+                    "estimated_hours": 3
+                },
+                {
+                    "id": "2-ESS2-1",
+                    "description": "Compare multiple solutions designed to slow or prevent wind or water from changing the shape of the land.",
+                    "cluster": "Earth's Systems",
+                    "prerequisites": ["K-ESS3-2"],
+                    "stat_mappings": ["science", "critical_thinking", "technology"],
+                    "cognitive_complexity": 3,
+                    "estimated_hours": 4
+                },
+                {
+                    "id": "2-ESS2-2",
+                    "description": "Develop a model to represent the shapes and kinds of land and bodies of water in an area.",
+                    "cluster": "Earth's Systems",
+                    "prerequisites": [],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 2,
+                    "estimated_hours": 3
+                },
+                {
+                    "id": "2-ESS2-3",
+                    "description": "Obtain information to identify where water is found on Earth and that it can be solid or liquid.",
+                    "cluster": "Earth's Systems",
+                    "prerequisites": ["2-PS1-1"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 2,
+                    "estimated_hours": 3
+                }
+            ]
+        },
+        {
+            "name": "Engineering Design",
+            "standards": [
+                {
+                    "id": "K-2-ETS1-1",
+                    "description": "Ask questions, make observations, and gather information about a situation people want to change to define a simple problem that can be solved through the development of a new or improved object or tool.",
+                    "cluster": "Engineering Design",
+                    "prerequisites": [],
+                    "stat_mappings": ["science", "critical_thinking", "technology", "problem_solving"],
+                    "cognitive_complexity": 2,
+                    "estimated_hours": 4
+                },
+                {
+                    "id": "K-2-ETS1-2",
+                    "description": "Develop a simple sketch, drawing, or physical model to illustrate how the shape of an object helps it function as needed to solve a given problem.",
+                    "cluster": "Engineering Design",
+                    "prerequisites": ["K-2-ETS1-1"],
+                    "stat_mappings": ["science", "technology", "problem_solving"],
+                    "cognitive_complexity": 3,
+                    "estimated_hours": 5
+                },
+                {
+                    "id": "K-2-ETS1-3",
+                    "description": "Analyze data from tests of two objects designed to solve the same problem to compare the strengths and weaknesses of how each performs.",
+                    "cluster": "Engineering Design",
+                    "prerequisites": ["K-2-ETS1-2"],
+                    "stat_mappings": ["science", "critical_thinking", "technology"],
+                    "cognitive_complexity": 3,
+                    "estimated_hours": 5
+                }
+            ]
+        }
+    ]
+}

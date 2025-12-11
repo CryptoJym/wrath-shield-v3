@@ -1,0 +1,1616 @@
+{
+  "grade": "7",
+  "subject": "Mathematics",
+  "items": [
+    {
+      "id": "math-7-rp-a-1-001",
+      "standard_id": "7.RP.A.1",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "A recipe uses 3/4 cup of sugar for every 1/2 cup of butter. What is the unit rate of sugar per cup of butter?",
+      "correct_answer": "(3/4) ÷ (1/2) = (3/4) × (2/1) = 3/2 = 1.5 cups of sugar per cup of butter",
+      "rubric": {
+        "full_credit": "Correct unit rate with work shown",
+        "partial_credit": "Correct setup but calculation error",
+        "no_credit": "Incorrect approach"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-7-rp-a-1-002",
+      "standard_id": "7.RP.A.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A painter uses 2/3 gallon of paint to cover 1/4 of a wall. At this rate, how many gallons are needed to paint the entire wall? Explain your reasoning using unit rates.",
+      "correct_answer": "First find the unit rate: (2/3) ÷ (1/4) = (2/3) × 4 = 8/3 gallons per whole wall. The painter needs 8/3 or 2⅔ gallons to paint the entire wall. This makes sense because 1/4 of a wall uses 2/3 gallon, so the whole wall (4 quarters) uses 4 × 2/3 = 8/3 gallons.",
+      "rubric": {
+        "full_credit": "Correct answer with clear unit rate reasoning",
+        "partial_credit": "Correct answer but incomplete explanation",
+        "no_credit": "Incorrect answer"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-7-rp-a-1-003",
+      "standard_id": "7.RP.A.1",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "A car travels 7/8 mile in 1/3 minute at constant speed.\n\nPart A: Calculate the speed in miles per minute.\nPart B: Convert this to miles per hour.\nPart C: Is this speed realistic for a car? If not, what might the data actually represent?",
+      "correct_answer": {
+        "part_a": "(7/8) ÷ (1/3) = (7/8) × 3 = 21/8 = 2.625 miles per minute",
+        "part_b": "2.625 × 60 = 157.5 miles per hour",
+        "part_c": "This is not realistic for normal driving (highway speeds are typically 55-75 mph). This could represent a race car, a very fast sports car on a track, or there may be an error in the original measurements."
+      },
+      "rubric": {
+        "full_credit": "All calculations correct with thoughtful analysis of reasonableness",
+        "partial_credit": "Calculations correct but weak Part C analysis",
+        "no_credit": "Part A or B incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 240
+    },
+    {
+      "id": "math-7-rp-a-2-001",
+      "standard_id": "7.RP.A.2",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Which table shows a proportional relationship?",
+      "options": [
+        "A) x: 2, 4, 6 | y: 5, 9, 13",
+        "B) x: 2, 4, 6 | y: 6, 12, 18",
+        "C) x: 2, 4, 6 | y: 4, 6, 8",
+        "D) x: 2, 4, 6 | y: 3, 5, 7"
+      ],
+      "correct_answer": "B",
+      "rubric": {
+        "full_credit": "Correct answer B",
+        "no_credit": "Any other answer"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-7-rp-a-2-002",
+      "standard_id": "7.RP.A.2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Determine whether y = 2x + 1 represents a proportional relationship. Graph the equation, identify the y-intercept, and explain how the graph confirms whether the relationship is proportional.",
+      "correct_answer": "y = 2x + 1 is NOT proportional. The y-intercept is 1, meaning when x = 0, y = 1. Proportional relationships must pass through the origin (0, 0). The graph is a straight line but does not go through the origin, confirming it's linear but not proportional.",
+      "rubric": {
+        "full_credit": "Correct conclusion with graph showing y-intercept at (0,1) and clear explanation connecting to origin criterion",
+        "partial_credit": "Correct conclusion but incomplete graph or explanation",
+        "no_credit": "Incorrect conclusion"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-7-rp-a-2-003",
+      "standard_id": "7.RP.A.2",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "A gym offers two membership options:\nOption A: $20/month (no signup fee)\nOption B: $50 signup fee + $15/month\n\nPart A: Write an equation for the total cost (y) after x months for each option.\nPart B: Which option represents a proportional relationship? Explain.\nPart C: After how many months does Option B become the better deal?\nPart D: Graph both relationships and identify the point of intersection.",
+      "correct_answer": {
+        "part_a": "Option A: y = 20x; Option B: y = 15x + 50",
+        "part_b": "Option A is proportional (passes through origin, constant ratio of 20:1). Option B is not proportional because of the $50 signup fee.",
+        "part_c": "Set equal: 20x = 15x + 50 → 5x = 50 → x = 10. After 10 months, costs are equal. After month 10, Option B is better.",
+        "part_d": "Graphs intersect at (10, 200). Option A is a line through origin; Option B has y-intercept at 50."
+      },
+      "rubric": {
+        "full_credit": "All four parts correct with clear graph",
+        "partial_credit": "Three parts correct",
+        "no_credit": "Fewer than three parts correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 360
+    },
+    {
+      "id": "math-7-rp-a-3-001",
+      "standard_id": "7.RP.A.3",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "A shirt originally costs $45. It is on sale for 30% off. What is the sale price?",
+      "correct_answer": "$45 × 0.30 = $13.50 discount. Sale price = $45 - $13.50 = $31.50 (or $45 × 0.70 = $31.50)",
+      "rubric": {
+        "full_credit": "Correct sale price of $31.50",
+        "partial_credit": "Correct percent but wrong final answer",
+        "no_credit": "Incorrect calculation"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-7-rp-a-3-002",
+      "standard_id": "7.RP.A.3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A population of 2,500 bacteria increases by 40% in the first hour and then decreases by 25% in the second hour. What is the final population? Is the final population more or less than the original? Explain why.",
+      "correct_answer": "After hour 1: 2,500 × 1.40 = 3,500. After hour 2: 3,500 × 0.75 = 2,625. The final population (2,625) is MORE than the original (2,500) by 125. This happens because the 40% increase is based on the original, while the 25% decrease is based on the larger number. 40% of 2,500 = 1,000 gained, but 25% of 3,500 = 875 lost.",
+      "rubric": {
+        "full_credit": "Correct final population with clear explanation of why increase > decrease",
+        "partial_credit": "Correct calculation but incomplete explanation",
+        "no_credit": "Incorrect calculation"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-7-rp-a-3-003",
+      "standard_id": "7.RP.A.3",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "A store has a complex sale:\n- First, all items are marked 20% off\n- Then, members get an additional 15% off the sale price\n- Finally, 8% tax is added\n\nPart A: A member buys a $80 item. What is the final price after all discounts and tax?\nPart B: What single percent discount (before tax) is equivalent to the two successive discounts?\nPart C: Is 20% off plus 15% off the same as 35% off? Prove your answer mathematically.",
+      "correct_answer": {
+        "part_a": "After 20% off: $80 × 0.80 = $64. After 15% off: $64 × 0.85 = $54.40. After 8% tax: $54.40 × 1.08 = $58.75",
+        "part_b": "Original $80 → Final before tax $54.40. Discount = ($80 - $54.40)/$80 = $25.60/$80 = 32% total discount",
+        "part_c": "No. 35% off of $80 = $80 × 0.65 = $52. But successive discounts give $54.40. Mathematically: 0.80 × 0.85 = 0.68 = 68% of original, which is 32% off, not 35% off."
+      },
+      "rubric": {
+        "full_credit": "All three parts correct with mathematical proof in Part C",
+        "partial_credit": "Two parts correct",
+        "no_credit": "Fewer than two parts correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.8,
+      "time_estimate_seconds": 360
+    },
+    {
+      "id": "math-7-ns-a-1-001",
+      "standard_id": "7.NS.A.1",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Calculate: -15 + 8 - (-3) + (-7)",
+      "correct_answer": "-15 + 8 + 3 - 7 = -11",
+      "rubric": {
+        "full_credit": "Correct answer of -11",
+        "partial_credit": "One sign error but correct process",
+        "no_credit": "Multiple errors"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 60
+    },
+    {
+      "id": "math-7-ns-a-1-002",
+      "standard_id": "7.NS.A.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Use a number line to explain why subtracting a negative number is the same as adding a positive number. Provide a specific example and show the movement on the number line.",
+      "correct_answer": "Example: 5 - (-3) = 5 + 3 = 8. On the number line, start at 5. Subtracting means moving left, but subtracting a negative reverses direction (two negatives make a positive), so we move right 3 units, landing at 8. This is the same as adding 3. The number line shows both 5 + 3 and 5 - (-3) result in moving from 5 to 8.",
+      "rubric": {
+        "full_credit": "Clear number line diagram with correct example and explanation of direction",
+        "partial_credit": "Correct answer but incomplete number line explanation",
+        "no_credit": "Incorrect understanding of concept"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-7-ns-a-1-003",
+      "standard_id": "7.NS.A.1",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "A scuba diver is at -45 feet (below sea level). She ascends 20 feet, descends 35 feet, and then ascends to half her current depth.\n\nPart A: Write an expression showing all the diver's movements.\nPart B: Calculate the diver's final depth.\nPart C: How far did the diver travel in total (count all movement, up and down)?\nPart D: The diver needs to reach -15 feet safely. What additional movement is needed?",
+      "correct_answer": {
+        "part_a": "-45 + 20 + (-35) + ((-45 + 20 - 35)/2) or step by step",
+        "part_b": "After ascend 20: -45 + 20 = -25. After descend 35: -25 - 35 = -60. Half of -60 is -30, so ascend to -30. Final depth: -30 feet",
+        "part_c": "20 + 35 + 30 = 85 feet total movement",
+        "part_d": "From -30 to -15 requires ascending 15 feet"
+      },
+      "rubric": {
+        "full_credit": "All four parts correct",
+        "partial_credit": "Three parts correct",
+        "no_credit": "Fewer than three parts correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 300
+    },
+    {
+      "id": "math-7-ns-a-2-001",
+      "standard_id": "7.NS.A.2",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Calculate: (-8) × (-5) ÷ (-2)",
+      "correct_answer": "(-8) × (-5) = 40. 40 ÷ (-2) = -20",
+      "rubric": {
+        "full_credit": "Correct answer of -20",
+        "partial_credit": "Correct intermediate step but wrong final sign",
+        "no_credit": "Incorrect calculation"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 60
+    },
+    {
+      "id": "math-7-ns-a-2-002",
+      "standard_id": "7.NS.A.2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Explain why the product of three negative numbers is always negative, while the product of two negative numbers is always positive. Use examples and describe the pattern.",
+      "correct_answer": "Two negatives: (-2)(-3) = 6 (positive). The first negative 'flips' to negative, the second 'flips' back to positive. Three negatives: (-2)(-3)(-4) = (6)(-4) = -24. After two negatives we have positive, but the third negative flips it negative again. Pattern: Even number of negatives → positive; Odd number of negatives → negative.",
+      "rubric": {
+        "full_credit": "Clear examples with explanation of the even/odd pattern",
+        "partial_credit": "Correct examples but incomplete pattern explanation",
+        "no_credit": "Incorrect understanding of sign rules"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-7-ns-a-2-003",
+      "standard_id": "7.NS.A.2",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "Part A: Calculate (-2/3) × (5/4) ÷ (-1/2).\nPart B: Rewrite the expression using only multiplication (convert division to multiplication).\nPart C: Explain how you determined the sign of your final answer.\nPart D: Create a real-world context where this calculation would apply.",
+      "correct_answer": {
+        "part_a": "(-2/3) × (5/4) = -10/12 = -5/6. Then (-5/6) ÷ (-1/2) = (-5/6) × (-2/1) = 10/6 = 5/3",
+        "part_b": "(-2/3) × (5/4) × (-2/1) or (-2/3) × (5/4) × (-1/2)^(-1)",
+        "part_c": "Two negatives and one positive: (-)(+)(-) = (+). Even number of negatives yields positive.",
+        "part_d": "Example: A stock drops 2/3 of 5/4 points, but then the loss is split between 1/2 of a share, so each half-share gains 5/3 points."
+      },
+      "rubric": {
+        "full_credit": "All four parts correct with reasonable real-world context",
+        "partial_credit": "Three parts correct",
+        "no_credit": "Fewer than three correct or Part A wrong"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 300
+    },
+    {
+      "id": "math-7-ns-a-3-001",
+      "standard_id": "7.NS.A.3",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Evaluate: -2.5 + 4.8 × (-2) - 1.5",
+      "correct_answer": "-2.5 + (-9.6) - 1.5 = -2.5 - 9.6 - 1.5 = -13.6",
+      "rubric": {
+        "full_credit": "Correct answer with proper order of operations",
+        "partial_credit": "Order of operations correct but arithmetic error",
+        "no_credit": "Wrong order of operations"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-7-ns-a-3-002",
+      "standard_id": "7.NS.A.3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A checking account has a balance of $125.50. The following transactions occur: deposit of $45.75, withdrawal of $200, and a bank fee of $12.50. Write an expression to represent the final balance, calculate it, and explain what the negative balance means in real-world terms.",
+      "correct_answer": "Expression: 125.50 + 45.75 - 200 - 12.50 = -41.25. The final balance is -$41.25. In real-world terms, this means the account is overdrawn by $41.25 - the account holder owes the bank money and may face additional overdraft fees.",
+      "rubric": {
+        "full_credit": "Correct expression, calculation, and real-world interpretation",
+        "partial_credit": "Correct calculation but weak interpretation",
+        "no_credit": "Incorrect calculation"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 150
+    },
+    {
+      "id": "math-7-ns-a-3-003",
+      "standard_id": "7.NS.A.3",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "A deep-sea exploration vehicle starts at sea level. Its journey:\n- Descends 500 feet in the first hour\n- Ascends 1/4 of that distance\n- Descends twice the distance it just ascended\n- Rises at a rate of 75 feet per minute for 4 minutes\n\nPart A: Write an expression for the final depth.\nPart B: Calculate the final depth.\nPart C: What is the average descent rate (feet per hour) for the entire journey, if the journey took 2 hours?\nPart D: At what constant rate would the vehicle need to ascend to reach the surface in 30 minutes?",
+      "correct_answer": {
+        "part_a": "0 - 500 + (500/4) - 2(500/4) + (75 × 4)",
+        "part_b": "= -500 + 125 - 250 + 300 = -325 feet",
+        "part_c": "Net descent of 325 feet in 2 hours = 162.5 feet per hour average descent",
+        "part_d": "Need to rise 325 feet in 30 minutes = 325/0.5 = 650 feet per hour = 10.83 feet per minute"
+      },
+      "rubric": {
+        "full_credit": "All four parts correct",
+        "partial_credit": "Three parts correct",
+        "no_credit": "Fewer than three correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.8,
+      "time_estimate_seconds": 360
+    },
+    {
+      "id": "math-7-ee-a-1-001",
+      "standard_id": "7.EE.A.1",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Simplify: 4(2x - 3) + 5(x + 2)",
+      "correct_answer": "8x - 12 + 5x + 10 = 13x - 2",
+      "rubric": {
+        "full_credit": "Correct simplified expression",
+        "partial_credit": "Correct distribution but combining error",
+        "no_credit": "Incorrect distribution"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-7-ee-a-1-002",
+      "standard_id": "7.EE.A.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Factor completely: 12x + 18y - 24. Show two different approaches to verify your answer is correct.",
+      "correct_answer": "GCF of 12, 18, 24 is 6. Factored: 6(2x + 3y - 4). Verification 1: Distribute 6(2x) + 6(3y) + 6(-4) = 12x + 18y - 24 ✓. Verification 2: Substitute x=1, y=1: Original = 12 + 18 - 24 = 6. Factored = 6(2 + 3 - 4) = 6(1) = 6 ✓",
+      "rubric": {
+        "full_credit": "Correct factorization with two valid verification methods",
+        "partial_credit": "Correct factorization with one verification",
+        "no_credit": "Incorrect factorization"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 150
+    },
+    {
+      "id": "math-7-ee-a-1-003",
+      "standard_id": "7.EE.A.1",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "The perimeter of a rectangle is given by P = 2l + 2w.\n\nPart A: Factor this expression.\nPart B: The area of a rectangle is A = lw. A gardener wants a rectangular garden with perimeter 40 feet and maximum area. If the width is w, write an expression for length in terms of w, then write the area formula in terms of w only.\nPart C: Calculate the area when w = 5, w = 10, and w = 12. What pattern do you notice?\nPart D: What dimensions give maximum area? (Hint: The pattern from Part C)",
+      "correct_answer": {
+        "part_a": "P = 2(l + w)",
+        "part_b": "From P = 40: 2(l + w) = 40, so l + w = 20, thus l = 20 - w. Area = w(20 - w) = 20w - w²",
+        "part_c": "w=5: A = 5(15) = 75. w=10: A = 10(10) = 100. w=12: A = 12(8) = 96. The area is maximum when w = 10.",
+        "part_d": "Maximum area is when l = w = 10 (a square). Dimensions: 10 ft × 10 ft = 100 sq ft"
+      },
+      "rubric": {
+        "full_credit": "All four parts correct with recognition of square for maximum area",
+        "partial_credit": "Three parts correct",
+        "no_credit": "Fewer than three correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 360
+    },
+    {
+      "id": "math-7-ee-a-2-001",
+      "standard_id": "7.EE.A.2",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "The expression 3(x + 4) + 2x represents the total cost where x is the number of items. Which rewritten form best shows the total number of items?",
+      "options": [
+        "A) 5x + 12",
+        "B) 3x + 12 + 2x",
+        "C) 5(x + 2.4)",
+        "D) x(5) + 12"
+      ],
+      "correct_answer": "D",
+      "rubric": {
+        "full_credit": "Correct answer D (shows 5 items and 12 fixed cost)",
+        "no_credit": "Any other answer"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-7-ee-a-2-002",
+      "standard_id": "7.EE.A.2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A phone plan costs $30 plus $0.10 per text. The expression 30 + 0.10t represents the monthly cost. Rewrite this expression in at least two different forms and explain what insight each form provides about the cost structure.",
+      "correct_answer": "Form 1: 0.10(300 + t) shows the cost as $0.10 per text after the first 300 'free' texts are included in base price. Form 2: 10(3 + 0.01t) factors out 10, showing the cost in units of $10. Form 3: 30 + t/10 shows cost as base $30 plus texts divided by 10. Each form reveals different aspects: Form 1 shows equivalent 'free texts' in base fee, Form 2 shows cost in larger units, Form 3 shows fractional dollar cost per text.",
+      "rubric": {
+        "full_credit": "At least two valid rewritten forms with meaningful interpretations for each",
+        "partial_credit": "Two forms but only one meaningful interpretation",
+        "no_credit": "Fewer than two valid forms"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-7-ee-a-2-003",
+      "standard_id": "7.EE.A.2",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "A store offers a 20% discount on all items, then adds 8% sales tax.\n\nPart A: Write an expression for the final price of an item costing p dollars.\nPart B: Simplify your expression to a single multiplication.\nPart C: A customer pays $86.40 for an item. What was the original price?\nPart D: Is there an original price where the discount exactly equals the tax? If so, find it. If not, explain why.",
+      "correct_answer": {
+        "part_a": "(p - 0.20p) × 1.08 or 0.80p × 1.08",
+        "part_b": "0.80 × 1.08 × p = 0.864p",
+        "part_c": "0.864p = 86.40 → p = 86.40/0.864 = $100",
+        "part_d": "Discount = 0.20p. Tax = 0.08(0.80p) = 0.064p. Setting equal: 0.20p = 0.064p is only true when p = 0. So no positive price exists where discount equals tax."
+      },
+      "rubric": {
+        "full_credit": "All four parts correct with clear reasoning in Part D",
+        "partial_credit": "Three parts correct",
+        "no_credit": "Fewer than three correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 300
+    },
+    {
+      "id": "math-7-ee-b-3-001",
+      "standard_id": "7.EE.B.3",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Evaluate: -3 + 2(-4)² ÷ 8 - 5",
+      "correct_answer": "-3 + 2(16) ÷ 8 - 5 = -3 + 32 ÷ 8 - 5 = -3 + 4 - 5 = -4",
+      "rubric": {
+        "full_credit": "Correct answer with proper order of operations",
+        "partial_credit": "Order of operations correct but arithmetic error",
+        "no_credit": "Wrong order of operations"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-7-ee-b-3-002",
+      "standard_id": "7.EE.B.3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Marcus has $150 to spend on a camping trip. He spends 1/3 of his money on a sleeping bag, 2/5 of the remainder on a tent, and $15 on supplies. How much money does Marcus have left? Show your calculations step by step.",
+      "correct_answer": "Sleeping bag: (1/3)($150) = $50. Remainder: $150 - $50 = $100. Tent: (2/5)($100) = $40. After tent: $100 - $40 = $60. After supplies: $60 - $15 = $45 remaining.",
+      "rubric": {
+        "full_credit": "Correct final answer ($45) with clear step-by-step work",
+        "partial_credit": "Correct process but arithmetic error",
+        "no_credit": "Incorrect process (e.g., taking 2/5 of original amount)"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-7-ee-b-3-003",
+      "standard_id": "7.EE.B.3",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "A hiker is planning a trip. She can hike 3.5 miles per hour uphill and 4.5 miles per hour downhill. The trail is 8 miles up to the peak and 8 miles back down.\n\nPart A: How long will the uphill portion take?\nPart B: How long will the downhill portion take?\nPart C: What is her average speed for the entire trip?\nPart D: Explain why the average speed is NOT simply (3.5 + 4.5) ÷ 2.",
+      "correct_answer": {
+        "part_a": "8 miles ÷ 3.5 mph = 2.286 hours ≈ 2 hours 17 minutes",
+        "part_b": "8 miles ÷ 4.5 mph = 1.778 hours ≈ 1 hour 47 minutes",
+        "part_c": "Total distance = 16 miles. Total time = 2.286 + 1.778 = 4.064 hours. Average speed = 16 ÷ 4.064 = 3.94 mph",
+        "part_d": "Simple average (4 mph) is wrong because she spends more TIME going uphill (slower). Average speed must be total distance ÷ total time. Since she's slower going uphill, she spends more time at the slower speed, pulling the average below 4 mph."
+      },
+      "rubric": {
+        "full_credit": "All four parts correct with clear explanation of weighted time in Part D",
+        "partial_credit": "Three parts correct",
+        "no_credit": "Fewer than three correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 300
+    },
+    {
+      "id": "math-7-ee-b-4-001",
+      "standard_id": "7.EE.B.4",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Solve: 3x + 7 = 25",
+      "correct_answer": "3x = 18, so x = 6",
+      "rubric": {
+        "full_credit": "Correct answer x = 6",
+        "no_credit": "Incorrect answer"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 60
+    },
+    {
+      "id": "math-7-ee-b-4-002",
+      "standard_id": "7.EE.B.4",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "The sum of three consecutive odd integers is 87. Write and solve an equation to find the three integers. Verify your answer.",
+      "correct_answer": "Let x = first odd integer. Then x + 2 = second, x + 4 = third. Equation: x + (x + 2) + (x + 4) = 87. Simplify: 3x + 6 = 87 → 3x = 81 → x = 27. The integers are 27, 29, 31. Verify: 27 + 29 + 31 = 87 ✓",
+      "rubric": {
+        "full_credit": "Correct equation, solution, and verification",
+        "partial_credit": "Correct answer but no verification or equation error with correct answer",
+        "no_credit": "Incorrect integers"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-7-ee-b-4-003",
+      "standard_id": "7.EE.B.4",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "A concert venue charges $12 per ticket plus a $3 service fee per order. They also offer a membership for $50/year that gives 20% off tickets (service fee still applies).\n\nPart A: Write an inequality to find how many tickets (in a single order) makes the membership worthwhile.\nPart B: Solve the inequality.\nPart C: If someone plans to attend 4 concerts this year, buying 2 tickets each time, should they get the membership? Justify your answer.\nPart D: What's the minimum number of concerts (buying 2 tickets each) that makes membership worthwhile for the year?",
+      "correct_answer": {
+        "part_a": "Let t = tickets. Without membership: 12t + 3. With membership: 50 + 0.80(12)t + 3 = 53 + 9.6t. Inequality: 53 + 9.6t < 12t + 3",
+        "part_b": "53 + 9.6t < 12t + 3 → 50 < 2.4t → t > 20.83. Need more than 21 tickets in a single order.",
+        "part_c": "Per order comparison: 2 tickets = $27 without membership. With membership: 53 + 9.6(2) = $72.20 for one order, or $50 + 4($22.20) = $138.80 annually vs 4($27) = $108. Membership is NOT worth it for 4 concerts with 2 tickets each.",
+        "part_d": "Annual cost without: n concerts × $27 per order of 2. Annual cost with: $50 + n × ($19.20 + $3) = $50 + $22.20n. Set equal: 27n = 50 + 22.20n → 4.8n = 50 → n ≈ 10.4. Need at least 11 concerts."
+      },
+      "rubric": {
+        "full_credit": "All four parts correct with proper reasoning",
+        "partial_credit": "Three parts correct or correct method with calculation errors",
+        "no_credit": "Fewer than two parts correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.8,
+      "time_estimate_seconds": 420
+    },
+    {
+      "id": "math-7-g-a-1-001",
+      "standard_id": "7.G.A.1",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "A scale drawing has a scale of 1 inch = 8 feet. If a room measures 3.5 inches by 2 inches on the drawing, what are the actual dimensions?",
+      "correct_answer": "Length: 3.5 × 8 = 28 feet. Width: 2 × 8 = 16 feet. The room is 28 feet by 16 feet.",
+      "rubric": {
+        "full_credit": "Both dimensions correct",
+        "partial_credit": "One dimension correct",
+        "no_credit": "Neither correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-7-g-a-1-002",
+      "standard_id": "7.G.A.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A map has a scale of 1 cm = 25 km. Two cities are 3.5 cm apart on the map. If a car travels at 80 km/h, how long will the drive take? Show your work and express your answer in hours and minutes.",
+      "correct_answer": "Actual distance: 3.5 × 25 = 87.5 km. Time = Distance ÷ Speed = 87.5 ÷ 80 = 1.09375 hours. Convert: 0.09375 × 60 = 5.625 minutes ≈ 5-6 minutes. Answer: approximately 1 hour and 6 minutes.",
+      "rubric": {
+        "full_credit": "Correct distance calculation and time conversion",
+        "partial_credit": "Correct distance but time calculation error",
+        "no_credit": "Incorrect distance"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-7-g-a-1-003",
+      "standard_id": "7.G.A.1",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "An architect creates a blueprint at scale 1/4 inch = 1 foot.\n\nPart A: A room on the blueprint is 4 inches by 3 inches. What are the actual dimensions?\nPart B: The client wants to reproduce the blueprint at a new scale of 1/8 inch = 1 foot. What will the new dimensions be on the drawing?\nPart C: What is the ratio of the area on the new blueprint to the area on the original blueprint?\nPart D: If the actual room costs $25 per square foot to renovate, what is the total cost?",
+      "correct_answer": {
+        "part_a": "4 ÷ (1/4) = 16 feet by 3 ÷ (1/4) = 12 feet",
+        "part_b": "16 × (1/8) = 2 inches by 12 × (1/8) = 1.5 inches",
+        "part_c": "Original: 4 × 3 = 12 sq in. New: 2 × 1.5 = 3 sq in. Ratio = 3/12 = 1/4 (or the area scales by the square of the linear scale factor: (1/2)² = 1/4)",
+        "part_d": "Actual area: 16 × 12 = 192 sq ft. Cost: 192 × $25 = $4,800"
+      },
+      "rubric": {
+        "full_credit": "All four parts correct",
+        "partial_credit": "Three parts correct",
+        "no_credit": "Fewer than three correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 300
+    },
+    {
+      "id": "math-7-g-a-2-001",
+      "standard_id": "7.G.A.2",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Which set of side lengths can form a triangle?",
+      "options": [
+        "A) 3, 4, 8",
+        "B) 5, 5, 10",
+        "C) 4, 6, 9",
+        "D) 2, 3, 7"
+      ],
+      "correct_answer": "C",
+      "rubric": {
+        "full_credit": "Correct answer C (4+6 > 9, 4+9 > 6, 6+9 > 4)",
+        "no_credit": "Any other answer"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-7-g-a-2-002",
+      "standard_id": "7.G.A.2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Can a triangle have angles measuring 50°, 60°, and 80°? Explain your reasoning using the triangle angle sum property. Then draw a rough sketch of what this triangle might look like and classify it.",
+      "correct_answer": "50° + 60° + 80° = 190°, which is greater than 180°. No, this triangle cannot exist because the sum of angles in any triangle must equal exactly 180°. If it could exist, it would be an acute scalene triangle (all angles less than 90°, all different).",
+      "rubric": {
+        "full_credit": "Correct reasoning about angle sum, correct conclusion, and classification attempt",
+        "partial_credit": "Correct conclusion but incomplete explanation",
+        "no_credit": "Incorrect conclusion"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 150
+    },
+    {
+      "id": "math-7-g-a-2-003",
+      "standard_id": "7.G.A.2",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "Part A: Draw a triangle with sides 5 cm, 7 cm, and 9 cm. Is this triangle unique? Explain.\nPart B: Draw a triangle with angles 40°, 60°, and 80°. Is this triangle unique? Explain.\nPart C: Explain the difference between the conditions in Parts A and B in terms of how many triangles can be formed.\nPart D: Give an example of conditions that would allow exactly two different triangles to be formed.",
+      "correct_answer": {
+        "part_a": "This triangle is unique (up to congruence). SSS determines exactly one triangle.",
+        "part_b": "This triangle is NOT unique. AAA only determines similarity, not size. Infinitely many similar triangles exist with these angles.",
+        "part_c": "SSS gives exactly one triangle (or none if triangle inequality fails). AAA gives infinitely many similar triangles of different sizes.",
+        "part_d": "SSA (ambiguous case): Two sides and a non-included angle. Example: AB = 8, AC = 5, angle B = 30°. This can produce two different triangles."
+      },
+      "rubric": {
+        "full_credit": "All four parts correct with clear understanding of uniqueness conditions",
+        "partial_credit": "Three parts correct",
+        "no_credit": "Fewer than three correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 360
+    },
+    {
+      "id": "math-7-g-a-3-001",
+      "standard_id": "7.G.A.3",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "When a right rectangular prism is sliced parallel to its base, the cross-section is:",
+      "options": [
+        "A) A triangle",
+        "B) A circle",
+        "C) A rectangle congruent to the base",
+        "D) A smaller rectangle"
+      ],
+      "correct_answer": "C",
+      "rubric": {
+        "full_credit": "Correct answer C",
+        "no_credit": "Any other answer"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 60
+    },
+    {
+      "id": "math-7-g-a-3-002",
+      "standard_id": "7.G.A.3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A right rectangular pyramid has a square base. Describe and sketch the cross-section when the pyramid is sliced: (a) parallel to the base, (b) perpendicular to the base through the apex, and (c) perpendicular to the base but not through the apex.",
+      "correct_answer": "(a) Parallel to base: A smaller square similar to the base. (b) Through apex perpendicular: A triangle (isoceles triangle through the apex). (c) Perpendicular not through apex: A trapezoid (if it cuts two opposite slanted faces) or a triangle (if it cuts through one face and the apex).",
+      "rubric": {
+        "full_credit": "All three cross-sections correctly described with accurate sketches",
+        "partial_credit": "Two correct descriptions",
+        "no_credit": "Fewer than two correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-7-g-a-3-003",
+      "standard_id": "7.G.A.3",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "A wedge of cheese is shaped like a right triangular prism. The triangular face has legs 6 cm and 8 cm, and the prism is 12 cm long.\n\nPart A: Describe the cross-section when sliced perpendicular to the length.\nPart B: Describe the cross-section when sliced parallel to one of the rectangular faces.\nPart C: If you want a cross-section that is a rectangle with area 48 cm², how should you slice it?\nPart D: Is it possible to slice this prism to get a square cross-section? If yes, describe how. If no, explain why.",
+      "correct_answer": {
+        "part_a": "A right triangle with legs 6 cm and 8 cm (congruent to the base).",
+        "part_b": "A rectangle. Dimensions depend on position: could be 6×12, 8×12, or 10×12 (hypotenuse face).",
+        "part_c": "Slice parallel to the 6×8 face at a distance that gives area 48. Since 6×8 = 48, slice parallel to that rectangular face OR slice to get 4×12 (parallel to a different face).",
+        "part_d": "Need a square, so sides must be equal. Possible squares: 6×6 (slice parallel to 6×12 face, 6 cm from edge), 8×8 (impossible, prism is only 6 cm on one dimension), 12×12 (impossible, no dimension that large works). Only 6×6 is possible - slice parallel to the 6-cm leg face."
+      },
+      "rubric": {
+        "full_credit": "All four parts correct with clear visualization",
+        "partial_credit": "Three parts correct",
+        "no_credit": "Fewer than three correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.8,
+      "time_estimate_seconds": 360
+    },
+    {
+      "id": "math-7-g-b-4-001",
+      "standard_id": "7.G.B.4",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Find the circumference and area of a circle with radius 7 cm. Use π ≈ 3.14.",
+      "correct_answer": "Circumference = 2πr = 2(3.14)(7) = 43.96 cm. Area = πr² = 3.14(49) = 153.86 cm².",
+      "rubric": {
+        "full_credit": "Both correct with units",
+        "partial_credit": "One correct",
+        "no_credit": "Neither correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-7-g-b-4-002",
+      "standard_id": "7.G.B.4",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Explain why the formula for the area of a circle, A = πr², can be understood as 'half the circumference times the radius.' Use the relationship between C and A to demonstrate this connection.",
+      "correct_answer": "Circumference C = 2πr. Half of circumference = πr. Multiplying by r: πr × r = πr² = Area. Alternatively, imagine 'unrolling' the circle into many thin triangular sectors. The base of all triangles combined equals C = 2πr, and height equals r. Total area = (1/2) × base × height = (1/2)(2πr)(r) = πr². This shows A = (C/2) × r.",
+      "rubric": {
+        "full_credit": "Clear mathematical connection showing A = (C/2) × r",
+        "partial_credit": "Correct formulas used but connection not clearly explained",
+        "no_credit": "Incorrect relationship or no valid explanation"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-7-g-b-4-003",
+      "standard_id": "7.G.B.4",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "A circular track has an outer radius of 25 meters and the track is 5 meters wide.\n\nPart A: What is the circumference of the outer edge of the track?\nPart B: What is the circumference of the inner edge of the track?\nPart C: What is the area of the track (the running surface, not including the inner grass)?\nPart D: If a runner runs one lap on the outer edge and another runs one lap on the inner edge, how much farther does the outer runner travel?",
+      "correct_answer": {
+        "part_a": "C_outer = 2π(25) = 50π ≈ 157.08 m",
+        "part_b": "Inner radius = 25 - 5 = 20 m. C_inner = 2π(20) = 40π ≈ 125.66 m",
+        "part_c": "Area = π(25)² - π(20)² = 625π - 400π = 225π ≈ 706.86 m²",
+        "part_d": "50π - 40π = 10π ≈ 31.42 m farther"
+      },
+      "rubric": {
+        "full_credit": "All four parts correct",
+        "partial_credit": "Three parts correct",
+        "no_credit": "Fewer than three correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 240
+    },
+    {
+      "id": "math-7-g-b-5-001",
+      "standard_id": "7.G.B.5",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Two angles are supplementary. One angle is 35°. What is the other angle?",
+      "correct_answer": "180° - 35° = 145°",
+      "rubric": {
+        "full_credit": "Correct answer 145°",
+        "no_credit": "Incorrect answer"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 30
+    },
+    {
+      "id": "math-7-g-b-5-002",
+      "standard_id": "7.G.B.5",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Two lines intersect. One of the angles formed is (3x + 15)°. The angle adjacent to it is (5x - 25)°. Find the value of x and all four angle measures. Identify which angles are vertical angles.",
+      "correct_answer": "Adjacent angles are supplementary: (3x + 15) + (5x - 25) = 180. 8x - 10 = 180. 8x = 190. x = 23.75. Angles: 3(23.75) + 15 = 86.25° and 5(23.75) - 25 = 93.75°. Four angles: 86.25°, 93.75°, 86.25°, 93.75°. Vertical angles are the equal pairs: 86.25° opposite 86.25°, and 93.75° opposite 93.75°.",
+      "rubric": {
+        "full_credit": "Correct x value, all four angles correct, and vertical angles identified",
+        "partial_credit": "Correct x but error in finding angles, or correct angles but no identification of vertical pairs",
+        "no_credit": "Incorrect x value"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-7-g-b-5-003",
+      "standard_id": "7.G.B.5",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "In the figure, lines m and n are parallel, cut by transversal t. One angle is labeled (2x + 10)° and its corresponding angle on the other parallel line is labeled (3x - 20)°.\n\nPart A: Write an equation and solve for x.\nPart B: Find the measure of both labeled angles.\nPart C: Find the measure of the angle that is supplementary to the (2x + 10)° angle.\nPart D: Name all the angle relationships present (corresponding, alternate interior, alternate exterior, same-side interior) and give the measure of one example of each.",
+      "correct_answer": {
+        "part_a": "Corresponding angles are equal: 2x + 10 = 3x - 20 → 30 = x → x = 30",
+        "part_b": "2(30) + 10 = 70°. 3(30) - 20 = 70°. Both angles are 70°.",
+        "part_c": "Supplementary to 70° = 180° - 70° = 110°",
+        "part_d": "Corresponding: 70° each. Alternate interior: 70° each. Alternate exterior: 70° each. Same-side interior (co-interior): 70° + 110° = 180° (supplementary)."
+      },
+      "rubric": {
+        "full_credit": "All four parts correct with proper angle relationship terminology",
+        "partial_credit": "Three parts correct",
+        "no_credit": "Fewer than three correct or fundamental error in Part A"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 300
+    },
+    {
+      "id": "math-7-g-b-6-001",
+      "standard_id": "7.G.B.6",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Find the volume of a triangular prism with a base area of 24 cm² and a height of 10 cm.",
+      "correct_answer": "V = Base area × height = 24 × 10 = 240 cm³",
+      "rubric": {
+        "full_credit": "Correct volume with units",
+        "partial_credit": "Correct calculation, missing units",
+        "no_credit": "Incorrect calculation"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 60
+    },
+    {
+      "id": "math-7-g-b-6-002",
+      "standard_id": "7.G.B.6",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A composite solid is made by placing a smaller cube on top of a larger cube. The larger cube has edges of 6 cm and the smaller cube has edges of 4 cm. Find the total surface area of the composite solid (the part you can see from outside).",
+      "correct_answer": "Large cube surface area = 6(6²) = 216 cm². But the top has a 4×4 section covered. Small cube surface area = 6(4²) = 96 cm². But its bottom is attached. Visible surface = 216 - 16 + 96 - 16 = 280 cm². Alternatively: Large cube 5 faces + (6² - 4²) top = 5(36) + 20 = 200. Small cube 5 faces = 5(16) = 80. Total = 280 cm².",
+      "rubric": {
+        "full_credit": "Correct surface area with clear explanation of overlapping faces",
+        "partial_credit": "Correct method but arithmetic error",
+        "no_credit": "Did not account for overlapping faces"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 240
+    },
+    {
+      "id": "math-7-g-b-6-003",
+      "standard_id": "7.G.B.6",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "A swimming pool is shaped like a rectangular prism. It measures 25 m long, 10 m wide, and 2 m deep.\n\nPart A: Calculate the volume of water the pool can hold.\nPart B: If the pool is filled to 0.5 m from the top, what volume of water is in the pool?\nPart C: The pool walls and floor need to be painted. Calculate the surface area to be painted (not the water surface).\nPart D: If paint covers 15 m² per gallon, how many gallons are needed for two coats?",
+      "correct_answer": {
+        "part_a": "V = 25 × 10 × 2 = 500 m³",
+        "part_b": "Water depth = 2 - 0.5 = 1.5 m. V = 25 × 10 × 1.5 = 375 m³",
+        "part_c": "Floor: 25 × 10 = 250 m². Two long walls: 2(25 × 2) = 100 m². Two short walls: 2(10 × 2) = 40 m². Total = 390 m²",
+        "part_d": "Two coats = 2 × 390 = 780 m². Gallons = 780 ÷ 15 = 52 gallons"
+      },
+      "rubric": {
+        "full_credit": "All four parts correct",
+        "partial_credit": "Three parts correct",
+        "no_credit": "Fewer than three correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 300
+    },
+    {
+      "id": "math-7-sp-a-1-001",
+      "standard_id": "7.SP.A.1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Which sampling method would produce a representative sample of student opinions about school lunch?",
+      "options": [
+        "A) Survey students in the cafeteria at lunch time",
+        "B) Survey every 10th student from an alphabetical list",
+        "C) Survey members of the chess club",
+        "D) Survey students who stay after school"
+      ],
+      "correct_answer": "B",
+      "rubric": {
+        "full_credit": "Correct answer B (systematic random sampling from complete list)",
+        "no_credit": "Any other answer"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-7-sp-a-1-002",
+      "standard_id": "7.SP.A.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A radio station claims that 85% of people in the city listen to their station. They surveyed 500 people who called in to participate in a contest. Explain why this sample may not represent the entire city population and suggest a better sampling method.",
+      "correct_answer": "This is a biased sample because: (1) Only people who already listen to the station would call in, (2) It's voluntary response, which often attracts people with strong opinions, (3) People without phones or who don't enter contests are excluded. A better method: Random digit dialing to call randomly selected phone numbers, or random selection from city voter/utility records.",
+      "rubric": {
+        "full_credit": "Identifies at least two sources of bias AND suggests a valid random sampling method",
+        "partial_credit": "Identifies bias but no alternative OR alternative with incomplete bias identification",
+        "no_credit": "Does not identify the sampling bias"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-7-sp-a-1-003",
+      "standard_id": "7.SP.A.1",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "A school has 1,200 students: 300 freshmen, 350 sophomores, 275 juniors, and 275 seniors.\n\nPart A: Design a stratified random sample of 120 students that proportionally represents each grade.\nPart B: Explain why stratified sampling is better than simple random sampling for this population.\nPart C: If you only want to compare upperclassmen (juniors and seniors) to underclassmen, how might you modify your sampling approach?\nPart D: What is the minimum sample size needed if you want a margin of error of about 5%? (Hint: n ≈ 1/margin²)",
+      "correct_answer": {
+        "part_a": "Freshmen: 300/1200 × 120 = 30 students. Sophomores: 350/1200 × 120 = 35 students. Juniors: 275/1200 × 120 ≈ 27-28 students. Seniors: 275/1200 × 120 ≈ 27-28 students.",
+        "part_b": "Stratified ensures each grade is represented in proportion to the population. Simple random might over/under-represent certain grades by chance.",
+        "part_c": "Use stratified with two strata: underclassmen (650 students) and upperclassmen (550 students). Sample proportionally or use equal sample sizes from each group for comparison.",
+        "part_d": "n ≈ 1/(0.05)² = 1/0.0025 = 400 students minimum"
+      },
+      "rubric": {
+        "full_credit": "All four parts correct with appropriate calculations",
+        "partial_credit": "Three parts correct",
+        "no_credit": "Fewer than three correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 360
+    },
+    {
+      "id": "math-7-sp-a-2-001",
+      "standard_id": "7.SP.A.2",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "A random sample of 50 students found that 30 prefer pizza for lunch. If the school has 800 students, estimate how many prefer pizza.",
+      "correct_answer": "(30/50) × 800 = 0.6 × 800 = 480 students",
+      "rubric": {
+        "full_credit": "Correct estimate of 480",
+        "partial_credit": "Correct proportion but wrong calculation",
+        "no_credit": "Incorrect approach"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 60
+    },
+    {
+      "id": "math-7-sp-a-2-002",
+      "standard_id": "7.SP.A.2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Three random samples of 40 students each were taken from a school. The number of students who walk to school was 12, 15, and 9 in the three samples. If the school has 600 students, estimate the number who walk to school. Explain why using multiple samples gives a better estimate than using just one.",
+      "correct_answer": "Average from samples: (12 + 15 + 9)/3 = 12 students per sample of 40. Proportion: 12/40 = 0.30 or 30%. Estimate: 0.30 × 600 = 180 students. Multiple samples reduce the effect of random variation. One sample might be unusually high or low. Averaging multiple samples gives an estimate closer to the true population parameter.",
+      "rubric": {
+        "full_credit": "Correct calculation from averaged samples AND clear explanation of why multiple samples are better",
+        "partial_credit": "Correct calculation but weak explanation",
+        "no_credit": "Incorrect calculation method"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-7-sp-a-2-003",
+      "standard_id": "7.SP.A.2",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "A wildlife biologist wants to estimate the number of fish in a lake using capture-recapture method. She catches 100 fish, tags them, and releases them. A week later, she catches 80 fish and finds that 10 are tagged.\n\nPart A: Set up a proportion to estimate the total fish population.\nPart B: Solve for the estimated population.\nPart C: The biologist repeats the recapture three more times, finding 8, 12, and 14 tagged fish out of 80 each time. Calculate a better estimate using all four samples.\nPart D: What assumptions must be true for this method to work accurately?",
+      "correct_answer": {
+        "part_a": "tagged in sample / sample size = total tagged / total population → 10/80 = 100/N",
+        "part_b": "10N = 8000 → N = 800 fish",
+        "part_c": "Average tagged: (10+8+12+14)/4 = 11. Better estimate: 11/80 = 100/N → N = 8000/11 ≈ 727 fish",
+        "part_d": "Assumptions: (1) Tags don't fall off or affect fish survival, (2) Tagged fish mix randomly with population, (3) Population doesn't change (no births, deaths, migration) between samplings, (4) All fish have equal probability of being caught"
+      },
+      "rubric": {
+        "full_credit": "All four parts correct with at least 2 assumptions identified",
+        "partial_credit": "Three parts correct",
+        "no_credit": "Fewer than three correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 360
+    },
+    {
+      "id": "math-7-sp-b-3-001",
+      "standard_id": "7.SP.B.3",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Data set A has mean 50 and MAD 8. Data set B has mean 62 and MAD 7. Express the difference between the means as a multiple of the MAD.",
+      "correct_answer": "Difference in means: 62 - 50 = 12. Using average MAD of 7.5: 12/7.5 = 1.6 MADs apart. (Or using either MAD: 12/8 = 1.5 or 12/7 ≈ 1.7 MADs)",
+      "rubric": {
+        "full_credit": "Correct calculation showing means are about 1.5-1.7 MADs apart",
+        "partial_credit": "Correct difference but unclear expression as multiple of MAD",
+        "no_credit": "Incorrect approach"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-7-sp-b-3-002",
+      "standard_id": "7.SP.B.3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Class A test scores: 70, 75, 78, 80, 82, 85, 88, 90. Class B test scores: 60, 65, 70, 75, 80, 85, 90, 95. Calculate the mean and MAD for each class, then determine if there is meaningful overlap between the distributions.",
+      "correct_answer": "Class A: Mean = 648/8 = 81. Deviations from mean: 11, 6, 3, 1, 1, 4, 7, 9. MAD = 42/8 = 5.25. Class B: Mean = 620/8 = 77.5. Deviations: 17.5, 12.5, 7.5, 2.5, 2.5, 7.5, 12.5, 17.5. MAD = 80/8 = 10. Difference in means = 3.5, which is 3.5/7.6 ≈ 0.46 MADs (using average MAD). Since less than 2 MADs apart, there is substantial overlap.",
+      "rubric": {
+        "full_credit": "Correct mean and MAD for both classes, and correct interpretation of overlap",
+        "partial_credit": "Calculations correct but incomplete overlap interpretation",
+        "no_credit": "Incorrect means or MADs"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 300
+    },
+    {
+      "id": "math-7-sp-b-3-003",
+      "standard_id": "7.SP.B.3",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "A company tests two manufacturing processes:\nProcess A: Mean defect rate 5.2%, MAD 0.8%\nProcess B: Mean defect rate 4.5%, MAD 1.2%\n\nPart A: How many MADs apart are the means?\nPart B: Based on this, is there convincing evidence that Process B is better?\nPart C: If you could only choose one process for a product where consistency is crucial, which would you choose? Explain.\nPart D: Design a scenario where you would choose the other process despite your answer to Part C.",
+      "correct_answer": {
+        "part_a": "Difference = 0.7%. Average MAD = 1.0%. 0.7/1.0 = 0.7 MADs apart.",
+        "part_b": "Not convincing. The means are less than 1 MAD apart, indicating significant overlap. The difference could be due to random variation.",
+        "part_c": "Process A has lower variability (MAD 0.8% vs 1.2%), so it's more consistent. For crucial consistency, choose Process A despite slightly higher mean defect rate.",
+        "part_d": "If the product is low-stakes and cost is priority, Process B's lower mean (4.5% vs 5.2%) might save money on defects overall, even with more variability. Or if occasional very-low-defect batches are valuable, Process B's higher variability might produce them."
+      },
+      "rubric": {
+        "full_credit": "All four parts correct with logical reasoning throughout",
+        "partial_credit": "Three parts correct",
+        "no_credit": "Fewer than three correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 360
+    },
+    {
+      "id": "math-7-sp-b-4-001",
+      "standard_id": "7.SP.B.4",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Sample A (n=25) has mean 72 and sample B (n=25) has mean 68. Both have standard deviation of 5. Is this difference likely meaningful? Calculate the difference in means as a multiple of the standard deviation.",
+      "correct_answer": "Difference = 72 - 68 = 4. As multiple of SD: 4/5 = 0.8 standard deviations. This is a moderate difference; may or may not be meaningful (less than 1 SD suggests overlap).",
+      "rubric": {
+        "full_credit": "Correct calculation and reasonable interpretation",
+        "partial_credit": "Correct calculation but no interpretation",
+        "no_credit": "Incorrect calculation"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-7-sp-b-4-002",
+      "standard_id": "7.SP.B.4",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A study compares sleep hours for teens who use phones before bed vs. those who don't:\nPhone users: Mean 6.2 hours, MAD 0.8 hours (n=45)\nNon-users: Mean 7.5 hours, MAD 0.6 hours (n=50)\n\nDraw informal comparative inferences about these two populations.",
+      "correct_answer": "The difference in means is 1.3 hours. Average MAD ≈ 0.7. The difference is about 1.3/0.7 ≈ 1.9 MADs, which suggests minimal overlap between distributions. Inference: There appears to be a meaningful difference - teens who use phones before bed get less sleep on average. The non-users also have lower variability, suggesting more consistent sleep patterns. This suggests phone use before bed may be associated with both less sleep and less consistent sleep.",
+      "rubric": {
+        "full_credit": "Correct comparison using MAD, clear inference about both center and variability",
+        "partial_credit": "Correct comparison but incomplete inference",
+        "no_credit": "Incorrect calculations or no comparative inference"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-7-sp-b-4-003",
+      "standard_id": "7.SP.B.4",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "Two fertilizers are tested on plant growth:\nFertilizer X: Heights (cm) - 12, 14, 15, 16, 18, 19, 20, 22\nFertilizer Y: Heights (cm) - 15, 17, 18, 19, 20, 21, 22, 24\n\nPart A: Calculate the mean and median for each group.\nPart B: Calculate the IQR for each group.\nPart C: Express the difference in medians as a multiple of the IQR.\nPart D: A gardener claims Fertilizer Y is significantly better. Evaluate this claim using your statistical analysis.",
+      "correct_answer": {
+        "part_a": "X: Mean = 136/8 = 17, Median = (16+18)/2 = 17. Y: Mean = 156/8 = 19.5, Median = (19+20)/2 = 19.5",
+        "part_b": "X: Q1 = 14.5, Q3 = 19.5, IQR = 5. Y: Q1 = 17.5, Q3 = 21.5, IQR = 4",
+        "part_c": "Difference in medians = 2.5. Average IQR = 4.5. 2.5/4.5 ≈ 0.56 IQRs",
+        "part_d": "The difference (2.5 cm) is only about half an IQR, suggesting moderate overlap between distributions. While Fertilizer Y does appear to produce somewhat taller plants on average, the difference may not be 'significant' in a statistical sense. The claim is somewhat supported but should be stated more cautiously."
+      },
+      "rubric": {
+        "full_credit": "All four parts correct with nuanced evaluation",
+        "partial_credit": "Three parts correct",
+        "no_credit": "Fewer than three correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 360
+    },
+    {
+      "id": "math-7-sp-c-5-001",
+      "standard_id": "7.SP.C.5",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Which probability indicates an event that is LEAST likely to occur?",
+      "options": [
+        "A) 0.15",
+        "B) 1/3",
+        "C) 45%",
+        "D) 0.05"
+      ],
+      "correct_answer": "D",
+      "rubric": {
+        "full_credit": "Correct answer D (0.05 is smallest)",
+        "no_credit": "Any other answer"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 60
+    },
+    {
+      "id": "math-7-sp-c-5-002",
+      "standard_id": "7.SP.C.5",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A weather forecast says there is a 70% chance of rain tomorrow. Explain what this means in terms of probability. What is the probability it will NOT rain? Are you certain it will rain? Why or why not?",
+      "correct_answer": "70% = 0.70 probability means if we had 100 similar days with these conditions, about 70 would have rain. Probability of no rain = 1 - 0.70 = 0.30 or 30%. No, we are not certain it will rain. A 70% probability means it's more likely to rain than not, but there's still a 30% chance it won't rain. Probability describes likelihood, not certainty.",
+      "rubric": {
+        "full_credit": "Correct interpretation of 70%, correct complement (30%), and clear explanation that probability ≠ certainty",
+        "partial_credit": "Two of three elements correct",
+        "no_credit": "Fundamental misunderstanding of probability"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 150
+    },
+    {
+      "id": "math-7-sp-c-5-003",
+      "standard_id": "7.SP.C.5",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "Part A: Order these events from least likely to most likely and assign each a probability estimate: getting struck by lightning in a year, flipping heads on a coin, rolling a 6 on a die, being left-handed, a random baby being a girl.\n\nPart B: Create your own event with probability approximately 0.25.\n\nPart C: Explain why no probability can be less than 0 or greater than 1.\n\nPart D: A friend says 'The probability of my team winning is 150%.' What's wrong with this statement?",
+      "correct_answer": {
+        "part_a": "Lightning (~0.0000001) < rolling 6 (0.167) < being left-handed (~0.10) < random baby girl (~0.49) < coin heads (0.50)",
+        "part_b": "Example: Drawing a heart from a deck of cards (13/52 = 0.25), or rolling a 1 or 2 on a die (2/6 ≈ 0.33)",
+        "part_c": "Probability represents the fraction of times an event occurs. You can't have fewer than 0 occurrences (impossible = 0) or more than all occurrences (certain = 1).",
+        "part_d": "Probability cannot exceed 1 (or 100%). 150% is impossible. The friend is expressing confidence/enthusiasm, not a mathematical probability."
+      },
+      "rubric": {
+        "full_credit": "All four parts correct with reasonable probability estimates",
+        "partial_credit": "Three parts correct",
+        "no_credit": "Fewer than three correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 300
+    },
+    {
+      "id": "math-7-sp-c-6-001",
+      "standard_id": "7.SP.C.6",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "A spinner is spun 80 times and lands on blue 28 times. What is the experimental probability of landing on blue?",
+      "correct_answer": "28/80 = 7/20 = 0.35 or 35%",
+      "rubric": {
+        "full_credit": "Correct probability in any form",
+        "no_credit": "Incorrect probability"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 60
+    },
+    {
+      "id": "math-7-sp-c-6-002",
+      "standard_id": "7.SP.C.6",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A coin is flipped 20 times and lands on heads 8 times. Does this mean the coin is unfair? Explain using the concept of long-run relative frequency. How many more flips would you recommend to determine if the coin is fair?",
+      "correct_answer": "8/20 = 0.40 or 40% heads. This doesn't necessarily mean the coin is unfair. With only 20 flips, variation from 50% is expected. The theoretical probability is 0.50, and 0.40 is within reasonable variation for a small sample. Long-run relative frequency means as you flip more times, the experimental probability should approach the theoretical probability if the coin is fair. I'd recommend at least 100-200 more flips. If after 200 flips the proportion is still far from 50%, the coin may be unfair.",
+      "rubric": {
+        "full_credit": "Correct interpretation that 8/20 doesn't prove unfairness, explains long-run frequency concept, and suggests reasonable additional trials",
+        "partial_credit": "Partially correct explanation but missing key concepts",
+        "no_credit": "Incorrectly concludes coin is definitely fair or unfair"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-7-sp-c-6-003",
+      "standard_id": "7.SP.C.6",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "A basketball player's free throw percentage is 75%. \n\nPart A: If she shoots 40 free throws in practice, how many would you expect her to make?\nPart B: In actual practice, she made 26 out of 40. How does this compare to the expected value?\nPart C: Calculate the experimental probability from this practice session.\nPart D: If she shoots 200 free throws over the season, within what range would you expect the number made to fall? (Assume some variation is normal.)",
+      "correct_answer": {
+        "part_a": "0.75 × 40 = 30 free throws expected",
+        "part_b": "She made 26, which is 4 fewer than expected (30). This is 26/30 = 86.7% of expected, or about 13% below expected.",
+        "part_c": "26/40 = 0.65 or 65%",
+        "part_d": "Expected: 0.75 × 200 = 150. With normal variation (roughly ±10%), a reasonable range might be 135-165 made free throws. (More precise: using standard deviation √(200×0.75×0.25) ≈ 6.1, so 150 ± 12 = 138-162)"
+      },
+      "rubric": {
+        "full_credit": "All four parts correct with reasonable range estimation in Part D",
+        "partial_credit": "Three parts correct",
+        "no_credit": "Fewer than three correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 300
+    },
+    {
+      "id": "math-7-sp-c-7-001",
+      "standard_id": "7.SP.C.7",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "A bag contains 4 red, 6 blue, and 2 green marbles. Create a probability model by finding the probability of drawing each color.",
+      "correct_answer": "Total = 12 marbles. P(red) = 4/12 = 1/3 ≈ 0.33. P(blue) = 6/12 = 1/2 = 0.50. P(green) = 2/12 = 1/6 ≈ 0.17. Check: 1/3 + 1/2 + 1/6 = 2/6 + 3/6 + 1/6 = 1 ✓",
+      "rubric": {
+        "full_credit": "All three probabilities correct, ideally with verification sum = 1",
+        "partial_credit": "Two probabilities correct",
+        "no_credit": "Fewer than two correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-7-sp-c-7-002",
+      "standard_id": "7.SP.C.7",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A spinner has 5 equal sections numbered 1-5. The theoretical probability model says P(each number) = 0.20. In 50 spins, the results were: 1→12, 2→8, 3→11, 4→10, 5→9. Compare the experimental results to the probability model and discuss any discrepancies.",
+      "correct_answer": "Theoretical: Each number should appear 0.20 × 50 = 10 times. Experimental frequencies: 1→12 (2 above), 2→8 (2 below), 3→11 (1 above), 4→10 (exactly expected), 5→9 (1 below). The differences are small (-2 to +2) and expected due to random variation. No number is dramatically over- or under-represented. The model appears to fit the data well; discrepancies are consistent with normal sampling variability.",
+      "rubric": {
+        "full_credit": "Correct expected values, accurate comparison, and appropriate interpretation of discrepancies",
+        "partial_credit": "Correct comparison but weak interpretation",
+        "no_credit": "Incorrect expected values or wrong interpretation"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-7-sp-c-7-003",
+      "standard_id": "7.SP.C.7",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "A game uses a spinner divided into sections: Red (120°), Blue (90°), Green (60°), Yellow (90°).\n\nPart A: Create a theoretical probability model for this spinner.\nPart B: If you spin 60 times, how many times would you expect each color?\nPart C: Actual results: Red-22, Blue-12, Green-8, Yellow-18. For which color is the discrepancy largest?\nPart D: Suggest possible explanations if the discrepancy is real (not just random variation).",
+      "correct_answer": {
+        "part_a": "P(Red) = 120/360 = 1/3. P(Blue) = 90/360 = 1/4. P(Green) = 60/360 = 1/6. P(Yellow) = 90/360 = 1/4. Check: 1/3 + 1/4 + 1/6 + 1/4 = 4/12 + 3/12 + 2/12 + 3/12 = 12/12 = 1 ✓",
+        "part_b": "Red: 60 × 1/3 = 20. Blue: 60 × 1/4 = 15. Green: 60 × 1/6 = 10. Yellow: 60 × 1/4 = 15",
+        "part_c": "Red: 22-20 = +2. Blue: 12-15 = -3. Green: 8-10 = -2. Yellow: 18-15 = +3. Blue and Yellow tied for largest discrepancy (3 each).",
+        "part_d": "Possible explanations: Spinner may not be perfectly balanced (heavier on one side), sections may not be exactly the angles stated, spinner pointer may have friction that favors stopping at certain positions, or just random variation (60 spins is not that many)."
+      },
+      "rubric": {
+        "full_credit": "All four parts correct with thoughtful explanations",
+        "partial_credit": "Three parts correct",
+        "no_credit": "Fewer than three correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 360
+    },
+    {
+      "id": "math-7-sp-c-8-001",
+      "standard_id": "7.SP.C.8",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "A coin is flipped twice. List all possible outcomes and find P(at least one head).",
+      "correct_answer": "Outcomes: HH, HT, TH, TT. At least one head: HH, HT, TH = 3 outcomes. P(at least one head) = 3/4 = 0.75",
+      "rubric": {
+        "full_credit": "Correct sample space and probability",
+        "partial_credit": "Correct sample space but wrong probability",
+        "no_credit": "Incorrect sample space"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-7-sp-c-8-002",
+      "standard_id": "7.SP.C.8",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A restaurant offers 3 appetizers, 4 main courses, and 2 desserts. Use the counting principle to find how many different three-course meals are possible. Then create an organized list or tree diagram showing all meals if there were only 2 appetizers, 2 main courses, and 2 desserts.",
+      "correct_answer": "Full menu: 3 × 4 × 2 = 24 different meals. Reduced menu tree: Start with App1 or App2. From each, branch to Main1 or Main2. From each of those, branch to Dess1 or Dess2. Total: 2 × 2 × 2 = 8 meals. List: (A1,M1,D1), (A1,M1,D2), (A1,M2,D1), (A1,M2,D2), (A2,M1,D1), (A2,M1,D2), (A2,M2,D1), (A2,M2,D2).",
+      "rubric": {
+        "full_credit": "Correct calculation for full menu AND correct tree/list for reduced menu",
+        "partial_credit": "Correct calculation but incomplete tree/list",
+        "no_credit": "Incorrect counting principle application"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 240
+    },
+    {
+      "id": "math-7-sp-c-8-003",
+      "standard_id": "7.SP.C.8",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "A lock has a 3-digit code where each digit is 0-9.\n\nPart A: How many possible codes are there if digits can repeat?\nPart B: How many possible codes if no digit can repeat?\nPart C: What is the probability of guessing the correct code on the first try for each scenario?\nPart D: If you can try one code per second, how long would it take to try all possible codes in each scenario? Express in minutes.",
+      "correct_answer": {
+        "part_a": "10 × 10 × 10 = 1,000 codes",
+        "part_b": "10 × 9 × 8 = 720 codes",
+        "part_c": "With repeats: P = 1/1000 = 0.001. Without repeats: P = 1/720 ≈ 0.00139",
+        "part_d": "With repeats: 1,000 seconds = 16.67 minutes. Without repeats: 720 seconds = 12 minutes."
+      },
+      "rubric": {
+        "full_credit": "All four parts correct",
+        "partial_credit": "Three parts correct",
+        "no_credit": "Fewer than three correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 240
+    },
+    {
+      "id": "math-7-sp-c-8-004",
+      "standard_id": "7.SP.C.8",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "Two dice are rolled. Use simulation to estimate probabilities.\n\nPart A: Create a sample space (table or list) for rolling two dice.\nPart B: Using your sample space, find P(sum = 7), P(sum > 9), and P(both dice show same number).\nPart C: Design a simulation using random numbers 1-6 that could estimate P(sum = 7). How many trials would you recommend?\nPart D: If P(sum = 7) = 1/6, what's P(sum ≠ 7)? If you roll the dice 30 times, how many times would you expect a sum of 7?",
+      "correct_answer": {
+        "part_a": "6×6 grid showing 36 outcomes (1,1) through (6,6)",
+        "part_b": "P(sum=7) = 6/36 = 1/6 (outcomes: 1+6,2+5,3+4,4+3,5+2,6+1). P(sum>9) = 6/36 = 1/6 (10,10,10,11,11,12). P(doubles) = 6/36 = 1/6",
+        "part_c": "Simulation: Generate two random numbers 1-6, add them, check if sum = 7. Repeat many times. Recommend at least 100 trials (more is better - 500+ for good accuracy).",
+        "part_d": "P(sum ≠ 7) = 1 - 1/6 = 5/6. Expected 7s in 30 rolls: 30 × 1/6 = 5 times."
+      },
+      "rubric": {
+        "full_credit": "All four parts correct with complete sample space",
+        "partial_credit": "Three parts correct",
+        "no_credit": "Fewer than three correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 420
+    }
+  ]
+}

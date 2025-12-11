@@ -1,0 +1,427 @@
+{
+  "grade": "1",
+  "items": [
+    {
+      "id": "sci-1-ps4-1-001",
+      "standard_id": "1-PS4-1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "What happens when you pluck a guitar string?",
+      "options": ["It vibrates and makes a sound", "It changes color", "It becomes longer", "It disappears"],
+      "correct_answer": "It vibrates and makes a sound",
+      "explanation": "When you pluck a guitar string, it vibrates back and forth quickly. These vibrations create sound waves that we can hear.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 30,
+      "science_practice": "Planning and Carrying Out Investigations"
+    },
+    {
+      "id": "sci-1-ps4-1-002",
+      "standard_id": "1-PS4-1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Put your hand on your throat and hum. What do you feel? Explain how your voice makes sound.",
+      "rubric": {
+        "4": "Describes feeling vibrations and explains that vocal cords vibrate to make sound",
+        "3": "Describes vibrations with some connection to sound production",
+        "2": "Mentions feeling something but vibration concept unclear",
+        "1": "Response relates to humming but no vibration mentioned",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 150,
+      "science_practice": "Planning and Carrying Out Investigations"
+    },
+    {
+      "id": "sci-1-ps4-2-001",
+      "standard_id": "1-PS4-2",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Why can't you see things in a completely dark room?",
+      "options": ["There is no light to see the objects", "The objects have disappeared", "Your eyes are closed", "The objects are hiding"],
+      "correct_answer": "There is no light to see the objects",
+      "explanation": "We need light to see objects. When light shines on something, it bounces off and goes into our eyes. In the dark, there is no light to bounce off objects.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 30,
+      "science_practice": "Constructing Explanations and Designing Solutions"
+    },
+    {
+      "id": "sci-1-ps4-2-002",
+      "standard_id": "1-PS4-2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "You walk into a dark closet with a flashlight. Draw and explain what happens when you turn on the flashlight. Why can you now see your toys?",
+      "rubric": {
+        "4": "Drawing shows light traveling from flashlight to objects and explanation includes light reflecting to eyes",
+        "3": "Shows flashlight illuminating objects with partial explanation",
+        "2": "Shows flashlight and objects but light path or reflection not clear",
+        "1": "Drawing present but explanation of light and seeing not connected",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 180,
+      "science_practice": "Constructing Explanations and Designing Solutions"
+    },
+    {
+      "id": "sci-1-ps4-3-001",
+      "standard_id": "1-PS4-3",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "What happens when you shine a flashlight through a clear glass of water?",
+      "options": ["Light goes through the water", "Light bounces back to you", "The water turns dark", "The flashlight stops working"],
+      "correct_answer": "Light goes through the water",
+      "explanation": "Clear materials like water and glass let light pass through them. This is why we can see through windows and water glasses.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 30,
+      "science_practice": "Planning and Carrying Out Investigations"
+    },
+    {
+      "id": "sci-1-ps4-3-002",
+      "standard_id": "1-PS4-3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "You have three objects: a piece of cardboard, a plastic wrap, and a wooden block. If you shine a flashlight at each one, what will happen to the light? Draw and explain your predictions.",
+      "rubric": {
+        "4": "Correctly predicts light blocked by cardboard/wood and passing through plastic, with clear drawings and explanations",
+        "3": "Mostly correct predictions with some explanation",
+        "2": "Some correct predictions but explanations incomplete",
+        "1": "Attempts predictions but mostly incorrect",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 240,
+      "science_practice": "Planning and Carrying Out Investigations"
+    },
+    {
+      "id": "sci-1-ps4-4-001",
+      "standard_id": "1-PS4-4",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Which device uses sound to send a message from far away?",
+      "options": ["A telephone", "A mirror", "A ruler", "A pencil"],
+      "correct_answer": "A telephone",
+      "explanation": "A telephone changes your voice into signals that travel far away, then changes them back to sound so someone else can hear you.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 30,
+      "science_practice": "Constructing Explanations and Designing Solutions"
+    },
+    {
+      "id": "sci-1-ps4-4-002",
+      "standard_id": "1-PS4-4",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Design a way to send a secret message to a friend across the room using only light (no talking or writing). Draw your design and explain how it works.",
+      "rubric": {
+        "4": "Creative design using light signals (flashlight morse code, colored lights, etc.) with clear explanation of how receiver understands message",
+        "3": "Workable design with light signals and partial explanation",
+        "2": "Uses light but signal system unclear",
+        "1": "Mentions light but no clear communication system",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 5,
+        "generativity_delta": 6
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 300,
+      "science_practice": "Constructing Explanations and Designing Solutions"
+    },
+    {
+      "id": "sci-1-ls1-1-001",
+      "standard_id": "1-LS1-1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "A cactus has sharp spines instead of leaves. How do the spines help the cactus survive?",
+      "options": ["They protect the cactus from animals that want to eat it", "They help the cactus walk around", "They make the cactus smell good", "They help the cactus fly"],
+      "correct_answer": "They protect the cactus from animals that want to eat it",
+      "explanation": "Cactus spines keep animals away so they don't eat or damage the cactus. This is how the plant protects itself.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 35,
+      "science_practice": "Constructing Explanations and Designing Solutions"
+    },
+    {
+      "id": "sci-1-ls1-1-002",
+      "standard_id": "1-LS1-1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Birds have beaks of different shapes. Think about how a bird uses its beak to get food. Design a tool that works like a bird beak to pick up small seeds. Draw your tool and explain how it works.",
+      "rubric": {
+        "4": "Tool design mimics beak function with clear explanation of how shape helps pick up seeds",
+        "3": "Workable tool design with some connection to beak function",
+        "2": "Tool drawn but connection to beak or function unclear",
+        "1": "Drawing present but not clearly a tool or related to task",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 240,
+      "science_practice": "Constructing Explanations and Designing Solutions"
+    },
+    {
+      "id": "sci-1-ls1-2-001",
+      "standard_id": "1-LS1-2",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "A mother bird brings food to her baby birds in the nest. Why does the mother do this?",
+      "options": ["To help the babies survive until they can find food themselves", "Because baby birds don't like to eat", "To teach baby birds to fly", "Because the mother is not hungry"],
+      "correct_answer": "To help the babies survive until they can find food themselves",
+      "explanation": "Parent birds feed their young because baby birds cannot fly or find food on their own. This behavior helps baby birds survive.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 35,
+      "science_practice": "Obtaining, Evaluating, and Communicating Information"
+    },
+    {
+      "id": "sci-1-ls1-2-002",
+      "standard_id": "1-LS1-2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Think about how a mother cat takes care of her kittens. Describe two things the mother cat does to help her kittens survive. Why are these behaviors important?",
+      "rubric": {
+        "4": "Identifies two behaviors (feeding, cleaning, protecting, teaching) with clear explanation of how each helps survival",
+        "3": "Two behaviors with some survival connection",
+        "2": "One behavior clearly explained or two without connection to survival",
+        "1": "Mentions cat care but behaviors not specific to survival",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 180,
+      "science_practice": "Obtaining, Evaluating, and Communicating Information"
+    },
+    {
+      "id": "sci-1-ls3-1-001",
+      "standard_id": "1-LS3-1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "A puppy looks a lot like its mother dog but has slightly different colored spots. What is this an example of?",
+      "options": ["Young animals are similar but not exactly like their parents", "Puppies and adult dogs are completely different", "All dogs look exactly the same", "Spots appear by magic"],
+      "correct_answer": "Young animals are similar but not exactly like their parents",
+      "explanation": "Baby animals inherit traits from their parents, so they look similar. But they also have some differences, like slightly different markings.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 35,
+      "science_practice": "Constructing Explanations and Designing Solutions"
+    },
+    {
+      "id": "sci-1-ls3-1-002",
+      "standard_id": "1-LS3-1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Draw a parent plant and its young plant (seedling). Show how they are the same and how they are different. Label your drawing.",
+      "rubric": {
+        "4": "Both plants drawn with labeled similarities (shape, leaf type) and differences (size, number of leaves) clearly shown",
+        "3": "Both plants with some labeled similarities and differences",
+        "2": "Both plants drawn but similarities/differences not clearly labeled",
+        "1": "One plant drawn or relationship unclear",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 180,
+      "science_practice": "Constructing Explanations and Designing Solutions"
+    },
+    {
+      "id": "sci-1-ess1-1-001",
+      "standard_id": "1-ESS1-1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "What pattern can we observe about the sun every day?",
+      "options": ["It rises in the morning and sets in the evening", "It stays in the same place all day", "It only appears on Mondays", "It comes out only when we want it to"],
+      "correct_answer": "It rises in the morning and sets in the evening",
+      "explanation": "The sun follows a predictable pattern. It appears to rise in the east each morning and set in the west each evening.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 30,
+      "science_practice": "Analyzing and Interpreting Data"
+    },
+    {
+      "id": "sci-1-ess1-1-002",
+      "standard_id": "1-ESS1-1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Look at the sky at night with an adult. Draw what you see. What patterns do you notice about stars? Are some brighter than others? Can you find any shapes?",
+      "rubric": {
+        "4": "Drawing shows stars with observations about patterns (brightness differences, groupings, shapes/constellations)",
+        "3": "Drawing with some pattern observations",
+        "2": "Drawing of stars but patterns not discussed",
+        "1": "Simple drawing with no observations",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 180,
+      "science_practice": "Analyzing and Interpreting Data"
+    },
+    {
+      "id": "sci-1-ess1-2-001",
+      "standard_id": "1-ESS1-2",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "In summer, it stays light outside until very late. In winter, it gets dark early. What causes this pattern?",
+      "options": ["The amount of daylight changes with the seasons", "Someone turns off the sun early in winter", "The sun is broken in winter", "There is no pattern to daylight"],
+      "correct_answer": "The amount of daylight changes with the seasons",
+      "explanation": "The Earth is tilted, so different seasons have different amounts of daylight. Summer has more daylight hours than winter.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 35,
+      "science_practice": "Analyzing and Interpreting Data"
+    },
+    {
+      "id": "sci-1-ess1-2-002",
+      "standard_id": "1-ESS1-2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Keep track of what time it gets dark outside for 5 days in fall and 5 days in spring. Make a chart showing your observations. What pattern do you see?",
+      "rubric": {
+        "4": "Chart with accurate times and clear observation that sunset times change by season",
+        "3": "Chart with times and some pattern observation",
+        "2": "Some data recorded but pattern not clearly stated",
+        "1": "Partial data with no pattern observation",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 240,
+      "science_practice": "Analyzing and Interpreting Data"
+    },
+    {
+      "id": "sci-1-ets1-1-001",
+      "standard_id": "K-2-ETS1-1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Students want to keep their lunch cold until lunchtime. What information should they gather first?",
+      "options": ["How long do we need to keep it cold? What materials do we have?", "What is everyone's favorite color?", "How many students are in our class?", "What day of the week is it?"],
+      "correct_answer": "How long do we need to keep it cold? What materials do we have?",
+      "explanation": "To solve a design problem, we need to understand the requirements (how long) and resources (what materials). This helps us create a good solution.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 1,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 35,
+      "science_practice": "Asking Questions and Defining Problems"
+    },
+    {
+      "id": "sci-1-ets1-2-001",
+      "standard_id": "K-2-ETS1-2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Your pencil keeps rolling off your desk. Draw a design for something that would stop the pencil from rolling. Explain how its shape helps solve the problem.",
+      "rubric": {
+        "4": "Creative design with clear explanation of how shape (edges, grooves, flat surfaces) prevents rolling",
+        "3": "Workable design with some shape explanation",
+        "2": "Design present but shape-function connection unclear",
+        "1": "Drawing with no connection to rolling problem",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 180,
+      "science_practice": "Developing and Using Models"
+    },
+    {
+      "id": "sci-1-ets1-3-001",
+      "standard_id": "K-2-ETS1-3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Two students made paper boats to float in water. One boat floated for 2 minutes. The other boat floated for 5 minutes. What could be different about the boats? What test could you do to find out which design is better?",
+      "rubric": {
+        "4": "Identifies multiple possible differences (shape, size, folds) and proposes fair test with controlled variables",
+        "3": "Some differences identified with test idea",
+        "2": "Mentions differences or test but not both clearly",
+        "1": "Response about boats but no comparison or test",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 240,
+      "science_practice": "Analyzing and Interpreting Data"
+    }
+  ]
+}

@@ -1,0 +1,199 @@
+{
+    "grade": "11",
+    "subject": "Mathematics",
+    "course": "Algebra II",
+    "domains": [
+        {
+            "id": "N-CN",
+            "name": "The Complex Number System",
+            "standards": [
+                {
+                    "id": "HSN-CN.A.1",
+                    "description": "Know there is a complex number i such that i^2 = -1, and every complex number has the form a + bi with a and b real.",
+                    "prerequisites": ["HSN-RN.B.3", "HSA-REI.B.4"],
+                    "cluster": "Perform arithmetic operations with complex numbers."
+                },
+                {
+                    "id": "HSN-CN.A.2",
+                    "description": "Use the relation i^2 = -1 and the commutative, associative, and distributive properties to add, subtract, and multiply complex numbers.",
+                    "prerequisites": ["HSN-CN.A.1"],
+                    "cluster": "Perform arithmetic operations with complex numbers."
+                },
+                {
+                    "id": "HSN-CN.C.7",
+                    "description": "Solve quadratic equations with real coefficients that have complex solutions.",
+                    "prerequisites": ["HSN-CN.A.2", "HSA-REI.B.4"],
+                    "cluster": "Use complex numbers in polynomial identities and equations."
+                }
+            ]
+        },
+        {
+            "id": "A-APR",
+            "name": "Arithmetic with Polynomials and Rational Expressions",
+            "standards": [
+                {
+                    "id": "HSA-APR.B.2",
+                    "description": "Know and apply the Remainder Theorem: For a polynomial p(x) and a number a, the remainder on division by x - a is p(a), so p(a) = 0 if and only if (x - a) is a factor of p(x).",
+                    "prerequisites": ["HSA-APR.A.1", "HSA-SSE.A.2"],
+                    "cluster": "Understand the relationship between zeros and factors of polynomials."
+                },
+                {
+                    "id": "HSA-APR.B.3",
+                    "description": "Identify zeros of polynomials when suitable factorizations are available, and use the zeros to construct a rough graph of the function defined by the polynomial.",
+                    "prerequisites": ["HSA-APR.B.2", "HSF-IF.C.7"],
+                    "cluster": "Understand the relationship between zeros and factors of polynomials."
+                },
+                {
+                    "id": "HSA-APR.C.4",
+                    "description": "Prove polynomial identities and use them to describe numerical relationships.",
+                    "prerequisites": ["HSA-APR.A.1", "HSA-SSE.A.2"],
+                    "cluster": "Use polynomial identities to solve problems."
+                },
+                {
+                    "id": "HSA-APR.D.6",
+                    "description": "Rewrite simple rational expressions in different forms; write a(x)/b(x) in the form q(x) + r(x)/b(x), where a(x), b(x), q(x), and r(x) are polynomials with the degree of r(x) less than the degree of b(x), using inspection, long division, or, for the more complicated examples, a computer algebra system.",
+                    "prerequisites": ["HSA-APR.B.2"],
+                    "cluster": "Rewrite rational expressions."
+                },
+                {
+                    "id": "HSA-APR.D.7",
+                    "description": "Understand that rational expressions form a system analogous to the rational numbers, closed under addition, subtraction, multiplication, and division by a nonzero rational expression; add, subtract, multiply, and divide rational expressions.",
+                    "prerequisites": ["HSA-APR.D.6"],
+                    "cluster": "Rewrite rational expressions."
+                }
+            ]
+        },
+        {
+            "id": "A-REI",
+            "name": "Reasoning with Equations and Inequalities",
+            "standards": [
+                {
+                    "id": "HSA-REI.A.2",
+                    "description": "Solve simple rational and radical equations in one variable, and give examples showing how extraneous solutions may arise.",
+                    "prerequisites": ["HSA-REI.B.4", "HSN-RN.A.2"],
+                    "cluster": "Understand solving equations as a process of reasoning and explain the reasoning."
+                },
+                {
+                    "id": "HSA-REI.C.7",
+                    "description": "Solve a simple system consisting of a linear equation and a quadratic equation in two variables algebraically and graphically.",
+                    "prerequisites": ["HSA-REI.C.6", "HSA-REI.B.4"],
+                    "cluster": "Solve systems of equations."
+                },
+                {
+                    "id": "HSA-REI.C.8",
+                    "description": "Represent a system of linear equations as a single matrix equation in a vector variable.",
+                    "prerequisites": ["HSA-REI.C.6"],
+                    "cluster": "Solve systems of equations."
+                },
+                {
+                    "id": "HSA-REI.C.9",
+                    "description": "Find the inverse of a matrix if it exists and use it to solve systems of linear equations (using technology for matrices of dimension 3 x 3 or greater).",
+                    "prerequisites": ["HSA-REI.C.8"],
+                    "cluster": "Solve systems of equations."
+                }
+            ]
+        },
+        {
+            "id": "F-IF",
+            "name": "Interpreting Functions",
+            "standards": [
+                {
+                    "id": "HSF-IF.C.7e",
+                    "description": "Graph exponential and logarithmic functions, showing intercepts and end behavior, and trigonometric functions, showing period, midline, and amplitude.",
+                    "prerequisites": ["HSF-IF.C.7", "HSF-LE.A.2"],
+                    "cluster": "Analyze functions using different representations."
+                },
+                {
+                    "id": "HSF-IF.C.8",
+                    "description": "Write a function defined by an expression in different but equivalent forms to reveal and explain different properties of the function.",
+                    "prerequisites": ["HSF-IF.C.7", "HSA-SSE.B.3"],
+                    "cluster": "Analyze functions using different representations."
+                },
+                {
+                    "id": "HSF-IF.C.8b",
+                    "description": "Use the properties of exponents to interpret expressions for exponential functions. For example, identify percent rate of change in functions such as y = (1.02)^t, y = (0.97)^t, y = (1.01)^12t, y = (1.2)^t/10, and classify them as representing exponential growth or decay.",
+                    "prerequisites": ["HSF-IF.C.8", "HSN-RN.A.1"],
+                    "cluster": "Analyze functions using different representations."
+                }
+            ]
+        },
+        {
+            "id": "F-BF",
+            "name": "Building Functions",
+            "standards": [
+                {
+                    "id": "HSF-BF.A.1c",
+                    "description": "Compose functions.",
+                    "prerequisites": ["HSF-BF.A.1", "HSF-IF.A.2"],
+                    "cluster": "Build a function that models a relationship between two quantities."
+                },
+                {
+                    "id": "HSF-BF.B.3",
+                    "description": "Identify the effect on the graph of replacing f(x) by f(x) + k, k f(x), f(kx), and f(x + k) for specific values of k (both positive and negative); find the value of k given the graphs. Experiment with cases and illustrate an explanation of the effects on the graph using technology.",
+                    "prerequisites": ["HSF-IF.C.7", "HSF-BF.A.1"],
+                    "cluster": "Build new functions from existing functions."
+                },
+                {
+                    "id": "HSF-BF.B.4",
+                    "description": "Find inverse functions.",
+                    "prerequisites": ["HSF-BF.A.1c", "HSF-IF.A.1"],
+                    "cluster": "Build new functions from existing functions."
+                },
+                {
+                    "id": "HSF-BF.B.4a",
+                    "description": "Solve an equation of the form f(x) = c for a simple function f that has an inverse and write an expression for the inverse.",
+                    "prerequisites": ["HSF-BF.B.4"],
+                    "cluster": "Build new functions from existing functions."
+                },
+                {
+                    "id": "HSF-BF.B.5",
+                    "description": "Understand the inverse relationship between exponents and logarithms and use this relationship to solve problems involving logarithms and exponents.",
+                    "prerequisites": ["HSF-BF.B.4", "HSN-RN.A.1"],
+                    "cluster": "Build new functions from existing functions."
+                }
+            ]
+        },
+        {
+            "id": "F-TF",
+            "name": "Trigonometric Functions",
+            "standards": [
+                {
+                    "id": "HSF-TF.A.1",
+                    "description": "Understand radian measure of an angle as the length of the arc on the unit circle subtended by the angle.",
+                    "prerequisites": ["HSG-C.B.5", "HSG-SRT.C.6"],
+                    "cluster": "Extend the domain of trigonometric functions using the unit circle."
+                },
+                {
+                    "id": "HSF-TF.A.2",
+                    "description": "Explain how the unit circle in the coordinate plane enables the extension of trigonometric functions to all real numbers, interpreted as radian measures of angles traversed counterclockwise around the unit circle.",
+                    "prerequisites": ["HSF-TF.A.1"],
+                    "cluster": "Extend the domain of trigonometric functions using the unit circle."
+                },
+                {
+                    "id": "HSF-TF.B.5",
+                    "description": "Choose trigonometric functions to model periodic phenomena with specified amplitude, frequency, and midline.",
+                    "prerequisites": ["HSF-TF.A.2", "HSF-IF.C.7e"],
+                    "cluster": "Model periodic phenomena with trigonometric functions."
+                },
+                {
+                    "id": "HSF-TF.C.8",
+                    "description": "Prove the Pythagorean identity sin^2(θ) + cos^2(θ) = 1 and use it to find sin(θ), cos(θ), or tan(θ) given sin(θ), cos(θ), or tan(θ) and the quadrant of the angle.",
+                    "prerequisites": ["HSF-TF.A.2", "HSG-SRT.C.8"],
+                    "cluster": "Prove and apply trigonometric identities."
+                }
+            ]
+        },
+        {
+            "id": "F-LE",
+            "name": "Linear, Quadratic, and Exponential Models",
+            "standards": [
+                {
+                    "id": "HSF-LE.A.4",
+                    "description": "For exponential models, express as a logarithm the solution to ab^ct = d where a, c, and d are numbers and the base b is 2, 10, or e; evaluate the logarithm using technology.",
+                    "prerequisites": ["HSF-LE.A.2", "HSF-BF.B.5"],
+                    "cluster": "Construct and compare linear, quadratic, and exponential models and solve problems."
+                }
+            ]
+        }
+    ]
+}

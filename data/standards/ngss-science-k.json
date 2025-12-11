@@ -1,0 +1,125 @@
+{
+    "subject": "science",
+    "grade": "K",
+    "domains": [
+        {
+            "name": "Physical Science: Forces and Interactions",
+            "standards": [
+                {
+                    "id": "K-PS2-1",
+                    "description": "Plan and conduct an investigation to compare the effects of different strengths or different directions of pushes and pulls on the motion of an object.",
+                    "cluster": "Motion and Stability: Forces and Interactions",
+                    "prerequisites": [],
+                    "stat_mappings": ["science", "critical_thinking", "problem_solving"],
+                    "cognitive_complexity": 2,
+                    "estimated_hours": 3
+                },
+                {
+                    "id": "K-PS2-2",
+                    "description": "Analyze data to determine if a design solution works as intended to change the speed or direction of an object with a push or a pull.",
+                    "cluster": "Motion and Stability: Forces and Interactions",
+                    "prerequisites": ["K-PS2-1"],
+                    "stat_mappings": ["science", "critical_thinking", "technology"],
+                    "cognitive_complexity": 3,
+                    "estimated_hours": 4
+                }
+            ]
+        },
+        {
+            "name": "Life Science: Interdependent Relationships in Ecosystems",
+            "standards": [
+                {
+                    "id": "K-LS1-1",
+                    "description": "Use observations to describe patterns of what plants and animals (including humans) need to survive.",
+                    "cluster": "From Molecules to Organisms: Structures and Processes",
+                    "prerequisites": [],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 2,
+                    "estimated_hours": 3
+                },
+                {
+                    "id": "K-ESS2-2",
+                    "description": "Construct an argument supported by evidence for how plants and animals (including humans) can change the environment to meet their needs.",
+                    "cluster": "Earth's Systems",
+                    "prerequisites": ["K-LS1-1"],
+                    "stat_mappings": ["science", "critical_thinking", "problem_solving"],
+                    "cognitive_complexity": 3,
+                    "estimated_hours": 4
+                }
+            ]
+        },
+        {
+            "name": "Earth and Space Science: Weather and Climate",
+            "standards": [
+                {
+                    "id": "K-ESS2-1",
+                    "description": "Use and share observations of local weather conditions to describe patterns over time.",
+                    "cluster": "Earth's Systems",
+                    "prerequisites": [],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 2,
+                    "estimated_hours": 3
+                },
+                {
+                    "id": "K-ESS3-1",
+                    "description": "Use a model to represent the relationship between the needs of different plants or animals (including humans) and the places they live.",
+                    "cluster": "Earth and Human Activity",
+                    "prerequisites": ["K-LS1-1"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 2,
+                    "estimated_hours": 3
+                },
+                {
+                    "id": "K-ESS3-2",
+                    "description": "Ask questions to obtain information about the purpose of weather forecasting to prepare for, and respond to, severe weather.",
+                    "cluster": "Earth and Human Activity",
+                    "prerequisites": ["K-ESS2-1"],
+                    "stat_mappings": ["science", "critical_thinking"],
+                    "cognitive_complexity": 2,
+                    "estimated_hours": 3
+                },
+                {
+                    "id": "K-ESS3-3",
+                    "description": "Communicate solutions that will reduce the impact of humans on the land, water, air, and/or other living things in the local environment.",
+                    "cluster": "Earth and Human Activity",
+                    "prerequisites": ["K-ESS3-1"],
+                    "stat_mappings": ["science", "critical_thinking", "problem_solving"],
+                    "cognitive_complexity": 3,
+                    "estimated_hours": 4
+                }
+            ]
+        },
+        {
+            "name": "Engineering Design",
+            "standards": [
+                {
+                    "id": "K-2-ETS1-1",
+                    "description": "Ask questions, make observations, and gather information about a situation people want to change to define a simple problem that can be solved through the development of a new or improved object or tool.",
+                    "cluster": "Engineering Design",
+                    "prerequisites": [],
+                    "stat_mappings": ["science", "critical_thinking", "technology", "problem_solving"],
+                    "cognitive_complexity": 2,
+                    "estimated_hours": 4
+                },
+                {
+                    "id": "K-2-ETS1-2",
+                    "description": "Develop a simple sketch, drawing, or physical model to illustrate how the shape of an object helps it function as needed to solve a given problem.",
+                    "cluster": "Engineering Design",
+                    "prerequisites": ["K-2-ETS1-1"],
+                    "stat_mappings": ["science", "technology", "problem_solving"],
+                    "cognitive_complexity": 3,
+                    "estimated_hours": 5
+                },
+                {
+                    "id": "K-2-ETS1-3",
+                    "description": "Analyze data from tests of two objects designed to solve the same problem to compare the strengths and weaknesses of how each performs.",
+                    "cluster": "Engineering Design",
+                    "prerequisites": ["K-2-ETS1-2"],
+                    "stat_mappings": ["science", "critical_thinking", "technology"],
+                    "cognitive_complexity": 3,
+                    "estimated_hours": 5
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,1336 @@
+{
+  "grade": "2",
+  "subject": "Mathematics",
+  "version": "1.0.0",
+  "created_at": "2025-01-08",
+  "items": [
+    {
+      "id": "math-g2-oa-a-1-001",
+      "standard_id": "2.OA.A.1",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "There are 45 books on the shelf.\n23 more books are added.\nHow many books are on the shelf now?",
+      "options": ["58", "68", "78", "22"],
+      "correct_answer": "68",
+      "explanation": "45 + 23 = 68 books on the shelf.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 30
+    },
+    {
+      "id": "math-g2-oa-a-1-002",
+      "standard_id": "2.OA.A.1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Maria has 56 stickers.\nShe gives 28 to her friend.\nThen she buys 15 more.\nHow many stickers does Maria have now?",
+      "options": ["33", "43", "53", "99"],
+      "correct_answer": "43",
+      "explanation": "Step 1: 56 - 28 = 28. Step 2: 28 + 15 = 43 stickers.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 45
+    },
+    {
+      "id": "math-g2-oa-a-1-003",
+      "standard_id": "2.OA.A.1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Jake has 34 toy cars.\nLily has 47 toy cars.\nHow many more cars does Lily have than Jake?",
+      "options": ["11", "12", "13", "81"],
+      "correct_answer": "13",
+      "explanation": "47 - 34 = 13. Lily has 13 more cars than Jake.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 35
+    },
+    {
+      "id": "math-g2-oa-a-1-004",
+      "standard_id": "2.OA.A.1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "A bus has 62 people.\n35 people get off at the first stop.\n18 people get on at the second stop.\nHow many people are on the bus now?",
+      "options": ["35", "45", "55", "115"],
+      "correct_answer": "45",
+      "explanation": "62 - 35 = 27, then 27 + 18 = 45 people.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 50
+    },
+    {
+      "id": "math-g2-oa-b-2-001",
+      "standard_id": "2.OA.B.2",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "9 + 7 = ?",
+      "options": ["14", "15", "16", "17"],
+      "correct_answer": "16",
+      "explanation": "9 + 7 = 16. This is a fact to know by heart!",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.15,
+      "time_estimate_seconds": 10
+    },
+    {
+      "id": "math-g2-oa-b-2-002",
+      "standard_id": "2.OA.B.2",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "17 - 8 = ?",
+      "options": ["7", "8", "9", "10"],
+      "correct_answer": "9",
+      "explanation": "17 - 8 = 9. Use the related addition fact: 8 + 9 = 17.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.2,
+      "time_estimate_seconds": 10
+    },
+    {
+      "id": "math-g2-oa-b-2-003",
+      "standard_id": "2.OA.B.2",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "8 + 8 = ?",
+      "options": ["14", "15", "16", "18"],
+      "correct_answer": "16",
+      "explanation": "8 + 8 = 16. Doubles facts are great to memorize!",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.15,
+      "time_estimate_seconds": 10
+    },
+    {
+      "id": "math-g2-oa-b-2-004",
+      "standard_id": "2.OA.B.2",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "14 - 6 = ?",
+      "options": ["6", "7", "8", "9"],
+      "correct_answer": "8",
+      "explanation": "14 - 6 = 8. Think: 6 + 8 = 14.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.2,
+      "time_estimate_seconds": 10
+    },
+    {
+      "id": "math-g2-oa-c-3-001",
+      "standard_id": "2.OA.C.3",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Is 14 even or odd?\n🔵🔵 🔵🔵 🔵🔵 🔵🔵 🔵🔵 🔵🔵 🔵🔵",
+      "options": ["Even", "Odd"],
+      "correct_answer": "Even",
+      "explanation": "14 is even because all the objects can be paired up with no leftovers.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.2,
+      "time_estimate_seconds": 15
+    },
+    {
+      "id": "math-g2-oa-c-3-002",
+      "standard_id": "2.OA.C.3",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Is 17 even or odd?\n🔵🔵 🔵🔵 🔵🔵 🔵🔵 🔵🔵 🔵🔵 🔵🔵 🔵🔵 🔵",
+      "options": ["Even", "Odd"],
+      "correct_answer": "Odd",
+      "explanation": "17 is odd because there is 1 left over when we try to make pairs.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.2,
+      "time_estimate_seconds": 15
+    },
+    {
+      "id": "math-g2-oa-c-3-003",
+      "standard_id": "2.OA.C.3",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Which equation shows that 16 is even?",
+      "options": ["16 = 8 + 8", "16 = 10 + 6", "16 = 9 + 7", "16 = 15 + 1"],
+      "correct_answer": "16 = 8 + 8",
+      "explanation": "16 = 8 + 8 shows 16 as a sum of two EQUAL addends. This proves it's even.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 25
+    },
+    {
+      "id": "math-g2-oa-c-4-001",
+      "standard_id": "2.OA.C.4",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Count the stars in this array:\n⭐⭐⭐⭐⭐\n⭐⭐⭐⭐⭐\n⭐⭐⭐⭐⭐\nHow many stars in all?",
+      "options": ["10", "12", "15", "20"],
+      "correct_answer": "15",
+      "explanation": "3 rows with 5 stars each: 5 + 5 + 5 = 15 stars.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 20
+    },
+    {
+      "id": "math-g2-oa-c-4-002",
+      "standard_id": "2.OA.C.4",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Look at this array:\n🔵🔵🔵🔵\n🔵🔵🔵🔵\n🔵🔵🔵🔵\n🔵🔵🔵🔵\nWhich equation matches?",
+      "options": ["4 + 4 = 8", "4 + 4 + 4 = 12", "4 + 4 + 4 + 4 = 16", "3 + 3 + 3 + 3 = 12"],
+      "correct_answer": "4 + 4 + 4 + 4 = 16",
+      "explanation": "4 rows with 4 in each row: 4 + 4 + 4 + 4 = 16 total.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 30
+    },
+    {
+      "id": "math-g2-oa-c-4-003",
+      "standard_id": "2.OA.C.4",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "An array has 3 rows and 5 columns.\nHow many objects are in the array?",
+      "options": ["8", "12", "15", "35"],
+      "correct_answer": "15",
+      "explanation": "3 rows × 5 columns = 5 + 5 + 5 = 15 objects.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 25
+    },
+    {
+      "id": "math-g2-nbt-a-1-001",
+      "standard_id": "2.NBT.A.1",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "In 374, what does the 3 mean?",
+      "options": ["3 ones", "3 tens", "3 hundreds", "300 ones"],
+      "correct_answer": "3 hundreds",
+      "explanation": "The 3 is in the hundreds place, so it means 3 hundreds (or 300).",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 15
+    },
+    {
+      "id": "math-g2-nbt-a-1-002",
+      "standard_id": "2.NBT.A.1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "What number has 5 hundreds, 2 tens, and 8 ones?",
+      "options": ["258", "285", "528", "852"],
+      "correct_answer": "528",
+      "explanation": "5 hundreds = 500, 2 tens = 20, 8 ones = 8. Total: 528.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 20
+    },
+    {
+      "id": "math-g2-nbt-a-1-003",
+      "standard_id": "2.NBT.A.1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Which shows 463 in expanded form?",
+      "options": ["4 + 6 + 3", "400 + 60 + 3", "400 + 6 + 3", "40 + 60 + 3"],
+      "correct_answer": "400 + 60 + 3",
+      "explanation": "463 = 4 hundreds + 6 tens + 3 ones = 400 + 60 + 3.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 20
+    },
+    {
+      "id": "math-g2-nbt-a-2-001",
+      "standard_id": "2.NBT.A.2",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Skip count by 5s. What comes next?\n85, 90, 95, ___",
+      "options": ["96", "99", "100", "105"],
+      "correct_answer": "100",
+      "explanation": "Counting by 5s: 85, 90, 95, 100. Add 5 each time.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.2,
+      "time_estimate_seconds": 15
+    },
+    {
+      "id": "math-g2-nbt-a-2-002",
+      "standard_id": "2.NBT.A.2",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Skip count by 10s. What comes next?\n760, 770, 780, ___",
+      "options": ["781", "790", "800", "880"],
+      "correct_answer": "790",
+      "explanation": "Counting by 10s: add 10 each time. 780 + 10 = 790.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.2,
+      "time_estimate_seconds": 15
+    },
+    {
+      "id": "math-g2-nbt-a-2-003",
+      "standard_id": "2.NBT.A.2",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Skip count by 100s. What comes next?\n400, 500, 600, ___",
+      "options": ["610", "650", "700", "1000"],
+      "correct_answer": "700",
+      "explanation": "Counting by 100s: 400, 500, 600, 700. Add 100 each time.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 15
+    },
+    {
+      "id": "math-g2-nbt-a-3-001",
+      "standard_id": "2.NBT.A.3",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "What is the number name for 845?",
+      "options": ["Eight four five", "Eight hundred forty-five", "Eight hundred and forty-five", "Eighty-four five"],
+      "correct_answer": "Eight hundred forty-five",
+      "explanation": "845 is read as \"eight hundred forty-five.\"",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 20
+    },
+    {
+      "id": "math-g2-nbt-a-3-002",
+      "standard_id": "2.NBT.A.3",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Write 'three hundred seven' as a number.",
+      "options": ["37", "307", "370", "3007"],
+      "correct_answer": "307",
+      "explanation": "Three hundred seven = 300 + 7 = 307. There are no tens.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 25
+    },
+    {
+      "id": "math-g2-nbt-a-3-003",
+      "standard_id": "2.NBT.A.3",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Write 592 in expanded form.",
+      "options": ["5 + 9 + 2", "500 + 90 + 2", "59 + 2", "500 + 9 + 2"],
+      "correct_answer": "500 + 90 + 2",
+      "explanation": "592 = 5 hundreds + 9 tens + 2 ones = 500 + 90 + 2.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 20
+    },
+    {
+      "id": "math-g2-nbt-a-4-001",
+      "standard_id": "2.NBT.A.4",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Compare: 456 ___ 465",
+      "options": [">", "<", "="],
+      "correct_answer": "<",
+      "explanation": "Both have 4 hundreds. Compare tens: 5 tens < 6 tens. So 456 < 465.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 20
+    },
+    {
+      "id": "math-g2-nbt-a-4-002",
+      "standard_id": "2.NBT.A.4",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Compare: 789 ___ 798",
+      "options": [">", "<", "="],
+      "correct_answer": "<",
+      "explanation": "Same hundreds (7), compare tens: 8 tens < 9 tens. So 789 < 798.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 20
+    },
+    {
+      "id": "math-g2-nbt-a-4-003",
+      "standard_id": "2.NBT.A.4",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Which number is the greatest?\n347, 374, 437, 473",
+      "options": ["347", "374", "437", "473"],
+      "correct_answer": "473",
+      "explanation": "Compare hundreds first: 473 has the most hundreds (4 hundreds, with 7 tens).",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 30
+    },
+    {
+      "id": "math-g2-nbt-b-5-001",
+      "standard_id": "2.NBT.B.5",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "34 + 25 = ?",
+      "options": ["57", "58", "59", "69"],
+      "correct_answer": "59",
+      "explanation": "34 + 25: 4 + 5 = 9 ones, 3 + 2 = 5 tens. Total: 59.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.2,
+      "time_estimate_seconds": 20
+    },
+    {
+      "id": "math-g2-nbt-b-5-002",
+      "standard_id": "2.NBT.B.5",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "67 - 29 = ?",
+      "options": ["36", "37", "38", "48"],
+      "correct_answer": "38",
+      "explanation": "67 - 29 = 38. You can think: 67 - 30 = 37, then add 1 back = 38.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 30
+    },
+    {
+      "id": "math-g2-nbt-b-5-003",
+      "standard_id": "2.NBT.B.5",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "48 + 37 = ?",
+      "options": ["75", "85", "86", "95"],
+      "correct_answer": "85",
+      "explanation": "48 + 37: 8 + 7 = 15 (write 5, carry 1). 4 + 3 + 1 = 8. Total: 85.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 30
+    },
+    {
+      "id": "math-g2-nbt-b-6-001",
+      "standard_id": "2.NBT.B.6",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "25 + 15 + 35 + 25 = ?",
+      "options": ["90", "100", "110", "120"],
+      "correct_answer": "100",
+      "explanation": "25 + 25 = 50, 15 + 35 = 50. Then 50 + 50 = 100.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 40
+    },
+    {
+      "id": "math-g2-nbt-b-6-002",
+      "standard_id": "2.NBT.B.6",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "12 + 24 + 18 + 16 = ?",
+      "options": ["60", "65", "70", "75"],
+      "correct_answer": "70",
+      "explanation": "12 + 18 = 30, 24 + 16 = 40. Then 30 + 40 = 70.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 45
+    },
+    {
+      "id": "math-g2-nbt-b-6-003",
+      "standard_id": "2.NBT.B.6",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "33 + 27 + 14 = ?",
+      "options": ["64", "74", "84", "94"],
+      "correct_answer": "74",
+      "explanation": "33 + 27 = 60, then 60 + 14 = 74.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 35
+    },
+    {
+      "id": "math-g2-nbt-b-7-001",
+      "standard_id": "2.NBT.B.7",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "345 + 123 = ?",
+      "options": ["458", "468", "478", "568"],
+      "correct_answer": "468",
+      "explanation": "345 + 123: Add ones (5+3=8), tens (4+2=6), hundreds (3+1=4). Total: 468.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 35
+    },
+    {
+      "id": "math-g2-nbt-b-7-002",
+      "standard_id": "2.NBT.B.7",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "582 - 241 = ?",
+      "options": ["331", "341", "351", "441"],
+      "correct_answer": "341",
+      "explanation": "582 - 241: Ones (2-1=1), tens (8-4=4), hundreds (5-2=3). Total: 341.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 35
+    },
+    {
+      "id": "math-g2-nbt-b-7-003",
+      "standard_id": "2.NBT.B.7",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "456 + 275 = ?",
+      "options": ["621", "631", "721", "731"],
+      "correct_answer": "731",
+      "explanation": "456 + 275: 6+5=11 (write 1, carry 1), 5+7+1=13 (write 3, carry 1), 4+2+1=7. Total: 731.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 45
+    },
+    {
+      "id": "math-g2-nbt-b-8-001",
+      "standard_id": "2.NBT.B.8",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "What is 10 more than 345?",
+      "options": ["335", "346", "355", "445"],
+      "correct_answer": "355",
+      "explanation": "10 more than 345 is 355. The tens digit goes up by 1.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.2,
+      "time_estimate_seconds": 15
+    },
+    {
+      "id": "math-g2-nbt-b-8-002",
+      "standard_id": "2.NBT.B.8",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "What is 100 less than 567?",
+      "options": ["457", "467", "557", "667"],
+      "correct_answer": "467",
+      "explanation": "100 less than 567 is 467. The hundreds digit goes down by 1.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.2,
+      "time_estimate_seconds": 15
+    },
+    {
+      "id": "math-g2-nbt-b-8-003",
+      "standard_id": "2.NBT.B.8",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "What is 100 more than 895?",
+      "options": ["895", "905", "985", "995"],
+      "correct_answer": "995",
+      "explanation": "100 more than 895 is 995. 8 hundreds + 1 hundred = 9 hundreds.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 20
+    },
+    {
+      "id": "math-g2-nbt-b-9-001",
+      "standard_id": "2.NBT.B.9",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Why does 34 + 20 = 54?\n(Choose the best explanation)",
+      "options": ["I just know it", "3 tens + 2 tens = 5 tens, so 34 + 20 = 54", "I counted on my fingers", "The answer is always 54"],
+      "correct_answer": "3 tens + 2 tens = 5 tens, so 34 + 20 = 54",
+      "explanation": "Using place value: 34 has 3 tens. Adding 2 tens gives 5 tens = 50. Plus 4 ones = 54.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 35
+    },
+    {
+      "id": "math-g2-nbt-b-9-002",
+      "standard_id": "2.NBT.B.9",
+      "dok_level": 3,
+      "question_type": "multiple_choice",
+      "question": "Sam says: 48 + 25 = 48 + 20 + 5 = 68 + 5 = 73\nWhy did Sam break apart 25?",
+      "options": ["To make it harder", "To add the tens first, then the ones", "Because 25 is too big", "Sam made a mistake"],
+      "correct_answer": "To add the tens first, then the ones",
+      "explanation": "Sam used place value to break 25 into 20 + 5. Adding tens first makes it easier!",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 40
+    },
+    {
+      "id": "math-g2-nbt-b-9-003",
+      "standard_id": "2.NBT.B.9",
+      "dok_level": 3,
+      "question_type": "multiple_choice",
+      "question": "Maya says: 63 - 28 = 63 - 30 + 2 = 33 + 2 = 35\nIs Maya correct? Why?",
+      "options": ["Yes, she subtracted 30 then added 2 back", "No, she should have subtracted 2", "No, the answer is 45", "Yes, but the strategy is wrong"],
+      "correct_answer": "Yes, she subtracted 30 then added 2 back",
+      "explanation": "Maya subtracted 30 (which is 2 more than 28), then added 2 back. This works!",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 45
+    },
+    {
+      "id": "math-g2-md-a-1-001",
+      "standard_id": "2.MD.A.1",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Which tool would you use to measure the length of your desk?",
+      "options": ["A scale", "A ruler or yardstick", "A clock", "A thermometer"],
+      "correct_answer": "A ruler or yardstick",
+      "explanation": "A ruler or yardstick measures length. A scale measures weight, a clock measures time.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.2,
+      "time_estimate_seconds": 15
+    },
+    {
+      "id": "math-g2-md-a-1-002",
+      "standard_id": "2.MD.A.1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "To measure the length of a football field, which tool is best?",
+      "options": ["A 6-inch ruler", "A 12-inch ruler", "A yardstick", "A measuring tape"],
+      "correct_answer": "A measuring tape",
+      "explanation": "A measuring tape is best for long distances. It can measure many feet at once.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 20
+    },
+    {
+      "id": "math-g2-md-a-1-003",
+      "standard_id": "2.MD.A.1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Sarah measured her pencil with a ruler.\nIt was 7 inches long.\nWhat unit did Sarah use?",
+      "options": ["Centimeters", "Feet", "Inches", "Meters"],
+      "correct_answer": "Inches",
+      "explanation": "Sarah used inches as her unit of measurement.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.2,
+      "time_estimate_seconds": 15
+    },
+    {
+      "id": "math-g2-md-a-2-001",
+      "standard_id": "2.MD.A.2",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Tom measured a table with small paper clips: 15 clips.\nHe measured again with large paper clips: 10 clips.\nWhy are the numbers different?",
+      "options": ["Tom counted wrong", "The table changed size", "Larger clips need fewer to cover the same length", "The small clips are broken"],
+      "correct_answer": "Larger clips need fewer to cover the same length",
+      "explanation": "Larger units mean fewer are needed. The table is the same length!",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 35
+    },
+    {
+      "id": "math-g2-md-a-2-002",
+      "standard_id": "2.MD.A.2",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "A book is 8 inches long.\nAbout how many centimeters is that?\n(Hint: 1 inch ≈ 2.5 cm)",
+      "options": ["8 cm", "10 cm", "16 cm", "20 cm"],
+      "correct_answer": "20 cm",
+      "explanation": "8 inches × 2.5 cm = 20 cm. Smaller units give bigger numbers!",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 40
+    },
+    {
+      "id": "math-g2-md-a-2-003",
+      "standard_id": "2.MD.A.2",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Which will be a LARGER number when measuring a hallway?",
+      "options": ["Measuring in feet", "Measuring in inches", "They will be the same", "Cannot tell"],
+      "correct_answer": "Measuring in inches",
+      "explanation": "Inches are smaller than feet, so you need more of them. More inches = larger number.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 25
+    },
+    {
+      "id": "math-g2-md-a-3-001",
+      "standard_id": "2.MD.A.3",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "About how long is a new crayon?",
+      "options": ["About 1 inch", "About 4 inches", "About 12 inches", "About 3 feet"],
+      "correct_answer": "About 4 inches",
+      "explanation": "A new crayon is about 4 inches (or about 10 cm) long.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 15
+    },
+    {
+      "id": "math-g2-md-a-3-002",
+      "standard_id": "2.MD.A.3",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "About how long is a school bus?",
+      "options": ["About 10 inches", "About 10 feet", "About 35 feet", "About 100 feet"],
+      "correct_answer": "About 35 feet",
+      "explanation": "A school bus is about 35 feet long (about 10-11 meters).",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 20
+    },
+    {
+      "id": "math-g2-md-a-3-003",
+      "standard_id": "2.MD.A.3",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "A door is about 7 feet tall.\nAbout how many meters is that?\n(Hint: 1 meter is a little more than 3 feet)",
+      "options": ["About 1 meter", "About 2 meters", "About 7 meters", "About 21 meters"],
+      "correct_answer": "About 2 meters",
+      "explanation": "7 feet ÷ 3 ≈ about 2 meters. A door is about 2 meters tall.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 30
+    },
+    {
+      "id": "math-g2-md-a-4-001",
+      "standard_id": "2.MD.A.4",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "A red ribbon is 15 inches long.\nA blue ribbon is 9 inches long.\nHow much longer is the red ribbon?",
+      "options": ["4 inches", "5 inches", "6 inches", "24 inches"],
+      "correct_answer": "6 inches",
+      "explanation": "15 - 9 = 6. The red ribbon is 6 inches longer.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 20
+    },
+    {
+      "id": "math-g2-md-a-4-002",
+      "standard_id": "2.MD.A.4",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Jake's pencil is 12 cm.\nSarah's pencil is 18 cm.\nHow much shorter is Jake's pencil?",
+      "options": ["4 cm", "5 cm", "6 cm", "30 cm"],
+      "correct_answer": "6 cm",
+      "explanation": "18 - 12 = 6. Jake's pencil is 6 cm shorter.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 25
+    },
+    {
+      "id": "math-g2-md-a-4-003",
+      "standard_id": "2.MD.A.4",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "A rope is 48 inches long.\nAnother rope is 36 inches long.\nWhat is the difference in length?",
+      "options": ["10 inches", "12 inches", "14 inches", "84 inches"],
+      "correct_answer": "12 inches",
+      "explanation": "48 - 36 = 12 inches difference.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 30
+    },
+    {
+      "id": "math-g2-md-b-5-001",
+      "standard_id": "2.MD.B.5",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "A caterpillar crawled 34 cm in the morning.\nIt crawled 28 cm in the afternoon.\nHow far did it crawl in all?",
+      "options": ["52 cm", "62 cm", "72 cm", "6 cm"],
+      "correct_answer": "62 cm",
+      "explanation": "34 + 28 = 62 cm total distance.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 30
+    },
+    {
+      "id": "math-g2-md-b-5-002",
+      "standard_id": "2.MD.B.5",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "A board is 95 cm long.\nJake cuts off 47 cm.\nHow long is the board now?",
+      "options": ["38 cm", "42 cm", "48 cm", "58 cm"],
+      "correct_answer": "48 cm",
+      "explanation": "95 - 47 = 48 cm remaining.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 35
+    },
+    {
+      "id": "math-g2-md-b-5-003",
+      "standard_id": "2.MD.B.5",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Tom has a string that is 56 inches.\nHe needs a string that is 78 inches.\nHow many more inches does he need?",
+      "options": ["12 inches", "22 inches", "32 inches", "134 inches"],
+      "correct_answer": "22 inches",
+      "explanation": "78 - 56 = 22 more inches needed.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 30
+    },
+    {
+      "id": "math-g2-md-c-7-001",
+      "standard_id": "2.MD.C.7",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "The clock shows 3:25.\nWhat time is it?",
+      "options": ["3:05", "3:25", "5:15", "5:03"],
+      "correct_answer": "3:25",
+      "explanation": "The hour hand is on 3, the minute hand points to 5 (which means 25 minutes).",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 20
+    },
+    {
+      "id": "math-g2-md-c-7-002",
+      "standard_id": "2.MD.C.7",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "School starts at 8:00 a.m.\nRecess is at 10:15 a.m.\nWhich happens in the morning?",
+      "options": ["Only school starting", "Only recess", "Both happen in the morning", "Neither"],
+      "correct_answer": "Both happen in the morning",
+      "explanation": "A.M. means morning. Both 8:00 a.m. and 10:15 a.m. are in the morning.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 20
+    },
+    {
+      "id": "math-g2-md-c-7-003",
+      "standard_id": "2.MD.C.7",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "It's 7:45 now.\nIn 20 minutes, what time will it be?",
+      "options": ["7:65", "8:05", "8:15", "8:25"],
+      "correct_answer": "8:05",
+      "explanation": "7:45 + 15 min = 8:00, then + 5 more min = 8:05.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 35
+    },
+    {
+      "id": "math-g2-md-c-8-001",
+      "standard_id": "2.MD.C.8",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Jake has 3 quarters.\nHow much money does he have?",
+      "options": ["30¢", "50¢", "75¢", "$3.00"],
+      "correct_answer": "75¢",
+      "explanation": "Each quarter is 25¢. 3 × 25¢ = 75¢.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 20
+    },
+    {
+      "id": "math-g2-md-c-8-002",
+      "standard_id": "2.MD.C.8",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Emma has 2 dimes and 3 nickels.\nHow much money does she have?",
+      "options": ["23¢", "25¢", "35¢", "50¢"],
+      "correct_answer": "35¢",
+      "explanation": "2 dimes = 20¢, 3 nickels = 15¢. Total: 20¢ + 15¢ = 35¢.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 30
+    },
+    {
+      "id": "math-g2-md-c-8-003",
+      "standard_id": "2.MD.C.8",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "A toy costs 85¢.\nSam has 1 quarter, 4 dimes, and 2 nickels.\nDoes Sam have enough money?",
+      "options": ["Yes, exactly", "Yes, with some left over", "No, needs more", "Cannot tell"],
+      "correct_answer": "No, needs more",
+      "explanation": "25¢ + 40¢ + 10¢ = 75¢. Sam has 75¢ but needs 85¢. He needs 10¢ more.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 45
+    },
+    {
+      "id": "math-g2-md-d-9-001",
+      "standard_id": "2.MD.D.9",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Students measured their pencils. The lengths were:\n5 in, 6 in, 5 in, 7 in, 6 in, 5 in\nWhich length appeared most often?",
+      "options": ["5 inches", "6 inches", "7 inches", "They are all equal"],
+      "correct_answer": "5 inches",
+      "explanation": "5 inches appears 3 times, 6 inches appears 2 times, 7 inches appears 1 time.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 35
+    },
+    {
+      "id": "math-g2-md-d-9-002",
+      "standard_id": "2.MD.D.9",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "On a line plot showing shoe lengths:\nX X X\nX X X X\nX X\n|----|----|----|\n8    9    10   11\nHow many shoes are 9 inches?",
+      "options": ["2", "3", "4", "9"],
+      "correct_answer": "4",
+      "explanation": "Count the X's above 9. There are 4 X's, so 4 shoes are 9 inches.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 30
+    },
+    {
+      "id": "math-g2-md-d-9-003",
+      "standard_id": "2.MD.D.9",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "You measured 5 books. The lengths were:\n8 in, 10 in, 9 in, 8 in, 10 in\nHow many X's would go above 10 on a line plot?",
+      "options": ["1", "2", "3", "5"],
+      "correct_answer": "2",
+      "explanation": "10 inches appears 2 times in the data, so 2 X's go above 10.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 25
+    },
+    {
+      "id": "math-g2-md-d-10-001",
+      "standard_id": "2.MD.D.10",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Look at this bar graph:\nApples: ████ (4)\nOranges: ██████ (6)\nBananas: ██ (2)\nWhich fruit is the favorite?",
+      "options": ["Apples", "Oranges", "Bananas", "They are all equal"],
+      "correct_answer": "Oranges",
+      "explanation": "Oranges has the longest bar (6), so it's the favorite.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.2,
+      "time_estimate_seconds": 20
+    },
+    {
+      "id": "math-g2-md-d-10-002",
+      "standard_id": "2.MD.D.10",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Use this picture graph:\n🐕 Dogs: 🐕🐕🐕🐕🐕 (5)\n🐈 Cats: 🐈🐈🐈 (3)\n🐰 Rabbits: 🐰🐰🐰🐰 (4)\nHow many more dogs than cats?",
+      "options": ["1", "2", "3", "8"],
+      "correct_answer": "2",
+      "explanation": "5 dogs - 3 cats = 2 more dogs than cats.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 25
+    },
+    {
+      "id": "math-g2-md-d-10-003",
+      "standard_id": "2.MD.D.10",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Use the bar graph:\nRed: 8 students\nBlue: 6 students\nGreen: 4 students\nHow many students voted in all?",
+      "options": ["14", "16", "18", "20"],
+      "correct_answer": "18",
+      "explanation": "8 + 6 + 4 = 18 students voted in all.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 25
+    },
+    {
+      "id": "math-g2-g-a-1-001",
+      "standard_id": "2.G.A.1",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "A shape has 5 sides and 5 angles.\nWhat is it called?",
+      "options": ["Quadrilateral", "Pentagon", "Hexagon", "Triangle"],
+      "correct_answer": "Pentagon",
+      "explanation": "A pentagon has 5 sides and 5 angles. 'Penta' means 5.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 15
+    },
+    {
+      "id": "math-g2-g-a-1-002",
+      "standard_id": "2.G.A.1",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Which shape has 6 sides?",
+      "options": ["Pentagon", "Hexagon", "Octagon", "Quadrilateral"],
+      "correct_answer": "Hexagon",
+      "explanation": "A hexagon has 6 sides. 'Hex' means 6.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 15
+    },
+    {
+      "id": "math-g2-g-a-1-003",
+      "standard_id": "2.G.A.1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "A square is a special kind of:",
+      "options": ["Triangle", "Pentagon", "Rectangle", "Hexagon"],
+      "correct_answer": "Rectangle",
+      "explanation": "A square has 4 sides and 4 right angles, like a rectangle. But all sides are equal!",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 20
+    },
+    {
+      "id": "math-g2-g-a-2-001",
+      "standard_id": "2.G.A.2",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "A rectangle is divided into rows and columns:\n⬜⬜⬜⬜\n⬜⬜⬜⬜\n⬜⬜⬜⬜\nHow many small squares are there?",
+      "options": ["7", "10", "12", "16"],
+      "correct_answer": "12",
+      "explanation": "3 rows × 4 columns = 12 small squares.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 20
+    },
+    {
+      "id": "math-g2-g-a-2-002",
+      "standard_id": "2.G.A.2",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "A rectangle has 5 columns and 4 rows of squares.\nHow many squares in all?",
+      "options": ["9", "15", "20", "25"],
+      "correct_answer": "20",
+      "explanation": "4 rows × 5 columns = 20 squares. Same as 5 + 5 + 5 + 5 = 20.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 25
+    },
+    {
+      "id": "math-g2-g-a-2-003",
+      "standard_id": "2.G.A.2",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "A rectangle is partitioned into 15 equal squares.\nIf there are 3 rows, how many columns are there?",
+      "options": ["3", "4", "5", "6"],
+      "correct_answer": "5",
+      "explanation": "15 squares ÷ 3 rows = 5 columns. (3 × 5 = 15)",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 30
+    },
+    {
+      "id": "math-g2-g-a-3-001",
+      "standard_id": "2.G.A.3",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "A pizza is cut into 3 equal slices.\nWhat is each slice called?",
+      "options": ["A half", "A third", "A fourth", "A whole"],
+      "correct_answer": "A third",
+      "explanation": "When divided into 3 equal parts, each part is called a third.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.2,
+      "time_estimate_seconds": 15
+    },
+    {
+      "id": "math-g2-g-a-3-002",
+      "standard_id": "2.G.A.3",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "A rectangle is divided into 4 equal parts.\nHow many fourths make the whole rectangle?",
+      "options": ["1", "2", "3", "4"],
+      "correct_answer": "4",
+      "explanation": "4 fourths = 1 whole. Four quarters make a complete rectangle.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": -1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 20
+    },
+    {
+      "id": "math-g2-g-a-3-003",
+      "standard_id": "2.G.A.3",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Sarah ate 2 thirds of a pie.\nHow much of the pie is left?",
+      "options": ["One half", "One third", "Two thirds", "The whole pie"],
+      "correct_answer": "One third",
+      "explanation": "3 thirds make a whole. 3 thirds - 2 thirds = 1 third left.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 25
+    }
+  ],
+  "metadata": {
+    "total_items": 78,
+    "standards_covered": [
+      "2.OA.A.1", "2.OA.B.2", "2.OA.C.3", "2.OA.C.4",
+      "2.NBT.A.1", "2.NBT.A.2", "2.NBT.A.3", "2.NBT.A.4",
+      "2.NBT.B.5", "2.NBT.B.6", "2.NBT.B.7", "2.NBT.B.8", "2.NBT.B.9",
+      "2.MD.A.1", "2.MD.A.2", "2.MD.A.3", "2.MD.A.4", "2.MD.B.5",
+      "2.MD.C.7", "2.MD.C.8", "2.MD.D.9", "2.MD.D.10",
+      "2.G.A.1", "2.G.A.2", "2.G.A.3"
+    ],
+    "dok_distribution": {
+      "dok_1": 26,
+      "dok_2": 48,
+      "dok_3": 4
+    },
+    "question_type_distribution": {
+      "multiple_choice": 78
+    }
+  }
+}

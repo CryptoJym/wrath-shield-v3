@@ -1,0 +1,1200 @@
+{
+  "grade": "K",
+  "subject": "Mathematics",
+  "version": "1.0.0",
+  "created_at": "2025-01-08",
+  "items": [
+    {
+      "id": "math-k-cc-a-1-001",
+      "standard_id": "K.CC.A.1",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Count by ones. What number comes next?\n1, 2, 3, 4, ___",
+      "options": ["3", "4", "5", "6"],
+      "correct_answer": "5",
+      "explanation": "When we count by ones, the next number after 4 is 5.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.15,
+      "time_estimate_seconds": 15
+    },
+    {
+      "id": "math-k-cc-a-1-002",
+      "standard_id": "K.CC.A.1",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Count by tens. What number comes next?\n10, 20, 30, ___",
+      "options": ["31", "35", "40", "50"],
+      "correct_answer": "40",
+      "explanation": "When we count by tens, we add 10 each time. 30 + 10 = 40.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 20
+    },
+    {
+      "id": "math-k-cc-a-1-003",
+      "standard_id": "K.CC.A.1",
+      "dok_level": 1,
+      "question_type": "drag_drop",
+      "question": "Put these numbers in counting order from smallest to biggest.",
+      "items_to_order": ["5", "3", "7", "1"],
+      "correct_order": ["1", "3", "5", "7"],
+      "explanation": "When we count by ones, the order is 1, 3, 5, 7.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": -1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 30
+    },
+    {
+      "id": "math-k-cc-a-1-004",
+      "standard_id": "K.CC.A.1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Count by tens. What number is missing?\n10, 20, ___, 40, 50",
+      "options": ["21", "25", "30", "35"],
+      "correct_answer": "30",
+      "explanation": "When counting by tens: 10, 20, 30, 40, 50. The missing number is 30.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 25
+    },
+    {
+      "id": "math-k-cc-a-2-001",
+      "standard_id": "K.CC.A.2",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Start at 5. Count forward. What comes next?\n5, 6, 7, ___",
+      "options": ["5", "6", "8", "9"],
+      "correct_answer": "8",
+      "explanation": "When counting forward from 5, we go 5, 6, 7, 8. The next number is 8.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.2,
+      "time_estimate_seconds": 15
+    },
+    {
+      "id": "math-k-cc-a-2-002",
+      "standard_id": "K.CC.A.2",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Start at 12. What is the next number?",
+      "options": ["10", "11", "13", "14"],
+      "correct_answer": "13",
+      "explanation": "When counting forward from 12, the next number is 13.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.2,
+      "time_estimate_seconds": 15
+    },
+    {
+      "id": "math-k-cc-a-2-003",
+      "standard_id": "K.CC.A.2",
+      "dok_level": 2,
+      "question_type": "drag_drop",
+      "question": "Start at 8. Put the next 4 numbers in order.",
+      "items_to_order": ["11", "9", "12", "10"],
+      "correct_order": ["9", "10", "11", "12"],
+      "explanation": "Starting at 8 and counting forward: 9, 10, 11, 12.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 35
+    },
+    {
+      "id": "math-k-cc-a-3-001",
+      "standard_id": "K.CC.A.3",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "How many apples are there? 🍎🍎🍎🍎🍎🍎🍎",
+      "options": ["5", "6", "7", "8"],
+      "correct_answer": "7",
+      "explanation": "There are 7 apples. Count each one: 1, 2, 3, 4, 5, 6, 7.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.2,
+      "time_estimate_seconds": 20
+    },
+    {
+      "id": "math-k-cc-a-3-002",
+      "standard_id": "K.CC.A.3",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Which number shows how many stars? ⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐",
+      "options": ["10", "11", "12", "13"],
+      "correct_answer": "12",
+      "explanation": "There are 12 stars. Count them all to get 12.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 25
+    },
+    {
+      "id": "math-k-cc-a-3-003",
+      "standard_id": "K.CC.A.3",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "There are no cookies on the plate. What number shows how many cookies?",
+      "options": ["0", "1", "2", "none"],
+      "correct_answer": "0",
+      "explanation": "When there are no objects, we write the number 0.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": -1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 15
+    },
+    {
+      "id": "math-k-cc-a-3-004",
+      "standard_id": "K.CC.A.3",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "How many hearts? ❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️",
+      "options": ["18", "19", "20", "21"],
+      "correct_answer": "20",
+      "explanation": "There are 20 hearts. This is the biggest number we write in Kindergarten!",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 35
+    },
+    {
+      "id": "math-k-cc-b-4-001",
+      "standard_id": "K.CC.B.4",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Count the dogs: 🐕🐕🐕🐕\nHow many dogs are there?",
+      "options": ["2", "3", "4", "5"],
+      "correct_answer": "4",
+      "explanation": "When we count objects, the last number we say tells us how many. We counted to 4, so there are 4 dogs.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.15,
+      "time_estimate_seconds": 15
+    },
+    {
+      "id": "math-k-cc-b-4-002",
+      "standard_id": "K.CC.B.4",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Sam counted these fish: 🐟🐟🐟🐟🐟🐟\nSam said \"1, 2, 3, 4, 5, 6\"\nHow many fish are there?",
+      "options": ["1", "5", "6", "7"],
+      "correct_answer": "6",
+      "explanation": "The last number Sam said was 6, so there are 6 fish. The last number we count tells us the total.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 20
+    },
+    {
+      "id": "math-k-cc-b-4-003",
+      "standard_id": "K.CC.B.4",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Maya has 5 blocks. She doesn't add or take away any. How many blocks does she still have?",
+      "options": ["4", "5", "6", "10"],
+      "correct_answer": "5",
+      "explanation": "If we don't add or take away objects, the number stays the same. Maya still has 5 blocks.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": -1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 20
+    },
+    {
+      "id": "math-k-cc-b-5-001",
+      "standard_id": "K.CC.B.5",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "How many circles are in the line?\n⚪⚪⚪⚪⚪⚪⚪⚪",
+      "options": ["6", "7", "8", "9"],
+      "correct_answer": "8",
+      "explanation": "Count each circle in the line: 1, 2, 3, 4, 5, 6, 7, 8. There are 8 circles.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.2,
+      "time_estimate_seconds": 20
+    },
+    {
+      "id": "math-k-cc-b-5-002",
+      "standard_id": "K.CC.B.5",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "How many squares are in the rows?\n🟦🟦🟦🟦🟦\n🟦🟦🟦🟦🟦",
+      "options": ["5", "8", "10", "12"],
+      "correct_answer": "10",
+      "explanation": "Count all the squares: 5 in the first row + 5 in the second row = 10 squares.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 25
+    },
+    {
+      "id": "math-k-cc-b-5-003",
+      "standard_id": "K.CC.B.5",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "How many butterflies are scattered around?\n    🦋\n  🦋    🦋\n🦋   🦋   🦋\n    🦋",
+      "options": ["5", "6", "7", "8"],
+      "correct_answer": "7",
+      "explanation": "Even when objects are scattered, we count each one. There are 7 butterflies.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 30
+    },
+    {
+      "id": "math-k-cc-c-6-001",
+      "standard_id": "K.CC.C.6",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Which group has MORE?\nGroup A: 🍎🍎🍎🍎🍎\nGroup B: 🍎🍎🍎",
+      "options": ["Group A", "Group B", "They are the same"],
+      "correct_answer": "Group A",
+      "explanation": "Group A has 5 apples and Group B has 3 apples. 5 is more than 3, so Group A has more.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.2,
+      "time_estimate_seconds": 20
+    },
+    {
+      "id": "math-k-cc-c-6-002",
+      "standard_id": "K.CC.C.6",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Which group has LESS?\nGroup A: 🌟🌟🌟🌟🌟🌟\nGroup B: 🌟🌟🌟🌟",
+      "options": ["Group A", "Group B", "They are the same"],
+      "correct_answer": "Group B",
+      "explanation": "Group A has 6 stars and Group B has 4 stars. 4 is less than 6, so Group B has less.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.2,
+      "time_estimate_seconds": 20
+    },
+    {
+      "id": "math-k-cc-c-6-003",
+      "standard_id": "K.CC.C.6",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Are these groups EQUAL?\nGroup A: 🔵🔵🔵🔵🔵🔵🔵\nGroup B: 🔴🔴🔴🔴🔴🔴🔴",
+      "options": ["Yes, they are equal", "No, Group A has more", "No, Group B has more"],
+      "correct_answer": "Yes, they are equal",
+      "explanation": "Both groups have 7 objects. When groups have the same number, they are equal.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": -1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 25
+    },
+    {
+      "id": "math-k-cc-c-7-001",
+      "standard_id": "K.CC.C.7",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Which number is bigger?\n3 or 7",
+      "options": ["3", "7", "They are the same"],
+      "correct_answer": "7",
+      "explanation": "7 is bigger than 3. When we count, 7 comes after 3.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.15,
+      "time_estimate_seconds": 10
+    },
+    {
+      "id": "math-k-cc-c-7-002",
+      "standard_id": "K.CC.C.7",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Which number is smaller?\n8 or 5",
+      "options": ["8", "5", "They are the same"],
+      "correct_answer": "5",
+      "explanation": "5 is smaller than 8. When we count, 5 comes before 8.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.15,
+      "time_estimate_seconds": 10
+    },
+    {
+      "id": "math-k-cc-c-7-003",
+      "standard_id": "K.CC.C.7",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Put these numbers in order from smallest to biggest:\n9, 4, 6",
+      "options": ["4, 6, 9", "9, 6, 4", "6, 4, 9", "4, 9, 6"],
+      "correct_answer": "4, 6, 9",
+      "explanation": "From smallest to biggest: 4 is smallest, then 6, then 9 is biggest.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 25
+    },
+    {
+      "id": "math-k-oa-a-1-001",
+      "standard_id": "K.OA.A.1",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Look at this picture:\n🐱🐱 + 🐱🐱🐱 = ?\nWhich shows putting the cats together?",
+      "options": ["2 + 3", "3 + 3", "2 + 2", "5 + 0"],
+      "correct_answer": "2 + 3",
+      "explanation": "We have 2 cats and 3 more cats. Putting them together is 2 + 3.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 20
+    },
+    {
+      "id": "math-k-oa-a-1-002",
+      "standard_id": "K.OA.A.1",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Max had 5 cookies. He ate 2 cookies.\n🍪🍪🍪🍪🍪 ➡️ 🍪❌🍪❌🍪\nWhich shows this story?",
+      "options": ["5 + 2", "5 - 2", "2 + 5", "2 - 5"],
+      "correct_answer": "5 - 2",
+      "explanation": "Max started with 5 and took away 2. This is subtraction: 5 - 2.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 25
+    },
+    {
+      "id": "math-k-oa-a-1-003",
+      "standard_id": "K.OA.A.1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Show with your fingers: 4 + 1\nHow many fingers should you hold up in all?",
+      "options": ["3", "4", "5", "6"],
+      "correct_answer": "5",
+      "explanation": "Hold up 4 fingers on one hand and 1 more finger. 4 + 1 = 5 fingers in all.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": -1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 20
+    },
+    {
+      "id": "math-k-oa-a-2-001",
+      "standard_id": "K.OA.A.2",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Lily has 3 red flowers 🌹🌹🌹\nShe picks 2 more yellow flowers 🌻🌻\nHow many flowers does Lily have now?",
+      "options": ["3", "4", "5", "6"],
+      "correct_answer": "5",
+      "explanation": "3 red flowers + 2 yellow flowers = 5 flowers in all.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 25
+    },
+    {
+      "id": "math-k-oa-a-2-002",
+      "standard_id": "K.OA.A.2",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "There are 6 birds on a tree. 🐦🐦🐦🐦🐦🐦\n4 birds fly away. 🐦🐦🐦🐦 ➡️ ✈️\nHow many birds are left?",
+      "options": ["1", "2", "3", "4"],
+      "correct_answer": "2",
+      "explanation": "6 birds - 4 birds = 2 birds left on the tree.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 25
+    },
+    {
+      "id": "math-k-oa-a-2-003",
+      "standard_id": "K.OA.A.2",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Tom has 4 toy cars. 🚗🚗🚗🚗\nEmma has 3 toy cars. 🚗🚗🚗\nHow many cars do they have together?",
+      "options": ["5", "6", "7", "8"],
+      "correct_answer": "7",
+      "explanation": "4 cars + 3 cars = 7 cars together.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": -1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 25
+    },
+    {
+      "id": "math-k-oa-a-3-001",
+      "standard_id": "K.OA.A.3",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Which shows a way to make 5?\n🔵🔵🔵 and 🔴🔴",
+      "options": ["2 + 2", "3 + 2", "4 + 2", "1 + 5"],
+      "correct_answer": "3 + 2",
+      "explanation": "3 blue circles + 2 red circles = 5 in all. 3 + 2 is a way to make 5.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 20
+    },
+    {
+      "id": "math-k-oa-a-3-002",
+      "standard_id": "K.OA.A.3",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "6 can be split into 4 and ___\n🟢🟢🟢🟢 and 🟢🟢",
+      "options": ["1", "2", "3", "4"],
+      "correct_answer": "2",
+      "explanation": "6 = 4 + 2. If we have 4, we need 2 more to make 6.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 25
+    },
+    {
+      "id": "math-k-oa-a-3-003",
+      "standard_id": "K.OA.A.3",
+      "dok_level": 3,
+      "question_type": "multiple_choice",
+      "question": "Which is NOT a way to make 7?",
+      "options": ["5 + 2", "3 + 4", "6 + 2", "1 + 6"],
+      "correct_answer": "6 + 2",
+      "explanation": "6 + 2 = 8, not 7. The other choices all equal 7.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 30
+    },
+    {
+      "id": "math-k-oa-a-4-001",
+      "standard_id": "K.OA.A.4",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "What number goes with 6 to make 10?\n6 + ___ = 10",
+      "options": ["2", "3", "4", "5"],
+      "correct_answer": "4",
+      "explanation": "6 + 4 = 10. We need 4 more to get from 6 to 10.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": -1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 20
+    },
+    {
+      "id": "math-k-oa-a-4-002",
+      "standard_id": "K.OA.A.4",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Use the picture to help:\n🔵🔵🔵🔵🔵🔵🔵 ⚪⚪⚪\n7 + ___ = 10",
+      "options": ["1", "2", "3", "4"],
+      "correct_answer": "3",
+      "explanation": "There are 7 blue circles and 3 empty spots. 7 + 3 = 10.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": -1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 25
+    },
+    {
+      "id": "math-k-oa-a-4-003",
+      "standard_id": "K.OA.A.4",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "I have 2 pencils. How many more do I need to have 10 pencils?",
+      "options": ["6", "7", "8", "9"],
+      "correct_answer": "8",
+      "explanation": "2 + 8 = 10. You need 8 more pencils to have 10.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 25
+    },
+    {
+      "id": "math-k-oa-a-5-001",
+      "standard_id": "K.OA.A.5",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "2 + 2 = ?",
+      "options": ["2", "3", "4", "5"],
+      "correct_answer": "4",
+      "explanation": "2 + 2 = 4. Two plus two equals four.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.1,
+      "time_estimate_seconds": 10
+    },
+    {
+      "id": "math-k-oa-a-5-002",
+      "standard_id": "K.OA.A.5",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "5 - 3 = ?",
+      "options": ["1", "2", "3", "4"],
+      "correct_answer": "2",
+      "explanation": "5 - 3 = 2. Five minus three equals two.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.15,
+      "time_estimate_seconds": 10
+    },
+    {
+      "id": "math-k-oa-a-5-003",
+      "standard_id": "K.OA.A.5",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "1 + 4 = ?",
+      "options": ["3", "4", "5", "6"],
+      "correct_answer": "5",
+      "explanation": "1 + 4 = 5. One plus four equals five.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.1,
+      "time_estimate_seconds": 10
+    },
+    {
+      "id": "math-k-oa-a-5-004",
+      "standard_id": "K.OA.A.5",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "4 - 4 = ?",
+      "options": ["0", "1", "2", "4"],
+      "correct_answer": "0",
+      "explanation": "4 - 4 = 0. When we take away all of something, we have zero left.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": -1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.2,
+      "time_estimate_seconds": 10
+    },
+    {
+      "id": "math-k-nbt-a-1-001",
+      "standard_id": "K.NBT.A.1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "How many tens and ones are in 14?\n🔟🔟🔟🔟🔟🔟🔟🔟🔟🔟 🔵🔵🔵🔵",
+      "options": ["1 ten and 4 ones", "4 tens and 1 one", "14 ones", "0 tens and 14 ones"],
+      "correct_answer": "1 ten and 4 ones",
+      "explanation": "14 = 1 group of ten + 4 extra ones. We see 10 + 4 = 14.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 25
+    },
+    {
+      "id": "math-k-nbt-a-1-002",
+      "standard_id": "K.NBT.A.1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "17 is the same as:\n🔟 and 🔵🔵🔵🔵🔵🔵🔵",
+      "options": ["10 + 5", "10 + 6", "10 + 7", "10 + 8"],
+      "correct_answer": "10 + 7",
+      "explanation": "17 = 10 + 7. We have 1 ten and 7 more ones.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 20
+    },
+    {
+      "id": "math-k-nbt-a-1-003",
+      "standard_id": "K.NBT.A.1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "10 + 3 = ?",
+      "options": ["11", "12", "13", "14"],
+      "correct_answer": "13",
+      "explanation": "10 + 3 = 13. One ten plus 3 ones makes thirteen.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 15
+    },
+    {
+      "id": "math-k-md-a-1-001",
+      "standard_id": "K.MD.A.1",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "What can we measure about this pencil? ✏️",
+      "options": ["Its color", "Its length", "Its name", "Its favorite number"],
+      "correct_answer": "Its length",
+      "explanation": "We can measure how long the pencil is. Length is something we can measure.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.2,
+      "time_estimate_seconds": 15
+    },
+    {
+      "id": "math-k-md-a-1-002",
+      "standard_id": "K.MD.A.1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "A watermelon 🍉 can be measured by its:\n(Pick two things you could measure)",
+      "options": ["Weight and length", "Color and taste", "Name and shape", "Smell and sound"],
+      "correct_answer": "Weight and length",
+      "explanation": "We can measure how heavy (weight) and how big (length) a watermelon is. These are measurable attributes.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 25
+    },
+    {
+      "id": "math-k-md-a-1-003",
+      "standard_id": "K.MD.A.1",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Which word describes something we can measure?",
+      "options": ["Happy", "Heavy", "Pretty", "Silly"],
+      "correct_answer": "Heavy",
+      "explanation": "Heavy describes weight, which we can measure. The other words describe feelings or opinions.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 15
+    },
+    {
+      "id": "math-k-md-a-2-001",
+      "standard_id": "K.MD.A.2",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Which is LONGER?\n🖍️🖍️🖍️🖍️🖍️\n🖍️🖍️",
+      "options": ["The top one", "The bottom one", "They are the same"],
+      "correct_answer": "The top one",
+      "explanation": "The top line of crayons is longer because it has more crayons in a row.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.15,
+      "time_estimate_seconds": 15
+    },
+    {
+      "id": "math-k-md-a-2-002",
+      "standard_id": "K.MD.A.2",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Which is SHORTER?\nA: 📏📏📏📏📏📏\nB: 📏📏📏",
+      "options": ["A is shorter", "B is shorter", "They are the same"],
+      "correct_answer": "B is shorter",
+      "explanation": "B has fewer rulers in a row, so B is shorter than A.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.15,
+      "time_estimate_seconds": 15
+    },
+    {
+      "id": "math-k-md-a-2-003",
+      "standard_id": "K.MD.A.2",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "An elephant 🐘 and a mouse 🐭.\nWhich is HEAVIER?",
+      "options": ["The elephant", "The mouse", "They weigh the same"],
+      "correct_answer": "The elephant",
+      "explanation": "An elephant is much heavier than a mouse. Elephants have more weight.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": -1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.2,
+      "time_estimate_seconds": 15
+    },
+    {
+      "id": "math-k-md-b-3-001",
+      "standard_id": "K.MD.B.3",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Sort these by color:\n🔴🔵🔴🔵🔴\nHow many RED circles?",
+      "options": ["2", "3", "4", "5"],
+      "correct_answer": "3",
+      "explanation": "Count the red circles: 🔴🔴🔴. There are 3 red circles.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.2,
+      "time_estimate_seconds": 20
+    },
+    {
+      "id": "math-k-md-b-3-002",
+      "standard_id": "K.MD.B.3",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Animals on the farm:\n🐄🐄🐄 🐷🐷🐷🐷🐷 🐔🐔\nWhich category has the MOST?",
+      "options": ["Cows", "Pigs", "Chickens"],
+      "correct_answer": "Pigs",
+      "explanation": "Cows: 3, Pigs: 5, Chickens: 2. Pigs have the most with 5.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 30
+    },
+    {
+      "id": "math-k-md-b-3-003",
+      "standard_id": "K.MD.B.3",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Shapes: 🟦🔺🟦🔺🟦🔺🔺\nHow many triangles? 🔺",
+      "options": ["2", "3", "4", "5"],
+      "correct_answer": "4",
+      "explanation": "Count the triangles: 🔺🔺🔺🔺. There are 4 triangles.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 25
+    },
+    {
+      "id": "math-k-g-a-1-001",
+      "standard_id": "K.G.A.1",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "What shape is a ball? ⚽",
+      "options": ["Circle", "Square", "Triangle", "Sphere"],
+      "correct_answer": "Sphere",
+      "explanation": "A ball is shaped like a sphere. A sphere is round like a ball and is 3D (you can hold it).",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 15
+    },
+    {
+      "id": "math-k-g-a-1-002",
+      "standard_id": "K.G.A.1",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "The clock ⏰ is _______ the table.",
+      "options": ["above", "below", "behind", "inside"],
+      "correct_answer": "above",
+      "explanation": "A clock on a wall is above the table. Above means higher up.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.2,
+      "time_estimate_seconds": 15
+    },
+    {
+      "id": "math-k-g-a-1-003",
+      "standard_id": "K.G.A.1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "The cat 🐱 is hiding _______ the box 📦.",
+      "options": ["behind", "on top of", "next to", "in front of"],
+      "correct_answer": "behind",
+      "explanation": "If we can't see the cat because the box is in the way, the cat is behind the box.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 20
+    },
+    {
+      "id": "math-k-g-a-2-001",
+      "standard_id": "K.G.A.2",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "What shape is this? ⬛",
+      "options": ["Circle", "Square", "Triangle", "Rectangle"],
+      "correct_answer": "Square",
+      "explanation": "This shape has 4 equal sides and 4 corners. It is a square.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.15,
+      "time_estimate_seconds": 10
+    },
+    {
+      "id": "math-k-g-a-2-002",
+      "standard_id": "K.G.A.2",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "What shape is this? 🔺",
+      "options": ["Circle", "Square", "Triangle", "Hexagon"],
+      "correct_answer": "Triangle",
+      "explanation": "This shape has 3 sides and 3 corners. It is a triangle.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.15,
+      "time_estimate_seconds": 10
+    },
+    {
+      "id": "math-k-g-a-2-003",
+      "standard_id": "K.G.A.2",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "This triangle is upside down: 🔻\nIs it still a triangle?",
+      "options": ["Yes, it's still a triangle", "No, it's a different shape", "It becomes a square", "It becomes a circle"],
+      "correct_answer": "Yes, it's still a triangle",
+      "explanation": "A triangle is always a triangle, no matter which way it points! It still has 3 sides.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 20
+    },
+    {
+      "id": "math-k-g-a-3-001",
+      "standard_id": "K.G.A.3",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "A circle ⭕ is:\n(Think: can you pick it up or is it flat like paper?)",
+      "options": ["Flat (2D)", "Solid (3D)", "Both", "Neither"],
+      "correct_answer": "Flat (2D)",
+      "explanation": "A circle is flat, like a shape drawn on paper. It is two-dimensional (2D).",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 20
+    },
+    {
+      "id": "math-k-g-a-3-002",
+      "standard_id": "K.G.A.3",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "A ball ⚽ is:\n(Think: can you hold it in your hands?)",
+      "options": ["Flat (2D)", "Solid (3D)", "Both", "Neither"],
+      "correct_answer": "Solid (3D)",
+      "explanation": "A ball is solid and you can hold it. It is three-dimensional (3D).",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 20
+    },
+    {
+      "id": "math-k-g-a-3-003",
+      "standard_id": "K.G.A.3",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Which one is a FLAT shape?",
+      "options": ["A can of soup", "A dice cube", "A square drawn on paper", "A basketball"],
+      "correct_answer": "A square drawn on paper",
+      "explanation": "A square drawn on paper is flat (2D). The other items are solid (3D) - you can pick them up.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 25
+    },
+    {
+      "id": "math-k-g-b-4-001",
+      "standard_id": "K.G.B.4",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "How are a circle ⭕ and a square ⬛ ALIKE?",
+      "options": ["Both have corners", "Both are closed shapes", "Both have 4 sides", "Both are 3D"],
+      "correct_answer": "Both are closed shapes",
+      "explanation": "Both circle and square are closed - the lines connect all the way around with no gaps.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 25
+    },
+    {
+      "id": "math-k-g-b-4-002",
+      "standard_id": "K.G.B.4",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "How are a triangle 🔺 and a square ⬛ DIFFERENT?",
+      "options": ["Number of sides", "They are both flat", "They both have corners", "They are both shapes"],
+      "correct_answer": "Number of sides",
+      "explanation": "A triangle has 3 sides, but a square has 4 sides. That's how they are different.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 25
+    },
+    {
+      "id": "math-k-g-b-4-003",
+      "standard_id": "K.G.B.4",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "A big square and a small square:\nWhat is DIFFERENT about them?",
+      "options": ["The size", "The number of sides", "The number of corners", "The shape"],
+      "correct_answer": "The size",
+      "explanation": "A big square and a small square are both squares with 4 sides and 4 corners. Only the size is different.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 25
+    },
+    {
+      "id": "math-k-g-b-5-001",
+      "standard_id": "K.G.B.5",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "To draw a triangle, how many straight lines do you need?",
+      "options": ["2", "3", "4", "5"],
+      "correct_answer": "3",
+      "explanation": "A triangle has 3 sides, so you need 3 straight lines to draw it.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": -1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 15
+    },
+    {
+      "id": "math-k-g-b-5-002",
+      "standard_id": "K.G.B.5",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "You want to build a square with sticks.\nHow many sticks do you need?",
+      "options": ["2", "3", "4", "5"],
+      "correct_answer": "4",
+      "explanation": "A square has 4 sides, so you need 4 sticks to build it.",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": -1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 15
+    },
+    {
+      "id": "math-k-g-b-5-003",
+      "standard_id": "K.G.B.5",
+      "dok_level": 3,
+      "question_type": "multiple_choice",
+      "question": "I have 6 sticks all the same length.\nWhich shape can I build?",
+      "options": ["Triangle only", "Square only", "Hexagon", "Circle"],
+      "correct_answer": "Hexagon",
+      "explanation": "A hexagon has 6 sides, so you can build it with 6 sticks. (You could also make 2 triangles!)",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 30
+    },
+    {
+      "id": "math-k-g-b-6-001",
+      "standard_id": "K.G.B.6",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Put 2 triangles together like this:\n🔺🔻\nWhat bigger shape can you make?",
+      "options": ["Circle", "Square", "Triangle", "Hexagon"],
+      "correct_answer": "Square",
+      "explanation": "When you put 2 triangles together the right way, they make a square!",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 25
+    },
+    {
+      "id": "math-k-g-b-6-002",
+      "standard_id": "K.G.B.6",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "You have 4 small squares: ⬛⬛\n                          ⬛⬛\nWhat can you make?",
+      "options": ["A bigger square", "A circle", "A triangle", "A star"],
+      "correct_answer": "A bigger square",
+      "explanation": "4 small squares put together make 1 bigger square!",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 25
+    },
+    {
+      "id": "math-k-g-b-6-003",
+      "standard_id": "K.G.B.6",
+      "dok_level": 3,
+      "question_type": "multiple_choice",
+      "question": "How many triangles do you need to make a hexagon?",
+      "options": ["2", "4", "6", "8"],
+      "correct_answer": "6",
+      "explanation": "You can divide a hexagon into 6 triangles, so you need 6 triangles to make one!",
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 35
+    }
+  ],
+  "metadata": {
+    "total_items": 66,
+    "standards_covered": [
+      "K.CC.A.1", "K.CC.A.2", "K.CC.A.3", "K.CC.B.4", "K.CC.B.5", "K.CC.C.6", "K.CC.C.7",
+      "K.OA.A.1", "K.OA.A.2", "K.OA.A.3", "K.OA.A.4", "K.OA.A.5",
+      "K.NBT.A.1",
+      "K.MD.A.1", "K.MD.A.2", "K.MD.B.3",
+      "K.G.A.1", "K.G.A.2", "K.G.A.3", "K.G.B.4", "K.G.B.5", "K.G.B.6"
+    ],
+    "dok_distribution": {
+      "dok_1": 36,
+      "dok_2": 26,
+      "dok_3": 4
+    },
+    "question_type_distribution": {
+      "multiple_choice": 63,
+      "drag_drop": 3
+    }
+  }
+}

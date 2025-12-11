@@ -1,0 +1,371 @@
+[
+    {
+        "id": "11-12.RL.1",
+        "category": "Reading",
+        "domain": "Literature",
+        "grade_band": "11-12",
+        "description": "Cite strong and thorough textual evidence to support analysis of what the text says explicitly as well as inferences drawn from the text, including determining where the text leaves matters uncertain.",
+        "prerequisites": ["9-10.RL.1"],
+        "cluster": "Key Ideas and Details"
+    },
+    {
+        "id": "11-12.RL.2",
+        "category": "Reading",
+        "domain": "Literature",
+        "grade_band": "11-12",
+        "description": "Determine two or more themes or central ideas of a text and analyze their development over the course of the text, including how they interact and build on one another to produce a complex account; provide an objective summary of the text.",
+        "prerequisites": ["11-12.RL.1", "9-10.RL.2"],
+        "cluster": "Key Ideas and Details"
+    },
+    {
+        "id": "11-12.RL.3",
+        "category": "Reading",
+        "domain": "Literature",
+        "grade_band": "11-12",
+        "description": "Analyze the impact of the author's choices regarding how to develop and relate elements of a story or drama (e.g., where a story is set, how the action is ordered, how the characters are introduced and developed).",
+        "prerequisites": ["11-12.RL.1", "9-10.RL.3"],
+        "cluster": "Key Ideas and Details"
+    },
+    {
+        "id": "11-12.RL.4",
+        "category": "Reading",
+        "domain": "Literature",
+        "grade_band": "11-12",
+        "description": "Determine the meaning of words and phrases as they are used in the text, including figurative and connotative meanings; analyze the impact of specific word choices on meaning and tone, including words with multiple meanings or language that is particularly fresh, engaging, or beautiful.",
+        "prerequisites": ["9-10.RL.4"],
+        "cluster": "Craft and Structure"
+    },
+    {
+        "id": "11-12.RL.5",
+        "category": "Reading",
+        "domain": "Literature",
+        "grade_band": "11-12",
+        "description": "Analyze how an author's choices concerning how to structure specific parts of a text (e.g., the choice of where to begin or end a story, the choice to provide a comedic or tragic resolution) contribute to its overall structure and meaning as well as its aesthetic impact.",
+        "prerequisites": ["9-10.RL.5"],
+        "cluster": "Craft and Structure"
+    },
+    {
+        "id": "11-12.RL.6",
+        "category": "Reading",
+        "domain": "Literature",
+        "grade_band": "11-12",
+        "description": "Analyze a case in which grasping a point of view requires distinguishing what is directly stated in a text from what is really meant (e.g., satire, sarcasm, irony, or understatement).",
+        "prerequisites": ["9-10.RL.6"],
+        "cluster": "Craft and Structure"
+    },
+    {
+        "id": "11-12.RL.7",
+        "category": "Reading",
+        "domain": "Literature",
+        "grade_band": "11-12",
+        "description": "Analyze multiple interpretations of a story, drama, or poem (e.g., recorded or live production of a play or recorded novel or poetry), evaluating how each version interprets the source text.",
+        "prerequisites": ["9-10.RL.7"],
+        "cluster": "Integration of Knowledge and Ideas"
+    },
+    {
+        "id": "11-12.RL.9",
+        "category": "Reading",
+        "domain": "Literature",
+        "grade_band": "11-12",
+        "description": "Demonstrate knowledge of eighteenth-, nineteenth- and early-twentieth-century foundational works of American literature, including how two or more texts from the same period treat similar themes or topics.",
+        "prerequisites": ["9-10.RL.9"],
+        "cluster": "Integration of Knowledge and Ideas"
+    },
+    {
+        "id": "11-12.RL.10",
+        "category": "Reading",
+        "domain": "Literature",
+        "grade_band": "11-12",
+        "description": "By the end of grade 12, read and comprehend literature, including stories, dramas, and poems, at the high end of the grades 11-CCR text complexity band independently and proficiently.",
+        "prerequisites": ["9-10.RL.10"],
+        "cluster": "Range of Reading and Level of Text Complexity"
+    },
+    {
+        "id": "11-12.RI.1",
+        "category": "Reading",
+        "domain": "Informational Text",
+        "grade_band": "11-12",
+        "description": "Cite strong and thorough textual evidence to support analysis of what the text says explicitly as well as inferences drawn from the text, including determining where the text leaves matters uncertain.",
+        "prerequisites": ["9-10.RI.1"],
+        "cluster": "Key Ideas and Details"
+    },
+    {
+        "id": "11-12.RI.2",
+        "category": "Reading",
+        "domain": "Informational Text",
+        "grade_band": "11-12",
+        "description": "Determine two or more central ideas of a text and analyze their development over the course of the text, including how they interact and build on one another to provide a complex analysis; provide an objective summary of the text.",
+        "prerequisites": ["11-12.RI.1", "9-10.RI.2"],
+        "cluster": "Key Ideas and Details"
+    },
+    {
+        "id": "11-12.RI.3",
+        "category": "Reading",
+        "domain": "Informational Text",
+        "grade_band": "11-12",
+        "description": "Analyze a complex set of ideas or sequence of events and explain how specific individuals, ideas, or events interact and develop over the course of the text.",
+        "prerequisites": ["11-12.RI.1", "9-10.RI.3"],
+        "cluster": "Key Ideas and Details"
+    },
+    {
+        "id": "11-12.RI.4",
+        "category": "Reading",
+        "domain": "Informational Text",
+        "grade_band": "11-12",
+        "description": "Determine the meaning of words and phrases as they are used in a text, including figurative, connotative, and technical meanings; analyze how an author uses and refines the meaning of a key term or terms over the course of a text (e.g., how Madison defines faction in Federalist No. 10).",
+        "prerequisites": ["9-10.RI.4"],
+        "cluster": "Craft and Structure"
+    },
+    {
+        "id": "11-12.RI.5",
+        "category": "Reading",
+        "domain": "Informational Text",
+        "grade_band": "11-12",
+        "description": "Analyze and evaluate the effectiveness of the structure an author uses in his or her exposition or argument, including whether the structure makes points clear, convincing, and engaging.",
+        "prerequisites": ["11-12.RI.2", "9-10.RI.5"],
+        "cluster": "Craft and Structure"
+    },
+    {
+        "id": "11-12.RI.6",
+        "category": "Reading",
+        "domain": "Informational Text",
+        "grade_band": "11-12",
+        "description": "Determine an author's point of view or purpose in a text in which the rhetoric is particularly effective, analyzing how style and content contribute to the power, persuasiveness, or beauty of the text.",
+        "prerequisites": ["11-12.RI.1", "9-10.RI.6"],
+        "cluster": "Craft and Structure"
+    },
+    {
+        "id": "11-12.RI.7",
+        "category": "Reading",
+        "domain": "Informational Text",
+        "grade_band": "11-12",
+        "description": "Integrate and evaluate multiple sources of information presented in different media or formats (e.g., visually, quantitatively) as well as in words in order to address a question or solve a problem.",
+        "prerequisites": ["9-10.RI.7"],
+        "cluster": "Integration of Knowledge and Ideas"
+    },
+    {
+        "id": "11-12.RI.8",
+        "category": "Reading",
+        "domain": "Informational Text",
+        "grade_band": "11-12",
+        "description": "Delineate and evaluate the reasoning in seminal U.S. texts, including the application of constitutional principles and use of legal reasoning (e.g., in U.S. Supreme Court majority opinions and dissents) and the premises, purposes, and arguments in works of public advocacy (e.g., The Federalist, presidential addresses).",
+        "prerequisites": ["11-12.RI.1", "9-10.RI.8"],
+        "cluster": "Integration of Knowledge and Ideas"
+    },
+    {
+        "id": "11-12.RI.9",
+        "category": "Reading",
+        "domain": "Informational Text",
+        "grade_band": "11-12",
+        "description": "Analyze seventeenth-, eighteenth-, and nineteenth-century foundational U.S. documents of historical and literary significance (including The Declaration of Independence, the Preamble to the Constitution, the Bill of Rights, and Lincoln's Second Inaugural Address) for their themes, purposes, and rhetorical features.",
+        "prerequisites": ["11-12.RI.6", "9-10.RI.9"],
+        "cluster": "Integration of Knowledge and Ideas"
+    },
+    {
+        "id": "11-12.RI.10",
+        "category": "Reading",
+        "domain": "Informational Text",
+        "grade_band": "11-12",
+        "description": "By the end of grade 12, read and comprehend literary nonfiction at the high end of the grades 11-CCR text complexity band independently and proficiently.",
+        "prerequisites": ["9-10.RI.10"],
+        "cluster": "Range of Reading and Level of Text Complexity"
+    },
+    {
+        "id": "11-12.W.1",
+        "category": "Writing",
+        "domain": "Writing",
+        "grade_band": "11-12",
+        "description": "Write arguments to support claims in an analysis of substantive topics or texts, using valid reasoning and relevant and sufficient evidence.",
+        "prerequisites": ["9-10.W.1"],
+        "cluster": "Text Types and Purposes"
+    },
+    {
+        "id": "11-12.W.2",
+        "category": "Writing",
+        "domain": "Writing",
+        "grade_band": "11-12",
+        "description": "Write informative/explanatory texts to examine and convey complex ideas, concepts, and information clearly and accurately through the effective selection, organization, and analysis of content.",
+        "prerequisites": ["9-10.W.2"],
+        "cluster": "Text Types and Purposes"
+    },
+    {
+        "id": "11-12.W.3",
+        "category": "Writing",
+        "domain": "Writing",
+        "grade_band": "11-12",
+        "description": "Write narratives to develop real or imagined experiences or events using effective technique, well-chosen details, and well-structured event sequences.",
+        "prerequisites": ["9-10.W.3"],
+        "cluster": "Text Types and Purposes"
+    },
+    {
+        "id": "11-12.W.4",
+        "category": "Writing",
+        "domain": "Writing",
+        "grade_band": "11-12",
+        "description": "Produce clear and coherent writing in which the development, organization, and style are appropriate to task, purpose, and audience.",
+        "prerequisites": ["9-10.W.4"],
+        "cluster": "Production and Distribution of Writing"
+    },
+    {
+        "id": "11-12.W.5",
+        "category": "Writing",
+        "domain": "Writing",
+        "grade_band": "11-12",
+        "description": "Develop and strengthen writing as needed by planning, revising, editing, rewriting, or trying a new approach, focusing on addressing what is most significant for a specific purpose and audience.",
+        "prerequisites": ["11-12.W.4"],
+        "cluster": "Production and Distribution of Writing"
+    },
+    {
+        "id": "11-12.W.6",
+        "category": "Writing",
+        "domain": "Writing",
+        "grade_band": "11-12",
+        "description": "Use technology, including the Internet, to produce, publish, and update individual or shared writing products in response to ongoing feedback, including new arguments or information.",
+        "prerequisites": ["11-12.W.4"],
+        "cluster": "Production and Distribution of Writing"
+    },
+    {
+        "id": "11-12.W.7",
+        "category": "Writing",
+        "domain": "Writing",
+        "grade_band": "11-12",
+        "description": "Conduct short as well as more sustained research projects to answer a question (including a self-generated question) or solve a problem; narrow or broaden the inquiry when appropriate; synthesize multiple sources on the subject, demonstrating understanding of the subject under investigation.",
+        "prerequisites": ["11-12.W.1", "11-12.W.2"],
+        "cluster": "Research to Build and Present Knowledge"
+    },
+    {
+        "id": "11-12.W.8",
+        "category": "Writing",
+        "domain": "Writing",
+        "grade_band": "11-12",
+        "description": "Gather relevant information from multiple authoritative print and digital sources, using advanced searches effectively; assess the strengths and limitations of each source in terms of the task, purpose, and audience; integrate information into the text selectively to maintain the flow of ideas, avoiding plagiarism and overreliance on any one source and following a standard format for citation.",
+        "prerequisites": ["11-12.W.7"],
+        "cluster": "Research to Build and Present Knowledge"
+    },
+    {
+        "id": "11-12.W.9",
+        "category": "Writing",
+        "domain": "Writing",
+        "grade_band": "11-12",
+        "description": "Draw evidence from literary or informational texts to support analysis, reflection, and research.",
+        "prerequisites": ["11-12.W.7", "11-12.RL.1", "11-12.RI.1"],
+        "cluster": "Research to Build and Present Knowledge"
+    },
+    {
+        "id": "11-12.W.10",
+        "category": "Writing",
+        "domain": "Writing",
+        "grade_band": "11-12",
+        "description": "Write routinely over extended time frames (time for research, reflection, and revision) and shorter time frames (a single sitting or a day or two) for a range of tasks, purposes, and audiences.",
+        "prerequisites": ["11-12.W.4", "11-12.W.5"],
+        "cluster": "Range of Writing"
+    },
+    {
+        "id": "11-12.SL.1",
+        "category": "Speaking & Listening",
+        "domain": "Speaking & Listening",
+        "grade_band": "11-12",
+        "description": "Initiate and participate effectively in a range of collaborative discussions (one-on-one, in groups, and teacher-led) with diverse partners on grades 11-12 topics, texts, and issues, building on others' ideas and expressing their own clearly and persuasively.",
+        "prerequisites": ["9-10.SL.1"],
+        "cluster": "Comprehension and Collaboration"
+    },
+    {
+        "id": "11-12.SL.2",
+        "category": "Speaking & Listening",
+        "domain": "Speaking & Listening",
+        "grade_band": "11-12",
+        "description": "Integrate multiple sources of information presented in diverse formats and media (e.g., visually, quantitatively, orally) in order to make informed decisions and solve problems, evaluating the credibility and accuracy of each source and noting any discrepancies among the data.",
+        "prerequisites": ["11-12.SL.1"],
+        "cluster": "Comprehension and Collaboration"
+    },
+    {
+        "id": "11-12.SL.3",
+        "category": "Speaking & Listening",
+        "domain": "Speaking & Listening",
+        "grade_band": "11-12",
+        "description": "Evaluate a speaker's point of view, reasoning, and use of evidence and rhetoric, assessing the stance, premises, links among ideas, word choice, points of emphasis, and tone used.",
+        "prerequisites": ["11-12.SL.1"],
+        "cluster": "Comprehension and Collaboration"
+    },
+    {
+        "id": "11-12.SL.4",
+        "category": "Speaking & Listening",
+        "domain": "Speaking & Listening",
+        "grade_band": "11-12",
+        "description": "Present information, findings, and supporting evidence, conveying a clear and distinct perspective, such that listeners can follow the line of reasoning, alternative or opposing perspectives are addressed, and the organization, development, substance, and style are appropriate to purpose, audience, and a range of formal and informal tasks.",
+        "prerequisites": ["11-12.SL.1"],
+        "cluster": "Presentation of Knowledge and Ideas"
+    },
+    {
+        "id": "11-12.SL.5",
+        "category": "Speaking & Listening",
+        "domain": "Speaking & Listening",
+        "grade_band": "11-12",
+        "description": "Make strategic use of digital media (e.g., textual, graphical, audio, visual, and interactive elements) in presentations to enhance understanding of findings, reasoning, and evidence and to add interest.",
+        "prerequisites": ["11-12.SL.4"],
+        "cluster": "Presentation of Knowledge and Ideas"
+    },
+    {
+        "id": "11-12.SL.6",
+        "category": "Speaking & Listening",
+        "domain": "Speaking & Listening",
+        "grade_band": "11-12",
+        "description": "Adapt speech to a variety of contexts and tasks, demonstrating a command of formal English when indicated or appropriate.",
+        "prerequisites": ["11-12.SL.1", "11-12.L.1"],
+        "cluster": "Presentation of Knowledge and Ideas"
+    },
+    {
+        "id": "11-12.L.1",
+        "category": "Language",
+        "domain": "Language",
+        "grade_band": "11-12",
+        "description": "Demonstrate command of the conventions of standard English grammar and usage when writing or speaking.",
+        "prerequisites": ["9-10.L.1"],
+        "cluster": "Conventions of Standard English"
+    },
+    {
+        "id": "11-12.L.2",
+        "category": "Language",
+        "domain": "Language",
+        "grade_band": "11-12",
+        "description": "Demonstrate command of the conventions of standard English capitalization, punctuation, and spelling when writing.",
+        "prerequisites": ["9-10.L.2"],
+        "cluster": "Conventions of Standard English"
+    },
+    {
+        "id": "11-12.L.3",
+        "category": "Language",
+        "domain": "Language",
+        "grade_band": "11-12",
+        "description": "Apply knowledge of language to understand how language functions in different contexts, to make effective choices for meaning or style, and to comprehend more fully when reading or listening.",
+        "prerequisites": ["11-12.L.1"],
+        "cluster": "Knowledge of Language"
+    },
+    {
+        "id": "11-12.L.4",
+        "category": "Language",
+        "domain": "Language",
+        "grade_band": "11-12",
+        "description": "Determine or clarify the meaning of unknown and multiple-meaning words and phrases based on grades 11-12 reading and content, choosing flexibly from a range of strategies.",
+        "prerequisites": ["11-12.L.1"],
+        "cluster": "Vocabulary Acquisition and Use"
+    },
+    {
+        "id": "11-12.L.5",
+        "category": "Language",
+        "domain": "Language",
+        "grade_band": "11-12",
+        "description": "Demonstrate understanding of figurative language, word relationships, and nuances in word meanings.",
+        "prerequisites": ["11-12.L.4"],
+        "cluster": "Vocabulary Acquisition and Use"
+    },
+    {
+        "id": "11-12.L.6",
+        "category": "Language",
+        "domain": "Language",
+        "grade_band": "11-12",
+        "description": "Acquire and use accurately general academic and domain-specific words and phrases, sufficient for reading, writing, speaking, and listening at the college and career readiness level; demonstrate independence in gathering vocabulary knowledge when considering a word or phrase important to comprehension or expression.",
+        "prerequisites": ["11-12.L.4", "11-12.L.5"],
+        "cluster": "Vocabulary Acquisition and Use"
+    }
+]

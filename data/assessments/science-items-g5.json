@@ -1,0 +1,547 @@
+{
+  "grade": "5",
+  "items": [
+    {
+      "id": "sci-5-ps1-1-001",
+      "standard_id": "5-PS1-1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "A drop of food coloring spreads through a glass of water even without stirring. What does this demonstrate about matter?",
+      "options": ["Matter is made of tiny particles that are constantly moving", "The food coloring disappears", "Water pushes the coloring on purpose", "Color creates new water"],
+      "correct_answer": "Matter is made of tiny particles that are constantly moving",
+      "explanation": "The spreading of food coloring shows that matter is made of tiny particles (molecules) that move and mix on their own.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 45,
+      "science_practice": "Developing and Using Models"
+    },
+    {
+      "id": "sci-5-ps1-1-002",
+      "standard_id": "5-PS1-1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Create a particle model showing the same substance as a solid, liquid, and gas. Draw the arrangement of particles in each state. Explain how particle arrangement relates to the properties of each state (shape, volume).",
+      "rubric": {
+        "4": "Three accurate diagrams showing particles tightly packed (solid), loosely arranged (liquid), spread apart (gas) with clear explanation of shape/volume for each",
+        "3": "Three diagrams with good particle arrangement and some property explanation",
+        "2": "Diagrams shown but arrangement or explanation incomplete",
+        "1": "Attempts drawing but particle concept unclear",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 300,
+      "science_practice": "Developing and Using Models"
+    },
+    {
+      "id": "sci-5-ps1-2-001",
+      "standard_id": "5-PS1-2",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "A student measures 50g of water and adds 10g of salt, stirring until dissolved. What is the total mass of the mixture?",
+      "options": ["60 grams", "50 grams", "10 grams", "The salt weighs nothing when dissolved"],
+      "correct_answer": "60 grams",
+      "explanation": "Mass is conserved when substances are mixed. The dissolved salt still has mass, so 50g + 10g = 60g.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 40,
+      "science_practice": "Using Mathematics and Computational Thinking"
+    },
+    {
+      "id": "sci-5-ps1-2-002",
+      "standard_id": "5-PS1-2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Design an investigation to prove that mass is conserved when ice melts. What measurements would you take? When would you take them? What should the results show if mass is conserved?",
+      "rubric": {
+        "4": "Complete investigation with measurements before and after melting, sealed container to prevent evaporation, prediction that mass equals same",
+        "3": "Good investigation with measurements and prediction",
+        "2": "Basic investigation idea but some key elements missing",
+        "1": "Mentions measuring but no clear plan",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 300,
+      "science_practice": "Planning and Carrying Out Investigations"
+    },
+    {
+      "id": "sci-5-ps1-3-001",
+      "standard_id": "5-PS1-3",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Which property would be MOST useful for identifying whether a liquid is water or rubbing alcohol?",
+      "options": ["The temperature at which it boils", "Its color", "The shape of its container", "How loud it is when poured"],
+      "correct_answer": "The temperature at which it boils",
+      "explanation": "Boiling point is a characteristic property that differs between substances. Water boils at 100°C; alcohol boils at 78°C.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 40,
+      "science_practice": "Planning and Carrying Out Investigations"
+    },
+    {
+      "id": "sci-5-ps1-3-002",
+      "standard_id": "5-PS1-3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "You have two white powders that look identical. One is sugar and one is salt. Without tasting them, design a plan to identify which is which. What properties could you test? What results would you expect for each substance?",
+      "rubric": {
+        "4": "Multiple testable properties (dissolving in water and testing conductivity, melting point, crystal shape under magnifying glass) with expected results for each",
+        "3": "Two or more tests with expected results",
+        "2": "One valid test with reasoning",
+        "1": "Mentions testing but no specific plan",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 270,
+      "science_practice": "Planning and Carrying Out Investigations"
+    },
+    {
+      "id": "sci-5-ps1-4-001",
+      "standard_id": "5-PS1-4",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "When baking soda and vinegar are mixed, bubbles form and a gas is produced. What type of change occurred?",
+      "options": ["A chemical change because a new substance was formed", "A physical change because it's still baking soda and vinegar", "No change occurred", "The substances just moved around"],
+      "correct_answer": "A chemical change because a new substance was formed",
+      "explanation": "When new substances form (in this case, carbon dioxide gas), it's a chemical change. The original substances have been transformed.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 40,
+      "science_practice": "Constructing Explanations and Designing Solutions"
+    },
+    {
+      "id": "sci-5-ps1-4-002",
+      "standard_id": "5-PS1-4",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Design an investigation to determine if mixing two substances creates a new substance (chemical change) or just a mixture (physical change). What evidence would you look for? How would you test if the change is reversible?",
+      "rubric": {
+        "4": "Investigation with clear evidence criteria (color change, gas production, temperature change, new properties) and reversibility test (can you separate them back?)",
+        "3": "Good investigation with evidence criteria and some reversibility discussion",
+        "2": "Some evidence criteria but reversibility not addressed",
+        "1": "Mentions mixing without clear evidence criteria",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 300,
+      "science_practice": "Planning and Carrying Out Investigations"
+    },
+    {
+      "id": "sci-5-ps3-1-001",
+      "standard_id": "5-PS3-1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Where does the energy in a hamburger originally come from?",
+      "options": ["The sun, through a chain of energy transfers", "The refrigerator where it was stored", "The restaurant that cooked it", "It appears when you eat it"],
+      "correct_answer": "The sun, through a chain of energy transfers",
+      "explanation": "Energy in food traces back to the sun: sun → plants (photosynthesis) → cow (eating plants) → hamburger → you.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 45,
+      "science_practice": "Developing and Using Models"
+    },
+    {
+      "id": "sci-5-ps3-1-002",
+      "standard_id": "5-PS3-1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Create an energy flow model showing how energy from the sun ends up as energy in your body when you eat an apple. Include all the steps and explain what happens at each stage.",
+      "rubric": {
+        "4": "Complete model: Sun → light energy → apple tree (photosynthesis converts to chemical energy) → apple (stores chemical energy) → you eat → body uses for growth, movement, warmth",
+        "3": "Model with most stages and some energy transformation explanation",
+        "2": "Shows sun to apple to person but energy transformations unclear",
+        "1": "Basic food chain without energy focus",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 300,
+      "science_practice": "Developing and Using Models"
+    },
+    {
+      "id": "sci-5-ls1-1-001",
+      "standard_id": "5-LS1-1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "A plant in a pot gains 2 kg of mass over one year. Where did most of this mass come from?",
+      "options": ["Air (carbon dioxide) and water", "The soil in the pot", "Sunlight energy", "The pot itself"],
+      "correct_answer": "Air (carbon dioxide) and water",
+      "explanation": "Plants get most of their mass from CO2 in the air and water. They use sunlight energy to convert these into sugars and plant matter.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 45,
+      "science_practice": "Engaging in Argument from Evidence"
+    },
+    {
+      "id": "sci-5-ls1-1-002",
+      "standard_id": "5-LS1-1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A scientist claims that plants get most of their mass from soil. Design an argument against this claim using evidence about where plants actually get the materials they need for growth. What evidence would support your argument?",
+      "rubric": {
+        "4": "Strong argument with evidence: soil mass doesn't decrease much, plants need CO2 and H2O, van Helmont's experiment reference, photosynthesis explanation",
+        "3": "Good argument with some evidence",
+        "2": "Basic counter-argument but evidence weak",
+        "1": "States soil isn't the source without explanation",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 300,
+      "science_practice": "Engaging in Argument from Evidence"
+    },
+    {
+      "id": "sci-5-ls2-1-001",
+      "standard_id": "5-LS2-1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "In a food web, an arrow points from grass to rabbit. What does this arrow represent?",
+      "options": ["Matter and energy move from grass to rabbit when the rabbit eats grass", "The rabbit is protecting the grass", "Grass eats rabbits", "The rabbit turns into grass"],
+      "correct_answer": "Matter and energy move from grass to rabbit when the rabbit eats grass",
+      "explanation": "In food webs, arrows show the direction that matter and energy flow - from the organism being eaten to the one eating it.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 40,
+      "science_practice": "Developing and Using Models"
+    },
+    {
+      "id": "sci-5-ls2-1-002",
+      "standard_id": "5-LS2-1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Create a model showing the movement of matter through an ecosystem that includes: plants, herbivores, carnivores, and decomposers. Use arrows to show how matter moves between organisms and back to the environment.",
+      "rubric": {
+        "4": "Complete cycle showing sun → plants → herbivores → carnivores → decomposers → nutrients back to soil → plants, with matter cycling explanation",
+        "3": "Good cycle with most components and some cycling explanation",
+        "2": "Shows organisms but cycling incomplete",
+        "1": "Lists organisms without connections",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 300,
+      "science_practice": "Developing and Using Models"
+    },
+    {
+      "id": "sci-5-ess1-1-001",
+      "standard_id": "5-ESS1-1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "The sun appears much brighter than other stars in the sky. What is the main reason for this?",
+      "options": ["The sun is much closer to Earth than other stars", "The sun is the only star", "Other stars are turned off", "The sun is a special kind of star that makes extra light"],
+      "correct_answer": "The sun is much closer to Earth than other stars",
+      "explanation": "All stars produce light, but closer objects appear brighter. The sun looks brighter because it's our nearest star.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 40,
+      "science_practice": "Engaging in Argument from Evidence"
+    },
+    {
+      "id": "sci-5-ess1-1-002",
+      "standard_id": "5-ESS1-1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Use a flashlight to create a demonstration that shows why the sun looks brighter than other stars. Describe your demonstration and explain how it supports the argument about brightness and distance.",
+      "rubric": {
+        "4": "Clear demonstration (flashlight at different distances) with explanation that apparent brightness decreases with distance, connection to sun vs. other stars",
+        "3": "Good demonstration with some explanation",
+        "2": "Demonstration idea but connection to stars weak",
+        "1": "Mentions flashlight without clear connection",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 270,
+      "science_practice": "Engaging in Argument from Evidence"
+    },
+    {
+      "id": "sci-5-ess1-2-001",
+      "standard_id": "5-ESS1-2",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "During the day, shadows are longest in the morning and evening, and shortest at noon. What causes this pattern?",
+      "options": ["The sun's position in the sky changes throughout the day", "Shadows like to change size", "The ground moves up and down", "Light changes temperature"],
+      "correct_answer": "The sun's position in the sky changes throughout the day",
+      "explanation": "As Earth rotates, the sun appears to move across the sky. When the sun is low (morning/evening), shadows are long. When the sun is high (noon), shadows are short.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 45,
+      "science_practice": "Analyzing and Interpreting Data"
+    },
+    {
+      "id": "sci-5-ess1-2-002",
+      "standard_id": "5-ESS1-2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Create a data table and graph showing shadow length measurements taken at 9 AM, 12 PM, and 3 PM. Shadow lengths: 9 AM = 150 cm, 12 PM = 50 cm, 3 PM = 140 cm. Describe the pattern you see and explain what causes it.",
+      "rubric": {
+        "4": "Complete data table, accurate bar/line graph, pattern identified (short at noon, long at morning/evening), explanation about sun position",
+        "3": "Table and graph with pattern and some explanation",
+        "2": "Data organized but pattern or explanation incomplete",
+        "1": "Data shown without pattern analysis",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 270,
+      "science_practice": "Analyzing and Interpreting Data"
+    },
+    {
+      "id": "sci-5-ess2-1-001",
+      "standard_id": "5-ESS2-1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "When a volcano erupts and ash falls into a lake, which Earth spheres are interacting?",
+      "options": ["Geosphere and hydrosphere", "Only the geosphere", "Only the hydrosphere", "Biosphere and atmosphere"],
+      "correct_answer": "Geosphere and hydrosphere",
+      "explanation": "The geosphere (rocks, land, volcanic material) interacts with the hydrosphere (water) when volcanic ash enters the lake.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 40,
+      "science_practice": "Developing and Using Models"
+    },
+    {
+      "id": "sci-5-ess2-1-002",
+      "standard_id": "5-ESS2-1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Create a model showing how all four spheres (geosphere, hydrosphere, atmosphere, biosphere) interact during a rainstorm. Describe what happens in each sphere and how they affect each other.",
+      "rubric": {
+        "4": "Model shows all four spheres with interactions: atmosphere (clouds, rain), hydrosphere (rain, streams), geosphere (erosion, soil), biosphere (plants absorbing water, animals drinking), with clear arrows showing connections",
+        "3": "Model with most spheres and several interactions",
+        "2": "Some spheres shown but interactions limited",
+        "1": "Lists spheres without showing interactions",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 300,
+      "science_practice": "Developing and Using Models"
+    },
+    {
+      "id": "sci-5-ess2-2-001",
+      "standard_id": "5-ESS2-2",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Looking at a pie chart of Earth's water, which section would be the largest?",
+      "options": ["Salt water in oceans (about 97%)", "Fresh water in lakes (about 50%)", "Fresh water in ice caps (about 50%)", "Water vapor in air (about 75%)"],
+      "correct_answer": "Salt water in oceans (about 97%)",
+      "explanation": "About 97% of Earth's water is salt water in the oceans. Only about 3% is fresh water, and most of that is frozen in ice caps.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 40,
+      "science_practice": "Analyzing and Interpreting Data"
+    },
+    {
+      "id": "sci-5-ess2-2-002",
+      "standard_id": "5-ESS2-2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Create a bar graph showing Earth's water distribution: Oceans 97%, Ice caps 2%, Groundwater 0.5%, Lakes/Rivers 0.3%, Other 0.2%. What does this data tell us about the availability of fresh water for humans to use?",
+      "rubric": {
+        "4": "Accurate bar graph with proper scale, conclusion that very little water is readily available fresh water (less than 1%)",
+        "3": "Good graph with correct conclusion",
+        "2": "Graph created but conclusion incomplete",
+        "1": "Some data shown without analysis",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 270,
+      "science_practice": "Analyzing and Interpreting Data"
+    },
+    {
+      "id": "sci-5-ess3-1-001",
+      "standard_id": "5-ESS3-1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "A community decides to build a rain garden to collect and filter stormwater. This is an example of using science to:",
+      "options": ["Protect the Earth's water resources", "Make the rain fall faster", "Stop all flooding everywhere", "Create new water sources"],
+      "correct_answer": "Protect the Earth's water resources",
+      "explanation": "Rain gardens use scientific understanding of water filtration to protect local water resources from pollution.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 35,
+      "science_practice": "Obtaining, Evaluating, and Communicating Information"
+    },
+    {
+      "id": "sci-5-ess3-1-002",
+      "standard_id": "5-ESS3-1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Research and describe how your community or another community uses scientific ideas to protect one of Earth's resources (water, air, soil, or energy). Include: what resource is being protected, what method is used, and how science helps.",
+      "rubric": {
+        "4": "Specific example (recycling, water treatment, renewable energy) with resource identified, method explained, and scientific principles described",
+        "3": "Good example with resource and method, some science explanation",
+        "2": "Example given but science connection weak",
+        "1": "General statement about protection without specifics",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 270,
+      "science_practice": "Obtaining, Evaluating, and Communicating Information"
+    },
+    {
+      "id": "sci-5-ets1-1-001",
+      "standard_id": "3-5-ETS1-1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "A team wants to design a water filter for camping. What should they define FIRST?",
+      "options": ["The criteria (what it must do) and constraints (limits like size, weight, cost)", "The color of the filter", "Who will carry the filter", "What they had for breakfast"],
+      "correct_answer": "The criteria (what it must do) and constraints (limits like size, weight, cost)",
+      "explanation": "Good engineering design starts with clearly defining what success looks like (criteria) and what limitations exist (constraints).",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 40,
+      "science_practice": "Asking Questions and Defining Problems"
+    },
+    {
+      "id": "sci-5-ets1-2-001",
+      "standard_id": "3-5-ETS1-2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "You need to design a container that will keep soup hot for 4 hours. Generate three different design solutions. For each design, evaluate how well it meets the criteria (stays hot) and constraints (portable, affordable, safe).",
+      "rubric": {
+        "4": "Three distinct designs (thermos style, insulated container, heated container) each evaluated on all three factors with reasoned comparison",
+        "3": "Three designs with evaluation on most factors",
+        "2": "Two designs with some evaluation",
+        "1": "One design or no evaluation",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 5,
+        "generativity_delta": 6
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 360,
+      "science_practice": "Constructing Explanations and Designing Solutions"
+    },
+    {
+      "id": "sci-5-ets1-3-001",
+      "standard_id": "3-5-ETS1-3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Students tested three bridge designs to see how much weight they could hold: Design A (triangular supports) = 2 kg, Design B (rectangular supports) = 0.5 kg, Design C (no supports) = 0.2 kg. What variables should be controlled for a fair test? What can you conclude about bridge strength?",
+      "rubric": {
+        "4": "Identifies controlled variables (same materials, same length, same testing method) and conclusion about triangular supports being strongest with reasoning about shape and force distribution",
+        "3": "Good variables and conclusion with some reasoning",
+        "2": "Some variables or conclusion without full explanation",
+        "1": "Basic observation without analysis",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 270,
+      "science_practice": "Planning and Carrying Out Investigations"
+    }
+  ]
+}

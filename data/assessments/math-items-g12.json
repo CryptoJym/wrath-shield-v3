@@ -1,0 +1,447 @@
+{
+  "grade": "12",
+  "course": "Pre-Calculus/Statistics",
+  "items": [
+    {
+      "id": "math-12-id-a-1-001",
+      "standard_id": "HSS-ID.A.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A dataset contains test scores: 72, 85, 78, 92, 88, 76, 95, 83, 79, 81, 86, 74, 90, 77, 84. Create a dot plot and a histogram (with bins of width 5 starting at 70). Discuss which representation better shows the distribution of scores and why.",
+      "rubric": {
+        "4": "Accurate dot plot with each value plotted; histogram with correct bins (70-74, 75-79, 80-84, 85-89, 90-95) and frequencies; thoughtful comparison noting dot plot shows individual values while histogram shows overall shape better for larger datasets",
+        "3": "Both representations correct with adequate comparison",
+        "2": "Both representations created but comparison weak or one has errors",
+        "1": "One representation correct",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 360
+    },
+    {
+      "id": "math-12-id-a-1-002",
+      "standard_id": "HSS-ID.A.1",
+      "dok_level": 3,
+      "question_type": "multi_part",
+      "question": "The ages of participants in two fitness programs are recorded. Program A: 25, 28, 32, 35, 38, 42, 45, 48, 52, 55. Program B: 22, 24, 26, 28, 30, 58, 62, 65, 68, 72. Part A: Create back-to-back stem plots for both programs. Part B: Describe the shape of each distribution. Part C: Which program has greater variability? Explain.",
+      "rubric": {
+        "4": "Correct back-to-back stem plot; A is roughly uniform/symmetric from 20s-50s; B is bimodal with cluster in 20s and 60s; B has greater variability due to spread across both ends with gap in middle",
+        "3": "All parts correct with minor errors",
+        "2": "Two parts substantially correct",
+        "1": "One part correct",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 420
+    },
+    {
+      "id": "math-12-id-a-1-003",
+      "standard_id": "HSS-ID.A.1",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Company salary data (in thousands): 35, 38, 42, 45, 48, 52, 55, 62, 75, 340. Create a box plot and discuss how the outlier affects the representation. Then explain why a histogram might be misleading and suggest an alternative approach.",
+      "rubric": {
+        "4": "Correct box plot identifying 340 as outlier (using 1.5×IQR rule); discusses how outlier stretches scale making other data compressed; suggests using broken axis, log scale, or removing outlier with notation; or presenting summary stats with and without outlier",
+        "3": "Correct box plot with adequate discussion of outlier effect and alternative",
+        "2": "Box plot correct but weak discussion, or good discussion with plotting errors",
+        "1": "Some correct elements but significant errors",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 420
+    },
+    {
+      "id": "math-12-id-b-5-001",
+      "standard_id": "HSS-ID.B.5",
+      "dok_level": 3,
+      "question_type": "multi_part",
+      "question": "A survey of 200 students shows: 120 play sports, 80 play music, and 40 do both. Part A: Create a two-way frequency table. Part B: What is the probability that a randomly selected student plays sports given that they play music? Part C: Are playing sports and playing music independent events? Show your work.",
+      "rubric": {
+        "4": "A: Correct table (Sports&Music:40, Sports only:80, Music only:40, Neither:40); B: P(S|M) = 40/80 = 0.5; C: P(S) = 120/200 = 0.6 ≠ P(S|M) = 0.5, so NOT independent",
+        "3": "All parts correct with minor calculation errors",
+        "2": "Two parts correct",
+        "1": "One part correct",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.60,
+      "time_estimate_seconds": 360
+    },
+    {
+      "id": "math-12-id-b-5-002",
+      "standard_id": "HSS-ID.B.5",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Medical test data: 95% of people with a disease test positive (sensitivity). 90% of people without the disease test negative (specificity). If 2% of the population has the disease, and a person tests positive, what is the probability they actually have the disease? Explain why this result might be surprising.",
+      "rubric": {
+        "4": "Uses Bayes' theorem or tree diagram: P(D|+) = P(+|D)P(D) / P(+) = (0.95)(0.02) / [(0.95)(0.02) + (0.10)(0.98)] = 0.019 / 0.117 ≈ 0.162 or 16.2%; explains base rate fallacy - low disease prevalence means false positives dominate",
+        "3": "Correct calculation with adequate explanation of surprising result",
+        "2": "Calculation mostly correct but weak explanation, or vice versa",
+        "1": "Attempts but significant errors in probability reasoning",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 5,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.85,
+      "time_estimate_seconds": 480
+    },
+    {
+      "id": "math-12-id-b-5-003",
+      "standard_id": "HSS-ID.B.5",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Data shows that among 500 customers: 300 bought Product A, 250 bought Product B, and 100 bought both. Create a Venn diagram and calculate: the probability a customer bought only A, the probability of buying A or B, and interpret what the overlap tells the marketing team.",
+      "rubric": {
+        "4": "Correct Venn: Only A = 200, Only B = 150, Both = 100, Neither = 50; P(only A) = 200/500 = 0.4; P(A or B) = 400/500 = 0.8; interprets: 20% buy both suggesting bundle opportunity, products may be complementary",
+        "3": "All calculations correct with reasonable interpretation",
+        "2": "Calculations correct but weak interpretation, or minor errors",
+        "1": "Some correct but significant errors",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.60,
+      "time_estimate_seconds": 300
+    },
+    {
+      "id": "math-12-id-c-7-001",
+      "standard_id": "HSS-ID.C.7",
+      "dok_level": 3,
+      "question_type": "multi_part",
+      "question": "Data on study hours (x) and exam scores (y): (2, 65), (3, 72), (4, 78), (5, 82), (6, 88), (7, 91). Part A: Find the least-squares regression line. Part B: Interpret the slope in context. Part C: Predict the score for 8 hours of study. Part D: Explain why predicting for 20 hours might be problematic.",
+      "rubric": {
+        "4": "A: y = 5.4x + 54.3 (or equivalent); B: Each additional hour of study is associated with approximately 5.4 more points on the exam; C: y(8) = 5.4(8) + 54.3 = 97.5; D: Extrapolation beyond data range is unreliable; diminishing returns likely, scores capped at 100",
+        "3": "All parts correct with minor errors",
+        "2": "Three parts substantially correct",
+        "1": "One or two parts correct",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 420
+    },
+    {
+      "id": "math-12-id-c-7-002",
+      "standard_id": "HSS-ID.C.7",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "A scatterplot of car age (years) vs. value (thousands of dollars) shows a curved pattern. The data: (1, 28), (2, 24), (3, 20), (4, 17), (5, 14), (7, 10), (10, 6). Explain why a linear model is inappropriate, then find an exponential model of the form y = ab^x and use it to predict the value of an 8-year-old car.",
+      "rubric": {
+        "4": "Notes curvature/decreasing rate of change suggests exponential decay; fits model y = 32(0.85)^x or similar; predicts y(8) = 32(0.85)^8 ≈ 8.7 thousand; discusses model fit",
+        "3": "Correct model type identification, reasonable exponential fit, correct prediction",
+        "2": "Identifies need for exponential but errors in fitting or prediction",
+        "1": "Some understanding but significant errors",
+        "0": "No response or uses linear model"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 420
+    },
+    {
+      "id": "math-12-id-c-7-003",
+      "standard_id": "HSS-ID.C.7",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "A regression analysis of height (cm) and weight (kg) for adults gives: ŷ = 0.9x - 70, r² = 0.64. Interpret r² in context. If a person's residual is -5 kg, explain what this means. Then discuss whether this relationship implies that gaining height causes weight gain.",
+      "rubric": {
+        "4": "r² = 0.64 means 64% of variation in weight is explained by height; residual of -5 kg means person weighs 5 kg less than predicted by their height; relationship is correlation not causation - third variables (genetics, nutrition) affect both",
+        "3": "All interpretations correct with minor gaps",
+        "2": "Two of three interpretations correct",
+        "1": "One interpretation correct",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.70,
+      "time_estimate_seconds": 360
+    },
+    {
+      "id": "math-12-ic-a-1-001",
+      "standard_id": "HSS-IC.A.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A researcher wants to estimate the average commute time for all employees in a large company. Describe how to select a simple random sample of 50 employees. Then explain why convenience sampling (asking the first 50 people in the lobby) could produce biased results.",
+      "rubric": {
+        "4": "SRS method: assign each employee a number, use random number generator to select 50; bias in convenience sample: lobby at certain time captures specific shift workers, excludes remote workers, may over-represent early arrivers who may have shorter commutes",
+        "3": "Correct SRS method with adequate bias explanation",
+        "2": "SRS correct but weak bias explanation, or vice versa",
+        "1": "Some understanding but significant errors",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 300
+    },
+    {
+      "id": "math-12-ic-a-1-002",
+      "standard_id": "HSS-IC.A.1",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "A school district wants to survey parents about a new policy. Part A: Describe a stratified random sample design using grade levels. Part B: Describe a cluster sample design using schools. Part C: Which design would you recommend if the district wants to ensure representation from each grade level? Explain the trade-offs.",
+      "rubric": {
+        "4": "A: Divide parents by child's grade (K, 1, 2,... 12), randomly sample proportionally from each stratum; B: Randomly select several schools, survey all parents at those schools; C: Stratified ensures each grade represented proportionally; trade-offs: stratified more complex but better representation, cluster easier but may miss variation between schools",
+        "3": "Both designs correct with reasonable recommendation",
+        "2": "Both designs described but weak comparison",
+        "1": "One design correct",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.70,
+      "time_estimate_seconds": 420
+    },
+    {
+      "id": "math-12-ic-a-1-003",
+      "standard_id": "HSS-IC.A.1",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "A political poll reports that 52% of voters support Candidate A with a margin of error of ±3%. Explain what the margin of error means, why larger sample sizes reduce it, and why we cannot conclude Candidate A will definitely win.",
+      "rubric": {
+        "4": "Margin of error: the interval (49%, 55%) likely contains true population proportion; larger samples reduce sampling variability (MOE ∝ 1/√n); cannot conclude win because 50% is within interval (49-55%), election outcome uncertain",
+        "3": "All three components addressed adequately",
+        "2": "Two components correct",
+        "1": "One component correct",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 300
+    },
+    {
+      "id": "math-12-ic-b-4-001",
+      "standard_id": "HSS-IC.B.4",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A sample of 100 light bulbs has a mean lifespan of 1200 hours with a standard deviation of 100 hours. Construct a 95% confidence interval for the population mean lifespan. Interpret this interval in context.",
+      "rubric": {
+        "4": "CI: x̄ ± z*(s/√n) = 1200 ± 1.96(100/10) = 1200 ± 19.6 = (1180.4, 1219.6); interpretation: we are 95% confident the true mean lifespan of all light bulbs is between 1180 and 1220 hours",
+        "3": "Correct calculation with adequate interpretation",
+        "2": "Calculation correct but weak interpretation, or minor errors",
+        "1": "Some understanding but significant errors",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.60,
+      "time_estimate_seconds": 300
+    },
+    {
+      "id": "math-12-ic-b-4-002",
+      "standard_id": "HSS-IC.B.4",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "A simulation generates 1000 bootstrap samples from a dataset. The middle 95% of the sample means range from 45.2 to 52.8. Explain what this bootstrap confidence interval means. Compare this approach to the traditional formula-based method and discuss when each might be preferred.",
+      "rubric": {
+        "4": "Bootstrap CI: (45.2, 52.8) gives 95% confidence for population mean based on resampling; traditional uses formula assuming normality; bootstrap preferred when distribution non-normal or formula unavailable; traditional preferred for known distributions and computational simplicity",
+        "3": "Correct interpretation with adequate comparison",
+        "2": "Interpretation correct but weak comparison, or vice versa",
+        "1": "Some understanding but significant gaps",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 420
+    },
+    {
+      "id": "math-12-ic-b-4-003",
+      "standard_id": "HSS-IC.B.4",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "An engineer claims a new battery lasts more than 500 hours on average. A sample of 36 batteries has mean 515 hours and standard deviation 60 hours. Part A: State null and alternative hypotheses. Part B: Calculate the test statistic. Part C: Find the p-value and make a conclusion at α = 0.05. Part D: Explain Type I and Type II errors in this context.",
+      "rubric": {
+        "4": "A: H₀: μ = 500, Hₐ: μ > 500; B: z = (515-500)/(60/6) = 15/10 = 1.5; C: p-value = P(Z > 1.5) ≈ 0.067 > 0.05, fail to reject H₀; D: Type I = concluding battery lasts >500 when it doesn't, Type II = failing to detect improvement when it exists",
+        "3": "All parts correct with minor errors",
+        "2": "Three parts correct",
+        "1": "One or two parts correct",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 5,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.80,
+      "time_estimate_seconds": 480
+    },
+    {
+      "id": "math-12-cp-a-1-001",
+      "standard_id": "HSS-CP.A.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A standard deck of 52 cards is used. Event A: drawing a heart. Event B: drawing a face card. Describe the sample space for drawing one card, then find P(A), P(B), P(A and B), and P(A or B). Show whether A and B are independent.",
+      "rubric": {
+        "4": "Sample space: 52 cards; P(A) = 13/52 = 1/4; P(B) = 12/52 = 3/13; P(A∩B) = 3/52 (J,Q,K of hearts); P(A∪B) = P(A) + P(B) - P(A∩B) = 13/52 + 12/52 - 3/52 = 22/52 = 11/26; Check: P(A)·P(B) = (1/4)(3/13) = 3/52 = P(A∩B), so independent",
+        "3": "All probabilities correct, independence check correct",
+        "2": "Most probabilities correct, minor errors",
+        "1": "Some correct but significant errors",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.60,
+      "time_estimate_seconds": 360
+    },
+    {
+      "id": "math-12-cp-a-1-002",
+      "standard_id": "HSS-CP.A.1",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "At a company, 60% of employees are engineers, 30% are managers, and 10% are support staff. Among engineers, 40% have advanced degrees; among managers, 70% have advanced degrees; among support staff, 10% have advanced degrees. If an employee is selected at random and has an advanced degree, what is the probability they are an engineer?",
+      "rubric": {
+        "4": "Uses Bayes' theorem: P(Eng|Adv) = P(Adv|Eng)P(Eng) / P(Adv); P(Adv) = 0.4(0.6) + 0.7(0.3) + 0.1(0.1) = 0.24 + 0.21 + 0.01 = 0.46; P(Eng|Adv) = (0.4)(0.6)/0.46 = 0.24/0.46 ≈ 0.52",
+        "3": "Correct calculation with minor errors",
+        "2": "Correct approach but significant calculation errors",
+        "1": "Attempts conditional probability but fundamental errors",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 420
+    },
+    {
+      "id": "math-12-cp-a-1-003",
+      "standard_id": "HSS-CP.A.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Explain the difference between mutually exclusive events and independent events. Create an example of each using rolling a die, and prove mathematically why one property implies the other cannot hold (for events with non-zero probability).",
+      "rubric": {
+        "4": "Mutually exclusive: A∩B = ∅ (e.g., roll 1 and roll 6); Independent: P(A∩B) = P(A)P(B) (e.g., two dice, first is even and second is >4); Proof: if mutually exclusive, P(A∩B) = 0, but independent requires P(A)P(B) = 0, impossible if both P(A), P(B) > 0",
+        "3": "Correct definitions and examples with adequate proof",
+        "2": "Definitions and examples correct but proof incomplete",
+        "1": "Some understanding but significant errors",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.70,
+      "time_estimate_seconds": 360
+    },
+    {
+      "id": "math-12-cp-b-6-001",
+      "standard_id": "HSS-CP.B.6",
+      "dok_level": 3,
+      "question_type": "multi_part",
+      "question": "A bag contains 5 red balls and 3 blue balls. Two balls are drawn without replacement. Part A: Find P(second is red | first is red). Part B: Find P(second is red | first is blue). Part C: Find P(both are red). Part D: Explain why these events are not independent.",
+      "rubric": {
+        "4": "A: If first red, 4 red left out of 7, so P = 4/7; B: If first blue, 5 red out of 7, so P = 5/7; C: P(both red) = (5/8)(4/7) = 20/56 = 5/14; D: Not independent because P(2nd red | 1st red) ≠ P(2nd red | 1st blue), i.e., outcome of first affects second",
+        "3": "All parts correct with minor errors",
+        "2": "Three parts correct",
+        "1": "One or two parts correct",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 300
+    },
+    {
+      "id": "math-12-cp-b-6-002",
+      "standard_id": "HSS-CP.B.6",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "In a certain city, 20% of days are rainy. On rainy days, 60% of people carry umbrellas. On non-rainy days, 15% of people carry umbrellas. If you see someone with an umbrella, what is the probability it is raining? Construct a tree diagram to solve this problem.",
+      "rubric": {
+        "4": "Tree diagram with: Rain (0.2) → Umbrella (0.6) = 0.12, No Rain (0.8) → Umbrella (0.15) = 0.12; P(Umbrella) = 0.12 + 0.12 = 0.24; P(Rain|Umbrella) = 0.12/0.24 = 0.5",
+        "3": "Correct calculation with tree diagram, minor errors",
+        "2": "Tree diagram correct but calculation errors, or correct answer without diagram",
+        "1": "Some understanding but significant errors",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.70,
+      "time_estimate_seconds": 360
+    },
+    {
+      "id": "math-12-cp-b-6-003",
+      "standard_id": "HSS-CP.B.6",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "A diagnostic test for a rare disease affects 1 in 10,000 people has 99% sensitivity (correctly identifies those with disease) and 98% specificity (correctly identifies those without disease). A person tests positive. Calculate the probability they actually have the disease, and explain why false positive rate matters for rare conditions.",
+      "rubric": {
+        "4": "P(D|+) = P(+|D)P(D) / [P(+|D)P(D) + P(+|D')P(D')] = (0.99)(0.0001) / [(0.99)(0.0001) + (0.02)(0.9999)] = 0.000099 / 0.020097 ≈ 0.0049 or about 0.5%; explains base rate fallacy: even with high specificity, the 2% false positive rate applied to 9,999 healthy people produces ~200 false positives, dwarfing the ~1 true positive",
+        "3": "Correct calculation with adequate explanation",
+        "2": "Calculation mostly correct with weak explanation",
+        "1": "Attempts but significant errors",
+        "0": "No response or completely incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 5,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.85,
+      "time_estimate_seconds": 480
+    }
+  ]
+}

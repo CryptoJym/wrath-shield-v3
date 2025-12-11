@@ -1,0 +1,569 @@
+{
+  "grade": "3",
+  "items": [
+    {
+      "id": "sci-3-ps2-1-001",
+      "standard_id": "3-PS2-1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "A book sits on a table without moving. What can you say about the forces acting on it?",
+      "options": ["The forces pushing up and down are balanced", "There are no forces acting on the book", "The push down is stronger than the push up", "The push up is stronger than the push down"],
+      "correct_answer": "The forces pushing up and down are balanced",
+      "explanation": "When an object stays still, the forces on it are balanced. Gravity pulls the book down, and the table pushes up with equal force.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 40,
+      "science_practice": "Constructing Explanations and Designing Solutions"
+    },
+    {
+      "id": "sci-3-ps2-1-002",
+      "standard_id": "3-PS2-1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Design an investigation using a toy car and a ramp to show the difference between balanced and unbalanced forces. Describe what you would do and what you would observe in each case.",
+      "rubric": {
+        "4": "Clear investigation showing car at rest on flat surface (balanced) vs. car on ramp/being pushed (unbalanced) with force diagrams or descriptions",
+        "3": "Shows both scenarios with explanation of forces",
+        "2": "Shows one scenario well or both with incomplete force explanation",
+        "1": "Uses car and ramp but force concepts unclear",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 300,
+      "science_practice": "Planning and Carrying Out Investigations"
+    },
+    {
+      "id": "sci-3-ps2-2-001",
+      "standard_id": "3-PS2-2",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "A ball rolling across the floor slows down and stops. If you measured its position every second, what pattern would you see?",
+      "options": ["The ball moves less distance each second until it stops", "The ball moves the same distance each second", "The ball speeds up as it rolls", "The ball teleports to random spots"],
+      "correct_answer": "The ball moves less distance each second until it stops",
+      "explanation": "Friction slows the ball down, so it covers less distance each second. This predictable pattern of slowing motion can be measured.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 45,
+      "science_practice": "Analyzing and Interpreting Data"
+    },
+    {
+      "id": "sci-3-ps2-2-002",
+      "standard_id": "3-PS2-2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "You roll a ball across the floor and measure how far it goes in 5 seconds: 100 cm, 80 cm, 50 cm, 20 cm, 5 cm. Create a data table, then predict how far it might go in second 6. Explain the pattern you see.",
+      "rubric": {
+        "4": "Complete data table, correct prediction (near 0 cm), and clear explanation of decreasing motion pattern due to friction",
+        "3": "Data table and reasonable prediction with some explanation",
+        "2": "Data organized but prediction or explanation weak",
+        "1": "Attempts organization but pattern not identified",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 240,
+      "science_practice": "Analyzing and Interpreting Data"
+    },
+    {
+      "id": "sci-3-ps2-3-001",
+      "standard_id": "3-PS2-3",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "A magnet can pull a paper clip through the air without touching it. What causes this to happen?",
+      "options": ["Magnetic force can act at a distance", "The paper clip is alive", "Someone is pushing the clip", "Paper clips always fly around"],
+      "correct_answer": "Magnetic force can act at a distance",
+      "explanation": "Magnetic force is a non-contact force. It can push or pull objects made of certain metals without touching them.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 35,
+      "science_practice": "Asking Questions and Defining Problems"
+    },
+    {
+      "id": "sci-3-ps2-3-002",
+      "standard_id": "3-PS2-3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "List three questions you could investigate to learn more about magnetic forces. For one of your questions, describe how you would test it.",
+      "rubric": {
+        "4": "Three investigable questions about magnetic force with detailed test procedure for one (materials, steps, observations)",
+        "3": "Three questions with basic test procedure",
+        "2": "Two questions or procedure incomplete",
+        "1": "One question or vague procedure",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 240,
+      "science_practice": "Asking Questions and Defining Problems"
+    },
+    {
+      "id": "sci-3-ps2-4-001",
+      "standard_id": "3-PS2-4",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "A door has a magnetic latch that keeps it closed. Which problem does this magnet solve?",
+      "options": ["It holds the door shut without needing a complicated lock", "It makes the door heavier", "It makes the door invisible", "It makes the door louder"],
+      "correct_answer": "It holds the door shut without needing a complicated lock",
+      "explanation": "Magnets can be used to hold things together. A magnetic latch is a simple way to keep a door closed using magnetic attraction.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 35,
+      "science_practice": "Constructing Explanations and Designing Solutions"
+    },
+    {
+      "id": "sci-3-ps2-4-002",
+      "standard_id": "3-PS2-4",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Define a problem that could be solved using magnets. Then design a simple solution using what you know about magnetic forces. Draw and explain your design.",
+      "rubric": {
+        "4": "Clear problem statement, creative solution using magnetic properties correctly, labeled diagram with explanation",
+        "3": "Good problem and solution with some explanation",
+        "2": "Problem or solution unclear but magnet use correct",
+        "1": "Mentions magnets but problem/solution not connected",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 5,
+        "generativity_delta": 6
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 300,
+      "science_practice": "Constructing Explanations and Designing Solutions"
+    },
+    {
+      "id": "sci-3-ls1-1-001",
+      "standard_id": "3-LS1-1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "All living things go through a life cycle. Which stages do ALL organisms have in common?",
+      "options": ["Birth, growth, reproduction, and death", "Birth, flying, sleeping, and death", "Eating, swimming, running, and death", "Birth, going to school, working, and death"],
+      "correct_answer": "Birth, growth, reproduction, and death",
+      "explanation": "All organisms share the same basic life cycle stages: they are born, they grow, they can reproduce, and eventually they die.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 40,
+      "science_practice": "Developing and Using Models"
+    },
+    {
+      "id": "sci-3-ls1-1-002",
+      "standard_id": "3-LS1-1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Create a model comparing the life cycle of a butterfly and a frog. Show all stages for each animal. What is similar and what is different about their life cycles?",
+      "rubric": {
+        "4": "Both life cycles complete with all stages (egg, larva/tadpole, pupa/froglet, adult), similarities (metamorphosis, aquatic stages) and differences clearly explained",
+        "3": "Both cycles shown with some comparison",
+        "2": "One cycle complete or comparison incomplete",
+        "1": "Partial life cycles without comparison",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 300,
+      "science_practice": "Developing and Using Models"
+    },
+    {
+      "id": "sci-3-ls2-1-001",
+      "standard_id": "3-LS2-1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Wolves hunt together in packs. How does this behavior help them survive?",
+      "options": ["They can catch larger prey that one wolf couldn't catch alone", "It makes them easier to see", "They can hide from each other", "It makes them run slower"],
+      "correct_answer": "They can catch larger prey that one wolf couldn't catch alone",
+      "explanation": "When animals work together in groups, they can do things that one animal couldn't do alone, like catching large prey.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 40,
+      "science_practice": "Engaging in Argument from Evidence"
+    },
+    {
+      "id": "sci-3-ls2-1-002",
+      "standard_id": "3-LS2-1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Some animals live alone, while others live in groups. Choose an animal that lives in a group (like bees, ants, elephants, or fish schools). Write an argument explaining how living in a group helps this animal survive. Use at least two pieces of evidence.",
+      "rubric": {
+        "4": "Clear argument with two or more specific pieces of evidence about group benefits (protection, food finding, caring for young)",
+        "3": "Argument with two pieces of evidence, some explanation",
+        "2": "Argument with one piece of evidence",
+        "1": "States animals live in groups without evidence",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 300,
+      "science_practice": "Engaging in Argument from Evidence"
+    },
+    {
+      "id": "sci-3-ls3-1-001",
+      "standard_id": "3-LS3-1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "In a litter of puppies, some have spots and some don't, even though they all have the same parents. What does this show?",
+      "options": ["Offspring can have variations in traits inherited from parents", "The puppies are not related", "Spots appear randomly from nowhere", "Only one puppy is really from those parents"],
+      "correct_answer": "Offspring can have variations in traits inherited from parents",
+      "explanation": "Parents pass on traits to their offspring, but those traits can vary. That's why siblings can look similar but not identical.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 40,
+      "science_practice": "Analyzing and Interpreting Data"
+    },
+    {
+      "id": "sci-3-ls3-1-002",
+      "standard_id": "3-LS3-1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Observe 5 students in your class. Record data about a visible trait like hair color or eye color. Create a table showing your data. What pattern do you see? What might explain why students have different traits?",
+      "rubric": {
+        "4": "Data table with 5 students and trait recorded, pattern identified, explanation connects to inheritance from parents",
+        "3": "Data table with pattern and partial explanation",
+        "2": "Data collected but pattern or explanation weak",
+        "1": "Partial data without analysis",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 240,
+      "science_practice": "Analyzing and Interpreting Data"
+    },
+    {
+      "id": "sci-3-ls3-2-001",
+      "standard_id": "3-LS3-2",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Two identical tomato plants are grown from the same seeds. One plant is watered daily and kept in sunlight. The other gets less water and shade. After 4 weeks, the first plant is bigger. What influenced this difference?",
+      "options": ["The environment (water and light) affected how the plant grew", "The seeds were actually different", "The smaller plant is a different species", "Size differences are always random"],
+      "correct_answer": "The environment (water and light) affected how the plant grew",
+      "explanation": "Even organisms with the same traits can develop differently based on their environment. Water and sunlight affect plant growth.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 45,
+      "science_practice": "Constructing Explanations and Designing Solutions"
+    },
+    {
+      "id": "sci-3-ls3-2-002",
+      "standard_id": "3-LS3-2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Think about how the environment might affect a trait in humans. For example, how might exercise affect muscle size, or how might sun exposure affect skin? Use evidence to support your explanation.",
+      "rubric": {
+        "4": "Clear example of environmental influence on trait with scientific explanation and evidence",
+        "3": "Good example with some evidence",
+        "2": "Example given but evidence weak",
+        "1": "Mentions environment and traits but connection unclear",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 240,
+      "science_practice": "Constructing Explanations and Designing Solutions"
+    },
+    {
+      "id": "sci-3-ls4-1-001",
+      "standard_id": "3-LS4-1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Scientists found a fossil of a fish in a desert. What can they conclude?",
+      "options": ["The area was once covered with water", "Fish can live in sand", "The fossil was carried there by wind", "Deserts have always been dry"],
+      "correct_answer": "The area was once covered with water",
+      "explanation": "Fossils tell us about past environments. Finding a fish fossil in a desert means that area was once an ocean or lake.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 40,
+      "science_practice": "Analyzing and Interpreting Data"
+    },
+    {
+      "id": "sci-3-ls4-1-002",
+      "standard_id": "3-LS4-1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "You find three fossils in a rock layer: a fern leaf, a dragonfly, and a fish. What kind of environment do you think this area was millions of years ago? Explain your reasoning using evidence from each fossil.",
+      "rubric": {
+        "4": "Identifies swamp/wetland environment with evidence from each fossil (fern=plants, dragonfly=humid air, fish=water)",
+        "3": "Correct environment with evidence from 2 fossils",
+        "2": "Environment identified but limited evidence",
+        "1": "Mentions fossils but doesn't connect to environment",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 270,
+      "science_practice": "Analyzing and Interpreting Data"
+    },
+    {
+      "id": "sci-3-ls4-2-001",
+      "standard_id": "3-LS4-2",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "In a population of rabbits, some have thicker fur than others. During a very cold winter, which rabbits are more likely to survive?",
+      "options": ["Rabbits with thicker fur because it keeps them warmer", "Rabbits with thinner fur", "All rabbits equally", "The rabbits' fur doesn't matter"],
+      "correct_answer": "Rabbits with thicker fur because it keeps them warmer",
+      "explanation": "Variations in traits can help some individuals survive better. Thicker fur is an advantage in cold weather.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 40,
+      "science_practice": "Constructing Explanations and Designing Solutions"
+    },
+    {
+      "id": "sci-3-ls4-3-001",
+      "standard_id": "3-LS4-3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A forest habitat has many tall trees. Three bird species live there: one that eats seeds on the ground, one that eats insects from tree bark, and one that eats berries from high branches. Explain how each bird is suited to survive in this habitat. Which bird might struggle if the trees were cut down?",
+      "rubric": {
+        "4": "Explains how each bird's traits suit its niche, correctly identifies bark/berry eaters as most affected by tree loss with reasoning",
+        "3": "Explains most birds' adaptations with some analysis of tree loss impact",
+        "2": "Some explanation of adaptations or impact but incomplete",
+        "1": "Lists birds but doesn't connect to habitat survival",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 300,
+      "science_practice": "Engaging in Argument from Evidence"
+    },
+    {
+      "id": "sci-3-ls4-4-001",
+      "standard_id": "3-LS4-4",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A pond is drying up due to drought. Some animals that live there include frogs, turtles, and fish. Propose a solution that could help these animals survive. What are the pros and cons of your solution?",
+      "rubric": {
+        "4": "Feasible solution (relocation, adding water, creating new habitat) with clear pros and cons evaluated",
+        "3": "Good solution with some pros/cons",
+        "2": "Solution given but pros/cons incomplete",
+        "1": "Basic idea without evaluation",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 5,
+        "generativity_delta": 6
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 300,
+      "science_practice": "Constructing Explanations and Designing Solutions"
+    },
+    {
+      "id": "sci-3-ess2-1-001",
+      "standard_id": "3-ESS2-1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Look at a weather data table showing temperature and precipitation for each month. In which season would you expect to see the highest temperatures?",
+      "options": ["Summer", "Winter", "The temperatures are the same all year", "There is no pattern to temperature"],
+      "correct_answer": "Summer",
+      "explanation": "Weather data shows seasonal patterns. Temperatures are typically highest in summer and lowest in winter.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 35,
+      "science_practice": "Analyzing and Interpreting Data"
+    },
+    {
+      "id": "sci-3-ess2-1-002",
+      "standard_id": "3-ESS2-1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Create a bar graph showing average high temperatures for each season in your area: Spring (60°F), Summer (85°F), Fall (55°F), Winter (35°F). What pattern does your graph show? Predict what clothes you would need for each season.",
+      "rubric": {
+        "4": "Accurate bar graph with proper labels, clear pattern description (summer hottest, winter coldest), logical clothing predictions",
+        "3": "Good graph with pattern and most predictions",
+        "2": "Graph created but pattern or predictions incomplete",
+        "1": "Partial graph without analysis",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 240,
+      "science_practice": "Analyzing and Interpreting Data"
+    },
+    {
+      "id": "sci-3-ess2-2-001",
+      "standard_id": "3-ESS2-2",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "What is the main difference between weather and climate?",
+      "options": ["Weather is daily conditions; climate is the average over many years", "Weather is only about rain; climate is about temperature", "They mean the same thing", "Climate only exists in deserts"],
+      "correct_answer": "Weather is daily conditions; climate is the average over many years",
+      "explanation": "Weather describes what's happening right now (sunny, rainy). Climate describes the average weather patterns over a long time.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 40,
+      "science_practice": "Obtaining, Evaluating, and Communicating Information"
+    },
+    {
+      "id": "sci-3-ess3-1-001",
+      "standard_id": "3-ESS3-1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Your town frequently floods when it rains hard. Design a solution that could help reduce flood damage. Explain how your solution works and what makes it a good design.",
+      "rubric": {
+        "4": "Creative, feasible solution (retention ponds, better drainage, elevated buildings) with clear explanation of how it reduces flooding",
+        "3": "Good solution with explanation",
+        "2": "Solution present but explanation weak",
+        "1": "Idea mentioned but not developed",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 5,
+        "generativity_delta": 6
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 300,
+      "science_practice": "Constructing Explanations and Designing Solutions"
+    },
+    {
+      "id": "sci-3-ets1-1-001",
+      "standard_id": "3-5-ETS1-1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "When defining a design problem, which questions are MOST important to answer?",
+      "options": ["What do we want to achieve? What limits do we have?", "What is our favorite color? What day is it?", "Who is the oldest person on the team? How tall is the room?", "What did we have for lunch? Is it raining?"],
+      "correct_answer": "What do we want to achieve? What limits do we have?",
+      "explanation": "Design problems need clear criteria (what we want) and constraints (limits like time, money, or materials).",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 40,
+      "science_practice": "Asking Questions and Defining Problems"
+    },
+    {
+      "id": "sci-3-ets1-2-001",
+      "standard_id": "3-5-ETS1-2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Your class needs a container to keep an ice cube from melting for as long as possible. You can use: foam, aluminum foil, plastic wrap, or newspaper. Generate two different design ideas. Compare them - which do you think would work better and why?",
+      "rubric": {
+        "4": "Two distinct designs with materials listed, clear comparison based on insulation properties, reasoned prediction",
+        "3": "Two designs with some comparison and prediction",
+        "2": "One design detailed or two without clear comparison",
+        "1": "Materials mentioned but no design thinking",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 300,
+      "science_practice": "Constructing Explanations and Designing Solutions"
+    },
+    {
+      "id": "sci-3-ets1-3-001",
+      "standard_id": "3-5-ETS1-3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Students tested three paper airplane designs. Design A flew 15 feet, Design B flew 22 feet, Design C flew 18 feet. They each threw their planes 3 times and averaged the results. What made this a fair test? Which design would you recommend and why?",
+      "rubric": {
+        "4": "Identifies fair test elements (multiple trials, same thrower/location), recommends Design B with distance reasoning, suggests potential improvements",
+        "3": "Identifies fair test and makes recommendation with reasoning",
+        "2": "Some fair test understanding or recommendation without full reasoning",
+        "1": "Chooses design without analysis of test fairness",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 240,
+      "science_practice": "Analyzing and Interpreting Data"
+    }
+  ]
+}

@@ -1,0 +1,819 @@
+{
+  "grade": "7",
+  "items": [
+    {
+      "id": "ela-7-rl-1-001",
+      "standard_id": "7.RL.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Cite several pieces of textual evidence to support an analysis of the protagonist's internal conflict. Your evidence should include both explicit statements and inferences you draw from the character's actions and dialogue.",
+      "rubric": {
+        "4": "Cites 3+ pieces of evidence (mix of explicit and inferential) with sophisticated analysis of internal conflict",
+        "3": "Cites several pieces of evidence with adequate analysis",
+        "2": "Cites 1-2 pieces of evidence or lacks balance of explicit/inferential",
+        "1": "Attempts response but evidence or analysis unclear",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 360,
+      "passage_required": true
+    },
+    {
+      "id": "ela-7-rl-1-002",
+      "standard_id": "7.RL.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "The author never explicitly states the relationship between the two main characters. Using several pieces of textual evidence, analyze what their relationship is and how you know. Include both direct evidence and inferences.",
+      "rubric": {
+        "4": "Identifies relationship with 3+ pieces of evidence, balancing explicit and inferential, with clear explanations",
+        "3": "Identifies relationship with several pieces of evidence and explanation",
+        "2": "Identifies relationship with limited evidence or unclear inferences",
+        "1": "Attempts response but relationship or evidence unclear",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 360,
+      "passage_required": true
+    },
+    {
+      "id": "ela-7-rl-2-001",
+      "standard_id": "7.RL.2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Determine the central theme of this story and analyze how it develops over the course of the text. Trace at least three key moments that contribute to the theme's development. Conclude with an objective summary.",
+      "rubric": {
+        "4": "Identifies theme, traces development through 3+ moments with insightful analysis, provides objective summary",
+        "3": "Identifies theme, traces development with adequate analysis and summary",
+        "2": "Identifies theme but limited development analysis or summary weak",
+        "1": "Attempts response but theme unclear or no development analysis",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 420,
+      "passage_required": true
+    },
+    {
+      "id": "ela-7-rl-2-002",
+      "standard_id": "7.RL.2",
+      "dok_level": 3,
+      "question_type": "multi_part",
+      "question": "Part A: What is the central theme of this text? Part B: Identify three specific moments where the theme is developed or reinforced. Part C: Explain how each moment contributes to the theme's development. Part D: Write an objective summary of the text.",
+      "rubric": {
+        "4": "All parts complete with sophisticated thematic analysis and objective summary",
+        "3": "All parts addressed with adequate analysis",
+        "2": "Theme identified but weak development analysis or subjective summary",
+        "1": "Partial response with multiple incomplete parts",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 480,
+      "passage_required": true
+    },
+    {
+      "id": "ela-7-rl-3-001",
+      "standard_id": "7.RL.3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Analyze how the setting of this story shapes the characters' behavior and motivations. Provide specific examples of how the environment influences the characters' decisions and actions.",
+      "rubric": {
+        "4": "Sophisticated analysis of setting-character interaction with multiple specific examples and clear cause-effect connections",
+        "3": "Analyzes setting's influence with examples and connections",
+        "2": "Addresses setting and characters but limited analysis of interaction",
+        "1": "Attempts response but lacks clear connection between setting and character",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 360,
+      "passage_required": true
+    },
+    {
+      "id": "ela-7-rl-3-002",
+      "standard_id": "7.RL.3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Analyze how the interaction between the two main characters drives the plot forward. Explain how their relationship creates or resolves conflict within the story.",
+      "rubric": {
+        "4": "Insightful analysis of character interaction's plot function with specific examples of conflict creation/resolution",
+        "3": "Analyzes interaction and plot with examples",
+        "2": "Addresses interaction but limited connection to plot progression",
+        "1": "Attempts response but analysis unclear",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 360,
+      "passage_required": true
+    },
+    {
+      "id": "ela-7-rl-4-001",
+      "standard_id": "7.RL.4",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "The poet uses alliteration and repetition throughout this poem. Analyze the impact of these sound devices on a specific stanza. How do they contribute to the poem's meaning and the reader's experience?",
+      "rubric": {
+        "4": "Identifies specific instances with sophisticated analysis of impact on meaning and reader experience",
+        "3": "Identifies devices with adequate analysis of impact",
+        "2": "Identifies devices but limited analysis of effect",
+        "1": "Attempts response but devices or impact unclear",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 360,
+      "passage_required": true
+    },
+    {
+      "id": "ela-7-rl-4-002",
+      "standard_id": "7.RL.4",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "The author uses both figurative and connotative language to describe the storm in paragraph 5. Analyze how these word choices create a particular mood. What emotions do these choices evoke in the reader?",
+      "rubric": {
+        "4": "Identifies specific language with sophisticated analysis of mood creation and reader response",
+        "3": "Identifies language and explains mood creation",
+        "2": "Addresses language but limited connection to mood",
+        "1": "Attempts response but unclear analysis",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 300,
+      "passage_required": true
+    },
+    {
+      "id": "ela-7-rl-5-001",
+      "standard_id": "7.RL.5",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "This poem is written as a sonnet. Analyze how this form (14 lines, specific rhyme scheme, volta) contributes to the poem's meaning. How would the meaning change if the poem were written in free verse?",
+      "rubric": {
+        "4": "Demonstrates understanding of sonnet form with sophisticated analysis of form-meaning connection and thoughtful comparison",
+        "3": "Explains sonnet form and its contribution to meaning with some comparison",
+        "2": "Addresses form but limited analysis of meaning or weak comparison",
+        "1": "Attempts response but form understanding unclear",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.8,
+      "time_estimate_seconds": 420,
+      "passage_required": true
+    },
+    {
+      "id": "ela-7-rl-5-002",
+      "standard_id": "7.RL.5",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "This drama includes a soliloquy in Act 2. Analyze how this structural element contributes to the overall meaning of the play. What does the audience learn from this soliloquy that they couldn't learn otherwise?",
+      "rubric": {
+        "4": "Insightful analysis of soliloquy's unique contribution to meaning and audience understanding",
+        "3": "Explains soliloquy's function and contribution to meaning",
+        "2": "Addresses soliloquy but limited analysis of its unique contribution",
+        "1": "Attempts response but unclear understanding of structural purpose",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 360,
+      "passage_required": true
+    },
+    {
+      "id": "ela-7-rl-6-001",
+      "standard_id": "7.RL.6",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Analyze how the author develops and contrasts the points of view of the protagonist and antagonist. How do their different perspectives on the same events reveal their characters and create tension in the narrative?",
+      "rubric": {
+        "4": "Sophisticated analysis of both perspectives with specific examples of contrast and insightful explanation of how differences create tension",
+        "3": "Analyzes both perspectives with examples of contrast and tension",
+        "2": "Addresses perspectives but limited contrast or tension analysis",
+        "1": "Attempts response but perspectives or contrast unclear",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.8,
+      "time_estimate_seconds": 420,
+      "passage_required": true
+    },
+    {
+      "id": "ela-7-rl-6-002",
+      "standard_id": "7.RL.6",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "This story alternates between two narrators. Analyze how the author uses these different points of view to reveal information to the reader. How does each narrator's perspective shape the reader's understanding of events?",
+      "rubric": {
+        "4": "Insightful analysis of how dual narration creates meaning, with specific examples from each perspective",
+        "3": "Analyzes both perspectives and their effect on reader understanding",
+        "2": "Addresses perspectives but limited analysis of effect",
+        "1": "Attempts response but narrative structure unclear",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.8,
+      "time_estimate_seconds": 420,
+      "passage_required": true
+    },
+    {
+      "id": "ela-7-rl-9-001",
+      "standard_id": "7.RL.9",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Compare and contrast the fictional account of the American Revolution in the novel with the historical account in the textbook excerpt. How does the author of fiction use or alter historical facts? What is the effect of these choices?",
+      "rubric": {
+        "4": "Comprehensive comparison identifying multiple alterations with sophisticated analysis of purpose and effect",
+        "3": "Compares accounts, identifies alterations, and explains effects",
+        "2": "Addresses both texts but limited analysis of alterations or effects",
+        "1": "Attempts comparison but unclear or one-sided",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.85,
+      "time_estimate_seconds": 480,
+      "passage_required": true
+    },
+    {
+      "id": "ela-7-rl-9-002",
+      "standard_id": "7.RL.9",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "The novel portrays life during the Great Depression while the historical article provides factual information about the same period. Analyze how the author renders historical material in a new way. What does the fiction reveal that the historical account does not?",
+      "rubric": {
+        "4": "Sophisticated analysis of how fiction transforms history with specific examples of unique insights fiction provides",
+        "3": "Analyzes transformation of history with examples",
+        "2": "Addresses both texts but limited analysis of fictional rendering",
+        "1": "Attempts response but comparison unclear",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.85,
+      "time_estimate_seconds": 480,
+      "passage_required": true
+    },
+    {
+      "id": "ela-7-ri-1-001",
+      "standard_id": "7.RI.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "The article argues that space exploration benefits humanity in unexpected ways. Cite several pieces of textual evidence to support this claim. Include evidence that is stated explicitly and evidence that requires inference.",
+      "rubric": {
+        "4": "Cites 3+ pieces of evidence (explicit and inferential) with clear explanation of how each supports the claim",
+        "3": "Cites several pieces of evidence with adequate explanation",
+        "2": "Cites 1-2 pieces or lacks balance of explicit/inferential",
+        "1": "Attempts response but evidence or explanation unclear",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 360,
+      "passage_required": true
+    },
+    {
+      "id": "ela-7-ri-1-002",
+      "standard_id": "7.RI.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Based on the article, what can you infer about the author's attitude toward social media's effect on teenagers? Cite several pieces of textual evidence to support your inference, including both direct statements and implied meanings.",
+      "rubric": {
+        "4": "Makes sophisticated inference with 3+ pieces of evidence balancing explicit and implied, with clear reasoning",
+        "3": "Makes inference with several pieces of evidence and explanation",
+        "2": "Makes inference with limited evidence or unclear reasoning",
+        "1": "Attempts inference but lacks support",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 360,
+      "passage_required": true
+    },
+    {
+      "id": "ela-7-ri-2-001",
+      "standard_id": "7.RI.2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Determine two or more central ideas in this article and analyze how they develop over the course of the text. How are these ideas connected? Provide an objective summary of the text.",
+      "rubric": {
+        "4": "Identifies 2+ central ideas, analyzes development, shows connections, provides complete objective summary",
+        "3": "Identifies central ideas, analyzes development, provides summary",
+        "2": "Identifies ideas but limited development analysis or summary weak",
+        "1": "Attempts response but ideas unclear or no analysis",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 420,
+      "passage_required": true
+    },
+    {
+      "id": "ela-7-ri-2-002",
+      "standard_id": "7.RI.2",
+      "dok_level": 3,
+      "question_type": "multi_part",
+      "question": "Part A: What are the two central ideas in this article? Part B: How does the author develop each idea throughout the text? Part C: What is the relationship between these two ideas? Part D: Provide an objective summary.",
+      "rubric": {
+        "4": "All parts complete with sophisticated analysis and objective summary",
+        "3": "All parts addressed adequately",
+        "2": "Ideas identified but development or connection analysis weak",
+        "1": "Partial response with multiple incomplete parts",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 480,
+      "passage_required": true
+    },
+    {
+      "id": "ela-7-ri-3-001",
+      "standard_id": "7.RI.3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Analyze the interactions between individuals, events, and ideas in this article about the civil rights movement. How do the actions of key individuals influence events? How do events influence the spread of ideas?",
+      "rubric": {
+        "4": "Sophisticated analysis of multiple interactions with specific examples showing cause-effect relationships",
+        "3": "Analyzes interactions with examples of influence",
+        "2": "Addresses interactions but limited cause-effect analysis",
+        "1": "Attempts response but interactions unclear",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 420,
+      "passage_required": true
+    },
+    {
+      "id": "ela-7-ri-3-002",
+      "standard_id": "7.RI.3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "The article discusses how scientific discoveries led to technological innovations. Analyze the interactions between the ideas (discoveries) and events (innovations). How did one lead to another?",
+      "rubric": {
+        "4": "Clear analysis of idea-event interactions with multiple specific examples and causal connections",
+        "3": "Analyzes interactions with examples and connections",
+        "2": "Addresses topic but limited interaction analysis",
+        "1": "Attempts response but connections unclear",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 360,
+      "passage_required": true
+    },
+    {
+      "id": "ela-7-ri-4-001",
+      "standard_id": "7.RI.4",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "The author describes the political situation as 'volatile' and the negotiations as 'delicate.' Analyze the impact of these specific word choices on the meaning and tone of the passage. How do these connotations shape the reader's understanding?",
+      "rubric": {
+        "4": "Sophisticated analysis of connotative meanings with clear explanation of impact on meaning, tone, and reader understanding",
+        "3": "Analyzes word choices and their impact on meaning and tone",
+        "2": "Addresses words but limited analysis of impact",
+        "1": "Attempts response but analysis unclear",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 300,
+      "passage_required": true
+    },
+    {
+      "id": "ela-7-ri-4-002",
+      "standard_id": "7.RI.4",
+      "dok_level": 3,
+      "question_type": "multi_part",
+      "question": "Part A: What does the technical term 'biodiversity' mean as used in this article? Part B: What does the figurative phrase 'web of life' mean in context? Part C: How do these terms work together to convey the author's message about ecosystems?",
+      "rubric": {
+        "4": "Both terms correctly defined with sophisticated analysis of how they work together",
+        "3": "Terms defined with adequate explanation of combined effect",
+        "2": "Terms defined but limited analysis of relationship",
+        "1": "Partial definitions or unclear analysis",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 300,
+      "passage_required": true
+    },
+    {
+      "id": "ela-7-ri-5-001",
+      "standard_id": "7.RI.5",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Analyze the structure the author uses to organize this article (e.g., chronological, compare-contrast, problem-solution). How do the major sections contribute to the whole text and to the development of the central idea?",
+      "rubric": {
+        "4": "Correctly identifies structure, analyzes how sections build on each other, and shows sophisticated understanding of structural purpose",
+        "3": "Identifies structure and explains how sections contribute",
+        "2": "Addresses structure but limited section analysis",
+        "1": "Attempts response but structure unclear",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 360,
+      "passage_required": true
+    },
+    {
+      "id": "ela-7-ri-5-002",
+      "standard_id": "7.RI.5",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "The article is organized with headings for each major section. Analyze how these sections work together to develop the author's ideas. What would be lost if one section were removed?",
+      "rubric": {
+        "4": "Insightful analysis of section relationships with thoughtful explanation of each section's essential contribution",
+        "3": "Explains section relationships and discusses importance",
+        "2": "Addresses sections but limited relationship analysis",
+        "1": "Attempts response but structural understanding weak",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 360,
+      "passage_required": true
+    },
+    {
+      "id": "ela-7-ri-6-001",
+      "standard_id": "7.RI.6",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Determine the author's point of view on the controversial topic discussed in this article. Analyze how the author distinguishes their position from opposing viewpoints. What techniques does the author use to address counterarguments?",
+      "rubric": {
+        "4": "Identifies author's position, shows how it differs from others, and analyzes techniques for addressing counterarguments",
+        "3": "Identifies position and shows how author distinguishes it from others",
+        "2": "Identifies position but limited analysis of distinction from others",
+        "1": "Attempts response but position or distinction unclear",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 420,
+      "passage_required": true
+    },
+    {
+      "id": "ela-7-ri-6-002",
+      "standard_id": "7.RI.6",
+      "dok_level": 3,
+      "question_type": "multi_part",
+      "question": "Part A: What is the author's purpose in writing this article? Part B: What position does the author take on the issue? Part C: How does the author acknowledge and respond to different viewpoints? Cite specific examples.",
+      "rubric": {
+        "4": "All parts answered with sophisticated understanding of purpose, position, and rhetorical strategy",
+        "3": "All parts addressed adequately with examples",
+        "2": "Purpose and position identified but weak analysis of opposing views",
+        "1": "Partial response with errors",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 420,
+      "passage_required": true
+    },
+    {
+      "id": "ela-7-ri-8-001",
+      "standard_id": "7.RI.8",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Trace and evaluate the author's argument in this editorial. For each major claim, assess whether the reasoning is sound and the evidence is relevant and sufficient. Identify any weaknesses in the argument.",
+      "rubric": {
+        "4": "Traces complete argument, evaluates multiple claims with sophisticated assessment of reasoning and evidence quality",
+        "3": "Traces argument and evaluates claims with assessment of evidence",
+        "2": "Addresses argument but limited evaluation of reasoning/evidence",
+        "1": "Attempts response but argument or evaluation unclear",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.8,
+      "time_estimate_seconds": 480,
+      "passage_required": true
+    },
+    {
+      "id": "ela-7-ri-8-002",
+      "standard_id": "7.RI.8",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "The author makes several claims about the benefits of year-round schooling. Evaluate each claim: Is the evidence sufficient? Is the reasoning sound? Are there any claims that lack adequate support?",
+      "rubric": {
+        "4": "Evaluates all major claims with sophisticated analysis of evidence sufficiency and reasoning soundness",
+        "3": "Evaluates claims with analysis of evidence and reasoning",
+        "2": "Addresses claims but limited evaluation depth",
+        "1": "Attempts response but evaluation unclear",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.8,
+      "time_estimate_seconds": 480,
+      "passage_required": true
+    },
+    {
+      "id": "ela-7-w-1-001",
+      "standard_id": "7.W.1",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Write an argument supporting or opposing the claim that schools should eliminate letter grades in favor of written feedback. Include a clear claim, organized reasons, relevant evidence, acknowledgment of counterarguments, and a concluding statement.",
+      "rubric": {
+        "4": "Clear claim with 3+ well-developed reasons, strong evidence, effective counterargument acknowledgment, logical organization, and compelling conclusion",
+        "3": "Clear claim with reasons, evidence, counterargument acknowledgment, and conclusion",
+        "2": "Claim with some reasons but weak evidence, missing counterarguments, or poor organization",
+        "1": "Claim unclear or lacks supporting elements",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.8,
+      "time_estimate_seconds": 1800,
+      "passage_required": false
+    },
+    {
+      "id": "ela-7-w-1-002",
+      "standard_id": "7.W.1",
+      "dok_level": 4,
+      "question_type": "multi_part",
+      "question": "After reading the two articles about cell phone use in schools, write an argument taking a position on whether cell phones should be allowed in classrooms. Part A: State your claim. Part B: Provide at least two reasons with evidence from the articles. Part C: Address at least one counterargument.",
+      "rubric": {
+        "4": "Clear claim, 2+ text-based reasons with specific evidence, effectively addresses counterargument",
+        "3": "Claim with reasons and evidence from texts, addresses counterargument",
+        "2": "Claim with some evidence but weak counterargument or limited text use",
+        "1": "Claim without adequate support or text evidence",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.8,
+      "time_estimate_seconds": 1500,
+      "passage_required": true
+    },
+    {
+      "id": "ela-7-w-2-001",
+      "standard_id": "7.W.2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Write an informative essay explaining the causes and effects of the Industrial Revolution. Select, organize, and analyze relevant information to clearly convey the topic. Include an introduction, body paragraphs, and conclusion.",
+      "rubric": {
+        "4": "Well-organized essay with clear introduction, multiple body paragraphs with analyzed information, effective transitions, and strong conclusion",
+        "3": "Organized essay with introduction, body paragraphs, and conclusion",
+        "2": "Some organization but weak analysis or missing structural elements",
+        "1": "Attempts informative writing but lacks organization or analysis",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 1500,
+      "passage_required": false
+    },
+    {
+      "id": "ela-7-w-2-002",
+      "standard_id": "7.W.2",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Using information from the science article, write an informative essay explaining how vaccines work to protect against disease. Organize your essay logically, include relevant facts and definitions, and use precise language.",
+      "rubric": {
+        "4": "Clear, well-organized essay with accurate information from source, precise scientific vocabulary, effective structure",
+        "3": "Organized essay with information from source and appropriate vocabulary",
+        "2": "Contains some information but organization or precision weak",
+        "1": "Attempts response but lacks clarity or source use",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 1200,
+      "passage_required": true
+    },
+    {
+      "id": "ela-7-w-3-001",
+      "standard_id": "7.W.3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Write a narrative about a character who must make a difficult moral choice. Use effective narrative techniques including dialogue, pacing, and descriptive details to develop the experience and show the character's internal conflict.",
+      "rubric": {
+        "4": "Engaging narrative with sophisticated use of dialogue, pacing, and description; clear internal conflict and resolution; well-structured sequence",
+        "3": "Complete narrative with effective techniques and clear structure",
+        "2": "Narrative present but techniques limited or structure weak",
+        "1": "Attempts narrative but lacks key elements",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 1500,
+      "passage_required": false
+    },
+    {
+      "id": "ela-7-w-4-001",
+      "standard_id": "7.W.4",
+      "dok_level": 3,
+      "question_type": "multi_part",
+      "question": "Part A: Read the writing prompt and identify the task, purpose, and intended audience. Part B: Explain what style and organization would be most appropriate for this task. Part C: Create a detailed outline for your response.",
+      "rubric": {
+        "4": "Correctly identifies all elements, provides sophisticated rationale for style/organization choices, creates detailed appropriate outline",
+        "3": "Identifies elements, explains style/organization choices, creates outline",
+        "2": "Identifies some elements but weak rationale or incomplete outline",
+        "1": "Partial response with errors",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 2,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 600,
+      "passage_required": true
+    },
+    {
+      "id": "ela-7-l-1-001",
+      "standard_id": "7.L.1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Which sentence correctly uses a dangling modifier?",
+      "options": [
+        "A. Walking through the park, the flowers were beautiful.",
+        "B. Walking through the park, I noticed the beautiful flowers.",
+        "C. The flowers were beautiful, walking through the park.",
+        "D. Beautiful flowers walking through the park were noticed."
+      ],
+      "correct_answer": "B",
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 90,
+      "passage_required": false
+    },
+    {
+      "id": "ela-7-l-1-002",
+      "standard_id": "7.L.1",
+      "dok_level": 2,
+      "question_type": "constructed_response",
+      "question": "Rewrite the following paragraph, correcting all errors in grammar and usage. Focus on subject-verb agreement, pronoun-antecedent agreement, and misplaced modifiers: 'Each of the students need to bring their own supplies. Carefully reviewing the syllabus, the assignments was understood. Everyone should do their best work.'",
+      "rubric": {
+        "4": "All errors corrected with proper grammar and usage throughout",
+        "3": "Most errors corrected with minor issues",
+        "2": "Some errors corrected but significant issues remain",
+        "1": "Attempts corrections but most errors remain",
+        "0": "No corrections attempted"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 240,
+      "passage_required": false
+    },
+    {
+      "id": "ela-7-sl-1-001",
+      "standard_id": "7.SL.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "After participating in the group discussion about the novel, write a reflection addressing: 1) What was the most important idea someone else contributed? 2) How did you build on or challenge that idea? 3) How did the discussion change your understanding of the text?",
+      "rubric": {
+        "4": "Thoughtfully addresses all three elements with specific examples from discussion and insightful reflection on learning",
+        "3": "Addresses all elements with examples and reflection",
+        "2": "Addresses elements but limited specificity or reflection",
+        "1": "Partial response missing key elements",
+        "0": "No response or completely off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 480,
+      "passage_required": false
+    }
+  ]
+}

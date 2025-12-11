@@ -1,0 +1,229 @@
+{
+    "grade": "7",
+    "subject": "Mathematics",
+    "domains": [
+        {
+            "id": "RP",
+            "name": "Ratios & Proportional Relationships",
+            "standards": [
+                {
+                    "id": "7.RP.A.1",
+                    "description": "Compute unit rates associated with ratios of fractions, including ratios of lengths, areas and other quantities measured in like or different units.",
+                    "prerequisites": [
+                        "6.RP.A.2"
+                    ],
+                    "cluster": "Analyze proportional relationships and use them to solve real-world and mathematical problems."
+                },
+                {
+                    "id": "7.RP.A.2",
+                    "description": "Recognize and represent proportional relationships between quantities.",
+                    "prerequisites": [
+                        "6.RP.A.3"
+                    ],
+                    "cluster": "Analyze proportional relationships and use them to solve real-world and mathematical problems."
+                },
+                {
+                    "id": "7.RP.A.3",
+                    "description": "Use proportional relationships to solve multistep ratio and percent problems.",
+                    "prerequisites": [
+                        "7.RP.A.2"
+                    ],
+                    "cluster": "Analyze proportional relationships and use them to solve real-world and mathematical problems."
+                }
+            ]
+        },
+        {
+            "id": "NS",
+            "name": "The Number System",
+            "standards": [
+                {
+                    "id": "7.NS.A.1",
+                    "description": "Apply and extend previous understandings of addition and subtraction to add and subtract rational numbers; represent addition and subtraction on a horizontal or vertical number line diagram.",
+                    "prerequisites": [
+                        "6.NS.C.7"
+                    ],
+                    "cluster": "Apply and extend previous understandings of operations with fractions."
+                },
+                {
+                    "id": "7.NS.A.2",
+                    "description": "Apply and extend previous understandings of multiplication and division and of fractions to multiply and divide rational numbers.",
+                    "prerequisites": [
+                        "7.NS.A.1",
+                        "6.NS.A.1"
+                    ],
+                    "cluster": "Apply and extend previous understandings of operations with fractions."
+                },
+                {
+                    "id": "7.NS.A.3",
+                    "description": "Solve real-world and mathematical problems involving the four operations with rational numbers.",
+                    "prerequisites": [
+                        "7.NS.A.2"
+                    ],
+                    "cluster": "Apply and extend previous understandings of operations with fractions."
+                }
+            ]
+        },
+        {
+            "id": "EE",
+            "name": "Expressions & Equations",
+            "standards": [
+                {
+                    "id": "7.EE.A.1",
+                    "description": "Apply properties of operations as strategies to add, subtract, factor, and expand linear expressions with rational coefficients.",
+                    "prerequisites": [
+                        "6.EE.A.3"
+                    ],
+                    "cluster": "Use properties of operations to generate equivalent expressions."
+                },
+                {
+                    "id": "7.EE.A.2",
+                    "description": "Understand that rewriting an expression in different forms in a problem context can shed light on the problem and how the quantities in it are related.",
+                    "prerequisites": [
+                        "7.EE.A.1"
+                    ],
+                    "cluster": "Use properties of operations to generate equivalent expressions."
+                },
+                {
+                    "id": "7.EE.B.3",
+                    "description": "Solve multi-step real-life and mathematical problems posed with positive and negative rational numbers in any form (whole numbers, fractions, and decimals), using tools strategically.",
+                    "prerequisites": [
+                        "7.NS.A.3",
+                        "6.EE.B.7"
+                    ],
+                    "cluster": "Solve real-life and mathematical problems using numerical and algebraic expressions and equations."
+                },
+                {
+                    "id": "7.EE.B.4",
+                    "description": "Use variables to represent quantities in a real-world or mathematical problem, and construct simple equations and inequalities to solve problems by reasoning about the quantities.",
+                    "prerequisites": [
+                        "6.EE.C.9"
+                    ],
+                    "cluster": "Solve real-life and mathematical problems using numerical and algebraic expressions and equations."
+                }
+            ]
+        },
+        {
+            "id": "G",
+            "name": "Geometry",
+            "standards": [
+                {
+                    "id": "7.G.A.1",
+                    "description": "Solve problems involving scale drawings of geometric figures, including computing actual lengths and areas from a scale drawing and reproducing a scale drawing at a different scale.",
+                    "prerequisites": [
+                        "7.RP.A.2"
+                    ],
+                    "cluster": "Draw, construct, and describe geometrical figures and describe the relationships between them."
+                },
+                {
+                    "id": "7.G.A.2",
+                    "description": "Draw (freehand, with ruler and protractor, and with technology) geometric shapes with given conditions. Focus on constructing triangles from three measures of angles or sides, noticing when the conditions determine a unique triangle, more than one triangle, or no triangle.",
+                    "prerequisites": [
+                        "6.G.A.1"
+                    ],
+                    "cluster": "Draw, construct, and describe geometrical figures and describe the relationships between them."
+                },
+                {
+                    "id": "7.G.A.3",
+                    "description": "Describe the two-dimensional figures that result from slicing three-dimensional figures, as in plane sections of right rectangular prisms and right rectangular pyramids.",
+                    "prerequisites": [
+                        "6.G.A.4"
+                    ],
+                    "cluster": "Draw, construct, and describe geometrical figures and describe the relationships between them."
+                },
+                {
+                    "id": "7.G.B.4",
+                    "description": "Know the formulas for the area and circumference of a circle and use them to solve problems; give an informal derivation of the relationship between the circumference and area of a circle.",
+                    "prerequisites": [
+                        "6.G.A.1"
+                    ],
+                    "cluster": "Solve real-life and mathematical problems involving angle measure, area, surface area, and volume."
+                },
+                {
+                    "id": "7.G.B.5",
+                    "description": "Use facts about supplementary, complementary, vertical, and adjacent angles in a multi-step problem to write and solve simple equations for an unknown angle in a figure.",
+                    "prerequisites": [
+                        "7.EE.B.4"
+                    ],
+                    "cluster": "Solve real-life and mathematical problems involving angle measure, area, surface area, and volume."
+                },
+                {
+                    "id": "7.G.B.6",
+                    "description": "Solve real-world and mathematical problems involving area, volume and surface area of two- and three-dimensional objects composed of triangles, quadrilaterals, polygons, cubes, and right prisms.",
+                    "prerequisites": [
+                        "6.G.A.2",
+                        "6.G.A.4"
+                    ],
+                    "cluster": "Solve real-life and mathematical problems involving angle measure, area, surface area, and volume."
+                }
+            ]
+        },
+        {
+            "id": "SP",
+            "name": "Statistics & Probability",
+            "standards": [
+                {
+                    "id": "7.SP.A.1",
+                    "description": "Understand that statistics can be used to gain information about a population by examining a sample of the population; generalizations about a population from a sample are valid only if the sample is representative of that population.",
+                    "prerequisites": [
+                        "6.SP.A.1"
+                    ],
+                    "cluster": "Use random sampling to draw inferences about a population."
+                },
+                {
+                    "id": "7.SP.A.2",
+                    "description": "Use data from a random sample to draw inferences about a population with an unknown characteristic of interest. Generate multiple samples (or simulated samples) of the same size to gauge the variation in estimates or predictions.",
+                    "prerequisites": [
+                        "7.SP.A.1"
+                    ],
+                    "cluster": "Use random sampling to draw inferences about a population."
+                },
+                {
+                    "id": "7.SP.B.3",
+                    "description": "Informally assess the degree of visual overlap of two numerical data distributions with similar variabilities, measuring the difference between the centers by expressing it as a multiple of a measure of variability.",
+                    "prerequisites": [
+                        "6.SP.B.5"
+                    ],
+                    "cluster": "Draw informal comparative inferences about two populations."
+                },
+                {
+                    "id": "7.SP.B.4",
+                    "description": "Use measures of center and measures of variability for numerical data from random samples to draw informal comparative inferences about two populations.",
+                    "prerequisites": [
+                        "7.SP.B.3"
+                    ],
+                    "cluster": "Draw informal comparative inferences about two populations."
+                },
+                {
+                    "id": "7.SP.C.5",
+                    "description": "Understand that the probability of a chance event is a number between 0 and 1 that expresses the likelihood of the event occurring. Larger numbers indicate greater likelihood.",
+                    "prerequisites": [],
+                    "cluster": "Investigate chance processes and develop, use, and evaluate probability models."
+                },
+                {
+                    "id": "7.SP.C.6",
+                    "description": "Approximate the probability of a chance event by collecting data on the chance process that produces it and observing its long-run relative frequency, and predict the approximate relative frequency given the probability.",
+                    "prerequisites": [
+                        "7.SP.C.5"
+                    ],
+                    "cluster": "Investigate chance processes and develop, use, and evaluate probability models."
+                },
+                {
+                    "id": "7.SP.C.7",
+                    "description": "Develop a probability model and use it to find probabilities of events. Compare probabilities from a model to observed frequencies; if the agreement is not good, explain possible sources of the discrepancy.",
+                    "prerequisites": [
+                        "7.SP.C.6"
+                    ],
+                    "cluster": "Investigate chance processes and develop, use, and evaluate probability models."
+                },
+                {
+                    "id": "7.SP.C.8",
+                    "description": "Find probabilities of compound events using organized lists, tables, tree diagrams, and simulation.",
+                    "prerequisites": [
+                        "7.SP.C.7"
+                    ],
+                    "cluster": "Investigate chance processes and develop, use, and evaluate probability models."
+                }
+            ]
+        }
+    ]
+}

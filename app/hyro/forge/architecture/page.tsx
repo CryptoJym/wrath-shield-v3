@@ -9,13 +9,15 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 
-type ViewMode = 'system' | 'curricula' | 'agents' | 'dimensions' | 'flow';
+type ViewMode = 'system' | 'curricula' | 'agents' | 'dimensions' | 'flow' | 'spheregrid' | 'meta';
 
 const VIEW_TABS: { id: ViewMode; label: string; icon: string }[] = [
   { id: 'system', label: 'System Overview', icon: '🏗️' },
-  { id: 'curricula', label: 'Curricula', icon: '📚' },
+  { id: 'curricula', label: 'Curricula (5)', icon: '📚' },
   { id: 'agents', label: 'AI Agents', icon: '🤖' },
   { id: 'dimensions', label: 'Manifold Dimensions', icon: '🌀' },
+  { id: 'spheregrid', label: 'Sphere Grid', icon: '🔮' },
+  { id: 'meta', label: 'Meta-Learning', icon: '🧬' },
   { id: 'flow', label: 'Learning Flow', icon: '🔄' },
 ];
 
@@ -93,6 +95,37 @@ const CURRICULA_DATA = {
     keyResearchers: ['Gazzaniga', 'Eagleman', 'LeDoux', 'Sapolsky', 'Dehaene', 'Oakley'],
     cegIntegration: true,
     color: 'from-purple-500 to-pink-500',
+  },
+  patternRecognition: {
+    name: 'Pattern Recognition & Medici Effect',
+    icon: '🔗',
+    status: 'complete',
+    standards: 'PR-1.* through PR-4.*',
+    patternTypes: [
+      'Proportional Relationship', 'Exponential Growth/Decay', 'Feedback Loops',
+      'Threshold Effects', 'Trade-offs', 'Network Effects', 'Emergence',
+      'Equilibrium', 'Cycles/Oscillations', 'Power Laws'
+    ],
+    abstractionLevels: ['surface', 'structural', 'deep', 'meta'],
+    keyResearchers: ['Frans Johansson (Medici Effect)', 'Herbert Simon', 'Douglas Hofstadter'],
+    color: 'from-teal-500 to-emerald-500',
+  },
+  testoutConfidence: {
+    name: 'Testout Confidence Engine',
+    icon: '🎓',
+    status: 'complete',
+    standards: 'CC-TEST-1.* through CC-TEST-3.*',
+    confidenceCategories: [
+      'not_ready', 'needs_more_prep', 'approaching_ready',
+      'likely_ready', 'highly_confident', 'recommend_now'
+    ],
+    factors: {
+      masteryBased: ['averageMastery', 'lowestMastery', 'coreStandardsMastery', 'masteredStandardsRatio'],
+      performanceBased: ['practiceTestAverage', 'recentTrend', 'consistencyScore', 'highStakesPerformance'],
+      behavioral: ['studyTimeLastWeek', 'practiceProblemsLastWeek', 'engagementScore', 'selfEfficacyScore'],
+    },
+    purpose: 'Canyon Grove competency testing readiness',
+    color: 'from-rose-500 to-red-500',
   },
 };
 

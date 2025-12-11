@@ -1,0 +1,844 @@
+{
+  "grade": "3",
+  "items": [
+    {
+      "id": "ela-3-rl-1-001",
+      "standard_id": "3.RL.1",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Read the passage: 'The old lighthouse keeper had lived alone for thirty years. Every night, without fail, he climbed the spiral stairs to light the beacon. Ships depended on him, and he never let them down.' According to the text, why did the lighthouse keeper light the beacon every night?",
+      "correct_answer": "Ships depended on him / To help ships",
+      "rubric": {
+        "full_credit": "Cites text evidence about ships depending on him",
+        "partial_credit": "General answer about helping without text reference",
+        "no_credit": "Cannot identify reason"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 90,
+      "passage": "The old lighthouse keeper had lived alone for thirty years. Every night, without fail, he climbed the spiral stairs to light the beacon. Ships depended on him, and he never let them down."
+    },
+    {
+      "id": "ela-3-rl-1-002",
+      "standard_id": "3.RL.1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Read: 'Maria's hands trembled as she stepped onto the stage. The bright lights made it hard to see the audience, but she could hear them rustling in their seats.' What can you infer about how Maria feels? Use evidence from the text.",
+      "options": ["She is nervous because her hands trembled", "She is happy because she is on stage", "She is angry because of the lights", "She is tired because she can't see"],
+      "correct_answer": "She is nervous because her hands trembled",
+      "rubric": {
+        "full_credit": "Infers with text evidence",
+        "no_credit": "Selects incorrect option"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 60,
+      "passage": "Maria's hands trembled as she stepped onto the stage. The bright lights made it hard to see the audience, but she could hear them rustling in their seats."
+    },
+    {
+      "id": "ela-3-rl-2-001",
+      "standard_id": "3.RL.2",
+      "dok_level": 3,
+      "question_type": "short_answer",
+      "question": "Read the myth: 'Icarus and his father made wings of feathers and wax. His father warned, \"Don't fly too close to the sun.\" But Icarus loved flying so much that he forgot. The sun melted his wings, and he fell into the sea.' What is the central message? Explain how the key details show this lesson.",
+      "correct_answer": "Listen to wise advice / Don't be too reckless or proud",
+      "rubric": {
+        "full_credit": "Identifies message and explains how details convey it",
+        "partial_credit": "Identifies message but weak connection to details",
+        "no_credit": "Cannot identify message"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 1,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 120,
+      "passage": "Icarus and his father made wings of feathers and wax. His father warned, 'Don't fly too close to the sun.' But Icarus loved flying so much that he forgot. The sun melted his wings, and he fell into the sea."
+    },
+    {
+      "id": "ela-3-rl-2-002",
+      "standard_id": "3.RL.2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Read the folktale about the boy who cried wolf. Recount the story and determine the moral. How do the key details help you understand the lesson?",
+      "correct_answer": null,
+      "rubric": {
+        "full_credit": "Recounts story, identifies moral, explains connection to details",
+        "partial_credit": "Recounts and identifies moral but weak explanation",
+        "no_credit": "Cannot recount or identify moral"
+      },
+      "manifold_fit": {
+        "coherence_delta": 5,
+        "entropy_delta": 1,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 180,
+      "passage": "A shepherd boy watched sheep near a village. Bored, he cried 'Wolf!' when there was no wolf. Villagers came running but found nothing. He did this again, and again they came. Then a real wolf appeared. The boy cried 'Wolf!' but no one came. They didn't believe him anymore."
+    },
+    {
+      "id": "ela-3-rl-3-001",
+      "standard_id": "3.RL.3",
+      "dok_level": 3,
+      "question_type": "short_answer",
+      "question": "Read: 'James was always the first to volunteer when someone needed help. When the new kid sat alone at lunch, James walked over with his tray and sat down. He asked, \"Want to join my soccer game after school?\"' Describe James's character traits. How do his actions show these traits?",
+      "correct_answer": "Kind/friendly/welcoming - actions show he helps others and includes new kid",
+      "rubric": {
+        "full_credit": "Identifies traits and explains how actions demonstrate them",
+        "partial_credit": "Identifies traits but weak connection to actions",
+        "no_credit": "Cannot identify traits"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 120,
+      "passage": "James was always the first to volunteer when someone needed help. When the new kid sat alone at lunch, James walked over with his tray and sat down. He asked, 'Want to join my soccer game after school?'"
+    },
+    {
+      "id": "ela-3-rl-3-002",
+      "standard_id": "3.RL.3",
+      "dok_level": 3,
+      "question_type": "multiple_choice",
+      "question": "Read: 'Elena saw her brother take cookies without asking. She felt torn. She didn't want to tattle, but she also knew it wasn't right. Finally, she said, \"You should ask Mom next time.\"' What motivated Elena's actions at the end?",
+      "options": ["She wanted to do the right thing without getting her brother in trouble", "She was hungry for cookies", "She wanted her brother to get in trouble", "She was afraid of her mother"],
+      "correct_answer": "She wanted to do the right thing without getting her brother in trouble",
+      "rubric": {
+        "full_credit": "Identifies motivation with text support",
+        "no_credit": "Selects incorrect option"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 1,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 75,
+      "passage": "Elena saw her brother take cookies without asking. She felt torn. She didn't want to tattle, but she also knew it wasn't right. Finally, she said, 'You should ask Mom next time.'"
+    },
+    {
+      "id": "ela-3-rl-4-001",
+      "standard_id": "3.RL.4",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Read: 'The snow blanketed the town.' Is 'blanketed' used literally or nonliterally? Explain what it means in this sentence.",
+      "correct_answer": "Nonliteral - means snow covered the town like a blanket covers a bed",
+      "rubric": {
+        "full_credit": "Identifies nonliteral and explains meaning",
+        "partial_credit": "Identifies one but not both",
+        "no_credit": "Cannot distinguish or explain"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 75,
+      "passage": "The snow blanketed the town."
+    },
+    {
+      "id": "ela-3-rl-4-002",
+      "standard_id": "3.RL.4",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Read: 'Time flies when you're having fun.' What does 'time flies' mean?",
+      "options": ["Time seems to pass quickly", "Time moves like a bird", "Clocks have wings", "Fun makes things float"],
+      "correct_answer": "Time seems to pass quickly",
+      "rubric": {
+        "full_credit": "Identifies figurative meaning",
+        "no_credit": "Selects literal interpretation"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 45,
+      "passage": "Time flies when you're having fun."
+    },
+    {
+      "id": "ela-3-rl-5-001",
+      "standard_id": "3.RL.5",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Read the poem with two stanzas. How does the second stanza build on the first stanza?",
+      "correct_answer": "varies - should explain connection between stanzas",
+      "rubric": {
+        "full_credit": "Explains how stanzas connect and build",
+        "partial_credit": "Describes stanzas without explaining connection",
+        "no_credit": "Cannot explain structure"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 1,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 120,
+      "passage": "Stanza 1: The morning sun rises gold, / Across the meadow bright and bold. / The birds begin their cheerful song, / Singing as the day grows long. \n\nStanza 2: But evening comes with purple sky, / The birds return home to fly. / The sun sinks low, the stars appear, / Another peaceful day ends here."
+    },
+    {
+      "id": "ela-3-rl-5-002",
+      "standard_id": "3.RL.5",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "A play has a list of characters at the beginning, dialogue in the middle, and stage directions in brackets. What is the list of characters called?",
+      "options": ["Cast of characters", "Stanza", "Narrator", "Scene"],
+      "correct_answer": "Cast of characters",
+      "rubric": {
+        "full_credit": "Identifies correct drama term",
+        "no_credit": "Selects incorrect option"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 30,
+      "passage": null
+    },
+    {
+      "id": "ela-3-rl-6-001",
+      "standard_id": "3.RL.6",
+      "dok_level": 3,
+      "question_type": "short_answer",
+      "question": "Read: 'I thought the new kid looked mean. He never smiled and always sat alone. But then I learned his family had just moved and he was shy.' How is the narrator's point of view different from reality?",
+      "correct_answer": "Narrator thought kid was mean but he was actually shy",
+      "rubric": {
+        "full_credit": "Distinguishes narrator's POV from reality",
+        "partial_credit": "Partially explains difference",
+        "no_credit": "Cannot distinguish"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 1,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 90,
+      "passage": "I thought the new kid looked mean. He never smiled and always sat alone. But then I learned his family had just moved and he was shy."
+    },
+    {
+      "id": "ela-3-rl-6-002",
+      "standard_id": "3.RL.6",
+      "dok_level": 3,
+      "question_type": "multiple_choice",
+      "question": "The narrator says, 'My little brother is so annoying!' But the story shows the brother bringing the narrator soup when sick. What does this show?",
+      "options": ["The narrator's view of the brother may not be completely accurate", "The brother is always annoying", "The narrator is sick", "The soup was bad"],
+      "correct_answer": "The narrator's view of the brother may not be completely accurate",
+      "rubric": {
+        "full_credit": "Distinguishes narrator POV from character's actions",
+        "no_credit": "Selects incorrect option"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 1,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 60,
+      "passage": null
+    },
+    {
+      "id": "ela-3-rl-9-001",
+      "standard_id": "3.RL.9",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Compare two books from the same series (e.g., Magic Tree House or Junie B. Jones). How are the themes, settings, and plots similar? How are they different?",
+      "correct_answer": null,
+      "rubric": {
+        "full_credit": "Compares/contrasts themes, settings, and plots with specific examples",
+        "partial_credit": "Addresses some elements but incomplete",
+        "no_credit": "Cannot compare"
+      },
+      "manifold_fit": {
+        "coherence_delta": 5,
+        "entropy_delta": 1,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 300,
+      "passage": null
+    },
+    {
+      "id": "ela-3-rl-9-002",
+      "standard_id": "3.RL.9",
+      "dok_level": 3,
+      "question_type": "short_answer",
+      "question": "Both Story A and Story B are about a character who wants to be brave. In Story A, the character faces a bully. In Story B, the character tries out for a play. How are the plots similar and different?",
+      "correct_answer": "Similar: both about becoming brave. Different: facing a person vs. trying something new",
+      "rubric": {
+        "full_credit": "Identifies similarities and differences in plots",
+        "partial_credit": "Identifies one but not both",
+        "no_credit": "Cannot compare"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 1,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 120,
+      "passage": null
+    },
+    {
+      "id": "ela-3-ri-1-001",
+      "standard_id": "3.RI.1",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Read: 'Honeybees are essential to our food supply. They pollinate about one-third of the food we eat, including apples, almonds, and blueberries. Without bees, many crops would fail.' According to the text, why are honeybees important? Refer to the text in your answer.",
+      "correct_answer": "They pollinate one-third of our food / crops would fail without them",
+      "rubric": {
+        "full_credit": "Answers with explicit text reference",
+        "partial_credit": "Correct answer but no text reference",
+        "no_credit": "Incorrect answer"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 90,
+      "passage": "Honeybees are essential to our food supply. They pollinate about one-third of the food we eat, including apples, almonds, and blueberries. Without bees, many crops would fail."
+    },
+    {
+      "id": "ela-3-ri-1-002",
+      "standard_id": "3.RI.1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Read: 'The Amazon rainforest produces about 20% of the world's oxygen. It is home to millions of species of plants and animals. Scientists call it the \"lungs of the Earth.\"' Why do scientists call the Amazon the 'lungs of the Earth'? Use evidence from the text.",
+      "options": ["Because it produces 20% of the world's oxygen", "Because it has many animals", "Because it is very large", "Because it is in South America"],
+      "correct_answer": "Because it produces 20% of the world's oxygen",
+      "rubric": {
+        "full_credit": "Uses text evidence for answer",
+        "no_credit": "Selects incorrect option"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 60,
+      "passage": "The Amazon rainforest produces about 20% of the world's oxygen. It is home to millions of species of plants and animals. Scientists call it the 'lungs of the Earth.'"
+    },
+    {
+      "id": "ela-3-ri-2-001",
+      "standard_id": "3.RI.2",
+      "dok_level": 3,
+      "question_type": "short_answer",
+      "question": "Read the passage about recycling. Determine the main idea. Then list two key details that support the main idea.",
+      "correct_answer": "Main idea: Recycling helps the environment. Details: reduces waste, saves resources, etc.",
+      "rubric": {
+        "full_credit": "Identifies main idea and 2 supporting details",
+        "partial_credit": "Main idea or 1 detail",
+        "no_credit": "Cannot identify"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 0,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 120,
+      "passage": "Recycling helps protect our environment in many ways. When we recycle paper, we save trees that would otherwise be cut down. Recycling plastic keeps it out of our oceans where it can harm sea life. Recycling aluminum cans uses much less energy than making new cans. Every small action adds up to make a big difference."
+    },
+    {
+      "id": "ela-3-ri-2-002",
+      "standard_id": "3.RI.2",
+      "dok_level": 3,
+      "question_type": "multiple_choice",
+      "question": "Read: 'Volcanoes form when hot melted rock, called magma, pushes up through the Earth's surface. When magma reaches the surface, it's called lava. Over time, layers of lava build up and create a mountain shape.' What is the main idea?",
+      "options": ["How volcanoes form and grow", "Why magma is hot", "Where volcanoes are found", "When volcanoes erupt"],
+      "correct_answer": "How volcanoes form and grow",
+      "rubric": {
+        "full_credit": "Identifies main idea",
+        "no_credit": "Selects detail instead of main idea"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 60,
+      "passage": "Volcanoes form when hot melted rock, called magma, pushes up through the Earth's surface. When magma reaches the surface, it's called lava. Over time, layers of lava build up and create a mountain shape."
+    },
+    {
+      "id": "ela-3-ri-3-001",
+      "standard_id": "3.RI.3",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Read: 'First, water evaporates from oceans and lakes. Then, it rises and cools, forming clouds. When clouds get heavy with water, precipitation falls as rain or snow. Finally, water flows back to the oceans, and the cycle begins again.' Describe the sequence. Use words like first, then, next, finally.",
+      "correct_answer": "Describes water cycle steps in order with sequence words",
+      "rubric": {
+        "full_credit": "Describes all steps with sequence language",
+        "partial_credit": "Some steps or missing sequence words",
+        "no_credit": "Cannot describe sequence"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 120,
+      "passage": "First, water evaporates from oceans and lakes. Then, it rises and cools, forming clouds. When clouds get heavy with water, precipitation falls as rain or snow. Finally, water flows back to the oceans, and the cycle begins again."
+    },
+    {
+      "id": "ela-3-ri-3-002",
+      "standard_id": "3.RI.3",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Read: 'Because the colonists were taxed unfairly, they protested. As a result of their protests, tensions grew. Eventually, this led to the American Revolution.' What caused the protests?",
+      "options": ["Unfair taxes", "The Revolution", "Growing tensions", "The colonists"],
+      "correct_answer": "Unfair taxes",
+      "rubric": {
+        "full_credit": "Identifies cause",
+        "no_credit": "Selects effect instead of cause"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 45,
+      "passage": "Because the colonists were taxed unfairly, they protested. As a result of their protests, tensions grew. Eventually, this led to the American Revolution."
+    },
+    {
+      "id": "ela-3-ri-8-001",
+      "standard_id": "3.RI.8",
+      "dok_level": 3,
+      "question_type": "short_answer",
+      "question": "Read: 'Paragraph 1: Dogs make excellent pets. Paragraph 2: For example, dogs are loyal companions who greet you when you come home.' How does paragraph 2 connect to paragraph 1?",
+      "correct_answer": "Paragraph 2 gives an example to support the claim in paragraph 1",
+      "rubric": {
+        "full_credit": "Explains example/evidence relationship",
+        "partial_credit": "Notes connection but vague",
+        "no_credit": "Cannot explain connection"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 1,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 90,
+      "passage": "Paragraph 1: Dogs make excellent pets. Paragraph 2: For example, dogs are loyal companions who greet you when you come home."
+    },
+    {
+      "id": "ela-3-ri-8-002",
+      "standard_id": "3.RI.8",
+      "dok_level": 3,
+      "question_type": "multiple_choice",
+      "question": "Read: 'First, gather your supplies. Second, read all the instructions. Third, follow each step carefully.' What type of connection do these sentences show?",
+      "options": ["A sequence of steps", "A comparison", "A cause and effect", "A problem and solution"],
+      "correct_answer": "A sequence of steps",
+      "rubric": {
+        "full_credit": "Identifies sequence relationship",
+        "no_credit": "Selects incorrect option"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 45,
+      "passage": "First, gather your supplies. Second, read all the instructions. Third, follow each step carefully."
+    },
+    {
+      "id": "ela-3-rf-3-001",
+      "standard_id": "3.RF.3",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Read the word 'unhappily'. What is the root word?",
+      "options": ["happy", "unhappy", "happily", "un"],
+      "correct_answer": "happy",
+      "rubric": {
+        "full_credit": "Identifies root word",
+        "no_credit": "Selects incorrect option"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 30,
+      "passage": null
+    },
+    {
+      "id": "ela-3-rf-3-002",
+      "standard_id": "3.RF.3",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "The word 'bicycle' has the prefix 'bi-'. What does 'bi-' mean? How does knowing this help you understand 'bicycle'?",
+      "correct_answer": "bi- means two; bicycle has two wheels",
+      "rubric": {
+        "full_credit": "Defines prefix and applies to word",
+        "partial_credit": "Defines prefix OR applies it",
+        "no_credit": "Cannot explain"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 60,
+      "passage": null
+    },
+    {
+      "id": "ela-3-rf-4-001",
+      "standard_id": "3.RF.4",
+      "dok_level": 2,
+      "question_type": "performance_task",
+      "question": "Read this passage aloud with accuracy, appropriate rate, and expression. Then answer a comprehension question about it.",
+      "correct_answer": null,
+      "rubric": {
+        "full_credit": "Reads accurately with expression and demonstrates comprehension",
+        "partial_credit": "Reads accurately but flat, or expressive but errors",
+        "no_credit": "Many errors or no comprehension"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 120,
+      "passage": "The sun was just coming up when Maya heard a strange sound in the backyard. She crept to the window and peered outside. There, among her mother's tomato plants, was a tiny fawn! Its spotted coat glistened with dew. Maya held her breath, afraid to scare it away."
+    },
+    {
+      "id": "ela-3-rf-4-002",
+      "standard_id": "3.RF.4",
+      "dok_level": 2,
+      "question_type": "performance_task",
+      "question": "Read this dialogue with expression, using different voices for different characters.",
+      "correct_answer": null,
+      "rubric": {
+        "full_credit": "Uses appropriate expression and different voices",
+        "partial_credit": "Some expression but limited differentiation",
+        "no_credit": "Flat reading"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 90,
+      "passage": "'Where are you going?' asked the rabbit nervously.\n'To the store,' said the fox smoothly. 'Would you like to come?'\n'No thank you!' squeaked the rabbit, hopping quickly away."
+    },
+    {
+      "id": "ela-3-w-1-001",
+      "standard_id": "3.W.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Write an opinion piece about whether students should have homework. Introduce your topic, state your opinion, provide at least two reasons with supporting details, use linking words, and write a concluding statement.",
+      "correct_answer": null,
+      "rubric": {
+        "full_credit": "Introduction, clear opinion, 2+ reasons with details, linking words, conclusion",
+        "partial_credit": "Missing 1-2 elements",
+        "no_credit": "No clear opinion or unsupported"
+      },
+      "manifold_fit": {
+        "coherence_delta": 5,
+        "entropy_delta": 2,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 600,
+      "passage": null
+    },
+    {
+      "id": "ela-3-w-1-002",
+      "standard_id": "3.W.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Write an opinion piece about the best book you've read. State your opinion, give reasons why others should read it, use linking words like 'because,' 'therefore,' and 'for example,' and write a strong conclusion.",
+      "correct_answer": null,
+      "rubric": {
+        "full_credit": "All elements present with strong reasoning",
+        "partial_credit": "Some elements missing or weak",
+        "no_credit": "Incomplete or off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 5,
+        "entropy_delta": 2,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 600,
+      "passage": null
+    },
+    {
+      "id": "ela-3-w-2-001",
+      "standard_id": "3.W.2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Write an informative paragraph about an animal habitat (ocean, desert, forest, or arctic). Introduce the topic, develop it with facts and definitions, group related information, and provide a concluding statement.",
+      "correct_answer": null,
+      "rubric": {
+        "full_credit": "Clear introduction, organized facts, definitions, strong conclusion",
+        "partial_credit": "Some organization or missing elements",
+        "no_credit": "Unclear or off-topic"
+      },
+      "manifold_fit": {
+        "coherence_delta": 5,
+        "entropy_delta": 1,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 600,
+      "passage": null
+    },
+    {
+      "id": "ela-3-w-2-002",
+      "standard_id": "3.W.2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Write an informative text explaining how something works (like the water cycle, how plants grow, or how a simple machine works). Include an introduction, facts, illustrations or diagrams if helpful, and a conclusion.",
+      "correct_answer": null,
+      "rubric": {
+        "full_credit": "Clear explanation with introduction, facts, and conclusion",
+        "partial_credit": "Explanation present but incomplete",
+        "no_credit": "Unclear or missing key elements"
+      },
+      "manifold_fit": {
+        "coherence_delta": 5,
+        "entropy_delta": 1,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 600,
+      "passage": null
+    },
+    {
+      "id": "ela-3-w-3-001",
+      "standard_id": "3.W.3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Write a narrative about a character who faces a problem and finds a solution. Use dialogue, descriptive details, and clear event sequence. Show how the character thinks and feels.",
+      "correct_answer": null,
+      "rubric": {
+        "full_credit": "Clear sequence, dialogue, description, character development, resolution",
+        "partial_credit": "Some elements present but weak",
+        "no_credit": "No clear narrative"
+      },
+      "manifold_fit": {
+        "coherence_delta": 6,
+        "entropy_delta": 2,
+        "generativity_delta": 6
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 720,
+      "passage": null
+    },
+    {
+      "id": "ela-3-w-3-002",
+      "standard_id": "3.W.3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Write a story about an adventure. Establish a situation, introduce characters, organize events in sequence, use temporal words, and provide a sense of closure.",
+      "correct_answer": null,
+      "rubric": {
+        "full_credit": "All narrative elements present with effective technique",
+        "partial_credit": "Narrative present but missing elements",
+        "no_credit": "No clear story"
+      },
+      "manifold_fit": {
+        "coherence_delta": 6,
+        "entropy_delta": 2,
+        "generativity_delta": 6
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 720,
+      "passage": null
+    },
+    {
+      "id": "ela-3-w-4-001",
+      "standard_id": "3.W.4",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Write a friendly letter to your teacher explaining your favorite subject. Make sure your writing is organized appropriately for a letter format.",
+      "correct_answer": null,
+      "rubric": {
+        "full_credit": "Proper letter format, clear development, appropriate organization",
+        "partial_credit": "Content present but format issues",
+        "no_credit": "Wrong format or unclear"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 1,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 420,
+      "passage": null
+    },
+    {
+      "id": "ela-3-w-4-002",
+      "standard_id": "3.W.4",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Write a book review that could be posted on a class website. Organize your writing to include an introduction to the book, your opinion with reasons, and a recommendation.",
+      "correct_answer": null,
+      "rubric": {
+        "full_credit": "Appropriate web format, clear organization, complete review",
+        "partial_credit": "Review present but organization issues",
+        "no_credit": "Unclear or missing key elements"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 1,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 480,
+      "passage": null
+    },
+    {
+      "id": "ela-3-sl-1-001",
+      "standard_id": "3.SL.1",
+      "dok_level": 2,
+      "question_type": "performance_task",
+      "question": "Participate in a group discussion about [topic]. Come prepared with ideas, follow rules for discussion, ask questions, and build on others' ideas.",
+      "correct_answer": null,
+      "rubric": {
+        "full_credit": "Prepared, follows rules, asks questions, builds on ideas",
+        "partial_credit": "Participates but limited engagement",
+        "no_credit": "Does not participate appropriately"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 1,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 360,
+      "passage": null
+    },
+    {
+      "id": "ela-3-sl-1-002",
+      "standard_id": "3.SL.1",
+      "dok_level": 2,
+      "question_type": "performance_task",
+      "question": "With your group, discuss the story you read. Explain your own ideas clearly and link your comments to others' remarks.",
+      "correct_answer": null,
+      "rubric": {
+        "full_credit": "Clear ideas, builds on others, appropriate linking",
+        "partial_credit": "Some participation but limited connections",
+        "no_credit": "Does not engage appropriately"
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 1,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 300,
+      "passage": null
+    },
+    {
+      "id": "ela-3-l-1-001",
+      "standard_id": "3.L.1",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Which sentence uses an abstract noun correctly?",
+      "options": ["Courage helped her speak up.", "The courage ran down the hall.", "She courage very well.", "Courage is blue and tall."],
+      "correct_answer": "Courage helped her speak up.",
+      "rubric": {
+        "full_credit": "Identifies correct usage",
+        "no_credit": "Selects incorrect option"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 30,
+      "passage": null
+    },
+    {
+      "id": "ela-3-l-1-002",
+      "standard_id": "3.L.1",
+      "dok_level": 1,
+      "question_type": "short_answer",
+      "question": "Make this sentence more descriptive by adding an adjective and adverb: 'The dog ran.'",
+      "correct_answer": "Example: The big dog ran quickly.",
+      "rubric": {
+        "full_credit": "Adds appropriate adjective and adverb",
+        "partial_credit": "Adds one correctly",
+        "no_credit": "No appropriate additions"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 3
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 45,
+      "passage": null
+    },
+    {
+      "id": "ela-3-l-2-001",
+      "standard_id": "3.L.2",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Which sentence has correct comma usage in a series?",
+      "options": ["I bought apples, oranges, and bananas.", "I bought apples oranges and bananas.", "I bought, apples, oranges and bananas.", "I bought apples oranges, and bananas."],
+      "correct_answer": "I bought apples, oranges, and bananas.",
+      "rubric": {
+        "full_credit": "Identifies correct comma usage",
+        "no_credit": "Selects incorrect option"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 0,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 30,
+      "passage": null
+    },
+    {
+      "id": "ela-3-l-2-002",
+      "standard_id": "3.L.2",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Add the correct possessive to show the ball belongs to the girl: 'The ___ ball is red.'",
+      "correct_answer": "girl's",
+      "rubric": {
+        "full_credit": "Correct possessive",
+        "no_credit": "Incorrect form"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.4,
+      "time_estimate_seconds": 20,
+      "passage": null
+    }
+  ]
+}

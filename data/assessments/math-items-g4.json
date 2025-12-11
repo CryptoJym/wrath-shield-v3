@@ -1,0 +1,1648 @@
+{
+  "grade": "4",
+  "subject": "Mathematics",
+  "version": "1.0.0",
+  "created_at": "2025-01-08",
+  "items": [
+    {
+      "id": "math-4-oa-a-1-001",
+      "standard_id": "4.OA.A.1",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Which statement correctly describes 28 = 4 × 7?",
+      "options": [
+        "28 is 4 more than 7",
+        "28 is 7 more than 4",
+        "28 is 4 times as many as 7",
+        "28 is 7 less than 4"
+      ],
+      "correct_answer": "28 is 4 times as many as 7",
+      "explanation": "Multiplicative comparison: 28 is 4 times as many as 7, meaning 4 groups of 7.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 30
+    },
+    {
+      "id": "math-4-oa-a-1-002",
+      "standard_id": "4.OA.A.1",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Write a comparison statement for 45 = 9 × 5 in two different ways (using 'times as many as').",
+      "correct_answer": "45 is 9 times as many as 5. 45 is 5 times as many as 9.",
+      "rubric": {
+        "full_credit": "Both correct comparison statements",
+        "partial_credit": "One correct comparison statement",
+        "no_credit": "Neither correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 60
+    },
+    {
+      "id": "math-4-oa-a-1-003",
+      "standard_id": "4.OA.A.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Marcus is 8 years old. His grandmother is 7 times as old as Marcus. His father is 5 times as old as Marcus. How old is each person? Write multiplication equations and explain the difference between additive and multiplicative comparison.",
+      "correct_answer": "Grandmother: 8 × 7 = 56 years. Father: 8 × 5 = 40 years. Additive comparison uses addition (e.g., 'more than'); multiplicative comparison uses multiplication (e.g., 'times as many').",
+      "rubric": {
+        "full_credit": "Correct ages for both, equations shown, and clear explanation of comparison types",
+        "partial_credit": "Correct ages with incomplete explanation",
+        "no_credit": "Incorrect ages or no understanding of comparison types"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 150
+    },
+    {
+      "id": "math-4-oa-a-2-001",
+      "standard_id": "4.OA.A.2",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Tom has 6 toy cars. His brother has 4 times as many. How many toy cars does his brother have?",
+      "options": ["10", "18", "24", "30"],
+      "correct_answer": "24",
+      "explanation": "4 times as many as 6 is 4 × 6 = 24 toy cars.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 30
+    },
+    {
+      "id": "math-4-oa-a-2-002",
+      "standard_id": "4.OA.A.2",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "A blue ribbon is 35 inches long. This is 5 times as long as a red ribbon. How long is the red ribbon? Write an equation with a symbol for the unknown.",
+      "correct_answer": "5 × r = 35 or r × 5 = 35; r = 7 inches",
+      "rubric": {
+        "full_credit": "Correct equation AND correct answer",
+        "partial_credit": "Correct equation OR correct answer (not both)",
+        "no_credit": "Neither correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 60
+    },
+    {
+      "id": "math-4-oa-a-2-003",
+      "standard_id": "4.OA.A.2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Create a word problem that uses multiplicative comparison and can be solved with division. Then solve your problem and explain why division works for this type of comparison.",
+      "correct_answer": "Valid word problem with multiplicative comparison (e.g., 'A has n times as many as B, A has total of x, find B'). Solution using division with explanation that division 'undoes' multiplication.",
+      "rubric": {
+        "full_credit": "Valid problem, correct solution, and clear explanation of division's role",
+        "partial_credit": "Valid problem with solution but incomplete explanation",
+        "no_credit": "Invalid problem or incorrect solution"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-4-oa-a-3-001",
+      "standard_id": "4.OA.A.3",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "There are 47 students going on a field trip. Each van holds 8 students. How many vans are needed?",
+      "options": ["5 vans", "6 vans", "7 vans", "8 vans"],
+      "correct_answer": "6 vans",
+      "explanation": "47 ÷ 8 = 5 remainder 7. The 7 remaining students need another van, so 6 vans are needed.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 60
+    },
+    {
+      "id": "math-4-oa-a-3-002",
+      "standard_id": "4.OA.A.3",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Mia has $50. She buys 3 books for $12 each. Then she divides the remaining money equally among her 2 sisters. How much does each sister get?",
+      "correct_answer": "$7 each. Work: 3 × 12 = 36; 50 - 36 = 14; 14 ÷ 2 = 7",
+      "rubric": {
+        "full_credit": "Correct answer with clear work showing all steps",
+        "partial_credit": "Correct process with calculation error OR correct answer without work",
+        "no_credit": "Incorrect process"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-4-oa-a-3-003",
+      "standard_id": "4.OA.A.3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A bakery has 125 cookies. They want to make gift bags with 8 cookies each and sell any remaining cookies individually for $1 each. How many gift bags can they make? How much will they earn from individual cookie sales? Show your work and explain how you interpreted the remainder.",
+      "correct_answer": "15 gift bags (125 ÷ 8 = 15 R5). Individual cookies: 5 × $1 = $5. Remainder represents leftover cookies sold individually.",
+      "rubric": {
+        "full_credit": "Correct calculations and clear explanation of remainder interpretation",
+        "partial_credit": "Correct division but incomplete interpretation OR calculation error with good explanation",
+        "no_credit": "Major errors in both"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 150
+    },
+    {
+      "id": "math-4-oa-b-4-001",
+      "standard_id": "4.OA.B.4",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Which pair shows all the factors of 12?",
+      "options": [
+        "1, 2, 3, 4",
+        "1, 2, 3, 4, 6, 12",
+        "2, 3, 4, 6",
+        "1, 12"
+      ],
+      "correct_answer": "1, 2, 3, 4, 6, 12",
+      "explanation": "The factors of 12 are all numbers that divide evenly into 12: 1, 2, 3, 4, 6, and 12.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 45
+    },
+    {
+      "id": "math-4-oa-b-4-002",
+      "standard_id": "4.OA.B.4",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Find all factor pairs for 36. Explain how you know you found them all.",
+      "correct_answer": "1 × 36, 2 × 18, 3 × 12, 4 × 9, 6 × 6. Explanation: Check all numbers from 1 up until factors repeat.",
+      "rubric": {
+        "full_credit": "All 5 factor pairs with valid explanation of systematic approach",
+        "partial_credit": "Most factor pairs OR all pairs without explanation",
+        "no_credit": "Major omissions without systematic approach"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-4-oa-b-4-003",
+      "standard_id": "4.OA.B.4",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "The number 24 has 8 factors and the number 25 has only 3 factors. Why does 25 have fewer factors? What type of number is 25? Find another number less than 30 with exactly 3 factors.",
+      "correct_answer": "25 = 5 × 5, a perfect square of a prime. Numbers with exactly 3 factors are squares of primes. Another: 4 (1, 2, 4) or 9 (1, 3, 9).",
+      "rubric": {
+        "full_credit": "Correct explanation of why 25 has few factors, identifies as perfect square of prime, finds another example",
+        "partial_credit": "Two of three elements correct",
+        "no_credit": "Does not understand relationship"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 150
+    },
+    {
+      "id": "math-4-oa-c-5-001",
+      "standard_id": "4.OA.C.5",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "What are the next three numbers in this pattern? 3, 7, 11, 15, ___",
+      "options": ["18, 21, 24", "19, 23, 27", "16, 17, 18", "20, 25, 30"],
+      "correct_answer": "19, 23, 27",
+      "explanation": "The rule is 'add 4.' 15 + 4 = 19, 19 + 4 = 23, 23 + 4 = 27.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 30
+    },
+    {
+      "id": "math-4-oa-c-5-002",
+      "standard_id": "4.OA.C.5",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Generate the first 6 terms of a pattern using the rule 'start at 2, multiply by 2.' What do you notice about whether the terms are odd or even?",
+      "correct_answer": "2, 4, 8, 16, 32, 64. All terms are even because multiplying any number by 2 always gives an even number.",
+      "rubric": {
+        "full_credit": "Correct sequence AND observation about even numbers with explanation",
+        "partial_credit": "Correct sequence without observation OR observation without sequence",
+        "no_credit": "Incorrect sequence"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-4-oa-c-5-003",
+      "standard_id": "4.OA.C.5",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Pattern A: Start at 0, add 3 (gives 0, 3, 6, 9...). Pattern B: Start at 0, add 6 (gives 0, 6, 12, 18...). Describe the relationship between corresponding terms in these patterns. Why does this relationship exist?",
+      "correct_answer": "Each term in Pattern B is 2 times the corresponding term in Pattern A. This is because the rule for B (add 6) is 2 times the rule for A (add 3).",
+      "rubric": {
+        "full_credit": "Correct relationship identified AND mathematical explanation of why",
+        "partial_credit": "Relationship identified without explanation OR explanation without clear relationship",
+        "no_credit": "Does not identify relationship"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 150
+    },
+    {
+      "id": "math-4-nbt-a-1-001",
+      "standard_id": "4.NBT.A.1",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "In the number 4,567, the 5 is in the hundreds place. What value does it represent?",
+      "options": ["5", "50", "500", "5,000"],
+      "correct_answer": "500",
+      "explanation": "A digit in the hundreds place represents that many hundreds. 5 in the hundreds place = 500.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 20
+    },
+    {
+      "id": "math-4-nbt-a-1-002",
+      "standard_id": "4.NBT.A.1",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "In the number 7,777, explain how the value of the 7 in the thousands place compares to the value of the 7 in the hundreds place.",
+      "correct_answer": "The 7 in thousands place = 7,000. The 7 in hundreds place = 700. 7,000 is 10 times greater than 700.",
+      "rubric": {
+        "full_credit": "Correct values and correct relationship (10 times)",
+        "partial_credit": "Correct values without relationship OR correct relationship without values",
+        "no_credit": "Neither correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 60
+    },
+    {
+      "id": "math-4-nbt-a-1-003",
+      "standard_id": "4.NBT.A.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A digit in one place represents 10 times what it represents in the place to its right. Use this rule to explain why 3,000 = 30 × 100. How would you write 3,000 using only multiplication by 10?",
+      "correct_answer": "3,000 = 3 × 1,000 = 3 × (10 × 10 × 10) = 3 × 10 × 10 × 10. Or: 30 × 100 because 30 = 3 × 10 and 100 = 10 × 10, so 30 × 100 = 3 × 10 × 10 × 10.",
+      "rubric": {
+        "full_credit": "Clear explanation using place value relationships and correct expression with 10s",
+        "partial_credit": "Partial explanation or correct expression without full reasoning",
+        "no_credit": "Does not demonstrate understanding"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 120
+    },
+    {
+      "id": "math-4-nbt-a-2-001",
+      "standard_id": "4.NBT.A.2",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Which symbol makes this statement true? 45,678 ___ 45,687",
+      "options": ["<", ">", "="],
+      "correct_answer": "<",
+      "explanation": "Comparing digit by digit from left: 4=4, 5=5, 6=6, 7<8, so 45,678 < 45,687.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 30
+    },
+    {
+      "id": "math-4-nbt-a-2-002",
+      "standard_id": "4.NBT.A.2",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Write 84,506 in expanded form and word form.",
+      "correct_answer": "Expanded: 80,000 + 4,000 + 500 + 6 (or 8×10,000 + 4×1,000 + 5×100 + 0×10 + 6×1). Word: eighty-four thousand, five hundred six.",
+      "rubric": {
+        "full_credit": "Both forms correct",
+        "partial_credit": "One form correct",
+        "no_credit": "Neither correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-4-nbt-a-2-003",
+      "standard_id": "4.NBT.A.2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Using the digits 5, 0, 3, 8, and 2 exactly once each, create the largest possible five-digit number and the smallest possible five-digit number. Explain your strategy for each.",
+      "correct_answer": "Largest: 85,320. Smallest: 20,358. Strategy: For largest, place biggest digits in leftmost positions. For smallest, place smallest non-zero digit first, then smallest remaining digits.",
+      "rubric": {
+        "full_credit": "Both numbers correct with clear explanation of strategy",
+        "partial_credit": "Both numbers correct without explanation OR one number with good strategy",
+        "no_credit": "Incorrect numbers"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 120
+    },
+    {
+      "id": "math-4-nbt-a-3-001",
+      "standard_id": "4.NBT.A.3",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "What is 7,849 rounded to the nearest thousand?",
+      "options": ["7,000", "7,800", "7,900", "8,000"],
+      "correct_answer": "8,000",
+      "explanation": "7,849 is between 7,000 and 8,000. Since 8 ≥ 5, round up to 8,000.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 25
+    },
+    {
+      "id": "math-4-nbt-a-3-002",
+      "standard_id": "4.NBT.A.3",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Round 56,234 to the nearest ten, hundred, and thousand. Show your reasoning for each.",
+      "correct_answer": "Nearest ten: 56,230 (4<5). Nearest hundred: 56,200 (3<5). Nearest thousand: 56,000 (2<5).",
+      "rubric": {
+        "full_credit": "All three correct with reasoning",
+        "partial_credit": "Two correct with reasoning OR all three without reasoning",
+        "no_credit": "Fewer than two correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-4-nbt-a-3-003",
+      "standard_id": "4.NBT.A.3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Find all whole numbers that round to 500 when rounded to the nearest hundred. Explain how you determined the range of numbers.",
+      "correct_answer": "450 to 549. Explanation: Numbers from 450-499 round up to 500; numbers from 500-549 round down to 500.",
+      "rubric": {
+        "full_credit": "Correct range with clear explanation of both endpoints",
+        "partial_credit": "Correct range without full explanation OR close to correct range with good reasoning",
+        "no_credit": "Incorrect range without understanding"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 120
+    },
+    {
+      "id": "math-4-nbt-b-4-001",
+      "standard_id": "4.NBT.B.4",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "What is 5,678 + 3,456?",
+      "options": ["8,134", "9,034", "9,134", "9,234"],
+      "correct_answer": "9,134",
+      "explanation": "Using the standard algorithm: 5,678 + 3,456 = 9,134.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 45
+    },
+    {
+      "id": "math-4-nbt-b-4-002",
+      "standard_id": "4.NBT.B.4",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Calculate 80,005 - 47,689 using the standard algorithm. Show your work.",
+      "correct_answer": "32,316. Work should show regrouping across zeros.",
+      "rubric": {
+        "full_credit": "Correct answer with clear work showing regrouping",
+        "partial_credit": "Correct answer without work OR work showing understanding with minor error",
+        "no_credit": "Incorrect answer without valid work"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-4-nbt-b-4-003",
+      "standard_id": "4.NBT.B.4",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Sam added 4,567 + 2,875 and got 6,432. Use estimation to check if his answer is reasonable. Then find and explain his error.",
+      "correct_answer": "Estimate: 4,600 + 2,900 = 7,500, so 6,432 is too low. Correct answer: 7,442. Error likely in regrouping in hundreds or thousands place.",
+      "rubric": {
+        "full_credit": "Correct estimate, correct answer, and identification of error",
+        "partial_credit": "Two of three elements correct",
+        "no_credit": "Fewer than two correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 150
+    },
+    {
+      "id": "math-4-nbt-b-5-001",
+      "standard_id": "4.NBT.B.5",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "What is 324 × 6?",
+      "options": ["1,844", "1,944", "2,044", "1,924"],
+      "correct_answer": "1,944",
+      "explanation": "324 × 6 = 1,944 using place value: (300 × 6) + (20 × 6) + (4 × 6) = 1,800 + 120 + 24 = 1,944.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 45
+    },
+    {
+      "id": "math-4-nbt-b-5-002",
+      "standard_id": "4.NBT.B.5",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Calculate 47 × 23 using an area model or partial products. Show your work.",
+      "correct_answer": "1,081. Area model: (40 × 20) + (40 × 3) + (7 × 20) + (7 × 3) = 800 + 120 + 140 + 21 = 1,081.",
+      "rubric": {
+        "full_credit": "Correct answer with clear area model or partial products shown",
+        "partial_credit": "Correct answer without method OR correct method with calculation error",
+        "no_credit": "Incorrect answer without valid method"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 120
+    },
+    {
+      "id": "math-4-nbt-b-5-003",
+      "standard_id": "4.NBT.B.5",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Explain why 25 × 36 = 900 using two different methods: (1) the distributive property and (2) an area model. Which method do you prefer and why?",
+      "correct_answer": "Distributive: 25 × 36 = 25 × (30 + 6) = 750 + 150 = 900 OR 25 × 36 = (20 + 5) × 36 = 720 + 180 = 900. Area model: Rectangle with dimensions showing partial products. Preference is personal with reasoning.",
+      "rubric": {
+        "full_credit": "Both methods correctly shown with justified preference",
+        "partial_credit": "Both methods correct without preference OR one method correct with reasoning",
+        "no_credit": "Neither method correctly shown"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-4-nbt-b-6-001",
+      "standard_id": "4.NBT.B.6",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "What is 848 ÷ 4?",
+      "options": ["202", "212", "222", "211"],
+      "correct_answer": "212",
+      "explanation": "848 ÷ 4 = 212. Check: 212 × 4 = 848.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 45
+    },
+    {
+      "id": "math-4-nbt-b-6-002",
+      "standard_id": "4.NBT.B.6",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Divide 5,475 ÷ 9. Show your work and verify using multiplication.",
+      "correct_answer": "608 R3 or 608 remainder 3. Verification: 608 × 9 = 5,472; 5,472 + 3 = 5,475.",
+      "rubric": {
+        "full_credit": "Correct quotient and remainder with verification",
+        "partial_credit": "Correct quotient without remainder OR with verification error",
+        "no_credit": "Incorrect quotient"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 120
+    },
+    {
+      "id": "math-4-nbt-b-6-003",
+      "standard_id": "4.NBT.B.6",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "The librarian has 2,567 books to arrange equally on 8 shelves. How many books go on each shelf? Will there be any books left over? Explain how you solved this problem and what the remainder means in this context.",
+      "correct_answer": "320 books per shelf with 7 left over. 2,567 ÷ 8 = 320 R7. The remainder means 7 books won't fit evenly and need a different solution.",
+      "rubric": {
+        "full_credit": "Correct calculation and interpretation of remainder in context",
+        "partial_credit": "Correct calculation without context interpretation OR minor error with good interpretation",
+        "no_credit": "Incorrect calculation and no contextual understanding"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 150
+    },
+    {
+      "id": "math-4-nf-a-1-001",
+      "standard_id": "4.NF.A.1",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Which fraction is equivalent to 3/4?",
+      "options": ["4/5", "6/8", "5/6", "3/8"],
+      "correct_answer": "6/8",
+      "explanation": "3/4 = 6/8 because 3×2 = 6 and 4×2 = 8. Multiplying numerator and denominator by the same number gives an equivalent fraction.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 30
+    },
+    {
+      "id": "math-4-nf-a-1-002",
+      "standard_id": "4.NF.A.1",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Write two fractions equivalent to 5/6 and explain how you created them using multiplication.",
+      "correct_answer": "10/12 (×2), 15/18 (×3), etc. Explanation: multiply both numerator and denominator by the same number.",
+      "rubric": {
+        "full_credit": "Two correct equivalent fractions with multiplication explanation",
+        "partial_credit": "Two correct fractions without explanation OR one correct with explanation",
+        "no_credit": "No correct equivalent fractions"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 60
+    },
+    {
+      "id": "math-4-nf-a-1-003",
+      "standard_id": "4.NF.A.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Draw a visual model to prove that 2/3 = 8/12. Then explain why multiplying both the numerator and denominator by the same number creates an equivalent fraction.",
+      "correct_answer": "Visual: Two identical wholes, one divided into 3 parts (2 shaded), one into 12 parts (8 shaded), showing same amount. Explanation: Multiplying by n/n = 1, which doesn't change the value.",
+      "rubric": {
+        "full_credit": "Correct visual model AND explanation using multiplicative identity",
+        "partial_credit": "Correct visual OR correct explanation (not both)",
+        "no_credit": "Neither demonstrates understanding"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 150
+    },
+    {
+      "id": "math-4-nf-a-2-001",
+      "standard_id": "4.NF.A.2",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Which is greater: 3/5 or 4/7?",
+      "options": ["3/5", "4/7", "They are equal", "Cannot be determined"],
+      "correct_answer": "3/5",
+      "explanation": "Using common denominator 35: 3/5 = 21/35, 4/7 = 20/35. 21/35 > 20/35, so 3/5 > 4/7.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 60
+    },
+    {
+      "id": "math-4-nf-a-2-002",
+      "standard_id": "4.NF.A.2",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Compare 5/8 and 7/12 using <, >, or =. Show your method.",
+      "correct_answer": "5/8 > 7/12. Method: Common denominator 24: 5/8 = 15/24, 7/12 = 14/24. 15/24 > 14/24.",
+      "rubric": {
+        "full_credit": "Correct comparison with valid method shown",
+        "partial_credit": "Correct comparison without method OR correct method with error",
+        "no_credit": "Incorrect comparison"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-4-nf-a-2-003",
+      "standard_id": "4.NF.A.2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Order these fractions from least to greatest: 2/3, 5/8, 7/12. Explain two different strategies you could use to compare fractions with different denominators.",
+      "correct_answer": "Order: 7/12 < 5/8 < 2/3 (convert to 24ths: 14/24 < 15/24 < 16/24). Strategies: (1) Find common denominator, (2) Compare to benchmark fraction like 1/2, (3) Cross multiply.",
+      "rubric": {
+        "full_credit": "Correct order with two valid comparison strategies explained",
+        "partial_credit": "Correct order with one strategy OR two strategies with order error",
+        "no_credit": "Incorrect order without valid strategies"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 150
+    },
+    {
+      "id": "math-4-nf-b-3-001",
+      "standard_id": "4.NF.B.3",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Which equation shows 5/4 as a sum of unit fractions?",
+      "options": [
+        "1/4 + 1/4 + 1/4 + 1/4 + 1/4",
+        "5/4 + 1/4",
+        "1/5 + 1/5 + 1/5 + 1/5",
+        "4/4 + 4/4 + 4/4 + 4/4 + 4/4"
+      ],
+      "correct_answer": "1/4 + 1/4 + 1/4 + 1/4 + 1/4",
+      "explanation": "5/4 = 5 × (1/4) = 1/4 + 1/4 + 1/4 + 1/4 + 1/4.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 30
+    },
+    {
+      "id": "math-4-nf-b-3-002",
+      "standard_id": "4.NF.B.3",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Add: 3/8 + 5/8 + 7/8. Write your answer as a mixed number.",
+      "correct_answer": "15/8 = 1 7/8",
+      "rubric": {
+        "full_credit": "Correct improper fraction AND correct mixed number",
+        "partial_credit": "Correct improper fraction only OR correct mixed number only",
+        "no_credit": "Both incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 60
+    },
+    {
+      "id": "math-4-nf-b-3-003",
+      "standard_id": "4.NF.B.3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A recipe calls for 2 1/3 cups of flour. Write this as a sum in two different ways: (1) as a sum of unit fractions, and (2) as a sum of a whole number and a fraction. Then convert 2 1/3 to an improper fraction and explain your method.",
+      "correct_answer": "(1) 1/3 + 1/3 + 1/3 + 1/3 + 1/3 + 1/3 + 1/3 = 7 × (1/3). (2) 2 + 1/3. Improper: 7/3 because 2 = 6/3, and 6/3 + 1/3 = 7/3.",
+      "rubric": {
+        "full_credit": "All three representations correct with conversion explanation",
+        "partial_credit": "Two of three correct with reasoning",
+        "no_credit": "Fewer than two correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 150
+    },
+    {
+      "id": "math-4-nf-b-4-001",
+      "standard_id": "4.NF.B.4",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "What is 3 × 2/5?",
+      "options": ["5/5", "6/5", "6/15", "2/15"],
+      "correct_answer": "6/5",
+      "explanation": "3 × 2/5 = (3 × 2)/5 = 6/5.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 30
+    },
+    {
+      "id": "math-4-nf-b-4-002",
+      "standard_id": "4.NF.B.4",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Calculate 4 × 3/8. Write your answer as a mixed number. Draw a model to represent the multiplication.",
+      "correct_answer": "4 × 3/8 = 12/8 = 1 4/8 = 1 1/2. Model should show 4 groups of 3/8 or repeated addition.",
+      "rubric": {
+        "full_credit": "Correct answer in simplified form with supporting model",
+        "partial_credit": "Correct answer without model OR model with unsimplified answer",
+        "no_credit": "Incorrect answer"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-4-nf-b-4-003",
+      "standard_id": "4.NF.B.4",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A runner runs 3/4 mile each day for 5 days. Write an equation to find the total distance. Then explain why multiplying a whole number by a fraction can give an answer greater than the whole number.",
+      "correct_answer": "5 × 3/4 = 15/4 = 3 3/4 miles. Explanation: When the fraction is greater than 1/n where n is the denominator, adding it n times exceeds 1, so multiple copies exceed the whole number.",
+      "rubric": {
+        "full_credit": "Correct calculation and explanation of why result can exceed multiplier",
+        "partial_credit": "Correct calculation without explanation OR explanation without calculation",
+        "no_credit": "Neither correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 150
+    },
+    {
+      "id": "math-4-nf-c-5-001",
+      "standard_id": "4.NF.C.5",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Which fraction is equivalent to 3/10?",
+      "options": ["3/100", "30/100", "33/100", "300/100"],
+      "correct_answer": "30/100",
+      "explanation": "3/10 = 30/100 because 3 × 10 = 30 and 10 × 10 = 100.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 25
+    },
+    {
+      "id": "math-4-nf-c-5-002",
+      "standard_id": "4.NF.C.5",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Add: 4/10 + 25/100. Express your answer as a fraction with denominator 100.",
+      "correct_answer": "40/100 + 25/100 = 65/100",
+      "rubric": {
+        "full_credit": "Correct conversion and correct sum",
+        "partial_credit": "Correct conversion without final answer OR correct approach with calculation error",
+        "no_credit": "Incorrect conversion"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 60
+    },
+    {
+      "id": "math-4-nf-c-5-003",
+      "standard_id": "4.NF.C.5",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Maya says 7/10 + 3/100 = 10/110 because she added both numerators and both denominators. Explain her error and find the correct answer.",
+      "correct_answer": "Error: Can't add fractions by adding numerators and denominators separately. Must convert to common denominator. Correct: 7/10 = 70/100, so 70/100 + 3/100 = 73/100.",
+      "rubric": {
+        "full_credit": "Clear explanation of error AND correct answer with work",
+        "partial_credit": "Correct answer without clear error explanation OR good error explanation without correct answer",
+        "no_credit": "Neither element correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 120
+    },
+    {
+      "id": "math-4-nf-c-6-001",
+      "standard_id": "4.NF.C.6",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Which decimal is equivalent to 7/10?",
+      "options": ["0.07", "0.7", "7.0", "0.710"],
+      "correct_answer": "0.7",
+      "explanation": "7/10 = 7 tenths = 0.7 in decimal notation.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 20
+    },
+    {
+      "id": "math-4-nf-c-6-002",
+      "standard_id": "4.NF.C.6",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Write 45/100 as a decimal. Then write 0.8 as a fraction with denominator 10 and as a fraction with denominator 100.",
+      "correct_answer": "45/100 = 0.45. 0.8 = 8/10 = 80/100.",
+      "rubric": {
+        "full_credit": "All three conversions correct",
+        "partial_credit": "Two of three correct",
+        "no_credit": "Fewer than two correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 60
+    },
+    {
+      "id": "math-4-nf-c-6-003",
+      "standard_id": "4.NF.C.6",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Explain why 0.5 = 0.50 = 0.500 using your understanding of fractions with denominators 10, 100, and 1000. Use equivalent fractions in your explanation.",
+      "correct_answer": "0.5 = 5/10, 0.50 = 50/100, 0.500 = 500/1000. These are equivalent: 5/10 = 50/100 = 500/1000 because multiplying numerator and denominator by 10 doesn't change value.",
+      "rubric": {
+        "full_credit": "Clear connection between decimals and equivalent fractions with explanation of equivalence",
+        "partial_credit": "Correct fractions without explanation OR explanation without all connections",
+        "no_credit": "Does not demonstrate understanding"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 150
+    },
+    {
+      "id": "math-4-nf-c-7-001",
+      "standard_id": "4.NF.C.7",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Which symbol makes this true? 0.45 ___ 0.54",
+      "options": ["<", ">", "="],
+      "correct_answer": "<",
+      "explanation": "Comparing tenths: 4 tenths < 5 tenths, so 0.45 < 0.54.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 25
+    },
+    {
+      "id": "math-4-nf-c-7-002",
+      "standard_id": "4.NF.C.7",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Order from least to greatest: 0.6, 0.06, 0.66. Explain your reasoning.",
+      "correct_answer": "0.06 < 0.6 < 0.66. Reasoning: 0.06 = 6 hundredths, 0.6 = 60 hundredths, 0.66 = 66 hundredths.",
+      "rubric": {
+        "full_credit": "Correct order with valid reasoning using place value",
+        "partial_credit": "Correct order without reasoning OR reasoning without correct order",
+        "no_credit": "Incorrect order without understanding"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 60
+    },
+    {
+      "id": "math-4-nf-c-7-003",
+      "standard_id": "4.NF.C.7",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Jake says 0.3 > 0.25 because 3 > 25. Is Jake correct? Explain why or why not, and describe how to correctly compare these decimals.",
+      "correct_answer": "Jake is incorrect in his reasoning but 0.3 > 0.25 is correct. 0.3 = 0.30 = 30 hundredths, 0.25 = 25 hundredths. 30 > 25, so 0.30 > 0.25. Must compare using same place value.",
+      "rubric": {
+        "full_credit": "Identifies flawed reasoning, confirms correct answer, and explains proper comparison method",
+        "partial_credit": "Two of three elements correct",
+        "no_credit": "Does not understand place value comparison"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 120
+    },
+    {
+      "id": "math-4-md-a-1-001",
+      "standard_id": "4.MD.A.1",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "How many centimeters are in 3 meters?",
+      "options": ["30 cm", "300 cm", "3000 cm", "0.03 cm"],
+      "correct_answer": "300 cm",
+      "explanation": "1 meter = 100 centimeters, so 3 meters = 3 × 100 = 300 centimeters.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 25
+    },
+    {
+      "id": "math-4-md-a-1-002",
+      "standard_id": "4.MD.A.1",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Convert: 5 kg = ___ g and 3500 g = ___ kg ___ g. Explain the relationship between kilograms and grams.",
+      "correct_answer": "5 kg = 5000 g. 3500 g = 3 kg 500 g. 1 kg = 1000 g.",
+      "rubric": {
+        "full_credit": "Both conversions correct with relationship explained",
+        "partial_credit": "Both conversions correct without explanation OR one conversion with explanation",
+        "no_credit": "Neither conversion correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-4-md-a-1-003",
+      "standard_id": "4.MD.A.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A table shows that 1 pound ≈ 16 ounces and 1 kilogram ≈ 2.2 pounds. Which is heavier: 5 pounds or 2 kilograms? Show your work and explain your reasoning.",
+      "correct_answer": "2 kg ≈ 2 × 2.2 = 4.4 lb. 5 lb > 4.4 lb, so 5 pounds is heavier. Alternative: Convert to oz or use different method.",
+      "rubric": {
+        "full_credit": "Correct comparison with valid conversions and clear reasoning",
+        "partial_credit": "Correct answer with incomplete work OR clear reasoning with calculation error",
+        "no_credit": "Incorrect comparison without understanding"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 150
+    },
+    {
+      "id": "math-4-md-a-2-001",
+      "standard_id": "4.MD.A.2",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Maria bought 3 items for $4.75 each. If she paid with a $20 bill, how much change did she receive?",
+      "options": ["$5.25", "$5.75", "$4.75", "$15.25"],
+      "correct_answer": "$5.75",
+      "explanation": "3 × $4.75 = $14.25. Change = $20 - $14.25 = $5.75.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 60
+    },
+    {
+      "id": "math-4-md-a-2-002",
+      "standard_id": "4.MD.A.2",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "A train leaves at 9:45 AM and arrives at 2:20 PM. How long is the trip?",
+      "correct_answer": "4 hours and 35 minutes",
+      "rubric": {
+        "full_credit": "Correct answer in hours and minutes",
+        "partial_credit": "Correct in only one unit OR minor calculation error",
+        "no_credit": "Incorrect time calculation"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 60
+    },
+    {
+      "id": "math-4-md-a-2-003",
+      "standard_id": "4.MD.A.2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A recipe calls for 2 1/4 cups of flour. If you want to make 3 batches, how many cups do you need? If flour is sold in 5-pound bags and 1 cup of flour weighs about 4.5 ounces, will one bag be enough? Show your work.",
+      "correct_answer": "2 1/4 × 3 = 6 3/4 cups needed. 6.75 cups × 4.5 oz ≈ 30.4 oz ≈ 1.9 lb < 5 lb. Yes, one bag is enough.",
+      "rubric": {
+        "full_credit": "Correct calculation of cups needed AND correct analysis of whether bag is enough with work shown",
+        "partial_credit": "Correct cups calculation without bag analysis OR both with minor errors",
+        "no_credit": "Incorrect calculation of cups needed"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-4-md-a-3-001",
+      "standard_id": "4.MD.A.3",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "What is the area of a rectangle with length 12 cm and width 5 cm?",
+      "options": ["17 cm²", "34 cm²", "60 cm²", "120 cm²"],
+      "correct_answer": "60 cm²",
+      "explanation": "Area = length × width = 12 × 5 = 60 cm².",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 25
+    },
+    {
+      "id": "math-4-md-a-3-002",
+      "standard_id": "4.MD.A.3",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "A rectangle has an area of 48 square meters and a length of 8 meters. What is the perimeter?",
+      "correct_answer": "Width = 48 ÷ 8 = 6 m. Perimeter = 2(8 + 6) = 28 m.",
+      "rubric": {
+        "full_credit": "Correct perimeter with work showing width calculation",
+        "partial_credit": "Correct width without perimeter OR perimeter without work",
+        "no_credit": "Incorrect width"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-4-md-a-3-003",
+      "standard_id": "4.MD.A.3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A farmer has 100 meters of fencing to make a rectangular garden. She wants the garden to have the largest possible area. What dimensions should she use? Explain your reasoning.",
+      "correct_answer": "25 m × 25 m = 625 m². A square maximizes area for a given perimeter. Testing: 10×40=400, 20×30=600, 24×26=624, 25×25=625.",
+      "rubric": {
+        "full_credit": "Correct dimensions with explanation of why square maximizes area (or systematic testing)",
+        "partial_credit": "Correct dimensions without full reasoning OR good reasoning with minor error",
+        "no_credit": "Incorrect dimensions without understanding"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-4-md-b-4-001",
+      "standard_id": "4.MD.B.4",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "On a line plot, what does each X represent?",
+      "options": [
+        "The total of all measurements",
+        "One data point or measurement",
+        "The difference between measurements",
+        "The average measurement"
+      ],
+      "correct_answer": "One data point or measurement",
+      "explanation": "Each X on a line plot represents one piece of data or one measurement.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.25,
+      "time_estimate_seconds": 20
+    },
+    {
+      "id": "math-4-md-b-4-002",
+      "standard_id": "4.MD.B.4",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Create a line plot for these pencil lengths (in inches): 5 1/4, 5 1/2, 5 1/4, 6, 5 1/2, 5 3/4, 5 1/2, 5 1/4. What is the most common length?",
+      "correct_answer": "Line plot with marks at 5 1/4 (3), 5 1/2 (3), 5 3/4 (1), 6 (1). Most common: 5 1/4 and 5 1/2 (both 3).",
+      "rubric": {
+        "full_credit": "Correct line plot with fractional scale and correct mode(s) identified",
+        "partial_credit": "Correct line plot OR correct mode without proper plot",
+        "no_credit": "Incorrect plot and mode"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 120
+    },
+    {
+      "id": "math-4-md-b-4-003",
+      "standard_id": "4.MD.B.4",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A line plot shows ribbon lengths: 2 ribbons at 1/4 yard, 3 ribbons at 1/2 yard, 4 ribbons at 3/4 yard, and 1 ribbon at 1 yard. If all ribbons are laid end to end, what is the total length? Show your work using fraction addition.",
+      "correct_answer": "2(1/4) + 3(1/2) + 4(3/4) + 1(1) = 1/2 + 3/2 + 3 + 1 = 1/2 + 1 1/2 + 4 = 6 yards",
+      "rubric": {
+        "full_credit": "Correct total with clear fraction calculation work",
+        "partial_credit": "Correct approach with calculation error",
+        "no_credit": "Incorrect approach"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 150
+    },
+    {
+      "id": "math-4-md-c-5-001",
+      "standard_id": "4.MD.C.5",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "An angle is formed when:",
+      "options": [
+        "Two lines are parallel",
+        "Two rays share a common endpoint",
+        "A line is curved",
+        "Two circles overlap"
+      ],
+      "correct_answer": "Two rays share a common endpoint",
+      "explanation": "An angle is formed by two rays (sides) that share a common endpoint (vertex).",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 25
+    },
+    {
+      "id": "math-4-md-c-5-002",
+      "standard_id": "4.MD.C.5",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "If a full circle is 360°, what fraction of a circle is a 90° angle? A 180° angle? Explain using the concept of 1-degree angles.",
+      "correct_answer": "90° = 90/360 = 1/4 circle. 180° = 180/360 = 1/2 circle. A 1-degree angle is 1/360 of a circle.",
+      "rubric": {
+        "full_credit": "Both fractions correct with explanation of degree concept",
+        "partial_credit": "Both fractions correct without explanation OR one fraction with explanation",
+        "no_credit": "Neither fraction correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-4-md-c-5-003",
+      "standard_id": "4.MD.C.5",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Explain why a straight angle measures 180° using the concept that an angle is measured by the number of 1° angles it contains. How does this relate to a half-turn?",
+      "correct_answer": "A straight angle is half of a full rotation (360°), so it contains 180 one-degree angles. A half-turn means rotating halfway around, which is 180°.",
+      "rubric": {
+        "full_credit": "Clear explanation connecting 180° to half of 360° and to half-turn rotation",
+        "partial_credit": "Partial explanation of one concept",
+        "no_credit": "Does not demonstrate understanding"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 120
+    },
+    {
+      "id": "math-4-md-c-6-001",
+      "standard_id": "4.MD.C.6",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "What tool is used to measure angles?",
+      "options": ["Ruler", "Protractor", "Compass", "Scale"],
+      "correct_answer": "Protractor",
+      "explanation": "A protractor is a tool specifically designed to measure angles in degrees.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.2,
+      "time_estimate_seconds": 15
+    },
+    {
+      "id": "math-4-md-c-6-002",
+      "standard_id": "4.MD.C.6",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "An angle measures 65°. Is it acute, right, or obtuse? Sketch an angle that measures approximately 120° and classify it.",
+      "correct_answer": "65° is acute (less than 90°). 120° sketch should show an obtuse angle (between 90° and 180°).",
+      "rubric": {
+        "full_credit": "Correct classification of 65° AND reasonable sketch of 120° with classification",
+        "partial_credit": "One correct classification and sketch OR both classifications without sketch",
+        "no_credit": "Incorrect classifications"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-4-md-c-6-003",
+      "standard_id": "4.MD.C.6",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A protractor has two scales (inner and outer). Explain why it has two scales and how you decide which scale to use when measuring an angle. Give an example.",
+      "correct_answer": "Two scales allow measuring angles opening either direction. Determine which scale by identifying which shows 0° aligned with one ray. Example: If ray aligns with 0° on outer scale, use outer scale to read the other ray.",
+      "rubric": {
+        "full_credit": "Clear explanation of two scales, method for choosing, and valid example",
+        "partial_credit": "Two of three elements correct",
+        "no_credit": "Does not understand protractor use"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 120
+    },
+    {
+      "id": "math-4-md-c-7-001",
+      "standard_id": "4.MD.C.7",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "An angle is split into two parts measuring 35° and 45°. What is the measure of the whole angle?",
+      "options": ["10°", "40°", "80°", "100°"],
+      "correct_answer": "80°",
+      "explanation": "Angles are additive: 35° + 45° = 80°.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 25
+    },
+    {
+      "id": "math-4-md-c-7-002",
+      "standard_id": "4.MD.C.7",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "A right angle is divided into two smaller angles. One angle measures 25°. What is the measure of the other angle? Write an equation to represent this situation.",
+      "correct_answer": "25° + x = 90°, so x = 65°.",
+      "rubric": {
+        "full_credit": "Correct equation AND correct answer",
+        "partial_credit": "Correct answer without equation OR correct equation without answer",
+        "no_credit": "Neither correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 60
+    },
+    {
+      "id": "math-4-md-c-7-003",
+      "standard_id": "4.MD.C.7",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Three angles meet at a point on a straight line. One angle measures 52° and another measures 73°. What is the measure of the third angle? Explain your reasoning using what you know about straight angles.",
+      "correct_answer": "Third angle = 180° - 52° - 73° = 55°. Reasoning: Angles on a straight line sum to 180° (straight angle).",
+      "rubric": {
+        "full_credit": "Correct answer with clear explanation referencing straight angle = 180°",
+        "partial_credit": "Correct answer without full explanation OR explanation with calculation error",
+        "no_credit": "Incorrect approach"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 120
+    },
+    {
+      "id": "math-4-g-a-1-001",
+      "standard_id": "4.G.A.1",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Which best describes perpendicular lines?",
+      "options": [
+        "Lines that never intersect",
+        "Lines that intersect at a 90° angle",
+        "Lines that curve",
+        "Lines that intersect at any angle"
+      ],
+      "correct_answer": "Lines that intersect at a 90° angle",
+      "explanation": "Perpendicular lines intersect to form right angles (90°).",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.3,
+      "time_estimate_seconds": 25
+    },
+    {
+      "id": "math-4-g-a-1-002",
+      "standard_id": "4.G.A.1",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Draw a pair of parallel lines and a pair of perpendicular lines. Label each and explain how you can tell the difference.",
+      "correct_answer": "Correct drawings with labels. Parallel lines never meet (same direction); perpendicular lines meet at 90°.",
+      "rubric": {
+        "full_credit": "Both drawings correct with explanation",
+        "partial_credit": "Both drawings correct without explanation OR one drawing with explanation",
+        "no_credit": "Neither drawing correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.45,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-4-g-a-1-003",
+      "standard_id": "4.G.A.1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Look at the letter H. Identify all the parallel line segments and all the perpendicular line segments. Then design your own letter or shape that contains exactly 2 pairs of parallel lines and 4 right angles.",
+      "correct_answer": "H: Two vertical lines are parallel; horizontal line is perpendicular to both verticals. Student design should match criteria.",
+      "rubric": {
+        "full_credit": "Correct analysis of H AND valid original design meeting criteria",
+        "partial_credit": "Correct analysis OR valid design (not both)",
+        "no_credit": "Neither correct"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-4-g-a-2-001",
+      "standard_id": "4.G.A.2",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "Which shape has exactly one pair of parallel sides?",
+      "options": ["Square", "Trapezoid", "Rectangle", "Rhombus"],
+      "correct_answer": "Trapezoid",
+      "explanation": "A trapezoid has exactly one pair of parallel sides. Squares, rectangles, and rhombuses have two pairs.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 30
+    },
+    {
+      "id": "math-4-g-a-2-002",
+      "standard_id": "4.G.A.2",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Compare a square and a rectangle. List their similarities (at least 3) and differences (at least 2) based on sides and angles.",
+      "correct_answer": "Similarities: Both have 4 sides, 4 right angles, 2 pairs of parallel sides, opposite sides equal. Differences: Square has all sides equal; rectangle may have 2 different side lengths.",
+      "rubric": {
+        "full_credit": "At least 3 valid similarities and 2 valid differences",
+        "partial_credit": "2 similarities and 1 difference OR 3 similarities without differences",
+        "no_credit": "Fewer than 2 correct attributes"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-4-g-a-2-003",
+      "standard_id": "4.G.A.2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Create a classification system for quadrilaterals based on parallel sides. Include: parallelogram, rectangle, square, rhombus, trapezoid, and kite. Show which shapes belong in which categories and explain overlaps.",
+      "correct_answer": "Hierarchy showing: Quadrilaterals → Trapezoids (1 pair parallel) and Parallelograms (2 pairs parallel). Parallelograms include rectangles (right angles), rhombuses (equal sides), squares (both). Explanation of how square is both rectangle and rhombus.",
+      "rubric": {
+        "full_credit": "Correct classification with clear hierarchy and explanation of overlaps",
+        "partial_credit": "Mostly correct classification with some errors or missing explanations",
+        "no_credit": "Major classification errors"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.75,
+      "time_estimate_seconds": 180
+    },
+    {
+      "id": "math-4-g-a-3-001",
+      "standard_id": "4.G.A.3",
+      "dok_level": 1,
+      "question_type": "multiple_choice",
+      "question": "How many lines of symmetry does a square have?",
+      "options": ["1", "2", "4", "8"],
+      "correct_answer": "4",
+      "explanation": "A square has 4 lines of symmetry: 2 through opposite corners (diagonals) and 2 through midpoints of opposite sides.",
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": -1,
+        "generativity_delta": 1
+      },
+      "difficulty": 0.35,
+      "time_estimate_seconds": 25
+    },
+    {
+      "id": "math-4-g-a-3-002",
+      "standard_id": "4.G.A.3",
+      "dok_level": 2,
+      "question_type": "short_answer",
+      "question": "Draw all lines of symmetry for an equilateral triangle and a rectangle (non-square). How many does each have?",
+      "correct_answer": "Equilateral triangle: 3 lines (from each vertex to midpoint of opposite side). Rectangle: 2 lines (through midpoints of opposite sides, not diagonals).",
+      "rubric": {
+        "full_credit": "Correct drawings and counts for both shapes",
+        "partial_credit": "One shape completely correct OR both counts correct without drawings",
+        "no_credit": "Both incorrect"
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 1,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 90
+    },
+    {
+      "id": "math-4-g-a-3-003",
+      "standard_id": "4.G.A.3",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Design a figure that has exactly 2 lines of symmetry. Then design a different figure that has no lines of symmetry. For each, explain how you verified the number of lines of symmetry.",
+      "correct_answer": "2 lines: Rectangle, rhombus, or original design with verification (fold test). 0 lines: Scalene triangle, parallelogram (non-rectangle), or original design with explanation that no fold creates matching halves.",
+      "rubric": {
+        "full_credit": "Both figures correct with valid verification methods explained",
+        "partial_credit": "Both figures correct without explanation OR one figure with good explanation",
+        "no_credit": "Neither figure meets criteria"
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 3,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 150
+    }
+  ],
+  "metadata": {
+    "total_items": 78,
+    "standards_covered": 26,
+    "dok_distribution": {
+      "dok_1": 26,
+      "dok_2": 26,
+      "dok_3": 26
+    },
+    "question_type_distribution": {
+      "multiple_choice": 28,
+      "short_answer": 26,
+      "constructed_response": 24
+    }
+  }
+}

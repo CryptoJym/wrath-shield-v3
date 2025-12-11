@@ -1,0 +1,487 @@
+{
+  "grade": "12",
+  "course": "Earth Science",
+  "framework": "NGSS",
+  "items": [
+    {
+      "id": "sci-12-ess1-1-001",
+      "standard_id": "HS-ESS1-1",
+      "standard_description": "Develop a model based on evidence to illustrate the life span of the sun and the role of nuclear fusion in the sun's core to release energy that eventually reaches Earth in the form of radiation.",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "The Sun has been shining for approximately 4.6 billion years and will continue for about 5 billion more.\n\n(a) Describe the nuclear fusion reaction occurring in the Sun's core, including the reactants and products.\n(b) Explain why the Sun's core must be so hot (15 million K) for fusion to occur.\n(c) Calculate the mass converted to energy each second if the Sun's luminosity is 3.8 × 10²⁶ W (use E = mc²).\n(d) Create a timeline model showing the Sun's evolution from formation to white dwarf.\n(e) Explain what will happen to Earth when the Sun becomes a red giant.",
+      "rubric": {
+        "4": "Complete explanation: (a) 4¹H → ⁴He + 2e⁺ + 2ν + energy (or p-p chain details); (b) Overcome electrostatic repulsion between positive protons requires high kinetic energy/temperature; (c) m = E/c² = 3.8×10²⁶/(3×10⁸)² = 4.2×10⁹ kg/s; (d) Correct timeline: nebula → protostar → main sequence (~10 billion years) → red giant → planetary nebula → white dwarf; (e) Red giant will expand past Earth's current orbit, Earth either engulfed or pushed outward.",
+        "3": "Correct fusion explanation and calculation. Timeline may lack detail on timescales.",
+        "2": "Understands fusion basics but calculation errors or incomplete evolution model.",
+        "1": "Basic understanding of solar energy without nuclear physics.",
+        "0": "Does not understand stellar fusion."
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.78,
+      "time_estimate_seconds": 540,
+      "science_practice": "Developing and Using Models",
+      "crosscutting_concept": "Energy and Matter"
+    },
+    {
+      "id": "sci-12-ess1-1-002",
+      "standard_id": "HS-ESS1-1",
+      "standard_description": "Develop a model based on evidence to illustrate the life span of the sun and the role of nuclear fusion in the sun's core to release energy that eventually reaches Earth in the form of radiation.",
+      "dok_level": 3,
+      "question_type": "data_analysis",
+      "question": "The table shows data for stars of different masses:\n\n| Star Mass (M☉) | Luminosity (L☉) | Main Sequence Lifetime (years) |\n|----------------|-----------------|-------------------------------|\n| 0.5 | 0.03 | 80 billion |\n| 1.0 | 1.0 | 10 billion |\n| 2.0 | 16 | 1 billion |\n| 10 | 10,000 | 20 million |\n| 25 | 80,000 | 5 million |\n\n(a) Graph the relationship between mass and luminosity.\n(b) Graph the relationship between mass and lifetime.\n(c) Explain why more massive stars have shorter lifetimes despite having more fuel.\n(d) Predict the lifetime of a star with mass 5 M☉.\n(e) Explain why low-mass stars will outlive the current age of the universe.",
+      "rubric": {
+        "4": "Correct analysis: (a) Shows L ∝ M^3.5 approximately (power law); (b) Shows inverse relationship, lifetime ∝ M/L ∝ M^(-2.5); (c) More massive stars burn fuel much faster (higher core temperature, faster fusion); luminosity increases faster than mass; (d) Interpolation: ~100-200 million years; (e) 0.5 M☉ star lifetime (80 billion years) >> age of universe (13.8 billion years), none have died yet.",
+        "3": "Correct graphs and relationships. Prediction reasonable. May not fully explain mass-luminosity physics.",
+        "2": "Creates graphs but analysis of relationships incomplete.",
+        "1": "Basic graphs without interpretation.",
+        "0": "Cannot analyze stellar evolution data."
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.77,
+      "time_estimate_seconds": 540,
+      "science_practice": "Analyzing and Interpreting Data",
+      "crosscutting_concept": "Scale, Proportion, and Quantity"
+    },
+    {
+      "id": "sci-12-ess1-2-001",
+      "standard_id": "HS-ESS1-2",
+      "standard_description": "Construct an explanation of the Big Bang theory based on astronomical evidence including the motion of distant galaxies, composition of matter in the universe, and cosmic background radiation.",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Three key pieces of evidence support the Big Bang theory:\n\n(a) Edwin Hubble observed that distant galaxies are moving away from us with velocity proportional to distance (v = Hd). Explain how this supports an expanding universe and estimate the age of the universe if H = 70 km/s/Mpc.\n(b) The cosmic microwave background (CMB) radiation has a temperature of 2.7 K. Explain what this radiation is and why its existence supports the Big Bang.\n(c) The universe is approximately 75% hydrogen and 24% helium by mass. Explain how Big Bang nucleosynthesis produced this ratio and why heavier elements are rare.\n(d) Construct a timeline of the early universe from t = 0 to t = 380,000 years.",
+      "rubric": {
+        "4": "Complete explanation: (a) All galaxies receding → space itself expanding; Age = 1/H ≈ 14 billion years (with unit conversion); (b) CMB is afterglow from recombination when universe cooled enough for atoms to form; uniform temperature across sky indicates hot, dense early state; (c) Only H, He, Li formed in first 3 minutes while hot enough for fusion; heavier elements formed later in stars; (d) Timeline: 0-10⁻⁴³s Planck epoch → inflation → quark-gluon plasma → nucleosynthesis (3 min) → matter era → recombination (380,000 years).",
+        "3": "Explains all three evidences correctly. Timeline may lack detail.",
+        "2": "Understands evidence but cannot fully connect to Big Bang theory.",
+        "1": "Basic understanding of one or two evidences.",
+        "0": "Does not understand Big Bang evidence."
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.80,
+      "time_estimate_seconds": 600,
+      "science_practice": "Constructing Explanations",
+      "crosscutting_concept": "Patterns"
+    },
+    {
+      "id": "sci-12-ess1-3-001",
+      "standard_id": "HS-ESS1-3",
+      "standard_description": "Communicate scientific ideas about the way stars, over their life cycle, produce elements.",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "The statement 'We are made of star stuff' reflects the cosmic origin of elements.\n\n(a) Explain which elements formed in the Big Bang and why heavier elements could not form then.\n(b) Describe how elements up to iron (Fe) are produced in massive stars through successive fusion stages.\n(c) Explain why elements heavier than iron cannot be produced by fusion in stellar cores. What process creates these elements?\n(d) Gold (Au, atomic number 79) exists on Earth. Trace the history of a gold atom from its creation to becoming part of Earth.\n(e) Explain why astronomers say we could not exist without supernova explosions.",
+      "rubric": {
+        "4": "Complete explanation: (a) H, He, Li only - universe cooled too fast for heavier fusion; (b) H→He→C→O→Si→Fe in concentric shells of massive stars; each stage shorter; (c) Fe fusion is endothermic (absorbs energy), products less stable; heavy elements formed in s-process (slow neutron capture) and r-process (rapid, in supernovae/neutron star mergers); (d) Gold formed in neutron star merger or supernova → expelled into space → incorporated into molecular cloud → solar nebula → Earth formation → concentrated by geological processes; (e) Elements essential for life (C, N, O, P, S, Fe) made in stars and dispersed only by stellar explosions.",
+        "3": "Explains stellar nucleosynthesis and element origin correctly. Gold history may lack detail.",
+        "2": "Understands fusion in stars but heavy element formation incomplete.",
+        "1": "Basic understanding of stellar element production.",
+        "0": "Does not understand nucleosynthesis."
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.77,
+      "time_estimate_seconds": 540,
+      "science_practice": "Obtaining, Evaluating, and Communicating Information",
+      "crosscutting_concept": "Energy and Matter"
+    },
+    {
+      "id": "sci-12-ess1-4-001",
+      "standard_id": "HS-ESS1-4",
+      "standard_description": "Use mathematical or computational representations to predict the motion of orbiting objects in the solar system.",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A newly discovered asteroid orbits the Sun with a semi-major axis of 4 AU.\n\n(a) Use Kepler's third law (P² = a³ for P in years and a in AU) to calculate its orbital period.\n(b) Calculate its orbital velocity at perihelion (closest to Sun, 2 AU) and aphelion (farthest, 6 AU) using conservation of angular momentum.\n(c) If this asteroid's orbit crosses Earth's orbit, calculate the maximum relative velocity at which it could collide with Earth.\n(d) Explain why the asteroid belt exists between Mars and Jupiter rather than having formed a planet.\n(e) Describe how gravitational interactions could change this asteroid's orbit over time.",
+      "rubric": {
+        "4": "Correct calculations: (a) P² = 4³ = 64, P = 8 years; (b) Using angular momentum: v₁r₁ = v₂r₂ and vis-viva equation, or energy conservation; v_perihelion ≈ 23 km/s, v_aphelion ≈ 7.7 km/s; (c) Max relative velocity occurs in head-on collision, Earth orbital velocity ≈ 30 km/s, asteroid ≈ 23 km/s at 1 AU crossing, relative ≈ 53 km/s; (d) Jupiter's gravity prevented accretion, stirred up velocities causing fragmentation; (e) Gravitational perturbations from Jupiter can alter orbit, resonances can stabilize or destabilize.",
+        "3": "Kepler's law correct. Velocity calculations may have minor errors. Good qualitative explanations.",
+        "2": "Basic Kepler calculation correct but velocity analysis incomplete.",
+        "1": "Attempts calculations but significant errors.",
+        "0": "Cannot apply orbital mechanics."
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.82,
+      "time_estimate_seconds": 600,
+      "science_practice": "Using Mathematics and Computational Thinking",
+      "crosscutting_concept": "Scale, Proportion, and Quantity"
+    },
+    {
+      "id": "sci-12-ess1-5-001",
+      "standard_id": "HS-ESS1-5",
+      "standard_description": "Evaluate evidence of the past and current movements of continental and oceanic crust and the theory of plate tectonics to explain the ages of crustal rocks.",
+      "dok_level": 3,
+      "question_type": "data_analysis",
+      "question": "The map shows the age of oceanic crust in the Atlantic Ocean, with ages in millions of years (Ma) at different distances from the Mid-Atlantic Ridge:\n\n| Distance from Ridge (km) | Age (Ma) |\n|--------------------------|----------|\n| 0 | 0 |\n| 500 | 25 |\n| 1000 | 50 |\n| 1500 | 75 |\n| 2000 | 100 |\n\n(a) Calculate the rate of seafloor spreading in cm/year.\n(b) Predict when North America and Europe began separating (current distance ≈ 4000 km from ridge to ridge).\n(c) Explain why the oldest oceanic crust is only about 200 million years old, while continental crust can be over 4 billion years old.\n(d) Describe three other lines of evidence that support plate tectonics.\n(e) Predict what the Atlantic Ocean will look like in 100 million years.",
+      "rubric": {
+        "4": "Correct analysis: (a) Rate = 1000 km / 50 Ma = 2 cm/year; (b) If 4000 km at 2 cm/year = 200 Ma; (c) Oceanic crust is recycled at subduction zones; continental crust is less dense, not subducted; (d) Evidence: magnetic stripes, earthquake/volcano distribution, fossil/rock correlations, GPS measurements; (e) Atlantic ~4000 km wider if spreading continues, possible new subduction zones.",
+        "3": "Calculations correct with good evidence discussion. Prediction reasonable.",
+        "2": "Basic calculations correct but evidence discussion limited.",
+        "1": "Attempts analysis but calculation errors.",
+        "0": "Cannot interpret seafloor spreading data."
+      },
+      "manifold_fit": {
+        "coherence_delta": 2,
+        "entropy_delta": 4,
+        "generativity_delta": 4
+      },
+      "difficulty": 0.73,
+      "time_estimate_seconds": 480,
+      "science_practice": "Analyzing and Interpreting Data",
+      "crosscutting_concept": "Stability and Change"
+    },
+    {
+      "id": "sci-12-ess1-6-001",
+      "standard_id": "HS-ESS1-6",
+      "standard_description": "Apply scientific reasoning and evidence from ancient Earth materials, meteorites, and other planetary surfaces to construct an account of Earth's formation and early history.",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Construct an account of Earth's formation and early history (4.6 to 3.5 billion years ago) using the following evidence:\n\n(a) Meteorites and lunar rocks have been dated to 4.5-4.6 billion years old.\n(b) The oldest Earth rocks found are about 4.0 billion years old.\n(c) Zircon crystals from Australia are 4.4 billion years old and contain evidence of water.\n(d) The Moon has the same oxygen isotope signature as Earth.\n(e) The early atmosphere lacked free oxygen.\n\nYour account should address: formation of the solar system, Earth's accretion, differentiation, the Moon-forming impact, the Late Heavy Bombardment, and the emergence of early oceans.",
+      "rubric": {
+        "4": "Comprehensive account: Solar nebula collapse → planetesimal accretion → Earth forms (~4.5 Ga), differentiation creates iron core + silicate mantle; giant impact (Theia) forms Moon (~4.5 Ga, explains isotope similarity); magma ocean phase explains missing old rocks; zircons indicate water by 4.4 Ga; Late Heavy Bombardment (~4.1-3.8 Ga) resurfaced Earth; early atmosphere from outgassing (CO2, N2, H2O, no O2 until photosynthesis later).",
+        "3": "Good account covering most events. May miss connections between evidence and events.",
+        "2": "Covers major events but doesn't integrate all evidence.",
+        "1": "Basic timeline without scientific reasoning.",
+        "0": "Cannot construct coherent account of Earth's early history."
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 5,
+        "generativity_delta": 6
+      },
+      "difficulty": 0.83,
+      "time_estimate_seconds": 720,
+      "science_practice": "Constructing Explanations",
+      "crosscutting_concept": "Stability and Change"
+    },
+    {
+      "id": "sci-12-ess2-1-001",
+      "standard_id": "HS-ESS2-1",
+      "standard_description": "Develop a model to illustrate how Earth's internal and surface processes operate at different spatial and temporal scales to form continental and ocean-floor features.",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Develop a model showing the formation of a mountain range at a convergent plate boundary:\n\n(a) Draw a cross-section showing the interaction between oceanic and continental plates.\n(b) Label and explain the processes occurring at each depth: trench formation, subduction, melting, volcanism, earthquakes, and mountain building.\n(c) Create a timeline showing how long each process takes (use examples like the Andes or Cascades).\n(d) Explain how different rock types found in mountain ranges (igneous, metamorphic, sedimentary) form at different stages.\n(e) Predict what will happen to this boundary in 50 million years.",
+      "rubric": {
+        "4": "Complete model: (a) Shows oceanic plate subducting under continental plate; (b) Trench at surface, accretionary wedge, Benioff zone earthquakes (progressively deeper), partial melting at ~100 km depth, volcanic arc, fold/thrust mountains; (c) Timeline: subduction continuous, volcanoes form in thousands of years, mountains grow mm/year over millions of years; (d) Igneous from magma, metamorphic from heat/pressure at depth, sedimentary scraped off and uplifted; (e) Continued mountain growth, possible terrane accretion.",
+        "3": "Good model with most features. Timeline may lack quantitative detail.",
+        "2": "Basic cross-section but processes not fully explained.",
+        "1": "Simple diagram without process explanation.",
+        "0": "Does not understand convergent boundaries."
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.80,
+      "time_estimate_seconds": 600,
+      "science_practice": "Developing and Using Models",
+      "crosscutting_concept": "Scale, Proportion, and Quantity"
+    },
+    {
+      "id": "sci-12-ess2-2-001",
+      "standard_id": "HS-ESS2-2",
+      "standard_description": "Analyze geoscience data to make the claim that one change to Earth's surface can create feedbacks that cause changes to other Earth systems.",
+      "dok_level": 4,
+      "question_type": "data_analysis",
+      "question": "The eruption of Mt. Pinatubo in 1991 ejected 20 million tons of SO2 into the stratosphere. Analyze the following data:\n\n| Time after eruption | Global temperature anomaly | Stratospheric aerosol | Surface UV |\n|--------------------|---------------------------|----------------------|------------|\n| Before | 0 | Low | Normal |\n| 1 month | -0.1°C | High | Reduced |\n| 6 months | -0.4°C | High | Reduced |\n| 1 year | -0.5°C | Declining | Increasing |\n| 3 years | -0.1°C | Normal | Normal |\n\n(a) Explain the mechanism by which volcanic aerosols affect global temperature.\n(b) Identify and explain two feedback loops (positive or negative) triggered by this eruption.\n(c) Compare this temporary cooling to proposed geoengineering schemes.\n(d) Analyze why the cooling was temporary while CO2 from fossil fuels causes persistent warming.\n(e) Predict the climate effects if a supervolcano (1000× larger) erupted.",
+      "rubric": {
+        "4": "Complete analysis: (a) SO2 → sulfate aerosols reflect sunlight, reduce insolation; (b) Feedbacks: cooling reduces evaporation → less water vapor (positive, enhances cooling); reduced UV affects ozone (complex feedback); (c) Geoengineering: stratospheric aerosol injection mimics this, but concerns about ozone, precipitation changes, termination shock; (d) Aerosols fall out in 1-3 years; CO2 persists for centuries, continuously trapping heat; (e) Multi-year 'volcanic winter,' crop failures, potential mass extinction (historical: Toba, Tambora).",
+        "3": "Good mechanism explanation and feedback identification. Geoengineering comparison may lack depth.",
+        "2": "Understands temperature effect but feedbacks incomplete.",
+        "1": "Basic understanding of volcanic cooling without system analysis.",
+        "0": "Cannot analyze climate feedback data."
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 5,
+        "generativity_delta": 6
+      },
+      "difficulty": 0.82,
+      "time_estimate_seconds": 600,
+      "science_practice": "Analyzing and Interpreting Data",
+      "crosscutting_concept": "Cause and Effect"
+    },
+    {
+      "id": "sci-12-ess2-3-001",
+      "standard_id": "HS-ESS2-3",
+      "standard_description": "Develop a model based on evidence of Earth's interior to describe the cycling of matter by thermal convection.",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Develop a model showing mantle convection and its role in plate tectonics:\n\n(a) Draw a cross-section of Earth showing the crust, mantle, and core with convection cells.\n(b) Explain what drives mantle convection (sources of heat).\n(c) Calculate how long it takes for mantle material to complete one convection cycle if the mantle is 2900 km thick and convection velocity is 5 cm/year.\n(d) Explain how seismic tomography provides evidence for mantle convection.\n(e) Describe the controversy between whole-mantle and layered convection models.",
+      "rubric": {
+        "4": "Complete model: (a) Shows convection cells with rising material at ridges, sinking at subduction zones; (b) Heat from radioactive decay (K, U, Th) and primordial heat from formation; (c) If ~3000 km cycle length, 3×10⁶ m / (0.05 m/year) = 60 million years (rough estimate); (d) Seismic tomography shows hot (slow) and cold (fast) regions consistent with rising and sinking material; (e) Whole-mantle: slabs penetrate 660 km boundary; layered: separate upper and lower convection. Current evidence supports whole-mantle with some complexity.",
+        "3": "Good model with correct heat sources and calculation. Seismic evidence may lack detail.",
+        "2": "Basic convection model but missing seismic evidence or controversy discussion.",
+        "1": "Simple diagram without quantitative analysis.",
+        "0": "Does not understand mantle convection."
+      },
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.77,
+      "time_estimate_seconds": 540,
+      "science_practice": "Developing and Using Models",
+      "crosscutting_concept": "Energy and Matter"
+    },
+    {
+      "id": "sci-12-ess2-4-001",
+      "standard_id": "HS-ESS2-4",
+      "standard_description": "Use a model to describe how variations in the flow of energy into and out of Earth's systems result in changes in climate.",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Earth's energy balance can be represented as: Energy In = Energy Out ± Storage\n\n(a) Calculate Earth's equilibrium temperature if it absorbed all incoming solar radiation (1361 W/m² solar constant, Stefan-Boltzmann constant σ = 5.67 × 10⁻⁸ W/m²K⁴). Use geometry: absorbed = πr²S, emitted = 4πr²σT⁴.\n(b) Earth's actual average temperature is 288 K (15°C). Explain this difference using the greenhouse effect.\n(c) Model how a 2% increase in solar output would affect Earth's temperature.\n(d) Model how a doubling of CO2 (equivalent to ~4 W/m² forcing) would affect temperature.\n(e) Explain why climate sensitivity to forcing is uncertain and describe two feedback mechanisms.",
+      "rubric": {
+        "4": "Complete analysis: (a) πr²S = 4πr²σT⁴; T⁴ = S/(4σ) = 1361/(4×5.67×10⁻⁸) = 6×10⁹; T = 278 K or with albedo (0.3): 255 K; (b) Greenhouse gases absorb and re-emit IR, warming surface by 33 K; (c) 2% increase → ~27 W/m² more, temperature increase ~1-2 K; (d) 4 W/m² forcing → ~1-4 K warming depending on sensitivity; (e) Uncertainty from feedbacks: water vapor (positive), ice-albedo (positive), clouds (uncertain direction), affecting climate sensitivity range 1.5-4.5°C per doubling.",
+        "3": "Calculations mostly correct. Feedback discussion may lack depth.",
+        "2": "Basic energy balance understood but calculations have errors.",
+        "1": "Conceptual understanding without quantitative analysis.",
+        "0": "Cannot apply energy balance concepts."
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.85,
+      "time_estimate_seconds": 720,
+      "science_practice": "Using Mathematics and Computational Thinking",
+      "crosscutting_concept": "Energy and Matter"
+    },
+    {
+      "id": "sci-12-ess2-5-001",
+      "standard_id": "HS-ESS2-5",
+      "standard_description": "Plan and conduct an investigation of the properties of water and its effects on Earth materials and surface processes.",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Design an investigation to study freeze-thaw weathering and its role in shaping landscapes:\n\n(a) State your hypothesis about how rock type and porosity affect weathering rate.\n(b) Describe your experimental setup, including materials, procedure, and measurements.\n(c) Explain the physics of freeze-thaw: Why does water expand when freezing, and what forces does this create?\n(d) Identify all variables (IV, DV, controlled) and explain how you would control them.\n(e) Predict which rock types would weather fastest and justify using their properties.\n(f) Describe how you would scale your lab findings to explain real landscape features.",
+      "rubric": {
+        "4": "Complete design: (a) Hypothesis relating porosity/permeability to weathering rate; (b) Rock samples, water saturation, repeated freeze-thaw cycles, mass loss/crack measurement; (c) Water expands 9% due to hydrogen bonding structure of ice, generates up to 2000 kg/cm² pressure; (d) IV: rock type; DV: mass loss, crack width; Controls: water amount, freeze/thaw rate, time, sample size; (e) Porous, fine-grained rocks (sandstone, shale) fastest; granite slowest; (f) Discuss limitations of accelerated lab tests, extrapolate to real rates using known weathering times.",
+        "3": "Good experimental design with most components. Physics explanation may lack detail.",
+        "2": "Basic experiment but incomplete variable control or scaling discussion.",
+        "1": "Simple procedure without experimental rigor.",
+        "0": "Does not understand experimental design or weathering processes."
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.78,
+      "time_estimate_seconds": 600,
+      "science_practice": "Planning and Carrying Out Investigations",
+      "crosscutting_concept": "Cause and Effect"
+    },
+    {
+      "id": "sci-12-ess2-6-001",
+      "standard_id": "HS-ESS2-6",
+      "standard_description": "Develop a quantitative model to describe the cycling of carbon among the hydrosphere, atmosphere, geosphere, and biosphere.",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "The carbon cycle operates on multiple timescales. Use the following reservoir sizes and fluxes:\n\nReservoirs (gigatons C): Atmosphere: 850; Ocean surface: 1,000; Deep ocean: 37,000; Vegetation: 600; Soils: 1,500; Fossil fuels: 4,000\n\nFluxes (Gt C/year): Photosynthesis: 120; Respiration: 120; Ocean uptake: 92; Ocean release: 90; Fossil fuel burning: 10\n\n(a) Calculate the residence time of carbon in the atmosphere.\n(b) Explain why atmospheric CO2 is increasing despite ocean uptake.\n(c) Model what would happen if photosynthesis stopped.\n(d) Explain the 'biological pump' and its role in sequestering carbon.\n(e) Describe the geological carbon cycle (millions of years) and compare its fluxes to the biological cycle.",
+      "rubric": {
+        "4": "Complete model: (a) Residence time = reservoir/flux = 850/(120+92) ≈ 4 years (for exchange); (b) Fossil fuel input (10) > net ocean uptake (2), so atmospheric CO2 increases by ~5 Gt/year (half stays in atmosphere); (c) CO2 would accumulate, respiration continues, ecosystem collapse, massive atmospheric increase; (d) Biological pump: surface organisms fix CO2, sink to deep ocean when they die, sequestering carbon for centuries-millennia; (e) Geological: weathering + volcanic outgassing + burial, ~0.1 Gt/year, 1000× slower than biological.",
+        "3": "Good quantitative analysis. One component may be incomplete.",
+        "2": "Basic carbon cycle understanding but quantitative modeling weak.",
+        "1": "Conceptual description without calculations.",
+        "0": "Does not understand carbon cycle reservoirs and fluxes."
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 5,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.82,
+      "time_estimate_seconds": 600,
+      "science_practice": "Developing and Using Models",
+      "crosscutting_concept": "Energy and Matter"
+    },
+    {
+      "id": "sci-12-ess2-7-001",
+      "standard_id": "HS-ESS2-7",
+      "standard_description": "Construct an argument based on evidence about the simultaneous coevolution of Earth's systems and life on Earth.",
+      "dok_level": 4,
+      "question_type": "argumentation",
+      "question": "Construct an argument that Earth and life have co-evolved, using evidence from:\n\n(a) The Great Oxygenation Event (2.4 billion years ago)\n(b) The Snowball Earth episodes (720-635 million years ago)\n(c) The Cambrian Explosion (540 million years ago)\n(d) The end-Permian extinction (252 million years ago)\n\nFor each event, explain: (1) how life affected Earth's systems, (2) how Earth's systems affected life, and (3) evidence supporting co-evolution. Conclude with an argument about whether life and Earth can be understood separately.",
+      "rubric": {
+        "4": "Complete argument: (a) Cyanobacteria produce O2 → oxygenates atmosphere → mass extinction of anaerobes, enables aerobic life → banded iron formations, red beds as evidence; (b) Possible result of altered carbon cycle → ice-albedo feedback → climate extreme → survival in refugia → multicellular life evolves; (c) O2 enables complex metabolism → predation drives diversification → rapid evolution → body fossils appear; (d) Volcanic CO2 → warming → ocean acidification → 90% species loss → recovery with new fauna. Argument: Earth and life are inseparable, feedback systems mean neither can be understood in isolation.",
+        "3": "Good evidence for all events. Argument may lack synthesis.",
+        "2": "Covers events but co-evolution connections weak.",
+        "1": "Describes events without co-evolution framework.",
+        "0": "Does not understand Earth-life interactions."
+      },
+      "manifold_fit": {
+        "coherence_delta": 5,
+        "entropy_delta": 6,
+        "generativity_delta": 6
+      },
+      "difficulty": 0.85,
+      "time_estimate_seconds": 720,
+      "science_practice": "Engaging in Argument from Evidence",
+      "crosscutting_concept": "Stability and Change"
+    },
+    {
+      "id": "sci-12-ess3-1-001",
+      "standard_id": "HS-ESS3-1",
+      "standard_description": "Construct an explanation based on evidence for how the availability of natural resources, occurrence of natural hazards, and changes in climate have influenced human activity.",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Analyze how Earth systems have influenced the development of human civilization:\n\n(a) Explain how the distribution of fossil fuel resources has shaped geopolitics in the 20th and 21st centuries.\n(b) Describe how climate fluctuations (Medieval Warm Period, Little Ice Age) affected European societies.\n(c) Analyze how earthquake and volcanic hazards influenced the location and architecture of ancient civilizations.\n(d) Predict how sea level rise and changing precipitation patterns might influence future human migration.\n(e) Evaluate: 'Geography is destiny' - to what extent do Earth systems determine human outcomes?",
+      "rubric": {
+        "4": "Complete analysis: (a) Oil distribution in Middle East → geopolitical conflict, economic influence; coal resources → Industrial Revolution location; (b) MWP: Viking expansion, agricultural prosperity; LIA: famines, witch trials, colonial impacts; (c) Japanese earthquake-resistant design, Mediterranean volcanic soil agriculture, settlement patterns avoiding fault zones; (d) Coastal migration inland, climate refugees from drought regions, new agricultural zones; (e) Nuanced evaluation: resources and hazards set constraints and opportunities, but technology and institutions mediate outcomes.",
+        "3": "Good analysis of historical influences. Future predictions or evaluation may lack depth.",
+        "2": "Addresses examples but doesn't fully analyze human-Earth system interactions.",
+        "1": "Basic understanding without analytical framework.",
+        "0": "Cannot connect Earth systems to human activity."
+      },
+      "manifold_fit": {
+        "coherence_delta": 4,
+        "entropy_delta": 5,
+        "generativity_delta": 6
+      },
+      "difficulty": 0.78,
+      "time_estimate_seconds": 600,
+      "science_practice": "Constructing Explanations",
+      "crosscutting_concept": "Cause and Effect"
+    },
+    {
+      "id": "sci-12-ess3-2-001",
+      "standard_id": "HS-ESS3-2",
+      "standard_description": "Evaluate competing design solutions for developing, managing, and utilizing energy and mineral resources based on cost-benefit ratios.",
+      "dok_level": 4,
+      "question_type": "argumentation",
+      "question": "A coastal city needs 1000 MW of new electricity generation. Evaluate three options:\n\nOption A: Natural gas combined-cycle plant (Capital: $1B, Fuel: $50M/year, CO2: 400g/kWh)\nOption B: Offshore wind farm (Capital: $3B, O&M: $100M/year, CO2: 10g/kWh lifecycle)\nOption C: Nuclear plant (Capital: $8B, Fuel: $20M/year, CO2: 5g/kWh lifecycle)\n\nFor each option, evaluate:\n(a) Lifetime cost over 40 years (assume 8% capacity factor for gas, 40% for wind, 90% for nuclear)\n(b) Total CO2 emissions over 40 years\n(c) Resource requirements and waste\n(d) Reliability and grid integration considerations\n(e) Recommend a solution with scientific justification",
+      "rubric": {
+        "4": "Complete evaluation: (a) Correct cost calculations including capacity factors; Gas: ~$3B; Wind: ~$7B (higher capital, no fuel); Nuclear: ~$8.8B; (b) Gas: ~14 million tons; Wind: ~350,000 tons; Nuclear: ~175,000 tons; (c) Gas: fuel supply dependence; Wind: large area, materials (rare earths); Nuclear: uranium mining, waste storage; (d) Gas: dispatchable; Wind: intermittent, needs storage; Nuclear: baseload, inflexible; (e) Reasoned recommendation considering all factors, may suggest portfolio approach.",
+        "3": "Good cost-benefit analysis with most factors. Calculations may have minor errors.",
+        "2": "Compares options but quantitative analysis incomplete.",
+        "1": "Basic comparison without cost-benefit framework.",
+        "0": "Cannot evaluate energy options systematically."
+      },
+      "manifold_fit": {
+        "coherence_delta": 5,
+        "entropy_delta": 6,
+        "generativity_delta": 6
+      },
+      "difficulty": 0.85,
+      "time_estimate_seconds": 720,
+      "science_practice": "Engaging in Argument from Evidence",
+      "crosscutting_concept": "Energy and Matter"
+    },
+    {
+      "id": "sci-12-ess3-3-001",
+      "standard_id": "HS-ESS3-3",
+      "standard_description": "Create a computational simulation to illustrate the relationships among management of natural resources, the sustainability of human populations, and biodiversity.",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Design a simulation to model sustainable fisheries management:\n\n(a) Identify the key variables your simulation would track (fish population, fishing effort, ecosystem factors).\n(b) Write pseudocode or describe the mathematical relationships (e.g., logistic growth, catch equations).\n(c) Describe how you would model the concept of Maximum Sustainable Yield (MSY).\n(d) Include at least one feedback loop and one external perturbation (e.g., climate change, pollution).\n(e) Describe what outputs your simulation would produce and how managers could use them.\n(f) Discuss limitations of your model and what uncertainties remain.",
+      "rubric": {
+        "4": "Complete simulation design: (a) Variables: population N, carrying capacity K, growth rate r, catch C, effort E; (b) dN/dt = rN(1-N/K) - C; C = qEN where q = catchability; (c) MSY = rK/4 at N = K/2; (d) Feedback: overfishing reduces N, reduces catch, may reduce effort; Perturbation: climate shifts K; (e) Outputs: population projections, optimal effort, extinction probability; (f) Limitations: single species, ignores age structure, spatial dynamics, assumes constant parameters.",
+        "3": "Good simulation design with most components. Mathematical relationships may be simplified.",
+        "2": "Basic model concept but lacking mathematical rigor.",
+        "1": "Describes fisheries concepts without simulation framework.",
+        "0": "Cannot design computational simulation."
+      },
+      "manifold_fit": {
+        "coherence_delta": 5,
+        "entropy_delta": 6,
+        "generativity_delta": 6
+      },
+      "difficulty": 0.88,
+      "time_estimate_seconds": 720,
+      "science_practice": "Using Mathematics and Computational Thinking",
+      "crosscutting_concept": "Systems and System Models"
+    },
+    {
+      "id": "sci-12-ess3-4-001",
+      "standard_id": "HS-ESS3-4",
+      "standard_description": "Evaluate or refine a technological solution that reduces impacts of human activities on natural systems.",
+      "dok_level": 4,
+      "question_type": "argumentation",
+      "question": "Carbon capture and storage (CCS) is proposed as a solution to reduce atmospheric CO2. Evaluate this technology:\n\n(a) Explain the three stages of CCS: capture, transport, and storage.\n(b) Calculate the energy penalty: if capturing CO2 from a power plant requires 25% of its energy output, what is the effective reduction in emissions per kWh delivered?\n(c) Evaluate storage options: deep saline aquifers, depleted oil fields, and ocean injection. Consider capacity, permanence, and risks.\n(d) Compare CCS to alternative approaches: renewables, nuclear, efficiency improvements.\n(e) Critique: Under what conditions would CCS be the best solution, and when would alternatives be preferable?",
+      "rubric": {
+        "4": "Complete evaluation: (a) Capture: amine scrubbing, oxy-fuel, or pre-combustion; Transport: pipelines, ships; Storage: injection into geological formations; (b) If plant emits 400g CO2/kWh, needs 33% more fuel for same output, so 533g emitted, 90% captured = 53g released vs 400g, but at 1.33× energy cost; (c) Saline aquifers: huge capacity, less proven; Oil fields: well-characterized, limited capacity; Ocean: large capacity but acidification, legality; (d) Renewables cheaper but intermittent; nuclear baseload but controversial; efficiency reduces total demand; (e) CCS may be necessary for hard-to-decarbonize sectors (cement, steel) but not cost-effective for power where renewables are cheaper.",
+        "3": "Good technical explanation and comparison. Energy calculation may have minor errors.",
+        "2": "Understands CCS concept but evaluation incomplete.",
+        "1": "Basic description without critical evaluation.",
+        "0": "Does not understand carbon capture technology."
+      },
+      "manifold_fit": {
+        "coherence_delta": 5,
+        "entropy_delta": 5,
+        "generativity_delta": 6
+      },
+      "difficulty": 0.82,
+      "time_estimate_seconds": 600,
+      "science_practice": "Designing Solutions",
+      "crosscutting_concept": "Stability and Change"
+    },
+    {
+      "id": "sci-12-ess3-5-001",
+      "standard_id": "HS-ESS3-5",
+      "standard_description": "Analyze geoscience data and the results from global climate models to make an evidence-based forecast of the current rate of global or regional climate change and associated future impacts to Earth systems.",
+      "dok_level": 4,
+      "question_type": "data_analysis",
+      "question": "Analyze the following climate projections for 2100 under different emission scenarios:\n\n| Scenario | CO2 (ppm) | Temperature rise (°C) | Sea level rise (m) | Arctic ice-free |\n|----------|-----------|----------------------|-------------------|----------------|\n| SSP1-1.9 | 400 | 1.4 | 0.3-0.6 | Rare |\n| SSP2-4.5 | 550 | 2.7 | 0.4-0.8 | Common |\n| SSP5-8.5 | 1100 | 4.4 | 0.6-1.0 | Year-round |\n\n(a) Explain what each scenario represents in terms of human choices.\n(b) For each temperature rise, predict impacts on: coral reefs, agriculture, extreme weather, and human health.\n(c) Why is sea level rise projected to continue for centuries even if warming stops?\n(d) Estimate the economic and human costs of each scenario.\n(e) Using the evidence, make a case for which emission pathway humanity should pursue and why.",
+      "rubric": {
+        "4": "Complete analysis: (a) SSP1-1.9: net-zero by 2050; SSP2-4.5: moderate mitigation; SSP5-8.5: fossil fuel intensive; (b) Specific impacts: 1.4°C - some coral bleaching, minor shifts; 2.7°C - major coral loss, crop failures, intensified storms; 4.4°C - ecosystem collapse, massive displacement, heat mortality; (c) Ocean thermal expansion continues as deep water warms, ice sheet dynamics commit to centuries of melt; (d) Economic estimates with citations to IPCC or economic models; (e) Evidence-based argument for aggressive mitigation considering costs vs. climate damages.",
+        "3": "Good scenario analysis with most impacts. Economic estimates may lack quantification.",
+        "2": "Understands scenario differences but impacts analysis incomplete.",
+        "1": "Basic interpretation without detailed impact analysis.",
+        "0": "Cannot analyze climate scenario data."
+      },
+      "manifold_fit": {
+        "coherence_delta": 5,
+        "entropy_delta": 6,
+        "generativity_delta": 6
+      },
+      "difficulty": 0.85,
+      "time_estimate_seconds": 720,
+      "science_practice": "Analyzing and Interpreting Data",
+      "crosscutting_concept": "Stability and Change"
+    },
+    {
+      "id": "sci-12-ess3-6-001",
+      "standard_id": "HS-ESS3-6",
+      "standard_description": "Use a computational representation to illustrate the relationships among Earth systems and how those relationships are being modified due to human activity.",
+      "dok_level": 4,
+      "question_type": "constructed_response",
+      "question": "Create a systems diagram showing how burning fossil fuels affects multiple Earth systems:\n\n(a) Draw a diagram showing connections between: atmosphere (CO2, aerosols), hydrosphere (ocean acidification, sea level), cryosphere (ice melt), biosphere (ecosystem shifts, biodiversity), and geosphere (weathering rates).\n(b) For each connection, indicate whether it's a reinforcing (positive) or balancing (negative) feedback.\n(c) Identify the largest positive feedback and explain why it's concerning.\n(d) Calculate: If oceans have absorbed 30% of anthropogenic CO2 and atmosphere contains 280 ppm more than pre-industrial, estimate how much is in the ocean.\n(e) Explain how Earth's systems could stabilize at a new equilibrium, and how long this might take.",
+      "rubric": {
+        "4": "Complete systems diagram: (a) Shows all five systems with at least 3 connections each; (b) Correctly identifies: ice-albedo (positive), water vapor (positive), weathering (negative), vegetation (mixed); (c) Ice-albedo or water vapor feedback with explanation of amplification; (d) If 280 ppm additional in atmosphere (about 600 Gt C), and atmosphere has 70%, ocean has 30% = 257 Gt C approximately; (e) New equilibrium when inputs = outputs, may take thousands of years for ocean circulation and ice sheets, hundreds of thousands for weathering.",
+        "3": "Good systems diagram with most feedbacks correct. Calculation may have minor errors.",
+        "2": "Basic systems understanding but feedback identification incomplete.",
+        "1": "Simple diagram without systems analysis.",
+        "0": "Cannot illustrate Earth system connections."
+      },
+      "manifold_fit": {
+        "coherence_delta": 5,
+        "entropy_delta": 6,
+        "generativity_delta": 6
+      },
+      "difficulty": 0.85,
+      "time_estimate_seconds": 720,
+      "science_practice": "Using Mathematics and Computational Thinking",
+      "crosscutting_concept": "Systems and System Models"
+    }
+  ]
+}

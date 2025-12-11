@@ -1,0 +1,125 @@
+{
+  "grade": "6",
+  "items": [
+    {
+      "id": "sci-6-ps3-1-001",
+      "standard_id": "MS-PS3-1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "Two identical cars are traveling on a highway. Car A is moving at 60 mph and Car B is moving at 30 mph. How does the kinetic energy of Car A compare to Car B?",
+      "options": ["Car A has four times the kinetic energy of Car B", "Car A has twice the kinetic energy of Car B", "Both cars have the same kinetic energy", "Car B has more kinetic energy"],
+      "correct_answer": "Car A has four times the kinetic energy of Car B",
+      "explanation": "Kinetic energy is proportional to the square of speed (KE = ½mv²). Doubling the speed quadruples the kinetic energy.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.55,
+      "time_estimate_seconds": 60,
+      "science_practice": "Using Mathematics and Computational Thinking"
+    },
+    {
+      "id": "sci-6-ps3-1-002",
+      "standard_id": "MS-PS3-1",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Create a graph showing how kinetic energy changes as speed increases for a 1 kg object. Calculate the kinetic energy at speeds of 1, 2, 3, 4, and 5 m/s using KE = ½mv². Describe the pattern you observe and explain what it means for vehicle safety.",
+      "rubric": {
+        "4": "Accurate calculations (0.5J, 2J, 4.5J, 8J, 12.5J), graph showing curved relationship, pattern identified as exponential/squared growth, safety implications discussed (higher speeds much more dangerous)",
+        "3": "Correct calculations with graph and pattern explanation",
+        "2": "Some calculations correct, pattern not fully explained",
+        "1": "Attempts calculations without pattern analysis",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.7,
+      "time_estimate_seconds": 360,
+      "science_practice": "Using Mathematics and Computational Thinking"
+    },
+    {
+      "id": "sci-6-ps3-1-003",
+      "standard_id": "MS-PS3-1",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "A 2 kg bowling ball and a 5 kg bowling ball are rolling at the same speed. Which has more kinetic energy?",
+      "options": ["The 5 kg ball because kinetic energy increases with mass", "The 2 kg ball because lighter objects move faster", "They have the same kinetic energy", "Neither has kinetic energy"],
+      "correct_answer": "The 5 kg ball because kinetic energy increases with mass",
+      "explanation": "Kinetic energy depends on both mass and speed. At the same speed, an object with more mass has proportionally more kinetic energy.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 45,
+      "science_practice": "Analyzing and Interpreting Data"
+    },
+    {
+      "id": "sci-6-ps3-2-001",
+      "standard_id": "MS-PS3-2",
+      "dok_level": 2,
+      "question_type": "multiple_choice",
+      "question": "A book sits on a shelf 2 meters high. Compared to the same book on a shelf 4 meters high, the lower book has:",
+      "options": ["Less gravitational potential energy", "More gravitational potential energy", "The same gravitational potential energy", "No potential energy at all"],
+      "correct_answer": "Less gravitational potential energy",
+      "explanation": "Gravitational potential energy increases with height. An object higher above the ground has more potential energy because it can do more work when it falls.",
+      "manifold_fit": {
+        "coherence_delta": 3,
+        "entropy_delta": 0,
+        "generativity_delta": 2
+      },
+      "difficulty": 0.5,
+      "time_estimate_seconds": 45,
+      "science_practice": "Developing and Using Models"
+    },
+    {
+      "id": "sci-6-ps3-2-002",
+      "standard_id": "MS-PS3-2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "Develop a model to explain how potential energy changes as a roller coaster moves along its track. Include: 1) Where potential energy is highest and lowest, 2) What happens to the energy as the coaster moves, 3) Why the first hill must be the tallest.",
+      "rubric": {
+        "4": "Complete model showing PE highest at top of hills, lowest at bottom, energy converts to kinetic and back, first hill tallest because some energy lost to friction",
+        "3": "Good model with energy transformation and height relationship",
+        "2": "Shows energy changes but explanation incomplete",
+        "1": "Basic roller coaster drawing without energy analysis",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.65,
+      "time_estimate_seconds": 360,
+      "science_practice": "Developing and Using Models"
+    },
+    {
+      "id": "sci-6-ps3-2-003",
+      "standard_id": "MS-PS3-2",
+      "dok_level": 3,
+      "question_type": "constructed_response",
+      "question": "A stretched rubber band has elastic potential energy. A compressed spring also has elastic potential energy. Create a model comparing these two systems. Show how potential energy is stored and released in each case.",
+      "rubric": {
+        "4": "Model shows both systems with explanation of elastic deformation storing energy, energy released when objects return to original shape, real-world applications",
+        "3": "Both systems shown with energy storage and release",
+        "2": "One system explained well or both incomplete",
+        "1": "Mentions stretching/compressing without energy focus",
+        "0": "No response"
+      },
+      "manifold_fit": {
+        "coherence_delta": 1,
+        "entropy_delta": 4,
+        "generativity_delta": 5
+      },
+      "difficulty": 0.6,
+      "time_estimate_seconds": 300,
+      "science_practice": "Developing and Using Models"
+    }
+  ]
+}
