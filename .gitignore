@@ -87,3 +87,13 @@ packages/legal-scrapers/*.json
 
 # Jest summary
 jest-summary.json
+
+# Playwright
+test-results/
+playwright-report/
+playwright-results.json
+e2e/.auth/user.json
+e2e/screenshots/
+!e2e/screenshots/.gitkeep
+blob-report/
+.playwright-cache/

@@ -66,6 +66,18 @@ jest.mock('lucide-react', () => {
     Pause: createMockIcon('pause'),
     Square: createMockIcon('square'),
     AlertCircle: createMockIcon('alert-circle'),
+    // Systems page icons
+    Database: createMockIcon('database'),
+    GitBranch: createMockIcon('git-branch'),
+    MessageSquare: createMockIcon('message-square'),
+    RefreshCw: createMockIcon('refresh-cw'),
+    CheckCircle2: createMockIcon('check-circle-2'),
+    AlertTriangle: createMockIcon('alert-triangle'),
+    Timer: createMockIcon('timer'),
+    Cpu: createMockIcon('cpu'),
+    Network: createMockIcon('network'),
+    ArrowRight: createMockIcon('arrow-right'),
+    Radio: createMockIcon('radio'),
   };
 });
 

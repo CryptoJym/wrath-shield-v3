@@ -1,0 +1,36 @@
+# Qdrant Configuration for HYRO Memory Layer
+# See: https://qdrant.tech/documentation/guides/configuration/
+
+log_level: INFO
+
+storage:
+  # Where to store data
+  storage_path: /qdrant/storage
+
+  # Optimizations for local development
+  optimizers:
+    # How many vectors can be indexed in parallel
+    indexing_threshold: 10000
+    # Minimum number of vectors in a segment before flushing to disk
+    flush_interval_sec: 5
+
+  # Performance tuning
+  performance:
+    # Max number of concurrent updates
+    max_optimization_threads: 2
+
+service:
+  # HTTP API settings
+  http_port: 6333
+
+  # gRPC API settings
+  grpc_port: 6334
+
+  # Enable CORS for local development
+  enable_cors: true
+
+  # Max request size (useful for large batches)
+  max_request_size_mb: 32
+
+# Telemetry (disable for privacy)
+telemetry_disabled: true

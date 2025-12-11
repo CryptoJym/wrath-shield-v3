@@ -42,7 +42,8 @@ async function checkLLMCredentials() {
 
   const hasOpenRouter = !!process.env.OPENROUTER_API_KEY;
   const hasOpenAI = !!process.env.OPENAI_API_KEY;
-  const hasXAI = !!process.env.XAI_API_KEY;
+  // Support both XAI_API_KEY and XAI_API_KEY_DIRECT
+  const hasXAI = !!(process.env.XAI_API_KEY || process.env.XAI_API_KEY_DIRECT);
 
   if (hasOpenRouter) {
     printTest('OpenRouter API key configured', 'PASS', 'OPENROUTER_API_KEY is set');

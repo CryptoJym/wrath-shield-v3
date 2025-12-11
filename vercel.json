@@ -6,6 +6,14 @@
     {
       "path": "/api/cron/finance-auto",
       "schedule": "15 12 * * *"
+    },
+    {
+      "path": "/api/cron/cortex-synthesis",
+      "schedule": "*/5 * * * *"
+    },
+    {
+      "path": "/api/cron/ea-learning",
+      "schedule": "0 0 * * *"
     }
   ]
 }

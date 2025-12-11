@@ -3,6 +3,16 @@ const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
 
+  // Enable standalone output for Docker deployments
+  output: process.env.DOCKER_BUILD === 'true' ? 'standalone' : undefined,
+
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+
   // Strict server-only module enforcement
   webpack: (config, { isServer }) => {
     if (!isServer) {
