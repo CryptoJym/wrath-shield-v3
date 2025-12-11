@@ -12,55 +12,48 @@
 - Run `bun test` to see current failures
 - Priority: HIGH - affects CI/CD reliability
 
-### 2. Dead API Routes (Proxy to Archived Services)
-These routes proxy to services that have been archived:
+### ~~2. Dead API Routes (Proxy to Archived Services)~~ ✅ COMPLETED
+~~These routes proxy to services that have been archived:~~
 ```
-/api/agentic/health  → proxies to archived agentic-grok
-/api/agentic/status  → proxies to archived agentic-grok
-/api/eeg/*           → proxies to archived eeg-tokenizer
+/api/agentic/health  → ✅ Returns 410 deprecation response
+/api/agentic/status  → ✅ Uses local DB (not archived service)
+/api/eeg/status      → ✅ Returns 410 deprecation response
 ```
-**Action:** Either remove these routes or update them to return proper "service unavailable" responses.
+**FIXED:** Routes now return proper HTTP 410 "Gone" responses with deprecation info and alternatives.
 
 ---
 
 ## HIGH PRIORITY - Implementation Gaps
 
-### 3. Agent Subscriptions - Incomplete Integration
+### ~~3. Agent Subscriptions - Incomplete Integration~~ ✅ COMPLETED
 **File:** `lib/agents/agent-subscriptions.ts`
-```typescript
-// TODO: Integrate with AgentInvoker
-```
-- Learning system publishes events but handlers don't invoke agents
-- Event bus is wired but agent execution is stubbed
-- **Action:** Complete the AgentInvoker integration
+- ✅ AgentInvoker integration complete
+- ✅ Event handlers now invoke agents via `invokeAgent()`
+- ✅ Metadata extraction and context passing implemented
+- ✅ Error handling prevents one agent failure from blocking others
 
-### 4. Cortex Synthesis Loop - Placeholder Implementation
+### ~~4. Cortex Synthesis Loop - Placeholder Implementation~~ ✅ COMPLETED
 **Files:**
 - `lib/cortex/init.ts`
 - `lib/cortex/synthesis-loop.ts`
-```typescript
-// TODO: Implement actual synthesis loop
-// TODO: Call synthesis engine
-const lowConfidenceTasks: UnifiedTask[] = []; // Placeholder
-const patterns: SynthesisPattern[] = []; // Placeholder
-```
-- **Action:** Implement actual synthesis loop logic
+- ✅ Synthesis loop already fully implemented with:
+  - Real task fetching via `taskStore.getTasksNeedingRefinement()`
+  - Pattern retrieval via `getRelevantPatterns(events)`
+  - Full LLM invocation with retry logic
+  - JSON parsing and validation
 
-### 5. Cortex Event Ingestor - Fast-path Routing
+### ~~5. Cortex Event Ingestor - Fast-path Routing~~ ✅ COMPLETED
 **File:** `lib/cortex/event-ingestor.ts`
-```typescript
-// TODO: Implement fast-path routing to agent
-```
-- Critical items identified but not routed to agents
-- **Action:** Wire fast-path items to appropriate agent handlers
+- ✅ Fast-path routing implemented via `routeCriticalToAgent()`
+- ✅ Critical emails, iMessages, and calendar events route directly to agents
+- ✅ Events published to event bus with appropriate domain mapping
+- ✅ Fallback to working memory if routing fails
 
-### 6. Decision Queue - Correction Recording
+### ~~6. Decision Queue - Correction Recording~~ ✅ COMPLETED
 **File:** `lib/cortex/decision-queue.ts`
-```typescript
-// TODO: Wire to recordCorrection in preference-model.ts
-```
-- User corrections not being recorded for preference learning
-- **Action:** Connect to preference model
+- ✅ Connected to `recordCorrection` in preference-model.ts
+- ✅ When user selects non-recommended option, correction is recorded
+- ✅ Learning feedback loop now active
 
 ---
 
@@ -77,13 +70,12 @@ const patterns: SynthesisPattern[] = []; // Placeholder
 - Task execution stubs exist but don't connect to real services
 - **Action:** Implement actual service integrations
 
-### 8. Google Calendar - Timezone Configuration
+### ~~8. Google Calendar - Timezone Configuration~~ ✅ COMPLETED
 **File:** `lib/integrations/GoogleCalendarClient.ts`
-```typescript
-timeZone: 'America/Los_Angeles', // TODO: Make configurable
-```
-- Hardcoded timezone
-- **Action:** Pull from user preferences or env config
+- ✅ Already configurable via:
+  - Constructor parameter: `new GoogleCalendarClient('America/New_York')`
+  - Environment variable: `DEFAULT_TIMEZONE`
+  - Fallback: `'America/Los_Angeles'`
 
 ### 9. Repo Organizer - Project Creation
 **File:** `lib/pm/repo-organizer.ts`
@@ -110,13 +102,12 @@ From cleanup report - deferred:
 - Requires careful import updates across entire codebase
 - **Action:** Plan and execute as separate focused refactor
 
-### 12. Agent Health Calculation
+### ~~12. Agent Health Calculation~~ ✅ COMPLETED
 **File:** `lib/agents/registry.ts`
-```typescript
-hp: 92, // TODO: Calculate from success rate
-```
-- Hardcoded health value
-- **Action:** Implement actual health calculation from metrics
+- ✅ HP calculated from agent execution success rate
+- ✅ MP calculated from token usage efficiency
+- ✅ Status calculated from recent activity (green/yellow/red)
+- Lines 57-64 implement dynamic health metrics
 
 ### 13. Pod Implementations
 **Files:** `lib/pods/*.ts`

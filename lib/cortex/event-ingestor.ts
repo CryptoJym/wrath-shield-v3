@@ -18,6 +18,7 @@ import { ensureServerOnly } from '../server-only-guard';
 import { getWorkingMemory } from './working-memory';
 import type { EventSource, WorkingMemoryEvent } from './types';
 import type { Domain } from '../ea/preference-model';
+import { getEventBus, createMessageEvent, DOMAINS, type Domain as EventBusDomain } from '../agents/life-os-event-bus';
 
 // Prevent client-side imports
 ensureServerOnly('lib/cortex/event-ingestor');
@@ -325,11 +326,10 @@ export async function ingestEmail(email: EmailInput): Promise<IngestionResult> {
 
     console.log(`[EventIngestor] Email ingested with ID: ${eventId}, urgency: ${classification.urgency}`);
 
-    // Fast-path critical items (TODO: route to appropriate agent)
+    // Fast-path critical items - route directly to appropriate agent via event bus
     if (classification.isCritical) {
       console.warn(`[EventIngestor] CRITICAL email detected! Event ID: ${eventId}`);
-      // TODO: Implement fast-path routing to agent
-      // e.g., await routeToAgent(eventId, 'inbox-agent');
+      await routeCriticalToAgent(eventId, 'email', email, classification);
     }
 
     return {
@@ -396,10 +396,10 @@ export async function ingestIMessage(message: IMessageInput): Promise<IngestionR
 
     console.log(`[EventIngestor] iMessage ingested with ID: ${eventId}, urgency: ${classification.urgency}`);
 
-    // Fast-path critical items
+    // Fast-path critical items - route directly to comms agent via event bus
     if (classification.isCritical) {
       console.warn(`[EventIngestor] CRITICAL iMessage detected! Event ID: ${eventId}`);
-      // TODO: Implement fast-path routing to agent
+      await routeCriticalToAgent(eventId, 'imessage', message, classification);
     }
 
     return {
@@ -529,10 +529,10 @@ export async function ingestCalendar(event: CalendarInput): Promise<IngestionRes
 
     console.log(`[EventIngestor] Calendar event ingested with ID: ${eventId}, urgency: ${classification.urgency}`);
 
-    // Fast-path critical items (events happening very soon)
+    // Fast-path critical items (events happening very soon) - route to EA agent
     if (classification.isCritical) {
       console.warn(`[EventIngestor] CRITICAL calendar event detected! Event ID: ${eventId}`);
-      // TODO: Implement fast-path routing to agent
+      await routeCriticalToAgent(eventId, 'calendar', event, classification);
     }
 
     return {
@@ -561,4 +561,61 @@ export async function getIngestionStats() {
     oldestEventTimestamp: stats.oldestEventTimestamp,
     newestEventTimestamp: stats.newestEventTimestamp,
   };
+}
+
+/**
+ * Route critical items directly to agents via event bus for immediate processing
+ * This bypasses the normal synthesis loop for time-sensitive items
+ */
+async function routeCriticalToAgent(
+  eventId: string,
+  source: 'email' | 'imessage' | 'calendar' | 'limitless',
+  payload: EmailInput | IMessageInput | CalendarInput | LimitlessInput,
+  classification: InitialClassification
+): Promise<void> {
+  try {
+    const eventBus = getEventBus();
+
+    // Determine target domain based on source and classification
+    let targetDomain: EventBusDomain = DOMAINS.WORK; // Default to work domain
+    if (classification.domain) {
+      // Map domain to event bus domain
+      const domainMap: Record<string, EventBusDomain> = {
+        legal: DOMAINS.LEGAL,
+        finance: DOMAINS.FINANCE,
+        health: DOMAINS.HEALTH,
+        business: DOMAINS.WORK,
+        personal: DOMAINS.FAMILY,
+        pm: DOMAINS.WORK,
+        comms: DOMAINS.FAMILY,
+        hyro: DOMAINS.FAMILY,
+        general: DOMAINS.WORK,
+      };
+      targetDomain = domainMap[classification.domain] || DOMAINS.WORK;
+    }
+
+    // Create a critical event for the event bus
+    const criticalEvent = createMessageEvent(
+      `cortex.ingestor.${source}`,
+      {
+        eventId,
+        source,
+        payload,
+        classification,
+        fastPath: true,
+        timestamp: new Date().toISOString(),
+      },
+      targetDomain,
+      'critical', // Mark as critical priority
+      `fast-path-${eventId}` // Correlation ID for tracking
+    );
+
+    // Publish to the event bus - subscribed agents will pick it up immediately
+    await eventBus.publish(criticalEvent);
+
+    console.log(`[EventIngestor] Fast-path routed ${source} event ${eventId} to domain ${targetDomain}`);
+  } catch (error) {
+    console.error(`[EventIngestor] Failed to fast-path route event ${eventId}:`, error);
+    // Don't throw - we already ingested the event to working memory as fallback
+  }
 }

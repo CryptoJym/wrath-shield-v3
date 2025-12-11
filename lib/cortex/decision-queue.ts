@@ -459,9 +459,46 @@ export class DecisionQueue {
         `[DecisionQueue] Learning: User chose "${selectedOption.label}" over recommended "${recommendedOption.label}"`
       );
 
-      // This could feed into the preference model correction system
-      // For now, log for observability
-      // TODO: Wire to recordCorrection in preference-model.ts
+      // Record as correction in preference model for learning
+      try {
+        const { recordCorrection } = await import('../ea/preference-model');
+
+        // Map decision to correction format
+        const originalAction = recommendedOption.action || 'unknown';
+        const correctedAction = selectedOption.action || 'unknown';
+
+        // Infer urgency from priority
+        const urgencyMap: Record<string, 'critical' | 'high' | 'medium' | 'low'> = {
+          critical: 'critical',
+          high: 'high',
+          medium: 'medium',
+          low: 'low',
+        };
+
+        await recordCorrection(
+          decisionId,
+          {
+            urgency: urgencyMap[decision.priority] || 'medium',
+            domain: decision.domain as any,
+            action: originalAction,
+          },
+          {
+            urgency: urgencyMap[decision.priority] || 'medium',
+            domain: decision.domain as any,
+            action: correctedAction,
+          },
+          decision.userFeedback || `User selected "${selectedOption.label}" instead of recommended "${recommendedOption.label}"`,
+          {
+            type: 'notification',
+            summary: decision.title,
+            content: decision.summary,
+          }
+        );
+
+        console.log(`[DecisionQueue] Recorded correction for decision ${decisionId}`);
+      } catch (error) {
+        console.error('[DecisionQueue] Failed to record correction:', error);
+      }
     }
   }
 

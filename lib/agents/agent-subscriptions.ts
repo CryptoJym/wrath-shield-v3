@@ -4,6 +4,7 @@
  */
 
 import { getEventBus, DOMAINS, AgentEvent } from './life-os-event-bus';
+import { invokeAgent, type AgentResponse } from './AgentInvoker';
 
 interface AgentSubscriptionConfig {
   agentId: string;
@@ -137,11 +138,77 @@ function createAgentHandler(agentId: string) {
   return async (event: AgentEvent): Promise<void> => {
     console.log(`[AgentSubscriptions] ${agentId} received event: ${event.type} from ${event.source}`);
 
-    // TODO: Integrate with AgentInvoker
-    // For now, just log - actual invocation will be added in Phase 4
-    // const invoker = getAgentInvoker();
-    // await invoker.invoke(agentId, event);
+    try {
+      // Build user message from event data
+      const userMessage = formatEventAsMessage(event);
+
+      // Extract metadata from payload if available
+      const payloadObj = event.payload as Record<string, unknown> | undefined;
+      const eventMetadata = payloadObj?.metadata as Record<string, unknown> | undefined;
+      const skipMemory = eventMetadata?.skipMemory === true;
+
+      // Invoke the agent via AgentInvoker
+      const response: AgentResponse = await invokeAgent({
+        agentId,
+        userMessage,
+        context: {
+          domainId: event.domain,
+          metadata: {
+            event_id: event.id,
+            event_type: event.type,
+            event_source: event.source,
+            event_timestamp: event.timestamp,
+            ...(eventMetadata || {}),
+          },
+          skipMemory,
+        },
+      });
+
+      console.log(`[AgentSubscriptions] ${agentId} responded: escalation=${response.escalationLevel}, executed=${response.shouldExecute}`);
+
+      // Handle escalation if needed
+      if (!response.shouldExecute) {
+        console.log(`[AgentSubscriptions] ${agentId} action blocked by escalation: ${response.escalationReason}`);
+        // Could emit an escalation event here for tracking
+      }
+    } catch (error) {
+      console.error(`[AgentSubscriptions] ${agentId} failed to process event:`, error);
+      // Don't rethrow - we don't want one agent failure to block others
+    }
   };
+}
+
+/**
+ * Format an event as a user message for the agent
+ */
+function formatEventAsMessage(event: AgentEvent): string {
+  const parts = [
+    `Event Type: ${event.type}`,
+    `Source: ${event.source}`,
+    `Domain: ${event.domain || 'unknown'}`,
+    `Priority: ${event.priority}`,
+  ];
+
+  if (event.payload) {
+    const payloadObj = event.payload as Record<string, unknown>;
+    if (typeof event.payload === 'string') {
+      parts.push(`Content: ${event.payload}`);
+    } else if (payloadObj && typeof payloadObj === 'object') {
+      if ('message' in payloadObj && payloadObj.message) {
+        parts.push(`Message: ${String(payloadObj.message)}`);
+      } else if ('content' in payloadObj && payloadObj.content) {
+        parts.push(`Content: ${String(payloadObj.content)}`);
+      } else if ('task' in payloadObj && payloadObj.task) {
+        parts.push(`Task: ${JSON.stringify(payloadObj.task)}`);
+      } else {
+        parts.push(`Data: ${JSON.stringify(event.payload)}`);
+      }
+    } else {
+      parts.push(`Data: ${JSON.stringify(event.payload)}`);
+    }
+  }
+
+  return parts.join('\n');
 }
 
 /**
