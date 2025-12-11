@@ -1089,12 +1089,9 @@ export async function evaluateResponse(
 }
 
 // ============================================================================
-// Exports
+// Exports (Note: buildTutorContextAsync already exported at definition)
 // ============================================================================
 
 export {
-  formatContextForLLM,
-  buildTutorContextAsync,
-  buildTutorContextSafe,
-  chatAsync
+  formatContextForLLM
 };

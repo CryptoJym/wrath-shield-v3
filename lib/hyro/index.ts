@@ -50,6 +50,76 @@ export {
   getRecommendedTimeBudget,
 } from './recommender';
 
+// ============================================================================
+// ULTIMATE LEVEL UP MACHINE - Meta-Learning System Exports
+// ============================================================================
+
+// Meta-Learner: Trajectory recording and pattern learning
+export {
+  recordTrajectory,
+  planTrajectory,
+  getStudentTrajectories,
+  findSimilarPatterns,
+  learnFromTrajectories,
+  manifoldDistance,
+  clusterState,
+  type StateVector,
+  type Intervention,
+  type TrajectoryRecord,
+  type LearnedPattern,
+  type TrajectoryPlan,
+} from './forge-meta-learner';
+
+// Meta-Dimensions: Higher-order learning capabilities
+export {
+  getStudentMetaDimensions,
+  updateMetaDimension,
+  getMetaDimensionHistory,
+  calculateSubjectContribution,
+  getMetaDimensionRecommendations,
+  META_DIMENSION_NAMES,
+  type MetaDimensions,
+  type MetaDimensionName,
+  type MetaDimensionEvent,
+  type StudentMetaProfile,
+} from './forge-meta-dimensions';
+
+// Standards Mapping: Common Core/NGSS to C/E/G manifold
+export {
+  getStandardManifoldMapping,
+  calculateStandardContribution,
+  getSuggestableStandards,
+  updateStandardMastery,
+  getPrerequisiteChain,
+  calculateStandardReadiness,
+  type StandardMapping,
+  type StandardMastery,
+  type ManifoldContribution,
+} from './forge-standards-mapping';
+
+// Assessment Framework: Manifold-aware testing
+export {
+  createAssessmentSession,
+  selectAssessmentItems,
+  scoreAssessmentResponse,
+  completeAssessment,
+  getAssessmentHistory,
+  type AssessmentSession,
+  type AssessmentItem,
+  type AssessmentResponse,
+  type AssessmentResult,
+} from './forge-assessment';
+
+// Student Profile: Enhanced multi-grade support
+export {
+  getStudentProfile,
+  createStudentProfile,
+  getEffectiveGrade,
+  updateInferredGrade,
+  getStudentProgressSummary,
+  type EnhancedStudentProfile,
+} from './forge-student-profile';
+
 /**
  * Quick start helper - Initialize Hyro for a new user
  */

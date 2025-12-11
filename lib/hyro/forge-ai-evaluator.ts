@@ -11,6 +11,7 @@
 
 import { ensureServerOnly } from '../server-only-guard';
 import { getOpenRouterClient } from '../OpenRouterClient';
+import { DirectLLMClients } from '../DirectLLMClients';
 import { getDatabase } from '../db/Database';
 import {
   ComprehensionPrompt,
@@ -275,7 +276,115 @@ function extractGrowthAreas(evidence: number, reasoning: number, depth: number, 
 // ============================================================================
 
 /**
+ * Try Ollama first (local, private, fast), fall back to OpenRouter
+ * Uses the smart inference API at localhost:8789 or direct Ollama
+ */
+async function evaluateWithOllama(
+  systemPrompt: string,
+  userPrompt: string
+): Promise<{ content: string; model: string } | null> {
+  const ollamaEnabled = process.env.OLLAMA_ENABLED === 'true';
+  if (!ollamaEnabled) {
+    console.log('[AI Evaluator] Ollama disabled, skipping');
+    return null;
+  }
+
+  const model = process.env.OLLAMA_DEFAULT_MODEL || 'deepseek-r1:8b';
+  console.log(`[AI Evaluator] Trying Ollama (${model})...`);
+
+  try {
+    // Try the smart inference API first (handles local/remote routing)
+    const inferenceApiUrl = process.env.OLLAMA_INFERENCE_API || 'http://localhost:8789';
+
+    // Preferred model priority: 70b (remote) > 8b (local)
+    const preferredModel = process.env.OLLAMA_EVALUATION_MODEL || 'deepseek-r1:70b';
+
+    const inferenceResponse = await fetch(`${inferenceApiUrl}/inference`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        task_type: 'misconception_analysis',
+        prompt: userPrompt,
+        system_prompt: systemPrompt,
+        model: preferredModel,
+        temperature: 0.3,
+        max_tokens: 1000,
+      }),
+      signal: AbortSignal.timeout(90000), // 90 second timeout for model loading
+    });
+
+    if (inferenceResponse.ok) {
+      const data = await inferenceResponse.json();
+
+      // Check if response is empty (may happen if remote model unavailable)
+      if (data.response && data.response.trim()) {
+        console.log(`[AI Evaluator] ✓ Ollama inference API succeeded (${data.execution_time_ms}ms, model: ${data.model})`);
+        return {
+          content: data.response,
+          model: data.model,
+        };
+      }
+
+      // If 70b returned empty, try 8b as fallback
+      if (preferredModel.includes('70b')) {
+        console.log('[AI Evaluator] 70b returned empty, trying 8b locally...');
+        const fallbackResponse = await fetch(`${inferenceApiUrl}/inference`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            task_type: 'misconception_analysis',
+            prompt: userPrompt,
+            system_prompt: systemPrompt,
+            model: 'deepseek-r1:8b',
+            temperature: 0.3,
+            max_tokens: 1000,
+          }),
+          signal: AbortSignal.timeout(60000),
+        });
+
+        if (fallbackResponse.ok) {
+          const fallbackData = await fallbackResponse.json();
+          if (fallbackData.response && fallbackData.response.trim()) {
+            console.log(`[AI Evaluator] ✓ 8b fallback succeeded (${fallbackData.execution_time_ms}ms)`);
+            return {
+              content: fallbackData.response,
+              model: fallbackData.model,
+            };
+          }
+        }
+      }
+    }
+
+    // Fall back to direct Ollama if inference API unavailable
+    console.log('[AI Evaluator] Inference API unavailable, trying direct Ollama...');
+
+    const result = await DirectLLMClients.ollamaChat(
+      {
+        messages: [
+          { role: 'system', content: systemPrompt },
+          { role: 'user', content: userPrompt },
+        ],
+        temperature: 0.3,
+        max_tokens: 1000,
+      },
+      model
+    );
+
+    console.log(`[AI Evaluator] ✓ Direct Ollama succeeded`);
+    return {
+      content: result.content,
+      model: result.model,
+    };
+  } catch (error) {
+    const errorMsg = error instanceof Error ? error.message : 'Unknown error';
+    console.log(`[AI Evaluator] Ollama failed: ${errorMsg}, will try OpenRouter`);
+    return null;
+  }
+}
+
+/**
  * Use LLM to evaluate response with full educational context
+ * Priority: Ollama (local, private) → OpenRouter (cloud fallback)
  */
 async function evaluateWithLLM(
   prompt: ComprehensionPrompt,
@@ -314,7 +423,46 @@ ${response}
 
 Please evaluate this response according to the rubric and return the JSON format specified.`;
 
-  // Get OpenRouter client
+  // =========================================================================
+  // PRIORITY 1: Try Ollama (local, private, fast)
+  // =========================================================================
+  const ollamaResult = await evaluateWithOllama(systemPrompt, userPrompt);
+
+  if (ollamaResult) {
+    try {
+      // Parse JSON response from Ollama
+      const evaluation = JSON.parse(ollamaResult.content);
+
+      // Validate structure
+      if (evaluation.score && evaluation.feedback && evaluation.rubric_scores) {
+        console.log(`[AI Evaluator] ✓ Ollama evaluation successful (${ollamaResult.model})`);
+
+        // Store evaluation in memory
+        await addEducationMemory(
+          `Evaluated response to prompt "${prompt.prompt_text.substring(0, 50)}...": Score ${evaluation.score}/100, Depth: ${evaluation.depth_rating}`,
+          'progress',
+          {
+            prompt_id: prompt.id,
+            score: evaluation.score,
+            depth_rating: evaluation.depth_rating,
+            evaluation_source: 'ollama',
+            model: ollamaResult.model,
+          }
+        );
+
+        return evaluation as EvaluationResult;
+      }
+
+      console.log('[AI Evaluator] Ollama response missing required fields, trying OpenRouter');
+    } catch (parseError) {
+      console.log('[AI Evaluator] Failed to parse Ollama response as JSON, trying OpenRouter');
+    }
+  }
+
+  // =========================================================================
+  // PRIORITY 2: Fall back to OpenRouter (cloud)
+  // =========================================================================
+  console.log('[AI Evaluator] Falling back to OpenRouter...');
   const client = getOpenRouterClient();
 
   try {
@@ -356,7 +504,7 @@ Please evaluate this response according to the rubric and return the JSON format
         prompt_id: prompt.id,
         score: evaluation.score,
         depth_rating: evaluation.depth_rating,
-        evaluation_source: 'llm',
+        evaluation_source: 'openrouter',
       }
     );
 

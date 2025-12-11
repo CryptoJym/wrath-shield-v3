@@ -72,12 +72,31 @@ export async function getCurrentStudent(): Promise<StudentContext> {
         VALUES (?, ?, ?, ?, 0, 'welcome')
       `).run(userId, displayName, email, avatarUrl);
 
+      // Create initial character sheet
+      db.prepare(`
+        INSERT OR IGNORE INTO hyro_character (id, display_name, avatar_url)
+        VALUES (?, ?, ?)
+      `).run(userId, displayName, avatarUrl);
+
       student = db.prepare(`SELECT * FROM students WHERE id = ?`).get(userId) as Student;
     }
   }
 
   // Update last login
   if (student) {
+    // Self-healing: Ensure character record exists (for migrated users)
+    const charExists = db.prepare(`SELECT 1 FROM hyro_character WHERE id = ?`).get(userId);
+    if (!charExists) {
+      const clerkUser = await currentUser();
+      const displayName = student.display_name || clerkUser?.firstName || 'Student';
+      const avatarUrl = student.avatar_url || clerkUser?.imageUrl || null;
+
+      db.prepare(`
+        INSERT OR IGNORE INTO hyro_character (id, display_name, avatar_url)
+        VALUES (?, ?, ?)
+      `).run(userId, displayName, avatarUrl);
+    }
+
     db.prepare(`UPDATE students SET last_login_at = unixepoch() WHERE id = ?`).run(userId);
   }
 

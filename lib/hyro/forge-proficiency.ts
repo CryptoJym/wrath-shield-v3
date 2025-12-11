@@ -3,6 +3,16 @@ import { randomUUID } from 'crypto';
 import { StatName, STAT_NAMES } from './forge-types';
 import fs from 'fs';
 import path from 'path';
+import {
+  GradeLevel,
+  get50thPercentileBenchmarks,
+  getStatBenchmark,
+  getEffectiveGrade,
+  getEffectiveBenchmark,
+  calculatePercentile,
+  getPerformanceStatus,
+  getBenchmark,
+} from './forge-grade-benchmarks';
 
 // ============================================================================
 // Types
@@ -82,24 +92,25 @@ export interface BenchmarkComparison {
   user_level: number;
   benchmark_level: number;
   percentile: number;
-  status: 'below' | 'at' | 'above' | 'excellent';
+  status: 'far_below' | 'below' | 'approaching' | 'at' | 'above' | 'far_above';
+  grade: GradeLevel;  // The grade used for comparison
 }
 
 // ============================================================================
 // Constants
 // ============================================================================
 
-// Grade 6 benchmark levels (50th percentile)
-const GRADE_6_BENCHMARKS: Record<StatName, number> = {
-  math: 65,
-  reading: 65,
-  science: 60,
-  coding: 50,
-  study_skills: 55,
-  critical_thinking: 55,
-  technology: 50,
-  problem_solving: 55,
-};
+/**
+ * @deprecated Use get50thPercentileBenchmarks(grade) or getStatBenchmark(stat, grade) instead.
+ * Kept for backward compatibility - dynamically returns Grade 6 benchmarks.
+ */
+const GRADE_6_BENCHMARKS: Record<StatName, number> = get50thPercentileBenchmarks('6');
+
+/**
+ * Default student ID used when no specific student context is available.
+ * In production, this should come from authentication/session context.
+ */
+const DEFAULT_STUDENT_ID = 'default_student';
 
 // Prior for new skills (weak prior centered at 50)
 const PRIOR_MEAN = 50;
@@ -615,20 +626,29 @@ export function getCalibrationFeedback(): CalibrationReport {
 
 /**
  * Compare skill to grade-level benchmark
+ * @param statName - The stat to compare
+ * @param studentId - Optional student ID (defaults to using DEFAULT_STUDENT_ID)
+ * @param grade - Optional explicit grade (defaults to student's effective grade)
  */
-export function compareToBenchmark(statName: StatName): BenchmarkComparison {
+export function compareToBenchmark(
+  statName: StatName,
+  studentId?: string,
+  grade?: GradeLevel
+): BenchmarkComparison {
   const proficiency = getSkillProficiency(statName);
-  const benchmark = GRADE_6_BENCHMARKS[statName];
 
-  // Estimate percentile (simplified)
-  // Assume benchmark is 50th percentile, std dev of 15
-  const zScore = (proficiency.level - benchmark) / 15;
-  const percentile = Math.min(99, Math.max(1, Math.round(50 + zScore * 34)));
+  // Determine the grade to use for comparison
+  const effectiveGrade = grade ??
+    (studentId ? getEffectiveGrade(studentId, statName) : '6' as GradeLevel);
 
-  let status: 'below' | 'at' | 'above' | 'excellent' = 'at';
-  if (proficiency.level < benchmark - 10) status = 'below';
-  else if (proficiency.level > benchmark + 20) status = 'excellent';
-  else if (proficiency.level > benchmark + 5) status = 'above';
+  // Get the grade-appropriate benchmark
+  const benchmark = getStatBenchmark(statName, effectiveGrade);
+
+  // Calculate percentile using the new grade-aware function
+  const percentile = calculatePercentile(proficiency.level, statName, effectiveGrade);
+
+  // Get performance status using the new grade-aware function
+  const status = getPerformanceStatus(proficiency.level, statName, effectiveGrade);
 
   return {
     stat_name: statName,
@@ -636,14 +656,37 @@ export function compareToBenchmark(statName: StatName): BenchmarkComparison {
     benchmark_level: benchmark,
     percentile,
     status,
+    grade: effectiveGrade,
   };
 }
 
 /**
- * Get benchmark comparison for all skills
+ * Compare skill to benchmark for a specific student (grade-aware)
  */
-export function getAllBenchmarks(): BenchmarkComparison[] {
-  return STAT_NAMES.map(stat => compareToBenchmark(stat));
+export function compareToBenchmarkForStudent(
+  statName: StatName,
+  studentId: string
+): BenchmarkComparison {
+  return compareToBenchmark(statName, studentId);
+}
+
+/**
+ * Get benchmark comparison for all skills
+ * @param studentId - Optional student ID for grade-aware comparisons
+ * @param grade - Optional explicit grade (defaults to Grade 6 or student's effective grade)
+ */
+export function getAllBenchmarks(
+  studentId?: string,
+  grade?: GradeLevel
+): BenchmarkComparison[] {
+  return STAT_NAMES.map(stat => compareToBenchmark(stat, studentId, grade));
+}
+
+/**
+ * Get benchmark comparison for all skills for a specific student
+ */
+export function getAllBenchmarksForStudent(studentId: string): BenchmarkComparison[] {
+  return getAllBenchmarks(studentId);
 }
 
 // ============================================================================

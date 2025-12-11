@@ -16,6 +16,14 @@ import { getDatabase } from '@/lib/db/Database';
 import { StatName, STAT_NAMES } from './forge-types';
 import { getProficiencyProfile, getSkillProficiency, SkillProficiency } from './forge-proficiency';
 import { getLatestResult, DiagnosticResult } from './forge-diagnostics';
+import {
+  GradeLevel,
+  getStatBenchmark,
+  getEffectiveGrade,
+  getEffectiveBenchmark,
+  getStudentGradeProfile,
+  getBenchmark,
+} from './forge-grade-benchmarks';
 
 // ============================================================================
 // State Vector Types (from Manifold)
@@ -106,8 +114,16 @@ const MAX_ZONE_WIDTH = 0.25; // At most 25% zone
 const SCAFFOLDING_FAILURE_STREAK = 3;
 const SCAFFOLDING_SUCCESS_RATE_THRESHOLD = 0.40;
 
-// Grade benchmarks
-const GRADE_6_BENCHMARK = 50; // Target level for 6th grade
+/**
+ * @deprecated Use getStatBenchmark(stat, grade) or getEffectiveBenchmark(studentId, stat) instead.
+ * This constant is kept for backward compatibility and returns a generic benchmark.
+ */
+const GRADE_6_BENCHMARK = 50; // Legacy target level
+
+/**
+ * Default student ID used when no specific student context is available.
+ */
+const DEFAULT_STUDENT_ID = 'default_student';
 
 // ============================================================================
 // ZPD State Calculation
@@ -330,8 +346,10 @@ export function getContentRecommendation(statName: StatName): ZPDRecommendation 
 
 /**
  * Calculate learning velocity (rate of improvement)
+ * @param statName - The stat to calculate velocity for
+ * @param studentId - Optional student ID for grade-aware benchmarks
  */
-export function getLearningVelocity(statName: StatName): LearningVelocity {
+export function getLearningVelocity(statName: StatName, studentId?: string): LearningVelocity {
   const db = getDatabase();
 
   // Get proficiency history
@@ -374,10 +392,15 @@ export function getLearningVelocity(statName: StatName): LearningVelocity {
   const secondHalfGrowth = currentLevel - midWeekLevel;
   const acceleration = secondHalfGrowth - firstHalfGrowth;
 
+  // Get grade-aware benchmark for estimating days to reach target
+  const targetBenchmark = studentId
+    ? getEffectiveBenchmark(studentId, statName)
+    : getStatBenchmark(statName, '6'); // Default to Grade 6
+
   // Estimate days to benchmark
   let estimatedDays: number | null = null;
-  if (currentLevel < GRADE_6_BENCHMARK && dailyGrowth > 0) {
-    const remaining = GRADE_6_BENCHMARK - currentLevel;
+  if (currentLevel < targetBenchmark && dailyGrowth > 0) {
+    const remaining = targetBenchmark - currentLevel;
     estimatedDays = Math.ceil(remaining / dailyGrowth);
   }
 
@@ -391,10 +414,25 @@ export function getLearningVelocity(statName: StatName): LearningVelocity {
 }
 
 /**
- * Get learning velocity for all stats
+ * Calculate learning velocity for a specific student (grade-aware)
  */
-export function getAllLearningVelocities(): LearningVelocity[] {
-  return STAT_NAMES.map(getLearningVelocity);
+export function getLearningVelocityForStudent(statName: StatName, studentId: string): LearningVelocity {
+  return getLearningVelocity(statName, studentId);
+}
+
+/**
+ * Get learning velocity for all stats
+ * @param studentId - Optional student ID for grade-aware benchmarks
+ */
+export function getAllLearningVelocities(studentId?: string): LearningVelocity[] {
+  return STAT_NAMES.map(stat => getLearningVelocity(stat, studentId));
+}
+
+/**
+ * Get learning velocity for all stats for a specific student (grade-aware)
+ */
+export function getAllLearningVelocitiesForStudent(studentId: string): LearningVelocity[] {
+  return getAllLearningVelocities(studentId);
 }
 
 /**

@@ -40,7 +40,7 @@ export function getCharacter(studentId: string = 'hyro'): Character | null {
   const db = getDatabase();
 
   const character = db.prepare(`
-    SELECT * FROM hyro_character WHERE student_id = ?
+    SELECT * FROM hyro_character WHERE id = ?
   `).get(studentId) as Character | undefined;
 
   return character || null;
@@ -70,10 +70,10 @@ export function getCharacterSheet(studentId: string = 'hyro'): CharacterSheet | 
   // Get active quests
   const activeQuests = db.prepare(`
     SELECT * FROM hyro_quests
-    WHERE status IN ('available', 'active')
+    WHERE student_id = ? AND status IN ('available', 'in_progress')
     ORDER BY due_at ASC NULLS LAST, created_at DESC
     LIMIT 5
-  `).all();
+  `).all(studentId);
 
   return {
     ...character,

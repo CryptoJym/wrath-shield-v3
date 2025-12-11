@@ -1,52 +1,327 @@
 /**
-
-HYRO FORGE: Visual Assessment & Multi-Modal Learning */
-import { getDatabase } from '@/lib/db/Database'; import { randomUUID } from 'crypto'; import { awardXP } from './forge-xp'; import { StatName } from './forge-types'; import { getOpenRouterClient } from '../OpenRouterClient'; import { ensureServerOnly } from '../server-only-guard';
+ * HYRO FORGE: Visual Assessment & Multi-Modal Learning
+ */
+import { getDatabase } from '@/lib/db/Database';
+import { randomUUID } from 'crypto';
+import { awardXP } from './forge-xp';
+import { StatName } from './forge-types';
+import { getOpenRouterClient } from '../OpenRouterClient';
+import { ensureServerOnly } from '../server-only-guard';
 
 ensureServerOnly('lib/hyro/forge-visual-assessment');
 
-export type VisualAssessmentType = 'diagram_interpretation' | 'chart_reading' | 'visual_comparison' | 'spatial_reasoning' | 'image_analysis'; export type Modality = 'text' | 'image' | 'diagram' | 'video' | 'interactive' | 'audio'; export type DiagramType = 'flowchart' | 'mind_map' | 'comparison_table' | 'timeline' | 'concept_map' | 'venn_diagram' | 'cause_effect' | 'hierarchy';
+export type VisualAssessmentType = 'diagram_interpretation' | 'chart_reading' | 'visual_comparison' | 'spatial_reasoning' | 'image_analysis';
+export type Modality = 'text' | 'image' | 'diagram' | 'video' | 'interactive' | 'audio';
+export type DiagramType = 'flowchart' | 'mind_map' | 'comparison_table' | 'timeline' | 'concept_map' | 'venn_diagram' | 'cause_effect' | 'hierarchy';
 
-export interface AssessmentContext { bookId?: string; chapterId?: string; conceptId?: string; difficulty?: string; statTargeted?: StatName; }
+export interface AssessmentContext {
+    bookId?: string;
+    chapterId?: string;
+    conceptId?: string;
+    difficulty?: string;
+    statTargeted?: StatName;
+}
 
-export interface VisualAssessment { id: string; student_id: string; assessment_type: VisualAssessmentType; image_url: string; context: AssessmentContext; score: number | null; response_data: Record<string, any>; created_at: number; }
+export interface VisualAssessment {
+    id: string;
+    student_id: string;
+    assessment_type: VisualAssessmentType;
+    image_url: string;
+    context: AssessmentContext;
+    score: number | null;
+    response_data: Record<string, any>;
+    created_at: number;
+}
 
-export interface ModalityPreference { student_id: string; modality: Modality; preference_score: number; samples_count: number; effectiveness_score: number; }
+export interface ModalityPreference {
+    student_id: string;
+    modality: Modality;
+    preference_score: number;
+    samples_count: number;
+    effectiveness_score: number;
+}
 
-export interface MultiModalPrompt { modality: Modality; content: string; instructions: string[]; expected_outcomes: string[]; estimated_time_minutes: number; resources: string[]; }
+export interface MultiModalPrompt {
+    modality: Modality;
+    content: string;
+    instructions: string[];
+    expected_outcomes: string[];
+    estimated_time_minutes: number;
+    resources: string[];
+}
 
-export interface DiagramPrompt { diagram_type: DiagramType; concept_id: string; instructions: string; structural_guidance: string[]; example_elements: string[]; evaluation_criteria: string[]; complexity_level: 'basic' | 'intermediate' | 'advanced'; estimated_time_minutes: number; }
+export interface DiagramPrompt {
+    diagram_type: DiagramType;
+    concept_id: string;
+    instructions: string;
+    structural_guidance: string[];
+    example_elements: string[];
+    evaluation_criteria: string[];
+    complexity_level: 'basic' | 'intermediate' | 'advanced';
+    estimated_time_minutes: number;
+}
 
-export interface VisualAssessmentResult { assessment_id: string; score: number; comprehension_analysis: string; identified_concepts: string[]; feedback: string; xp_awarded: number; }
+export interface VisualAssessmentResult {
+    assessment_id: string;
+    score: number;
+    comprehension_analysis: string;
+    identified_concepts: string[];
+    feedback: string;
+    xp_awarded: number;
+}
 
-export interface AssessmentOptions { generateQuestions?: boolean; questionCount?: number; studentResponse?: string; includeAnalysis?: boolean; }
+export interface AssessmentOptions {
+    generateQuestions?: boolean;
+    questionCount?: number;
+    studentResponse?: string;
+    includeAnalysis?: boolean;
+}
 
-export function initializeVisualAssessmentTables(): void { const db = getDatabase(); db.exec(CREATE TABLE IF NOT EXISTS hyro_visual_assessments ( id TEXT PRIMARY KEY, student_id TEXT NOT NULL DEFAULT 'hyro', assessment_type TEXT NOT NULL, image_url TEXT NOT NULL, context TEXT, score REAL, response_data TEXT, created_at INTEGER DEFAULT (unixepoch()) ); CREATE INDEX IF NOT EXISTS idx_visual_assess_student ON hyro_visual_assessments(student_id); CREATE TABLE IF NOT EXISTS hyro_modality_performance ( id TEXT PRIMARY KEY, student_id TEXT NOT NULL DEFAULT 'hyro', modality TEXT NOT NULL, concept_id TEXT NOT NULL, performance_score REAL NOT NULL, engagement_rating REAL NOT NULL, time_spent_seconds INTEGER NOT NULL, created_at INTEGER DEFAULT (unixepoch()) ); CREATE INDEX IF NOT EXISTS idx_modality_perf_student ON hyro_modality_performance(student_id); CREATE TABLE IF NOT EXISTS hyro_modality_preferences ( id TEXT PRIMARY KEY, student_id TEXT NOT NULL DEFAULT 'hyro', modality TEXT NOT NULL, preference_score REAL NOT NULL DEFAULT 50, samples_count INTEGER NOT NULL DEFAULT 0, updated_at INTEGER DEFAULT (unixepoch()), created_at INTEGER DEFAULT (unixepoch()), UNIQUE(student_id, modality) ); CREATE INDEX IF NOT EXISTS idx_modality_pref_student ON hyro_modality_preferences(student_id);); }
+export function initializeVisualAssessmentTables(): void {
+    const db = getDatabase();
+    db.exec(`
+    CREATE TABLE IF NOT EXISTS hyro_visual_assessments (
+      id TEXT PRIMARY KEY,
+      student_id TEXT NOT NULL DEFAULT 'hyro',
+      assessment_type TEXT NOT NULL,
+      image_url TEXT NOT NULL,
+      context TEXT,
+      score REAL,
+      response_data TEXT,
+      created_at INTEGER DEFAULT (unixepoch())
+    );
+    CREATE INDEX IF NOT EXISTS idx_visual_assess_student ON hyro_visual_assessments(student_id);
 
-export async function assessVisualComprehension( studentId: string, imageUrl: string, context: AssessmentContext, options: AssessmentOptions = {} ): Promise<VisualAssessmentResult> { const db = getDatabase(); const id = randomUUID(); const now = Math.floor(Date.now() / 1000); const client = getOpenRouterClient();
+    CREATE TABLE IF NOT EXISTS hyro_modality_performance (
+      id TEXT PRIMARY KEY,
+      student_id TEXT NOT NULL DEFAULT 'hyro',
+      modality TEXT NOT NULL,
+      concept_id TEXT NOT NULL,
+      performance_score REAL NOT NULL,
+      engagement_rating REAL NOT NULL,
+      time_spent_seconds INTEGER NOT NULL,
+      created_at INTEGER DEFAULT (unixepoch())
+    );
+    CREATE INDEX IF NOT EXISTS idx_modality_perf_student ON hyro_modality_performance(student_id);
 
-const systemPrompt = options.studentResponse ? Analyze the student's response to the visual content. Return JSON: {score: 0-100, analysis: string, identified_concepts: string[], feedback: string} : Analyze this image for educational purposes. Return JSON: {score: 0-100, analysis: string, identified_concepts: string[], feedback: string};
+    CREATE TABLE IF NOT EXISTS hyro_modality_preferences (
+      id TEXT PRIMARY KEY,
+      student_id TEXT NOT NULL DEFAULT 'hyro',
+      modality TEXT NOT NULL,
+      preference_score REAL NOT NULL DEFAULT 50,
+      samples_count INTEGER NOT NULL DEFAULT 0,
+      updated_at INTEGER DEFAULT (unixepoch()),
+      created_at INTEGER DEFAULT (unixepoch()),
+      UNIQUE(student_id, modality)
+    );
+    CREATE INDEX IF NOT EXISTS idx_modality_pref_student ON hyro_modality_preferences(student_id);
+  `);
+}
 
-const userPrompt = options.studentResponse ? Student response: "${options.studentResponse}"\nContext: ${JSON.stringify(context)} : Analyze for educational purposes. Context: ${JSON.stringify(context)};
+export async function assessVisualComprehension(
+    studentId: string,
+    imageUrl: string,
+    context: AssessmentContext,
+    options: AssessmentOptions = {}
+): Promise<VisualAssessmentResult> {
+    const db = getDatabase();
+    const id = randomUUID();
+    const now = Math.floor(Date.now() / 1000);
+    const client = getOpenRouterClient();
 
-const response = await client.chat.completions.create({ model: 'anthropic/claude-3.5-sonnet', messages: [ { role: 'system', content: systemPrompt }, { role: 'user', content: [{ type: 'text', text: userPrompt }, { type: 'image_url', image_url: { url: imageUrl } }] } ], max_tokens: 1024, });
+    const systemPrompt = options.studentResponse
+        ? `Analyze the student's response to the visual content. Return JSON: {score: 0-100, analysis: string, identified_concepts: string[], feedback: string}`
+        : `Analyze this image for educational purposes. Return JSON: {score: 0-100, analysis: string, identified_concepts: string[], feedback: string}`;
 
-const content = response.choices[0]?.message?.content || '{}'; let parsed: any; try { const jsonMatch = content.match(/{[\s\S]*}/); parsed = jsonMatch ? JSON.parse(jsonMatch[0]) : { score: 50, analysis: content, identified_concepts: [], feedback: '' }; } catch { parsed = { score: 50, analysis: content, identified_concepts: [], feedback: '' }; }
+    const userPrompt = options.studentResponse
+        ? `Student response: "${options.studentResponse}"\nContext: ${JSON.stringify(context)}`
+        : `Analyze for educational purposes. Context: ${JSON.stringify(context)}`;
 
-const score = parsed.score || 50; const stat = context.statTargeted || 'critical_thinking'; const xpAmount = Math.floor(score / 10); if (score >= 60) awardXP(studentId, stat, xpAmount);
+    const response = await client.chat.completions.create({
+        model: 'anthropic/claude-3.5-sonnet',
+        messages: [
+            { role: 'system', content: systemPrompt },
+            {
+                role: 'user',
+                content: [
+                    { type: 'text', text: userPrompt },
+                    { type: 'image_url', image_url: { url: imageUrl } }
+                ]
+            }
+        ],
+        max_tokens: 1024,
+    });
 
-db.prepare(INSERT INTO hyro_visual_assessments (id, student_id, assessment_type, image_url, context, score, response_data, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)).run(id, studentId, 'image_analysis', imageUrl, JSON.stringify(context), score, JSON.stringify(parsed), now);
+    const content = response.choices[0]?.message?.content || '{}';
+    let parsed: any;
+    try {
+        const jsonMatch = content.match(/\{[\s\S]*\}/);
+        parsed = jsonMatch ? JSON.parse(jsonMatch[0]) : { score: 50, analysis: content, identified_concepts: [], feedback: '' };
+    } catch {
+        parsed = { score: 50, analysis: content, identified_concepts: [], feedback: '' };
+    }
 
-return { assessment_id: id, score, comprehension_analysis: parsed.analysis || '', identified_concepts: parsed.identified_concepts || [], feedback: parsed.feedback || '', xp_awarded: score >= 60 ? xpAmount : 0 }; }
+    const score = parsed.score || 50;
+    const stat = context.statTargeted || 'critical_thinking';
+    const xpAmount = Math.floor(score / 10);
 
-const MODALITY_PROMPTS: Record<Modality, { instructions: string[]; resources: string[]; time: number }> = { text: { instructions: ['Read carefully', 'Take notes', 'Summarize'], resources: ['Textbooks', 'Articles'], time: 20 }, image: { instructions: ['Study visually', 'Identify components', 'Trace relationships'], resources: ['Diagrams', 'Charts'], time: 15 }, diagram: { instructions: ['Analyze structure', 'Follow flow', 'Note connections'], resources: ['Flowcharts', 'Mind maps'], time: 25 }, video: { instructions: ['Watch without distractions', 'Take notes', 'Rewatch'], resources: ['Videos', 'Tutorials'], time: 30 }, interactive: { instructions: ['Engage actively', 'Try inputs', 'Document findings'], resources: ['Simulations', 'Labs'], time: 35 }, audio: { instructions: ['Listen quietly', 'Take notes', 'Replay'], resources: ['Podcasts', 'Lectures'], time: 25 }, };
+    if (score >= 60) {
+        awardXP(studentId, stat, xpAmount);
+    }
 
-export function generateMultiModalPrompt(studentId: string, conceptId: string, modality: Modality): MultiModalPrompt { const prefs = getModalityPreferences(studentId); const modalityPref = prefs.find((p: ModalityPreference) => p.modality === modality); const config = MODALITY_PROMPTS[modality]; let content = Learn "${conceptId}" using ${modality}-based materials.; if (modalityPref && modalityPref.preference_score > 70) content += ' This matches your preferred style!'; return { modality, content, instructions: config.instructions, expected_outcomes: [Understand ${conceptId}, Explain ${conceptId}, Connect to related concepts], estimated_time_minutes: config.time, resources: config.resources }; }
+    db.prepare(`
+    INSERT INTO hyro_visual_assessments (id, student_id, assessment_type, image_url, context, score, response_data, created_at)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+  `).run(
+        id,
+        studentId,
+        'image_analysis',
+        imageUrl,
+        JSON.stringify(context),
+        score,
+        JSON.stringify(parsed),
+        now
+    );
 
-export function getModalityPreferences(studentId: string = 'hyro'): ModalityPreference[] { const db = getDatabase(); const rows = db.prepare(SELECT student_id, modality, preference_score, samples_count FROM hyro_modality_preferences WHERE student_id = ? ORDER BY preference_score DESC).all(studentId) as any[]; return rows.map(row => { const perf = db.prepare(SELECT AVG(performance_score) as avg FROM hyro_modality_performance WHERE student_id = ? AND modality = ? LIMIT 10).get(studentId, row.modality) as any; return { student_id: row.student_id, modality: row.modality as Modality, preference_score: row.preference_score, samples_count: row.samples_count, effectiveness_score: perf?.avg || row.preference_score }; }); }
+    return {
+        assessment_id: id,
+        score,
+        comprehension_analysis: parsed.analysis || '',
+        identified_concepts: parsed.identified_concepts || [],
+        feedback: parsed.feedback || '',
+        xp_awarded: score >= 60 ? xpAmount : 0
+    };
+}
 
-export function recordModalityPerformance(studentId: string, modality: Modality, params: { conceptId: string; performanceScore: number; engagementRating: number; timeSpentSeconds: number }): void { const db = getDatabase(); const id = randomUUID(); const now = Math.floor(Date.now() / 1000); db.prepare(INSERT INTO hyro_modality_performance (id, student_id, modality, concept_id, performance_score, engagement_rating, time_spent_seconds, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)).run(id, studentId, modality, params.conceptId, params.performanceScore, params.engagementRating, params.timeSpentSeconds, now); const newScore = params.performanceScore * 0.6 + params.engagementRating * 0.4; const existing = db.prepare(SELECT preference_score, samples_count FROM hyro_modality_preferences WHERE student_id = ? AND modality = ?).get(studentId, modality) as any; if (existing) { const updated = existing.preference_score * 0.7 + newScore * 0.3; db.prepare(UPDATE hyro_modality_preferences SET preference_score = ?, samples_count = ?, updated_at = ? WHERE student_id = ? AND modality = ?).run(updated, existing.samples_count + 1, now, studentId, modality); } else { db.prepare(INSERT INTO hyro_modality_preferences (id, student_id, modality, preference_score, samples_count, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?)).run(randomUUID(), studentId, modality, newScore, 1, now, now); } }
+const MODALITY_PROMPTS: Record<Modality, { instructions: string[]; resources: string[]; time: number }> = {
+    text: { instructions: ['Read carefully', 'Take notes', 'Summarize'], resources: ['Textbooks', 'Articles'], time: 20 },
+    image: { instructions: ['Study visually', 'Identify components', 'Trace relationships'], resources: ['Diagrams', 'Charts'], time: 15 },
+    diagram: { instructions: ['Analyze structure', 'Follow flow', 'Note connections'], resources: ['Flowcharts', 'Mind maps'], time: 25 },
+    video: { instructions: ['Watch without distractions', 'Take notes', 'Rewatch'], resources: ['Videos', 'Tutorials'], time: 30 },
+    interactive: { instructions: ['Engage actively', 'Try inputs', 'Document findings'], resources: ['Simulations', 'Labs'], time: 35 },
+    audio: { instructions: ['Listen quietly', 'Take notes', 'Replay'], resources: ['Podcasts', 'Lectures'], time: 25 },
+};
 
-const DIAGRAM_CONFIG: Record<DiagramType, { guidance: string[]; elements: string[]; criteria: string[] }> = { flowchart: { guidance: ['Start node', 'Diamonds for decisions', 'All paths end'], elements: ['Ovals', 'Rectangles', 'Diamonds'], criteria: ['Complete paths', 'Yes/No branches'] }, mind_map: { guidance: ['Central concept', 'Branch categories', 'Sub-branches'], elements: ['Central topic', 'Branches', 'Keywords'], criteria: ['Clear center', 'Balanced branches'] }, comparison_table: { guidance: ['Clear criteria', 'Consistent columns', 'Highlight differences'], elements: ['Headers', 'Rows', 'Columns'], criteria: ['Parallel structure', 'Clear distinctions'] }, timeline: { guidance: ['Clear scale', 'Proportional spacing', 'Dates and descriptions'], elements: ['Axis', 'Markers', 'Labels'], criteria: ['Accurate chronology', 'Clear labels'] }, concept_map: { guidance: ['Main concept top', 'Labeled relationships', 'Cross-links'], elements: ['Nodes', 'Links', 'Labels'], criteria: ['Valid propositions', 'Hierarchy'] }, venn_diagram: { guidance: ['Size circles', 'Label clearly', 'Items in overlaps'], elements: ['Circles', 'Overlaps', 'Items'], criteria: ['Correct placement', 'Meaningful overlaps'] }, cause_effect: { guidance: ['Main effect', 'Category branches', 'Sub-causes'], elements: ['Effect', 'Categories', 'Causes'], criteria: ['Clear links', 'Comprehensive'] }, hierarchy: { guidance: ['Root at top', 'Parent-child relationships', 'Consistent levels'], elements: ['Root', 'Parents', 'Children'], criteria: ['Clear hierarchy', 'Balanced'] }, };
+export function generateMultiModalPrompt(studentId: string, conceptId: string, modality: Modality): MultiModalPrompt {
+    const prefs = getModalityPreferences(studentId);
+    const modalityPref = prefs.find((p: ModalityPreference) => p.modality === modality);
+    const config = MODALITY_PROMPTS[modality];
 
-export function generateDiagramPrompt(conceptId: string, diagramType: DiagramType, params?: { complexity?: 'basic' | 'intermediate' | 'advanced'; topic?: string }): DiagramPrompt { const config = DIAGRAM_CONFIG[diagramType]; const complexity = params?.complexity || 'intermediate'; const timeEstimates = { basic: 15, intermediate: 25, advanced: 40 }; return { diagram_type: diagramType, concept_id: conceptId, instructions: Create a ${diagramType.replace('_', ' ')} for "${params?.topic || conceptId}"., structural_guidance: config.guidance, example_elements: config.elements, evaluation_criteria: config.criteria, complexity_level: complexity, estimated_time_minutes: timeEstimates[complexity] }; }
+    let content = `Learn "${conceptId}" using ${modality}-based materials.`;
+    if (modalityPref && modalityPref.preference_score > 70) {
+        content += ' This matches your preferred style!';
+    }
+
+    return {
+        modality,
+        content,
+        instructions: config.instructions,
+        expected_outcomes: [`Understand ${conceptId}`, `Explain ${conceptId}`, `Connect to related concepts`],
+        estimated_time_minutes: config.time,
+        resources: config.resources
+    };
+}
+
+export function getModalityPreferences(studentId: string = 'hyro'): ModalityPreference[] {
+    const db = getDatabase();
+    const rows = db.prepare(`
+    SELECT student_id, modality, preference_score, samples_count
+    FROM hyro_modality_preferences
+    WHERE student_id = ?
+    ORDER BY preference_score DESC
+  `).all(studentId) as any[];
+
+    return rows.map(row => {
+        const perf = db.prepare(`
+      SELECT AVG(performance_score) as avg
+      FROM hyro_modality_performance
+      WHERE student_id = ? AND modality = ?
+      LIMIT 10
+    `).get(studentId, row.modality) as any;
+
+        return {
+            student_id: row.student_id,
+            modality: row.modality as Modality,
+            preference_score: row.preference_score,
+            samples_count: row.samples_count,
+            effectiveness_score: perf?.avg || row.preference_score
+        };
+    });
+}
+
+export function recordModalityPerformance(
+    studentId: string,
+    modality: Modality,
+    params: { conceptId: string; performanceScore: number; engagementRating: number; timeSpentSeconds: number }
+): void {
+    const db = getDatabase();
+    const id = randomUUID();
+    const now = Math.floor(Date.now() / 1000);
+
+    db.prepare(`
+    INSERT INTO hyro_modality_performance (id, student_id, modality, concept_id, performance_score, engagement_rating, time_spent_seconds, created_at)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+  `).run(
+        id,
+        studentId,
+        modality,
+        params.conceptId,
+        params.performanceScore,
+        params.engagementRating,
+        params.timeSpentSeconds,
+        now
+    );
+
+    const newScore = params.performanceScore * 0.6 + params.engagementRating * 0.4;
+    const existing = db.prepare(`
+    SELECT preference_score, samples_count
+    FROM hyro_modality_preferences
+    WHERE student_id = ? AND modality = ?
+  `).get(studentId, modality) as any;
+
+    if (existing) {
+        const updated = existing.preference_score * 0.7 + newScore * 0.3;
+        db.prepare(`
+      UPDATE hyro_modality_preferences
+      SET preference_score = ?, samples_count = ?, updated_at = ?
+      WHERE student_id = ? AND modality = ?
+    `).run(updated, existing.samples_count + 1, now, studentId, modality);
+    } else {
+        db.prepare(`
+      INSERT INTO hyro_modality_preferences (id, student_id, modality, preference_score, samples_count, created_at, updated_at)
+      VALUES (?, ?, ?, ?, ?, ?, ?)
+    `).run(randomUUID(), studentId, modality, newScore, 1, now, now);
+    }
+}
+
+const DIAGRAM_CONFIG: Record<DiagramType, { guidance: string[]; elements: string[]; criteria: string[] }> = {
+    flowchart: { guidance: ['Start node', 'Diamonds for decisions', 'All paths end'], elements: ['Ovals', 'Rectangles', 'Diamonds'], criteria: ['Complete paths', 'Yes/No branches'] },
+    mind_map: { guidance: ['Central concept', 'Branch categories', 'Sub-branches'], elements: ['Central topic', 'Branches', 'Keywords'], criteria: ['Clear center', 'Balanced branches'] },
+    comparison_table: { guidance: ['Clear criteria', 'Consistent columns', 'Highlight differences'], elements: ['Headers', 'Rows', 'Columns'], criteria: ['Parallel structure', 'Clear distinctions'] },
+    timeline: { guidance: ['Clear scale', 'Proportional spacing', 'Dates and descriptions'], elements: ['Axis', 'Markers', 'Labels'], criteria: ['Accurate chronology', 'Clear labels'] },
+    concept_map: { guidance: ['Main concept top', 'Labeled relationships', 'Cross-links'], elements: ['Nodes', 'Links', 'Labels'], criteria: ['Valid propositions', 'Hierarchy'] },
+    venn_diagram: { guidance: ['Size circles', 'Label clearly', 'Items in overlaps'], elements: ['Circles', 'Overlaps', 'Items'], criteria: ['Correct placement', 'Meaningful overlaps'] },
+    cause_effect: { guidance: ['Main effect', 'Category branches', 'Sub-causes'], elements: ['Effect', 'Categories', 'Causes'], criteria: ['Clear links', 'Comprehensive'] },
+    hierarchy: { guidance: ['Root at top', 'Parent-child relationships', 'Consistent levels'], elements: ['Root', 'Parents', 'Children'], criteria: ['Clear hierarchy', 'Balanced'] },
+};
+
+export function generateDiagramPrompt(
+    conceptId: string,
+    diagramType: DiagramType,
+    params?: { complexity?: 'basic' | 'intermediate' | 'advanced'; topic?: string }
+): DiagramPrompt {
+    const config = DIAGRAM_CONFIG[diagramType];
+    const complexity = params?.complexity || 'intermediate';
+    const timeEstimates = { basic: 15, intermediate: 25, advanced: 40 };
+
+    return {
+        diagram_type: diagramType,
+        concept_id: conceptId,
+        instructions: `Create a ${diagramType.replace('_', ' ')} for "${params?.topic || conceptId}".`,
+        structural_guidance: config.guidance,
+        example_elements: config.elements,
+        evaluation_criteria: config.criteria,
+        complexity_level: complexity,
+        estimated_time_minutes: timeEstimates[complexity]
+    };
+}

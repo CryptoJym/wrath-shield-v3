@@ -10,7 +10,10 @@
 export type StatName =
   | 'math'
   | 'reading'
+  | 'writing'
   | 'science'
+  | 'social_studies'
+  | 'financial_literacy'
   | 'coding'
   | 'study_skills'
   | 'critical_thinking'
@@ -21,7 +24,10 @@ export type StatName =
 export const STAT_NAMES: StatName[] = [
   'math',
   'reading',
+  'writing',
   'science',
+  'social_studies',
+  'financial_literacy',
   'coding',
   'study_skills',
   'critical_thinking',

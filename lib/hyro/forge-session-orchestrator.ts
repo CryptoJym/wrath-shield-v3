@@ -21,6 +21,26 @@ import type { StatWithTrend } from './forge-types';
 import { getStatsNeedingDiagnostic, getActiveSkillGaps, SkillGap } from './forge-diagnostics';
 import type { Quest } from './forge-types';
 
+// Import sophisticated systems for integration
+import {
+  detectCurrentAttractor,
+  getParetoOptimalContent,
+  type AttractorField,
+  type Content,
+  type ParetoFrontier,
+  type Intervention,
+  recordAttractorAssignment,
+  recordStateHistory,
+} from './forge-chart-space';
+import { getStateVector, type StateVector } from './forge-zpd-engine';
+import {
+  getHGMOptimizer,
+  proposeParameterChange,
+  recordExperimentObservation,
+  getOptimizationStatus,
+  type ExperimentConfig,
+} from './forge-hgm-optimizer';
+
 // ============================================================================
 // Types
 // ============================================================================
@@ -92,6 +112,18 @@ export interface SessionContext {
 
   // Streak
   streak_days: number;
+
+  // === SOPHISTICATED SYSTEMS ===
+  // Attractor field detection (C/E/G manifold)
+  current_attractor?: AttractorField | null;
+  attractor_interventions?: string[];
+
+  // State vector for primary focus stat
+  state_vector?: StateVector | null;
+
+  // Active HGM experiments
+  active_experiments?: ExperimentConfig[];
+  optimization_status?: ReturnType<typeof getOptimizationStatus>;
 }
 
 export interface SessionPlanParams {
@@ -202,6 +234,40 @@ export function getSessionContext(): SessionContext {
   // Get streak (from character)
   const character = db.prepare('SELECT current_streak FROM hyro_character LIMIT 1').get() as { current_streak: number } | undefined;
 
+  // === SOPHISTICATED SYSTEMS INTEGRATION ===
+  // Get primary focus stat (weakest stat or first needing diagnostic)
+  const primaryStat = statsNeedingDiagnostic[0] || weakestStats[0]?.stat_name || 'critical_thinking';
+
+  // Detect current attractor field for the primary stat
+  let currentAttractor: AttractorField | null = null;
+  let attractorInterventions: string[] = [];
+  let stateVector: StateVector | null = null;
+
+  try {
+    currentAttractor = detectCurrentAttractor(studentId, primaryStat as StatName);
+    stateVector = getStateVector(primaryStat as StatName, studentId);
+    if (currentAttractor) {
+      attractorInterventions = currentAttractor.intervention_suggestions;
+      // Record the attractor assignment for tracking
+      if (stateVector) {
+        recordAttractorAssignment(studentId, primaryStat as StatName, currentAttractor, stateVector);
+      }
+    }
+  } catch (err) {
+    console.warn('[SessionOrchestrator] Failed to detect attractor:', err);
+  }
+
+  // Get active HGM experiments and optimization status
+  let activeExperiments: ExperimentConfig[] = [];
+  let optimizationStatus;
+  try {
+    const optimizer = getHGMOptimizer();
+    activeExperiments = optimizer.getActiveExperiments();
+    optimizationStatus = getOptimizationStatus();
+  } catch (err) {
+    console.warn('[SessionOrchestrator] Failed to get HGM status:', err);
+  }
+
   return {
     due_cards_count: dueCardsCount,
     due_cards_by_deck: Array.from(cardsByDeck.values()),
@@ -214,6 +280,12 @@ export function getSessionContext(): SessionContext {
     stats_with_trend: statsWithTrend,
     weakest_stats: weakestStats,
     streak_days: character?.current_streak || 0,
+    // Sophisticated systems
+    current_attractor: currentAttractor,
+    attractor_interventions: attractorInterventions,
+    state_vector: stateVector,
+    active_experiments: activeExperiments,
+    optimization_status: optimizationStatus,
   };
 }
 
@@ -407,6 +479,60 @@ export function planSession(params: SessionPlanParams = {}): SessionPlan {
     }
     return false;
   };
+
+  // === ATTRACTOR-BASED INTERVENTION INJECTION ===
+  // If student is in a negative attractor state (frustration, confusion, boredom),
+  // inject targeted interventions at the start of the session
+  if (context.current_attractor) {
+    const attractor = context.current_attractor;
+    const attractorType = attractor.type;
+    const probability = attractor.student_probability;
+
+    // Only intervene if probability is significant (>0.4)
+    if (probability > 0.4) {
+      switch (attractorType) {
+        case 'frustration':
+          // Student is struggling - reduce difficulty, provide scaffolding
+          addActivity({
+            type: 'break',
+            title: '🧘 Mindfulness Break',
+            description: 'Take a moment to reset. Frustration detected - let\'s build confidence first.',
+            estimated_minutes: 5,
+            xp_potential: 5,
+            stat_focus: ['study_skills'],
+            priority: 10, // Highest priority
+          });
+          break;
+
+        case 'confusion':
+          // Student has fragmented understanding - focus on coherence
+          addActivity({
+            type: 'reflection',
+            title: '🔍 Knowledge Mapping',
+            description: 'Let\'s organize what you know. Confusion detected - building coherence.',
+            estimated_minutes: 8,
+            xp_potential: 15,
+            stat_focus: ['study_skills', 'critical_thinking'],
+            priority: 10,
+          });
+          break;
+
+        case 'boredom':
+          // Student is disengaged - increase challenge
+          // This is handled by Pareto optimization below - prioritize transfer_potential
+          break;
+
+        case 'discovery':
+          // Student is in active learning - support exploration
+          // Good state - no intervention needed
+          break;
+
+        case 'flow':
+          // Optimal state - maintain current approach
+          break;
+      }
+    }
+  }
 
   // 1. HIGHEST PRIORITY: Diagnostics needed (if enabled)
   if (include_diagnostics && context.stats_needing_diagnostic.length > 0) {
@@ -607,6 +733,172 @@ export function planSession(params: SessionPlanParams = {}): SessionPlan {
   saveSessionPlan(sessionPlan);
 
   return sessionPlan;
+}
+
+/**
+ * Get Pareto-optimal content recommendations for a session
+ * Uses multi-objective optimization to balance:
+ * - learning_gain: Expected proficiency improvement
+ * - engagement_score: Predicted student engagement
+ * - efficiency_score: Knowledge gain per time unit
+ * - transfer_potential: Cross-skill applicability
+ *
+ * Additionally adjusts recommendations based on current attractor state:
+ * - Frustration: Prioritize engagement_score (easier content)
+ * - Boredom: Prioritize transfer_potential (more challenging)
+ * - Confusion: Prioritize learning_gain (structured content)
+ * - Discovery/Flow: Balanced selection
+ */
+export function getParetoContentRecommendations(
+  studentId: string,
+  candidateContent: Content[],
+  context?: SessionContext
+): {
+  recommendations: ParetoFrontier;
+  attractor_adjusted: boolean;
+  adjustment_reason?: string;
+} {
+  // Get context if not provided
+  const sessionContext = context || getSessionContext();
+
+  // Get base Pareto frontier
+  const frontier = getParetoOptimalContent(studentId, candidateContent);
+
+  // Check for attractor-based adjustment
+  if (sessionContext.current_attractor) {
+    const attractor = sessionContext.current_attractor;
+    const probability = attractor.student_probability;
+
+    if (probability > 0.4) {
+      // Re-sort optimal content based on attractor state
+      switch (attractor.type) {
+        case 'frustration':
+          // Prioritize engagement (easier, more approachable content)
+          frontier.optimal_content.sort((a, b) => b.engagement_score - a.engagement_score);
+          return {
+            recommendations: frontier,
+            attractor_adjusted: true,
+            adjustment_reason: 'Frustration detected - prioritizing engaging content to rebuild confidence',
+          };
+
+        case 'boredom':
+          // Prioritize transfer potential (more challenging, novel content)
+          frontier.optimal_content.sort((a, b) => b.transfer_potential - a.transfer_potential);
+          return {
+            recommendations: frontier,
+            attractor_adjusted: true,
+            adjustment_reason: 'Boredom detected - prioritizing challenging content to re-engage',
+          };
+
+        case 'confusion':
+          // Prioritize learning gain (structured, coherence-building content)
+          frontier.optimal_content.sort((a, b) => b.learning_gain - a.learning_gain);
+          return {
+            recommendations: frontier,
+            attractor_adjusted: true,
+            adjustment_reason: 'Confusion detected - prioritizing structured learning content',
+          };
+
+        default:
+          // Discovery or Flow - balanced selection is fine
+          break;
+      }
+    }
+  }
+
+  return {
+    recommendations: frontier,
+    attractor_adjusted: false,
+  };
+}
+
+/**
+ * Record session outcome for HGM optimizer
+ * Called after a session completes to feed data to the A/B testing system
+ */
+export function recordSessionOutcome(
+  sessionId: string,
+  outcome: {
+    completion_rate: number;
+    xp_earned: number;
+    time_spent_minutes: number;
+    engagement_signals?: {
+      activities_skipped: number;
+      average_activity_time: number;
+      breaks_taken: number;
+    };
+  }
+): void {
+  const session = getSession(sessionId);
+  if (!session) return;
+
+  try {
+    // Record observation for any active experiments
+    const optimizer = getHGMOptimizer();
+    const activeExperiments = optimizer.getActiveExperiments();
+
+    for (const experiment of activeExperiments) {
+      // Calculate outcome metric based on experiment parameter
+      let outcomeValue = 0;
+
+      switch (experiment.parameter) {
+        case 'session_duration':
+          // Did the adjusted duration improve completion?
+          outcomeValue = outcome.completion_rate;
+          break;
+        case 'break_interval':
+          // Did the break interval affect engagement?
+          outcomeValue = outcome.completion_rate * (1 - (outcome.engagement_signals?.activities_skipped || 0) / session.activities.length);
+          break;
+        case 'difficulty_adjustment':
+          // Did difficulty changes improve learning outcomes?
+          outcomeValue = (outcome.xp_earned / session.xp_potential) * outcome.completion_rate;
+          break;
+        default:
+          outcomeValue = outcome.completion_rate;
+      }
+
+      // Record the observation (baseline vs treatment based on whether experiment is active)
+      recordExperimentObservation(experiment.id, outcomeValue, experiment.status === 'active');
+    }
+  } catch (err) {
+    console.warn('[SessionOrchestrator] Failed to record HGM observation:', err);
+  }
+}
+
+/**
+ * Get session parameters adjusted by HGM optimizer
+ * Returns optimized parameters for session planning based on A/B test results
+ */
+export function getOptimizedSessionParams(): SessionPlanParams {
+  const baseParams: SessionPlanParams = {
+    available_minutes: DEFAULT_SESSION_MINUTES,
+    energy_level: 7,
+    include_diagnostics: true,
+  };
+
+  try {
+    const status = getOptimizationStatus();
+
+    // Apply any optimizations that have proven safe
+    if (status.total_experiments_completed > 0) {
+      // Check for session duration optimizations
+      const durationExperiments = status.recent_experiments?.filter(
+        (e: any) => e.parameter === 'session_duration' && e.status === 'applied'
+      );
+
+      if (durationExperiments && durationExperiments.length > 0) {
+        const latestDuration = durationExperiments[0];
+        if (latestDuration.proposed_value) {
+          baseParams.available_minutes = latestDuration.proposed_value as number;
+        }
+      }
+    }
+  } catch (err) {
+    console.warn('[SessionOrchestrator] Failed to get HGM optimizations:', err);
+  }
+
+  return baseParams;
 }
 
 // ============================================================================
