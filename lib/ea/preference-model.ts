@@ -976,6 +976,415 @@ export async function getCorrectionStats(): Promise<{
 }
 
 // ============================================================================
+// Background Learning Loop Functions
+// ============================================================================
+
+/**
+ * Result of running the learning loop
+ */
+export interface LearningLoopResult {
+  correctionsAnalyzed: number;
+  patternsReinforced: number;
+  patternsWeakened: number;
+  patternsPruned: number;
+  newPatternsCreated: number;
+  modelVersion: string;
+  duration_ms: number;
+}
+
+/**
+ * Run the periodic learning loop to improve the preference model
+ *
+ * This function:
+ * 1. Analyzes recent corrections from Zep memory
+ * 2. Identifies recurring patterns in corrections
+ * 3. Adjusts pattern weights based on effectiveness
+ * 4. Prunes stale/ineffective patterns
+ * 5. Consolidates similar patterns
+ */
+export async function runLearningLoop(): Promise<LearningLoopResult> {
+  const startTime = Date.now();
+  console.log('[PreferenceModel] Starting learning loop...');
+
+  const result: LearningLoopResult = {
+    correctionsAnalyzed: 0,
+    patternsReinforced: 0,
+    patternsWeakened: 0,
+    patternsPruned: 0,
+    newPatternsCreated: 0,
+    modelVersion: '',
+    duration_ms: 0,
+  };
+
+  try {
+    // Load current preferences
+    const model = await loadPreferences();
+    result.modelVersion = model.version;
+
+    // Step 1: Fetch recent corrections from Zep (last 30 days)
+    const corrections = await fetchRecentCorrections(30);
+    result.correctionsAnalyzed = corrections.length;
+    console.log(`[PreferenceModel] Analyzing ${corrections.length} recent corrections`);
+
+    if (corrections.length < 3) {
+      console.log('[PreferenceModel] Not enough corrections for pattern analysis');
+      result.duration_ms = Date.now() - startTime;
+      return result;
+    }
+
+    // Step 2: Analyze correction patterns
+    const patternAnalysis = analyzeCorrectionsForPatterns(corrections);
+
+    // Step 3: Reinforce patterns that align with corrections
+    const reinforced = reinforceEffectivePatterns(model, patternAnalysis);
+    result.patternsReinforced = reinforced;
+
+    // Step 4: Weaken patterns that contradict corrections
+    const weakened = weakenIneffectivePatterns(model, patternAnalysis);
+    result.patternsWeakened = weakened;
+
+    // Step 5: Prune patterns below threshold
+    const pruned = pruneStalePatterns(model);
+    result.patternsPruned = pruned;
+
+    // Step 6: Create new patterns from recurring correction themes
+    const created = createNewPatternsFromThemes(model, patternAnalysis);
+    result.newPatternsCreated = created;
+
+    // Step 7: Save updated model
+    await savePreferences(model);
+
+    result.duration_ms = Date.now() - startTime;
+    console.log(`[PreferenceModel] Learning loop complete in ${result.duration_ms}ms: ${result.patternsReinforced} reinforced, ${result.patternsWeakened} weakened, ${result.patternsPruned} pruned, ${result.newPatternsCreated} created`);
+
+    return result;
+  } catch (error) {
+    console.error('[PreferenceModel] Learning loop error:', error);
+    result.duration_ms = Date.now() - startTime;
+    throw error;
+  }
+}
+
+/**
+ * Fetch recent corrections from Zep memory
+ */
+async function fetchRecentCorrections(days: number): Promise<Array<{
+  original_urgency: string;
+  corrected_urgency: string;
+  original_domain: string;
+  corrected_domain: string;
+  reason?: string;
+  sender?: string;
+  timestamp: string;
+}>> {
+  try {
+    const results = await searchAgentMemory(EA_AGENT_ID, 'correction', 50);
+    const cutoffDate = new Date();
+    cutoffDate.setDate(cutoffDate.getDate() - days);
+
+    return results
+      .filter((r) => {
+        const meta = r.memory.metadata;
+        if (meta?.type !== 'correction') return false;
+        const timestamp = meta?.timestamp as string;
+        if (!timestamp) return false;
+        return new Date(timestamp) > cutoffDate;
+      })
+      .map((r) => ({
+        original_urgency: (r.memory.metadata?.original_urgency as string) || 'medium',
+        corrected_urgency: (r.memory.metadata?.corrected_urgency as string) || 'medium',
+        original_domain: (r.memory.metadata?.original_domain as string) || 'general',
+        corrected_domain: (r.memory.metadata?.corrected_domain as string) || 'general',
+        reason: r.memory.metadata?.reason as string | undefined,
+        sender: r.memory.metadata?.sender as string | undefined,
+        timestamp: (r.memory.metadata?.timestamp as string) || new Date().toISOString(),
+      }));
+  } catch (error) {
+    console.error('[PreferenceModel] Error fetching corrections:', error);
+    return [];
+  }
+}
+
+interface PatternAnalysis {
+  urgencyUpgrades: Map<string, number>; // sender/pattern -> count of upgrades
+  urgencyDowngrades: Map<string, number>; // sender/pattern -> count of downgrades
+  domainShifts: Map<string, { from: string; to: string; count: number }[]>;
+  commonKeywords: Map<string, number>; // keyword -> frequency in corrections
+}
+
+/**
+ * Analyze corrections to identify patterns
+ */
+function analyzeCorrectionsForPatterns(corrections: Array<{
+  original_urgency: string;
+  corrected_urgency: string;
+  original_domain: string;
+  corrected_domain: string;
+  reason?: string;
+  sender?: string;
+}>): PatternAnalysis {
+  const analysis: PatternAnalysis = {
+    urgencyUpgrades: new Map(),
+    urgencyDowngrades: new Map(),
+    domainShifts: new Map(),
+    commonKeywords: new Map(),
+  };
+
+  const urgencyOrder = ['background', 'low', 'medium', 'high', 'critical'];
+
+  for (const correction of corrections) {
+    const originalIdx = urgencyOrder.indexOf(correction.original_urgency);
+    const correctedIdx = urgencyOrder.indexOf(correction.corrected_urgency);
+
+    // Track urgency changes
+    if (correction.sender) {
+      if (correctedIdx > originalIdx) {
+        const count = analysis.urgencyUpgrades.get(correction.sender) || 0;
+        analysis.urgencyUpgrades.set(correction.sender, count + 1);
+      } else if (correctedIdx < originalIdx) {
+        const count = analysis.urgencyDowngrades.get(correction.sender) || 0;
+        analysis.urgencyDowngrades.set(correction.sender, count + 1);
+      }
+    }
+
+    // Track domain shifts
+    if (correction.original_domain !== correction.corrected_domain) {
+      const shifts = analysis.domainShifts.get(correction.original_domain) || [];
+      const existing = shifts.find((s) => s.to === correction.corrected_domain);
+      if (existing) {
+        existing.count++;
+      } else {
+        shifts.push({ from: correction.original_domain, to: correction.corrected_domain, count: 1 });
+      }
+      analysis.domainShifts.set(correction.original_domain, shifts);
+    }
+
+    // Extract keywords from reasons
+    if (correction.reason) {
+      const keywords = extractKeywordsFromReason(correction.reason);
+      for (const keyword of keywords) {
+        const count = analysis.commonKeywords.get(keyword) || 0;
+        analysis.commonKeywords.set(keyword, count + 1);
+      }
+    }
+  }
+
+  return analysis;
+}
+
+/**
+ * Reinforce patterns that align with correction patterns
+ */
+function reinforceEffectivePatterns(model: JamesPreferenceModel, analysis: PatternAnalysis): number {
+  let reinforced = 0;
+
+  // Reinforce priority contacts that consistently need upgrades
+  for (const [sender, count] of analysis.urgencyUpgrades) {
+    if (count >= 2) {
+      const contact = model.priority_contacts.find(
+        (c) => c.identifier.toLowerCase() === sender.toLowerCase()
+      );
+      if (contact) {
+        // Already a priority contact - this validates the pattern
+        reinforced++;
+      }
+    }
+  }
+
+  // Reinforce urgency triggers that match keywords from corrections
+  for (const trigger of model.urgency_triggers) {
+    const triggerKeywords = trigger.pattern.toLowerCase().split('|');
+    let matchCount = 0;
+
+    for (const [keyword, count] of analysis.commonKeywords) {
+      if (triggerKeywords.some((tk) => tk.includes(keyword) || keyword.includes(tk))) {
+        matchCount += count;
+      }
+    }
+
+    if (matchCount > 0 && trigger.weight < 0.95) {
+      trigger.weight = Math.min(0.95, trigger.weight + 0.02 * matchCount);
+      reinforced++;
+    }
+  }
+
+  return reinforced;
+}
+
+/**
+ * Weaken patterns that contradict corrections
+ */
+function weakenIneffectivePatterns(model: JamesPreferenceModel, analysis: PatternAnalysis): number {
+  let weakened = 0;
+
+  // Weaken priority contacts that consistently get downgraded
+  for (const [sender, count] of analysis.urgencyDowngrades) {
+    if (count >= 2) {
+      const contactIdx = model.priority_contacts.findIndex(
+        (c) => c.identifier.toLowerCase() === sender.toLowerCase()
+      );
+      if (contactIdx >= 0) {
+        // Remove priority contact that's consistently being downgraded
+        model.priority_contacts.splice(contactIdx, 1);
+        weakened++;
+      }
+    }
+  }
+
+  // Weaken patterns that don't match correction keywords
+  const now = new Date();
+  for (const trigger of model.urgency_triggers) {
+    if (trigger.source === 'correction') {
+      const learnedDate = new Date(trigger.learnedAt);
+      const daysSinceLearned = (now.getTime() - learnedDate.getTime()) / (1000 * 60 * 60 * 24);
+
+      // If a correction-learned pattern is old and not being reinforced, weaken it
+      if (daysSinceLearned > 14 && trigger.weight > 0.3) {
+        trigger.weight = Math.max(0.3, trigger.weight - 0.05);
+        weakened++;
+      }
+    }
+  }
+
+  return weakened;
+}
+
+/**
+ * Prune patterns below effectiveness threshold
+ */
+function pruneStalePatterns(model: JamesPreferenceModel): number {
+  let pruned = 0;
+
+  // Remove urgency triggers with very low weight
+  const originalTriggerCount = model.urgency_triggers.length;
+  model.urgency_triggers = model.urgency_triggers.filter((t) => {
+    // Keep manual patterns, prune correction patterns below threshold
+    if (t.source === 'manual') return true;
+    if (t.weight < 0.25) {
+      console.log(`[PreferenceModel] Pruning low-weight trigger: ${t.pattern}`);
+      return false;
+    }
+    return true;
+  });
+  pruned += originalTriggerCount - model.urgency_triggers.length;
+
+  // Remove auto-archive patterns with very low weight
+  const originalArchiveCount = model.auto_archive_patterns.length;
+  model.auto_archive_patterns = model.auto_archive_patterns.filter((p) => {
+    if (p.source === 'manual') return true;
+    if (p.weight < 0.25) {
+      console.log(`[PreferenceModel] Pruning low-weight archive pattern: ${p.pattern}`);
+      return false;
+    }
+    return true;
+  });
+  pruned += originalArchiveCount - model.auto_archive_patterns.length;
+
+  return pruned;
+}
+
+/**
+ * Create new patterns from recurring themes in corrections
+ */
+function createNewPatternsFromThemes(model: JamesPreferenceModel, analysis: PatternAnalysis): number {
+  let created = 0;
+  const now = new Date().toISOString();
+
+  // Add senders with multiple urgency upgrades as priority contacts
+  for (const [sender, count] of analysis.urgencyUpgrades) {
+    if (count >= 3) {
+      const existingContact = model.priority_contacts.find(
+        (c) => c.identifier.toLowerCase() === sender.toLowerCase()
+      );
+
+      if (!existingContact) {
+        model.priority_contacts.push({
+          identifier: sender,
+          identifierType: sender.includes('@') ? 'email' : 'name',
+          urgencyBoost: count >= 5 ? 'critical' : 'high',
+          alwaysNotify: count >= 5,
+          notes: `Auto-learned from ${count} correction upgrades`,
+          addedAt: now,
+          source: 'inferred',
+        });
+        created++;
+        console.log(`[PreferenceModel] Inferred new priority contact: ${sender}`);
+      }
+    }
+  }
+
+  // Add frequently-appearing keywords as urgency triggers
+  for (const [keyword, count] of analysis.commonKeywords) {
+    if (count >= 3 && keyword.length > 4) {
+      const existingTrigger = model.urgency_triggers.find(
+        (t) => t.pattern.toLowerCase().includes(keyword)
+      );
+
+      if (!existingTrigger) {
+        model.urgency_triggers.push({
+          pattern: keyword,
+          isRegex: false,
+          caseSensitive: false,
+          weight: Math.min(0.8, 0.5 + count * 0.1),
+          learnedAt: now,
+          source: 'inferred',
+          exampleMatches: [],
+        });
+        created++;
+        console.log(`[PreferenceModel] Inferred new urgency trigger: ${keyword}`);
+      }
+    }
+  }
+
+  return created;
+}
+
+/**
+ * Get learning statistics for monitoring
+ */
+export async function getLearningStats(): Promise<{
+  model: {
+    version: string;
+    lastUpdated: string;
+    correctionsCount: number;
+    lastCorrection: string | null;
+  };
+  patterns: {
+    urgencyTriggers: { total: number; manual: number; learned: number; inferred: number };
+    archivePatterns: { total: number; manual: number; learned: number; inferred: number };
+    priorityContacts: { total: number; manual: number; learned: number; inferred: number };
+  };
+  domainSensitivity: Array<{ domain: Domain; weight: number }>;
+}> {
+  const model = await loadPreferences();
+
+  const countBySource = (items: Array<{ source: string }>) => ({
+    total: items.length,
+    manual: items.filter((i) => i.source === 'manual').length,
+    learned: items.filter((i) => i.source === 'correction').length,
+    inferred: items.filter((i) => i.source === 'inferred').length,
+  });
+
+  return {
+    model: {
+      version: model.version,
+      lastUpdated: model.lastUpdated,
+      correctionsCount: model.corrections_count,
+      lastCorrection: model.last_correction_at,
+    },
+    patterns: {
+      urgencyTriggers: countBySource(model.urgency_triggers),
+      archivePatterns: countBySource(model.auto_archive_patterns),
+      priorityContacts: countBySource(model.priority_contacts),
+    },
+    domainSensitivity: model.domain_sensitivity.map((d) => ({
+      domain: d.domain,
+      weight: d.baseWeight,
+    })),
+  };
+}
+
+// ============================================================================
 // Exports
 // ============================================================================
 
